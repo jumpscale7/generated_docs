@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.system.TarFile &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.system.TarFile</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;The TarFile class provides convenience methods to work with tar archives&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">tarfile</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.baseclasses</span> <span class="kn">import</span> <span class="n">BaseEnumeration</span><span class="p">,</span> <span class="n">BaseType</span>
+
+<span class="c">#NOTE: We use this enumeration so we can add tar file creation and others</span>
+<span class="c">#later on. This enumeration is used when constructing a new TarFile object,</span>
+<span class="c">#which allows us to do (eg) &#39;exists&#39; checking when a tar file should be read.</span>
+<span class="k">class</span> <span class="nc">TarFileAction</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Enumeration of tar file access methods&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="TarFileAction"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.TarFile.TarFileAction">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_initItems</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Register enumeration items&#39;&#39;&#39;</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;read&#39;</span><span class="p">)</span>
+
+        <span class="n">cls</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+
+<span class="c">#NOTE: When implementing, see documentation on the &#39;errorlevel&#39; attribute of</span>
+<span class="c">#the Python TarFile object</span>
+<span class="k">class</span> <span class="nc">TarFile</span><span class="p">(</span><span class="n">BaseType</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Handle tar files&#39;&#39;&#39;</span></div>
+<div class="viewcode-block" id="TarFile"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.TarFile.TarFile">[docs]</a>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">filepath</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="s">&#39;Path of the on-disk tar file&#39;</span><span class="p">)</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">enumeration</span><span class="p">(</span><span class="n">TarFileAction</span><span class="p">,</span>
+                <span class="n">doc</span><span class="o">=</span><span class="s">&#39;Access method of tar file&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">TarFileAction</span><span class="o">.</span><span class="n">READ</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create a new TarFile object</span>
+
+<span class="sd">        @param path: Path to target tar file</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        @prarm action: Action to perform on the tar file</span>
+<span class="sd">        @type action: TarFileAction</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">filepath</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Provided string &quot;</span><span class="si">%s</span><span class="s">&quot; is not a valid path&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">is</span> <span class="n">TarFileAction</span><span class="o">.</span><span class="n">READ</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s">&#39;Provided path &quot;</span><span class="si">%s</span><span class="s">&quot; is not an existing file&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">is_tarfile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s">&#39;Provided path &quot;</span><span class="si">%s</span><span class="s">&quot; is not a valid tar archive&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid action&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">action</span>
+
+
+    <span class="k">def</span> <span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destination_path</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Extract all or some files from the archive to destination_path</span>
+<div class="viewcode-block" id="TarFile.extract"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.TarFile.TarFile.extract">[docs]</a>
+<span class="sd">        The files argument can be a list of names (relative from the root of</span>
+<span class="sd">        the archive) to extract. If no file list is provided, all files</span>
+<span class="sd">        contained in the archive will be extracted.</span>
+
+<span class="sd">        @param destination_path: Extraction output folder</span>
+<span class="sd">        @type destination_path: string</span>
+<span class="sd">        @param files: Filenames to extract</span>
+<span class="sd">        @type files: iterable</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="ow">is</span> <span class="n">TarFileAction</span><span class="o">.</span><span class="n">READ</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Can only extract archives opened for reading&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">dirpath</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">destination_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Not a valid folder name provided&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Destination folder &quot;</span><span class="si">%s</span><span class="s">&quot; does not exist&#39;</span>
+                    <span class="o">%</span> <span class="n">destination_path</span><span class="p">)</span>
+
+        <span class="n">members</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">all_members</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tar</span><span class="o">.</span><span class="n">getmembers</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">all_members</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                    <span class="n">members</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">members</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">destination_path</span><span class="p">,</span> <span class="n">members</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tar</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">destination_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Close the backing tar file&#39;&#39;&#39;</span></div>
+<div class="viewcode-block" id="TarFile.close"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.TarFile.TarFile.close">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">_tar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

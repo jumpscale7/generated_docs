@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="next" title="Admin" href="Admin/index.html" />
+    <link rel="prev" title="Using the appserver FTP Client" href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Admin/index.html" title="Admin"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html" title="Using the appserver FTP Client"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Admin/index.html">Admin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Admin/AdminBestpractices.html">Admin Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/AdminMainUseCases.html">Admin Main Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/AdminPrinciples.html">Admin Principles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Admin/AdminPrinciples.html#selection-of-nodes">Selection of Nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/AdminConfiguration.html">Admin Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Admin/AdminConfiguration.html#format-of-the-cfg-files">format of the .cfg files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/AdminDNS.html">Admin DNS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/JSAdmin.html">jsadmin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#applyconfig">applyconfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#sshfs-sshfsoff">sshfs &amp; sshfsoff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#jsadmin-listnodes">jsadmin listnodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#jsadmin-createidentity">jsadmin createidentity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#jsadmin-print-runid-update">jsadmin print &#8211;runid=update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#jsadmin-kill">jsadmin kill</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSAdmin.html#jsadmin-config2gridmaster">jsadmin config2gridmaster</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Admin/JSExec.html">jsexec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSExec.html#usage-of-runid">usage of runid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSExec.html#selection-criteria-are-much-more-flexible-as-before">selection criteria are much more flexible as before</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSExec.html#sync-or-not-to-sync">sync or not to sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Admin/JSExec.html#some-examples">some examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AgentController/index.html">AgentController</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/AgentController.html">Distributed Work Controller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentController.html#introduction">Introduction.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentController.html#components">Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentController.html#how-to">How To</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/AgentControllerServer.html">Agentcontroller</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentControllerServer.html#description">Description.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentControllerServer.html#roles">Roles.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentControllerServer.html#executing-of-a-task-jumpscript">Executing of a task (JumpScript)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/AgentControllerServer.html#agentcontroller-client">Agentcontroller client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/JumpScript.html">JumpScripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/JumpScript.html#location">Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/JumpScript.html#syntax">Syntax.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/ProcessManager.html">Processmanager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/ProcessManager.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/ProcessManager.html#how-to-debug-a-process-manager">how to debug a process manager</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/Workers.html">Workers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/Workers.html#descriptions">Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/ScheduleWork.html">Schedule work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AgentController/ACRedis/ACRedis.html">Agent controller usage of redis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AgentController/ACRedis/ACRedis.html#webdis-based">webdis based</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="OSIS/index.html">OSIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="OSIS/OsisModelSpec.html">Osis Model Specs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OsisModelSpec.html#nocrud">nocrud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OsisModelSpec.html#index">index</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="OSIS/OSISInitialization.html">Using OSIS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#install-elasticsearch-client">install elasticsearch client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#install-mongodb-client">install mongodb client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#install-redis-client">install redis client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#install-influxdb-client">install influxdb client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#install-osis">install osis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#how-to-manually-start-osis">how to manually start osis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISInitialization.html#an-example-osis-start-script">an example osis start script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="OSIS/OSISRemote.html">Remote OSIS server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="OSIS/OSISRemote.html#small-demo">Small Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="OSIS/Types.html">Types in OSIS Model Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OSIS/DbFormat.html">How To Stor in Key Value Stor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Macros/index.html">Macros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroDisk.html">Macro Disk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroDisk.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroDisk.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroEco.html">Macro Error Condition Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroEco.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroEco.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroEcos.html">Macro Ecos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroEcos.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroEcos.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroJob.html">macro job</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJob.html#arguments">arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJob.html#labels">labels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroJobs.html">Macro Jobs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJobs.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJobs.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroJumpscript.html">macro jumpscript</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJumpscript.html#arguments">arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroJumpscript.html#labels">labels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroLog.html">Macro Log</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroLog.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroLog.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroLogs.html">Macro Logs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroLogs.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroLogs.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroNode.html">Macro Node</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroNode.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroNode.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroNodes.html">Macro nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroNodes.html#description">Description</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroProcess.html">Macro Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroProcess.html#arguments">Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroProcess.html#available-parameters">Available Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/MacroProcesses.html">Macro Processes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroProcesses.html#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Macros/MacroProcesses.html#filters">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Macros/Macros.html">macros specific to grid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ShellCommands/index.html">Shell Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSAC.html">JSAC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSAC.html#help">Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSAC.html#actions">Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSCode.html">JSCODE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSCode.html#commit">commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSCode.html#push">push</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSCode.html#update">update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSCode.html#status">status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSDISK.html">jsdisk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSGRID.html">JSGrid</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGRID.html#healthcheck">Healthcheck</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGRID.html#purgall-purgelogs-purgejobs-and-purgeecos">Purgall, Purgelogs, purgejobs and purgeecos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGRID.html#restartprocessmgrs-reloadjumpscripts">restartprocessmgrs / reloadjumpscripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGRID.html#resetlocks">resetlocks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSGroup.html">JSGroup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGroup.html#help">Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSGroup.html#actions">Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGroup.html#add">Add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGroup.html#delete">Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSGroup.html#list">List</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSNode.html">jsnode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSNode.html#deletenode">Deletenode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSNode.html#listnodes">Listnodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSNode.html#enablenode-and-disablenode">Enablenode and disablenode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSNode.html#setrole">setrole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSNode.html#deleterole">deleterole</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSProcess.html">JSProcess</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#logs">logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#attach">attach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#status">status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#list">list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#start">start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#stop">stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#restart">restart</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#disable">disable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSProcess.html#enable">enable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSUser.html">JSUser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#help">Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ShellCommands/JSUser.html#actions">Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#add">Add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#delete">Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#list">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#auth">Auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#addgroup">Addgroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#delgroup">Delgroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ShellCommands/JSUser.html#passwd">Passwd</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WatchDog/index.html">WatchDog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WatchDog/WatchDog.html">watchdog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WatchDog/WatchDog.html#server-watchdog-manager">server = watchdog manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WatchDog/WatchDog.html#to-use-client">to use client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WatchDog/WatchDog.html#types-of-watchdogs">types of watchdogs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WatchDog/WatchDogImplementationDetails.html">Implementation Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WatchDog/WatchDogImplementationDetails.html#how-on-server">how on server</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WatchDog/WatchDogTypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">Redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#redis-usage-in-jumpscale">Redis Usage in JumpScale.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#redisac-runs-on-port-7769-only-on-agentcontroller-master-node">Redisac runs on port 7769 only on agentcontroller/master node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#redisc-redis-cache-on-port-7768-runs-on-all-grid-nodes">Redisc redis cache on port 7768 runs on all grid nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ZDaemon.html">ZDaemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ZDaemon.html#zdaemon-client">ZDaemon Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZDaemon.html#raw-client">Raw client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZDaemon.html#cmd-introspection-client">CMD (introspection) client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ZDaemonProtocol.html">ZDaemon and ZClient</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ZDaemonProtocol.html#identification-and-session">Identification and session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZDaemonProtocol.html#calling-cmds">Calling cmds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ZDaemonProtocol.html#example-python-code">Example python code:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html"
+                        title="previous chapter">Using the appserver FTP Client</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Admin/index.html"
+                        title="next chapter">Admin</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Admin/index.html" title="Admin"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html" title="Using the appserver FTP Client"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

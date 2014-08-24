@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.logging.logtargets.LogTargetLogForwarder &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.logging.logtargets.LogTargetLogForwarder</h1><div class="highlight"><pre>
+<span class="c"># import socket</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ujson</span> <span class="kn">as</span> <span class="nn">json</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.redis</span>
+
+<span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">5</span>
+
+<div class="viewcode-block" id="LogTargetLogForwarder"><a class="viewcode-back" href="../../../../../API/JumpScale.core.logging.logtargets.html#JumpScale.core.logging.logtargets.LogTargetLogForwarder.LogTargetLogForwarder">[docs]</a><span class="k">class</span> <span class="nc">LogTargetLogForwarder</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Forwards incoming logRecords to redis&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serverip</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">7768</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">serverip</span><span class="o">=</span><span class="n">serverip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">=</span><span class="n">port</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastcheck</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">appname</span><span class="o">==</span><span class="s">&quot;osisserver&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#do not put on on, too dangerous, to many apps cannot &amp; should not use it, only when in grid mode we should</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">redisqueue</span><span class="o">=</span><span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkTarget</span><span class="p">()</span>
+
+<div class="viewcode-block" id="LogTargetLogForwarder.checkTarget"><a class="viewcode-back" href="../../../../../API/JumpScale.core.logging.logtargets.html#JumpScale.core.logging.logtargets.LogTargetLogForwarder.LogTargetLogForwarder.checkTarget">[docs]</a>    <span class="k">def</span> <span class="nf">checkTarget</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check status of target, if ok return True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lastcheck</span> <span class="o">+</span> <span class="n">TIMEOUT</span> <span class="o">&gt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected</span>
+
+        <span class="c">#redis &amp; processmanager need to be active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serverip</span><span class="p">,</span><span class="mi">7768</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastcheck</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;Could not connect to redis will try again in 5 seconds.&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">redisqueue</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">redis</span><span class="o">.</span><span class="n">getRedisQueue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serverip</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span><span class="s">&quot;logs&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">redisqueueEco</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">redis</span><span class="o">.</span><span class="n">getRedisQueue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serverip</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span><span class="s">&quot;eco&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connected</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;LogTargetToRedis logging to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serverip</span><span class="p">))</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span>
+
+<div class="viewcode-block" id="LogTargetLogForwarder.logECO"><a class="viewcode-back" href="../../../../../API/JumpScale.core.logging.logtargets.html#JumpScale.core.logging.logtargets.LogTargetLogForwarder.LogTargetLogForwarder.logECO">[docs]</a>    <span class="k">def</span> <span class="nf">logECO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eco</span><span class="p">):</span>
+        <span class="c"># print &quot;!!!!!!!!!!!!&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;tb&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;frames&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">eco</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">eco</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">])</span>
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkTarget</span><span class="p">():</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">redisqueueEco</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">100</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;Failed to log error to redis,Queue full on redis&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">redisqueueEco</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;Failed to log error in </span><span class="si">%s</span><span class="s"> error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="LogTargetLogForwarder.log"><a class="viewcode-back" href="../../../../../API/JumpScale.core.logging.logtargets.html#JumpScale.core.logging.logtargets.LogTargetLogForwarder.LogTargetLogForwarder.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        forward the already encoded message to the target destination</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="k">if</span>  <span class="n">log</span><span class="o">.</span><span class="n">category</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">return</span>            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkTarget</span><span class="p">():</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">redisqueue</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;Failed to log to redis,Queue full on redis&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">log</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">__dict__</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">redisqueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">log</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&#39;Failed to log in </span><span class="si">%s</span><span class="s">,error:</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.sort.Sort &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.sort.Sort</h1><div class="highlight"><pre>
+<span class="c"># &lt;License type=&quot;Sun Cloud BSD&quot; version=&quot;2.2&quot;&gt;</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2005-2009, Sun Microsystems, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or</span>
+<span class="c"># without modification, are permitted provided that the following</span>
+<span class="c"># conditions are met:</span>
+<span class="c">#</span>
+<span class="c"># 1. Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#</span>
+<span class="c"># 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer in</span>
+<span class="c">#    the documentation and/or other materials provided with the</span>
+<span class="c">#    distribution.</span>
+<span class="c">#</span>
+<span class="c"># 3. Neither the name Sun Microsystems, Inc. nor the names of other</span>
+<span class="c">#    contributors may be used to endorse or promote products derived</span>
+<span class="c">#    from this software without specific prior written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY SUN MICROSYSTEMS, INC. &quot;AS IS&quot; AND ANY</span>
+<span class="c"># EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</span>
+<span class="c"># PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SUN MICROSYSTEMS, INC. OR</span>
+<span class="c"># CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,</span>
+<span class="c"># EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,</span>
+<span class="c"># PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR</span>
+<span class="c"># PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY</span>
+<span class="c"># OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="c">#</span>
+<span class="c"># &lt;/License&gt;</span>
+
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heapify</span><span class="p">,</span> <span class="n">heappop</span><span class="p">,</span> <span class="n">heappush</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span><span class="p">,</span> <span class="n">cycle</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">gettempdir</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="Sort"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.sort.html#JumpScale.baselib.sort.Sort.Sort">[docs]</a><span class="k">class</span> <span class="nc">Sort</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Sort.merge"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.sort.html#JumpScale.baselib.sort.Sort.Sort.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chunks</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	@todo p3 document  (id:22)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+	    <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span>
+
+	<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+
+	<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+	    <span class="k">try</span><span class="p">:</span>
+		<span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+		<span class="n">value</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+	    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+		    <span class="n">chunk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		    <span class="n">chunks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+		    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;StopIterationException&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+	    <span class="k">else</span><span class="p">:</span>
+		<span class="n">heappush</span><span class="p">(</span><span class="n">values</span><span class="p">,((</span><span class="n">key</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="n">index</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">iterator</span><span class="p">,</span><span class="n">chunk</span><span class="p">)))</span>
+
+	<span class="k">while</span> <span class="n">values</span><span class="p">:</span>
+	    <span class="n">k</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">iterator</span><span class="p">,</span> <span class="n">chunk</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+	    <span class="k">yield</span> <span class="n">value</span>
+	    <span class="k">try</span><span class="p">:</span>
+		<span class="n">value</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+
+	    <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+		    <span class="n">chunk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		    <span class="n">chunks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+		    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;StopIterationException&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+	    <span class="k">else</span><span class="p">:</span>
+		<span class="n">heappush</span><span class="p">(</span><span class="n">values</span><span class="p">,(</span><span class="n">key</span><span class="p">(</span><span class="n">value</span><span class="p">),</span><span class="n">index</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">iterator</span><span class="p">,</span><span class="n">chunk</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Sort.batch_sort"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.sort.html#JumpScale.baselib.sort.Sort.Sort.batch_sort">[docs]</a>    <span class="k">def</span> <span class="nf">batch_sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">buffer_size</span><span class="o">=</span><span class="mi">32000</span><span class="p">,</span><span class="n">tempdirs</span><span class="o">=</span><span class="p">[]):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	@todo p3 document  (id:23)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">tempdirs</span><span class="p">:</span>
+	    <span class="n">tempdirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gettempdir</span><span class="p">())</span>
+
+	<span class="n">input_file</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">,</span><span class="mi">64</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+
+	<span class="k">try</span><span class="p">:</span>
+	    <span class="n">input_iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+
+	    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+	    <span class="k">try</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">tempdir</span> <span class="ow">in</span> <span class="n">cycle</span><span class="p">(</span><span class="n">tempdirs</span><span class="p">):</span>
+		    <span class="n">current_chunk</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">input_iterator</span><span class="p">,</span><span class="n">buffer_size</span><span class="p">))</span>
+		    <span class="k">if</span> <span class="n">current_chunk</span><span class="p">:</span>
+			<span class="n">current_chunk</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+			<span class="n">output_chunk</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tempdir</span><span class="p">,</span><span class="s">&#39;</span><span class="si">%06i</span><span class="s">&#39;</span><span class="o">%</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)),</span><span class="s">&#39;w+b&#39;</span><span class="p">,</span><span class="mi">64</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+			<span class="n">output_chunk</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">current_chunk</span><span class="p">)</span>
+			<span class="n">output_chunk</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+			<span class="n">output_chunk</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+			<span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output_chunk</span><span class="p">)</span>
+		    <span class="k">else</span><span class="p">:</span>
+			<span class="k">break</span>
+	    <span class="k">except</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
+		    <span class="k">try</span><span class="p">:</span>
+			<span class="n">chunk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+			<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		    <span class="k">except</span><span class="p">:</span>
+			<span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;StopIterationException&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">output_chunk</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
+		    <span class="k">try</span><span class="p">:</span>
+			<span class="n">output_chunk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+			<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output_chunk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		    <span class="k">except</span><span class="p">:</span>
+			<span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;StopIterationException&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+		<span class="k">return</span>
+	<span class="k">finally</span><span class="p">:</span>
+	    <span class="n">input_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+	<span class="n">output_file</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="s">&#39;wb&#39;</span><span class="p">,</span><span class="mi">64</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+	<span class="k">try</span><span class="p">:</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">merge</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span><span class="n">key</span><span class="p">))</span>
+
+	<span class="k">finally</span><span class="p">:</span>
+	    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
+		<span class="k">try</span><span class="p">:</span>
+		    <span class="n">chunk</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+		    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chunk</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+		    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;StopIterationException&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+	    <span class="n">output_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+	    
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.jpackages.JPackageStateObject &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.jpackages.JPackageStateObject</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<div class="viewcode-block" id="JPackageStateObject"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject">[docs]</a><span class="k">class</span> <span class="nc">JPackageStateObject</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">jpackagesObject</span><span class="p">):</span>
+        <span class="n">key</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">jpackagesObject</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span><span class="n">jpackagesObject</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">jpackagesObject</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&quot;jpackages&quot;</span><span class="p">,</span> <span class="s">&quot;state&quot;</span><span class="p">,</span> <span class="n">key</span> <span class="o">+</span> <span class="s">&quot;.cfg&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">inifile</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">addSection</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastinstalledbuildnr</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastdownloadedbuildnr</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastexpandedbuildnr</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastaction</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lasttag</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastactiontime</span><span class="o">=</span><span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="o">=</span><span class="mi">0</span>
+            <span class="c">#self.state=j.enumerators.JPackageState4.OK</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">retry</span><span class="o">=</span><span class="mi">0</span> <span class="c">#nr of times we tried to repair last broken state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span><span class="o">=</span><span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isPendingReconfiguration</span><span class="o">=</span><span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">downloadedBlobStorKeys</span><span class="o">=</span><span class="p">{}</span>  <span class="c">#is dict with key platform &amp; value the key</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">installedBlobStorKeys</span><span class="o">=</span><span class="p">{}</span><span class="c">#is dict with key platform &amp; value the key</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">inifile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastinstalledbuildnr</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastinstalledbuildnr&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastexpandedbuildnr</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastexpandedbuildnr&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastdownloadedbuildnr</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastdownloadedbuildnr&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastaction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastaction&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lasttag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lasttag&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastactiontime</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastactiontime&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currentaction&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currenttag&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currentactiontime&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">downloadedBlobStorKeys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_strToDict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;downloadedblobstorkeys&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">installedBlobStorKeys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_strToDict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;installedblobstorkeys&quot;</span><span class="p">))</span>
+
+            <span class="c">#print &#39;Asking enum : &#39; + self._ini.getValue(&quot;main&quot;,&quot;state&quot;) + &#39; from &#39; + str(self._ini)</span>
+            <span class="c">#self.state=j.enumerators.JPackageState4.getByName(self._ini.getValue(&quot;main&quot;,&quot;state&quot;))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">retry</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;retry&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;prepared&quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">checkParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span> <span class="s">&quot;debugMode&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span> <span class="s">&quot;debugMode&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">isPendingReconfiguration</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;isPendingReconfiguration&quot;</span><span class="p">))</span>
+             
+    <span class="k">def</span> <span class="nf">_strToDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">platform</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">platform</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">_dictToStr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d</span><span class="p">):</span>
+        <span class="n">s</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">platform</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">platform</span><span class="p">]</span>
+            <span class="n">s</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">,&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">platform</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">s</span>
+            
+    <span class="k">def</span> <span class="nf">_save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastinstalledbuildnr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastinstalledbuildnr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastexpandedbuildnr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastexpandedbuildnr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastdownloadedbuildnr&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastdownloadedbuildnr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastaction&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastaction</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lasttag&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lasttag</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;lastactiontime&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lastactiontime</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currentaction&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currenttag&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;currentactiontime&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="p">)</span>
+        <span class="c">#print &quot;in JPackageStateObject save: &quot; + str(self.state)</span>
+        <span class="c">#self._ini.setParam(&quot;main&quot;,&quot;state&quot;,self.state)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;retry&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">retry</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;prepared&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">prepared</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;isPendingReconfiguration&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">isPendingReconfiguration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;debugMode&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span><span class="p">)</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;downloadedblobstorkeys&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_dictToStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">downloadedBlobStorKeys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;installedblobstorkeys&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_dictToStr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">installedBlobStorKeys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+        
+<div class="viewcode-block" id="JPackageStateObject.save"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span></div>
+<div class="viewcode-block" id="JPackageStateObject.setDebugMode"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setDebugMode">[docs]</a>    <span class="k">def</span> <span class="nf">setDebugMode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        enables debug mode for jpackages</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.getDebugMode"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getDebugMode">[docs]</a>    <span class="k">def</span> <span class="nf">getDebugMode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span>
+    </div>
+<div class="viewcode-block" id="JPackageStateObject.setLastInstalledBuildNr"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastInstalledBuildNr">[docs]</a>    <span class="k">def</span> <span class="nf">setLastInstalledBuildNr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buildNr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the last buildnumber to the one given as parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastinstalledbuildnr</span> <span class="o">=</span> <span class="n">buildNr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.setLastExpandedBuildNr"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastExpandedBuildNr">[docs]</a>    <span class="k">def</span> <span class="nf">setLastExpandedBuildNr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buildNr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the last expanded build number to the one given as parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastexpandedbuildnr</span> <span class="o">=</span> <span class="n">buildNr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.setLastDownloadedBuildNr"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastDownloadedBuildNr">[docs]</a>    <span class="k">def</span> <span class="nf">setLastDownloadedBuildNr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buildNr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the last downloaded build number to the one given as parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastdownloadedbuildnr</span> <span class="o">=</span> <span class="n">buildNr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.setIsPendingReconfiguration"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setIsPendingReconfiguration">[docs]</a>    <span class="k">def</span> <span class="nf">setIsPendingReconfiguration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the jpackages&#39;s config file to see whether reconfiguration is required or not depending on the value given as parameter</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&#39;true&#39;</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isPendingReconfiguration</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JPackageStateObject.getIsPendingReconfiguration"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getIsPendingReconfiguration">[docs]</a>    <span class="k">def</span> <span class="nf">getIsPendingReconfiguration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true is the jpackages needs reconfiguration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isPendingReconfiguration</span>
+</div>
+<div class="viewcode-block" id="JPackageStateObject.setCurrentAction"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentAction">[docs]</a>    <span class="k">def</span> <span class="nf">setCurrentAction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tag</span><span class="p">,</span><span class="n">action</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param tag  e.g. install</span>
+<span class="sd">        @param action e.g. checkout when tag=codemgmt</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lasttag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastaction</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastactiontime</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="o">=</span><span class="n">action</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="o">=</span><span class="n">tag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.setCurrentActionIsDone"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentActionIsDone">[docs]</a>    <span class="k">def</span> <span class="nf">setCurrentActionIsDone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        current action is succesfully completed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentAction</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">JPackageState4</span><span class="o">.</span><span class="n">OK</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="JPackageStateObject.setPrepared"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setPrepared">[docs]</a>    <span class="k">def</span> <span class="nf">setPrepared</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prepared</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the jpackages config file to whether the package has been prepared or not depending on the parameter given</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepared</span><span class="o">=</span><span class="n">prepared</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="JPackageStateObject.checkNoCurrentAction"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.checkNoCurrentAction">[docs]</a>    <span class="k">def</span> <span class="nf">checkNoCurrentAction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        if no current action return True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">==</span><span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">JPackageState4</span><span class="o">.</span><span class="n">OK</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    </div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">string</span>  <span class="o">=</span> <span class="s">&quot;lastinstalledbuildnr:&quot;</span>  <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastinstalledbuildnr</span><span class="p">)</span>  <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;lastdownloadedbuildnr:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastdownloadedbuildnr</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;lastexpandedbuildnr:&quot;</span>   <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastexpandedbuildnr</span><span class="p">)</span>   <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;lastaction:&quot;</span>            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastaction</span><span class="p">)</span>            <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;lasttag:&quot;</span>               <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lasttag</span><span class="p">)</span>               <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;lastactiontime:&quot;</span>        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lastactiontime</span><span class="p">)</span>        <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;currentaction:&quot;</span>         <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currentaction</span><span class="p">)</span>         <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;currenttag:&quot;</span>            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currenttag</span><span class="p">)</span>            <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;currentactontime:&quot;</span>      <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currentactiontime</span><span class="p">)</span>     <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="n">string</span> <span class="o">+=</span> <span class="s">&quot;nrretry:&quot;</span>               <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">retry</span><span class="p">)</span>                 <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="k">return</span> <span class="n">string</span>
+        
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

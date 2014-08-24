@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.docgenerator.PageRST &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.docgenerator.PageRST</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">Page</span> <span class="kn">import</span> <span class="n">Page</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ujson</span> <span class="kn">as</span> <span class="nn">json</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="k">class</span> <span class="nc">PageRST</span><span class="p">(</span><span class="n">Page</span><span class="p">):</span>
+<div class="viewcode-block" id="PageRST"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST">[docs]</a>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Page</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">projectname</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">divlevel</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_codeblockid</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasfindmenu</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processparameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bodyattributes</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentReadyFunctions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">addMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PageRST.addMessage"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addMessage">[docs]</a>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;paragraph&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;paragraph&quot;</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">message</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">message</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addMessage</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">blockcheck</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_addMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+        <span class="c"># if blockcheck:</span>
+        <span class="c">#     # print &quot;blockcheck %s&quot; % message</span>
+        <span class="c">#     self._checkBlock(&quot;&quot;, &quot;&quot;, &quot;&quot;)</span>
+        <span class="c"># else:</span>
+            <span class="c"># print &quot;no blockcheck %s&quot; % message</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;text:u&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">message</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;&#39;&quot;</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">message</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+        <span class="c"># print &quot;OUT:%s&quot;%message</span>
+
+    <span class="k">def</span> <span class="nf">addParagraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<div class="viewcode-block" id="PageRST.addParagraph"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addParagraph">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;paragraph&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;paragraph&quot;</span>
+
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">message</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addBullet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addBullet"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addBullet">[docs]</a>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;bullet&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span> <span class="o">=</span> <span class="n">level</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;bullet&quot;</span>
+
+        <span class="k">if</span> <span class="n">level</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;level needs to be between 1 and 6&quot;</span><span class="p">)</span>
+
+        <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">prefix</span><span class="o">+=</span><span class="s">&quot;  &quot;</span>
+
+        <span class="k">if</span> <span class="n">level</span><span class="o">&lt;&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+        <span class="n">first</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">message</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">* </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;  </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addMessage</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span> <span class="o">=</span><span class="n">level</span>
+
+    <span class="k">def</span> <span class="nf">_checkBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttype</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">close</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        types are : bullet,descr</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span>
+        <span class="c"># print &quot;checkblock inblock:%s ttype:%s intype:%s&quot; %(self._inBlock,ttype,self._inBlockType)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">!=</span> <span class="n">ttype</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&quot;bullet&quot;</span><span class="p">,</span> <span class="s">&quot;number&quot;</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_bulletslevel</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">open</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="nb">open</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlock</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">=</span> <span class="n">ttype</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span> <span class="o">=</span> <span class="n">close</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlock</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="nb">open</span><span class="p">,</span> <span class="n">blockcheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ttype</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">close</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_inBlock</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">=</span> <span class="n">ttype</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockClosingStatement</span> <span class="o">=</span> <span class="n">close</span>
+        <span class="c"># print &quot;checkblock END: inblock:%s ttype:%s intype:%s&quot; %(self._inBlock,ttype,self._inBlockType)</span>
+
+    <span class="k">def</span> <span class="nf">addDescr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">descr</span><span class="p">):</span>
+<div class="viewcode-block" id="PageRST.addDescr"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addDescr">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;|</span><span class="si">%s</span><span class="s">|</span><span class="si">%s</span><span class="s">|&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">descr</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">addBullets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addBullets"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addBullets">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        messages: list of bullets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addBullet</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addNewLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nrlines</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addNewLine"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addNewLine">[docs]</a>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrlines</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addMessage</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addHeading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addHeading"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addHeading">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span><span class="s">&quot;heading&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;heading&quot;</span>
+
+        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot have enter in heading&quot;</span><span class="p">)</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">message</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">:</span>
+                <span class="n">message</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+        <span class="n">order</span><span class="o">=</span><span class="s">&quot;#*=-^</span><span class="se">\&quot;</span><span class="s">&quot;</span>
+        <span class="n">char</span><span class="o">=</span><span class="n">order</span><span class="p">[</span><span class="n">level</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">line</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">+=</span><span class="n">char</span>
+        <span class="n">message</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">line</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_addMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">showcolumns</span><span class="o">=</span><span class="p">[],</span> <span class="n">columnAliases</span><span class="o">=</span><span class="p">{},</span> <span class="n">classparams</span><span class="o">=</span><span class="s">&quot;table-condensed table-hover&quot;</span><span class="p">,</span> <span class="n">linkcolumns</span><span class="o">=</span><span class="p">[]):</span></div>
+<div class="viewcode-block" id="PageRST.addList"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addList">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param rows [[col1,col2, ...]]  (array of array of column values)</span>
+<span class="sd">        @param headers [header1, header2, ...]</span>
+<span class="sd">        @param linkcolumns has pos (starting 0) of columns which should be formatted as links  (in that column format needs to be $description__$link</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;list&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;list&quot;</span>        
+        <span class="k">return</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW addlist (pagerst)&quot;</span>
+        <span class="c"># embed()</span>
+        
+        <span class="k">if</span> <span class="n">rows</span><span class="o">==</span><span class="p">[[]]:</span>
+            <span class="k">return</span> 
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">headers</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+                <span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">headers</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+                <span class="c">#raise RuntimeError(&quot;Cannot process headers, wrong nr of cols&quot;)</span>
+                <span class="k">print</span> <span class="s">&quot;Cannot process headers, wrong nr of cols&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;ERROR header wrong nr of cols:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">headers</span><span class="p">)</span>
+                <span class="n">headers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">c</span> <span class="o">=</span> <span class="s">&quot;&quot;</span> 
+        <span class="k">if</span> <span class="n">headers</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;thead&gt;&lt;tr&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">headers</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">item</span> <span class="o">=</span> <span class="s">&quot; &quot;</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&lt;th&gt;</span><span class="si">%s</span><span class="s">&lt;/th&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;/tr&gt;&lt;/thead&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">rows3</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;tbody&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows3</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;tr&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">columnAliases</span><span class="p">:</span>
+                <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">columnAliases</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">colnr</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">col</span> <span class="o">=</span> <span class="s">&quot; &quot;</span>
+                <span class="k">if</span> <span class="n">colnr</span> <span class="ow">in</span> <span class="n">linkcolumns</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;column which represents a link needs to be of format $descr__$link, here was:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">col</span><span class="p">)</span>
+                    <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;td&gt;</span><span class="si">%s</span><span class="s">&lt;/td&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">getLink</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;td&gt;</span><span class="si">%s</span><span class="s">&lt;/td&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRound</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+                <span class="n">colnr</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;/tr&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;/tbody&gt;&lt;/table&gt;</span><span class="se">\n\n</span><span class="s">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="n">isElement</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictobject</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">keystoshow</span><span class="o">=</span><span class="p">[],</span> <span class="n">aliases</span><span class="o">=</span><span class="p">{},</span> <span class="n">roundingDigits</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addDict"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addDict">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @params aliases is dict with mapping between name in dict and name to use</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW addDict (pagerst)&quot;</span>
+        <span class="c"># embed()        </span>
+        <span class="k">if</span> <span class="n">keystoshow</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">keystoshow</span> <span class="o">=</span> <span class="n">dictobject</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">keystoshow</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">aliases</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="n">dictobject</span><span class="p">[</span><span class="n">item</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addList</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">addLink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">link</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addLink"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addLink">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">_addMessage</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> &lt;</span><span class="si">%s</span><span class="s">&gt;&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">description</span><span class="p">,</span><span class="n">link</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">addPageBreak</span><span class="p">(</span><span class="bp">self</span><span class="p">,):</span></div>
+<div class="viewcode-block" id="PageRST.addPageBreak"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addPageBreak">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addActionBox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addActionBox"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addActionBox">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addCodeBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s">&quot;python&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">edit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">exitpage</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">spacename</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">pagename</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">linenr</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>\</div>
+<div class="viewcode-block" id="PageRST.addCodeBlock"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addCodeBlock">[docs]</a>        <span class="n">linecolor</span><span class="o">=</span><span class="s">&quot;#eee&quot;</span><span class="p">,</span><span class="n">linecolortopbottom</span><span class="o">=</span><span class="s">&quot;1px solid black&quot;</span><span class="p">,</span><span class="n">wrap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">wrapwidth</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># out=&quot;::\n&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;code&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;code&quot;</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;.. code-block:: python</span><span class="se">\n\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">code</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;  </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addCodePythonBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">removeLeadingTab</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addCodePythonBlock"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addCodePythonBlock">[docs]</a>        <span class="c"># todo</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span> <span class="o">==</span> <span class="s">&quot;code&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inBlockType</span><span class="o">=</span><span class="s">&quot;code&quot;</span>
+
+        <span class="k">if</span> <span class="n">removeLeadingTab</span><span class="p">:</span>
+            <span class="n">check</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">code</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;    &quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">):</span>
+                    <span class="n">check</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">check</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">code2</span> <span class="o">=</span> <span class="n">code</span>
+                <span class="n">code</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">code2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+                    <span class="n">code</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addCodeBlock</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">imagePath</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="p">[]):</span></div>
+<div class="viewcode-block" id="PageRST.addImage"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addImage">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param title alt text of the image</span>
+<span class="sd">        @param imagePath can be url or local path</span>
+<span class="sd">        @param width width of the image</span>
+<span class="sd">        @param height height of the image</span>
+<span class="sd">        @param styles a list of tuples, containing CSS attributes for the image, e.g. [(&quot;background-color&quot;, &quot;green), (&quot;border&quot;, &quot;1px solid green&quot;)]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW add image page2rst&quot;</span>
+        <span class="c"># embed()</span>
+        
+        <span class="n">width_n_height</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">width</span><span class="p">:</span>
+            <span class="n">width_n_height</span> <span class="o">+=</span> <span class="s">&#39; width=&quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">height</span><span class="p">:</span>
+            <span class="n">width_n_height</span> <span class="o">+=</span> <span class="s">&#39; height=&quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="s">&quot;&lt;img src=&#39;</span><span class="si">%s</span><span class="s">&#39; alt=&#39;</span><span class="si">%s</span><span class="s">&#39; </span><span class="si">%s</span><span class="s"> style=&#39;clear:both;</span><span class="si">%s</span><span class="s">&#39; /&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imagePath</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">width_n_height</span><span class="p">,</span> <span class="n">PageHTML</span><span class="o">.</span><span class="n">_format_styles</span><span class="p">(</span><span class="n">styles</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">isElement</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addTableWithContent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columnsWidth</span><span class="p">,</span> <span class="n">colContents</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addTableWithContent"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addTableWithContent">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param columnsWidth = Array with each element a nr, when None then HTML does the formatting, otherwise relative to each other</span>
+<span class="sd">        @param colContents = array with each element HTML code</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW addTableWithContent (page2rst)&quot;</span>
+        <span class="c"># embed()</span>
+        
+        <span class="n">table</span> <span class="o">=</span> <span class="s">&quot;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&quot;</span>
+        <span class="k">for</span> <span class="n">colWidth</span><span class="p">,</span> <span class="n">colContent</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">columnsWidth</span><span class="p">,</span> <span class="n">colContents</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">colWidth</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&quot;&lt;th width=&#39;</span><span class="si">%s</span><span class="s">&#39;&gt;</span><span class="si">%s</span><span class="s">&lt;/th&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colWidth</span><span class="p">,</span> <span class="n">colContent</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">table</span> <span class="o">+=</span> <span class="s">&quot;&lt;th&gt;</span><span class="si">%s</span><span class="s">&lt;/th&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colContent</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">+=</span> <span class="s">&quot;&lt;/tr&gt;&lt;/head&gt;&lt;/table&gt;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">isElement</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+<span class="c">################################ all not relevant</span>
+
+    <span class="k">def</span> <span class="nf">addLineChart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addLineChart"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addLineChart">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue</span>
+<span class="sd">        @param headers [] first value is name of the different rowtypes e.g. P&amp;L</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot be implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addBarChart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">showcolumns</span><span class="o">=</span><span class="p">[],</span> <span class="n">columnAliases</span><span class="o">=</span><span class="p">{},</span> <span class="n">onclickfunction</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addBarChart"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addBarChart">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot be implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addPieChart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addPieChart"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addPieChart">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot be implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addHTML</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">htmlcode</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addHTML"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addHTML">[docs]</a>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot be implemented&quot;</span><span class="p">)</span>
+        <span class="c">#import cgi</span>
+        <span class="c">#html = &quot;&lt;pre&gt;%s&lt;/pre&gt;&quot; % cgi.escape(htmlcode)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">htmlcode</span><span class="p">,</span> <span class="n">isElement</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">removeCSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude</span><span class="p">,</span> <span class="n">permanent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.removeCSS"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.removeCSS">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addCSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cssLink</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cssContent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">exlcude</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addCSS"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addCSS">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addJS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jsLink</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">jsContent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addJS"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addJS">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addScriptBodyJS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jsContent</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addScriptBodyJS"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addScriptBodyJS">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addBootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jquery</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addBootstrap"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addBootstrap">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addBodyAttribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addBodyAttribute"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addBodyAttribute">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addHostBasedContent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addHostBasedContent"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addHostBasedContent">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addDocumentReadyJSfunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addDocumentReadyJSfunction"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addDocumentReadyJSfunction">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addExplorer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">dockey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addExplorer"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addExplorer">[docs]</a>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot be implemented&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addHTMLHeader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addHTMLHeader"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLHeader">[docs]</a>        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">addHTMLBody</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.addHTMLBody"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLBody">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getContent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="PageRST.getContent"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.PageRST.PageRST.getContent">[docs]</a>        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="c"># make sure we get closures where needed (/div)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_checkBlock</span><span class="p">(</span><span class="s">&quot;DDD&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">body</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

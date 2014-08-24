@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.remote.cluster.ClusterSSHClient &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.remote.cluster.ClusterSSHClient</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">warnings</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="s">r&#39;.*sha.*&#39;</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">paramiko</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="ClusterSSHClient"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterSSHClient.ClusterSSHClient">[docs]</a><span class="k">class</span> <span class="nc">ClusterSSHClient</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cluster</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isconnected</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="n">node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">cluster</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">passwd</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sftp</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="ClusterSSHClient.sshtest"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterSSHClient.ClusterSSHClient.sshtest">[docs]</a>    <span class="k">def</span> <span class="nf">sshtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">testonly</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterSSHClient.connect"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterSSHClient.ClusterSSHClient.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">testonly</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return True when connected, raise error when not possible</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isconnected</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">force</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">pingMachine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not connect to machine </span><span class="si">%s</span><span class="s"> to create an SSH connection, please check if the machine is reachable. Could not ping it.&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;connect </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+        <span class="n">passwdworking</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">passwd</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="c"># means node has been checked before and has good passwd</span>
+            <span class="n">passwords2try</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">passwd</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">passwords2try</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">superadminpassword</span><span class="p">]</span>
+            <span class="n">passwords2try</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">_superadminpasswords</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">passwd</span> <span class="ow">in</span> <span class="n">passwords2try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;autherror&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c"># We need to package jshell remote for this</span>
+                    <span class="c">#j.logger.log(&quot;clustersshclient: try to login with passwd %s on %s&quot; %(passwd,self.node.ipaddr),2)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">passwd</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;done&quot;</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;cluster node </span><span class="si">%s</span><span class="s"> connected over ssh&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+                    <span class="n">passwdworking</span> <span class="o">=</span> <span class="n">passwd</span>
+
+                <span class="k">except</span> <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RemoteSystemAuthenticationError</span><span class="p">:</span>  <span class="c"># :AuthenticationException,e:</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;autherror&quot;</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Could not sshlogin into </span><span class="si">%s</span><span class="s"> with login </span><span class="si">%s</span><span class="s">, passwd </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">passwd</span><span class="p">))</span>
+                <span class="c"># except Exception, e:</span>
+                    <span class="c"># if str(e.message).lower().find(&quot;authentication failed&quot;)&gt;-1:</span>
+                        <span class="c"># could not login</span>
+                        <span class="c"># state=&quot;autherror&quot;</span>
+                        <span class="c">#j.logger.log(&quot;Could not sshlogin into %s with login %s, passwd %s&quot; % (self.node.ipaddr,&quot;root&quot;,passwd))</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">testonly</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">False</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">Cannot connect over SSH to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">isconnected</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="ClusterSSHClient.execute"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterSSHClient.ClusterSSHClient.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tostdout</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="c">#returncode,stdout,stderr=self._sshclient.process.executeUnix(command, dieOnError, timeout)</span>
+        <span class="c"># Todo is this correct?</span>
+        <span class="n">stderr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Can</span><span class="se">\&#39;</span><span class="s">t execute process, there is no connection initialized.</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span>
+                               <span class="s">&#39;Make sure nodes are up and running and cluster passwords are correct.&#39;</span><span class="p">)</span>
+        <span class="n">returncode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="n">dieOnError</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">outputToStdout</span><span class="o">=</span><span class="n">tostdout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">returncode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span>
+</div>
+<div class="viewcode-block" id="ClusterSSHClient.getSFtpConnection"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterSSHClient.ClusterSSHClient.getSFtpConnection">[docs]</a>    <span class="k">def</span> <span class="nf">getSFtpConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Open SFTP connection to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="c">#t = paramiko.Transport((self.host, self.port))</span>
+        <span class="c">#t.connect(username=self.username , password=self.password)</span>
+
+        <span class="c"># Keep the connection open or we get the follwing exception</span>
+        <span class="c"># paramico wait_for_event() SSHException: Channel closed.</span>
+        <span class="c"># when making to many connections, closing the generated connections did not work</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sftp</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sshtest</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not establish ssh connection&quot;</span><span class="p">)</span>
+            <span class="n">transport</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sshclient</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sftp</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SFTPClient</span><span class="o">.</span><span class="n">from_transport</span><span class="p">(</span><span class="n">transport</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sftp</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Install Methods Jumpscale Core &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="install-methods-jumpscale-core">
+<h1>Install Methods Jumpscale Core<a class="headerlink" href="#install-methods-jumpscale-core" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="this-explains-how-to-manually-install-jumpscale-in-sandboxed-mode">
+<h2>This Explains how to manually install JumpScale in sandboxed mode<a class="headerlink" href="#this-explains-how-to-manually-install-jumpscale-in-sandboxed-mode" title="Permalink to this headline">¶</a></h2>
+<p>Tested on 13.10 &amp; 14.04 64 bit.
+does also work on equavelant mint distro 64 bit.</p>
+<p>update your apt repository &amp; make sure some basic requirements are met</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="c">#apt-get upgrade</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mercurial</span> <span class="n">ssh</span> <span class="n">mc</span> <span class="n">curl</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<div class="section" id="to-make-sure-you-remove-previous-version-od">
+<h3>to make sure you remove previous version od<a class="headerlink" href="#to-make-sure-you-remove-previous-version-od" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">JumpScale</span><span class="o">-</span><span class="n">core</span>
+</pre></div>
+</div>
+<p>if you are not sure please do</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">killall</span> <span class="n">tmux</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jumpscale</span>
+<span class="n">rm</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">js</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">jpack</span><span class="o">*</span>
+<span class="n">killall</span> <span class="n">python</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">sentry</span><span class="o">/</span>
+<span class="n">killall</span> <span class="n">redis</span><span class="o">-</span><span class="n">server</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">redis</span><span class="o">/</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+</pre></div>
+</div>
+<p>this will make sure all leftovers are gone</p>
+</div>
+<div class="section" id="install-the-sandbox">
+<h3>Install the sandbox<a class="headerlink" href="#install-the-sandbox" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">install</span><span class="o">.</span><span class="n">jumpscale</span><span class="o">.</span><span class="n">org</span><span class="p">:</span><span class="mi">85</span><span class="o">/</span><span class="n">cmds</span><span class="o">/</span><span class="n">jsbox_stable</span><span class="o">.</span><span class="n">sh</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">sh</span><span class="p">;</span><span class="n">sh</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jsbox</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">js</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-the-jpackage-metadata">
+<h3>Update the jpackage metadata<a class="headerlink" href="#update-the-jpackage-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jssync</span> <span class="n">download</span> <span class="o">-</span><span class="n">c</span> <span class="n">jpackages</span> <span class="o">-</span><span class="n">k</span> <span class="n">test</span>
+<span class="c">#or for stable</span>
+<span class="n">jssync</span> <span class="n">download</span> <span class="o">-</span><span class="n">c</span> <span class="n">jpackages</span> <span class="o">-</span><span class="n">k</span> <span class="n">unstable</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-jumpscale-documentation-in-a-development-env-which-is-also-master">
+<h3>install jumpscale documentation in a development env which is also master<a class="headerlink" href="#install-jumpscale-documentation-in-a-development-env-which-is-also-master" title="Permalink to this headline">¶</a></h3>
+<p>just do</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">redis</span>
+<span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">grid_master_singlenode</span>
+<span class="c">#creates user admin with passwd admin for grid_portal</span>
+<span class="n">jsuser</span> <span class="n">add</span> <span class="o">-</span><span class="n">d</span> <span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="p">:</span><span class="n">ikk</span><span class="nd">@com</span><span class="p">:</span><span class="n">jumpscale</span>
+<span class="c">#visit localhost:81 to see gridportal</span>
+<span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">doc_jumpscale</span>
+</pre></div>
+</div>
+<p>this will install all components required to work with the documentation from a local portal.
+This will also install osis, elasticsearch, processmanager, redis</p>
+</div>
+</div>
+<div class="section" id="this-explains-how-to-manually-install-jumpscale-on-ubuntu-mint-in-development-mode">
+<h2>This Explains how to manually install JumpScale on ubuntu &amp; mint in development mode<a class="headerlink" href="#this-explains-how-to-manually-install-jumpscale-on-ubuntu-mint-in-development-mode" title="Permalink to this headline">¶</a></h2>
+<p>This is the non sandboxed install method.
+<em>This is only for developers !!!!</em></p>
+<p>Tested on 13.10 &amp; 14.04 64 bit.
+does also work on mint distro 64 bit.</p>
+<p>update your apt repository &amp; make sure some basic requirements are met</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">git</span> <span class="n">git</span> <span class="n">ssh</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span> <span class="n">python</span><span class="o">-</span><span class="n">requests</span> <span class="n">python</span><span class="o">-</span><span class="n">apt</span> <span class="n">openssl</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> <span class="n">ipython</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<div class="section" id="to-make-sure-you-remove-previous-version">
+<h3>to make sure you remove previous version<a class="headerlink" href="#to-make-sure-you-remove-previous-version" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">JumpScale</span><span class="o">-</span><span class="n">core</span>
+</pre></div>
+</div>
+<p>if you are not sure please do</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">JumpScale</span><span class="o">-</span><span class="n">core</span>
+<span class="n">killall</span> <span class="n">tmux</span>  <span class="c">#dangerous</span>
+<span class="n">killall</span> <span class="n">redis</span><span class="o">-</span><span class="n">server</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">JumpScale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">/</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jumpscale</span>
+<span class="n">rm</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">js</span><span class="o">*</span>
+<span class="n">rm</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">jpack</span><span class="o">*</span>
+<span class="n">killall</span> <span class="n">python</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">sentry</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">stop</span> <span class="n">redisac</span>
+<span class="n">sudo</span> <span class="n">stop</span> <span class="n">redisp</span>
+<span class="n">sudo</span> <span class="n">stop</span> <span class="n">redism</span>
+<span class="n">sudo</span> <span class="n">stop</span> <span class="n">redisc</span>
+<span class="n">killall</span> <span class="n">redis</span><span class="o">-</span><span class="n">server</span>
+<span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">redis</span><span class="o">/</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span> <span class="o">-</span><span class="n">y</span>
+</pre></div>
+</div>
+<p>this will make sure all leftovers are gone</p>
+</div>
+<div class="section" id="install-the-latest-trunk-version-from-github">
+<h3>Install the latest trunk version from github<a class="headerlink" href="#install-the-latest-trunk-version-from-github" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Jumpscale</span><span class="o">/</span><span class="n">jumpscale_core</span><span class="o">/</span><span class="n">archive</span><span class="o">/</span><span class="n">master</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+<p>if you get a weird error please make sure that all js... files or links in /usr/local/bin/ are gone</p>
+</div>
+<div class="section" id="get-the-jpackage-metadata">
+<h3>Get the jpackage metadata<a class="headerlink" href="#get-the-jpackage-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Run the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">mdupdate</span>
+</pre></div>
+</div>
+<p>This command may ask you for a valid github account credentials.</p>
+</div>
+<div class="section" id="install-the-core-jpackages">
+<h3>Install the core jpackages<a class="headerlink" href="#install-the-core-jpackages" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">base</span> <span class="o">-</span><span class="n">r</span>
+<span class="n">jpackage</span> <span class="n">link</span> <span class="o">-</span><span class="n">n</span> <span class="n">core</span><span class="p">,</span><span class="n">libs</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">portal</span> <span class="o">-</span><span class="n">r</span>
+</pre></div>
+</div>
+<p>this will checkout the core repo and link into your environment, to make development easy.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Install Methods Jumpscale Core</a><ul>
+<li><a class="reference internal" href="#this-explains-how-to-manually-install-jumpscale-in-sandboxed-mode">This Explains how to manually install JumpScale in sandboxed mode</a><ul>
+<li><a class="reference internal" href="#to-make-sure-you-remove-previous-version-od">to make sure you remove previous version od</a></li>
+<li><a class="reference internal" href="#install-the-sandbox">Install the sandbox</a></li>
+<li><a class="reference internal" href="#update-the-jpackage-metadata">Update the jpackage metadata</a></li>
+<li><a class="reference internal" href="#install-jumpscale-documentation-in-a-development-env-which-is-also-master">install jumpscale documentation in a development env which is also master</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#this-explains-how-to-manually-install-jumpscale-on-ubuntu-mint-in-development-mode">This Explains how to manually install JumpScale on ubuntu &amp; mint in development mode</a><ul>
+<li><a class="reference internal" href="#to-make-sure-you-remove-previous-version">to make sure you remove previous version</a></li>
+<li><a class="reference internal" href="#install-the-latest-trunk-version-from-github">Install the latest trunk version from github</a></li>
+<li><a class="reference internal" href="#get-the-jpackage-metadata">Get the jpackage metadata</a></li>
+<li><a class="reference internal" href="#install-the-core-jpackages">Install the core jpackages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Core/Docs/Install/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

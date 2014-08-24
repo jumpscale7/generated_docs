@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.lib.cisco_ios.CiscoSwitchManager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.lib.cisco_ios.CiscoSwitchManager</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="c"># import JumpScale.baselib.remote</span>
+
+<div class="viewcode-block" id="CiscoSwitchManager"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitchManager">[docs]</a><span class="k">class</span> <span class="nc">CiscoSwitchManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CiscoSwitchManager.get"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitchManager.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">CiscoSwitch</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span><span class="n">password</span><span class="p">)</span>
+<span class="c">#!/usr/bin/python</span>
+</div></div>
+<span class="kn">from</span> <span class="nn">Router</span> <span class="kn">import</span> <span class="n">Router</span>
+
+<div class="viewcode-block" id="CiscoSwitch"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch">[docs]</a><span class="k">class</span> <span class="nc">CiscoSwitch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span><span class="n">password</span><span class="p">):</span>
+
+        <span class="n">R1</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s">&#39;cisco.log&#39;</span><span class="p">)</span>
+        <span class="n">login_cmd</span> <span class="o">=</span> <span class="s">&#39;telnet &#39;</span> <span class="o">+</span> <span class="n">host</span>
+        <span class="n">login_expect</span> <span class="o">=</span> <span class="s">&#39;#&#39;</span><span class="c">#.format(hostname)  #@TODO NEEDS TO BE ADJUSTED</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">R1</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">login_cmd</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">login_expect</span><span class="p">)</span>
+        <span class="c"># if out != R1._LOGIN_USERNAME_PROMPTS:</span>
+        <span class="c">#     R1.logout()</span>
+        <span class="c">#     time.sleep(60)</span>
+        <span class="c">#     R1 = Router(hostname, logfile=&#39;cisco.log&#39;)</span>
+        <span class="c">#     password = Localhost1.get_rsa_token()</span>
+        <span class="c">#     out = R1.login(login_cmd, login, password, login_expect)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cisco</span><span class="o">=</span><span class="n">R1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="o">=</span><span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="o">=</span><span class="n">login</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="o">=</span><span class="n">password</span>
+        <span class="c"># if res&lt;&gt;True: #adjust to check @TODO</span>
+        <span class="c">#     raise RuntimeError(&quot;Could not login into cisco switch: %s&quot;%host)</span>
+
+        <span class="c"># inputsentence = []</span>
+
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;terminal length 0&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;configure terminal&quot;</span><span class="p">,</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;hostname </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">host</span><span class="p">,</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;exit&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CiscoSwitch.logout"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.logout">[docs]</a>    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="CiscoSwitch.do"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">prompt</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">prompt</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">#&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">cisco</span><span class="o">.</span><span class="n">hostname</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cisco</span><span class="o">.</span><span class="n">exec_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CiscoSwitch.interface_getvlanconfig"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.interface_getvlanconfig">[docs]</a>    <span class="k">def</span> <span class="nf">interface_getvlanconfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">interfaceName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return vlan config of interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="CiscoSwitch.interface_setvlan"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.interface_setvlan">[docs]</a>    <span class="k">def</span> <span class="nf">interface_setvlan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">interfaceName</span><span class="p">,</span><span class="n">fromVlanId</span><span class="p">,</span><span class="n">toVlanId</span><span class="p">,</span><span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        configure set of vlan&#39;s on interface</span>
+<span class="sd">        @param reset when True older info is deleted and only this vlanrange is added</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+    <span class="k">def</span> <span class="nf">_normalizespaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;  &quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;  &quot;</span><span class="p">,</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">line</span>
+
+
+<div class="viewcode-block" id="CiscoSwitch.interface_getArpMAC"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.interface_getArpMAC">[docs]</a>    <span class="k">def</span> <span class="nf">interface_getArpMAC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns mac addresses an interface knows about (can be used to detect connected ports from servers)</span>
+<span class="sd">        return dict as follows</span>
+<span class="sd">        {$interfacename:[$macaddr1,$macaddr2,...]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;sh mac-address-table&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;*&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">line</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_normalizespaces</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">splitted</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">vlan</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">mac</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">ttype</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">interface</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">interface</span><span class="p">):</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+            
+
+</div>
+<div class="viewcode-block" id="CiscoSwitch.interface_getall"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.interface_getall">[docs]</a>    <span class="k">def</span> <span class="nf">interface_getall</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return info about interfaces on switch (name, macaddresses, types, ...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;implement&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span>
+</div>
+<div class="viewcode-block" id="CiscoSwitch.interface_getnames"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.interface_getnames">[docs]</a>    <span class="k">def</span> <span class="nf">interface_getnames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;implement&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span>
+</div>
+<div class="viewcode-block" id="CiscoSwitch.backup"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.backup">[docs]</a>    <span class="k">def</span> <span class="nf">backup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">destinationdir</span><span class="p">):</span>
+        <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;show running-config&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;implement&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;/system/backup/save&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="n">name</span><span class="p">})</span>
+        <span class="n">path</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.backup&quot;</span><span class="o">%</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">destinationdir</span><span class="p">,</span><span class="n">path</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="s">&quot;/export&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;file&quot;</span><span class="p">:</span><span class="n">name</span><span class="p">})</span>
+        <span class="n">path</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.rsc&quot;</span><span class="o">%</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">destinationdir</span><span class="p">,</span><span class="n">path</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="CiscoSwitch.download"><a class="viewcode-back" href="../../../../API/JumpScale.lib.cisco_ios.html#JumpScale.lib.cisco_ios.CiscoSwitchManager.CiscoSwitch.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">dest</span><span class="p">):</span>
+        <span class="c">#@todo now sure how that works on cisco sw</span>
+        <span class="kn">from</span> <span class="nn">ftplib</span> <span class="kn">import</span> <span class="n">FTP</span>
+        <span class="n">ftp</span><span class="o">=</span><span class="n">FTP</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">retrbinary</span><span class="p">(</span><span class="s">&#39;RETR </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">path</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">)</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

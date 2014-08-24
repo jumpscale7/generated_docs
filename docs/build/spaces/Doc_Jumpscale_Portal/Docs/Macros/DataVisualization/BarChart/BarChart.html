@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>BarChart Macro &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Data Visualization" href="../index.html" />
+    <link rel="next" title="DataTables_use" href="../DataTables/DataTables.html" />
+    <link rel="prev" title="Data Visualization" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../DataTables/DataTables.html" title="DataTables_use"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Data Visualization"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Data Visualization</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="barchart-macro">
+<h1>BarChart Macro<a class="headerlink" href="#barchart-macro" title="Permalink to this headline">¶</a></h1>
+<p>This macro is used to add barcharts to your page</p>
+</div>
+<div class="section" id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>&#8216;title&#8217;: The title of the chart</li>
+<li>&#8216;rows&#8217;: 2-D list of the data which will be viewed in the chart. Each row represents a type of bars.</li>
+<li>&#8216;headers&#8217;: The headers of a group of charts.</li>
+<li>&#8216;width&#8217;: The width of the chart, in pixels.</li>
+<li>&#8216;height&#8217;: The height of the chart, in pixels.</li>
+<li>&#8216;showcolumns&#8217;: The list of columns to be shown.</li>
+<li>&#8216;columnAliases&#8217;: Aliases for specific values.</li>
+<li>&#8216;onclickfunction&#8217;: The name of the Javascript function which will be called when the chart is clicked.</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">barchart</span><span class="p">:</span><span class="s">&quot;Test&quot;</span><span class="o">|</span> <span class="p">[[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">],[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span><span class="o">|</span> <span class="p">[</span><span class="s">&quot;HEADER 1&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 2&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 3&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 4&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 5&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 6&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 7&quot;</span><span class="p">,</span> <span class="s">&quot;HEADER 8&quot;</span><span class="p">]</span><span class="o">|</span> <span class="mi">900</span><span class="o">|</span> <span class="mi">400</span><span class="o">|</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span><span class="o">|</span> <span class="p">{</span><span class="mi">20</span><span class="p">:</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">:</span> <span class="s">&#39;b&#39;</span><span class="p">}</span><span class="o">|</span> <span class="s">&#39;&#39;</span>
+\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">BarChart Macro</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Data Visualization</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../DataTables/DataTables.html"
+                        title="next chapter">DataTables_use</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Macros/DataVisualization/BarChart/BarChart.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../DataTables/DataTables.html" title="DataTables_use"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Data Visualization"
+             >previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" >Data Visualization</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

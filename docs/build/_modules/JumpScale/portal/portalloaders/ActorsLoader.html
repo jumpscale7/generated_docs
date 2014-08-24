@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.portalloaders.ActorsLoader &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.portalloaders.ActorsLoader</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">LoaderBase</span> <span class="kn">import</span> <span class="n">LoaderBase</span><span class="p">,</span> <span class="n">LoaderBaseObject</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale.core.extensions.PMExtensionsGroup</span> <span class="kn">import</span> <span class="n">PMExtensionsGroup</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.extensions.PMExtensions</span> <span class="kn">import</span> <span class="n">PMExtensions</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.tags</span>
+
+
+<div class="viewcode-block" id="ActorExtensionsGroup"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorExtensionsGroup">[docs]</a><span class="k">class</span> <span class="nc">ActorExtensionsGroup</span><span class="p">(</span><span class="n">PMExtensionsGroup</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ActorExtensionsGroup</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ActorExtensionsGroup constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">PMExtensionsGroup</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pm_name</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pm_location</span> <span class="o">=</span> <span class="s">&quot;a&quot;</span>
+
+        <span class="n">extensionLoader</span> <span class="o">=</span> <span class="n">PMExtensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;a.&#39;</span><span class="p">)</span>
+
+        <span class="n">extensionLoader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_activate</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Activates all extensions in the extention group</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">extensionName</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm_extensions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pm_extensions</span><span class="p">[</span><span class="n">extensionName</span><span class="p">]</span>
+            <span class="n">extension</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Class"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.Class">[docs]</a><span class="k">class</span> <span class="nc">Class</span><span class="p">():</span>
+    <span class="k">pass</span>
+    </div>
+<div class="viewcode-block" id="GroupAppsClass"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.GroupAppsClass">[docs]</a><span class="k">class</span> <span class="nc">GroupAppsClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actorsloader</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actorsloader</span> <span class="o">=</span> <span class="n">actorsloader</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">):</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">AppClass</span><span class="p">(</span><span class="n">appname</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">app</span>
+</div>
+<div class="viewcode-block" id="AppClass"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.AppClass">[docs]</a><span class="k">class</span> <span class="nc">AppClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_appname</span> <span class="o">=</span> <span class="n">appname</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actorname</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">actorname</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;__members__&#39;</span><span class="p">,</span> <span class="s">&#39;__methods__&#39;</span><span class="p">,</span> <span class="s">&#39;trait_names&#39;</span><span class="p">,</span> <span class="s">&#39;_getAttributeNames&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actorname</span><span class="p">)</span>
+        <span class="n">actor</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">actorsloader</span><span class="o">.</span><span class="n">getActor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">actor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">actor</span>
+
+</div>
+<div class="viewcode-block" id="ActorsLoader"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader">[docs]</a><span class="k">class</span> <span class="nc">ActorsLoader</span><span class="p">(</span><span class="n">LoaderBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    loader for all actors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">LoaderBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;actor&quot;</span><span class="p">,</span> <span class="n">ActorLoader</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actorIdToActorLoader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">getActorLoaderFromId</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getLoaderFromId</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="ActorsLoader.reset"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">apps</span> <span class="o">=</span> <span class="n">GroupAppsClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">app_actornames</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">actornames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">appnames</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">modelnames</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">specs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">codegenerator</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c"># j.core.portal.active._init()</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.getApps"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getApps">[docs]</a>    <span class="k">def</span> <span class="nf">getApps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">app</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">app</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.getAppActors"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getAppActors">[docs]</a>    <span class="k">def</span> <span class="nf">getAppActors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">app</span><span class="p">,</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">app</span><span class="p">,</span> <span class="n">actor</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.getActor"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getActor">[docs]</a>    <span class="k">def</span> <span class="nf">getActor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">):</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">actorname</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">print</span> <span class="s">&quot;get actor cache miss for </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actorIdToActorLoader</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actorIdToActorLoader</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">aobj</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">aobj</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find actor from app </span><span class="si">%s</span><span class="s"> with name </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.existsActorLoader"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActorLoader">[docs]</a>    <span class="k">def</span> <span class="nf">existsActorLoader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">actorname</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.existsActor"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActor">[docs]</a>    <span class="k">def</span> <span class="nf">existsActor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">actorname</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span>
+</div>
+<div class="viewcode-block" id="ActorsLoader.loadOsisTasklets"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.loadOsisTasklets">[docs]</a>    <span class="k">def</span> <span class="nf">loadOsisTasklets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actorobject</span><span class="p">,</span> <span class="n">actorpath</span><span class="p">,</span> <span class="n">modelname</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">actorpath</span><span class="p">,</span> <span class="s">&quot;osis&quot;</span><span class="p">,</span> <span class="n">modelname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;set&quot;</span><span class="p">,</span> <span class="s">&quot;get&quot;</span><span class="p">,</span> <span class="s">&quot;delete&quot;</span><span class="p">,</span> <span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;find&quot;</span><span class="p">,</span> <span class="s">&quot;datatables&quot;</span><span class="p">]:</span>
+                <span class="n">path2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&quot;method_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span>
+                <span class="n">actorobject</span><span class="o">.</span><span class="n">_te</span><span class="p">[</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">modelname</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">taskletengine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path2</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="ActorLoader"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader">[docs]</a><span class="k">class</span> <span class="nc">ActorLoader</span><span class="p">(</span><span class="n">LoaderBaseObject</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">LoaderBaseObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;actor&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="ActorLoader.createDefaults"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.createDefaults">[docs]</a>    <span class="k">def</span> <span class="nf">createDefaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portalloader</span><span class="o">.</span><span class="n">getTemplatesPath</span><span class="p">(),</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">overwriteFiles</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ActorLoader.raiseError"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.raiseError">[docs]</a>    <span class="k">def</span> <span class="nf">raiseError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">path was:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">path</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="ActorLoader.loadFromDisk"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.loadFromDisk">[docs]</a>    <span class="k">def</span> <span class="nf">loadFromDisk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="c"># the name is $appname__actorname all in lowercase</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="c"># print &quot;load actor dir:%s&quot;%path</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">app</span><span class="p">,</span> <span class="n">actor</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;__&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="s">&quot;Cannot create actor, name of directory needs to be $appname__$actorname&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loadFromDisk</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span> <span class="o">=</span> <span class="n">actor</span>
+        </div>
+    <span class="k">def</span> <span class="nf">_removeFromMem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;remove actor </span><span class="si">%s</span><span class="s"> from memory&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">removeSpecsForActor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">codegenerator</span><span class="o">.</span><span class="n">removeFromMem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">unloadActorFromRoutes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ActorLoader.reset"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_removeFromMem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadFromDisk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actorsloader</span><span class="o">.</span><span class="n">getActor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_descrTo1Line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">descr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">descr</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">descr</span>
+        <span class="n">descr</span> <span class="o">=</span> <span class="n">descr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">descr</span> <span class="o">=</span> <span class="n">descr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">n&quot;</span><span class="p">)</span>
+        <span class="c"># descr=descr.replace(&quot;&#39;n&quot;,&quot;&quot;)</span>
+        <span class="k">return</span> <span class="n">descr</span>
+
+
+<div class="viewcode-block" id="ActorLoader.activate"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.activate">[docs]</a>    <span class="k">def</span> <span class="nf">activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;activate actor: </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="p">)</span>
+
+        <span class="n">appname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span>
+        <span class="n">actorname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span>
+        <span class="n">actorpath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span>
+        <span class="c"># parse the specs</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">parseSpecs</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/specs&quot;</span> <span class="o">%</span> <span class="n">actorpath</span><span class="p">,</span> <span class="n">appname</span><span class="o">=</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="o">=</span><span class="n">actorname</span><span class="p">)</span>
+
+        <span class="c"># retrieve the just parsed spec</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">getActorSpec</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">raiseError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">spec</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+        <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">tags</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">spec</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+
+        <span class="n">spec</span><span class="o">.</span><span class="n">hasTasklets</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;tasklets&quot;</span><span class="p">)</span>
+
+        <span class="c"># generate the tasklets for the methods of the actor</span>
+        <span class="c"># j.core.codegenerator.generate(spec,&quot;tasklet&quot;,codepath=actorpath)</span>
+
+        <span class="c"># generate the class for the methods of the actor</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tags</span>
+        <span class="n">classpath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">actorpath</span><span class="p">,</span> <span class="s">&quot;methodclass&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">.py&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">appname</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">actorname</span><span class="p">))</span>
+        <span class="n">modelNames</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">getModelNames</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">)</span>
+        
+        <span class="n">actorobject</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">codegenerator</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="s">&quot;actorclass&quot;</span><span class="p">,</span> <span class="n">codepath</span><span class="o">=</span><span class="n">actorpath</span><span class="p">,</span> <span class="n">classpath</span><span class="o">=</span><span class="n">classpath</span><span class="p">,</span>
+                                                    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">makeCopy</span><span class="o">=</span><span class="bp">True</span><span class="p">)()</span>             
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">modelNames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">actorobject</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">modelName</span> <span class="ow">in</span> <span class="n">modelNames</span><span class="p">:</span>
+                <span class="n">modelspec</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">getModelSpec</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelName</span><span class="p">)</span>
+                <span class="n">modeltags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">modelspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+
+                <span class="c"># will generate the tasklets</span>
+                <span class="n">modelHasTasklets</span> <span class="o">=</span> <span class="n">modeltags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;tasklets&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">modelHasTasklets</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">codegenerator</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">modelspec</span><span class="p">,</span> <span class="s">&quot;osis&quot;</span><span class="p">,</span> <span class="n">codepath</span><span class="o">=</span><span class="n">actorpath</span><span class="p">,</span> <span class="n">returnClass</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">hasTasklets</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">loadOsisTasklets</span><span class="p">(</span><span class="n">actorobject</span><span class="p">,</span> <span class="n">actorpath</span><span class="p">,</span> <span class="n">modelname</span><span class="o">=</span><span class="n">modelspec</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+                <span class="n">classs</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">codegenerator</span><span class="o">.</span><span class="n">getClassJSModel</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelName</span><span class="p">,</span> <span class="n">codepath</span><span class="o">=</span><span class="n">actorpath</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">modelspec</span><span class="o">.</span><span class="n">tags</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">modelspec</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">modelspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span>
+                <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">modelspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+
+                <span class="n">db</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">keyvaluestore</span><span class="o">.</span><span class="n">getMemoryStore</span><span class="p">()</span>
+                <span class="n">osis</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagExists</span><span class="p">(</span><span class="s">&quot;dbtype&quot;</span><span class="p">):</span>
+                    <span class="n">dbtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagGet</span><span class="p">(</span><span class="s">&quot;dbtype&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)]</span>
+                    <span class="k">if</span> <span class="s">&quot;arakoon&quot;</span> <span class="ow">in</span> <span class="n">dbtypes</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">dbtypes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;arakoon&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">db</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">keyvaluestore</span><span class="o">.</span><span class="n">getArakoonStore</span><span class="p">(</span><span class="n">modelName</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s">&quot;fs&quot;</span> <span class="ow">in</span> <span class="n">dbtypes</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">dbtypes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;fs&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">db</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">keyvaluestore</span><span class="o">.</span><span class="n">getFileSystemStore</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="n">modelName</span><span class="p">,</span> <span class="n">serializers</span><span class="o">=</span><span class="p">[</span><span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">getSerializerType</span><span class="p">(</span><span class="s">&#39;j&#39;</span><span class="p">)])</span>
+                    <span class="k">if</span> <span class="s">&quot;redis&quot;</span> <span class="ow">in</span> <span class="n">dbtypes</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">dbtypes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&quot;redis&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">db</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">keyvaluestore</span><span class="o">.</span><span class="n">getRedisStore</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="n">modelName</span><span class="p">,</span> <span class="n">serializers</span><span class="o">=</span><span class="p">[</span><span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">getSerializerType</span><span class="p">(</span><span class="s">&#39;j&#39;</span><span class="p">)])</span>
+                    <span class="k">if</span> <span class="s">&quot;osis&quot;</span> <span class="ow">in</span> <span class="n">dbtypes</span><span class="p">:</span>
+                        <span class="n">osis</span> <span class="o">=</span> <span class="bp">True</span>
+
+                <span class="k">if</span> <span class="n">osis</span><span class="p">:</span>
+                    <span class="c"># We need to check if the correct namespace is existing and</span>
+                    <span class="c"># the namespace maps to the actor name, every object is a</span>
+                    <span class="c"># category</span>
+                    <span class="n">namespacename</span> <span class="o">=</span> <span class="n">actorname</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span><span class="p">:</span>
+                        <span class="kn">import</span> <span class="nn">JumpScale.grid.osis</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&#39;root&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">actorname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span><span class="o">.</span><span class="n">listNamespaces</span><span class="p">():</span>
+                        <span class="n">template</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagGet</span><span class="p">(</span><span class="s">&#39;osis_template&#39;</span><span class="p">,</span> <span class="s">&#39;modelobjects&#39;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span><span class="o">.</span><span class="n">createNamespace</span><span class="p">(</span><span class="n">actorname</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">modelName</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span><span class="o">.</span><span class="n">listNamespaceCategories</span><span class="p">(</span><span class="n">namespacename</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">osiscl</span><span class="o">.</span><span class="n">createNamespaceCategory</span><span class="p">(</span><span class="n">namespacename</span><span class="p">,</span> <span class="n">modelName</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">osis</span><span class="p">:</span>
+                        <span class="n">actorobject</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">modelName</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osismodel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelName</span><span class="p">,</span> <span class="n">classs</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">actorobject</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">modelName</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osismodel</span><span class="o">.</span><span class="n">getRemoteOsisDB</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelName</span><span class="p">,</span> <span class="n">classs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Could not get osis model for </span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">.Error was </span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelName</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="c"># add routes to webserver</span>
+        <span class="k">for</span> <span class="n">methodspec</span> <span class="ow">in</span> <span class="n">spec</span><span class="o">.</span><span class="n">methods</span><span class="p">:</span>
+            <span class="c"># make sure tasklets are loaded</span>
+
+            <span class="n">methodtags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">methodspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+            <span class="n">methodspec</span><span class="o">.</span><span class="n">hasTasklets</span> <span class="o">=</span> <span class="n">methodtags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;tasklets&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">hasTasklets</span> <span class="ow">or</span> <span class="n">spec</span><span class="o">.</span><span class="n">hasTasklets</span><span class="p">:</span>
+                <span class="n">taskletpath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">actorpath</span><span class="p">,</span> <span class="s">&quot;methodtasklets&quot;</span><span class="p">,</span> <span class="s">&quot;method_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">taskletpath</span><span class="p">):</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">taskletpath</span><span class="p">)</span>
+                    <span class="n">taskletContent</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, args, params, actor, tags, tasklet):</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, args, params, actor, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">                    &quot;&quot;&quot;</span>
+                    <span class="n">methodtasklet</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">taskletpath</span><span class="p">,</span> <span class="s">&quot;5_</span><span class="si">%s</span><span class="s">.py&quot;</span> <span class="o">%</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">methodtasklet</span><span class="p">,</span> <span class="n">taskletContent</span><span class="p">)</span>
+                <span class="n">actorobject</span><span class="o">.</span><span class="n">_te</span><span class="p">[</span><span class="n">methodspec</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">taskletengine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">taskletpath</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+
+                <span class="n">paramvalidation</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">vars</span><span class="p">:</span>
+                    <span class="n">paramvalidation</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>  <span class="c"># @todo</span>
+
+                <span class="n">paramoptional</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">vars</span><span class="p">:</span>
+                    <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;optional&quot;</span><span class="p">):</span>
+                        <span class="n">paramoptional</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+                <span class="n">paramdescription</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">vars</span><span class="p">:</span>
+                    <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;optional&quot;</span><span class="p">):</span>
+                        <span class="n">descr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">description</span> <span class="o">+</span> <span class="s">&quot; (optional)&quot;</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">descr</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">description</span>
+                    <span class="n">paramdescription</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_descrTo1Line</span><span class="p">(</span><span class="n">descr</span><span class="p">)</span>
+
+                <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">methodspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagExists</span><span class="p">(</span><span class="s">&quot;returnformat&quot;</span><span class="p">):</span>
+                    <span class="n">returnformat</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagGet</span><span class="p">(</span><span class="s">&quot;returnformat&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">returnformat</span> <span class="o">=</span> <span class="bp">None</span>
+
+                <span class="n">auth</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;noauth&quot;</span><span class="p">)</span>
+                <span class="n">methodcall</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">actorobject</span><span class="p">,</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">addRoute</span><span class="p">(</span><span class="n">methodcall</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">methodspec</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                                               <span class="n">paramvalidation</span><span class="o">=</span><span class="n">paramvalidation</span><span class="p">,</span> <span class="n">paramdescription</span><span class="o">=</span><span class="n">paramdescription</span><span class="p">,</span> <span class="n">paramoptional</span><span class="o">=</span><span class="n">paramoptional</span><span class="p">,</span>
+                                                               <span class="n">description</span><span class="o">=</span><span class="n">methodspec</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="n">returnformat</span><span class="p">)</span>
+                <span class="c"># actorobjects = modelNames</span>
+                <span class="c"># j.core.portal.active.addExtRoute(methodcall, appname, actorname, methodspec.name,</span>
+                <span class="c">#                                                   actorobjects,</span>
+                <span class="c">#                                                   paramvalidation=paramvalidation, </span>
+                <span class="c">#                                                   paramdescription=paramdescription, </span>
+                <span class="c">#                                                   paramoptional=paramoptional, </span>
+                <span class="c">#                                                   description=methodspec.description, auth=auth, returnformat=returnformat)</span>
+
+        <span class="c"># load taskletengines if they do exist</span>
+        <span class="n">tepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">actorpath</span><span class="p">,</span> <span class="s">&quot;taskletengines&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">tepath</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s">&quot;taskletengines&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">actorobject</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
+                <span class="n">actorobject</span><span class="o">.</span><span class="n">taskletengines</span> <span class="o">=</span> <span class="n">Class</span><span class="p">()</span>
+            <span class="n">tepaths</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listDirsInDir</span><span class="p">(</span><span class="n">tepath</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tepath</span> <span class="ow">in</span> <span class="n">tepaths</span><span class="p">:</span>
+                <span class="n">actorobject</span><span class="o">.</span><span class="n">taskletengines</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">tepath</span><span class="p">)]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">taskletengine</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tepath</span><span class="p">)</span>
+
+        <span class="c"># LOAD actorobject to qbase tree</span>
+        <span class="k">if</span> <span class="n">appname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">appname</span><span class="p">]</span> <span class="o">=</span> <span class="n">AppClass</span><span class="p">(</span><span class="n">appname</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">actorname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">appname</span><span class="p">]</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">appname</span><span class="p">]</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">actorname</span><span class="p">]</span> <span class="o">=</span> <span class="n">actorobject</span>
+
+        <span class="k">if</span> <span class="s">&quot;runningAppserver&quot;</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">appname</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">spec</span><span class="o">.</span><span class="n">actorname</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">actorobject</span>
+
+        <span class="c"># load extensions</span>
+        <span class="n">actorobject</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;extensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ActorExtensionsGroup</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">actorpath</span><span class="p">,</span> <span class="s">&quot;extensions&quot;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">actorobject</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

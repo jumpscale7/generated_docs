@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.gridhealthchecker.gridhealthchecker &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.gridhealthchecker.gridhealthchecker</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.agentcontroller</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.osis</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.units</span>
+<span class="kn">import</span> <span class="nn">gevent</span>
+
+<div class="viewcode-block" id="GridHealthChecker"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker">[docs]</a><span class="k">class</span> <span class="nc">GridHealthChecker</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">nostdout</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">agentcontroller</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_osiscl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&#39;root&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_heartbeatcl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_osiscl</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;heartbeat&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nodecl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_osiscl</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;node&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tostdout</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">with</span> <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">nostdout</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">(</span><span class="n">activecheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_addError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">category</span><span class="p">:</span><span class="nb">list</span><span class="p">()})</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="p">[</span><span class="n">nid</span><span class="p">][</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;errormessage&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="p">[</span><span class="n">nid</span><span class="p">][</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GridHealthChecker.getName"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.getName">[docs]</a>    <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">(</span><span class="n">activecheck</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_addResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="nb">list</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">[</span><span class="n">nid</span><span class="p">][</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">functionname</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">functionname</span><span class="o">.</span><span class="n">func_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;ping&#39;</span><span class="p">]:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span>
+        <span class="n">greens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="n">greenlet</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">Greenlet</span><span class="p">(</span><span class="n">functionname</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="p">)</span>
+            <span class="n">greenlet</span><span class="o">.</span><span class="n">nid</span> <span class="o">=</span> <span class="n">nid</span>
+            <span class="n">greenlet</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">greens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">greenlet</span><span class="p">)</span>
+        <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">greens</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">green</span> <span class="ow">in</span> <span class="n">greens</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">green</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                <span class="n">errors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">green</span><span class="o">.</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">green</span><span class="o">.</span><span class="n">exception</span><span class="p">),</span> <span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="n">category</span><span class="p">)]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_returnResults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addResult</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+
+    <span class="k">def</span> <span class="nf">_checkRunningNIDs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&#39;CHECKING HEARTBEATS...&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">get all heartbeats (just query from ES):&quot;</span><span class="p">,</span>
+        <span class="n">heartbeats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heartbeatcl</span><span class="o">.</span><span class="n">simpleSearch</span><span class="p">({})</span>
+        <span class="k">print</span> <span class="s">&quot;OK&quot;</span>
+        <span class="k">for</span> <span class="n">heartbeat</span> <span class="ow">in</span> <span class="n">heartbeats</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span> <span class="ow">and</span>  <span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">]</span>  <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">],</span><span class="s">&quot;found heartbeat node &#39;</span><span class="si">%s</span><span class="s">&#39; which is not in grid nodes.&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">]),</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>
+
+        <span class="n">nid2hb</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">x</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;lastcheck&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">heartbeats</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">nid2hb</span><span class="p">:</span>
+                    <span class="n">lastchecked</span> <span class="o">=</span> <span class="n">nid2hb</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getEpochAgo</span><span class="p">(</span><span class="s">&#39;-2m&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">lastchecked</span><span class="p">:</span>
+                        <span class="c"># print &quot;%s&quot;%nid,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>                        
+                        <span class="n">hago</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span><span class="o">-</span><span class="n">lastchecked</span><span class="p">)</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span><span class="s">&quot;On node:&#39;</span><span class="si">%s</span><span class="s">&#39; (</span><span class="si">%s</span><span class="s">). Processmanager is not responding, last heartbeat </span><span class="si">%s</span><span class="s"> hours ago&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">nid</span><span class="p">,</span><span class="n">hago</span><span class="p">),</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>    
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span><span class="s">&quot;found heartbeat node &#39;</span><span class="si">%s</span><span class="s">&#39; which is not in grid nodes.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nid</span><span class="p">),</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_checkRunningNIDsFromPing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">[:]</span>
+        <span class="k">for</span> <span class="n">nid</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">error</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="s">&#39;processmanagerping&#39;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">nid</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GridHealthChecker.toStdout"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.toStdout">[docs]</a>    <span class="k">def</span> <span class="nf">toStdout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tostdout</span> <span class="o">=</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.getNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.getNodes">[docs]</a>    <span class="k">def</span> <span class="nf">getNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">activecheck</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        cache in mem</span>
+<span class="sd">        list nodes from grid</span>
+<span class="sd">        list nodes from heartbeat</span>
+<span class="sd">        if gridnodes found not in heartbeat -&gt; error</span>
+<span class="sd">        if heartbeat nodes found not in gridnodes -&gt; error</span>
+<span class="sd">        all the ones found in self._nids (return if populated)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodecl</span><span class="o">.</span><span class="n">simpleSearch</span><span class="p">({})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nodenames</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s">&quot;active&quot;</span><span class="p">]</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">activecheck</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pingAllNodesSync</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_checkRunningNIDsFromPing</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.runAll"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.runAll">[docs]</a>    <span class="k">def</span> <span class="nf">runAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkHeartbeatsAllNodes</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkProcessManagerAllNodes</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">**Running tests on </span><span class="si">%s</span><span class="s"> node(s). </span><span class="si">%s</span><span class="s"> node(s) have not responded to ping**</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pingAllNodesAsync</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkElasticSearch</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkRedisAllNodes</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkWorkersAllNodes</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">checkDisksAllNodes</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tostdout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_printResults</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.runAllOnNode"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.runAllOnNode">[docs]</a>    <span class="k">def</span> <span class="nf">runAllOnNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkRedis</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pingasync</span><span class="p">(</span><span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkWorkers</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkDisks</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tostdout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_printResults</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">_printResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%(nid)-8s</span><span class="s"> </span><span class="si">%(name)-10s</span><span class="s"> </span><span class="si">%(status)-8s</span><span class="s"> </span><span class="si">%(issues)s</span><span class="s">&#39;</span>
+        <span class="k">print</span> <span class="n">form</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;nid&#39;</span><span class="p">:</span> <span class="s">&#39;NODE ID&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;NAME&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;STATUS&#39;</span><span class="p">,</span> <span class="s">&#39;issues&#39;</span><span class="p">:</span><span class="s">&#39;ISSUES&#39;</span><span class="p">}</span>
+        <span class="k">print</span> <span class="s">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">80</span>
+        <span class="k">print</span> <span class="s">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">nid</span><span class="p">,</span> <span class="n">checks</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">nid</span><span class="p">):</span>
+                <span class="n">nodedata</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;nid&#39;</span><span class="p">:</span> <span class="n">nid</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="n">nid</span><span class="p">),</span> <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;OK&#39;</span><span class="p">,</span> <span class="s">&#39;issues&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">}</span>
+                <span class="k">print</span> <span class="n">form</span> <span class="o">%</span> <span class="n">nodedata</span>
+
+        <span class="k">for</span> <span class="n">nid</span><span class="p">,</span> <span class="n">checks</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">nodedata</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;nid&#39;</span><span class="p">:</span> <span class="n">nid</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span><span class="n">nid</span><span class="p">),</span> <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;ERROR&#39;</span><span class="p">,</span> <span class="s">&#39;issues&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">}</span>
+            <span class="k">print</span> <span class="n">form</span> <span class="o">%</span> <span class="n">nodedata</span>
+            <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">checks</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                    <span class="n">defaultvalue</span> <span class="o">=</span> <span class="s">&#39;processmanager is unreachable by ping&#39;</span> <span class="k">if</span> <span class="n">category</span> <span class="o">==</span> <span class="s">&#39;processmanager&#39;</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
+                    <span class="n">errormessage</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;errormessage&#39;</span><span class="p">,</span> <span class="n">defaultvalue</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">errormessage</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">):</span>
+                        <span class="n">nodedata</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;nid&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;issues&#39;</span><span class="p">:</span> <span class="s">&#39;- </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">message</span><span class="p">}</span>
+                        <span class="k">print</span> <span class="n">form</span> <span class="o">%</span> <span class="n">nodedata</span>
+
+
+<div class="viewcode-block" id="GridHealthChecker.checkElasticSearch"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkElasticSearch">[docs]</a>    <span class="k">def</span> <span class="nf">checkElasticSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+
+        <span class="n">errormessage</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">masternid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+            <span class="n">errormessage</span> <span class="o">=</span> <span class="s">&#39;ElasticSearch status UNKNOWN&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">eshealth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;info_gather_elasticsearch&#39;</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;TIMEOUT&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;TIMEOUT&#39;</span><span class="p">},</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+                <span class="n">errormessage</span> <span class="o">=</span> <span class="s">&#39;ElasticSearch status TIMEOUT&#39;</span>
+            <span class="k">elif</span> <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;OK&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+                <span class="n">errormessage</span> <span class="o">=</span> <span class="s">&#39;ElasticSearch status UNKNOWN&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">eshealth</span> <span class="o">=</span> <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">eshealth</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span><span class="s">&quot;elasticsearch did not return info for healthcheck&quot;</span><span class="p">,</span><span class="s">&quot;elasticsearch&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+                <span class="n">size</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">converToBestUnit</span><span class="p">(</span><span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;size&#39;</span><span class="p">])</span>
+                <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%.2f</span><span class="s"> </span><span class="si">%s</span><span class="s">B&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+                <span class="n">size</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">converToBestUnit</span><span class="p">(</span><span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;memory_usage&#39;</span><span class="p">])</span>
+                <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;memory_usage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%.2f</span><span class="s"> </span><span class="si">%s</span><span class="s">B&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">eshealth</span><span class="p">[</span><span class="s">&#39;health&#39;</span><span class="p">][</span><span class="s">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="n">eshealth</span><span class="p">,</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+                    <span class="n">errormessage</span> <span class="o">=</span> <span class="s">&#39;ElasticSearch status is RED&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_addResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="n">eshealth</span><span class="p">,</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">errormessage</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">masternid</span><span class="p">,</span> <span class="n">errormessage</span><span class="p">,</span> <span class="s">&#39;elasticsearch&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkRedisAllNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkRedisAllNodes">[docs]</a>    <span class="k">def</span> <span class="nf">checkRedisAllNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;CHECKING REDIS ON </span><span class="si">%s</span><span class="s"> NODE(S)...&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkRedis</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;redis&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.getWikiStatus"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.getWikiStatus">[docs]</a>    <span class="k">def</span> <span class="nf">getWikiStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">):</span>
+        <span class="n">colormap</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;RUNNING&#39;</span><span class="p">:</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;HALTED&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">:</span> <span class="s">&#39;orange&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;BROKEN&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;OK&#39;</span><span class="p">:</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;NOT OK&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="s">&#39;{color:</span><span class="si">%s</span><span class="s">}*</span><span class="si">%s</span><span class="s">*{color}&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colormap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s">&#39;orange&#39;</span><span class="p">),</span> <span class="n">status</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkRedis"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkRedis">[docs]</a>    <span class="k">def</span> <span class="nf">checkRedis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errormessage</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;info_gather_redis&#39;</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">redis</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;OK&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">redis</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="s">&#39;redis&#39;</span><span class="p">))</span>
+            <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Redis state UNKNOWN&#39;</span><span class="p">)</span>
+            <span class="n">redis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">port</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">redis</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">size</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">converToBestUnit</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&#39;memory_usage&#39;</span><span class="p">])</span>
+            <span class="n">result</span><span class="p">[</span><span class="s">&#39;memory_usage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%.2f</span><span class="s"> </span><span class="si">%s</span><span class="s">B&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s">&#39;port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">port</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;RUNNING&#39;</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s">&#39;redis&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Redis port &quot;</span><span class="si">%(port)s</span><span class="s">&quot; is </span><span class="si">%(state)s</span><span class="s">. Memory usage = </span><span class="si">%(memory_usage)s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">result</span><span class="p">)</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s">&#39;redis&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">errormessage</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errormessage</span><span class="p">),</span> <span class="s">&#39;redis&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkWorkersAllNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkWorkersAllNodes">[docs]</a>    <span class="k">def</span> <span class="nf">checkWorkersAllNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;CHECKING WORKERS ON </span><span class="si">%s</span><span class="s"> NODE(S)...&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkWorkers</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;workers&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkWorkers"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkWorkers">[docs]</a>    <span class="k">def</span> <span class="nf">checkWorkers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errormessage</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;workerstatus&#39;</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">workers</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;OK&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">workers</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span><span class="s">&#39;UNKNOWN&#39;</span><span class="p">,</span> <span class="s">&#39;mem&#39;</span><span class="p">:</span> <span class="s">&#39;0 B&#39;</span><span class="p">},</span> <span class="s">&#39;workers&#39;</span><span class="p">))</span>
+            <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Workers status UNKNOWN&#39;</span><span class="p">)</span>
+            <span class="n">workers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">worker</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">workers</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">size</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">converToBestUnit</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s">&#39;mem&#39;</span><span class="p">])</span>
+            <span class="n">stats</span><span class="p">[</span><span class="s">&#39;mem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%.2f</span><span class="s"> </span><span class="si">%s</span><span class="s">B&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="n">stats</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">worker</span>
+            <span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;RUNNING&#39;</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="s">&#39;workers&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">statsmod</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">statsmod</span><span class="p">[</span><span class="s">&#39;lastactive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">epoch2HRDateTime</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s">&#39;lastactive&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="n">stats</span><span class="p">[</span><span class="s">&#39;lastactive&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s">&#39;never&#39;</span>
+                <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%(name)s</span><span class="s"> is </span><span class="si">%(state)s</span><span class="s">. Last active: </span><span class="si">%(lastactive)s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">statsmod</span><span class="p">)</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="s">&#39;workers&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">errormessage</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errormessage</span><span class="p">),</span> <span class="s">&#39;workers&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span>
+
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkProcessManagerAllNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkProcessManagerAllNodes">[docs]</a>    <span class="k">def</span> <span class="nf">checkProcessManagerAllNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;CHECKING PROCESSMANAGERS...&quot;</span>
+        <span class="n">haltednodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">haltednodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;HALTED&#39;</span><span class="p">},</span> <span class="s">&#39;processmanager&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addResult</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;RUNNING&#39;</span><span class="p">},</span> <span class="s">&#39;processmanager&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkHeartbeatsAllNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkHeartbeatsAllNodes">[docs]</a>    <span class="k">def</span> <span class="nf">checkHeartbeatsAllNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&#39;CHECKING HEARTBEATS...&#39;</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s">get all heartbeats (just query from ES):&quot;</span><span class="p">,</span>
+        <span class="k">print</span> <span class="s">&quot;OK&quot;</span>
+        <span class="n">heartbeats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heartbeatcl</span><span class="o">.</span><span class="n">simpleSearch</span><span class="p">({})</span>
+        <span class="k">for</span> <span class="n">heartbeat</span> <span class="ow">in</span> <span class="n">heartbeats</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span> <span class="ow">and</span>  <span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">]</span>  <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">],</span> <span class="s">&quot;found heartbeat node &#39;</span><span class="si">%s</span><span class="s">&#39; when not in grid nodes.&quot;</span> <span class="o">%</span> <span class="n">heartbeat</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">],</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>
+
+        <span class="n">nid2hb</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">x</span><span class="p">[</span><span class="s">&#39;nid&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;lastcheck&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">heartbeats</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">nid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nidsNonActive</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nid</span> <span class="ow">in</span> <span class="n">nid2hb</span><span class="p">:</span>
+                    <span class="n">lastchecked</span> <span class="o">=</span> <span class="n">nid2hb</span><span class="p">[</span><span class="n">nid</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getEpochAgo</span><span class="p">(</span><span class="s">&#39;-2m&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">lastchecked</span><span class="p">:</span>
+                        <span class="n">hago</span><span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span><span class="o">-</span><span class="n">lastchecked</span><span class="p">)</span><span class="o">/</span><span class="mi">3600</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="s">&quot;Last heartbeat </span><span class="si">%s</span><span class="s"> hours ago&quot;</span> <span class="o">%</span> <span class="n">hago</span><span class="p">,</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>    
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="s">&quot;found heartbeat node when not in grid nodes.&quot;</span><span class="p">,</span><span class="s">&quot;heartbeat&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkProcessManager"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkProcessManager">[docs]</a>    <span class="k">def</span> <span class="nf">checkProcessManager</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check heartbeat on specified node, see if result came in osis</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">gid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">gid</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heartbeatcl</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">nid</span><span class="p">)):</span>
+            <span class="n">heartbeat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_heartbeatcl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">nid</span><span class="p">))</span>
+            <span class="n">lastchecked</span> <span class="o">=</span> <span class="n">heartbeat</span><span class="o">.</span><span class="n">lastcheck</span>
+            <span class="k">if</span>  <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getEpochAgo</span><span class="p">(</span><span class="s">&#39;-2m&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">lastchecked</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addResult</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;RUNNING&#39;</span><span class="p">},</span> <span class="s">&#39;processmanager&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;HALTED&#39;</span><span class="p">},</span> <span class="s">&#39;processmanager&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_addError</span><span class="p">(</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="s">&#39;processmanager&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkDisksAllNodes"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkDisksAllNodes">[docs]</a>    <span class="k">def</span> <span class="nf">checkDisksAllNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;CHECKING DISKS ON </span><span class="si">%s</span><span class="s"> NODE(S)...&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkDisks</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;disks&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.pingAllNodesSync"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.pingAllNodesSync">[docs]</a>    <span class="k">def</span> <span class="nf">pingAllNodesSync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;PROCESS MANAGER PING TO ALL (</span><span class="si">%s</span><span class="s">) NODES...&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;processmanagerping&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.pingAllNodesAsync"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.pingAllNodesAsync">[docs]</a>    <span class="k">def</span> <span class="nf">pingAllNodesAsync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nids</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;WORKER PING TO </span><span class="si">%s</span><span class="s"> NODE(S)...&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_runningnids</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallelize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pingasync</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;workerping&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errors</span>        
+</div>
+<div class="viewcode-block" id="GridHealthChecker.ping"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.ping">[docs]</a>    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nid</span><span class="p">,</span><span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;echo_sync&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;msg&quot;</span><span class="p">:</span><span class="s">&quot;ping&quot;</span><span class="p">},</span><span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;ping&quot;</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;ping&#39;</span><span class="p">:</span> <span class="s">&#39;down&#39;</span><span class="p">},</span> <span class="s">&#39;processmanagerping&#39;</span><span class="p">))</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="s">&#39;cannot ping processmanager&#39;</span><span class="p">,</span> <span class="s">&#39;processmanagerping&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.pingasync"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.pingasync">[docs]</a>    <span class="k">def</span> <span class="nf">pingasync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nid</span><span class="p">,</span><span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;echo_async&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;msg&quot;</span><span class="p">:</span><span class="s">&quot;ping&quot;</span><span class="p">},</span> <span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;ping&quot;</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;ping&#39;</span><span class="p">:</span> <span class="s">&#39;down&#39;</span><span class="p">},</span> <span class="s">&#39;workerping&#39;</span><span class="p">))</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="s">&#39;cannot ping workers&#39;</span><span class="p">,</span> <span class="s">&#39;workerping&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span>
+</div>
+<div class="viewcode-block" id="GridHealthChecker.checkDisks"><a class="viewcode-back" href="../../../../API/JumpScale.grid.gridhealthchecker.html#JumpScale.grid.gridhealthchecker.gridhealthchecker.GridHealthChecker.checkDisks">[docs]</a>    <span class="k">def</span> <span class="nf">checkDisks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">clean</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">()</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">errormessage</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="s">&#39;check_disks&#39;</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="n">nid</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">disks</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;OK&#39;</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="s">&#39;UNKNOWN&#39;</span><span class="p">},</span> <span class="s">&#39;disks&#39;</span><span class="p">))</span>
+            <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Disks status UNKNOWN.&#39;</span><span class="p">)</span>
+            <span class="n">disks</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">disk</span> <span class="ow">in</span> <span class="n">disks</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">disk</span><span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">disk</span><span class="p">[</span><span class="s">&#39;free&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">disk</span><span class="p">[</span><span class="s">&#39;size&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">disk</span><span class="p">[</span><span class="s">&#39;free&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">disk</span><span class="p">[</span><span class="s">&#39;size&#39;</span><span class="p">]))</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">disk</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;FREE SPACE LESS THAN 10</span><span class="si">%%</span><span class="s"> on disk </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span>
+                <span class="n">disk</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;NOT OK&#39;</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="p">{</span><span class="n">path</span><span class="p">:</span> <span class="n">disk</span><span class="p">},</span> <span class="s">&#39;disks&#39;</span><span class="p">))</span>
+                <span class="n">errormessage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;Disk </span><span class="si">%(path)s</span><span class="s"> is </span><span class="si">%(state)s</span><span class="s">. </span><span class="si">%(message)s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">disk</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">disk</span><span class="p">[</span><span class="s">&#39;free&#39;</span><span class="p">]:</span>
+                    <span class="n">size</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">converToBestUnit</span><span class="p">(</span><span class="n">disk</span><span class="p">[</span><span class="s">&#39;free&#39;</span><span class="p">],</span> <span class="s">&#39;M&#39;</span><span class="p">)</span>
+                    <span class="n">disk</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%.2f</span><span class="s"> </span><span class="si">%s</span><span class="s">iB free space available&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">disk</span><span class="p">[</span><span class="s">&#39;message&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;Disk is not mounted, Info is not available&#39;</span>
+                <span class="n">disk</span><span class="p">[</span><span class="s">&#39;state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;OK&#39;</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="n">disk</span><span class="p">,</span> <span class="s">&#39;disks&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">errormessage</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nid</span><span class="p">,</span> <span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errormessage</span><span class="p">),</span> <span class="s">&#39;disks&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_returnResults</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">errors</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

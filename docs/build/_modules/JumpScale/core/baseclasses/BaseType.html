@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.baseclasses.BaseType &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="JumpScale.core.baseclasses" href="../baseclasses.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../baseclasses.html" accesskey="U">JumpScale.core.baseclasses</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.baseclasses.BaseType</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.base</span> <span class="kn">import</span> <span class="n">BaseType</span> <span class="k">as</span> <span class="n">TypeBaseType</span>
+
+<span class="k">def</span> <span class="nf">generate_init_properties</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Generate a class __init_properties__ method</span>
+<div class="viewcode-block" id="generate_init_properties"><a class="viewcode-back" href="../../../../API/JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseType.generate_init_properties">[docs]</a>
+<span class="sd">    @param cls: Type to generate method for</span>
+<span class="sd">    @type cls: type</span>
+<span class="sd">    @param attrs: Class construction attributes</span>
+<span class="sd">    @type attrs: dict</span>
+
+<span class="sd">    @returns: __init_properties__ method</span>
+<span class="sd">    @rtype: method</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init_properties__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Initialize all properties with their default value&#39;&#39;&#39;</span>
+
+        <span class="c"># Call superclass __init_properties__, if any. No-op otherwise</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s">&#39;__init_properties__&#39;</span><span class="p">):</span>
+            <span class="n">base</span><span class="o">.</span><span class="n">__init_properties__</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> \
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">TypeBaseType</span><span class="p">)):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="o">.</span><span class="n">attribute_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">__init_properties__</span>
+
+
+<span class="k">class</span> <span class="nc">BaseTypeMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Meta class for all BaseTypes, makes sure we know the name of descriptor attributes&#39;&#39;&#39;</span></div>
+<div class="viewcode-block" id="BaseTypeMeta"><a class="viewcode-back" href="../../../../API/JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseType.BaseTypeMeta">[docs]</a>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c">#If this *is* &#39;BaseObject&#39; we don&#39;t want to do anything special with it</span>
+            <span class="c">#This raises a NameError if BaseObject is not &#39;known&#39; yet</span>
+            <span class="n">BaseType</span>
+        <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">t</span>
+
+        <span class="c"># Store attribute name on BaseType attributes</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> \
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">TypeBaseType</span><span class="p">)):</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">_PM_NAME</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c">#Generate __init_properties__</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">generate_init_properties</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s">&#39;__init_properties__&#39;</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span>
+
+        <span class="n">property_metadata</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">bases</span><span class="p">:</span>
+            <span class="n">property_metadata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s">&#39;pm_property_metadata&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">()))</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> \
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">TypeBaseType</span><span class="p">)):</span>
+            <span class="n">property_metadata</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">constructor_args</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s">&#39;pm_property_metadata&#39;</span><span class="p">,</span> <span class="n">property_metadata</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span>
+
+
+<span class="k">class</span> <span class="nc">BaseType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</div>
+<div class="viewcode-block" id="BaseType"><a class="viewcode-back" href="../../../../API/JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseType.BaseType">[docs]</a>    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">BaseTypeMeta</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize basetype</span>
+<span class="sd">        </span>
+<span class="sd">        During initialization all pmtype properties are set to their default</span>
+<span class="sd">        values. This is only done when an object is created for the first time,</span>
+<span class="sd">        otherwise the property values would be overwritten when e.g. restoring</span>
+<span class="sd">        an object from the cmdb.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_pm__initialized&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__init_properties__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pm__initialized</span> <span class="o">=</span> <span class="bp">True</span>
+        
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../baseclasses.html" >JumpScale.core.baseclasses</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

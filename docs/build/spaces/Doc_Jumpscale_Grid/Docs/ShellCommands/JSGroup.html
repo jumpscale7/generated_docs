@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JSGroup &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Shell Commands" href="index.html" />
+    <link rel="next" title="jsnode" href="JSNode.html" />
+    <link rel="prev" title="JSGrid" href="JSGRID.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JSNode.html" title="jsnode"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JSGRID.html" title="JSGrid"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Shell Commands</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jsgroup">
+<h1>JSGroup<a class="headerlink" href="#jsgroup" title="Permalink to this headline">¶</a></h1>
+<p>The &#8216;jsgroup&#8217; command is a tool to manage groups. It is possible to create delete and list groups.</p>
+<div class="section" id="help">
+<h2>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsgroup</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">jsgroup</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DATA</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">ADDR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">gl</span> <span class="n">GROUP</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">gd</span> <span class="n">DOMAIN</span><span class="p">]</span>
+               <span class="p">{</span><span class="n">add</span><span class="p">,</span><span class="n">delete</span><span class="p">,</span><span class="nb">list</span><span class="p">}</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="n">add</span><span class="p">,</span><span class="n">delete</span><span class="p">,</span><span class="nb">list</span><span class="p">}</span>     <span class="n">Command</span> <span class="n">to</span> <span class="n">perform</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
+  <span class="o">-</span><span class="n">d</span> <span class="n">DATA</span><span class="p">,</span> <span class="o">--</span><span class="n">data</span> <span class="n">DATA</span>  <span class="n">add</span> <span class="n">group</span> <span class="k">as</span> <span class="n">groupname</span><span class="p">:</span><span class="n">domain</span>
+  <span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">,</span> <span class="o">--</span><span class="n">passwd</span> <span class="n">PASSWD</span>
+                        <span class="n">superadmin</span> <span class="n">passwd</span> <span class="k">for</span> <span class="n">grid</span>
+  <span class="o">-</span><span class="n">a</span> <span class="n">ADDR</span><span class="p">,</span> <span class="o">--</span><span class="n">addr</span> <span class="n">ADDR</span>  <span class="n">ip</span> <span class="n">addr</span> <span class="n">of</span> <span class="n">master</span><span class="p">,</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">specified</span> <span class="n">will</span> <span class="n">be</span> <span class="n">the</span> <span class="n">one</span> <span class="k">as</span>
+                        <span class="n">specified</span> <span class="ow">in</span> <span class="n">local</span> <span class="n">config</span>
+  <span class="o">-</span><span class="n">gl</span> <span class="n">GROUP</span><span class="p">,</span> <span class="o">--</span><span class="n">group</span> <span class="n">GROUP</span>
+                        <span class="n">groupname</span>
+  <span class="o">-</span><span class="n">gd</span> <span class="n">DOMAIN</span><span class="p">,</span> <span class="o">--</span><span class="n">domain</span> <span class="n">DOMAIN</span>
+                        <span class="n">domain</span> <span class="k">for</span> <span class="n">group</span> <span class="n">to</span> <span class="nb">list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="actions">
+<h1>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="add">
+<h2>Add<a class="headerlink" href="#add" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsgroup</span> <span class="n">add</span> <span class="o">-</span><span class="n">d</span> <span class="n">level1</span><span class="p">:</span><span class="n">jumpscale</span><span class="o">.</span><span class="n">org</span>
+<span class="p">{</span>
+  <span class="s">&quot;_ckey&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;_meta&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s">&quot;system&quot;</span><span class="p">,</span>
+    <span class="s">&quot;group&quot;</span><span class="p">,</span>
+    <span class="mi">1</span>
+  <span class="p">],</span>
+  <span class="s">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+  <span class="s">&quot;domain&quot;</span><span class="p">:</span> <span class="s">&quot;jumpscale.org&quot;</span><span class="p">,</span>
+  <span class="s">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+  <span class="s">&quot;guid&quot;</span><span class="p">:</span> <span class="s">&quot;55_level1&quot;</span><span class="p">,</span>
+  <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="s">&quot;level1&quot;</span><span class="p">,</span>
+  <span class="s">&quot;lastcheck&quot;</span><span class="p">:</span> <span class="mi">1405238371</span><span class="p">,</span>
+  <span class="s">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="s">&quot;users&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete">
+<h2>Delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsgroup</span> <span class="n">delete</span> <span class="o">-</span><span class="n">gl</span> <span class="n">newgroup</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="list">
+<h2>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsgroup</span> <span class="nb">list</span>
+
+<span class="n">name</span>                 <span class="n">domain</span>                    <span class="n">users</span>
+<span class="o">================================================================================</span>
+<span class="bp">None</span>                 <span class="n">incubaid</span><span class="o">.</span><span class="n">com</span>              <span class="n">admin</span>
+<span class="n">admin</span>                <span class="n">incubaid</span><span class="o">.</span><span class="n">com</span>              <span class="n">admin</span>
+<span class="n">level1</span>               <span class="n">jumpscale</span><span class="o">.</span><span class="n">org</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JSGroup</a><ul>
+<li><a class="reference internal" href="#help">Help</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#actions">Actions</a><ul>
+<li><a class="reference internal" href="#add">Add</a></li>
+<li><a class="reference internal" href="#delete">Delete</a></li>
+<li><a class="reference internal" href="#list">List</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JSGRID.html"
+                        title="previous chapter">JSGrid</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JSNode.html"
+                        title="next chapter">jsnode</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/ShellCommands/JSGroup.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JSNode.html" title="jsnode"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JSGRID.html" title="JSGrid"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >Shell Commands</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.base package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-core-base-package">
+<h1>JumpScale.core.base package<a class="headerlink" href="#jumpscale-core-base-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.base.idgenerator.html">JumpScale.core.base.idgenerator package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#module-JumpScale.core.base.idgenerator.IDGenerator">JumpScale.core.base.idgenerator.IDGenerator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#module-JumpScale.core.base.idgenerator">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.base.time.html">JumpScale.core.base.time package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.time.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.time.html#module-JumpScale.core.base.time.Time">JumpScale.core.base.time.Time module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.time.html#module-JumpScale.core.base.time">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-JumpScale.core.base"></span><dl class="class">
+<dt id="JumpScale.core.base.Time">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.base.</tt><tt class="descname">Time</tt><a class="headerlink" href="#JumpScale.core.base.Time" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic provider of time functions
+lives at j.base.time</p>
+<dl class="method">
+<dt id="JumpScale.core.base.Time.HRDatetoEpoch">
+<tt class="descname">HRDatetoEpoch</tt><big>(</big><em>datestr</em>, <em>local=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.HRDatetoEpoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert string date to epoch
+Date needs to be formatted as 16/06/1988</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.epoch2HRDate">
+<tt class="descname">epoch2HRDate</tt><big>(</big><em>epoch</em>, <em>local=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.epoch2HRDate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.epoch2HRDateTime">
+<tt class="descname">epoch2HRDateTime</tt><big>(</big><em>epoch</em>, <em>local=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.epoch2HRDateTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.epoch2HRTime">
+<tt class="descname">epoch2HRTime</tt><big>(</big><em>epoch</em>, <em>local=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.epoch2HRTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.fiveMinuteIdToEpoch">
+<tt class="descname">fiveMinuteIdToEpoch</tt><big>(</big><em>fiveMinuteId</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.fiveMinuteIdToEpoch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.formatTime">
+<tt class="descname">formatTime</tt><big>(</big><em>epoch</em>, <em>formatstr='%Y/%m/%d %H:%M:%S'</em>, <em>local=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.formatTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted time string representing the current time</p>
+<p>See <a class="reference external" href="http://docs.python.org/lib/module-time.html#l2h-2826">http://docs.python.org/lib/module-time.html#l2h-2826</a> for an
+overview of available formatting options.</p>
+<p>&#64;param format: Format string
+&#64;type format: string</p>
+<p>&#64;returns: Formatted current time
+&#64;rtype: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.get5MinuteId">
+<tt class="descname">get5MinuteId</tt><big>(</big><em>epoch=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.get5MinuteId" title="Permalink to this definition">¶</a></dt>
+<dd><p>is # 5 min from jan 1 2010</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getDayId">
+<tt class="descname">getDayId</tt><big>(</big><em>epoch=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getDayId" title="Permalink to this definition">¶</a></dt>
+<dd><p>is # day from jan 1 2010</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getEpochAgo">
+<tt class="descname">getEpochAgo</tt><big>(</big><em>txt</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getEpochAgo" title="Permalink to this definition">¶</a></dt>
+<dd><p>only supported now is -3m, -3d and -3h  (ofcourse 3 can be any int)
+and an int which would be just be returned
+means 3 days ago 3 hours ago
+if 0 or &#8216;&#8217; then is now</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getEpochFuture">
+<tt class="descname">getEpochFuture</tt><big>(</big><em>txt</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getEpochFuture" title="Permalink to this definition">¶</a></dt>
+<dd><p>only supported now is +3d and +3h  (ofcourse 3 can be any int)        
++3d means 3 days in future
+and an int which would be just be returned
+if txt==None or 0 then will be 1 day ago</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getHourId">
+<tt class="descname">getHourId</tt><big>(</big><em>epoch=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getHourId" title="Permalink to this definition">¶</a></dt>
+<dd><p>is # hour from jan 1 2010</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getLocalTimeHR">
+<tt class="descname">getLocalTimeHR</tt><big>(</big><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getLocalTimeHR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current local date and time in a human-readable form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getLocalTimeHRForFilesystem">
+<tt class="descname">getLocalTimeHRForFilesystem</tt><big>(</big><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getLocalTimeHRForFilesystem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getMinuteId">
+<tt class="descname">getMinuteId</tt><big>(</big><em>epoch=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getMinuteId" title="Permalink to this definition">¶</a></dt>
+<dd><p>is # min from jan 1 2010</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getTimeEpoch">
+<tt class="descname">getTimeEpoch</tt><big>(</big><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getTimeEpoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get epoch timestamp (number of seconds passed since January 1, 1970)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.base.Time.getTimeEpochBin">
+<tt class="descname">getTimeEpochBin</tt><big>(</big><big>)</big><a class="headerlink" href="#JumpScale.core.base.Time.getTimeEpochBin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get epoch timestamp (number of seconds passed since January 1, 1970)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.core.base package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.core.base.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

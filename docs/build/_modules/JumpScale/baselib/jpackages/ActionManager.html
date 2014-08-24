@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.jpackages.ActionManager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.jpackages.ActionManager</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">imp</span>
+
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MethodType</span>
+
+<div class="viewcode-block" id="ActionManager"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.ActionManager.ActionManager">[docs]</a><span class="k">class</span> <span class="nc">ActionManager</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the action manager is responsible for executing the actions linked to a jpackages</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">jp</span><span class="p">):</span>
+        <span class="c"># print &quot;init actions for %s&quot;%jp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_jpackage</span><span class="o">=</span><span class="n">jp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="o">=</span><span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="o">=</span><span class="p">{}</span>        
+
+        <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+
+            <span class="n">md5</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5_string</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">modname</span> <span class="o">=</span> <span class="s">&quot;JumpScale.baselib.jpackages.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">md5</span>
+            <span class="c"># print path</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="n">modname</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">main</span>
+
+            <span class="n">attribname</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">,</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">attribname</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getActionMethod</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">classpath</span><span class="o">=</span><span class="n">jp</span><span class="o">.</span><span class="n">getPathMetadata</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">actionname</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">getActionNamesClass</span><span class="p">():</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">classpath</span><span class="p">,</span><span class="s">&quot;actions&quot;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.py&quot;</span><span class="o">%</span><span class="n">actionname</span><span class="p">)</span>
+            <span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">jp</span><span class="o">.</span><span class="n">instance</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">instancepath</span><span class="o">=</span><span class="n">jp</span><span class="o">.</span><span class="n">getPathInstance</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">instancepath</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">actionname</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">getActionNamesInstance</span><span class="p">():</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">instancepath</span><span class="p">,</span><span class="s">&quot;actions&quot;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.py&quot;</span><span class="o">%</span><span class="n">actionname</span><span class="p">)</span>
+                    <span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>        
+
+<div class="viewcode-block" id="ActionManager.clear"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.ActionManager.ActionManager.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_done</span><span class="o">=</span><span class="p">{}</span>
+        </div>
+    <span class="k">def</span> <span class="nf">_getActionMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="n">found</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;kill&quot;</span><span class="p">,</span><span class="s">&quot;start&quot;</span><span class="p">,</span><span class="s">&quot;stop&quot;</span><span class="p">,</span><span class="s">&quot;monitor&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">found</span><span class="o">=</span><span class="bp">True</span>
+
+        <span class="k">if</span> <span class="n">found</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">def method(self{args}):</span>
+<span class="s">    print &quot;</span><span class="si">%s</span><span class="s"> : action:&#39;{name}&#39;&quot;</span><span class="si">%s</span><span class="s">elf._jpackage</span>
+<span class="s">    result=self._actions[&#39;{name}&#39;](j,self._jpackage{args})</span>
+<span class="s">    return result&quot;&quot;&quot;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">def method(self{args}):</span>
+<span class="s">    key=&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_{name}&quot;%(self._jpackage.domain,self._jpackage.name)</span>
+<span class="s">    if self._done.has_key(key):</span>
+<span class="s">        #print &quot;already executed </span><span class="si">%s</span><span class="s">&quot;%key</span>
+<span class="s">        return True</span>
+<span class="s">    print &quot;</span><span class="si">%s</span><span class="s"> : action:&#39;{name}&#39;&quot;</span><span class="si">%s</span><span class="s">elf._jpackage</span>
+<span class="s">    result=self._actions[&#39;{name}&#39;](j,self._jpackage{args2})</span>
+<span class="s">    self._done[key]=True</span>
+<span class="s">    return result&quot;&quot;&quot;</span>
+
+        <span class="n">args</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="n">args2</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;code.link&quot;</span> <span class="ow">or</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;code.update&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">=</span><span class="s">&quot;,force=True&quot;</span>
+            <span class="n">args2</span><span class="o">=</span><span class="s">&quot;,force=force&quot;</span>
+
+        <span class="k">elif</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;install.download&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">=</span><span class="s">&quot;,expand=True,nocode=False&quot;</span>
+            <span class="n">args2</span><span class="o">=</span><span class="s">&quot;,expand=expand,nocode=nocode&quot;</span>
+
+        <span class="k">elif</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;upload&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">=</span><span class="s">&quot;,onlycode=False&quot;</span>
+            <span class="n">args2</span><span class="o">=</span><span class="s">&quot;,onlycode=onlycode&quot;</span>
+
+        <span class="k">elif</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;data.export&quot;</span> <span class="ow">or</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;data.import&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">=</span><span class="s">&quot;,url=None&quot;</span>       
+            <span class="n">args2</span><span class="o">=</span><span class="s">&quot;,url=url&quot;</span>
+
+        <span class="k">elif</span> <span class="n">name</span><span class="o">==</span><span class="s">&quot;monitor.up.net&quot;</span><span class="p">:</span>
+            <span class="n">args</span><span class="o">=</span><span class="s">&quot;,ipaddr=&#39;localhost&#39;&quot;</span>       
+            <span class="n">args2</span><span class="o">=</span><span class="s">&quot;,ipaddr=ipaddr&quot;</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{args}&quot;</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{args2}&quot;</span><span class="p">,</span><span class="n">args2</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{name}&quot;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+        <span class="c"># print C</span>
+        <span class="k">exec</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MethodType</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">ActionManager</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

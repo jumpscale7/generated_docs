@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.remote.cluster.ClusterFactory &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.remote.cluster.ClusterFactory</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">from</span> <span class="nn">Replicator</span> <span class="kn">import</span> <span class="n">Replicator</span>
+<span class="kn">from</span> <span class="nn">Cluster</span> <span class="kn">import</span> <span class="n">Cluster</span>
+
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">Replicator</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ClusterConfigs</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="ClusterFactory"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory">[docs]</a><span class="k">class</span> <span class="nc">ClusterFactory</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># self._lastSuperadminPassword=&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replicator</span> <span class="o">=</span> <span class="n">Replicator</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">cluster</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="s">&quot;clusterconfig&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">ClusterConfigs</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replication</span> <span class="o">=</span> <span class="n">Replicator</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getSections</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">clustername</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">getSections</span><span class="p">():</span>
+            <span class="n">ipaddresses</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">clustername</span><span class="p">,</span> <span class="s">&quot;ip&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">domainname</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">clustername</span><span class="p">,</span> <span class="s">&quot;domain&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">superadminpassword</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">clustername</span><span class="p">,</span> <span class="s">&quot;rootpasswd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">cl</span> <span class="o">=</span> <span class="n">Cluster</span><span class="p">(</span><span class="n">clustername</span><span class="o">=</span><span class="n">clustername</span><span class="p">,</span> <span class="n">domainname</span><span class="o">=</span><span class="n">domainname</span><span class="p">,</span> <span class="n">ipaddresses</span><span class="o">=</span><span class="n">ipaddresses</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">),</span> <span class="n">superadminpassword</span><span class="o">=</span><span class="n">superadminpassword</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="n">clustername</span><span class="p">]</span> <span class="o">=</span> <span class="n">cl</span>
+
+<div class="viewcode-block" id="ClusterFactory.get"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clustername</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">domainname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return cluster for specified domain or shortname, </span>
+<span class="sd">        there needs to be a cluster defined already before otherwise no nodes will be found</span>
+<span class="sd">        config file which stores this info is at $qbasedir/cfg/jsconfig/clusterconfig.cfg</span>
+<span class="sd">        only one of th 2 params is required</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">clustername</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">domainname</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">clustername</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askChoice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(),</span> <span class="s">&quot;select cluster&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clustername</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="n">clustername</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">clustername</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">cl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="n">clustername</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">cl</span><span class="o">.</span><span class="n">domainname</span> <span class="o">==</span> <span class="n">domainname</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">cl</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find cluster with domainname </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">domainname</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterFactory.create"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clustername</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">domainname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ipaddresses</span><span class="o">=</span><span class="p">[],</span> <span class="n">superadminpassword</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">superadminpasswords</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="c"># TODO</span>
+        <span class="c"># j.console.echo(&quot;*** Ignore master for now, it&#39;s not yet implemented yet, just pick any node of the cluster.. ***&quot;)</span>
+        <span class="c"># j.console.echo(&quot;*** After specifying the information for a cluster, the information gets written to disk but is not used by the program, instead it tries to guess the information by probing the network (mostly wrong), in case of problems just restart the shell, your cluster will be there. .. ***&quot;)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        domainname needs to be unique</span>
+<span class="sd">        clustername is only a name which makes it easy for you to remember and used to store in config file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">superadminpasswords</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">superadminpasswords</span> <span class="o">=</span> <span class="p">[</span><span class="n">superadminpassword</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">clustername</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="c"># fill in cluster configuration file with information already known</span>
+            <span class="n">ipaddresses2</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">ipaddr</span> <span class="ow">in</span> <span class="n">ipaddresses</span><span class="p">],</span> <span class="s">&quot;,&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">clustername</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">clustername</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domainname</span><span class="p">,</span> <span class="s">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ipaddresses2</span><span class="p">,</span> <span class="s">&#39;rootpasswd&#39;</span><span class="p">:</span> <span class="n">superadminpassword</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">clustername</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;domain&#39;</span><span class="p">:</span> <span class="n">domainname</span><span class="p">,</span> <span class="s">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ipaddresses2</span><span class="p">,</span> <span class="s">&#39;rootpasswd&#39;</span><span class="p">:</span> <span class="n">superadminpassword</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">domainname</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="ow">or</span> <span class="n">ipaddresses</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span> <span class="n">superadminpassword</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">clustername</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="c">#import pdb</span>
+                    <span class="c"># pdb.set_trace()</span>
+                    <span class="c"># How do I get the IP adresses?</span>
+                    <span class="c"># Get the ip adresses and put them in ipaddresses</span>
+                    <span class="c"># so the constructor of Cluster does not use avahi, because its results or wrong!</span>
+                    <span class="n">clustername</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&#39;Name for the cluster&#39;</span><span class="p">,</span> <span class="s">&#39;myCluster&#39;</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">itemname</span><span class="o">=</span><span class="n">clustername</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">review</span><span class="p">(</span><span class="n">clustername</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="n">clustername</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ipaddresses</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Please specify ipaddresses of nodes you would like to add to cluster&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">superadminpasswords</span> <span class="o">==</span> <span class="p">[]:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Please specify password(s) of nodes you would like to add to cluster&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">domainname</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Please specify domainname for cluster&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">clustername</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Please specify short name for cluster&quot;</span><span class="p">)</span>
+
+        <span class="c"># at this point we know ipaddresses &amp; possible superadminpasswords</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">Cluster</span><span class="p">(</span><span class="n">clustername</span><span class="o">=</span><span class="n">clustername</span><span class="p">,</span> <span class="n">domainname</span><span class="o">=</span><span class="n">domainname</span><span class="p">,</span> <span class="n">ipaddresses</span><span class="o">=</span><span class="n">ipaddresses</span><span class="p">,</span>
+                     <span class="n">superadminpasswords</span><span class="o">=</span><span class="n">superadminpasswords</span><span class="p">,</span> <span class="n">superadminpassword</span><span class="o">=</span><span class="n">superadminpassword</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="p">[</span><span class="n">clustername</span><span class="p">]</span> <span class="o">=</span> <span class="n">cl</span>
+        <span class="k">return</span> <span class="n">cl</span>
+</div>
+<div class="viewcode-block" id="ClusterFactory.delete"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clustername</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Delete a cluster with clustername from the configuration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">clustername</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">ask</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">ask</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&#39;Are you sure you want to delete cluster </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">q</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">ask</span><span class="p">:</span>
+                    <span class="n">clustername</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askChoice</span><span class="p">(</span><span class="s">&#39;Select cluster to remove&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;In non-interactive mode please specify clustername to be removed&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">clustername</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">q</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">clustername</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Cluster </span><span class="si">%s</span><span class="s"> not found&quot;</span> <span class="o">%</span> <span class="n">clustername</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterFactory.listAvahiEnabledMachines"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory.listAvahiEnabledMachines">[docs]</a>    <span class="k">def</span> <span class="nf">listAvahiEnabledMachines</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Investigate network, try to find potential nodes (using avahi).&quot;</span><span class="p">)</span>
+        <span class="n">services</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">cmdtools</span><span class="o">.</span><span class="n">avahi</span><span class="o">.</span><span class="n">getServices</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ipaddresses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">service</span> <span class="ow">in</span> <span class="n">services</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">service</span><span class="o">.</span><span class="n">address</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ipaddresses</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+                <span class="n">ipaddresses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">service</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="ClusterFactory.list"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterFactory.ClusterFactory.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return list of clusternames</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="c"># def _removeRedundantFiles(self):</span>
+        <span class="c"># path=&quot;/opt/qbase3&quot;</span>
+        <span class="c">##j.logger.log(&quot;removeredundantfiles %s&quot; % (path))</span>
+        <span class="c"># files=j.system.fs.listFilesInDir(path,True,filter=&quot;*.pyc&quot;)</span>
+        <span class="c"># files.extend(j.system.fs.listFilesInDir(path,True,filter=&quot;*.pyo&quot;)) #@todo remove other files</span>
+        <span class="c"># for item in files:</span>
+            <span class="c"># j.system.fs.remove(item)</span>
+        <span class="c"># j.system.fs.removeDirTree(j.system.fs.joinPaths(j.dirs.logDir))</span>
+        <span class="c"># j.system.fs.removeDirTree(j.system.fs.joinPaths(j.dirs.tmpDir))</span>
+        <span class="c"># j.system.fs.createDir(j.system.fs.joinPaths(j.dirs.tmpDir))</span>
+        <span class="c"># j.system.fs.createDir(j.system.fs.joinPaths(j.dirs.logDir))</span>
+        <span class="c"># j.system.fs.removeDirTree(j.system.fs.joinPaths(j.dirs.varDir,&quot;owpackages&quot;))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

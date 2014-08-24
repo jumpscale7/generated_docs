@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.actions.action.ActionController &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.actions.action.ActionController</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="k">class</span> <span class="nc">StartStopOutputCountException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<div class="viewcode-block" id="StartStopOutputCountException"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.StartStopOutputCountException">[docs]</a>    <span class="sd">&#39;&#39;&#39;Exception raised when an action.startOutput/action.stopOutput count</span>
+<span class="sd">    mismatch occurs&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StartStopOutputCountException</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
+                <span class="s">&#39;Output start/stop count mismatch&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_ActionStatus</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+    <span class="sd">&#39;&#39;&#39;Enumeration of all known action statuses&#39;&#39;&#39;</span>
+    <span class="n">DONE</span> <span class="o">=</span> <span class="s">&#39;DONE&#39;</span>
+    <span class="n">RUNNING</span> <span class="o">=</span> <span class="s">&#39;RUNNING&#39;</span>
+    <span class="n">FINISHED</span> <span class="o">=</span> <span class="s">&#39;FINISHED&#39;</span>
+    <span class="n">FAILED</span> <span class="o">=</span> <span class="s">&#39;FAILED&#39;</span>
+
+<span class="n">_MAX_STATUS_LENGTH</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">def</span> <span class="nf">calculateLongestStatusLength</span><span class="p">():</span>
+<div class="viewcode-block" id="calculateLongestStatusLength"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.calculateLongestStatusLength">[docs]</a>    <span class="sd">&#39;&#39;&#39;Calculate the length of the longest action status name</span>
+
+<span class="sd">    @returns: Length of longest action status name</span>
+<span class="sd">    @rtype: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">actionLengths</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">_ActionStatus</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">yield</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">global</span> <span class="n">_MAX_STATUS_LENGTH</span>
+    <span class="k">if</span> <span class="n">_MAX_STATUS_LENGTH</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_MAX_STATUS_LENGTH</span>
+
+    <span class="n">_MAX_STATUS_LENGTH</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">actionLengths</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">_MAX_STATUS_LENGTH</span>
+
+
+<span class="k">class</span> <span class="nc">_Action</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+    <span class="sd">&#39;&#39;&#39;Representation of an action&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">errormessage</span><span class="p">,</span> <span class="n">resolutionmessage</span><span class="p">,</span> <span class="n">indent</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Initialize a new action</span>
+
+<span class="sd">        @param description: Description message displayed to the user</span>
+<span class="sd">        @type description: string</span>
+<span class="sd">        @param errormessage: Error message displayed when the action fails</span>
+<span class="sd">        @type errormessage: string</span>
+<span class="sd">        @param resolutionmessage: Resolution message displayed when the action</span>
+<span class="sd">                                  fails</span>
+<span class="sd">        @type resolutionmessage: string</span>
+<span class="sd">        @param indent: Indention level of this action</span>
+<span class="sd">        @type indent: number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errormessage</span> <span class="o">=</span> <span class="n">errormessage</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolutionmessage</span> <span class="o">=</span> <span class="n">resolutionmessage</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">indent</span> <span class="o">=</span> <span class="n">indent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interrupted</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">calculateMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Calculate the message to display to the user</span>
+
+<span class="sd">        Since this can be a multiline message the length of the last line is</span>
+<span class="sd">        returned as well.</span>
+
+<span class="sd">        @param width: Maximum line width</span>
+<span class="sd">        @type width: number</span>
+
+<span class="sd">        @returns: Length of last line and message to display</span>
+<span class="sd">        @rtype: tuple&lt;number, string&gt;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">maxResultLength</span> <span class="o">=</span> <span class="n">calculateLongestStatusLength</span><span class="p">()</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s">&#39; * </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39; &#39;</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">)</span>
+        <span class="n">maxMessageLength</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="n">maxResultLength</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">indent</span>
+
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">maxMessageLength</span><span class="p">,</span>
+                              <span class="n">initial_indent</span><span class="o">=</span><span class="n">prefix</span><span class="p">,</span>
+                              <span class="n">subsequent_indent</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Write the description message to output</span>
+
+<span class="sd">        @param output: File-like object to write to</span>
+<span class="sd">        @type output: object</span>
+<span class="sd">        @param width: Maximum line width</span>
+<span class="sd">        @type width: number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculateMessage</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">writeResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Write the result of the current action</span>
+
+<span class="sd">        The action description will be printed again if the action was</span>
+<span class="sd">        interrupted as well.</span>
+
+<span class="sd">        @param output: File-like object to write to</span>
+<span class="sd">        @type output: object</span>
+<span class="sd">        @param result: Action result</span>
+<span class="sd">        @type result: string</span>
+<span class="sd">        @param width: Maximum line width</span>
+<span class="sd">        @type width: number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interrupted</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+
+        <span class="n">longestResultLength</span> <span class="o">=</span> <span class="n">calculateLongestStatusLength</span><span class="p">()</span>
+
+        <span class="n">len_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculateMessage</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">spacing</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="n">len_</span> <span class="o">-</span> <span class="n">longestResultLength</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">spacing</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">spacing</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39; &#39;</span> <span class="o">*</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_setOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="c">#TODO We might want to deprecate this one day</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s">&#39;_output&#39;</span><span class="p">),</span> <span class="n">fset</span><span class="o">=</span><span class="n">_setOutput</span><span class="p">)</span>
+
+    <span class="c"># We need these aliases until the event subsystem no longer uses these</span>
+    <span class="c"># attributes (or accesses the protected list of running actions at all)</span>
+    <span class="n">errorMessage</span> <span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="n">resolutionMessage</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">increaseOutputCount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Increase the counter counting the number of calls to</span>
+<span class="sd">        action.startOutput during this action&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">decreaseOutputCount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Decrease the counter counting the number of calls to</span>
+<span class="sd">        action.startOutput during this action, i.e. on every call to</span>
+<span class="sd">        action.stopOutput</span>
+
+<span class="sd">        @raise StartStopOutputCountException: Count became negative</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">StartStopOutputCountException</span>
+
+    <span class="k">def</span> <span class="nf">checkOutputCountIsZero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Check whether the counter counting the number of calls to</span>
+<span class="sd">        action.startOutput minus the number of calls to action.stopOutput during</span>
+<span class="sd">        this action is zero, i.e. the number of calls to action.startOutput</span>
+<span class="sd">        matches the number of calles to action.stopOutput, as it should</span>
+
+<span class="sd">        @raise StartStopOutputCountException: Count is not equal to 0</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">StartStopOutputCountException</span>
+
+
+<span class="k">class</span> <span class="nc">ActionController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ActionController"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController">[docs]</a>    <span class="sd">&#39;&#39;&#39;Manager controlling actions&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_output</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">_width</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Initialize a new action controller</span>
+
+<span class="sd">        @param _output: File-like object to write output to. Defaults to</span>
+<span class="sd">                        sys.stdout.</span>
+<span class="sd">                        This should not be used by anyone except testcases</span>
+<span class="sd">        @type _output: object</span>
+<span class="sd">        @param _width: Maximum width of output</span>
+<span class="sd">                       This should not be used by anyone except testcases</span>
+<span class="sd">        @type _width: number</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">_output</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">_width</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">errormessage</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">resolutionmessage</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="ActionController.start"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.start">[docs]</a>              <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">messageLevel</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Start a new action</span>
+
+<span class="sd">        @param description: Description of the action</span>
+<span class="sd">        @type description: string</span>
+<span class="sd">        @param errormessage: Error message displayed to the user when the action</span>
+<span class="sd">                             fails</span>
+<span class="sd">        @type errormessage: string</span>
+<span class="sd">        @param resolutionmessage: Resolution message displayed to the user when</span>
+<span class="sd">                                  the action fails</span>
+<span class="sd">        @type resolutionmessage: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c">#TODO Be more verbose / raise in time</span>
+        <span class="k">if</span> <span class="n">show</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Using deprecated/unused argument &#39;</span>
+                                  <span class="s">&#39;</span><span class="se">\&#39;</span><span class="s">show</span><span class="se">\&#39;</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">messageLevel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Using deprecated/unused argument &#39;</span>
+                                  <span class="s">&#39;</span><span class="se">\&#39;</span><span class="s">messageLevel</span><span class="se">\&#39;</span><span class="s">&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interrupted</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">writeResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">,</span> <span class="n">_ActionStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interrupted</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Starting action: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">description</span><span class="p">,</span>
+                              <span class="mi">5</span><span class="p">)</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">_Action</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">errormessage</span><span class="p">,</span> <span class="n">resolutionmessage</span><span class="p">,</span>
+                        <span class="n">indent</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+        <span class="n">action</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span>
+
+        <span class="c">#TODO Get rid of this when reworking console handling properly</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">hideOutput</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failed</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ActionController.stop"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.stop">[docs]</a>        <span class="sd">&#39;&#39;&#39;Stop the currently running action</span>
+
+<span class="sd">        This will get the latest started action from the action stack and</span>
+<span class="sd">        display a result message.</span>
+
+<span class="sd">        @param failed: Whether the action failed</span>
+<span class="sd">        @type failed: bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">:</span>
+            <span class="c">#TODO Raise some exception?</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Stop called while no actions are &#39;</span>
+                                  <span class="s">&#39;running at all&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="c"># If this is the last action, _output_start_count should be 0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c">#raise StartStopOutputCountException</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_handleStartStopOutputCountMismatch</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">action</span><span class="o">.</span><span class="n">checkOutputCountIsZero</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">StartStopOutputCountException</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handleStartStopOutputCountMismatch</span><span class="p">()</span>
+
+        <span class="n">status</span> <span class="o">=</span> <span class="n">_ActionStatus</span><span class="o">.</span><span class="n">DONE</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span> <span class="k">else</span> <span class="n">_ActionStatus</span><span class="o">.</span><span class="n">FAILED</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="ow">and</span> <span class="n">action</span><span class="o">.</span><span class="n">interrupted</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="n">_ActionStatus</span><span class="o">.</span><span class="n">FINISHED</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Stopping action </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s">, result &#39;</span>
+                              <span class="s">&#39;is </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">action</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">writeResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">:</span>
+            <span class="c">#TODO Get rid of this when reworking console handling properly</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">showOutput</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ActionController.clean"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.clean">[docs]</a>        <span class="sd">&#39;&#39;&#39;Clean the list of running actions&#39;&#39;&#39;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[ACTIONS] Clearing all actions&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="c">#TODO Get rid of this when reworking console handling properly</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">showOutput</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">hasRunningActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ActionController.hasRunningActions"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.hasRunningActions">[docs]</a>        <span class="sd">&#39;&#39;&#39;Check whether actions are currently running</span>
+
+<span class="sd">        @returns: Whether actions are runnin</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">printOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ActionController.printOutput"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.printOutput">[docs]</a>        <span class="k">for</span> <span class="n">qa</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_runningActions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">qa</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_setActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="n">_runningActions</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s">&#39;_actions&#39;</span><span class="p">),</span><span class="n">fset</span><span class="o">=</span><span class="n">_setActions</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">startOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ActionController.startOutput"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.startOutput">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable j.console output. Format such that it is nicely shown between action start/stop.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">showOutput</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRunningActions</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">increaseOutputCount</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRunningActions</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interrupted</span><span class="p">:</span>
+            <span class="c"># After a START, must make sure to put the last action on &quot;RUNNING&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">writeResult</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">,</span> <span class="n">_ActionStatus</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">,</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">interrupted</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">stopOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ActionController.stopOutput"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.actions.action.html#JumpScale.baselib.actions.action.ActionController.ActionController.stopOutput">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable j.console output. Format such that it is nicely shown between action start/stop.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRunningActions</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decreaseOutputCount</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">StartStopOutputCountException</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_handleStartStopOutputCountMismatch</span><span class="p">()</span>
+                <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c">#raise StartStopOutputCountException</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_handleStartStopOutputCountMismatch</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasRunningActions</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">hideOutput</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">_handleStartStopOutputCountMismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="sd">&#39;&#39;&#39;Handle a start/stop output count mismatch exception</span>
+
+<span class="sd">        Reset running action list and output start count.</span>
+
+<span class="sd">        This will break running actions or might break future actions.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="s">&#39;[ACTIONS] Warning: start/stop output count mismatch&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_actions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_start_count</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

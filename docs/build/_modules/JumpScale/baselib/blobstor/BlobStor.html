@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.blobstor.BlobStor &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.blobstor.BlobStor</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.baseclasses</span> <span class="kn">import</span> <span class="n">BaseEnumeration</span>
+<span class="kn">from</span> <span class="nn">BlobStorConfigManagement</span> <span class="kn">import</span> <span class="n">BlobStorConfigManagement</span>
+
+<div class="viewcode-block" id="BlobType"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobType">[docs]</a><span class="k">class</span> <span class="nc">BlobType</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Blob type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_initItems</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;varia&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;jpackage&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="BlobStor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor">[docs]</a><span class="k">class</span> <span class="nc">BlobStor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generic usable storage system for larger blobs =  a blob is e.g. a file or a directory (which is then compressed)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadConfig</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;namespace&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="BlobStor.loadConfig"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.loadConfig">[docs]</a>    <span class="k">def</span> <span class="nf">loadConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">BlobStorConfigManagement</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find blobstor connection with name </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">configitem</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">configitem</span>
+</div>
+    <span class="k">def</span> <span class="nf">_getDestination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destproto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">destproto</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;httpftp&#39;</span><span class="p">:</span>
+                <span class="n">destproto</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">,</span> <span class="s">&#39;ftp&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;ftp&#39;</span><span class="p">:</span>
+                <span class="n">destproto</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;ftp&#39;</span><span class="p">,)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;http&#39;</span><span class="p">:</span>
+                <span class="n">destproto</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;http&#39;</span><span class="p">,)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;local&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;file://&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;localpath&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;/</span><span class="si">%s</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uri</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">proto</span> <span class="ow">in</span> <span class="n">destproto</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">proto</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">proto</span><span class="p">]</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">uri</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No ftp url properly configured as remote blobstor&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">uri</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;/&quot;</span><span class="p">:</span>
+                <span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">uri</span> <span class="o">+</span> <span class="s">&quot;/</span><span class="si">%s</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span>
+
+<div class="viewcode-block" id="BlobStor.exists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the blobstor contains an entry for the given key</span>
+
+<span class="sd">        @param key: key to</span>
+<span class="sd">        @type key: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">targetDirPath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_getDestination</span><span class="p">(),</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="n">resultMeta</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sourcePathExists</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirPath</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%(key)s</span><span class="s">.meta&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">}))</span> <span class="c">#@todo gives error when source not found, need other method</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;local&quot;</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;exists </span><span class="si">%s</span><span class="s">: &quot;</span><span class="o">%</span><span class="n">key</span><span class="p">,</span>
+            
+            <span class="n">resultGz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sourcePathExists</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirPath</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%(key)s</span><span class="s">.tgz&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">}))</span> <span class="ow">or</span> \
+                       <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sourcePathExists</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirPath</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%(key)s</span><span class="s">.gz&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">}))</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Name or service not known&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Check network connection to </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirPath</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%(key)s</span><span class="s">.meta&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">}))</span>
+            <span class="n">msg</span><span class="o">=</span><span class="s">&quot;Could not check existence of key </span><span class="si">%s</span><span class="s"> in blobstor </span><span class="si">%s</span><span class="s"> in namespace </span><span class="si">%s</span><span class="s">, there was error:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">=</span> <span class="n">resultMeta</span> <span class="ow">and</span> <span class="n">resultGz</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;local&quot;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">res</span>
+</div>
+<div class="viewcode-block" id="BlobStor.getMetadata"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.getMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">getMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="n">targetDirName</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_getDestination</span><span class="p">(),</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">targetFileNameMeta</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">key</span> <span class="o">+</span> <span class="s">&quot;.meta&quot;</span><span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">targetFileNameMeta</span><span class="p">)</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">BlobMetadata</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">metadata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find </span><span class="si">%s</span><span class="s"> on storagesystem&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BlobStor.download"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.download">[docs]</a>    <span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_download</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">uncompress</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keepTempFile</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_download</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">uncompress</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">keepTempFile</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMetadata</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">hashh</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">hash</span>
+        <span class="n">filetype</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filetype</span>
+        <span class="n">targetDirName</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_getDestination</span><span class="p">(),</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+            <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.gz&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.tgz&quot;</span><span class="p">)</span>
+
+        <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+        <span class="n">downloading</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">downloading</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Could not download </span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s"> try&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">counter</span><span class="p">))</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not download </span><span class="si">%s</span><span class="s">, have tried 5 times, could be file is corrupt&quot;</span> <span class="o">%</span> <span class="n">source</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;local&#39;</span><span class="p">:</span>
+                <span class="c"># when blobstor type is local, don&#39;t copy the tgz file, that would be a waste of resources</span>
+                <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">targetFileNameTgz</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="s">&#39;file://&#39;</span><span class="p">):]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getTempFileName</span><span class="p">()</span>
+                <span class="c">#here we do the download</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">targetFileNameTgz</span><span class="p">,</span> <span class="s">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">tmpfile</span><span class="p">)</span>
+
+            <span class="n">hashFromCompressed</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">md5</span> <span class="o">==</span> <span class="n">hashFromCompressed</span><span class="p">:</span>
+                <span class="n">downloading</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">uncompress</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">gunzip</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">targzUncompress</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">removeDestinationdir</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">keepTempFile</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="c"># when blobstor type is remote, clean up temporary file</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;remote&#39;</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tmpfile</span><span class="p">,</span> <span class="n">metadata</span>
+
+<div class="viewcode-block" id="BlobStor.checkIdentical"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.checkIdentical">[docs]</a>    <span class="k">def</span> <span class="nf">checkIdentical</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return True if destination is still same as on blobsystem</span>
+<span class="sd">        else False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMetadata</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">filetype</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filetype</span>
+        <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+            <span class="n">hashh</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hashh</span><span class="p">,</span> <span class="n">filesdescr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">hashDir</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">metadata</span><span class="o">.</span><span class="n">hash</span> <span class="o">==</span> <span class="n">hashh</span>
+</div>
+<div class="viewcode-block" id="BlobStor.copyToOtherBlobStor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.copyToOtherBlobStor">[docs]</a>    <span class="k">def</span> <span class="nf">copyToOtherBlobStor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">blobstor</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">blobstor</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;local&#39;</span><span class="p">:</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getMetadata</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>                    
+                    <span class="n">hashh</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">hash</span>
+                    <span class="n">targetDirName</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_getDestination</span><span class="p">(),</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+                        <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.gz&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.tgz&quot;</span><span class="p">)</span>
+                    <span class="n">targetFileNameTgz</span><span class="o">=</span><span class="n">targetFileNameTgz</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">md5</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">targetFileNameTgz</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">md5</span><span class="o">&lt;&gt;</span> <span class="n">metadata</span><span class="o">.</span><span class="n">md5</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;source file not ok, hash error: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">targetFileNameTgz</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">blobstor</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">targetFileNameTgz</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>                
+                    <span class="n">tmpfile</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_download</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">uncompress</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">keepTempFile</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">blobstor</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">blobstor</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;No need to download &#39;</span><span class="si">%s</span><span class="s">&#39; to blobstor, because is already there&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="s">&quot;download&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;COULD NOT FIND </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">blobstor</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blobstor</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">):</span>
+        <span class="c"># print &quot;put:%s&quot;%tmpfile</span>
+        <span class="n">hashh</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">hash</span>
+
+        <span class="n">targetDirName</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">blobstor</span><span class="o">.</span><span class="n">_getDestination</span><span class="p">([</span><span class="s">&#39;ftp&#39;</span><span class="p">]),</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">hashh</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+            <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.gz&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.tgz&quot;</span><span class="p">)</span>
+        <span class="n">targetFileNameMeta</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">targetDirName</span><span class="p">,</span> <span class="n">hashh</span> <span class="o">+</span> <span class="s">&quot;.meta&quot;</span><span class="p">)</span>
+
+        <span class="n">ok</span><span class="o">=</span><span class="bp">False</span>
+
+        <span class="k">if</span> <span class="n">blobstor</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;local&quot;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;local:&quot;</span><span class="p">,</span>
+            <span class="n">targetFileNameTgz</span> <span class="o">=</span> <span class="n">targetFileNameTgz</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">targetFileNameMeta</span><span class="o">=</span><span class="n">targetFileNameMeta</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">targetFileNameTgz</span><span class="p">))</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">targetFileNameTgz</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">targetFileNameMeta</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">ok</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">print</span> <span class="s">&quot;OK.&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;upload remote:&quot;</span>
+            <span class="k">try</span><span class="p">:</span>                
+                <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="s">&#39;file://&#39;</span> <span class="o">+</span> <span class="n">tmpfile</span><span class="p">,</span> <span class="n">targetFileNameTgz</span><span class="p">)</span>
+                <span class="n">ok</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Failed to login on ftp server&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Could not login to FTP server for blobstor, please give your login details.&quot;</span><span class="p">)</span>
+                        <span class="n">login</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&quot;login&quot;</span><span class="p">)</span>
+                        <span class="n">passwd</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askPassword</span><span class="p">(</span><span class="s">&quot;passwd&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+                        <span class="n">config</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="s">&quot;blobstor&quot;</span><span class="p">)</span>
+                        <span class="n">ftpurl</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">blobstor</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;ftp&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">ftpurl</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                            <span class="n">end</span><span class="o">=</span><span class="n">ftpurl</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">end</span><span class="o">=</span><span class="n">ftpurl</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;//&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="n">ftpurl</span><span class="o">=</span><span class="s">&quot;ftp://</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">@</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">login</span><span class="p">,</span><span class="n">passwd</span><span class="p">,</span><span class="n">end</span><span class="p">)</span>
+                        <span class="n">config</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="n">blobstor</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s">&quot;ftp&quot;</span><span class="p">,</span><span class="n">ftpurl</span><span class="p">)</span>
+                        <span class="n">blobstor</span><span class="o">.</span><span class="n">loadConfig</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">blobstor</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">)</span> 
+                <span class="k">print</span> <span class="s">&quot;ERROR:could not upload&quot;</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processPythonExceptionObject</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseOperationalCritical</span><span class="p">(</span><span class="s">&quot;cannot upload file to </span><span class="si">%s</span><span class="s"> (ftp), error </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">targetFileNameTgz</span><span class="p">,</span><span class="n">e</span><span class="p">),</span> <span class="n">category</span><span class="o">=</span><span class="s">&#39;ftp.upload&#39;</span><span class="p">)</span>
+                    
+            <span class="k">if</span> <span class="n">ok</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;OK.&quot;</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">targetFileNameMeta</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BlobStor.put"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStor.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">expiration</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        put file or directory to blobstor</span>
+<span class="sd">        @param expiration in hours</span>
+<span class="sd">        @param type see: j.enumerators.BlobType....</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">anyPutDone</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find file </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">filetype</span> <span class="o">=</span> <span class="s">&quot;file&quot;</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">filetype</span> <span class="o">=</span> <span class="s">&quot;dir&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find file (exists but is not a file or dir) </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+            <span class="n">hashh</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">filesdescr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hashh</span><span class="p">,</span> <span class="n">filesdescr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">hashDir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">hashh</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="c">#means empty dir</span>
+            <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;local&quot;</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">blobstor</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Path:&#39;</span><span class="si">%s</span><span class="s">&#39; Hash:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">hashh</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;upload&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getTempFileName</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">filetype</span> <span class="o">==</span> <span class="s">&quot;file&quot;</span><span class="p">:</span>
+            <span class="c"># @TODO: Check what realpath should be.</span>
+            <span class="c">#if not j.system.windows.checkFileToIgnore(realpath):</span>
+            <span class="c">#    j.system.fs.gzip(path, tmpfile)</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;compress:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">targzCompress</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">,</span> <span class="n">followlinks</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;ok.&quot;</span>
+
+        <span class="n">hashFromCompressed</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+        <span class="n">descr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;whoami=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span>  <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">getWhoAmiStr</span><span class="p">()</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;appname=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">appname</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;tags=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tags</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;expiration=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">expiration</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;type=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">type</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;epochtime=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;filepath=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;filetype=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">filetype</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;md5=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">hashFromCompressed</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="s">&quot;================================================================</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">descr</span> <span class="o">+=</span> <span class="n">filesdescr</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">BlobMetadata</span><span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="n">hashh</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hashh</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;local&quot;</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">blobstor</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;No need to upload &#39;</span><span class="si">%s</span><span class="s">&#39; to blobstor:&#39;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;, have already done so.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;upload&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">tmpfile</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hashh</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not upload </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">anyPutDone</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;local&quot;</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">blobstor</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Successfully uploaded blob: &#39;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;upload&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="c"># for blobstor in blobstors:</span>
+        <span class="c">#     if blobstor.exists(hashh):</span>
+        <span class="c">#         j.clients.blobstor.log(&quot;No need to upload &#39;%s&#39; to blobstor:&#39;%s/%s&#39;, have already done so.&quot; % (path,blobstor.name,self.namespace),category=&quot;upload&quot;,level=5)</span>
+        <span class="c">#     else:</span>
+        <span class="c">#         self._put(blobstor, metadata, tmpfile)</span>
+        <span class="c">#         anyPutDone = True</span>
+        <span class="c">#         j.clients.blobstor.log(&quot;Successfully uploaded &#39;%s&#39; to blobstor:&#39;%s/%s&#39;&quot; % (path,blobstor.name,self.namespace) ,category=&quot;upload&quot;,level=5)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hashh</span><span class="p">,</span> <span class="n">descr</span><span class="p">,</span> <span class="n">anyPutDone</span>
+
+</div></div>
+<div class="viewcode-block" id="BlobMetadata"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobMetadata">[docs]</a><span class="k">class</span> <span class="nc">BlobMetadata</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="nb">hash</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash</span> <span class="o">=</span> <span class="nb">hash</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;filedescr&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">splitted</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">:])])</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;============&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;filedescr&quot;</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span><span class="p">:</span>
+                <span class="n">splitted</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                <span class="n">param</span> <span class="o">=</span> <span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+</div>
+<div class="viewcode-block" id="BlobStorFactory"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStorFactory">[docs]</a><span class="k">class</span> <span class="nc">BlobStorFactory</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logenable</span><span class="o">=</span><span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span><span class="o">=</span><span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blobstorCache</span><span class="o">=</span><span class="p">{}</span> 
+
+<div class="viewcode-block" id="BlobStorFactory.get"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStorFactory.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blobstorCache</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">blobstorCache</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blobstorCache</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span> <span class="n">BlobStor</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">blobstorCache</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="BlobStorFactory.parse"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStorFactory.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse a blobstor description file</span>
+
+<span class="sd">        @param path: location of the description file</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        @return: parsed description</span>
+<span class="sd">        @rtype: BlobDescription</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">rawDescription</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">BlobMetadata</span><span class="p">(</span><span class="n">rawDescription</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">description</span>
+</div>
+<div class="viewcode-block" id="BlobStorFactory.log"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.blobstor.html#JumpScale.baselib.blobstor.BlobStor.BlobStorFactory.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">level</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">loglevel</span><span class="o">+</span><span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">logenable</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;blobstor.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">category</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

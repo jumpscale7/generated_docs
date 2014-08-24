@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.testengine.TestEngineKds &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.testengine.TestEngineKds</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">imp</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.osis</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<div class="viewcode-block" id="FileLikeStreamObject"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.FileLikeStreamObject">[docs]</a><span class="k">class</span> <span class="nc">FileLikeStreamObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+<div class="viewcode-block" id="FileLikeStreamObject.write"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.FileLikeStreamObject.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">buf</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+            <span class="c">#print &quot;###%s&quot;%line</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">line</span>
+
+ 
+</div></div>
+<div class="viewcode-block" id="Test"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.Test">[docs]</a><span class="k">class</span> <span class="nc">Test</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">testclass</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="n">db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">testclass</span><span class="o">=</span><span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eco</span><span class="o">=</span><span class="bp">None</span>
+
+<div class="viewcode-block" id="Test.execute"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.Test.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">testrunname</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">testDebug</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;import ipdb&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;import embed&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">##TEST:</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">organization</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">testclass</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+        <span class="k">print</span> <span class="s">&quot;setup&quot;</span>
+        
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">path</span>
+        <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">testclass</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;test_&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="c">#found test</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">:]</span>
+                <span class="k">print</span> <span class="s">&quot;execute test:</span><span class="si">%-30s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+
+                <span class="n">out</span><span class="o">=</span><span class="n">FileLikeStreamObject</span><span class="p">()</span>
+
+                
+                <span class="k">if</span> <span class="n">debug</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">testDebug</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">name</span><span class="p">])</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>            
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">out</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">out</span>
+                
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">result</span><span class="o">=</span><span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]()</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">testengineKds</span><span class="o">.</span><span class="n">sysstdout</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">testengineKds</span><span class="o">.</span><span class="n">sysstderr</span>  
+                    <span class="k">print</span> <span class="s">&quot;ERROR IN TEST:&quot;</span>
+                    <span class="k">print</span> <span class="n">out</span><span class="o">.</span><span class="n">out</span>
+                    <span class="n">eco</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="n">eco</span><span class="o">.</span><span class="n">tags</span><span class="o">=</span><span class="s">&quot;testrunner testrun:</span><span class="si">%s</span><span class="s"> org:</span><span class="si">%s</span><span class="s"> testgroup:</span><span class="si">%s</span><span class="s"> testname:</span><span class="si">%s</span><span class="s"> testpath:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">testrun</span><span class="p">,</span>\
+                            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">organization</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>                    
+                    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">testengineKds</span><span class="o">.</span><span class="n">sysstdout</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">testengineKds</span><span class="o">.</span><span class="n">sysstderr</span>
+                <span class="k">print</span> <span class="s">&quot;ok&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">out</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">testclass</span><span class="o">.</span><span class="n">tearDown</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="k">pass</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;_&quot;</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;source&quot;</span><span class="p">,</span><span class="s">&quot;output&quot;</span><span class="p">]:</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%-35s</span><span class="s"> :  </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">items</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span>
+
+
+
+</div>
+<div class="viewcode-block" id="TestEngineKds"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.TestEngineKds">[docs]</a><span class="k">class</span> <span class="nc">TestEngineKds</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="o">=</span><span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests</span><span class="o">=</span><span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputpath</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/apps/gridportal/base/Tests/TestRuns/&quot;</span><span class="o">%</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sysstdout</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sysstderr</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>        
+
+<div class="viewcode-block" id="TestEngineKds.initTests"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.TestEngineKds.initTests">[docs]</a>    <span class="k">def</span> <span class="nf">initTests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">osisip</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="n">login</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">passwd</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">noOsis</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span> <span class="c">#@todo implement remote osis</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;test&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">noOsis</span><span class="o">=</span><span class="n">noOsis</span>
+</div>
+<div class="viewcode-block" id="TestEngineKds.runTests"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.testengine.html#JumpScale.baselib.testengine.TestEngineKds.TestEngineKds.runTests">[docs]</a>    <span class="k">def</span> <span class="nf">runTests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">testrunname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">testrunname</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">testrunname</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getLocalTimeHRForFilesystem</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;scan dir: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="nb">filter</span><span class="o">=</span><span class="s">&quot;*__test.py&quot;</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                <span class="n">testdb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;__test.py&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">testmod</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">testmod</span><span class="o">.</span><span class="n">enable</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">testclass</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">TEST</span><span class="p">()</span>
+
+                <span class="n">test</span><span class="o">=</span><span class="n">Test</span><span class="p">(</span><span class="n">testdb</span><span class="p">,</span><span class="n">testclass</span><span class="p">)</span>
+
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">author</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">author</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">descr</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">descr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">organization</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">organization</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">version</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">version</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">categories</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">enable</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">enable</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">license</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">license</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">priority</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">priority</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">gid</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">gid</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">nid</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">nid</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">state</span><span class="o">=</span><span class="s">&quot;INIT&quot;</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">testrun</span><span class="o">=</span><span class="n">testrunname</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="n">item</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">priority</span><span class="o">=</span><span class="n">testmod</span><span class="o">.</span><span class="n">priority</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="mi">0</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">send2osis</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">testmod</span><span class="p">,</span><span class="s">&quot;send2osis&quot;</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+
+                <span class="n">C</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">methods</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">extractBlocks</span><span class="p">(</span><span class="n">C</span><span class="p">,[</span><span class="s">&quot;def test&quot;</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+                    <span class="n">methodname</span><span class="o">=</span><span class="n">method</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="s">&quot;    def test_&quot;</span><span class="p">):]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">methodsource</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">])</span>
+                    <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">source</span><span class="p">[</span><span class="n">methodname</span><span class="p">]</span><span class="o">=</span><span class="n">methodsource</span>
+
+                <span class="n">test</span><span class="o">.</span><span class="n">testclass</span><span class="o">=</span><span class="n">testclass</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="s">&quot;all tests loaded in osis&quot;</span>
+
+        <span class="n">priority</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tests</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">priority</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">priority</span><span class="p">):</span>
+                <span class="n">priority</span><span class="p">[</span><span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">priority</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>    
+            <span class="n">priority</span><span class="p">[</span><span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">priority</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+        <span class="n">prio</span><span class="o">=</span><span class="n">priority</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">prio</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">prio</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">priority</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="c">#now sorted</span>
+                <span class="c"># print test</span>
+                <span class="n">test</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">testrunname</span><span class="o">=</span><span class="n">testrunname</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">send2osis</span> <span class="ow">and</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">noOsis</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">db</span><span class="p">)</span>
+
+
+                </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

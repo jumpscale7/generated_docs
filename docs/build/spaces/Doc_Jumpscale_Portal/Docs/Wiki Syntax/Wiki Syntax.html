@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wiki Syntax &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="../../index.html" />
+    <link rel="next" title="Macros:" href="../Macros/index.html" />
+    <link rel="prev" title="User Management" href="../Configuration/UserManagement/UserManagement.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Macros/index.html" title="Macros:"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Configuration/UserManagement/UserManagement.html" title="User Management"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wiki-syntax">
+<h1>Wiki Syntax<a class="headerlink" href="#wiki-syntax" title="Permalink to this headline">¶</a></h1>
+<p>To write documentation with JumpScale, you have to use a specific wiki format, which is a plain-text syntax using text annotation to change the markup.
+In this section you find the general text formatting in the JumpScale wiki format.</p>
+<div class="section" id="general-text-formatting">
+<h2>General Text Formatting<a class="headerlink" href="#general-text-formatting" title="Permalink to this headline">¶</a></h2>
+<p>Any text surrounded with one of the</p>
+<p>WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.</p>
+</div>
+<div class="section" id="other-text-formatting">
+<h2>Other Text Formatting<a class="headerlink" href="#other-text-formatting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use text color:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="n">color</span><span class="p">:</span><span class="n">green</span><span class="p">}</span><span class="n">Colored</span> <span class="n">text</span><span class="p">{</span><span class="n">color</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>&lt;span style=&#8221;color:green&#8221;&gt;Colored text&lt;/span&gt;</p>
+<ul class="simple">
+<li>Use block quotes:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bq</span><span class="o">.</span> <span class="n">Text</span> <span class="n">inside</span> <span class="n">blockquote</span> <span class="n">text</span>
+</pre></div>
+</div>
+<p>&lt;blockquote&gt;Text inside blockquote text&lt;/blockquote&gt;</p>
+<p>Paragraphs are separated by new lines. Consecutive new lines are considered as one. To force a new line, write double-backslashes. <a href="#id1"><span class="problematic" id="id2">`</span></a></p>
+</div>
+<div class="section" id="heading">
+<h2>Heading<a class="headerlink" href="#heading" title="Permalink to this headline">¶</a></h2>
+<p>You define a heading as follows: &#8216;h3. &#8216;, followed by your heading text. The heading range is from 1 to 6 included.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">h4</span><span class="o">.</span> <span class="n">Sample</span> <span class="n">heading</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>becomes</p>
+</div>
+<div class="section" id="sample-heading-4">
+<h2>Sample heading 4<a class="headerlink" href="#sample-heading-4" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>You can create two types of lists:</p>
+<ul class="simple">
+<li>Ordered lists: you create an ordered list by using the the combination star and hash (<cite>#</cite>) as first characters on each line. Do not use empty lines between subsequent items because the numbering will restart.</li>
+<li>Unordered lists: you create an unordered list by using the asterisk (``) as first character on each line.</li>
+</ul>
+<p>You can nest levels, by adding two or more asterisks (<cite>&#8216;) or hashes (&#8216;##</cite>). You can also combine unordered and ordered lists.</p>
+<div class="section" id="example-unordered-list">
+<h3>Example Unordered List<a class="headerlink" href="#example-unordered-list" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*</span> <span class="n">item</span> <span class="mi">1</span>
+<span class="o">*</span> <span class="n">item</span> <span class="mi">2</span>
+<span class="o">**</span> <span class="n">item</span> <span class="mf">2.1</span>
+<span class="o">**</span> <span class="n">item</span> <span class="mf">2.2</span>
+<span class="o">*</span> <span class="n">item</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+<div class="section" id="example-ordered-list">
+<h3>Example Ordered List<a class="headerlink" href="#example-ordered-list" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*</span><span class="c"># item 1</span>
+<span class="o">*</span><span class="c"># item 2</span>
+<span class="o">*</span><span class="c">## item 2.1</span>
+<span class="o">*</span><span class="c">## item 2.2</span>
+<span class="o">*</span><span class="c"># item 3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+<div class="section" id="ordered-list-with-inline-css">
+<h3>Ordered List with Inline CSS<a class="headerlink" href="#ordered-list-with-inline-css" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*-</span> <span class="n">style</span><span class="o">=</span><span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">green</span> <span class="o">|</span> <span class="nb">id</span><span class="o">=</span><span class="n">ul_id</span>
+<span class="o">*</span><span class="c"># item 1</span>
+<span class="o">*</span><span class="c"># item 2</span>
+<span class="o">**-</span> <span class="n">style</span><span class="o">=</span><span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">red</span>
+<span class="o">*</span><span class="c">## item 2.1</span>
+<span class="o">*</span><span class="c">## item 2.2</span>
+<span class="o">*</span><span class="c"># item 3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+</div>
+<div class="section" id="images">
+<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<p>To create an image, write its path enclosed with exclamation marks &#8216;!&#8217;</p>
+<div class="highlight-python"><div class="highlight"><pre>!/$$space/.files/img/gorilla.jpg!
+</pre></div>
+</div>
+<p>!/$$space/.files/img/gorilla.jpg!</p>
+<div class="section" id="with-styles">
+<h3>With styles<a class="headerlink" href="#with-styles" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>!/$$space/.files/img/gorilla.jpg | border= 5px solid blue!
+</pre></div>
+</div>
+<p>!/$$space/.files/img/gorilla.jpg | border= 5px solid blue!</p>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<p>Links are surrounded by square brackets</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">Macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>/docs/Macros &lt;/docs/Macros&gt;
+To add description to the link, add it like this</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Macros</span> <span class="n">page</span> <span class="n">description</span> <span class="o">|</span> <span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">Macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Macros page description  &lt; /docs/Macros&gt;</p>
+<p>You can put a link to a page in a space this way</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Macros</span> <span class="n">page</span> <span class="n">description</span> <span class="o">|</span> <span class="n">docs</span><span class="p">;</span><span class="n">macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Macros page description  &lt;/docs/macros&gt;</p>
+<p>You can add ID &amp; class to it</p>
+<div class="highlight-python"><div class="highlight"><pre>[Macros page description | /docs/Macros | id=link_id | class = link_class]
+</pre></div>
+</div>
+<p>Macros page description  &lt; /docs/Macros &gt;</p>
+<p>the last element is any html which will be putin in the link, in this case ask the link to open a new tab</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Performance</span> <span class="n">Dashboard</span><span class="o">|</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">dashboard</span><span class="o">|||</span><span class="n">target</span><span class="o">=</span><span class="s">&#39;_blank&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You can add images in the description of links</p>
+<div class="highlight-python"><div class="highlight"><pre>[Macros page description !/$$space/.files/img/gorilla.jpg! | /docs/Macros | id=link_id | class = link_class]
+</pre></div>
+</div>
+<p>Macros page description !/$$space/.files/img/gorilla.jpg!  &lt; /docs/Macros &gt;</p>
+</div>
+<div class="section" id="tables">
+<h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<p>Header cells are enclosed with double bars &#8216;|&#8217;, while table body cells are surrounded with single bars &#8216;|&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">||</span> <span class="n">Header</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">Header</span> <span class="mi">2</span> <span class="o">||</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">1.1</span> <span class="o">|</span> <span class="n">Cell</span> <span class="mf">1.2</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.1</span> <span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.2</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wiki Syntax</a><ul>
+<li><a class="reference internal" href="#general-text-formatting">General Text Formatting</a></li>
+<li><a class="reference internal" href="#other-text-formatting">Other Text Formatting</a></li>
+<li><a class="reference internal" href="#heading">Heading</a></li>
+<li><a class="reference internal" href="#sample-heading-4">Sample heading 4</a></li>
+<li><a class="reference internal" href="#lists">Lists</a><ul>
+<li><a class="reference internal" href="#example-unordered-list">Example Unordered List</a></li>
+<li><a class="reference internal" href="#example-ordered-list">Example Ordered List</a></li>
+<li><a class="reference internal" href="#ordered-list-with-inline-css">Ordered List with Inline CSS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#images">Images</a><ul>
+<li><a class="reference internal" href="#with-styles">With styles</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#links">Links</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Configuration/UserManagement/UserManagement.html"
+                        title="previous chapter">User Management</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Macros/index.html"
+                        title="next chapter">Macros:</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Macros/index.html" title="Macros:"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Configuration/UserManagement/UserManagement.html" title="User Management"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

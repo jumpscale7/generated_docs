@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.tools.startupmanager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-tools-startupmanager">
+<h1>j.tools.startupmanager<a class="headerlink" href="#j-tools-startupmanager" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /baselib/startupmanager/StartupManager.py</li>
+</ul>
+<div class="section" id="addprocess">
+<h2>addProcess<a class="headerlink" href="#addprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name,cmd,args,env,numprocesses,priority,shell,workingdir,jpackage,domain,ports,autostart,reload_signal,user,stopcmd,pid,active,check,timeoutcheck,isJSapp,upstart,processfilterstr,stats,log</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:565)</li>
+</ul>
+</div>
+<div class="section" id="disableprocess">
+<h2>disableProcess<a class="headerlink" href="#disableprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:823)</li>
+</ul>
+</div>
+<div class="section" id="enableprocess">
+<h2>enableProcess<a class="headerlink" href="#enableprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:827)</li>
+</ul>
+</div>
+<div class="section" id="exists">
+<h2>exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:723)</li>
+</ul>
+</div>
+<div class="section" id="existsjpackage">
+<h2>existsJPackage<a class="headerlink" href="#existsjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:744)</li>
+</ul>
+</div>
+<div class="section" id="getdomains">
+<h2>getDomains<a class="headerlink" href="#getdomains" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:728)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdef">
+<h2>getProcessDef<a class="headerlink" href="#getprocessdef" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,fromkey</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:686)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdefs">
+<h2>getProcessDefs<a class="headerlink" href="#getprocessdefs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,system</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:697)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdefs4jpackage">
+<h2>getProcessDefs4JPackage<a class="headerlink" href="#getprocessdefs4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:747)</li>
+</ul>
+</div>
+<div class="section" id="getstatus">
+<h2>getStatus<a class="headerlink" href="#getstatus" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:797)</li>
+</ul>
+<p>get status of process, True if status ok</p>
+</div>
+<div class="section" id="getstatus4jpackage">
+<h2>getStatus4JPackage<a class="headerlink" href="#getstatus4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:791)</li>
+</ul>
+</div>
+<div class="section" id="listprocesses">
+<h2>listProcesses<a class="headerlink" href="#listprocesses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:806)</li>
+</ul>
+</div>
+<div class="section" id="load">
+<h2>load<a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:679)</li>
+</ul>
+</div>
+<div class="section" id="monitorprocess">
+<h2>monitorProcess<a class="headerlink" href="#monitorprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:831)</li>
+</ul>
+</div>
+<div class="section" id="reloadprocess">
+<h2>reloadProcess<a class="headerlink" href="#reloadprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:839)</li>
+</ul>
+</div>
+<div class="section" id="remove4jpackage">
+<h2>remove4JPackage<a class="headerlink" href="#remove4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:787)</li>
+</ul>
+</div>
+<div class="section" id="removeprocess">
+<h2>removeProcess<a class="headerlink" href="#removeprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:779)</li>
+</ul>
+</div>
+<div class="section" id="reset">
+<h2>reset<a class="headerlink" href="#reset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:543)</li>
+</ul>
+</div>
+<div class="section" id="restartall">
+<h2>restartAll<a class="headerlink" href="#restartall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:773)</li>
+</ul>
+</div>
+<div class="section" id="restartprocess">
+<h2>restartProcess<a class="headerlink" href="#restartprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:835)</li>
+</ul>
+</div>
+<div class="section" id="startall">
+<h2>startAll<a class="headerlink" href="#startall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:754)</li>
+</ul>
+</div>
+<div class="section" id="startjpackage">
+<h2>startJPackage<a class="headerlink" href="#startjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:735)</li>
+</ul>
+</div>
+<div class="section" id="startprocess">
+<h2>startProcess<a class="headerlink" href="#startprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:815)</li>
+</ul>
+</div>
+<div class="section" id="stopjpackage">
+<h2>stopJPackage<a class="headerlink" href="#stopjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:739)</li>
+</ul>
+</div>
+<div class="section" id="stopprocess">
+<h2>stopProcess<a class="headerlink" href="#stopprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:819)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.tools.startupmanager</a><ul>
+<li><a class="reference internal" href="#addprocess">addProcess</a></li>
+<li><a class="reference internal" href="#disableprocess">disableProcess</a></li>
+<li><a class="reference internal" href="#enableprocess">enableProcess</a></li>
+<li><a class="reference internal" href="#exists">exists</a></li>
+<li><a class="reference internal" href="#existsjpackage">existsJPackage</a></li>
+<li><a class="reference internal" href="#getdomains">getDomains</a></li>
+<li><a class="reference internal" href="#getprocessdef">getProcessDef</a></li>
+<li><a class="reference internal" href="#getprocessdefs">getProcessDefs</a></li>
+<li><a class="reference internal" href="#getprocessdefs4jpackage">getProcessDefs4JPackage</a></li>
+<li><a class="reference internal" href="#getstatus">getStatus</a></li>
+<li><a class="reference internal" href="#getstatus4jpackage">getStatus4JPackage</a></li>
+<li><a class="reference internal" href="#listprocesses">listProcesses</a></li>
+<li><a class="reference internal" href="#load">load</a></li>
+<li><a class="reference internal" href="#monitorprocess">monitorProcess</a></li>
+<li><a class="reference internal" href="#reloadprocess">reloadProcess</a></li>
+<li><a class="reference internal" href="#remove4jpackage">remove4JPackage</a></li>
+<li><a class="reference internal" href="#removeprocess">removeProcess</a></li>
+<li><a class="reference internal" href="#reset">reset</a></li>
+<li><a class="reference internal" href="#restartall">restartAll</a></li>
+<li><a class="reference internal" href="#restartprocess">restartProcess</a></li>
+<li><a class="reference internal" href="#startall">startAll</a></li>
+<li><a class="reference internal" href="#startjpackage">startJPackage</a></li>
+<li><a class="reference internal" href="#startprocess">startProcess</a></li>
+<li><a class="reference internal" href="#stopjpackage">stopJPackage</a></li>
+<li><a class="reference internal" href="#stopprocess">stopProcess</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/tools/j.tools.startupmanager.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

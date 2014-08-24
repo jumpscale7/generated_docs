@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.docgenerator.Confluence2HTML &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.docgenerator.Confluence2HTML</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.portal.macrolib</span> <span class="kn">import</span> <span class="n">div_base</span>
+<span class="kn">from</span> <span class="nn">.PageHTML</span> <span class="kn">import</span> <span class="n">PageHTML</span>
+
+
+<div class="viewcode-block" id="Confluence2HTML"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML">[docs]</a><span class="k">class</span> <span class="nc">Confluence2HTML</span><span class="p">():</span>
+
+<div class="viewcode-block" id="Confluence2HTML.defGet"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.defGet">[docs]</a>    <span class="k">def</span> <span class="nf">defGet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">contentmanager</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">defmanager</span><span class="o">.</span><span class="n">aliases</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">contentmanager</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">defmanager</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">contentmanager</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">defmanager</span><span class="o">.</span><span class="n">defs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">contentmanager</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">defmanager</span><span class="o">.</span><span class="n">defs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Confluence2HTML.processDefs"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.processDefs">[docs]</a>    <span class="k">def</span> <span class="nf">processDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">doc</span><span class="o">.</span><span class="n">processDefs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">line</span>
+
+        <span class="c"># print &quot;processdefs:%s&quot;%line</span>
+
+        <span class="k">def</span> <span class="nf">processToken</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;{&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">token</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;]&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">token</span>
+            <span class="c"># print &quot;tok1:%s&quot;%token</span>
+            <span class="n">deff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">defGet</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">deff</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c"># print &quot;founddef&quot;</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;[</span><span class="si">%s</span><span class="s">|</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">deff</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">deff</span><span class="o">.</span><span class="n">pagename</span><span class="p">)</span>
+                <span class="c"># print &quot;tok2:%s&quot;%token</span>
+            <span class="k">return</span> <span class="n">token</span>
+
+        <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">lineout</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="s">&quot;;&quot;</span><span class="p">,</span> <span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="s">&quot;?&quot;</span><span class="p">,</span> <span class="s">&quot;!&quot;</span><span class="p">,</span> <span class="s">&quot;|&quot;</span><span class="p">]:</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="n">processToken</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+                <span class="n">lineout</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">elif</span> <span class="n">char</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;]&quot;</span><span class="p">]:</span>
+                <span class="n">lineout</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+                <span class="n">token</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">token</span> <span class="o">+=</span> <span class="n">char</span>
+        <span class="n">lineout</span> <span class="o">+=</span> <span class="n">processToken</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="n">lineout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findLinks</span><span class="p">(</span><span class="n">lineout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lineout</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="Confluence2HTML.findLinks"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.findLinks">[docs]</a>    <span class="k">def</span> <span class="nf">findLinks</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+        <span class="c"># r=r&quot;\[[-:|_@#.?\w\s\\=/&amp;]*\]&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="s">r&quot;\[[^\[\]]+\]&quot;</span>  <span class="c">#@todo does not seem right to me</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>  <span class="c"># find links</span>
+            <span class="c"># print &quot;match %s&quot;% line</span>
+            <span class="n">htmlelements</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">yieldRegexMatches</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="c"># print &quot;link: %s&quot; % match.founditem</span>
+                <span class="n">link_id</span> <span class="o">=</span> <span class="n">link_class</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">match2</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">founditem</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">match2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">parts</span> <span class="o">=</span> <span class="n">match2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span>
+                    <span class="n">descr</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">link</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                            <span class="n">link_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                            <span class="n">link_class</span> <span class="o">=</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+                        <span class="n">htmlelements</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+
+                <span class="k">elif</span> <span class="n">match2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">descr</span><span class="p">,</span> <span class="n">link</span> <span class="o">=</span> <span class="n">match2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">match2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">link</span> <span class="o">=</span> <span class="n">match2</span>
+                    <span class="n">descr</span> <span class="o">=</span> <span class="n">link</span>
+                <span class="c"># if link.find(&quot;:&quot;)&lt;&gt;-1:  #@todo what was the reason for this, probly have broken something now</span>
+                <span class="c">#     link=link.replace(&quot;:&quot;,&quot;___&quot;)</span>
+                <span class="k">if</span> <span class="n">link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">space</span><span class="p">,</span> <span class="n">pagename</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">link</span> <span class="o">=</span> <span class="s">&quot;/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">),</span> <span class="n">pagename</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">))</span>
+                <span class="c"># print &quot;match:%s&quot;%match.founditem</span>
+                <span class="c"># print &quot;getlink:%s&quot; %page.getLink(descr,link)</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">founditem</span><span class="p">,</span> <span class="n">PageHTML</span><span class="o">.</span><span class="n">getLink</span><span class="p">(</span><span class="n">descr</span><span class="p">,</span> <span class="n">link</span><span class="p">,</span> <span class="n">link_id</span><span class="p">,</span> <span class="n">link_class</span><span class="p">,</span><span class="n">htmlelements</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">line</span>
+
+    <span class="c"># This is copied from PageHTML.py</span>
+    <span class="c"># TODO: use only one copy</span></div>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_styles</span><span class="p">(</span><span class="n">styles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return CSS styles, given a list of CSS attributes</span>
+<span class="sd">        @param styles a list of tuples, of CSS attributes, e.g. [(&quot;background-color&quot;, &quot;green), (&quot;border&quot;, &quot;1px solid green&quot;)]</span>
+
+<span class="sd">        &gt;&gt;&gt; PageHTML._format_styles([(&quot;background-color&quot;, &quot;green&quot;), (&quot;border&quot;, &quot;1px solid green&quot;)])</span>
+<span class="sd">        &#39;background-color: green; border: 1px solid green&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;{0}: {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">style</span><span class="p">)</span> <span class="k">for</span> <span class="n">style</span> <span class="ow">in</span> <span class="n">styles</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+
+<div class="viewcode-block" id="Confluence2HTML.createImage"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.createImage">[docs]</a>    <span class="k">def</span> <span class="nf">createImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">imagePath</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param title alt text of the image</span>
+<span class="sd">        @param imagePath can be url or local path</span>
+<span class="sd">        @param width width of the image</span>
+<span class="sd">        @param height height of the image</span>
+<span class="sd">        @param styles a list of tuples, containing CSS attributes for the image, e.g. [(&quot;background-color&quot;, &quot;green), (&quot;border&quot;, &quot;1px solid green&quot;)]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">width_n_height</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">width</span><span class="p">:</span>
+            <span class="n">width_n_height</span> <span class="o">+=</span> <span class="s">&#39; width=&quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">height</span><span class="p">:</span>
+            <span class="n">width_n_height</span> <span class="o">+=</span> <span class="s">&#39; height=&quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s">&quot;&lt;img src=&#39;</span><span class="si">%s</span><span class="s">&#39; alt=&#39;</span><span class="si">%s</span><span class="s">&#39; </span><span class="si">%s</span><span class="s"> style=&#39;clear:both;</span><span class="si">%s</span><span class="s">&#39; /&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">imagePath</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">width_n_height</span><span class="p">,</span> <span class="n">Confluence2HTML</span><span class="o">.</span><span class="n">_format_styles</span><span class="p">(</span><span class="n">styles</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Confluence2HTML.convert"><a class="viewcode-back" href="../../../../API/JumpScale.portal.docgenerator.html#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">requestContext</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">paramsExtra</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="c"># Now I should format the wiki text, but keeping the macros untouched because I don&#39;t want to</span>
+        <span class="c"># screw it</span>
+        <span class="c">#</span>
+        <span class="c"># Formatting of text inside the macro is the responsibility of the macro itself</span>
+
+        <span class="c"># This is a list of formatting tags &amp; I&#39;m going to replace the in HTML, e.g. _word_ will be replaced with</span>
+        <span class="c"># &lt;em&gt;word&lt;/em&gt;</span>
+        <span class="c">#styled_text = r&#39;([\w\-:_/= *.\.\/\&gt;\&lt;\\{},|`!]+)&#39;</span>
+        <span class="n">styled_text</span> <span class="o">=</span> <span class="s">r&#39;[^{0}\n]*?&#39;</span>
+
+        <span class="k">def</span> <span class="nf">limiter</span><span class="p">(</span><span class="n">char</span><span class="p">):</span>
+            <span class="c"># Limiters can contain RE special chars, so I escape them here</span>
+            <span class="n">limiter_re</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">char</span><span class="p">)</span>
+
+            <span class="c"># This is the RE which is used to replace wiki text formatting with equivalent HTML tag</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;(\W){0}([^ #{0}]{1}[^ \n{0}]?){0}(\W)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">limiter_re</span><span class="p">,</span> <span class="n">styled_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">limiter_re</span><span class="p">)))</span>
+
+        <span class="k">def</span> <span class="nf">limiter_replacement</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s">r&#39;\1&lt;{0}&gt;\2&lt;/{0}&gt;\3&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">substitute_email</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s">r&#39;&lt;a href=&quot;{0}&quot;&gt;{1}&lt;/a&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;mailto:&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">escape_char</span><span class="p">(</span><span class="n">char</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s">&#39;&amp;#{0};&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+        <span class="n">substitutions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">([^\n\r</span><span class="se">\\</span><span class="s">])&#39;</span><span class="p">,</span>  <span class="n">escape_char</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">&#39;&lt;&#39;</span><span class="p">,</span>           <span class="s">&#39;&amp;lt;&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">&#39;&gt;&#39;</span><span class="p">,</span>           <span class="s">&#39;&amp;gt;&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">r&#39;\@LF\b&#39;</span><span class="p">,</span>     <span class="s">&#39;&lt;br&gt;&#39;</span><span class="p">),</span> <span class="c"># This should come after &lt;&gt;</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;`&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;code&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;strong&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;em&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;+&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;ins&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;strike&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;??&#39;</span><span class="p">),</span> <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;cite&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;^&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;sup&#39;</span><span class="p">)),</span>
+            <span class="p">(</span><span class="n">limiter</span><span class="p">(</span><span class="s">&#39;~&#39;</span><span class="p">),</span>  <span class="n">limiter_replacement</span><span class="p">(</span><span class="s">&#39;sub&#39;</span><span class="p">)),</span>
+            
+
+            <span class="c"># {color: red}text goes here{color}</span>
+            <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;\{{color\:(.*?)\}}({0})\{{color\}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">styled_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;{}&#39;</span><span class="p">)),</span>
+                        <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">),</span>
+             <span class="s">r&#39;&lt;span style=&quot;color:\1&quot;&gt;\2&lt;/span&gt;&#39;</span><span class="p">),</span>
+
+            <span class="c"># Links &amp; emails</span>
+            <span class="c">#(r&#39;\[(.*?)\]&#39;, substitute_email),</span>
+
+            <span class="c"># blockquote</span>
+            <span class="p">(</span><span class="s">r&#39;bq\.\s+(.*?)\n&#39;</span><span class="p">,</span> <span class="s">r&#39;&lt;blockquote&gt;\1&lt;/blockquote&gt;\n&#39;</span><span class="p">),</span>
+
+            <span class="c"># Escape characters by putting \ in front of it, e.g. \*</span>
+        <span class="p">]</span>
+        <span class="c"># First, divide the text into macros &amp; non-macros</span>
+        <span class="n">blocks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">r&#39;({{.*?}})&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;{{&#39;</span><span class="p">):</span>  <span class="c"># a macro</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">tag_re</span><span class="p">,</span> <span class="n">sub_re</span> <span class="ow">in</span> <span class="n">substitutions</span><span class="p">:</span>
+                <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">tag_re</span><span class="p">,</span> <span class="n">sub_re</span><span class="p">,</span> <span class="n">blocks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">page</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">docgenerator</span><span class="o">.</span><span class="n">pageNewHTML</span><span class="p">(</span><span class="s">&quot;temp&quot;</span><span class="p">)</span>
+
+        <span class="c"># images=j.system.fs.listFilesInDir(dirpath,False)</span>
+        <span class="c"># images3=[]L</span>
+        <span class="c"># for image in images:</span>
+            <span class="c"># image2=image.lower()</span>
+            <span class="c"># if image2.find(&quot;.jpg&quot;)&lt;&gt;-1 or image2.find(&quot;.png&quot;)&lt;&gt;-1:</span>
+                <span class="c"># image2=image2.strip()</span>
+                <span class="c"># image2=j.system.fs.getBaseName(image2.replace(&quot;\\&quot;,&quot;/&quot;))</span>
+                <span class="c"># images3.append(image2)</span>
+
+        <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+        <span class="n">macro</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@show&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c"># process show blocks before converting</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+                <span class="c"># print &quot;%s %s&quot; % (state,line)</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@show&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;hide&quot;</span>
+                    <span class="n">pythoncode</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@show&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">paramsExtra2</span> <span class="o">=</span> <span class="n">paramsExtra</span>
+                    <span class="n">paramsExtra2</span><span class="p">[</span><span class="s">&quot;doc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc</span>
+                    <span class="n">paramsExtra2</span><span class="p">[</span><span class="s">&quot;page&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page</span>
+                    <span class="n">paramsExtra2</span><span class="p">[</span><span class="s">&quot;requestContext&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">requestContext</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">pythoncode</span><span class="p">,</span> <span class="n">paramsExtra</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="c">#out+=&quot;***error***: Could not parse &amp; execute %s, error was %s\n&quot; % (pythoncode,e)</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">boolean</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+                        <span class="c">#out+=&quot;***error***: Could not parse &amp; execute %s, result needs to be a boolean.\n&quot; % (pythoncode)</span>
+                        <span class="k">continue</span>
+
+                    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+                        <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;show&quot;</span>
+                        <span class="k">continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;hide&quot;</span>
+                        <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@end&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;show&quot;</span><span class="p">:</span>
+                    <span class="n">out</span> <span class="o">+=</span> <span class="n">line</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+
+            <span class="n">content</span> <span class="o">=</span> <span class="n">out</span>
+
+        <span class="n">ulAttributes</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lastLine</span> <span class="o">=</span> <span class="n">line</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;macro&#39;</span><span class="p">]:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="c"># \\ on their own line will emit &lt;br&gt;</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s">r&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="k">continue</span>
+
+
+            <span class="c"># print &quot;#: %s %s&quot; % (state,line)</span>
+
+            <span class="c"># END TABLE</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;table&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;||&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+                <span class="k">if</span> <span class="n">params</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">page</span><span class="o">.</span><span class="n">addList</span><span class="p">(</span><span class="n">trows</span><span class="p">,</span> <span class="n">theader</span><span class="p">,</span> <span class="n">classparams</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">page</span><span class="o">.</span><span class="n">addList</span><span class="p">(</span><span class="n">trows</span><span class="p">,</span> <span class="n">theader</span><span class="p">)</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+            <span class="c"># PAGEBREAK</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&amp;nbsp;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>  <span class="c"># or line==&quot;&quot;:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addNewLine</span><span class="p">()</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="s">&quot;macro&quot;</span> <span class="ow">and</span> <span class="n">line</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">_checkBlock</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c"># SKIP LINES</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="s">&quot;macro&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;#&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c"># IMAGE</span>
+            <span class="n">regex</span> <span class="o">=</span> <span class="s">r&quot;\![\w\-:_/=*.,|?&amp;][\w\-:_/= *.,|?&amp;]*[\w\-:_/=*.,|?&amp;]\!&quot;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;table&quot;</span><span class="p">)</span><span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+                <span class="n">matches</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;!&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s">&#39;|&#39;</span> <span class="ow">in</span> <span class="n">image</span><span class="p">:</span>
+                        <span class="c"># Image may have attributes, like</span>
+                        <span class="c">#   !image.png|border=1px solid black, margin=1px!</span>
+                        <span class="c"># these should be written as CSS properties. The syntax for the macro should follow CSS format</span>
+                        <span class="c">#</span>
+                        <span class="c"># Result: &lt;img src=&quot;image.png&quot; style=&quot;border: 1px solid black; margin: 1px&quot; /&gt;</span>
+                        <span class="n">image</span><span class="p">,</span> <span class="n">styles</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">styles</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">)]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">styles</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">image</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;http://&#39;</span><span class="p">):</span>
+                        <span class="n">imagePath</span> <span class="o">=</span> <span class="n">image</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">imagePath</span> <span class="o">=</span> <span class="s">&quot;/images/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">getSpaceName</span><span class="p">(),</span> <span class="n">image</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">image</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">images</span><span class="p">:</span>
+                        <span class="c"># th=j.core.tags.getObject(tags)</span>
+                        <span class="c"># result=th.getValues(width=800,height=600,border=True)</span>
+                        <span class="c">#page.addImage(image, image, result[&quot;width&quot;], result[&quot;height&quot;])</span>
+                        <span class="c">#page.addImage(image, imagePath, styles=styles)</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">createImage</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">imagePath</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">))</span>
+                        <span class="c"># continue</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">imagePath</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">image</span><span class="p">]</span>
+                        <span class="n">th</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+                        <span class="n">result</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">getValues</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                        <span class="n">imagePath</span> <span class="o">=</span> <span class="s">&quot;/images/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">getSpaceName</span><span class="p">(),</span> <span class="n">image</span><span class="p">)</span>
+                        <span class="c">#page.addImage(image, imagePath, result[&quot;width&quot;], result[&quot;height&quot;], styles)</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">createImage</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">imagePath</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;width&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;height&quot;</span><span class="p">],</span> <span class="n">styles</span><span class="p">))</span>
+
+                    <span class="c"># continue</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findLinks</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;{center}&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;{toc:&quot;</span><span class="p">):</span>
+                <span class="c"># line=&quot;{{toc}}&quot;</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="k">continue</span>
+
+            <span class="c"># 1 line macros</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;table&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;{{&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;}}&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">macros</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">macroexecutorPage</span><span class="o">.</span><span class="n">getMacroCandidates</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">macro</span> <span class="ow">in</span> <span class="n">macros</span><span class="p">:</span>
+                    <span class="c"># print &quot;## 1linemacro:%s&quot;%macro</span>
+
+                    <span class="c"># mtayseer: this condition looks wrong!!</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;{{&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">macros</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">htmlMacro</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">macroexecutorPage</span><span class="o">.</span><span class="n">executeMacroReturnHTML</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span>
+                                                                                              <span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span> <span class="n">requestContext</span><span class="o">=</span><span class="n">requestContext</span><span class="p">,</span> <span class="n">paramsExtra</span><span class="o">=</span><span class="n">paramsExtra</span><span class="p">,</span> <span class="n">pagemirror4jscss</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">htmlMacro</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">macroexecutorPage</span><span class="o">.</span><span class="n">executeMacroAdd2Page</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span>
+                                                                                <span class="n">requestContext</span><span class="o">=</span><span class="n">requestContext</span><span class="p">,</span> <span class="n">paramsExtra</span><span class="o">=</span><span class="n">paramsExtra</span><span class="p">)</span>
+                        <span class="n">line</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">macro</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="c"># print &quot;processed 1 macro line:%s&quot;%line</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+            <span class="c"># print &quot;after1linemacrostate:%s %s&quot;%(line,state)</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;{{&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;macro&quot;</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;macro&quot;</span><span class="p">:</span>
+                <span class="n">macro</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">line</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;macro&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;}}&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;start&quot;</span>
+                <span class="c"># print &quot;macroend:%s&quot;%line</span>
+                <span class="c"># macrostr=macro</span>
+                <span class="c"># macro=macro.strip().lstrip(&quot;{{&quot;)</span>
+                <span class="c"># macro=macro.rstrip(&quot;}}&quot;)</span>
+                <span class="k">if</span> <span class="n">doc</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">macroexecutorPage</span><span class="o">.</span><span class="n">executeMacroAdd2Page</span><span class="p">(</span><span class="n">macro</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span> <span class="n">requestContext</span><span class="o">=</span><span class="n">requestContext</span><span class="p">,</span> <span class="n">paramsExtra</span><span class="o">=</span><span class="n">paramsExtra</span><span class="p">)</span>
+                    <span class="n">macro</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                    <span class="c"># params=&quot;&quot;</span>
+                    <span class="k">continue</span>
+                <span class="n">macro</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c"># print &quot;linkcheck: %s&quot; % j.codetools.regex.match(&quot;\[[-\\:|_\w\s/]*\]&quot;,line)</span>
+            <span class="c"># FIND LINKS</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findLinks</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="c"># HEADING</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatch</span><span class="p">(</span><span class="s">&quot;^h(\d)\. (.+?)$&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">header</span> <span class="ow">and</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span><span class="p">:</span>
+                <span class="n">level</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">foundSubitems</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addHeading</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">unorderedItem</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatch</span><span class="p">(</span><span class="s">&quot;^(\*+) (.+?)$&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">unorderedItem</span><span class="p">:</span>
+                <span class="n">stars</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="n">unorderedItem</span><span class="o">.</span><span class="n">foundSubitems</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stars</span><span class="p">)</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addBullet</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="n">ulAttributes</span><span class="p">)</span>
+                <span class="n">ulAttributes</span> <span class="o">=</span> <span class="s">&#39;&#39;</span> <span class="c"># ulAttributes is set in the previous iteration of the for-loop. It should be reset _after_ the list is added </span>
+                <span class="k">continue</span>
+
+            <span class="n">numberedItem</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatch</span><span class="p">(</span><span class="s">&quot;^\*(#+) (.+?)$&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">numberedItem</span><span class="p">:</span>
+                <span class="n">hashes</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="n">numberedItem</span><span class="o">.</span><span class="n">foundSubitems</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addBullet</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">bullet_type</span><span class="o">=</span><span class="s">&#39;number&#39;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s">&#39;ol&#39;</span><span class="p">,</span> <span class="n">attributes</span><span class="o">=</span><span class="n">ulAttributes</span><span class="p">)</span>
+                <span class="n">ulAttributes</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="k">continue</span>
+
+            <span class="c"># Read styles for lists</span>
+            <span class="c"># The syntax will be like this</span>
+            <span class="c">#</span>
+            <span class="c">#   *- id=main-menu | class=nav nav-list</span>
+            <span class="c">#   * item 1</span>
+            <span class="c">#   * item 2</span>
+            <span class="n">ulAttributes</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatch</span><span class="p">(</span><span class="s">&quot;^(\*+)- (.+?)$&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ulAttributes</span><span class="p">:</span>
+                <span class="n">ulAttributes</span> <span class="o">=</span> <span class="n">div_base</span><span class="o">.</span><span class="n">tag_params_to_html_attrs</span><span class="p">(</span><span class="n">ulAttributes</span><span class="o">.</span><span class="n">foundSubitems</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ulAttributes</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;.*\|\|.*&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;||&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c"># DESCRIPTIONS</span>
+                <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;||&quot;</span><span class="p">)</span>
+                <span class="n">p2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addDescr</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@divend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@rowend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@colend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@blockend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@block&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># divlower(divauto,page,&quot;block&quot;)</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@block&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="s">&quot;container&quot;</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&gt;&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">divlevel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;block&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@row&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># divlower(divauto,page,&quot;row&quot;)</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@row&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="s">&quot;row-fluid&quot;</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&gt;&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">divlevel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;row&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@col&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># divlower(divauto,page,&quot;col&quot;)</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@col&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s">span</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&gt;&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">divlevel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;col&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@block&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@block&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">arg</span> <span class="o">=</span> <span class="s">&quot;container-fluid&quot;</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&gt;&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+                <span class="n">page</span><span class="o">.</span><span class="n">divlevel</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c"># check params</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;@params&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;@params&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="kn">from</span> <span class="nn">JumpScale.core.Shell</span> <span class="kn">import</span> <span class="n">ipshell</span>
+                <span class="k">print</span> <span class="s">&quot;DEBUG NOW params, not implemented&quot;</span>
+                <span class="n">ipshell</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;||&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># beginning of table</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;table&quot;</span>
+                <span class="n">cols</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;||&quot;</span><span class="p">)</span>
+                <span class="n">cols</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">theader</span> <span class="o">=</span> <span class="n">cols</span>
+                <span class="n">trows</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;start&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># beginning of table</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s">&quot;table&quot;</span>
+                <span class="n">theader</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">trows</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s">&quot;table&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c"># ADD ROW TO TABLE</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                <span class="n">cols</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span>
+                <span class="n">trows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="c"># was a regular line so add</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">!=</span> <span class="s">&quot;macro&quot;</span> <span class="ow">and</span> <span class="n">state</span> <span class="o">!=</span> <span class="s">&quot;table&quot;</span> <span class="ow">and</span> <span class="n">line</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;@&quot;</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processDefs</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">page</span><span class="p">)</span>
+                    <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">isElement</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            
+
+        <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">body</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="c"># work on the special includes with [[]]</span>
+            <span class="n">includes</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s">&quot;\[\[[\w :;,\.\*\!\?\^\=</span><span class="se">\&#39;</span><span class="s">\-/]*\]\]&quot;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">includes</span><span class="p">:</span>
+                <span class="n">item2</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;[[&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;]]&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">docExists</span><span class="p">(</span><span class="n">item2</span><span class="p">):</span>
+                    <span class="n">doc2</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">docGet</span><span class="p">(</span><span class="n">item2</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">page</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s">&quot; ***error*** : COULD NOT FIND DOC </span><span class="si">%s</span><span class="s">, could not include.&quot;</span> <span class="o">%</span> <span class="n">item2</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="n">page2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">docgenerator</span><span class="o">.</span><span class="n">pageNewHTML</span><span class="p">(</span><span class="s">&quot;includeInConfluence2Wiki&quot;</span><span class="p">)</span>
+                <span class="n">page2</span><span class="o">.</span><span class="n">liblocation</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">liblocation</span>
+                <span class="n">page2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">doc2</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">page2</span><span class="p">,</span> <span class="n">doc2</span><span class="p">,</span> <span class="n">requestContext</span><span class="p">)</span>
+
+                <span class="n">page</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">page2</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">page</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

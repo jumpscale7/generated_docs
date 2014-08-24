@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.statmanager.StatManager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.statmanager.StatManager</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<span class="k">class</span> <span class="nc">StatManager</span><span class="p">():</span>
+<div class="viewcode-block" id="StatManager"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager">[docs]</a>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inited</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hourseconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dayseconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_monthseconds</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">31</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dayseconds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="o">=</span><span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hourId</span><span class="o">=</span><span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fiveMinuteId</span><span class="o">=</span><span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">osisclient</span><span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&#39;root&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">osisclient</span><span class="p">,</span> <span class="s">&#39;stats&#39;</span><span class="p">,</span> <span class="s">&#39;history&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getFiveMinuteId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="StatManager.getFiveMinuteId"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getFiveMinuteId">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fiveMinuteId</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fiveMinuteId</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getHourId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getHourId"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getHourId">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourId</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hourId</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getHourId</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">scheduleSaveClean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.scheduleSaveClean"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.scheduleSaveClean">[docs]</a>        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">addSchedule1MinPeriod</span><span class="p">(</span><span class="s">&quot;saveInfomgr&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">addSchedule15MinPeriod</span><span class="p">(</span><span class="s">&quot;cleanCacheInfoMgr&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleanCache</span><span class="p">)</span>
+
+        <span class="c"># per hour we keep: nritems,maxitem,minitem,total  (so out of this we can calc average)</span>
+
+        <span class="c"># REMARK: now we do all in mem, in future we will have to cache the incoming values and only process couple of objects per time</span>
+        <span class="c">#   only when a request for info comes we need to process the info for that object first</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.reset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.reset">[docs]</a>        <span class="c"># self.models.infotable.destroy()</span>
+        <span class="c"># self.models.history.destroy()</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW osis destroy&quot;</span>
+        <span class="c"># embed()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infotableLastSave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getNrItemsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getNrItemsRow"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getNrItemsRow">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;counter&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">nrItemsIn5MinRow</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># no need to stor per 5 min</span>
+            <span class="n">nrItemsInHourRow</span> <span class="o">=</span> <span class="mi">1464</span>  <span class="c"># only keep 2 months (keep 61 days)</span>
+            <span class="k">return</span> <span class="n">nrItemsIn5MinRow</span><span class="p">,</span> <span class="n">nrItemsInHourRow</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nrItemsIn5MinRow</span> <span class="o">=</span> <span class="mi">8929</span>  <span class="c"># 2 months (32 days so more than 1 month)</span>
+            <span class="n">nrItemsInHourRow</span> <span class="o">=</span> <span class="mi">8761</span>  <span class="c"># 1 year+1h</span>
+            <span class="k">return</span> <span class="n">nrItemsIn5MinRow</span><span class="p">,</span> <span class="n">nrItemsInHourRow</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.save"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.save">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">hourId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getHourId</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fiveMinuteId</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">()</span>
+
+        <span class="n">ttime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+        <span class="n">now5min</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">fiveMinuteId</span>
+        <span class="n">nowh</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">active</span><span class="o">.</span><span class="n">hourId</span>
+        <span class="c"># walk over history obj and save if needed</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">force</span> <span class="ow">or</span> <span class="n">ttime</span> <span class="o">&gt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span> <span class="mi">900</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                    <span class="n">nrItemsIn5MinRow</span><span class="p">,</span> <span class="n">nrItemsInHourRow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getNrItemsRow</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="k">print</span> <span class="s">&quot;save: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">guid</span><span class="p">)</span>
+                    <span class="c"># trim values out of range</span>
+                    <span class="k">if</span> <span class="n">nrItemsIn5MinRow</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">test</span> <span class="o">=</span> <span class="n">now5min</span> <span class="o">-</span> <span class="n">nrItemsIn5MinRow</span>
+                        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">test</span><span class="p">:</span>
+                            <span class="c"># remove old items for 5min</span>
+                            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                                <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">test</span><span class="p">:</span>
+                                    <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">if</span> <span class="n">nrItemsInHourRow</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">test</span> <span class="o">=</span> <span class="n">nowh</span> <span class="o">-</span> <span class="n">nrItemsInHourRow</span>
+                        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">test</span><span class="p">:</span>
+                            <span class="c"># remove old items for 5min</span>
+                            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                                <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">test</span><span class="p">:</span>
+                                    <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span> <span class="o">=</span> <span class="p">{}</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span></div>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serialize</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ttime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="c">#@todo needs to be implemented, go to dense binary format (use struct)</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">cleanCache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="StatManager.cleanCache"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.cleanCache">[docs]</a>        <span class="k">print</span> <span class="s">&quot;clean cache&quot;</span>
+        <span class="n">ttime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="bp">False</span> <span class="ow">and</span> <span class="n">ttime</span> <span class="o">&gt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+</span> <span class="mi">600</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c"># from IPython import embed</span>
+            <span class="c"># print &quot;DEBUG NOW error in clean cache for StatManager&quot;</span>
+            <span class="c"># embed()</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">getEpoch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getEpoch"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getEpoch">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getHistoryObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getHistoryObject"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getHistoryObject">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="c"># now = self.getEpoch()</span>
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW getmodel&quot;</span>
+        <span class="c"># embed()</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guid</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">createIfNeeded</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deserialize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="c"># if obj.month_5min=={}:</span>
+        <span class="c">#     for i in range(8928):</span>
+        <span class="c"># nrsecondsago=i*5*60 #(every 5 min)</span>
+        <span class="c">#         key=j.base.time.get5MinuteId(now-nrsecondsago)</span>
+        <span class="c">#         obj.month_5min[key]=0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsLastSave</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">historyObjs</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_getKey5min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span></div>
+        <span class="c"># nrsecondsago=5*60</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addInfoLine2HistoryObj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="StatManager.addInfoLine2HistoryObj"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.addInfoLine2HistoryObj">[docs]</a>        <span class="k">if</span> <span class="n">epoch</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHistoryObject</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+        <span class="n">key2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getHourId</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+
+        <span class="c"># store 5min value</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="c"># remember modification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historyObjsMod</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="c"># value for hour row</span>
+        <span class="k">if</span> <span class="n">key2</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="p">:</span>
+            <span class="n">nritems</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">mmin</span><span class="p">,</span> <span class="n">mmax</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">mmin</span><span class="p">:</span>
+                <span class="n">mmin</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">mmax</span><span class="p">:</span>
+                <span class="n">mmax</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">value</span>
+            <span class="n">nritems</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">nritems</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">mmin</span><span class="p">,</span> <span class="n">mmax</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">year_hour</span><span class="p">[</span><span class="n">key2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="c"># cleanup is not done here but when we save the object to the keyval stor</span>
+
+    <span class="k">def</span> <span class="nf">listHistoryObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.listHistoryObjects"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.listHistoryObjects">[docs]</a>        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">addInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.addInfo"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.addInfo">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        can be multi line</span>
+<span class="sd">        param:info dotnotation of info e.g. &#39;water.white.level.sb 10&#39;  (as used in graphite)</span>
+<span class="sd">        result bool         </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getEpoch</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">splitted</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">epoch</span> <span class="o">=</span> <span class="n">splitted</span>
+                <span class="n">epoch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">id</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">splitted</span>
+                <span class="n">epoch</span> <span class="o">=</span> <span class="n">now</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseMonitoringError</span><span class="p">(</span><span class="s">&quot;Line &#39;</span><span class="si">%s</span><span class="s">&#39; not well constructed, cannot process monitoring stat info&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="c"># # make sure table of stats is complete</span>
+            <span class="c"># if id not in self.infotable:</span>
+            <span class="c">#     self.infotable[id] = True</span>
+            <span class="c">#     print &quot;infotable NEW&quot;</span>
+            <span class="c">#     self.models.infotable.set(self._infotableobj)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">addInfoLine2HistoryObj</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">resampleList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">llist</span><span class="p">,</span> <span class="n">nritems</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.resampleList"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.resampleList">[docs]</a>        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">llist</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">nritems</span><span class="p">:</span>
+            <span class="n">skip</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="n">nritems</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">skip</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">llist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">skip</span> <span class="o">==</span> <span class="n">pos</span><span class="p">:</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">getInfoWithHeaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">maxvalues</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getInfoWithHeaders"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getInfoWithHeaders">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param:id id in dot noation e.g. &#39;water.white.level.sb&#39;  (can be multiple use comma as separation)</span>
+<span class="sd">        param:start epoch</span>
+<span class="sd">        param:stop epoch</span>
+<span class="sd">        param:maxvalues nr of values you want to return</span>
+<span class="sd">        result list(list) </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getInfo5MinFromTo</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resampleList</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">nritems</span><span class="o">=</span><span class="n">maxvalues</span><span class="p">)</span>
+            <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHeaders</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resampleList</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">nritems</span><span class="o">=</span><span class="n">maxvalues</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">header</span><span class="p">,</span> <span class="n">rows</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getHeaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getHeaders"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getHeaders">[docs]</a>        <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+        <span class="n">start2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">stop2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="o">-</span> <span class="n">start2</span>
+        <span class="n">start2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">hoursecs</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">5</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">stop</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hourseconds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start2</span><span class="p">,</span> <span class="n">stop2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">m&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">stop</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dayseconds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start2</span><span class="p">,</span> <span class="n">stop2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">h&quot;</span> <span class="o">%</span> <span class="n">i2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start2</span><span class="p">,</span> <span class="n">stop2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">i2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">24</span><span class="p">))</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">d&quot;</span> <span class="o">%</span> <span class="n">i2</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">getTimeStamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getTimeStamp"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getTimeStamp">[docs]</a>        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getEpochAgo</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">timestamp</span>
+
+    <span class="k">def</span> <span class="nf">getInfo5MinFromTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getInfo5MinFromTo"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getInfo5MinFromTo">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        will not return more than 1 month of info</span>
+<span class="sd">        param:id id in dot noation e.g. &#39;water.white.level.sb&#39;</span>
+<span class="sd">        param:start epoch</span>
+<span class="sd">        param:stop epoch</span>
+<span class="sd">        result list with values</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHistoryObject</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">start2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
+        <span class="n">stop2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getTimeStamp</span><span class="p">(</span><span class="n">stop</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start2</span><span class="p">,</span> <span class="n">stop2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="p">:</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">getInfo1hFromTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getInfo1hFromTo"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getInfo1hFromTo">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        will not return more than 12 months of info, resolution = 1h</span>
+<span class="sd">        param:id id in dot noation e.g. &#39;water.white.level.sb&#39;</span>
+<span class="sd">        param:start epoch</span>
+<span class="sd">        param:stop epoch</span>
+<span class="sd">        result dict() </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">getInfo5Min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">epoch2human</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getInfo5Min"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getInfo5Min">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return raw info (resolution is 5min)</span>
+<span class="sd">        param:id id in dot noation e.g. &#39;water.white.level.sb&#39; (can be multiple use comma as separation)</span>
+<span class="sd">        param:start epoch; 0 means all</span>
+<span class="sd">        param:stop epoch; 0 means all</span>
+<span class="sd">        result list(list)  [[epoch,value],[epoch,value],...]</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHistoryObject</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">start2</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">stop</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">stop2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stop2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">get5MinuteId</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">stop2</span><span class="p">,</span> <span class="n">start2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">fiveMinuteIdToEpoch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">epoch2human</span><span class="p">:</span>
+                <span class="n">epoch</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">epoch2HRDateTime</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">epoch</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">month_5min</span><span class="p">[</span><span class="n">key</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">getInfo1h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span></div>
+<div class="viewcode-block" id="StatManager.getInfo1h"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.statmanager.html#JumpScale.baselib.statmanager.StatManager.StatManager.getInfo1h">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return raw info (resolution is 1h)</span>
+<span class="sd">        param:id id in dot noation e.g. &#39;water.white.level.sb&#39; (can be multiple use comma as separation)</span>
+<span class="sd">        param:start epoch; 0 means all</span>
+<span class="sd">        param:stop epoch; 0 means all</span>
+<span class="sd">        result list(list) </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

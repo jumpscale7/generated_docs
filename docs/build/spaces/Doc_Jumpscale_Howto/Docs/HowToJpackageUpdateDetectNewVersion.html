@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>how to detect during jpackage install that its a new version &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="How To Use JumpScale" href="index.html" />
+    <link rel="next" title="Rebuilding JPackages" href="HowToRebuildBunchJpackages.html" />
+    <link rel="prev" title="How To Us Java" href="HowToUseJava.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HowToRebuildBunchJpackages.html" title="Rebuilding JPackages"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="HowToUseJava.html" title="How To Us Java"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How To Use JumpScale</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-detect-during-jpackage-install-that-its-a-new-version">
+<h1>how to detect during jpackage install that its a new version<a class="headerlink" href="#how-to-detect-during-jpackage-install-that-its-a-new-version" title="Permalink to this headline">¶</a></h1>
+<p><em>&#64;TODO could be is no longer working, needs to be verified</em></p>
+<ul class="simple">
+<li>in the active hrd of the jpackage put a version field e.g.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">elasticsearch</span><span class="o">.</span><span class="n">version</span><span class="o">=</span><span class="mf">0.9</span><span class="o">.</span><span class="mi">9</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>when the jpackage is in prepare step, the active hrd will not be applied yet to the installed version</li>
+<li>so if we check for version in the prepare action we can see the installed version is different.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;elasticsearch.version&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;elasticsearch.version&quot;</span><span class="p">)</span><span class="o">&lt;&gt;</span><span class="s">&quot;0.9.9&quot;</span><span class="p">:</span>
+    <span class="c">#we are updating</span>
+    <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;do you want to remove the old database of elasticsearch, this is required for this version.&quot;</span><span class="p">)</span>
+    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="s">&quot;/opt/data/elasticsearch/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will make sure that if the version does not exist yet or its different that we can do something</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="HowToUseJava.html"
+                        title="previous chapter">How To Us Java</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="HowToRebuildBunchJpackages.html"
+                        title="next chapter">Rebuilding JPackages</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Howto/Docs/HowToJpackageUpdateDetectNewVersion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HowToRebuildBunchJpackages.html" title="Rebuilding JPackages"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="HowToUseJava.html" title="How To Us Java"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >How To Use JumpScale</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

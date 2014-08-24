@@ -1,0 +1,840 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.expect.Expect &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.expect.Expect</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="n">PIPE</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span>
+
+<span class="k">if</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">mswindows</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">win32file</span> <span class="kn">import</span> <span class="n">ReadFile</span><span class="p">,</span> <span class="n">WriteFile</span>
+    <span class="kn">from</span> <span class="nn">win32pipe</span> <span class="kn">import</span> <span class="n">PeekNamedPipe</span>
+    <span class="kn">import</span> <span class="nn">msvcrt</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">select</span>
+    <span class="kn">import</span> <span class="nn">fcntl</span>
+    
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;linux&#39;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pxssh</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c">#We want this to go to stderr, otherwise applications relying on stdout</span>
+        <span class="c">#output (build command generator scripts) are pretty busted.</span>
+        <span class="c">#print &gt;&gt; sys.stderr, &quot;Module pxssh not found...Wont be able to ssh on linux!!!&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;cannot find pxssh&quot;</span>
+        <span class="k">pass</span>
+    
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;sun&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;linux&#39;</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pexpect</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;did not find pexpect&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;python-pexpect&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Popen</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">):</span>
+<div class="viewcode-block" id="Popen"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen">[docs]</a>    <span class="k">def</span> <span class="nf">recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Popen.recv"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen.recv">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv</span><span class="p">(</span><span class="s">&#39;stdout&#39;</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">recv_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Popen.recv_err"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen.recv_err">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recv</span><span class="p">(</span><span class="s">&#39;stderr&#39;</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">send_recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">maxsize</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Popen.send_recv"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen.send_recv">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">input</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">maxsize</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">recv_err</span><span class="p">(</span><span class="n">maxsize</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_conn_maxsize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Popen.get_conn_maxsize"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen.get_conn_maxsize">[docs]</a>        <span class="k">if</span> <span class="n">maxsize</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1024</span>
+        <span class="k">elif</span> <span class="n">maxsize</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">maxsize</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">),</span> <span class="n">maxsize</span>
+
+    <span class="k">def</span> <span class="nf">_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">):</span></div>
+        <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">mswindows</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">msvcrt</span><span class="o">.</span><span class="n">get_osfhandle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+                <span class="p">(</span><span class="n">errCode</span><span class="p">,</span> <span class="n">written</span><span class="p">)</span> <span class="o">=</span> <span class="n">WriteFile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;close stdin&quot;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="s">&#39;stdin&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">pywintypes</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">),</span> <span class="n">why</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">why</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">109</span><span class="p">,</span> <span class="n">errno</span><span class="o">.</span><span class="n">ESHUTDOWN</span><span class="p">):</span>
+                    <span class="k">print</span> <span class="s">&quot;close stdin&quot;</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="s">&#39;stdin&#39;</span><span class="p">)</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">written</span>
+
+        <span class="k">def</span> <span class="nf">_recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">):</span>
+            <span class="n">conn</span><span class="p">,</span> <span class="n">maxsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_conn_maxsize</span><span class="p">(</span><span class="n">which</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">conn</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">msvcrt</span><span class="o">.</span><span class="n">get_osfhandle</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+                <span class="p">(</span><span class="n">read</span><span class="p">,</span> <span class="n">nAvail</span><span class="p">,</span> <span class="n">nMessage</span><span class="p">)</span> <span class="o">=</span> <span class="n">PeekNamedPipe</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">maxsize</span> <span class="o">&lt;</span> <span class="n">nAvail</span><span class="p">:</span>
+                    <span class="n">nAvail</span> <span class="o">=</span> <span class="n">maxsize</span>
+                <span class="k">if</span> <span class="n">nAvail</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="p">(</span><span class="n">errCode</span><span class="p">,</span> <span class="n">read</span><span class="p">)</span> <span class="o">=</span> <span class="n">ReadFile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nAvail</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="n">which</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">pywintypes</span><span class="o">.</span><span class="n">error</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">),</span> <span class="n">why</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">why</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">109</span><span class="p">,</span> <span class="n">errno</span><span class="o">.</span><span class="n">ESHUTDOWN</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="n">which</span><span class="p">)</span>
+                <span class="k">raise</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">universal_newlines</span><span class="p">:</span>
+                <span class="n">read</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_newlines</span><span class="p">(</span><span class="n">read</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">read</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="Popen.send"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Popen.send">[docs]</a>            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">stdin</span><span class="p">],</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">written</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="nb">input</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">why</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">why</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EPIPE</span><span class="p">:</span> <span class="c">#broken pipe</span>
+                    <span class="k">print</span> <span class="s">&quot;close stdin&quot;</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="s">&#39;stdin&#39;</span><span class="p">)</span>
+                <span class="k">raise</span>
+
+            <span class="k">return</span> <span class="n">written</span>
+
+        <span class="k">def</span> <span class="nf">_recv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">):</span></div>
+            <span class="n">conn</span><span class="p">,</span> <span class="n">maxsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_conn_maxsize</span><span class="p">(</span><span class="n">which</span><span class="p">,</span> <span class="n">maxsize</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">conn</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+
+            <span class="n">flags</span> <span class="o">=</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">fcntl</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">F_GETFL</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                <span class="n">fcntl</span><span class="o">.</span><span class="n">fcntl</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flags</span><span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_NONBLOCK</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">conn</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="s">&#39;&#39;</span>
+
+                <span class="n">r</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">maxsize</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_close</span><span class="p">(</span><span class="n">which</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">universal_newlines</span><span class="p">:</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_newlines</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">r</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">conn</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                    <span class="n">fcntl</span><span class="o">.</span><span class="n">fcntl</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ExpectTool</span><span class="p">:</span></div>
+<div class="viewcode-block" id="ExpectTool"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.ExpectTool">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ExpectTool.new"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.ExpectTool.new">[docs]</a>	<span class="sd">&#39;&#39;&#39;Create a new Expect session</span>
+<span class="sd">	</span>
+<span class="sd">	@param cmd: Command to execute</span>
+<span class="sd">	@type cmd: string</span>
+<span class="sd">	</span>
+<span class="sd">	@returns: Expect session</span>
+<span class="sd">	@rtype jumpscale.cmdline.Expect.Expect</span>
+<span class="sd">	&#39;&#39;&#39;</span>	
+	<span class="k">return</span> <span class="n">Expect</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+	
+
+<span class="k">class</span> <span class="nc">Expect</span><span class="p">:</span></div></div>
+<div class="viewcode-block" id="Expect"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect">[docs]</a>    <span class="n">_p</span><span class="o">=</span><span class="bp">None</span>      <span class="c">#popen process</span>
+    <span class="n">error</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">_lastsend</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+    <span class="n">_ignoreStdError</span><span class="o">=</span><span class="bp">False</span>
+    <span class="n">_ignoreLineFilter</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">_lastOutput</span><span class="o">=</span><span class="s">&quot;&quot;</span>  <span class="c">#stdOut from last send</span>
+    <span class="n">_lastError</span><span class="o">=</span><span class="s">&quot;&quot;</span>   <span class="c">#stdError from last send</span>
+    <span class="n">_cleanStringEnabled</span><span class="o">=</span><span class="bp">True</span> <span class="c">#if True every output will be cleaned from ansi codes</span>
+    <span class="n">_timeout</span><span class="o">=</span><span class="bp">False</span> <span class="c">#if true a send&amp;wait statement has timed out</span>
+    <span class="n">_waitTokens</span><span class="o">=</span><span class="p">[]</span> <span class="c">#list of tokens where we wait on when executing</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cmd</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addConsoleLogCategory</span><span class="p">(</span><span class="s">&quot;expect&quot;</span><span class="p">)</span>
+        <span class="n">PIPE</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prompt</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd</span><span class="o">==</span><span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;win&#39;</span><span class="p">):</span>
+                <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;cmd&#39;</span>
+            <span class="k">if</span> <span class="n">cmd</span><span class="o">==</span><span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;win&#39;</span><span class="p">):</span>
+                <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;sh&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pxssh</span> <span class="o">=</span> <span class="n">pxssh</span><span class="o">.</span><span class="n">pxssh</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">cmd</span> <span class="ow">and</span> <span class="n">cmd</span> <span class="o">!=</span> <span class="s">&#39;ssh&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;win&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span> <span class="o">=</span> <span class="n">pexpect</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cmd</span><span class="o">==</span><span class="s">&quot;sh&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setPrompt</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">enableCleanString</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.log"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.log">[docs]</a>        <span class="n">category</span><span class="o">=</span><span class="s">&quot;expect.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">category</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>            
+
+    <span class="k">def</span> <span class="nf">enableCleanString</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.enableCleanString"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.enableCleanString">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All output will be cleaned from ANSI code and other unwanted garbage</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanStringEnabled</span><span class="o">=</span><span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">disableCleanString</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.disableCleanString"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.disableCleanString">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable output cleaning, e.g. stripping ANSI code</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanStringEnabled</span><span class="o">=</span><span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">_add2lastOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="o">+</span><span class="nb">str</span>
+
+    <span class="k">def</span> <span class="nf">_add2lastError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastError</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastError</span><span class="o">+</span><span class="nb">str</span>
+
+    <span class="k">def</span> <span class="nf">setIgnoreStdError</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.setIgnoreStdError"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.setIgnoreStdError">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disable display of stderr error messages to the standard output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ignoreStdError</span><span class="o">=</span><span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">unsetIgnoreStdError</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.unsetIgnoreStdError"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.unsetIgnoreStdError">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enable display error output (stderr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ignoreStdError</span><span class="o">=</span><span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">addIgnoreLineFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">filter</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.addIgnoreLineFilter"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.addIgnoreLineFilter">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a filter on output lines. Lines matching the provided filter will not be displayed on stdout or stderr.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ignoreLineFilter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addWaitToken</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">token</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.addWaitToken"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.addWaitToken">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a token that we will wait for when using C{self.wait()}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_waitTokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">resetWaitTokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">token</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.resetWaitTokens"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.resetWaitTokens">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove all tokens we&#39;d wait for in self.wait()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_waitTokens</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">clearReceive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.clearReceive"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.clearReceive">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastError</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">remote</span><span class="p">,</span><span class="n">passwd</span><span class="p">,</span><span class="n">seedpasswd</span><span class="p">,</span><span class="n">initial</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.login"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.login">[docs]</a>        <span class="c">#login over ssh</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;ssh root@</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">remote</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">initial</span><span class="p">:</span>            
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;continue connecting&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;yes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        
+        <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;password:&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+      
+        <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;did not see passwd&quot;</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;continue connecting&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;saw confirmation ssh key&quot;</span>
+                <span class="k">print</span> <span class="s">&quot;send yes for ssh key&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;yes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;password:&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not login with std passwd nor with seedpasswd, did not get passwd str&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="o">&lt;&gt;</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+            <span class="c">#we saw passwd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>            
+            <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;Permission denied&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">result</span><span class="o">&lt;&gt;</span><span class="s">&quot;E&quot;</span> <span class="ow">and</span> <span class="n">seedpasswd</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&quot;permission denied, will try to use seedpasswd&quot;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">seedpasswd</span><span class="p">)</span>
+                    <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not login with std passwd nor with seedpasswd&quot;</span><span class="p">)</span>
+                    <span class="k">print</span> <span class="s">&quot;seedpasswd worked&quot;</span>
+
+                    <span class="k">print</span> <span class="s">&quot;change passwd&quot;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;passwd&quot;</span><span class="p">)</span>
+                    <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;password:&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;did not get passwd prompt.&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
+                    <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;password:&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;did not get passwd prompt.&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
+                    <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not change passwd&quot;</span><span class="p">)</span>    
+                    <span class="k">return</span> 
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not login did not see permission denied.&quot;</span><span class="p">)</span> 
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> 
+
+        <span class="k">if</span> <span class="n">result</span><span class="o">&lt;&gt;</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+            <span class="c">#we saw passwd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">passwd</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="s">&quot;E&quot;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not login&quot;</span><span class="p">)</span> 
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#did not see passwd again</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Did not see passwd request, could not login&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="c"># def login(self, ip, login, password, login_timeout=15):</span>
+    <span class="c">#     &quot;&quot;&quot;Log the user into the given server</span>
+
+    <span class="c">#     By default the prompt is rather optimistic and should be considered more of </span>
+    <span class="c">#     an example. It is better to try to match the prompt as exactly as possible to prevent</span>
+    <span class="c">#     any false matches by server strings such as a &quot;Message Of The Day&quot; or something. </span>
+
+    <span class="c">#     The closer you can make the original_prompt match your real prompt the better. </span>
+    <span class="c">#     A timeout causes not necessarily the login to fail.</span>
+
+    <span class="c">#     In case of a time out we assume that the prompt was so weird that we could not match  </span>
+    <span class="c">#     it. We still try to reset the prompt to something more unique. </span>
+        
+    <span class="c">#     If that still fails then we return False.</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     if not j.system.platformtype.isLinux():</span>
+    <span class="c">#         raise RuntimeError(&#39;pexpect/pxssh not supported on this platform&#39;)</span>
+
+    <span class="c">#     if not self._pxssh.login(ip, login, password, login_timeout=login_timeout):</span>
+    <span class="c">#         raise ValueError(&#39;Could not connect to %s, check either login/password are not correct or host is not reacheable over SSH.&#39;%ip)</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         j.logger.log(&#39;SSH %s@%s session login successful&#39; % (login, ip), 6)</span>
+
+    <span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.logout"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.logout">[docs]</a>        <span class="sd">&quot;&quot;&quot;This sends exit. If there are stopped jobs then this sends exit twice.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&#39;logout&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.receive"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.receive">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive standard out, stderror if available</span>
+<span class="sd">        return stdout,stderror</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">():</span>
+            <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receiveOut</span><span class="p">()</span>
+            <span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receiveError</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">out</span><span class="p">,</span><span class="n">err</span>        
+
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isUnix</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="p">:</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">match</span><span class="p">:</span>
+                <span class="c"># out=&#39;%s%s&#39;%(self.pexpect.after, self.pexpect.buffer)</span>
+                <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">before</span>
+                <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleanStr</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">out</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">before</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">before</span>                
+                <span class="n">before</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleanStr</span><span class="p">(</span><span class="n">before</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">before</span><span class="p">),</span><span class="s">&quot;&quot;</span>
+
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pxssh</span><span class="p">)</span><span class="o">.</span><span class="n">before</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+
+
+        <span class="n">o</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseBug</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;should never come here, unsupported platform&quot;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;expect.receive&quot;</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">receivePrint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.receivePrint"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.receivePrint">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive data from stdout and stderr and displays them</span>
+<span class="sd">        This function also remembers this information for later usage in the </span>
+<span class="sd">        classes C{_out} &amp; C{_error}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span><span class="p">,</span><span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="k">print</span> <span class="n">out</span>
+        <span class="k">if</span> <span class="n">err</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;ERROR:&quot;</span>
+            <span class="k">print</span> <span class="n">err</span>
+
+
+    <span class="k">def</span> <span class="nf">_receiveOut</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">#windows only</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive standard out and return. This information is stored for later usage </span>
+<span class="sd">        in the class C{_out}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_receive</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cleanStringEnabled</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleanStr</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add2lastOutput</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;stdout:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">out</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+        <span class="c">#@todo P2 not right,can never work, needs to check if expect or popen or, ...</span>
+
+    <span class="k">def</span> <span class="nf">_receiveError</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">#windows only</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receive standard error and return. This information is stored for later usage </span>
+<span class="sd">        in the class C{_error}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_receive</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cleanStringEnabled</span><span class="p">:</span>
+            <span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cleanStr</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add2lastError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">err</span>
+
+        <span class="c">#@todo P2 not right,can never work, needs to check if expect or popen or, ... </span>
+
+    <span class="k">def</span> <span class="nf">pprint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.pprint"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.pprint">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print the result of all send &amp; receive operations till now on local C{stdout}. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ignoreLinesBasedOnFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="p">)</span>
+        <span class="n">error</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastError</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">error</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/nerror:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">error</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+    <span class="c"># def _receive(self,checkError=False):</span>
+    <span class="c">#     #stdin=self._stdin</span>
+    <span class="c">#     #stdout=self._stdout</span>
+    <span class="c">#     t=.1</span>
+    <span class="c">#     e=1</span>
+    <span class="c">#     tr=5</span>
+    <span class="c">#     p=self._p</span>
+    <span class="c">#     if tr &lt; 1:</span>
+    <span class="c">#         tr = 1</span>
+    <span class="c">#     x = time.time()+t</span>
+    <span class="c">#     y = []</span>
+    <span class="c">#     r = &#39;&#39;</span>
+    <span class="c">#     pr = p.recv</span>
+    <span class="c">#     #check error</span>
+    <span class="c">#     if checkError:</span>
+    <span class="c">#         pr = p.recv_err</span>
+    <span class="c">#     while time.time() &lt; x or r:</span>
+    <span class="c">#         r = pr()</span>
+    <span class="c">#         if r is None:</span>
+    <span class="c">#             if e:</span>
+    <span class="c">#                 raise Exception(&quot;Exception occured&quot;)</span>
+    <span class="c">#             else:</span>
+    <span class="c">#                 break</span>
+    <span class="c">#         elif r:</span>
+    <span class="c">#             y.append(r)</span>
+    <span class="c">#         else:</span>
+    <span class="c">#             time.sleep(max((x-time.time())/tr, 0))</span>
+    <span class="c">#     returnval=&#39;&#39;.join(y)</span>
+    <span class="c">#     returnval=returnval.replace(&quot;\\n&quot;,&quot;\n&quot;)</span>
+    <span class="c">#     returnval=returnval.replace(&quot;\\r&quot;,&quot;\r&quot;)</span>
+    <span class="c">#     returnval=self._cleanStr(returnval)</span>
+    <span class="c">#     if returnval&lt;&gt;&quot;&quot; and checkError:</span>
+    <span class="c">#         self.error=True</span>
+    <span class="c">#     return returnval</span>
+
+    <span class="k">def</span> <span class="nf">_cleanStr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove most ANSI characters (screen emulation).</span>
+<span class="sd">        Remove double prompts (if used e.g. with remote ssh).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state</span><span class="o">=</span><span class="s">&quot;start&quot;</span>
+        <span class="c">#s=s.encode(&#39;ascii&#39;)</span>
+        <span class="n">strclean</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="c">#s=s.replace(unichr(27)+&quot;]0;&quot;,&quot;&quot;)</span>
+        <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_strRemovePromptSSHAnsi</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ansiCheckStart</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+                <span class="n">state</span><span class="o">=</span><span class="s">&quot;ignore&quot;</span>
+                <span class="n">teller</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">&lt;&gt;</span><span class="s">&quot;ignore&quot;</span><span class="p">:</span>
+                <span class="n">strclean</span><span class="o">=</span><span class="n">strclean</span><span class="o">+</span><span class="n">item</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">==</span><span class="s">&quot;ignore&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ansiCheckStop</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+                <span class="n">state</span><span class="o">=</span><span class="s">&quot;ok&quot;</span>
+        <span class="n">strclean</span><span class="o">=</span><span class="n">strclean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">+</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">strclean</span><span class="o">=</span><span class="n">strclean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">+</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">strclean</span><span class="o">=</span><span class="n">strclean</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strclean</span>
+
+    <span class="k">def</span> <span class="nf">_strRemovePromptSSHAnsi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">state</span><span class="o">=</span><span class="s">&quot;start&quot;</span>
+        <span class="n">strclean</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">t</span><span class="o">+</span><span class="mi">3</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="n">find</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">find</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">find</span><span class="o">==</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span><span class="o">+</span><span class="s">&quot;]0;&quot;</span><span class="p">:</span>
+                <span class="c">#found prompt</span>
+                <span class="n">state</span><span class="o">=</span><span class="s">&quot;ignore&quot;</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">&lt;&gt;</span><span class="s">&quot;ignore&quot;</span><span class="p">:</span>
+                <span class="n">strclean</span><span class="o">=</span><span class="n">strclean</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">==</span><span class="s">&quot;ignore&quot;</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==</span><span class="nb">unichr</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+                <span class="n">state</span><span class="o">=</span><span class="s">&quot;ok&quot;</span>
+        <span class="k">return</span> <span class="n">strclean</span>
+
+    <span class="k">def</span> <span class="nf">_ansiCheckStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">pattern</span><span class="o">=</span><span class="p">[</span><span class="mi">27</span><span class="p">]</span>
+        <span class="n">found</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">==</span><span class="n">item</span><span class="p">:</span>
+                <span class="n">found</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">return</span> <span class="n">found</span>
+
+    <span class="k">def</span> <span class="nf">_ansiCheckStop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">pattern</span><span class="o">=</span><span class="s">&quot;cnRhlL()HABCDfsurMHgKJipm&quot;</span>
+        <span class="n">found</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pattern</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">==</span><span class="nb">ord</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+                <span class="n">found</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">return</span> <span class="n">found</span>
+
+    <span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">newline</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.send"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.send">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Send a command to shell.</span>
+<span class="sd">        After sending a command, one of the receive functions must be called to </span>
+<span class="sd">        check for the result on C{stdout} or C{stderr}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;send: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;send&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastsend</span><span class="o">=</span><span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastError</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isUnix</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">newline</span><span class="p">:</span>
+                    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">():</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span>
+
+        <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_p</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">():</span>
+                <span class="n">sent</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">sent</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;ERROR: Data sent is none&quot;</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="nb">buffer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sent</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_pxssh</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c"># def read(self):</span>
+    <span class="c">#     o=self.pexpect.read_nonblocking()</span>
+    <span class="c">#     out=&quot;&quot;</span>
+    <span class="c">#     while o&lt;&gt;&quot;&quot;:</span>
+    <span class="c">#         print o,</span>
+    <span class="c">#         o=self.pexpect.read_nonblocking()</span>
+    <span class="c">#         out+=o</span>
+    <span class="c">#     return out</span>
+
+
+    <span class="k">def</span> <span class="nf">setPrompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">prompt</span><span class="o">=</span><span class="s">&quot;#.#.#&quot;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.setPrompt"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.setPrompt">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;PS1=&#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span><span class="o">%</span><span class="n">prompt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prompt</span><span class="o">=</span><span class="n">prompt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">executeSequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sequence</span><span class="p">,</span><span class="n">cmd</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.executeSequence"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.executeSequence">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        sequence=[[regex1,tosend,stepname,timeout],...]</span>
+<span class="sd">        timeout is optional, also stepname is optional</span>
+<span class="sd">        at end it waits for prompt</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="n">m</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+        <span class="n">nr</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+            <span class="n">nr</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">regex</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">tosend</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">stepname</span><span class="o">=</span><span class="n">nr</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">regex</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">tosend</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">stepname</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+                <span class="n">regex</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">tosend</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">stepname</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>                
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Error in syntax sequence,</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">sequence</span><span class="p">)</span>
+            
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">([</span><span class="n">regex</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt</span><span class="p">],</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">nr</span><span class="o">==</span><span class="n">m</span><span class="p">:</span>
+                <span class="n">o</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">o</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">STEP: </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span><span class="n">stepname</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">o</span>
+                <span class="k">print</span> <span class="n">o</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">tosend</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">result</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Timeout in execution of sequence.</span><span class="se">\n</span><span class="s">Error:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Error in execution of sequence.</span><span class="se">\n</span><span class="s">Error:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">o</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">prompt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.prompt"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.prompt">[docs]</a>        <span class="sd">&quot;&quot;&quot;Expect the prompt. </span>
+<span class="sd">        </span>
+<span class="sd">        Return C{True} if the prompt was matched.</span>
+<span class="sd">        Returns C{False} if there was a time out.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_removeFirstLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span></div>
+        <span class="n">lines</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="n">linenr</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">cleanstr</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">linenr</span><span class="o">=</span><span class="n">linenr</span><span class="o">+</span><span class="mi">1</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">linenr</span><span class="o">&lt;&gt;</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">cleanstr</span><span class="o">=</span><span class="n">cleanstr</span><span class="o">+</span><span class="n">line</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="n">cleanstr</span>
+
+    <span class="k">def</span> <span class="nf">execShellCmd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.execShellCmd"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.execShellCmd">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        execute a command and wait on the prompt</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prompt</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">,</span><span class="n">err</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>        
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.do"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.do">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function is a combination of the functions C{send}, C{receive} and C{print}.</span>
+
+<span class="sd">        The first line is also removed (this is the echo from what has been sent).</span>
+<span class="sd">        Use this if you quickly want to execute something from the command line.</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_removeFirstLine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastOutput</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+
+    <span class="c">#def waitTillEnd(self):</span>
+    <span class="c">#    &quot;&quot;&quot;</span>
+    <span class="c">#    @todo not clear what it does anw why needed</span>
+    <span class="c">#    &quot;&quot;&quot;</span>
+    <span class="c">#    self._p.wait()</span>
+
+    <span class="k">def</span> <span class="nf">_checkForTokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span></div>
+        <span class="k">if</span> <span class="n">text</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">tokens</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_waitTokens</span>
+        <span class="n">tokennr</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+            <span class="c">#j.logger.log(&quot;checktoken %s : %s&quot; % (token,text))</span>
+            <span class="n">tokennr</span><span class="o">=</span><span class="n">tokennr</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="c">#token found</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Found token:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">token</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">tokennr</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">_ignoreLinesBasedOnFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="n">lines</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="n">returnstr</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">foundmatch</span><span class="o">=</span><span class="bp">False</span>
+            <span class="k">for</span> <span class="nb">filter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignoreLineFilter</span><span class="p">:</span>
+                <span class="c">#print line</span>
+                <span class="c">#print filter</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Found ignore line:</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">filter</span><span class="p">,</span><span class="n">line</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span>
+                    <span class="n">foundmatch</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">if</span> <span class="n">foundmatch</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="n">returnstr</span><span class="o">=</span><span class="n">returnstr</span><span class="o">+</span><span class="n">line</span><span class="o">+</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="n">returnstr</span>
+
+    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timeoutval</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="viewcode-block" id="Expect.wait"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.wait">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wait until we detect tokens (see L{addWaitToken})</span>
+
+<span class="sd">        @param timeoutval: time in seconds we maximum will wait</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;wait: </span><span class="si">%s</span><span class="s"> sec&quot;</span> <span class="o">%</span> <span class="n">timeoutval</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;wait&quot;</span><span class="p">)</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="bp">False</span>
+        <span class="n">starttime</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="n">r</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="c">#full return</span>
+        <span class="n">returnpart</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="c">#one time return after receive</span>
+        <span class="n">done</span><span class="o">=</span><span class="bp">False</span> <span class="c">#status param</span>
+        <span class="n">tokenfound</span><span class="o">=</span><span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">timeout</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">done</span><span class="o">==</span><span class="bp">False</span><span class="p">):</span>
+            <span class="n">returnpart</span><span class="p">,</span><span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+            <span class="k">print</span> <span class="n">returnpart</span>
+            <span class="n">tokenfound</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_checkForTokens</span><span class="p">(</span><span class="n">returnpart</span><span class="p">)</span>
+            <span class="c">#j.logger.log(&quot;tokenfound:%s&quot;%tokenfound)</span>
+            <span class="n">returnpart</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ignoreLinesBasedOnFilter</span><span class="p">(</span><span class="n">returnpart</span><span class="p">)</span>
+            <span class="n">r</span><span class="o">=</span> <span class="n">r</span><span class="o">+</span><span class="n">returnpart</span>
+            <span class="n">curtime</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;TimeoutCheck on waitreceive: </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">curtime</span><span class="p">,</span><span class="n">starttime</span><span class="p">,</span><span class="n">timeoutval</span><span class="p">),</span><span class="mi">8</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">curtime</span><span class="o">-</span><span class="n">starttime</span><span class="o">&gt;</span><span class="n">timeoutval</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;WARNING: execute </span><span class="si">%s</span><span class="s"> timed out (timeout was </span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lastsend</span><span class="p">,</span><span class="n">timeoutval</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">if</span> <span class="n">tokenfound</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">done</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">out</span><span class="p">,</span><span class="n">err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">+</span><span class="n">out</span>
+        <span class="k">if</span> <span class="n">timeout</span><span class="p">:</span>
+            <span class="n">r</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">return</span> <span class="n">tokenfound</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">timeout</span>
+    
+    <span class="k">def</span> <span class="nf">expect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outputToExpect</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Expect.expect"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.expect.html#JumpScale.baselib.expect.Expect.Expect.expect">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pexpect expect method wrapper</span>
+<span class="sd">        usage: Excuting a command that expects user input, this method can be used to </span>
+<span class="sd">        expect the question asked then send the answer</span>
+<span class="sd">        Example:</span>
+<span class="sd">        Expect = j.tools.expect.new(&#39;passwd&#39;)</span>
+<span class="sd">        if Expect.expect(&#39;Enter new&#39;):</span>
+<span class="sd">            Expect.send(&#39;newPasswd&#39;)</span>
+<span class="sd">            </span>
+<span class="sd">            if Expect.expect(&#39;Retype new&#39;):</span>
+<span class="sd">                Expect.send(&#39;anotherPasswd&#39;)</span>
+<span class="sd">                </span>
+<span class="sd">                if Expect.expect(&#39;passwords do not match&#39;):</span>
+<span class="sd">                    j.console.echo(Expect.receive())</span>
+<span class="sd">        else:</span>
+<span class="sd">            j.console.echo(Expect.receive())</span>
+<span class="sd">        </span>
+<span class="sd">        @return &#39;E&#39; when error</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Expect </span><span class="si">%s</span><span class="s"> &#39;</span><span class="o">%</span><span class="n">outputToExpect</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pexpect</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">outputToExpect</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">msg</span><span class="o">=</span><span class="s">&#39;Failed to expect </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">, found </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s"> instead&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">outputToExpect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">receive</span><span class="p">())</span>
+            <span class="c"># print msg</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;E&quot;</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

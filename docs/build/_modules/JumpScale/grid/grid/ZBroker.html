@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.grid.ZBroker &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.grid.ZBroker</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c"># Paranoid Pirate queue</span>
+<span class="c">#</span>
+<span class="c">#   Author: Daniel Lundin &lt;dln(at)eintr(dot)org&gt;</span>
+<span class="c">#   Author: Kristof Incubaid BVBA Belgium</span>
+<span class="c">#</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="kn">import</span> <span class="nn">zmq.green</span> <span class="kn">as</span> <span class="nn">zmq</span>
+<span class="c"># from ZDataProcessor import ZDataProcessor</span>
+<span class="kn">from</span> <span class="nn">..gevent.GeventLoop</span> <span class="kn">import</span> <span class="n">GeventLoop</span>
+
+<span class="kn">from</span> <span class="nn">BrokerMainActions</span> <span class="kn">import</span> <span class="n">BrokerMainActions</span>
+
+<span class="kn">from</span> <span class="nn">..zdaemon.ZDaemon</span> <span class="kn">import</span> <span class="n">ZDaemon</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.grid</span>
+
+<span class="n">ujson</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">getSerializerType</span><span class="p">(</span><span class="s">&#39;j&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ZBroker"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.ZBroker.ZBroker">[docs]</a><span class="k">class</span> <span class="nc">ZBroker</span><span class="p">(</span><span class="n">ZDaemon</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ZDaemon</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">broker</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c"># key = worker.id = process.id (process id of worker which is unique) also called workerid, value is the set of roles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">role2workers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activeJobs</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">addCMDsInterface</span><span class="p">(</span><span class="n">BrokerMainActions</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&#39;broker&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">HEARTBEAT_LIVENESS</span> <span class="o">=</span> <span class="mi">3</span>     <span class="c"># 3..5 is reasonable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">HEARTBEAT_INTERVAL</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c"># Seconds</span>
+
+        <span class="c">#  Paranoid Pirate Protocol constants</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PPP_READY</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\x01</span><span class="s">&quot;</span>      <span class="c"># Signals worker is ready</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PPP_HEARTBEAT</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\x02</span><span class="s">&quot;</span>  <span class="c"># Signals worker heartbeat</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">frontend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">ROUTER</span><span class="p">)</span>  <span class="c"># ROUTER</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">ROUTER</span><span class="p">)</span>  <span class="c"># ROUTER</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;tcp://*:5651&quot;</span><span class="p">)</span>  <span class="c"># For clients</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s">&quot;tcp://*:5650&quot;</span><span class="p">)</span>  <span class="c"># For workers</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_workers</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Poller</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_workers</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_both</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Poller</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_both</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_both</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_at</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEARTBEAT_INTERVAL</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find grid id at j.core.grid.id, means grid not configured?&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ZBroker.registerRole4NewWorker"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.ZBroker.ZBroker.registerRole4NewWorker">[docs]</a>    <span class="k">def</span> <span class="nf">registerRole4NewWorker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">workerid</span><span class="p">,</span> <span class="n">rolestr</span><span class="p">):</span>
+        <span class="n">rolestr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rolestr</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rolestr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">role2workers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">role2workers</span><span class="p">[</span><span class="n">rolestr</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">rolestr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span><span class="p">[</span><span class="n">rolestr</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">role2workers</span><span class="p">[</span><span class="n">rolestr</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">workerid</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span><span class="p">[</span><span class="n">rolestr</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">workerid</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="ZBroker.hasWorkers"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.ZBroker.ZBroker.hasWorkers">[docs]</a>    <span class="k">def</span> <span class="nf">hasWorkers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span> <span class="o">!=</span> <span class="p">{}</span>
+</div>
+<div class="viewcode-block" id="ZBroker.start"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.ZBroker.ZBroker.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">consoleloglevel</span> <span class="o">=</span> <span class="mi">7</span>
+
+        <span class="n">port</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;osis.port&quot;</span><span class="p">)</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;osis.ip&quot;</span><span class="p">)</span>
+        <span class="n">nsid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;grid.broker.id&quot;</span><span class="p">)</span>
+
+        <span class="n">osisclient</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s">&#39;root&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nsid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nsname</span><span class="p">,</span> <span class="n">nsid</span> <span class="o">=</span> <span class="n">osisclient</span><span class="o">.</span><span class="n">createNamespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;broker_&quot;</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s">&quot;coreobjects&quot;</span><span class="p">,</span> <span class="n">incrementName</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;grid.broker.id&quot;</span><span class="p">,</span> <span class="n">nsid</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">osisclient</span><span class="o">.</span><span class="n">existsNamespace</span><span class="p">(</span><span class="s">&quot;broker_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nsid</span><span class="p">):</span>
+                <span class="c"># namespace does not exist yet on server</span>
+                <span class="n">nsname</span><span class="p">,</span> <span class="n">nsid</span> <span class="o">=</span> <span class="n">osisclient</span><span class="o">.</span><span class="n">createNamespace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;broker_&quot;</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s">&quot;coreobjects&quot;</span><span class="p">,</span> <span class="n">incrementName</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nsid</span><span class="o">=</span><span class="n">nsid</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;grid.broker.id&quot;</span><span class="p">,</span> <span class="n">nsid</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">nsid</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis_node</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="s">&quot;broker_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nsid</span><span class="p">,</span> <span class="s">&quot;node&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="c"># self.osis_job=j.core.osis.getClientForCategory(&quot;broker_%s&quot;%nsid,&quot;job&quot;,ip,port)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis_process</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="s">&quot;broker_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nsid</span><span class="p">,</span> <span class="s">&quot;process&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis_application</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="s">&quot;broker_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nsid</span><span class="p">,</span> <span class="s">&quot;applicationtype&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">osis_action</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="s">&quot;broker_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nsid</span><span class="p">,</span> <span class="s">&quot;action&quot;</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">broker</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>  <span class="c"># makes sure we dont connect over ip</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="s">&quot;cmdGreenlet&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdGreenlet</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">startClock</span><span class="p">()</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;broker started&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;grid.broker&quot;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="c"># if self.hasWorkers() &gt; 0:</span>
+            <span class="c">#     poller = self.poll_both</span>
+            <span class="c"># else:</span>
+            <span class="c">#     poller = self.poll_workers</span>
+
+            <span class="n">poller</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poll_both</span>
+
+            <span class="n">socks</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">poller</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mi">500000</span><span class="p">))</span>  <span class="c"># wait for 5 seconds</span>
+
+            <span class="c">#</span>
+            <span class="c"># Handle worker activity on backend</span>
+            <span class="k">if</span> <span class="n">socks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span> <span class="o">==</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">:</span>
+                <span class="c"># print &quot;activity on backend (workers)&quot;</span>
+
+                <span class="n">frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">recv_multipart</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">frames</span><span class="p">:</span>
+                    <span class="k">break</span>
+
+                <span class="c"># Validate control message, or return reply to client</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PPP_READY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PPP_HEARTBEAT</span><span class="p">):</span>
+                        <span class="k">print</span> <span class="s">&quot;E: Invalid message from worker: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">msg</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># print &quot;reply from worker:%s&quot;%msg</span>
+                    <span class="c"># msg here is what returns from worker</span>
+
+                    <span class="n">job</span> <span class="o">=</span> <span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+                    <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s">&quot;parent&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c"># msg[1]=ujson.dumps(job)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="o">.</span><span class="n">send_multipart</span><span class="p">([</span><span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c"># keep track of other parts which need to come</span>
+                        <span class="kn">from</span> <span class="nn">JumpScale.core.Shell</span> <span class="kn">import</span> <span class="n">ipshell</span>
+                        <span class="k">print</span> <span class="s">&quot;DEBUG NOW other parts&quot;</span>
+                        <span class="n">ipshell</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s">&quot;state&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;ok&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">activeJobs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s">&quot;guid&quot;</span><span class="p">])</span>
+
+                <span class="c"># Send heartbeats to idle workers if it&#39;s time</span>
+                <span class="c"># print str(self.now) + &quot; &quot; + str(self.heartbeat_at)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_at</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">workerid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">workerid</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">PPP_HEARTBEAT</span><span class="p">]</span>
+                        <span class="c"># print &quot;send heartbeat to %s&quot;%worker.guid</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">send_multipart</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">heartbeat_at</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">now</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEARTBEAT_INTERVAL</span>
+
+            <span class="c">#</span>
+            <span class="c"># receive job from client</span>
+            <span class="k">if</span> <span class="n">socks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="p">)</span> <span class="o">==</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">:</span>
+                <span class="c"># print &quot;activity on frontend (client)&quot;</span>
+                <span class="n">frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="o">.</span><span class="n">recv_multipart</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">frames</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c"># is serialized job</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">job</span> <span class="o">=</span> <span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not decode msg,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">processJob</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">client</span><span class="o">=</span><span class="n">frames</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="ZBroker.processJob"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.ZBroker.ZBroker.processJob">[docs]</a>    <span class="k">def</span> <span class="nf">processJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
+
+        <span class="n">role</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s">&quot;executorrole&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s">&quot;*&quot;</span><span class="p">:</span>
+            <span class="n">workers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">role</span><span class="p">):</span>
+                <span class="n">workers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">role2workersAvailable</span><span class="p">[</span><span class="n">role</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">workers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">worker</span> <span class="o">=</span> <span class="n">workers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c"># could not find workers to execute jog</span>
+            <span class="n">job</span><span class="p">[</span><span class="s">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;workernotfound&quot;</span>
+            <span class="n">job</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;could not find worker to execute work, no workers known which comply to role&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frontend</span><span class="o">.</span><span class="n">send_multipart</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">client</span><span class="p">),</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">job</span><span class="p">)])</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">workerid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateRandomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">worker</span> <span class="o">=</span> <span class="n">workers</span><span class="p">[</span><span class="n">workerid</span><span class="p">]</span>
+
+        <span class="n">job</span><span class="p">[</span><span class="s">&quot;wpid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">worker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activeJobs</span><span class="p">[</span><span class="n">job</span><span class="p">[</span><span class="s">&quot;guid&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">job</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">send_multipart</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">worker</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">client</span><span class="p">),</span> <span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">job</span><span class="p">)])</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

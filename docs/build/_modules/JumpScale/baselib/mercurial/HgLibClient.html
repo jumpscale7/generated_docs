@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.mercurial.HgLibClient &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.mercurial.HgLibClient</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;Utility methods to work with hg repositories&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">,</span><span class="s">&quot;baselib&quot;</span><span class="p">,</span><span class="s">&quot;mercurial&quot;</span><span class="p">))</span>
+<span class="kn">import</span> <span class="nn">hglib</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.codetools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+        
+<div class="viewcode-block" id="HgLibClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient">[docs]</a><span class="k">class</span> <span class="nc">HgLibClient</span><span class="p">:</span>    
+
+    <span class="c"># _configs = [&#39;ui.merge=internal:merge&#39;]  @todo is this ok to remove? (kds)</span>
+    <span class="n">_configs</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hgbasedir</span><span class="p">,</span> <span class="n">remoteUrl</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">branchname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cleandir</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param base dir where local hgrepository will be stored</span>
+<span class="sd">        @param remote url of hg repository, can be empty if local repo is created</span>
+<span class="sd">        @branchname &quot;&quot; means is the tip, None means will try to fetch the branchname from the basedir</span>
+<span class="sd">        @param cleandir: If True, files in that directory will be deleted before doing clone (if it wasn&#39;t an mercurial) if set to False,</span>
+<span class="sd">                         an exception will be raised if directory has files, if None, the user will be asked interactively.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span> <span class="o">=</span> <span class="n">remoteUrl</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span> <span class="o">=</span> <span class="n">hgbasedir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span> <span class="o">=</span> <span class="n">branchname</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span> <span class="o">=</span> <span class="s">&#39;default&#39;</span>
+
+        <span class="k">if</span> <span class="n">remoteUrl</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;mercurial remoteurl:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">remoteUrl</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;config&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hgbasedir</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remoteUrl</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">))</span>\
+         <span class="ow">or</span> <span class="p">(</span><span class="n">branchname</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">branchname</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Input to hgclient need to be all strings&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isInitialized</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;.hg not found and remote url is not supplied&quot;</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isInitialized</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_clone</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c">#did not find the mercurial dir</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cleandir</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                        <span class="n">cleandir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Did find a directory but there was no mercurial metadata inside.</span><span class="se">\n\t</span><span class="s">dir: </span><span class="si">%s</span><span class="se">\n\t</span><span class="s">url:</span><span class="si">%s</span><span class="se">\n\t</span><span class="s">Is it ok to remove all files from the target destination before cloning the repository?&quot;</span>\
+                                                       <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">))</span>
+                        
+                <span class="k">if</span> <span class="n">cleandir</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_clone</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Could not clone </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">, target dir was not empty&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">))</span>
+            
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_clone</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">hglib</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">configs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_configs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getUrl</span><span class="p">()</span>
+            <span class="n">currentbranchname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getbranchname</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">branchname</span> <span class="ow">and</span> <span class="n">branchname</span> <span class="o">!=</span> <span class="n">currentbranchname</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">switchbranch</span><span class="p">(</span><span class="n">branchname</span><span class="p">)</span>
+                <span class="n">currentbranchname</span> <span class="o">=</span> <span class="n">branchname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span> <span class="o">=</span> <span class="n">currentbranchname</span>
+
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">reponame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">repokey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getRepoNameAndKey</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_getRepoNameAndKey</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span>
+
+        <span class="k">def</span> <span class="nf">getNameAndKeyFromPath</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
+            <span class="n">unique</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">unique</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">codeDir</span><span class="p">):</span>
+            <span class="n">subPath</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">codeDir</span><span class="p">):]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+            <span class="n">parts</span> <span class="o">=</span> <span class="n">subPath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">getNameAndKeyFromPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="n">user</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">parts</span>
+            <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">getNameAndKeyFromPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+       
+<div class="viewcode-block" id="HgLibClient.isInitialized"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.isInitialized">[docs]</a>    <span class="k">def</span> <span class="nf">isInitialized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="s">&quot;.hg&quot;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.patchHgIgnore"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.patchHgIgnore">[docs]</a>    <span class="k">def</span> <span class="nf">patchHgIgnore</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c">#create or update the hgignore file</span>
+        <span class="n">hgignore</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">.pyc$</span>
+<span class="s">.swp$</span>
+<span class="s">~$</span>
+<span class="s">.project</span>
+<span class="s">.pydevproject</span>
+<span class="s">_generatedcode/*</span>
+<span class="s">.metadata</span>
+<span class="s">syntax: regexp</span>
+<span class="s">.project</span>
+<span class="s">\._.*</span>
+<span class="s">/_remote/</span>
+<span class="s">.orig$</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="n">ignorefilepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="s">&quot;.hgignore&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ignorefilepath</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">ignorefilepath</span><span class="p">,</span><span class="n">hgignore</span><span class="p">)</span>
+            
+        <span class="k">elif</span>  <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">):</span>
+            <span class="c">#add items not in hgignore yet</span>
+            <span class="n">lines</span><span class="o">=</span><span class="n">hgignore</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="n">inn</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">ignorefilepath</span><span class="p">)</span>
+            <span class="n">linesExisting</span><span class="o">=</span><span class="n">inn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="n">linesout</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">linesExisting</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">linesout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">line</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">linesExisting</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">linesout</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">linesout</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">&lt;&gt;</span><span class="n">inn</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">ignorefilepath</span><span class="p">,</span><span class="n">out</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.isConnected"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.isConnected">[docs]</a>    <span class="k">def</span> <span class="nf">isConnected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">#??</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">outgoing</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    </div>
+<div class="viewcode-block" id="HgLibClient.verify"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.verify">[docs]</a>    <span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">def</span> <span class="nf">eh</span><span class="p">(</span><span class="n">exitcode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">exitcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">hglib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;verify&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">rawcommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">eh</span><span class="o">=</span><span class="n">eh</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">errors</span> <span class="ow">and</span> <span class="n">die</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;invalid repo, output verify: &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="HgLibClient.verifyfix"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.verifyfix">[docs]</a>    <span class="k">def</span> <span class="nf">verifyfix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        verify repo and try to fix</span>
+<span class="sd">        @return True if fixed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;mercurial verify </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="bp">False</span><span class="p">):</span>
+            <span class="n">msg</span><span class="o">=</span><span class="s">&quot;Mercurial directory on </span><span class="si">%s</span><span class="s"> is corrupt.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;/nDo you want to repair the situation by removing the corrupt directory and clone again?&quot;</span><span class="p">):</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">)</span>                  
+                    <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Mercurial directory on </span><span class="si">%s</span><span class="s"> is corrupt.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isConnected</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;Verified repo on </span><span class="si">%s</span><span class="s">, no issues found&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    </div>
+    <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">message</span><span class="o">=</span><span class="s">&quot;repo:</span><span class="si">%s</span><span class="s">  </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">mercurial</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_raise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>        
+        <span class="n">message</span><span class="o">=</span><span class="s">&quot;ERROR hgclient: </span><span class="si">%s</span><span class="se">\n</span><span class="s">Please fix the merurial local repo manually and restart failed mercurial action.</span><span class="se">\n</span><span class="s">Repo is </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="HgLibClient.pull"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.pull">[docs]</a>    <span class="k">def</span> <span class="nf">pull</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;pull </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="HgLibClient.isTrackingFile"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.isTrackingFile">[docs]</a>    <span class="k">def</span> <span class="nf">isTrackingFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;isTrackingFile of </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">status</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">file</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;?&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.getModifiedFiles"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getModifiedFiles">[docs]</a>    <span class="k">def</span> <span class="nf">getModifiedFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return array with changed files in repo</span>
+<span class="sd">        @return {&quot;added&quot;:added,&quot;missing&quot;:missing,&quot;modified&quot;:modified,&quot;ignored&quot;:ignored,&quot;removed&quot;:removed,&quot;nottracked&quot;:nottracked} is dict</span>
+<span class="sd">        remarks</span>
+<span class="sd">        - missing means, file referenced in mercurial local repo but no longer on filesystem (! in hg status) </span>
+<span class="sd">        - notracked mans, file is on filesystem but not in repo (?)</span>
+<span class="sd">        - removed means, mercurial repo knows file has been removed from filesystem (R)</span>
+<span class="sd">        - ignored, means hg has been instructed to ignore that file (I)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#@todo rewrite using self.client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;getChangedFiles of </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        
+        <span class="c"># first remove backup files as these confuse the system</span>
+        <span class="c"># If the system contains backup files raise an exception</span>
+        <span class="n">files</span>  <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">file</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;~&#39;</span><span class="p">:</span> <span class="c"># if backupfile</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_removeRedundantFiles</span><span class="p">()</span>
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+        <span class="n">modified</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">added</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">ignored</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">removed</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">missing</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">nottracked</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="n">code</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;!&quot;</span><span class="p">:</span>
+                <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;I&quot;</span><span class="p">:</span>
+                <span class="n">ignored</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;?&quot;</span><span class="p">:</span>
+                <span class="n">nottracked</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;M&quot;</span><span class="p">:</span>
+                <span class="n">modified</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;A&quot;</span><span class="p">:</span>
+                <span class="n">added</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="s">&quot;R&quot;</span><span class="p">:</span>
+                <span class="n">removed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>      
+        <span class="k">return</span> <span class="p">{</span><span class="s">&quot;added&quot;</span><span class="p">:</span><span class="n">added</span><span class="p">,</span><span class="s">&quot;missing&quot;</span><span class="p">:</span><span class="n">missing</span><span class="p">,</span><span class="s">&quot;modified&quot;</span><span class="p">:</span><span class="n">modified</span><span class="p">,</span><span class="s">&quot;ignored&quot;</span><span class="p">:</span><span class="n">ignored</span><span class="p">,</span><span class="s">&quot;removed&quot;</span><span class="p">:</span><span class="n">removed</span><span class="p">,</span><span class="s">&quot;nottracked&quot;</span><span class="p">:</span><span class="n">nottracked</span><span class="p">}</span>
+    </div>
+<div class="viewcode-block" id="HgLibClient.hasModifiedFiles"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.hasModifiedFiles">[docs]</a>    <span class="k">def</span> <span class="nf">hasModifiedFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getModifiedFiles</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>            
+            </div>
+<div class="viewcode-block" id="HgLibClient.updatemerge"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.updatemerge">[docs]</a>    <span class="k">def</span> <span class="nf">updatemerge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commitMessage</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">addRemoveUntrackedFiles</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pull</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;updatemerge </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbranch</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pull</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+        <span class="n">updateresult</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">die</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">addRemoveUntrackedFiles</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addRemoveInteractive</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">force</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commitInteractive</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">force</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c"># j.console.log(&quot;There was nothing to merge&quot;)</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;MERGE DONE: WILL COMMIT NOW.&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commitInteractive</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">force</span><span class="p">)</span>
+        <span class="n">updateresult</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">die</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">updateresult</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;BUG:update should not fail at this point, because all addedremoved, merged &amp; committed.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasModifiedFiles</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;BUG: there should be no uncommitted files at this point&quot;</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="HgLibClient.addRemoveInteractive"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.addRemoveInteractive">[docs]</a>    <span class="k">def</span> <span class="nf">addRemoveInteractive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">commitMessage</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="n">result</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getModifiedFiles</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+                <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="n">remove</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;ignored&quot;</span><span class="p">])</span>
+
+        <span class="n">addremove</span><span class="o">=</span><span class="bp">False</span>
+
+        <span class="c">#means files not added to repo</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;nottracked&quot;</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Found files not added yet to repo.&quot;</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;To Add: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;nottracked&quot;</span><span class="p">]]))</span>
+                <span class="n">add</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;Above files are not added yet to repo but on filesystem, is it ok to add these files (No will remove)?&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">add</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;remove the nontracked files.</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;Will Remove: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;nottracked&quot;</span><span class="p">]]))</span>
+                    <span class="n">sure</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;are you sure you want to remove above mentioned files.&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">sure</span><span class="p">:</span>
+                        <span class="n">remove</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;nottracked&quot;</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Please manually add your files and restart operation.&quot;</span><span class="p">)</span>
+                        <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>                        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">addremove</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">elif</span> <span class="n">force</span><span class="p">:</span>
+                <span class="n">addremove</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot addremove, did not force operation.&quot;</span><span class="p">)</span>
+
+        <span class="c">#means files are in repo but no longer on filesystem</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;missing&quot;</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Found files in repo which are no longer on filesystem, so probably deleted.&quot;</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;To remove from repo: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;missing&quot;</span><span class="p">]]))</span>
+                <span class="n">remove</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;Above files are in repo but no longer on filesystem, is it ok to delete these files from repo?&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">remove</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Please manually get your missing files back and restart operation.&quot;</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">force</span><span class="p">:</span>
+                <span class="n">addremove</span><span class="o">=</span><span class="bp">True</span>                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot addremove, did not force operation.&quot;</span><span class="p">)</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">addremove</span><span class="p">()</span> <span class="c">#does not commit yet</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">commitInteractive</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.commitInteractive"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.commitInteractive">[docs]</a>    <span class="k">def</span> <span class="nf">commitInteractive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">commitMessage</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+            
+        <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getModifiedFiles</span><span class="p">()</span>   
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;added&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;removed&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;modified&quot;</span><span class="p">]]):</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Found modified, added, deleted files not committed yet&quot;</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;Added:    </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;added&quot;</span><span class="p">]]))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;Removed:  </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;removed&quot;</span><span class="p">]]))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;Modified: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;modified&quot;</span><span class="p">]]))</span>                    
+                <span class="k">if</span> <span class="n">force</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Do you want to commit the files?&quot;</span><span class="p">):</span>
+                    <span class="n">commitMessage</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Do you want to ignore the changed files? The changes will be lost&quot;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Cannot update repo because uncommitted files in </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>        
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">force</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Cannot update repo because uncommitted files in </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="HgLibClient.update"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">rev</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;update </span><span class="si">%s</span><span class="s"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rev</span><span class="o">=</span><span class="n">rev</span><span class="p">,</span> <span class="n">clean</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">die</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+         </div>
+<div class="viewcode-block" id="HgLibClient.remove"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">paths</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        remove file(s) with path from local repo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mypaths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+            <span class="n">mypaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;remove file from local repo with path </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">mypaths</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">mypaths</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.merge"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commitMessage</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">commit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;merge &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbranch</span><span class="p">()</span>
+        <span class="c"># self._removeRedundantFiles()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasModifiedFiles</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Cannot merge </span><span class="si">%s</span><span class="s"> because there are untracked files.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+
+        <span class="n">heads</span><span class="o">=</span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span>  <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">heads</span><span class="p">()</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">branch</span><span class="o">==</span><span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heads</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c">#no need to merge</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">heads</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;BUG: there should always be at least 1 head with the expected branchname:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#need merge</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">merge</span><span class="p">()</span>
+                <span class="n">returncode</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+            <span class="k">except</span> <span class="n">hglib</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">CommandError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;merge </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">err</span>
+                <span class="n">returncode</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">ret</span>
+
+            <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;nothing to merge&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">out</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;has one head&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;Nothing to merge&quot;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;conflicts during merge&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;conflicts in merge&quot;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">returncode</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;cannot merge, cmd was hg merge in dir </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>            
+
+            <span class="k">if</span> <span class="n">commit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>
+                    </div>
+<div class="viewcode-block" id="HgLibClient.switchbranch"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.switchbranch">[docs]</a>    <span class="k">def</span> <span class="nf">switchbranch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">branchname</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;switchbranch </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">branchname</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getbranchname</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rev</span><span class="o">=</span><span class="n">branchname</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="HgLibClient.pullupdate"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.pullupdate">[docs]</a>    <span class="k">def</span> <span class="nf">pullupdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;pullupdate </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;pullupdate&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;clone </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;clone&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">hglib</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">,</span> <span class="n">configs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_configs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verify</span><span class="p">()</span>
+
+<div class="viewcode-block" id="HgLibClient.getbranchname"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getbranchname">[docs]</a>    <span class="k">def</span> <span class="nf">getbranchname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">branch</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.checkbranch"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.checkbranch">[docs]</a>    <span class="k">def</span> <span class="nf">checkbranch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if branch of client is consistent with branch found on local repo</span>
+<span class="sd">        will raise error if not ok</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getbranchname</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">:</span>
+                <span class="n">force</span><span class="o">=</span><span class="bp">False</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Branchnames conflict for repo, jshell mercurial client has branchname: </span><span class="si">%s</span><span class="s"> and branchname on filesystem: </span><span class="si">%s</span><span class="se">\n</span><span class="s">This might result in loosing code changes. </span><span class="se">\n</span><span class="s">Do you want to continue, this will pull &amp; update to the branch?&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">getbranchname</span><span class="p">())):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">pullupdate</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Branchnames conflict for repo, jshell mercurial client has branchname: </span><span class="si">%s</span><span class="s"> and branchname on filesystem: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">getbranchname</span><span class="p">()))</span>
+
+                </div>
+<div class="viewcode-block" id="HgLibClient.getbranches"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getbranches">[docs]</a>    <span class="k">def</span> <span class="nf">getbranches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">branches</span><span class="p">()]</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.getbranchmap"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getbranchmap">[docs]</a>    <span class="k">def</span> <span class="nf">getbranchmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">branches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">branches</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">branches</span><span class="p">}</span>
+        </div>
+<div class="viewcode-block" id="HgLibClient.isPushNeeded"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.isPushNeeded">[docs]</a>    <span class="k">def</span> <span class="nf">isPushNeeded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">outgoing</span><span class="p">())</span>
+    </div>
+<div class="viewcode-block" id="HgLibClient.status"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.status">[docs]</a>    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="HgLibClient.id"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.id">[docs]</a>    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">identify</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        </div>
+    <span class="n">identify</span> <span class="o">=</span> <span class="nb">id</span>
+
+<div class="viewcode-block" id="HgLibClient.incoming"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.incoming">[docs]</a>    <span class="k">def</span> <span class="nf">incoming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s">&quot;default&quot;</span><span class="p">):</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getConfigItem</span><span class="p">(</span><span class="s">&#39;paths&#39;</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise</span><span class="p">(</span><span class="s">&quot;Invalid source </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">source</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">incoming</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.commit"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.commit">[docs]</a>    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">addremove</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">checkStatus</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        commit changes to local repo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;commit </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assertCommitterInfo</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbranch</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;Nothing to commit, e.g. after a merge which had nothing to do.&quot;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">return</span> 
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&quot;give commit message:&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">message</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;need commit message&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;commit </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">addremove</span><span class="o">=</span><span class="n">addremove</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">message</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.addremove"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.addremove">[docs]</a>    <span class="k">def</span> <span class="nf">addremove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        addremove files and commit if commit message is given</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;addremove &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkbranch</span><span class="p">()</span>   
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;Nothing to addremove&quot;</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">return</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_removeRedundantFiles</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">addremove</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">message</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>        
+        </div>
+<div class="viewcode-block" id="HgLibClient.push"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.push">[docs]</a>    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">branch</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">newbranch</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;push </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">))</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getUrl</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">branch</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">newbranch</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">newbranch</span><span class="o">=</span><span class="n">newbranch</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">branch</span><span class="o">=</span><span class="n">branch</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">dest</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">newbranch</span><span class="o">=</span><span class="n">newbranch</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="HgLibClient.commitpush"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.commitpush">[docs]</a>    <span class="k">def</span> <span class="nf">commitpush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commitMessage</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ignorechanges</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">addRemoveUntrackedFiles</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">trymerge</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pull</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reponame is name under which we are going checkout in dir targetdir, if not specified same as name repository</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;commitpush </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">pull</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">updatemerge</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span> <span class="n">ignorechanges</span><span class="p">,</span>
+                    <span class="n">addRemoveUntrackedFiles</span><span class="p">,</span> <span class="n">trymerge</span><span class="p">,</span> <span class="n">pull</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>        
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Failed to update/merge/push </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>  <span class="c">#now try to pull first</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">updatemerge</span><span class="p">(</span><span class="n">commitMessage</span><span class="p">,</span> <span class="n">ignorechanges</span><span class="p">,</span>
+                    <span class="n">addRemoveUntrackedFiles</span><span class="p">,</span> <span class="n">trymerge</span><span class="p">,</span> <span class="n">pull</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>        
+</div>
+    <span class="k">def</span> <span class="nf">_removeRedundantFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;removeredundantfiles </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">))</span>
+        <span class="n">dirs2delete</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">&quot;.pyc&quot;</span> <span class="ow">or</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">&quot;.pyo&quot;</span> <span class="ow">or</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">&quot;.pyw&quot;</span> <span class="ow">or</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;~&quot;</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;/.cache&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;/.hg/&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">dirs2delete</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fswalker</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span><span class="n">process</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="bp">True</span><span class="p">,</span><span class="bp">True</span><span class="p">)</span> 
+        <span class="k">for</span> <span class="n">cachedir</span> <span class="ow">in</span> <span class="n">dirs2delete</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="n">cachedir</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HgLibClient.getConfigItem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getConfigItem">[docs]</a>    <span class="k">def</span> <span class="nf">getConfigItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.getUrl"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getUrl">[docs]</a>    <span class="k">def</span> <span class="nf">getUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getConfigItem</span><span class="p">(</span><span class="s">&#39;paths&#39;</span><span class="p">,</span> <span class="s">&#39;default&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="HgLibClient.log"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromdaysago</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fromdate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fromkey</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @fromdate needs to be in epoch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fromdaysago</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">datecmd</span><span class="o">=</span><span class="n">fromdaysago</span>
+        <span class="k">elif</span> <span class="n">fromdate</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">datecmd</span><span class="o">=</span><span class="n">fromdate</span>        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">datecmd</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+           
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datecmd</span><span class="p">,</span> <span class="n">revrange</span><span class="o">=</span><span class="n">fromkey</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="HgLibClient.getFileChangeNodes"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.getFileChangeNodes">[docs]</a>    <span class="k">def</span> <span class="nf">getFileChangeNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fromNode</span><span class="o">=</span><span class="s">&quot;-1&quot;</span><span class="p">,</span> <span class="n">toNode</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the commit hash of all commits that changed `path`.</span>
+
+<span class="sd">        @param path: path to look for, relative to the repository root</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        @param fromNode: start looking from this revision onwards, default: latest</span>
+<span class="sd">        @type fromNode: string</span>
+<span class="sd">        @param toNode: stop looking at this revision, default: first</span>
+<span class="sd">        @type toNode: string</span>
+<span class="sd">        @param limit: maximum amount of changes to return</span>
+<span class="sd">        @type limit: int</span>
+<span class="sd">        @return: commit hash of all commits that changed `path`</span>
+<span class="sd">        @rtype: list(string)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">revrange</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fromNode</span><span class="p">,</span> <span class="n">toNode</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">logs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="n">path</span><span class="p">],</span> <span class="n">revrange</span><span class="o">=</span><span class="n">revrange</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">log</span><span class="o">.</span><span class="n">node</span> <span class="k">for</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">logs</span> <span class="p">]</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.cat"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.cat">[docs]</a>    <span class="k">def</span> <span class="nf">cat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rev</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the content of the file at `path` in commit `rev`</span>
+
+<span class="sd">        @param rev: commit identifier</span>
+<span class="sd">        @type rev: string</span>
+<span class="sd">        @param path: path of the file to cat, relative to the repository root</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        @return: content of the file at `path` in commit `rev`</span>
+<span class="sd">        @rtype: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">path</span><span class="p">],</span> <span class="n">rev</span><span class="o">=</span><span class="n">rev</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.walk"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.walk">[docs]</a>    <span class="k">def</span> <span class="nf">walk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rev</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Walk over the files in `rev` that match the argument `paths`, and call</span>
+<span class="sd">        `callback` with the repository instance and the file context as</span>
+<span class="sd">        arguments.</span>
+
+<span class="sd">        @param rev: ID of the revision to walk in</span>
+<span class="sd">        @type rev: string</span>
+<span class="sd">        @param paths: glob-style path list</span>
+<span class="sd">        @type paths: list(string)</span>
+<span class="sd">        @param callback: will be called for each match</span>
+<span class="sd">        @type callback: callable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">changectx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">[</span><span class="n">rev</span><span class="p">]</span>
+        <span class="n">fullPaths</span> <span class="o">=</span> <span class="p">[</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
+        <span class="n">matcher</span> <span class="o">=</span> <span class="n">changectx</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pats</span><span class="o">=</span><span class="n">fullPaths</span><span class="p">)</span>
+        <span class="n">walker</span> <span class="o">=</span> <span class="n">changectx</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">matcher</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">matchedPath</span> <span class="ow">in</span> <span class="n">walker</span><span class="p">:</span>
+            <span class="n">filectx</span> <span class="o">=</span> <span class="n">changectx</span><span class="o">.</span><span class="n">filectx</span><span class="p">(</span><span class="n">matchedPath</span><span class="p">)</span>
+            <span class="n">callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repo</span><span class="p">,</span> <span class="n">filectx</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_assertCommitterInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make sure relevant committer information is included in commit messages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getConfigItem</span><span class="p">(</span><span class="s">&#39;ui&#39;</span><span class="p">,</span> <span class="s">&#39;username&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">hgrclocation</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&quot;HOME&quot;</span><span class="p">],</span> <span class="s">&quot;.hgrc&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hgrclocation</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;A hgrc file exists at </span><span class="si">%s</span><span class="s">, but no username was &quot;</span>
+                    <span class="s">&quot;filled in in the [ui] section&quot;</span> <span class="o">%</span> <span class="n">hgrclocation</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Specify your username &amp; email address for mercurial</span><span class="se">\n</span><span class="s"> e.g Firstname Lastname &lt;firstname.lastname@example.net&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="s">&quot;[ui]</span><span class="se">\n</span><span class="s">username = </span><span class="si">%s</span><span class="se">\n</span><span class="s">verbose = True</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">name</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">hgrclocation</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+<div class="viewcode-block" id="HgLibClient.reset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset this client.</span>
+
+<span class="sd">        Mercurial saves some state linked to the repo object. If a hg pull</span>
+<span class="sd">        happened, the repo object seems unable to notice the pulled commits. So</span>
+<span class="sd">        in this method, we replace the repo object with a new one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">hglib</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="HgLibClient.close"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.mercurial.html#JumpScale.baselib.mercurial.HgLibClient.HgLibClient.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+</div>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remoteUrl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">basedir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">branchname</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">msg</span>
+    
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span> 
+    </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

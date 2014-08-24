@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.jpackages.enumerators4 &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.jpackages.enumerators4</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale.core.baseclasses</span> <span class="kn">import</span> <span class="n">BaseEnumeration</span>
+
+<div class="viewcode-block" id="DependencyType4"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.enumerators4.DependencyType4">[docs]</a><span class="k">class</span> <span class="nc">DependencyType4</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    One of two constants: runtime and build.</span>
+<span class="sd">    When a package has a runtime dependency on another package it means the first package cannot operate properly without the second package being installed.</span>
+<span class="sd">    When a package has a build dependency on another package it means the first package cannot be build without the second package being installed.</span>
+<span class="sd">    The second package typically is some build tool like gcc.</span>
+<span class="sd">    #@todo doc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</div>
+<span class="n">DependencyType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;runtime&#39;</span><span class="p">)</span>
+<span class="n">DependencyType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;build&#39;</span><span class="p">)</span>
+<span class="n">DependencyType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;native&#39;</span><span class="p">)</span>
+<span class="n">DependencyType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;python&#39;</span><span class="p">)</span>
+<span class="n">DependencyType4</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="VListType4"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.enumerators4.VListType4">[docs]</a><span class="k">class</span> <span class="nc">VListType4</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    #@todo doc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</div>
+<span class="n">VListType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;server&#39;</span><span class="p">)</span>
+<span class="n">VListType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;client&#39;</span><span class="p">)</span>
+<span class="n">VListType4</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="ACLPermission4"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.enumerators4.ACLPermission4">[docs]</a><span class="k">class</span> <span class="nc">ACLPermission4</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    #@todo doc</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+<span class="n">ACLPermission4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;R&#39;</span><span class="p">)</span>
+
+<span class="n">ACLPermission4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;W&#39;</span><span class="p">)</span> <span class="c">##only write access? for rsync that is not possible, no?</span>
+<span class="n">ACLPermission4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;RW&#39;</span><span class="p">)</span>
+<span class="n">ACLPermission4</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="JPackageState4"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.enumerators4.JPackageState4">[docs]</a><span class="k">class</span> <span class="nc">JPackageState4</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The states a JPackage can find itself in.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</div>
+<span class="n">JPackageState4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;ERROR&#39;</span><span class="p">)</span>
+<span class="n">JPackageState4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;OK&#39;</span><span class="p">)</span>
+<span class="n">JPackageState4</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+<div class="viewcode-block" id="JPackageQualityLevelType4"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4">[docs]</a><span class="k">class</span> <span class="nc">JPackageQualityLevelType4</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; JPackage quality level &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        </div>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;trunk&#39;</span><span class="p">)</span>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;test&#39;</span><span class="p">)</span>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;stable&#39;</span><span class="p">)</span>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;beta&#39;</span><span class="p">)</span>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;unstable&#39;</span><span class="p">)</span>
+<span class="n">JPackageQualityLevelType4</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-core-package">
+<h1>JumpScale.core package<a class="headerlink" href="#jumpscale-core-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.actors.html">JumpScale.core.actors package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.actors.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.actors.html#jumpscale-core-actors-actorobject-module">JumpScale.core.actors.ActorObject module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.actors.html#jumpscale-core-actors-actorobjects-module">JumpScale.core.actors.ActorObjects module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.actors.html#module-JumpScale.core.actors">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.base.html">JumpScale.core.base package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.base.idgenerator.html">JumpScale.core.base.idgenerator package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#module-JumpScale.core.base.idgenerator.IDGenerator">JumpScale.core.base.idgenerator.IDGenerator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.idgenerator.html#module-JumpScale.core.base.idgenerator">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.base.time.html">JumpScale.core.base.time package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.time.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.time.html#module-JumpScale.core.base.time.Time">JumpScale.core.base.time.Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.base.time.html#module-JumpScale.core.base.time">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.base.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.baseclasses.html">JumpScale.core.baseclasses package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.baseclasses.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.baseclasses.html#module-JumpScale.core.baseclasses.BaseEnumeration">JumpScale.core.baseclasses.BaseEnumeration module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.baseclasses.html#enumeration-lifecycle">Enumeration lifecycle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.baseclasses.html#enumeration-definition">Enumeration definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.baseclasses.html#baseenumerationmeta-magic">BaseEnumerationMeta magic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.baseclasses.html#lazy-loading-pitfalls-and-type-caching">Lazy loading pitfalls and type caching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.baseclasses.html#when-even-caching-becomes-complicated">When even caching becomes complicated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.baseclasses.html#the-story-of-intermediate-classes">The story of intermediate classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.baseclasses.html#module-JumpScale.core.baseclasses.BaseType">JumpScale.core.baseclasses.BaseType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.baseclasses.html#module-JumpScale.core.baseclasses.dirtyflaggingmixin">JumpScale.core.baseclasses.dirtyflaggingmixin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.baseclasses.html#module-JumpScale.core.baseclasses">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.config.html">JumpScale.core.config package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.config.generator.html">JumpScale.core.config.generator package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.config.generator.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.agent_cfg">JumpScale.core.config.generator.agent_cfg module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.arakoon_cfg">JumpScale.core.config.generator.arakoon_cfg module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.osis_cfg">JumpScale.core.config.generator.osis_cfg module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#module-JumpScale.core.config.ConfigLib">JumpScale.core.config.ConfigLib module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#module-JumpScale.core.config.IConfigBase">JumpScale.core.config.IConfigBase module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#module-JumpScale.core.config.JConfig">JumpScale.core.config.JConfig module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#module-JumpScale.core.config.JConfigBase">JumpScale.core.config.JConfigBase module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.html#module-JumpScale.core.config">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.db.html">JumpScale.core.db package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.db.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.db.html#jumpscale-core-db-dbconnection-module">JumpScale.core.db.DBConnection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.db.html#module-JumpScale.core.db">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.debugger.html">JumpScale.core.debugger package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.debugger.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.debugger.html#module-JumpScale.core.debugger.Debugging">JumpScale.core.debugger.Debugging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.debugger.html#module-JumpScale.core.debugger">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.enumerators.html">JumpScale.core.enumerators package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators.AppStatusType">JumpScale.core.enumerators.AppStatusType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators.ErrorConditionLevel">JumpScale.core.enumerators.ErrorConditionLevel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators.ErrorConditionType">JumpScale.core.enumerators.ErrorConditionType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators.LogLevel">JumpScale.core.enumerators.LogLevel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators.MessageType">JumpScale.core.enumerators.MessageType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#jumpscale-core-enumerators-winreghivetype-module">JumpScale.core.enumerators.WinRegHiveType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#jumpscale-core-enumerators-winregvaluetype-module">JumpScale.core.enumerators.WinRegValueType module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.enumerators.html#module-JumpScale.core.enumerators">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.errorhandling.html">JumpScale.core.errorhandling package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling.ErrorConditionHandler">JumpScale.core.errorhandling.ErrorConditionHandler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling.ErrorConditionObject">JumpScale.core.errorhandling.ErrorConditionObject module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling.EventHandler">JumpScale.core.errorhandling.EventHandler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling.six">JumpScale.core.errorhandling.six module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling.stacks">JumpScale.core.errorhandling.stacks module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.errorhandling.html#raven-utils-stacks">raven.utils.stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.errorhandling.html#module-JumpScale.core.errorhandling">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.extensions.html">JumpScale.core.extensions package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.extensions.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.extensions.html#module-JumpScale.core.extensions.PMExtension">JumpScale.core.extensions.PMExtension module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.extensions.html#module-JumpScale.core.extensions.PMExtensions">JumpScale.core.extensions.PMExtensions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.extensions.html#module-JumpScale.core.extensions.PMExtensionsGroup">JumpScale.core.extensions.PMExtensionsGroup module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.extensions.html#module-JumpScale.core.extensions">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.locale.html">JumpScale.core.locale package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.locale.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.locale.html#module-JumpScale.core.locale.locale">JumpScale.core.locale.locale module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.locale.html#module-JumpScale.core.locale">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.logging.html">JumpScale.core.logging package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.logging.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="JumpScale.core.logging.logtargets.html">JumpScale.core.logging.logtargets package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#module-JumpScale.core.logging.logtargets.LogTargetFS">JumpScale.core.logging.logtargets.LogTargetFS module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#module-JumpScale.core.logging.logtargets.LogTargetLogForwarder">JumpScale.core.logging.logtargets.LogTargetLogForwarder module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#jumpscale-core-logging-logtargets-logtargetscribe-module">JumpScale.core.logging.logtargets.LogTargetScribe module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#module-JumpScale.core.logging.logtargets.LogTargetStdOut">JumpScale.core.logging.logtargets.LogTargetStdOut module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#module-JumpScale.core.logging.logtargets.LogTargetToPylabsLogConsole">JumpScale.core.logging.logtargets.LogTargetToPylabsLogConsole module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="JumpScale.core.logging.logtargets.html#module-JumpScale.core.logging.logtargets">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.logging.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.logging.html#module-JumpScale.core.logging.LogHandler">JumpScale.core.logging.LogHandler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.logging.html#module-JumpScale.core.logging.RedirectStreams">JumpScale.core.logging.RedirectStreams module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.logging.html#module-JumpScale.core.logging">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.pmtypes.html">JumpScale.core.pmtypes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.CollectionTypes">JumpScale.core.pmtypes.CollectionTypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.CustomTypes">JumpScale.core.pmtypes.CustomTypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.GenericTypes">JumpScale.core.pmtypes.GenericTypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.IPAddress">JumpScale.core.pmtypes.IPAddress module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.PrimitiveTypes">JumpScale.core.pmtypes.PrimitiveTypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes.base">JumpScale.core.pmtypes.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.pmtypes.html#module-JumpScale.core.pmtypes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.properties.html">JumpScale.core.properties package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties.DirtyFlaggedProperty">JumpScale.core.properties.DirtyFlaggedProperty module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties.collections">JumpScale.core.properties.collections module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties.common">JumpScale.core.properties.common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties.customtypes">JumpScale.core.properties.customtypes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties.primitives">JumpScale.core.properties.primitives module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.properties.html#module-JumpScale.core.properties">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.shellconfig.html">JumpScale.core.shellconfig package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.shellconfig.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.shellconfig.html#module-JumpScale.core.shellconfig.ConfigFileManager">JumpScale.core.shellconfig.ConfigFileManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.shellconfig.html#jumpscale-core-shellconfig-declarativeconfig-module">JumpScale.core.shellconfig.DeclarativeConfig module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.shellconfig.html#module-JumpScale.core.shellconfig.ShellConfig">JumpScale.core.shellconfig.ShellConfig module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.shellconfig.html#module-JumpScale.core.shellconfig">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JumpScale.core.system.html">JumpScale.core.system package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.System">JumpScale.core.system.System module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#jumpscale-core-system-tarfile-module">JumpScale.core.system.TarFile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#jumpscale-core-system-zipfile-module">JumpScale.core.system.ZipFile module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.fs">JumpScale.core.system.fs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.fswalker">JumpScale.core.system.fswalker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.net">JumpScale.core.system.net module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.process">JumpScale.core.system.process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.processhelper">JumpScale.core.system.processhelper module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.string">JumpScale.core.system.string module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.text">JumpScale.core.system.text module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system.unix">JumpScale.core.system.unix module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#jumpscale-core-system-windows-module">JumpScale.core.system.windows module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JumpScale.core.system.html#module-JumpScale.core.system">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.core.Application">
+<span id="jumpscale-core-application-module"></span><h2>JumpScale.core.Application module<a class="headerlink" href="#module-JumpScale.core.Application" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.Application.Application">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.Application.</tt><tt class="descname">Application</tt><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.Application.Application.connectRedis">
+<tt class="descname">connectRedis</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.connectRedis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.connectRedis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Application.Application.debug">
+<tt class="descname">debug</tt><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.debug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.debug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.getAgentId">
+<tt class="descname">getAgentId</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.getAgentId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.getAgentId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.getCPUUsage">
+<tt class="descname">getCPUUsage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.getCPUUsage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.getCPUUsage" title="Permalink to this definition">¶</a></dt>
+<dd><p>try to get cpu usage, if it doesn&#8217;t work will return 0
+By default 0 for windows</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.getMemoryUsage">
+<tt class="descname">getMemoryUsage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.getMemoryUsage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.getMemoryUsage" title="Permalink to this definition">¶</a></dt>
+<dd><p>try to get memory usage, if it doesn&#8217;t work will return 0i
+By default 0 for windows</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.getUniqueMachineId">
+<tt class="descname">getUniqueMachineId</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.getUniqueMachineId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.getUniqueMachineId" title="Permalink to this definition">¶</a></dt>
+<dd><p>will look for network interface and return a hash calculated from lowest mac address from all physical nics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.getWhoAmiStr">
+<tt class="descname">getWhoAmiStr</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.getWhoAmiStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.getWhoAmiStr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.initGrid">
+<tt class="descname">initGrid</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.initGrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.initGrid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.initWhoAmI">
+<tt class="descname">initWhoAmI</tt><big>(</big><em>reload=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.initWhoAmI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.initWhoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>when in grid:</dt>
+<dd>is gid,nid,pid</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.loadConfig">
+<tt class="descname">loadConfig</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.loadConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.loadConfig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.start">
+<tt class="descname">start</tt><big>(</big><em>name=None</em>, <em>appdir='.'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the application</p>
+<p>You can only stop the application with return code 0 by calling
+j.Application.stop(). Don&#8217;t call sys.exit yourself, don&#8217;t try to run
+to end-of-script, I will find you anyway!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Application.Application.stop">
+<tt class="descname">stop</tt><big>(</big><em>exitcode=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Application.html#Application.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Application.Application.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stop the application cleanly using a given exitcode</p>
+<p>&#64;param exitcode: Exit code to use
+&#64;type exitcode: number</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Application.Application.writeExitcodeOnExit">
+<tt class="descname">writeExitcodeOnExit</tt><a class="headerlink" href="#JumpScale.core.Application.Application.writeExitcodeOnExit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets / sets if the exitcode has to be persisted on disk</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.Application.WhoAmI">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.Application.</tt><tt class="descname">WhoAmI</tt><a class="headerlink" href="#JumpScale.core.Application.WhoAmI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>WhoAmI(gid, nid, pid)</p>
+<dl class="attribute">
+<dt id="JumpScale.core.Application.WhoAmI.gid">
+<tt class="descname">gid</tt><a class="headerlink" href="#JumpScale.core.Application.WhoAmI.gid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Application.WhoAmI.nid">
+<tt class="descname">nid</tt><a class="headerlink" href="#JumpScale.core.Application.WhoAmI.nid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Application.WhoAmI.pid">
+<tt class="descname">pid</tt><a class="headerlink" href="#JumpScale.core.Application.WhoAmI.pid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.Dirs">
+<span id="jumpscale-core-dirs-module"></span><h2>JumpScale.core.Dirs module<a class="headerlink" href="#module-JumpScale.core.Dirs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.Dirs.Dirs">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.Dirs.</tt><tt class="descname">Dirs</tt><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Utility class to configure and store all relevant directory paths</p>
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.addProtectedDir">
+<tt class="descname">addProtectedDir</tt><big>(</big><em>path</em>, <em>name='main'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.addProtectedDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.addProtectedDir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Dirs.Dirs.appDir">
+<tt class="descname">appDir</tt><em class="property"> = None</em><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.appDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configuration file folder (appdir/cfg)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Dirs.Dirs.baseDir">
+<tt class="descname">baseDir</tt><em class="property"> = None</em><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.baseDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Application installation base folder (basedir/apps)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.checkInProtectedDir">
+<tt class="descname">checkInProtectedDir</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.checkInProtectedDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.checkInProtectedDir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.deployDefaultFilesInSandbox">
+<tt class="descname">deployDefaultFilesInSandbox</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.deployDefaultFilesInSandbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.deployDefaultFilesInSandbox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.getPathOfRunningFunction">
+<tt class="descname">getPathOfRunningFunction</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.getPathOfRunningFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.getPathOfRunningFunction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.init">
+<tt class="descname">init</tt><big>(</big><em>reinit=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes all the configured directories if needed</p>
+<p>If a folder attribute is None, set its value to the corresponding
+default path.</p>
+<p>&#64;returns: Initialization success
+&#64;rtype: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.loadProtectedDirs">
+<tt class="descname">loadProtectedDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.loadProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.loadProtectedDirs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.removeProtectedDir">
+<tt class="descname">removeProtectedDir</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.removeProtectedDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.removeProtectedDir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.replaceFilesDirVars">
+<tt class="descname">replaceFilesDirVars</tt><big>(</big><em>path</em>, <em>recursive=True</em>, <em>filter=None</em>, <em>additionalArgs={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.replaceFilesDirVars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.replaceFilesDirVars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Dirs.Dirs.replaceTxtDirVars">
+<tt class="descname">replaceTxtDirVars</tt><big>(</big><em>txt</em>, <em>additionalArgs={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#Dirs.replaceTxtDirVars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.Dirs.replaceTxtDirVars" title="Permalink to this definition">¶</a></dt>
+<dd><p>replace $base,$vardir,$cfgdir,$bindir,$codedir,$tmpdir,$logdir,$appdir with props of this class</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.Dirs.pathToUnicode">
+<tt class="descclassname">JumpScale.core.Dirs.</tt><tt class="descname">pathToUnicode</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Dirs.html#pathToUnicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Dirs.pathToUnicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert path to unicode. Use the local filesystem encoding. Will return
+path unmodified if path already is unicode.</p>
+<p>&#64;param path: path to convert to unicode
+&#64;type path: basestring
+&#64;return: unicode path
+&#64;rtype: unicode</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.PlatformTypes">
+<span id="jumpscale-core-platformtypes-module"></span><h2>JumpScale.core.PlatformTypes module<a class="headerlink" href="#module-JumpScale.core.PlatformTypes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.PlatformTypes.</tt><tt class="descname">PlatformTypes</tt><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.addPlatform">
+<tt class="descname">addPlatform</tt><big>(</big><em>name</em>, <em>parent</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.addPlatform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.addPlatform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.dieIfNotPlatform">
+<tt class="descname">dieIfNotPlatform</tt><big>(</big><em>platform</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.dieIfNotPlatform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.dieIfNotPlatform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.getChildren">
+<tt class="descname">getChildren</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.getChildren"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.getChildren" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.getMyRelevantPlatforms">
+<tt class="descname">getMyRelevantPlatforms</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.getMyRelevantPlatforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.getMyRelevantPlatforms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.getParents">
+<tt class="descname">getParents</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.getParents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.getParents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.getPlatforms">
+<tt class="descname">getPlatforms</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.getPlatforms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.getPlatforms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.has_parent">
+<tt class="descname">has_parent</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.has_parent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.has_parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isGeneric">
+<tt class="descname">isGeneric</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isGeneric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isGeneric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the platform is generic (they all should)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isHyperV">
+<tt class="descname">isHyperV</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isHyperV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isHyperV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the system supports HyperV</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isLinux">
+<tt class="descname">isLinux</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isLinux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isLinux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the platform is Linux-based</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isUnix">
+<tt class="descname">isUnix</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isUnix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isUnix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the platform is Unix-based</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isVirtualBox">
+<tt class="descname">isVirtualBox</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isVirtualBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isVirtualBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the system supports VirtualBox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isWindows">
+<tt class="descname">isWindows</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isWindows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isWindows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the platform is Windows-based</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.PlatformTypes.PlatformTypes.isXen">
+<tt class="descname">isXen</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/PlatformTypes.html#PlatformTypes.isXen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.PlatformTypes.PlatformTypes.isXen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether Xen support is enabled</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.Time">
+<span id="jumpscale-core-time-module"></span><h2>JumpScale.core.Time module<a class="headerlink" href="#module-JumpScale.core.Time" title="Permalink to this headline">¶</a></h2>
+<p>Timestamp routines</p>
+<dl class="class">
+<dt id="JumpScale.core.Time.TimeIntervalUnit">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.Time.</tt><tt class="descname">TimeIntervalUnit</tt><a class="reference internal" href="../_modules/JumpScale/core/Time.html#TimeIntervalUnit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerator for time interval units</p>
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.DAYS">
+<tt class="descname">DAYS</tt><em class="property"> = 3</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.DAYS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.HOURS">
+<tt class="descname">HOURS</tt><em class="property"> = 2</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.HOURS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.MICROSECONDS">
+<tt class="descname">MICROSECONDS</tt><em class="property"> = -2</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.MICROSECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.MILLISECONDS">
+<tt class="descname">MILLISECONDS</tt><em class="property"> = -1</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.MILLISECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.MINUTES">
+<tt class="descname">MINUTES</tt><em class="property"> = 1</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.MINUTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.MONTHS">
+<tt class="descname">MONTHS</tt><em class="property"> = 5</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.MONTHS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.NANOSECONDS">
+<tt class="descname">NANOSECONDS</tt><em class="property"> = -3</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.NANOSECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.SECONDS">
+<tt class="descname">SECONDS</tt><em class="property"> = 0</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.SECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.WEEKS">
+<tt class="descname">WEEKS</tt><em class="property"> = 4</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.WEEKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.Time.TimeIntervalUnit.YEARS">
+<tt class="descname">YEARS</tt><em class="property"> = 6</em><a class="headerlink" href="#JumpScale.core.Time.TimeIntervalUnit.YEARS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.Time.getabstime">
+<tt class="descclassname">JumpScale.core.Time.</tt><tt class="descname">getabstime</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Time.html#getabstime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Time.getabstime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get string representation of absolute time in milliseconds</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.Time.printdelta">
+<tt class="descclassname">JumpScale.core.Time.</tt><tt class="descname">printdelta</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Time.html#printdelta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Time.printdelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a function for source code or performance debugging.
+Call this function at every point cut in the source code
+where you want to print out a timestamp, together with the source code line</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.Util">
+<span id="jumpscale-core-util-module"></span><h2>JumpScale.core.Util module<a class="headerlink" href="#module-JumpScale.core.Util" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.Util.Util">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.Util.</tt><tt class="descname">Util</tt><a class="reference internal" href="../_modules/JumpScale/core/Util.html#Util"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Util.Util" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.Util.Util.cleanupString">
+<tt class="descname">cleanupString</tt><big>(</big><em>string</em>, <em>replacewith='_'</em>, <em>regex='([^A-Za-z0-9])'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Util.html#Util.cleanupString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Util.Util.cleanupString" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all non numeric or alphanumeric characters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Util.Util.lock">
+<tt class="descname">lock</tt><big>(</big><em>lockname</em>, <em>locktimeout=60</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Util.html#Util.lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Util.Util.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a system-wide interprocess exclusive lock. Default timeout is 60 seconds</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.Util.Util.unlock">
+<tt class="descname">unlock</tt><big>(</big><em>lockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/Util.html#Util.unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.Util.Util.unlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock system-wide interprocess lock</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="jumpscale-core-decorators-module">
+<h2>JumpScale.core.decorators module<a class="headerlink" href="#jumpscale-core-decorators-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.core package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.Application">JumpScale.core.Application module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.Dirs">JumpScale.core.Dirs module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.PlatformTypes">JumpScale.core.PlatformTypes module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.Time">JumpScale.core.Time module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.Util">JumpScale.core.Util module</a></li>
+<li><a class="reference internal" href="#jumpscale-core-decorators-module">JumpScale.core.decorators module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.core.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

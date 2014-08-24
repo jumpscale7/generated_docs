@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.system.process &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-system-process">
+<h1>j.system.process<a class="headerlink" href="#j-system-process" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /core/system/process.py</li>
+</ul>
+<div class="section" id="appcheckactive">
+<h2>appCheckActive<a class="headerlink" href="#appcheckactive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/process.py (line:1794)</li>
+</ul>
+</div>
+<div class="section" id="appgetpids">
+<h2>appGetPids<a class="headerlink" href="#appgetpids" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/process.py (line:1812)</li>
+</ul>
+</div>
+<div class="section" id="appgetpidsactive">
+<h2>appGetPidsActive<a class="headerlink" href="#appgetpidsactive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/process.py (line:1855)</li>
+</ul>
+</div>
+<div class="section" id="appnrinstances">
+<h2>appNrInstances<a class="headerlink" href="#appnrinstances" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/process.py (line:1797)</li>
+</ul>
+</div>
+<div class="section" id="appnrinstancesactive">
+<h2>appNrInstancesActive<a class="headerlink" href="#appnrinstancesactive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/process.py (line:1800)</li>
+</ul>
+</div>
+<div class="section" id="appsget">
+<h2>appsGet<a class="headerlink" href="#appsget" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/process.py (line:1841)</li>
+</ul>
+</div>
+<div class="section" id="appsgetnames">
+<h2>appsGetNames<a class="headerlink" href="#appsgetnames" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/process.py (line:1821)</li>
+</ul>
+</div>
+<div class="section" id="checkprocess">
+<h2>checkProcess<a class="headerlink" href="#checkprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: process,min</li>
+<li>path:/core/system/process.py (line:1652)</li>
+</ul>
+<p>Check if a certain process is running on the system.
+you can specify minimal running processes needed.
+are trying to check</p>
+</div>
+<div class="section" id="checkprocessforpid">
+<h2>checkProcessForPid<a class="headerlink" href="#checkprocessforpid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid,process</li>
+<li>path:/core/system/process.py (line:1675)</li>
+</ul>
+<p>Check whether a given pid actually does belong to a given process name.</p>
+</div>
+<div class="section" id="checkstart">
+<h2>checkstart<a class="headerlink" href="#checkstart" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: cmd,filterstr,nrtimes,retry</li>
+<li>path:/core/system/process.py (line:1550)</li>
+</ul>
+</div>
+<div class="section" id="checkstop">
+<h2>checkstop<a class="headerlink" href="#checkstop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: cmd,filterstr,retry,nrinstances</li>
+<li>path:/core/system/process.py (line:1568)</li>
+</ul>
+</div>
+<div class="section" id="execute">
+<h2>execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,dieOnNonZeroExitCode,outputToStdout,useShell,ignoreErrorOutput</li>
+<li>path:/core/system/process.py (line:1306)</li>
+</ul>
+<p>Executes a command, returns the exitcode and the output
+if exitcode is not zero then the executed command returned with errors</p>
+</div>
+<div class="section" id="executeasync">
+<h2>executeAsync<a class="headerlink" href="#executeasync" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,args,printCommandToStdout,redirectStreams,argsInCommand,useShell,outputToStdout</li>
+<li>path:/core/system/process.py (line:1213)</li>
+</ul>
+<p>Execute command asynchronous. By default, the input, output and error streams of the command will be piped to the returned Popen object. Be sure to call commands that don&#8217;t expect user input, or send input to the stdin parameter of the returning Popen object.</p>
+</div>
+<div class="section" id="executecode">
+<h2>executeCode<a class="headerlink" href="#executecode" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: code,params</li>
+<li>path:/core/system/process.py (line:1462)</li>
+</ul>
+<p>execute a method (python code with def)
+use params=j.core.params.get() as input</p>
+</div>
+<div class="section" id="executeinsandbox">
+<h2>executeInSandbox<a class="headerlink" href="#executeinsandbox" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,timeout</li>
+<li>path:/core/system/process.py (line:1444)</li>
+</ul>
+<p>Executes a command</p>
+</div>
+<div class="section" id="executeindependant">
+<h2>executeIndependant<a class="headerlink" href="#executeindependant" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: cmd</li>
+<li>path:/core/system/process.py (line:1426)</li>
+</ul>
+</div>
+<div class="section" id="executescript">
+<h2>executeScript<a class="headerlink" href="#executescript" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: scriptName</li>
+<li>path:/core/system/process.py (line:1434)</li>
+</ul>
+<p>execute python script from shell/Interactive Window</p>
+</div>
+<div class="section" id="executewithoutpipe">
+<h2>executeWithoutPipe<a class="headerlink" href="#executewithoutpipe" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,dieOnNonZeroExitCode,printCommandToStdout,outputToStdout</li>
+<li>path:/core/system/process.py (line:1182)</li>
+</ul>
+<p>DEPRECATED, use system.process.executeAsync() instead, and call the wait() method of the returned object.</p>
+<p>Execute command without opening pipes, returns only the exitcode
+This is platform independent
+if exitcode is not zero then the executed command returned with errors</p>
+</div>
+<div class="section" id="getdefunctprocesses">
+<h2>getDefunctProcesses<a class="headerlink" href="#getdefunctprocesses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/process.py (line:1826)</li>
+</ul>
+</div>
+<div class="section" id="getenviron">
+<h2>getEnviron<a class="headerlink" href="#getenviron" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid</li>
+<li>path:/core/system/process.py (line:1803)</li>
+</ul>
+</div>
+<div class="section" id="getmyprocessobject">
+<h2>getMyProcessObject<a class="headerlink" href="#getmyprocessobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/process.py (line:1616)</li>
+</ul>
+</div>
+<div class="section" id="getpidsbyfilter">
+<h2>getPidsByFilter<a class="headerlink" href="#getpidsbyfilter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: filterstr</li>
+<li>path:/core/system/process.py (line:1535)</li>
+</ul>
+</div>
+<div class="section" id="getpidsbyport">
+<h2>getPidsByPort<a class="headerlink" href="#getpidsbyport" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: port</li>
+<li>path:/core/system/process.py (line:1716)</li>
+</ul>
+<p>Returns pid of the process that is listening on the given port</p>
+</div>
+<div class="section" id="getprocessbyport">
+<h2>getProcessByPort<a class="headerlink" href="#getprocessbyport" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: port</li>
+<li>path:/core/system/process.py (line:1734)</li>
+</ul>
+<p>Returns the full name of the process that is listening on the given port</p>
+</div>
+<div class="section" id="getprocessobject">
+<h2>getProcessObject<a class="headerlink" href="#getprocessobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid</li>
+<li>path:/core/system/process.py (line:1619)</li>
+</ul>
+</div>
+<div class="section" id="getprocesspid">
+<h2>getProcessPid<a class="headerlink" href="#getprocesspid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: process</li>
+<li>path:/core/system/process.py (line:1591)</li>
+</ul>
+</div>
+<div class="section" id="getprocesspidsfromuser">
+<h2>getProcessPidsFromUser<a class="headerlink" href="#getprocesspidsfromuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: user</li>
+<li>path:/core/system/process.py (line:1626)</li>
+</ul>
+</div>
+<div class="section" id="getsimularprocesses">
+<h2>getSimularProcesses<a class="headerlink" href="#getsimularprocesses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/process.py (line:1639)</li>
+</ul>
+</div>
+<div class="section" id="ispidalive">
+<h2>isPidAlive<a class="headerlink" href="#ispidalive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid</li>
+<li>path:/core/system/process.py (line:1511)</li>
+</ul>
+<p>Checks whether this pid is alive.
+For unix, a signal is sent to check that the process is alive.
+For windows, the process information is retrieved and it is double checked that the process is python.exe
+or pythonw.exe</p>
+</div>
+<div class="section" id="kill">
+<h2>kill<a class="headerlink" href="#kill" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid,sig</li>
+<li>path:/core/system/process.py (line:19)</li>
+</ul>
+<p>Kill a process with a signal</p>
+</div>
+<div class="section" id="killprocessbyname">
+<h2>killProcessByName<a class="headerlink" href="#killprocessbyname" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name</li>
+<li>path:/core/system/process.py (line:1724)</li>
+</ul>
+</div>
+<div class="section" id="killprocessbyport">
+<h2>killProcessByPort<a class="headerlink" href="#killprocessbyport" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: port</li>
+<li>path:/core/system/process.py (line:1729)</li>
+</ul>
+</div>
+<div class="section" id="killuserprocesses">
+<h2>killUserProcesses<a class="headerlink" href="#killuserprocesses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: user</li>
+<li>path:/core/system/process.py (line:1635)</li>
+</ul>
+</div>
+<div class="section" id="run">
+<h2>run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: commandline,showOutput,captureOutput,maxSeconds,stopOnError,user,group</li>
+<li>path:/core/system/process.py (line:669)</li>
+</ul>
+<p>Execute a command and wait for its termination</p>
+<p>This function spawns a subprocess which executes the given command line in a
+subshell. The function waits for the spawned process to terminate, or until
+a time period of maxSeconds was exceeded.</p>
+<p>When showOutput is set to True, stdin, stderr and stdout handles of the
+subprocess are bound to the handles of the calling process. This can be used
+to run interactive commands.</p>
+<p>Both showOutput and captureOutput can&#8217;t be True at the same time.</p>
+<p>Any extra keyword arguments are passed to L{subprocess.Popen}. These
+arguments can overwrite any argument set by this function, so setting any of
+the arguments used by this function (including C{stdin}, C{stdout},
+C{stderr}, C{env}, C{shell} and C{preexec_fn}) can change the behavior
+of this function. This could e.g. be used to set C{cwd}.</p>
+<p>The exit code contained in the returned tuple is the exit code of the
+spawned process if equal to or larger than 0. If the subprocess was killed
+while running, the exit code will be -1. If the process was stopped because
+maxSeconds was exceeded, an exit code equal to -2 will be returned.</p>
+<p>If user or group is defined (as name of number), the process will
+setuid/setgid to this user and group before executing the command line,
+effectively running the child process with the privileges of the provided
+user and group.</p>
+<p>Remarks:</p>
+<ul class="simple">
+<li>Don&#8217;t use the &#8216;&amp;&#8217; shell operator to run a process in the background, use</li>
+</ul>
+<p>the startDaemon function instead</p>
+<ul class="simple">
+<li>Shell operators including pipes and redirects are allowed in the</li>
+</ul>
+<p>command line string</p>
+<ul class="simple">
+<li>When spawning processes which generate large amounts of output, make sure</li>
+</ul>
+<p>you set captureOutput to False, otherwise too much data will be buffered
+in memory</p>
+<ul class="simple">
+<li>If captureOutput is set to False, the values of stdout and stderr in the</li>
+</ul>
+<p>return value will be empty strings</p>
+<ul class="simple">
+<li>If stopOnError is set to True, the calling process will exit with exit</li>
+</ul>
+<p>code 44 if the child process returned a non-zero exit code, or 45 if the
+child process exceeds maxSeconds</p>
+<p>allowed to run</p>
+</div>
+<div class="section" id="rundaemon">
+<h2>runDaemon<a class="headerlink" href="#rundaemon" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: commandline,stdout,stderr,user,group,env</li>
+<li>path:/core/system/process.py (line:1012)</li>
+</ul>
+<p>Run an application as a background process</p>
+<p>This function will execute the given commandline decoupled from the host
+process by forking first. The stdout and stderr streams of the spawned
+application can be redirected to files.</p>
+<p>This can be compared to using</p>
+<p>nohup myapplication -u -b 1 &amp;</p>
+<p>in a Bash shell.</p>
+<p>If no stdout or stderr paths are provided, those streams are ignored.</p>
+<p>If user or group is defined (as name of number), the daemon process will
+setuid/setgid to this user and group before executing the child process,
+effectively running the daemon process with the privileges of the provided
+user and group.</p>
+<p>If C{env} is provided, it will be used as environment in which the daemon
+process will be executed. If it is not set, C{os.environ} will be used. Do
+note C{PYTHONUNBUFFERED} and C{PYTHONPATH} will be slightly altered (in a
+copy of the provided dictionary) by this function before spawning the
+daemon process.</p>
+</div>
+<div class="section" id="runscript">
+<h2>runScript<a class="headerlink" href="#runscript" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: script,showOutput,captureOutput,maxSeconds,stopOnError</li>
+<li>path:/core/system/process.py (line:982)</li>
+</ul>
+<p>Execute a Python script</p>
+<p>This function executes a Python script, making sure the script output will
+not be buffered.</p>
+<p>For an overview of the parameters and function behaviour, see the
+documentation of L{jumpscale.system.process.run}.</p>
+</div>
+<div class="section" id="setenvironmentvariable">
+<h2>setEnvironmentVariable<a class="headerlink" href="#setenvironmentvariable" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: varnames,varvalues</li>
+<li>path:/core/system/process.py (line:1702)</li>
+</ul>
+<p>Set the value of the environment variables C{varnames}. Existing variable are overwritten</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.system.process</a><ul>
+<li><a class="reference internal" href="#appcheckactive">appCheckActive</a></li>
+<li><a class="reference internal" href="#appgetpids">appGetPids</a></li>
+<li><a class="reference internal" href="#appgetpidsactive">appGetPidsActive</a></li>
+<li><a class="reference internal" href="#appnrinstances">appNrInstances</a></li>
+<li><a class="reference internal" href="#appnrinstancesactive">appNrInstancesActive</a></li>
+<li><a class="reference internal" href="#appsget">appsGet</a></li>
+<li><a class="reference internal" href="#appsgetnames">appsGetNames</a></li>
+<li><a class="reference internal" href="#checkprocess">checkProcess</a></li>
+<li><a class="reference internal" href="#checkprocessforpid">checkProcessForPid</a></li>
+<li><a class="reference internal" href="#checkstart">checkstart</a></li>
+<li><a class="reference internal" href="#checkstop">checkstop</a></li>
+<li><a class="reference internal" href="#execute">execute</a></li>
+<li><a class="reference internal" href="#executeasync">executeAsync</a></li>
+<li><a class="reference internal" href="#executecode">executeCode</a></li>
+<li><a class="reference internal" href="#executeinsandbox">executeInSandbox</a></li>
+<li><a class="reference internal" href="#executeindependant">executeIndependant</a></li>
+<li><a class="reference internal" href="#executescript">executeScript</a></li>
+<li><a class="reference internal" href="#executewithoutpipe">executeWithoutPipe</a></li>
+<li><a class="reference internal" href="#getdefunctprocesses">getDefunctProcesses</a></li>
+<li><a class="reference internal" href="#getenviron">getEnviron</a></li>
+<li><a class="reference internal" href="#getmyprocessobject">getMyProcessObject</a></li>
+<li><a class="reference internal" href="#getpidsbyfilter">getPidsByFilter</a></li>
+<li><a class="reference internal" href="#getpidsbyport">getPidsByPort</a></li>
+<li><a class="reference internal" href="#getprocessbyport">getProcessByPort</a></li>
+<li><a class="reference internal" href="#getprocessobject">getProcessObject</a></li>
+<li><a class="reference internal" href="#getprocesspid">getProcessPid</a></li>
+<li><a class="reference internal" href="#getprocesspidsfromuser">getProcessPidsFromUser</a></li>
+<li><a class="reference internal" href="#getsimularprocesses">getSimularProcesses</a></li>
+<li><a class="reference internal" href="#ispidalive">isPidAlive</a></li>
+<li><a class="reference internal" href="#kill">kill</a></li>
+<li><a class="reference internal" href="#killprocessbyname">killProcessByName</a></li>
+<li><a class="reference internal" href="#killprocessbyport">killProcessByPort</a></li>
+<li><a class="reference internal" href="#killuserprocesses">killUserProcesses</a></li>
+<li><a class="reference internal" href="#run">run</a></li>
+<li><a class="reference internal" href="#rundaemon">runDaemon</a></li>
+<li><a class="reference internal" href="#runscript">runScript</a></li>
+<li><a class="reference internal" href="#setenvironmentvariable">setEnvironmentVariable</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.process.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

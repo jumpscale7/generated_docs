@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.grid.LogTargetElasticSearch &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.grid.LogTargetElasticSearch</h1><div class="highlight"><pre>
+<span class="c"># import socket</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="LogTargetElasticSearch"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch">[docs]</a><span class="k">class</span> <span class="nc">LogTargetElasticSearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Forwards incoming logRecords to elastic search</span>
+<span class="sd">    attached to loghandler on jumpscale</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serverip</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">esclient</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">esclient</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span> <span class="o">=</span> <span class="n">serverip</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;LogToES&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">esclient</span> <span class="o">=</span> <span class="n">esclient</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connected</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">serverip</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">serverip</span> <span class="o">=</span> <span class="s">&quot;127.0.0.1&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span> <span class="o">=</span> <span class="n">serverip</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkTarget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;LogToES&quot;</span>
+
+<div class="viewcode-block" id="LogTargetElasticSearch.checkTarget"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch.checkTarget">[docs]</a>    <span class="k">def</span> <span class="nf">checkTarget</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check status of target, if ok return True</span>
+<span class="sd">        for std out always True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span><span class="p">,</span> <span class="mi">9200</span><span class="p">)</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">esclient</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">elasticsearch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span><span class="p">,</span> <span class="mi">9200</span><span class="p">)</span>
+            <span class="c"># j.logger.elasticsearchtarget=True</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; string representation of a LogTargetServer to ES&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&#39;LogTargetLogServer logging to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serverip</span><span class="p">))</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span>
+
+<div class="viewcode-block" id="LogTargetElasticSearch.log"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch.log">[docs]</a>    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logobject</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        forward the already formatted message to the target destination</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#@todo Low Prio: need to batch &amp; use geventloop to timeout when used e.g. in appserver</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;LOG OBJECT in logging to elasticsearch &quot;</span><span class="p">,</span> <span class="n">logobject</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">esclient</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s">&quot;clusterlog&quot;</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&quot;logrecord&quot;</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="s">&quot;14d&quot;</span><span class="p">,</span> <span class="n">replication</span><span class="o">=</span><span class="s">&quot;async&quot;</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="n">logobject</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span>
+            <span class="k">print</span> <span class="s">&quot;Could not log to elasticsearch server, log:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">logobject</span>
+            <span class="k">print</span> <span class="s">&quot;error was </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span>
+</div>
+<div class="viewcode-block" id="LogTargetElasticSearch.close"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loghandlers need to implement close method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="LogTargetElasticSearch.logbatch"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch.logbatch">[docs]</a>    <span class="k">def</span> <span class="nf">logbatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">docs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">logobject</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+            <span class="n">logobject</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">logobject</span><span class="o">.</span><span class="n">gid</span><span class="p">,</span> <span class="n">logobject</span><span class="o">.</span><span class="n">nodeid</span><span class="p">,</span> <span class="n">logobject</span><span class="o">.</span><span class="n">appid</span><span class="p">,</span> <span class="n">logobject</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+            <span class="n">docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logobject</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;batch:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">esclient</span><span class="o">.</span><span class="n">bulk_index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s">&quot;clusterlog&quot;</span><span class="p">,</span> <span class="n">doc_type</span><span class="o">=</span><span class="s">&quot;json&quot;</span><span class="p">,</span> <span class="n">docs</span><span class="o">=</span><span class="n">docs</span><span class="p">,</span> <span class="n">id_field</span><span class="o">=</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LogTargetElasticSearch.list"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.LogTargetElasticSearch.LogTargetElasticSearch.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">categoryPrefix</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">levelMin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">levelMax</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parentjob</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">private</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">nritems</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+        <span class="n">result2</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;facets&#39;</span><span class="p">:</span> <span class="p">{},</span>
+             <span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+             <span class="s">&#39;size&#39;</span><span class="p">:</span> <span class="n">nritems</span><span class="p">,</span>
+             <span class="s">&#39;sort&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;job&#39;</span><span class="p">,</span> <span class="s">&#39;appid&#39;</span><span class="p">,</span> <span class="s">&#39;order&#39;</span><span class="p">],</span>
+             <span class="s">&#39;query&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;bool&#39;</span><span class="p">:</span>
+                       <span class="p">{</span><span class="s">&#39;must&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s">&#39;prefix&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;logrecord..category&#39;</span><span class="p">:</span> <span class="n">categoryPrefix</span><span class="p">}},</span>
+                                 <span class="p">{</span><span class="s">&#39;range&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;logrecord.level&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;from&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">levelMin</span><span class="p">,</span> <span class="s">&#39;to&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">levelMax</span><span class="p">}}},</span>
+                                 <span class="p">{</span><span class="s">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;logrecord.job&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">job</span><span class="p">}},</span>
+                                 <span class="p">{</span><span class="s">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;logrecord.parentjob&#39;</span><span class="p">:</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">parentjob</span><span class="p">}},</span>
+                                 <span class="p">],</span>
+                           <span class="s">&#39;must_not&#39;</span><span class="p">:</span> <span class="p">[],</span>
+                           <span class="s">&#39;should&#39;</span><span class="p">:</span> <span class="p">[]</span>
+                        <span class="p">}</span>
+                       <span class="p">}</span>
+             <span class="p">}</span>
+        <span class="k">if</span> <span class="n">private</span><span class="p">:</span>
+            <span class="n">Q</span><span class="p">[</span><span class="s">&#39;query&#39;</span><span class="p">][</span><span class="s">&#39;bool&#39;</span><span class="p">][</span><span class="s">&#39;must&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;term&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;json.private&#39;</span><span class="p">:</span> <span class="s">&#39;1&#39;</span><span class="p">}})</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">esclient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">Q</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;hits&quot;</span><span class="p">][</span><span class="s">&quot;hits&quot;</span><span class="p">]:</span>
+            <span class="n">log</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">getLogObjectFromDict</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&quot;_source&quot;</span><span class="p">])</span>
+            <span class="n">result2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result2</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

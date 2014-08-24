@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.screen.Tmux &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.screen.Tmux</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<div class="viewcode-block" id="Tmux"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux">[docs]</a><span class="k">class</span> <span class="nc">Tmux</span><span class="p">:</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">screencmd</span><span class="o">=</span><span class="s">&quot;tmux&quot;</span>
+    
+<div class="viewcode-block" id="Tmux.createSession"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.createSession">[docs]</a>    <span class="k">def</span> <span class="nf">createSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sessionname</span><span class="p">,</span><span class="n">screens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param name is name of session</span>
+<span class="sd">        @screens is list with nr of screens required in session and their names (is [$screenname,...])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">checkInstall</span><span class="p">(</span><span class="s">&quot;tmux&quot;</span><span class="p">,</span><span class="s">&quot;tmux&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">killSession</span><span class="p">(</span><span class="n">sessionname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">screens</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot create screens, need at least 1 screen specified&quot;</span><span class="p">)</span>
+
+        <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;TMUX&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s"> new-session -d -s </span><span class="si">%s</span><span class="s"> -n </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screencmd</span><span class="p">,</span> <span class="n">sessionname</span><span class="p">,</span> <span class="n">screens</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+        <span class="c"># now add the other screens to it</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">screens</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">screen</span> <span class="ow">in</span> <span class="n">screens</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;tmux new-window -t &#39;</span><span class="si">%s</span><span class="s">&#39; -n &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sessionname</span><span class="p">,</span> <span class="n">screen</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Tmux.executeInScreen"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.executeInScreen">[docs]</a>    <span class="k">def</span> <span class="nf">executeInScreen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sessionname</span><span class="p">,</span><span class="n">screenname</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param sessionname Name of the tmux session</span>
+<span class="sd">        @type sessionname str</span>
+<span class="sd">        @param screenname Name of the window in the session</span>
+<span class="sd">        @type screenname str</span>
+<span class="sd">        @param cmd command to execute</span>
+<span class="sd">        @type cmd str</span>
+<span class="sd">        @param wait time to wait for output</span>
+<span class="sd">        @type wait int</span>
+<span class="sd">        @param cwd workingdir for command only in new screen see newscr</span>
+<span class="sd">        @type cwd str</span>
+<span class="sd">        @param env environment variables for cmd onlt in new screen see newscr</span>
+<span class="sd">        @type env dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">env</span> <span class="ow">or</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">envstr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">envstr</span> <span class="o">+=</span> <span class="s">&quot;export </span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">createWindow</span><span class="p">(</span><span class="n">sessionname</span><span class="p">,</span> <span class="n">screenname</span><span class="p">)</span>
+        <span class="n">pane</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getPane</span><span class="p">(</span><span class="n">sessionname</span><span class="p">,</span> <span class="n">screenname</span><span class="p">)</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;TMUX&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">envstr</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">cmd2</span><span class="o">=</span><span class="s">&quot;tmux send-keys -t &#39;</span><span class="si">%s</span><span class="s">&#39; &#39;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pane</span><span class="p">,</span><span class="n">envstr</span><span class="p">)</span>
+        <span class="c">#go to right directory</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd2</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">user</span><span class="o">&lt;&gt;</span><span class="s">&quot;root&quot;</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;cd </span><span class="si">%s</span><span class="s">;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="n">sudocmd</span><span class="o">=</span><span class="s">&quot;su -c </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">user</span><span class="p">)</span>
+            <span class="n">cmd2</span><span class="o">=</span><span class="s">&quot;tmux send-keys -t &#39;</span><span class="si">%s</span><span class="s">&#39; &#39;</span><span class="si">%s</span><span class="s">&#39; ENTER&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pane</span><span class="p">,</span><span class="n">sudocmd</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">cmd</span><span class="o">=</span><span class="n">cmd</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;&#39;&quot;</span><span class="p">,</span><span class="s">&quot;</span><span class="se">\&#39;</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="n">cmd2</span><span class="o">=</span><span class="s">&quot;tmux send-keys -t &#39;</span><span class="si">%s</span><span class="s">&#39; &#39;</span><span class="si">%s</span><span class="s">;</span><span class="si">%s</span><span class="s">&#39; ENTER&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pane</span><span class="p">,</span><span class="s">&quot;cd </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">cwd</span><span class="p">,</span><span class="n">cmd</span><span class="p">)</span>
+        
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd2</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">wait</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ppath</span><span class="p">):</span>
+            <span class="n">resultcode</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">ppath</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ppath</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">resultcode</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">resultcode</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not execute </span><span class="si">%s</span><span class="s"> in screen </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">, errorcode was </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">sessionname</span><span class="p">,</span><span class="n">screenname</span><span class="p">,</span><span class="n">resultcode</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">wait</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Execution of </span><span class="si">%s</span><span class="s">  did not return, maybe interactive, in screen </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">sessionname</span><span class="p">,</span><span class="n">screenname</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Tmux.getSessions"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.getSessions">[docs]</a>    <span class="k">def</span> <span class="nf">getSessions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;tmux list-sessions -F &quot;#{session_name}&quot;&#39;</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exitcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Tmux.getSessionNames"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.getSessionNames">[docs]</a>    <span class="k">def</span> <span class="nf">getSessionNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSessions</span><span class="p">()</span> <span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Tmux.getPid"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.getPid">[docs]</a>    <span class="k">def</span> <span class="nf">getPid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;tmux list-panes -t &quot;</span><span class="si">%s</span><span class="s">&quot; -F &quot;#{pane_pid};#{window_name}&quot; -a&#39;</span> <span class="o">%</span> <span class="n">session</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exitcode</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="n">pid</span><span class="p">,</span> <span class="n">windowname</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;;&#39;</span><span class="p">)</span>
+            <span class="c"># print &quot;%s &#39;%s&#39;&quot;%(pid,windowname)</span>
+            <span class="k">if</span> <span class="n">windowname</span> <span class="o">==</span> <span class="n">name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="Tmux.listSessions"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.listSessions">[docs]</a>    <span class="k">def</span> <span class="nf">listSessions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">sessions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getSessions</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">pid</span><span class="p">,</span><span class="n">name</span> <span class="ow">in</span> <span class="n">sessions</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Tmux.listWindows"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.listWindows">[docs]</a>    <span class="k">def</span> <span class="nf">listWindows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">attemps</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;tmux list-windows -F &quot;#{window_index}:#{window_name}&quot; -t &quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="n">session</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exitcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="n">idx</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Tmux.createWindow"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.createWindow">[docs]</a>    <span class="k">def</span> <span class="nf">createWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSessionNames</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createSession</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="n">windows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listWindows</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">windows</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;tmux new-window -t &#39;</span><span class="si">%s</span><span class="s">&#39; -n &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Tmux.logWindow"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.logWindow">[docs]</a>    <span class="k">def</span> <span class="nf">logWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">pane</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getPane</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&quot;tmux pipe-pane -t &#39;</span><span class="si">%s</span><span class="s">&#39; &#39;cat &gt;&gt; </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pane</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Tmux.windowExists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.windowExists">[docs]</a>    <span class="k">def</span> <span class="nf">windowExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSessionNames</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listWindows</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+    <span class="k">def</span> <span class="nf">_getPane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">windows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listWindows</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">remap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([</span> <span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">win</span> <span class="ow">in</span> <span class="n">windows</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">remap</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="Tmux.killWindow"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.killWindow">[docs]</a>    <span class="k">def</span> <span class="nf">killWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pane</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getPane</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="c"># window does nt exist</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s">&quot;tmux kill-window -t &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">pane</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Tmux.killSessions"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.killSessions">[docs]</a>    <span class="k">def</span> <span class="nf">killSessions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;tmux kill-server&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c">#todo checking</span>
+        </div>
+<div class="viewcode-block" id="Tmux.killSession"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.killSession">[docs]</a>    <span class="k">def</span> <span class="nf">killSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sessionname</span><span class="p">):</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;tmux kill-session -t &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span>  <span class="o">%</span> <span class="n">sessionname</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c">#todo checking</span>
+</div>
+<div class="viewcode-block" id="Tmux.attachSession"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.screen.html#JumpScale.baselib.screen.Tmux.Tmux.attachSession">[docs]</a>    <span class="k">def</span> <span class="nf">attachSession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sessionname</span><span class="p">,</span> <span class="n">windowname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">windowname</span><span class="p">:</span>
+            <span class="n">pane</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getPane</span><span class="p">(</span><span class="n">sessionname</span><span class="p">,</span> <span class="n">windowname</span><span class="p">)</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;tmux select-window -t &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span>  <span class="o">%</span> <span class="n">pane</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">executeWithoutPipe</span><span class="p">(</span><span class="s">&quot;tmux attach -t </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sessionname</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>
