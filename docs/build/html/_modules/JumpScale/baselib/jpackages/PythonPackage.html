@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.jpackages.PythonPackage &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.jpackages.PythonPackage</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<div class="viewcode-block" id="PythonPackage"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage">[docs]</a><span class="k">class</span> <span class="nc">PythonPackage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span><span class="o">=</span><span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_usrPathCache</span><span class="o">=</span><span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pythonPathCache</span><span class="o">=</span><span class="p">[]</span>
+        <span class="c"># j.logger.addConsoleLogCategory(&quot;python&quot;)</span>
+
+<div class="viewcode-block" id="PythonPackage.clearcache"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.clearcache">[docs]</a>    <span class="k">def</span> <span class="nf">clearcache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Clear pathscache for /usr &amp; python packages.&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;python.package&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">_getPythonPathNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pythonPathCache</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;getpython path names and cache.&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;python.package&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getItemsFromPrefix</span><span class="p">(</span><span class="s">&quot;python.paths&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesAndDirsInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                    <span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_pythonPathCache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>   
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pythonPathCache</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  
+        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_pythonPathCache</span>
+
+    <span class="k">def</span> <span class="nf">_getUsrPathNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_usrPathCache</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;get /usr path names and cache.&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;python.package&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getItemsFromPrefix</span><span class="p">(</span><span class="s">&quot;python.paths&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesAndDirsInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+                    <span class="n">item</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_usrPathCache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>   
+            <span class="bp">self</span><span class="o">.</span><span class="n">_usrPathCache</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  
+        <span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_usrPathCache</span>
+
+<div class="viewcode-block" id="PythonPackage.check"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+        </div>
+<div class="viewcode-block" id="PythonPackage.install"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">latest</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">version</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;pip install &#39;</span><span class="si">%s%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">latest</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;pip install &#39;</span><span class="si">%s</span><span class="s">&#39; --upgrade&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;pip install &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="PythonPackage.remove"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">names</span><span class="p">,</span><span class="n">clearcache</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param names can be 1 name as str or array when list</span>
+<span class="sd">        will look in all possible python paths &amp; remove the python lib</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">clearcache</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clearcache</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+            <span class="n">name2</span><span class="o">=</span><span class="n">names</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="c"># name2=name2.replace(&quot;python&quot;,&quot;&quot;)</span>
+            <span class="n">res</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">findPackagesInstalled</span><span class="p">(</span><span class="n">name2</span><span class="p">)</span>
+            <span class="n">ok</span><span class="o">=</span><span class="bp">False</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                <span class="n">item2</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">item2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;python&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">item2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;py&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="c">#found python package installed through aptget, remove</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">version</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">name2</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;pip uninstall -y </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span><span class="p">)</span>
+
+            
+            <span class="c">#get paths from python out of config</span>
+            <span class="c"># print &quot;FIND TO REMOVE:%s&quot;%name2</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getUsrPathNames</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name2</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;ipython&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>                        
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">onlyIfExists</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                            <span class="c"># print &quot;removed:%s&quot;%path</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">pass</span>
+
+                <span class="c"># print &quot;remove %s from python dir:%s&quot;%(name,path)</span>
+            <span class="k">if</span> <span class="n">clearcache</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clearcache</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="PythonPackage.list"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;pip list&quot;</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exitcode</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="c"># print &quot;WARNING CMD &#39;PIP LIST&#39; IS GIVING ERRORS, PLEASE CHECK, IMPORTANT&quot;   </span>
+            <span class="k">pass</span>     
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;^(?P&lt;name&gt;[\w-]+)\s+\((?P&lt;version&gt;[\w\.]+)\)&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rec</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="c">#@todo fix P1</span>
+
+</div>
+<div class="viewcode-block" id="PythonPackage.getSitePackagePathLocal"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.getSitePackagePathLocal">[docs]</a>    <span class="k">def</span> <span class="nf">getSitePackagePathLocal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">sandbox</span><span class="p">:</span>
+            <span class="n">base</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;libext&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">base</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;python.paths.local.sitepackages&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">base</span>
+</div>
+<div class="viewcode-block" id="PythonPackage.copyLibsToLocalSitePackagesDir"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibsToLocalSitePackagesDir">[docs]</a>    <span class="k">def</span> <span class="nf">copyLibsToLocalSitePackagesDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rootpath</span><span class="p">,</span><span class="n">remove</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        list all files and dirs in specified path and for each one call</span>
+<span class="sd">        self.copyLibToLocalSitePackagesDir</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesAndDirsInDir</span><span class="p">(</span><span class="n">rootpath</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">copyLibToLocalSitePackagesDir</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">remove</span><span class="o">=</span><span class="n">remove</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="PythonPackage.copyLibToLocalSitePackagesDir"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibToLocalSitePackagesDir">[docs]</a>    <span class="k">def</span> <span class="nf">copyLibToLocalSitePackagesDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">remove</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        copy library to python.paths.local.sitepackages config param in main jumpscale hrd </span>
+<span class="sd">        eg. for ubuntu is: /usr/local/lib/python2.7/site-packages/</span>
+<span class="sd">        does this for 1 lib, so the dir needs to be the library by itself</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        
+        <span class="n">sitepackagepath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getSitePackagePathLocal</span><span class="p">()</span>
+        <span class="n">base</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">dest</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">sitepackagepath</span><span class="p">,</span><span class="n">base</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">remove</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;copy python lib from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">dest</span><span class="p">),</span><span class="mi">5</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;python.install&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">createDirIfNeeded</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwriteFile</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">dest</span><span class="p">,</span> <span class="n">keepsymlinks</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eraseDestination</span><span class="o">=</span><span class="n">remove</span><span class="p">,</span> <span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwriteFiles</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

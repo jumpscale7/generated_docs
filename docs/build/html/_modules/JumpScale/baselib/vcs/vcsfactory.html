@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.vcs.vcsfactory &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.vcs.vcsfactory</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="n">BASEURLS</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;github&#39;</span><span class="p">:</span> <span class="s">&#39;github.com&#39;</span><span class="p">,</span>
+            <span class="s">&#39;bitbucket&#39;</span><span class="p">:</span> <span class="s">&#39;bitbucket.org&#39;</span><span class="p">}</span>
+
+<div class="viewcode-block" id="VCSConfig"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSConfig">[docs]</a><span class="k">class</span> <span class="nc">VCSConfig</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_account</span> <span class="o">=</span> <span class="n">account</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_provider</span> <span class="o">=</span> <span class="n">provider</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">checkParam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;@</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">key</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">&quot;@</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">question</span> <span class="o">=</span> <span class="s">&quot;Please provide </span><span class="si">%s</span><span class="s"> for </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_provider</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">password</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askPassword</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">addSection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ini</span><span class="o">.</span><span class="n">addParam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_account</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="VCSConfig.login"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSConfig.login">[docs]</a>    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getConfig</span><span class="p">(</span><span class="s">&#39;login&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="VCSConfig.passwd"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSConfig.passwd">[docs]</a>    <span class="k">def</span> <span class="nf">passwd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getConfig</span><span class="p">(</span><span class="s">&#39;passwd&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="VCSFactory"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSFactory">[docs]</a><span class="k">class</span> <span class="nc">VCSFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="VCSFactory.getClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSFactory.getClient">[docs]</a>    <span class="k">def</span> <span class="nf">getClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">):</span>
+        <span class="n">userconfig</span> <span class="o">=</span> <span class="n">VCSConfig</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">basepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">codeDir</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">userconfig</span><span class="o">.</span><span class="n">login</span>
+        <span class="n">passwd</span> <span class="o">=</span> <span class="n">userconfig</span><span class="o">.</span><span class="n">passwd</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;git&quot;</span><span class="p">]:</span>
+            <span class="kn">from</span> <span class="nn">JumpScale.baselib</span> <span class="kn">import</span> <span class="n">git</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s">&#39;git&#39;</span><span class="p">:</span> <span class="c"># This is ssh</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">@</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.git&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">BASEURLS</span><span class="p">[</span><span class="n">provider</span><span class="p">],</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">@</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.git&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">,</span> <span class="n">BASEURLS</span><span class="p">[</span><span class="n">provider</span><span class="p">],</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VCSGITClient</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">basepath</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">login</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="n">passwd</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;hg&#39;</span><span class="p">]:</span>
+            <span class="kn">from</span> <span class="nn">JumpScale.baselib</span> <span class="kn">import</span> <span class="n">mercurial</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;hg&#39;</span><span class="p">,</span> <span class="s">&#39;ssh&#39;</span><span class="p">):</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;ssh://hg@</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">BASEURLS</span><span class="p">[</span><span class="n">provider</span><span class="p">],</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">@</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">,</span> <span class="n">BASEURLS</span><span class="p">[</span><span class="n">provider</span><span class="p">],</span> <span class="n">account</span><span class="p">,</span> <span class="n">reponame</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">VCSHGClient</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">mercurial</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">basepath</span><span class="p">,</span> <span class="n">url</span><span class="p">))</span>
+</div></div>
+<div class="viewcode-block" id="VCSClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient">[docs]</a><span class="k">class</span> <span class="nc">VCSClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="VCSClient.update"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSClient.clone"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSClient.checkout"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient.checkout">[docs]</a>    <span class="k">def</span> <span class="nf">checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">revision</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSClient.push"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient.push">[docs]</a>    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSClient.init"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSClient.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make sure repo exist clone if not existing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</div></div>
+<div class="viewcode-block" id="VCSGITClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSGITClient">[docs]</a><span class="k">class</span> <span class="nc">VCSGITClient</span><span class="p">(</span><span class="n">VCSClient</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">baseDir</span>
+
+<div class="viewcode-block" id="VCSGITClient.clone"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSGITClient.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_clone</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSGITClient.update"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSGITClient.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSGITClient.push"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSGITClient.push">[docs]</a>    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">force</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VCSGITClient.init"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSGITClient.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</div></div>
+<div class="viewcode-block" id="VCSHGClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSHGClient">[docs]</a><span class="k">class</span> <span class="nc">VCSHGClient</span><span class="p">(</span><span class="n">VCSClient</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">basedir</span>
+
+<div class="viewcode-block" id="VCSHGClient.clone"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSHGClient.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_clone</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSHGClient.update"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSHGClient.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">pullupdate</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VCSHGClient.push"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSHGClient.push">[docs]</a>    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="VCSHGClient.init"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.vcs.html#JumpScale.baselib.vcs.vcsfactory.VCSHGClient.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span> <span class="c"># mercurial repos are initialized at contruction time</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.screen package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-baselib-screen-package">
+<h1>JumpScale.baselib.screen package<a class="headerlink" href="#jumpscale-baselib-screen-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.baselib.screen.Screen">
+<span id="jumpscale-baselib-screen-screen-module"></span><h2>JumpScale.baselib.screen.Screen module<a class="headerlink" href="#module-JumpScale.baselib.screen.Screen" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.screen.Screen.Screen">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.screen.Screen.</tt><tt class="descname">Screen</tt><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.attachSession">
+<tt class="descname">attachSession</tt><big>(</big><em>sessionname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.attachSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.attachSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.attached">
+<tt class="descname">attached</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.attached"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.attached" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.createSession">
+<tt class="descname">createSession</tt><big>(</big><em>sessionname</em>, <em>screens</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.createSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.createSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param name is name of session
+&#64;screens is list with nr of screens required in session and their names (is [$screenname,...])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.createWindow">
+<tt class="descname">createWindow</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.createWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.createWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.executeInScreen">
+<tt class="descname">executeInScreen</tt><big>(</big><em>sessionname</em>, <em>screenname</em>, <em>cmd</em>, <em>wait=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.executeInScreen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.executeInScreen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.getSessions">
+<tt class="descname">getSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.getSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.getSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.killSession">
+<tt class="descname">killSession</tt><big>(</big><em>sessionname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.killSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.killSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.killSessions">
+<tt class="descname">killSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.killSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.killSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.killWindow">
+<tt class="descname">killWindow</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.killWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.killWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.listSessions">
+<tt class="descname">listSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.listSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.listSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.listWindows">
+<tt class="descname">listWindows</tt><big>(</big><em>session</em>, <em>attemps=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.listWindows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.listWindows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Screen.Screen.windowExists">
+<tt class="descname">windowExists</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Screen.html#Screen.windowExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Screen.Screen.windowExists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.screen.Tmux">
+<span id="jumpscale-baselib-screen-tmux-module"></span><h2>JumpScale.baselib.screen.Tmux module<a class="headerlink" href="#module-JumpScale.baselib.screen.Tmux" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.screen.Tmux.</tt><tt class="descname">Tmux</tt><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.attachSession">
+<tt class="descname">attachSession</tt><big>(</big><em>sessionname</em>, <em>windowname=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.attachSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.attachSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.createSession">
+<tt class="descname">createSession</tt><big>(</big><em>sessionname</em>, <em>screens</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.createSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.createSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param name is name of session
+&#64;screens is list with nr of screens required in session and their names (is [$screenname,...])</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.createWindow">
+<tt class="descname">createWindow</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.createWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.createWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.executeInScreen">
+<tt class="descname">executeInScreen</tt><big>(</big><em>sessionname</em>, <em>screenname</em>, <em>cmd</em>, <em>wait=0</em>, <em>cwd=None</em>, <em>env=None</em>, <em>user='root'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.executeInScreen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.executeInScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param sessionname Name of the tmux session
+&#64;type sessionname str
+&#64;param screenname Name of the window in the session
+&#64;type screenname str
+&#64;param cmd command to execute
+&#64;type cmd str
+&#64;param wait time to wait for output
+&#64;type wait int
+&#64;param cwd workingdir for command only in new screen see newscr
+&#64;type cwd str
+&#64;param env environment variables for cmd onlt in new screen see newscr
+&#64;type env dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.getPid">
+<tt class="descname">getPid</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.getPid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.getPid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.getSessionNames">
+<tt class="descname">getSessionNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.getSessionNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.getSessionNames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.getSessions">
+<tt class="descname">getSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.getSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.getSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.killSession">
+<tt class="descname">killSession</tt><big>(</big><em>sessionname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.killSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.killSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.killSessions">
+<tt class="descname">killSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.killSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.killSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.killWindow">
+<tt class="descname">killWindow</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.killWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.killWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.listSessions">
+<tt class="descname">listSessions</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.listSessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.listSessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.listWindows">
+<tt class="descname">listWindows</tt><big>(</big><em>session</em>, <em>attemps=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.listWindows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.listWindows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.logWindow">
+<tt class="descname">logWindow</tt><big>(</big><em>session</em>, <em>name</em>, <em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.logWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.logWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.screen.Tmux.Tmux.windowExists">
+<tt class="descname">windowExists</tt><big>(</big><em>session</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/screen/Tmux.html#Tmux.windowExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.screen.Tmux.Tmux.windowExists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.screen">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.screen" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.baselib.screen package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.screen.Screen">JumpScale.baselib.screen.Screen module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.screen.Tmux">JumpScale.baselib.screen.Tmux module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.screen">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.baselib.screen.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

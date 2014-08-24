@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>jsexec &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Admin" href="index.html" />
+    <link rel="next" title="AgentController" href="../AgentController/index.html" />
+    <link rel="prev" title="jsadmin" href="JSAdmin.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../AgentController/index.html" title="AgentController"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JSAdmin.html" title="jsadmin"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Admin</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jsexec">
+<h1>jsexec<a class="headerlink" href="#jsexec" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># jsexec --help</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">jsexec</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">REMOTE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">GRIDNAME</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CFGNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span> <span class="n">EXTRA</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">f</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="n">COMMAND</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">s</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span><span class="p">]</span>
+              <span class="p">[</span><span class="o">--</span><span class="n">roles</span> <span class="n">ROLES</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">TIMEOUT</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">runid</span> <span class="n">RUNID</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">reset</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
+  <span class="o">-</span><span class="n">r</span> <span class="n">REMOTE</span><span class="p">,</span> <span class="o">--</span><span class="n">remote</span> <span class="n">REMOTE</span>
+                        <span class="n">hostname</span> <span class="n">of</span> <span class="n">node</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">,</span> <span class="o">--</span><span class="n">passwd</span> <span class="n">PASSWD</span>
+                        <span class="n">Root</span> <span class="n">password</span> <span class="n">to</span> <span class="n">use</span><span class="p">,</span> <span class="k">if</span> <span class="nb">any</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">,</span> <span class="o">--</span><span class="n">name</span> <span class="n">NAME</span>  <span class="n">Names</span> <span class="n">of</span> <span class="n">jumpscript</span> <span class="n">to</span> <span class="n">execute</span> <span class="p">(</span><span class="n">comma</span> <span class="n">separated</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">GRIDNAME</span><span class="p">,</span> <span class="o">--</span><span class="n">gridname</span> <span class="n">GRIDNAME</span>
+                        <span class="n">Name</span> <span class="n">of</span> <span class="n">grid</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">c</span> <span class="n">CFGNAME</span><span class="p">,</span> <span class="o">--</span><span class="n">cfgname</span> <span class="n">CFGNAME</span>
+                        <span class="n">Name</span> <span class="n">of</span> <span class="n">cfg</span> <span class="n">directory</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">e</span> <span class="n">EXTRA</span><span class="p">,</span> <span class="o">--</span><span class="n">extra</span> <span class="n">EXTRA</span>
+                        <span class="n">Extra</span> <span class="n">config</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">tag</span> <span class="n">format</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>
+                        <span class="n">cpasswd</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="n">myname</span><span class="p">:</span><span class="n">kds</span>
+  <span class="o">-</span><span class="n">f</span><span class="p">,</span> <span class="o">--</span><span class="n">force</span>           <span class="n">auto</span> <span class="n">answer</span> <span class="n">yes</span> <span class="n">on</span> <span class="n">every</span> <span class="n">question</span> <span class="ow">and</span> <span class="n">redo</span> <span class="n">even</span> <span class="k">if</span>
+                        <span class="n">already</span> <span class="n">done</span>
+  <span class="o">-</span><span class="n">x</span> <span class="n">COMMAND</span><span class="p">,</span> <span class="o">--</span><span class="n">command</span> <span class="n">COMMAND</span>
+                        <span class="k">if</span> <span class="n">this</span> <span class="n">one</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">then</span> <span class="n">just</span> <span class="n">this</span> <span class="n">command</span> <span class="n">will</span> <span class="n">be</span>
+                        <span class="n">execute</span>
+  <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">sync</span>            <span class="n">then</span> <span class="n">will</span> <span class="n">be</span> <span class="n">done</span> <span class="n">one</span> <span class="n">after</span> <span class="n">the</span> <span class="n">other</span>
+  <span class="o">-</span><span class="n">g</span>                    <span class="n">Apply</span> <span class="n">on</span> <span class="nb">all</span> <span class="n">active</span> <span class="n">nodes</span> <span class="n">on</span> <span class="n">grid</span>
+  <span class="o">--</span><span class="n">roles</span> <span class="n">ROLES</span>         <span class="n">Used</span> <span class="k">with</span> <span class="o">-</span><span class="n">g</span><span class="o">.</span> <span class="n">Apply</span> <span class="n">on</span> <span class="n">active</span> <span class="n">nodes</span> <span class="n">that</span> <span class="n">have</span> <span class="n">these</span>
+                        <span class="n">roles</span><span class="o">.</span> <span class="n">ex</span><span class="p">:</span> <span class="o">--</span><span class="n">roles</span><span class="o">=</span><span class="n">node</span><span class="p">,</span> <span class="n">computenode</span><span class="o">.</span><span class="n">kvm</span><span class="p">(</span><span class="n">note</span> <span class="n">the</span> <span class="o">=</span>
+                        <span class="n">sign</span><span class="p">)</span><span class="o">.</span> <span class="n">List</span> <span class="ow">is</span> <span class="n">comma</span> <span class="n">seperated</span>
+  <span class="o">-</span><span class="n">t</span> <span class="n">TIMEOUT</span><span class="p">,</span> <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span>
+                        <span class="n">Time</span> <span class="n">to</span> <span class="n">wait</span> <span class="n">to</span> <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">available</span>
+  <span class="o">--</span><span class="n">runid</span> <span class="n">RUNID</span>         <span class="n">Give</span> <span class="n">run</span> <span class="n">a</span> <span class="n">specific</span> <span class="nb">id</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">reset</span>               <span class="n">If</span> <span class="n">reset</span> <span class="n">info</span> <span class="k">for</span> <span class="n">that</span> <span class="n">run</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="kn">from</span> <span class="nn">redis.</span>
+</pre></div>
+</div>
+<div class="section" id="usage-of-runid">
+<h2>usage of runid<a class="headerlink" href="#usage-of-runid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>when launching a run if you specify a runid, then jsexec will remember which nodes where already executed ok and will not be repeated</li>
+<li>if jsexec hangs or crashes (in async mode can happen) you can always look at result by doing &#8216;jsadmin print &#8211;runid=$yourrunid&#8217;</li>
+</ul>
+</div>
+<div class="section" id="selection-criteria-are-much-more-flexible-as-before">
+<h2>selection criteria are much more flexible as before<a class="headerlink" href="#selection-criteria-are-much-more-flexible-as-before" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>see AdminPrinciples &lt;AdminPrinciples&gt;</li>
+</ul>
+</div>
+<div class="section" id="sync-or-not-to-sync">
+<h2>sync or not to sync<a class="headerlink" href="#sync-or-not-to-sync" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>make sure you run it with &#8211;runid=$yourRunId</li>
+<li>when many nodes, best is to start sync to see script is running</li>
+<li>if ok then stop jsadmin and then run async</li>
+<li>now it will go much faster, let it finish</li>
+<li>you will see all the ones which did not succeed yet, run again but now sync and repair issue by issue</li>
+</ul>
+</div>
+<div class="section" id="some-examples">
+<h2>some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">jsexec</a><ul>
+<li><a class="reference internal" href="#usage-of-runid">usage of runid</a></li>
+<li><a class="reference internal" href="#selection-criteria-are-much-more-flexible-as-before">selection criteria are much more flexible as before</a></li>
+<li><a class="reference internal" href="#sync-or-not-to-sync">sync or not to sync</a></li>
+<li><a class="reference internal" href="#some-examples">some examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JSAdmin.html"
+                        title="previous chapter">jsadmin</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../AgentController/index.html"
+                        title="next chapter">AgentController</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/Admin/JSExec.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../AgentController/index.html" title="AgentController"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JSAdmin.html" title="jsadmin"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >Admin</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

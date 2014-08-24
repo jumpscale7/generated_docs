@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.Dirs &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.Dirs</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">inspect</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">curdir</span>                        <span class="c"># Default</span>
+<span class="k">if</span> <span class="s">&#39;JSBASE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+    <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;JSBASE&#39;</span><span class="p">]</span>
+<span class="k">elif</span> <span class="s">&#39;JSJAIL&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+    <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;JSJAIL&#39;</span><span class="p">]</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;posix&#39;</span><span class="p">:</span>
+    <span class="c"># home = os.path.expanduser(&quot;~/&quot;)</span>
+    <span class="n">home</span><span class="o">=</span><span class="s">&quot;/opt/jumpscale&quot;</span>
+<span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;nt&#39;</span><span class="p">:</span>                   <span class="c"># Contributed by Jeff Bauer</span>
+    <span class="k">if</span> <span class="s">&#39;HOMEPATH&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s">&#39;HOMEDRIVE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOMEDRIVE&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOMEPATH&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOMEPATH&#39;</span><span class="p">]</span>
+
+<span class="c"># if not &#39;JSBASE&#39; in os.environ:</span>
+<span class="c">#     print &quot;WARNING: did not find JSBASE env environment, please set and point to your sandbox&quot;</span>
+
+<span class="k">def</span> <span class="nf">pathToUnicode</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<div class="viewcode-block" id="pathToUnicode"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.pathToUnicode">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert path to unicode. Use the local filesystem encoding. Will return</span>
+<span class="sd">    path unmodified if path already is unicode.</span>
+
+<span class="sd">    @param path: path to convert to unicode</span>
+<span class="sd">    @type path: basestring</span>
+<span class="sd">    @return: unicode path</span>
+<span class="sd">    @rtype: unicode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getfilesystemencoding</span><span class="p">())</span>
+
+<span class="k">class</span> <span class="nc">Dirs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs">[docs]</a>    <span class="sd">&quot;&quot;&quot;Utility class to configure and store all relevant directory paths&quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;jumpscale sandbox base folder&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__initialized</span> <span class="o">=</span> <span class="bp">False</span> <span class="c">##bool</span>
+
+        <span class="kn">import</span> <span class="nn">sys</span>
+        
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;library.zip&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="o">=</span><span class="bp">False</span>
+
+        <span class="n">iswindows</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="s">&quot;nt&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="o">=</span><span class="n">home</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+
+        <span class="sd">&#39;&#39;&#39;Application installation base folder (basedir/apps)&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">appDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+        
+        <span class="sd">&#39;&#39;&#39;Configuration file folder (appdir/cfg)&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="s">&#39;JSBASE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/../&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">),</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_data&quot;</span><span class="o">%</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)),</span><span class="s">&quot;cfg&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s">&#39;JSJAIL&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/../&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">),</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)),</span><span class="s">&quot;cfg&quot;</span><span class="p">)</span>            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;cfg&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">)</span>
+
+        <span class="n">tpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;debug&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">tpath</span><span class="p">)</span>
+
+        <span class="n">tpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;debug&quot;</span><span class="p">,</span><span class="s">&quot;protecteddirs&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">tpath</span><span class="p">)</span>
+
+        <span class="n">tpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;grid&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">tpath</span><span class="p">)</span>
+
+        <span class="n">tpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;hrd&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">tpath</span><span class="p">)</span>
+
+        <span class="sd">&#39;&#39;&#39;Var folder (basedir/var)&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">varDir</span> <span class="o">=</span> <span class="s">&quot;/var/jumpscale&quot;</span>
+        <span class="k">elif</span> <span class="s">&#39;JSBASE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/../&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">),</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_data&quot;</span><span class="o">%</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">),</span><span class="s">&quot;var&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">varDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;var&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">)</span>
+
+        <span class="sd">&#39;&#39;&#39;Temporary file folder (appdir/tmp)&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">iswindows</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tmpDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span><span class="s">&quot;tmp&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tmpDir</span> <span class="o">=</span> <span class="s">&quot;/tmp/jumpscale&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmpDir</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">iswindows</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">libDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;library.zip&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">libDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;lib&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">libDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">libExtDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;libext&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;libext&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">libDir</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">libDir</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">libDir</span><span class="p">)</span>
+
+        <span class="n">pythonzip</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">libDir</span><span class="p">,</span> <span class="s">&#39;python.zip&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pythonzip</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">pythonzip</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">pythonzip</span><span class="p">))</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">pythonzip</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">libExtDir</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">libExtDir</span><span class="p">))</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">libExtDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span><span class="s">&quot;log&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">packageDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span><span class="s">&quot;jpackages&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">packageDir</span><span class="p">)</span>
+
+        <span class="c"># self.homeDir = pathToUnicode(os.path.join(home, &quot;.jsbase&quot;))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pidDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span><span class="s">&quot;log&quot;</span><span class="p">)</span>           
+
+
+
+        <span class="k">if</span> <span class="s">&#39;JSBASE&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&#39;bin&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binDir</span> <span class="o">=</span> <span class="s">&quot;/usr/local/bin&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">codeDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span><span class="s">&quot;code&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">codeDir</span><span class="o">=</span><span class="s">&quot;/opt/code&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codeDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hrdDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;hrd&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hrdDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">configsDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span><span class="s">&quot;jsconfig&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configsDir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getLibPath</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">replaceTxtDirVars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">txt</span><span class="p">,</span><span class="n">additionalArgs</span><span class="o">=</span><span class="p">{}):</span>
+<div class="viewcode-block" id="Dirs.replaceTxtDirVars"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.replaceTxtDirVars">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        replace $base,$vardir,$cfgdir,$bindir,$codedir,$tmpdir,$logdir,$appdir with props of this class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$base&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$appdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">appDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$codedir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">codeDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$vardir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">varDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$cfgdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$bindir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">binDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$logdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">logDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$tmpdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">tmpDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$libdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">libDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$jslibdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$jslibextdir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">libExtDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$jsbindir&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">binDir</span><span class="p">)</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$nodeid&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">nid</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">additionalArgs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">key</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">txt</span>
+
+    <span class="k">def</span> <span class="nf">replaceFilesDirVars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">additionalArgs</span><span class="o">=</span><span class="p">{}):</span></div>
+<div class="viewcode-block" id="Dirs.replaceFilesDirVars"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.replaceFilesDirVars">[docs]</a>        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">paths</span><span class="o">=</span><span class="p">[</span><span class="n">path</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">paths</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">recursive</span><span class="p">,</span><span class="nb">filter</span><span class="p">)</span>
+            
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">content2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replaceTxtDirVars</span><span class="p">(</span><span class="n">content</span><span class="p">,</span><span class="n">additionalArgs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">content2</span><span class="o">&lt;&gt;</span><span class="n">content</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="p">,</span><span class="n">contents</span><span class="o">=</span><span class="n">content2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_createDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">reinit</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Dirs.init"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.init">[docs]</a>        <span class="sd">&quot;&quot;&quot;Initializes all the configured directories if needed</span>
+
+<span class="sd">        If a folder attribute is None, set its value to the corresponding</span>
+<span class="sd">        default path.</span>
+
+<span class="sd">        @returns: Initialization success</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">reinit</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__initialized</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">()</span> <span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">codeDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&#39;code&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadProtectedDirs</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">deployDefaultFilesInSandbox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__initialized</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">_getParent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the parent of the path:</span>
+<span class="sd">        /dir1/dir2/file_or_dir -&gt; /dir1/dir2/</span>
+<span class="sd">        /dir1/dir2/            -&gt; /dir1/</span>
+<span class="sd">        @todo why do we have 2 implementations which are almost the same see getParentDirName()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">=</span><span class="n">parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">parts</span><span class="o">=</span><span class="n">parts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">parts</span><span class="o">==</span><span class="p">[</span><span class="s">&#39;&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getLibPath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getParent</span>        
+        <span class="n">libDir</span><span class="o">=</span><span class="n">parent</span><span class="p">(</span><span class="n">parent</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+        <span class="n">libDir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">libDir</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">libDir</span>
+
+    <span class="k">def</span> <span class="nf">getPathOfRunningFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">function</span><span class="p">):</span>
+<div class="viewcode-block" id="Dirs.getPathOfRunningFunction"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.getPathOfRunningFunction">[docs]</a>        <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">loadProtectedDirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs.loadProtectedDirs"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.loadProtectedDirs">[docs]</a>        <span class="n">protectedDirsDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&#39;debug&#39;</span><span class="p">,</span> <span class="s">&#39;protecteddirs&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">protectedDirsDir</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_createDir</span><span class="p">(</span><span class="n">protectedDirsDir</span><span class="p">)</span>
+        <span class="n">_listOfCfgFiles</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">protectedDirsDir</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s">&#39;*.cfg&#39;</span><span class="p">)</span>
+        <span class="n">_protectedDirsList</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_cfgFile</span> <span class="ow">in</span> <span class="n">_listOfCfgFiles</span><span class="p">:</span>
+            <span class="n">_cfg</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">_cfgFile</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">_dirs</span> <span class="o">=</span> <span class="n">_cfg</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">_dir</span> <span class="ow">in</span> <span class="n">_dirs</span><span class="p">:</span>
+                <span class="n">_dir</span> <span class="o">=</span> <span class="n">_dir</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">_dir</span><span class="p">):</span>
+                    <span class="c"># npath=j.system.fs.pathNormalize(_dir)</span>
+                    <span class="k">if</span> <span class="n">_dir</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_protectedDirsList</span><span class="p">:</span>
+                        <span class="n">_protectedDirsList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protectedDirs</span> <span class="o">=</span> <span class="n">_protectedDirsList</span>
+
+
+    <span class="k">def</span> <span class="nf">addProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs.addProtectedDir"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.addProtectedDir">[docs]</a>        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">pathNormalize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">configfile</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&#39;debug&#39;</span><span class="p">,</span> <span class="s">&#39;protecteddirs&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.cfg&quot;</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">configfile</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">configfile</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+                <span class="n">content</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">configfile</span><span class="p">,</span><span class="n">content</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">loadProtectedDirs</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">removeProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs.removeProtectedDir"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.removeProtectedDir">[docs]</a>        <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">pathNormalize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">protectedDirsDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&#39;debug&#39;</span><span class="p">,</span> <span class="s">&#39;protecteddirs&#39;</span><span class="p">)</span>
+        <span class="n">_listOfCfgFiles</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">protectedDirsDir</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s">&#39;*.cfg&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_cfgFile</span> <span class="ow">in</span> <span class="n">_listOfCfgFiles</span><span class="p">:</span>
+            <span class="n">_cfg</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">_cfgFile</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">_dirs</span> <span class="o">=</span> <span class="n">_cfg</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="n">found</span><span class="o">=</span><span class="bp">False</span>
+            <span class="k">for</span> <span class="n">_dir</span> <span class="ow">in</span> <span class="n">_dirs</span><span class="p">:</span>
+                <span class="n">_dir</span> <span class="o">=</span> <span class="n">_dir</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">_dir</span><span class="o">==</span><span class="n">path</span><span class="p">:</span>
+                    <span class="c">#found, need to remove</span>
+                    <span class="n">found</span><span class="o">=</span><span class="bp">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">_dir</span>
+            <span class="k">if</span> <span class="n">found</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">_cfgFile</span><span class="p">,</span><span class="n">out</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">loadProtectedDirs</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">checkInProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs.checkInProtectedDir"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.checkInProtectedDir">[docs]</a>        <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">pathNormalize</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">protectedDirs</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">!=-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">deployDefaultFilesInSandbox</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Dirs.deployDefaultFilesInSandbox"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Dirs.Dirs.deployDefaultFilesInSandbox">[docs]</a>        <span class="n">iswindows</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="s">&quot;nt&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span> <span class="ow">or</span> <span class="n">iswindows</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="s">&#39;JSJAIL&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c">#@todo P3 let it work for windows as well</span>
+        <span class="n">bindest</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;bin&quot;</span><span class="p">)</span>
+        <span class="n">utilsdest</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span><span class="s">&quot;utils&quot;</span><span class="p">)</span>
+        <span class="n">cfgdest</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cfgDir</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bindest</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">utilsdest</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cfgdest</span><span class="p">):</span>
+            <span class="n">cfgsource</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">,</span><span class="s">&quot;core&quot;</span><span class="p">,</span><span class="s">&quot;_defaultcontent&quot;</span><span class="p">,</span><span class="s">&quot;cfg&quot;</span><span class="p">)</span>
+            <span class="n">binsource</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">,</span><span class="s">&quot;core&quot;</span><span class="p">,</span><span class="s">&quot;_defaultcontent&quot;</span><span class="p">,</span><span class="s">&quot;linux&quot;</span><span class="p">,</span><span class="s">&quot;bin&quot;</span><span class="p">)</span>
+            <span class="n">utilssource</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsLibDir</span><span class="p">,</span><span class="s">&quot;core&quot;</span><span class="p">,</span><span class="s">&quot;_defaultcontent&quot;</span><span class="p">,</span><span class="s">&quot;linux&quot;</span><span class="p">,</span><span class="s">&quot;utils&quot;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">binsource</span><span class="p">,</span><span class="n">bindest</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">utilssource</span><span class="p">,</span><span class="n">utilsdest</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">cfgsource</span><span class="p">,</span><span class="n">cfgdest</span><span class="p">,</span><span class="n">overwriteFiles</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">ipythondir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;HOME&#39;</span><span class="p">],</span> <span class="s">&#39;.ipython&#39;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="n">ipythondir</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">reloadconfig</span><span class="p">()</span>
+
+            
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span> <span class="c">#@todo P3 implement (thisnis not working)</span>
+
+    <span class="n">__repr__</span><span class="o">=</span><span class="n">__str__</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

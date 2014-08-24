@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.inifile.IniFile &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.inifile.IniFile</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">JumpScale</span> <span class="kn">as</span> <span class="nn">jumpscale</span>
+<span class="kn">from</span> <span class="nn">ConfigParser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="c">#@todo UGLY, validation should not happen on object (file) where you read from but on file where you populate values (kds)</span>
+
+<div class="viewcode-block" id="InifileTool"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.InifileTool">[docs]</a><span class="k">class</span> <span class="nc">InifileTool</span><span class="p">:</span>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="InifileTool.open"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.InifileTool.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">createIfNonExisting</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Open an existing INI file</span>
+
+<span class="sd">        @param filename: Filename of INI file</span>
+<span class="sd">        @type filename: string</span>
+
+<span class="sd">        @raises RuntimeError: When the provided filename doesn&#39;t exist</span>
+
+<span class="sd">        @returns: Opened INI file object</span>
+<span class="sd">        @rtype: jumpscale.inifile.IniFile.IniFile</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">createIfNonExisting</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">InifileTool</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Attempt to open non-existing INI file </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">IniFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="InifileTool.new"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.InifileTool.new">[docs]</a>    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Create a new INI file</span>
+
+<span class="sd">        @param filename: Filename of INI file</span>
+<span class="sd">        @type filename: string</span>
+
+<span class="sd">        @raises RuntimeError: When the provided filename exists</span>
+
+<span class="sd">        @returns: New INI file object</span>
+<span class="sd">        @rtype: jumpscale.inifile.IniFile.IniFile</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Attempt to create existing INI file </span><span class="si">%s</span><span class="s"> as a new file&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">IniFile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="IniFile"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile">[docs]</a><span class="k">class</span> <span class="nc">IniFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use with care:</span>
+<span class="sd">    - addParam and setParam are &#39;auto-write&#39;</span>
+<span class="sd">    - addSection isn&#39;t</span>
+<span class="sd">    - removeSection isn&#39;t</span>
+<span class="sd">    - removeParam isn&#39;t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__configParser</span> <span class="o">=</span> <span class="bp">None</span> <span class="c">##ConfigParser</span>
+    <span class="n">__inifilepath</span> <span class="o">=</span> <span class="bp">None</span> <span class="c">##string</span>
+    <span class="n">__file</span> <span class="o">=</span> <span class="bp">None</span> <span class="c">##File-like object</span>
+    <span class="n">__removeWhenDereferenced</span> <span class="o">=</span> <span class="bp">False</span> <span class="c">##bool</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iniFile</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">removeWhenDereferenced</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initialize IniFile. If the file already exists, read it and parse the structure.</span>
+<span class="sd">            If the file did not yet exist. Don&#39;t do anything yet.</span>
+
+<span class="sd">            @param iniFile:                The file to write to. This can be either a string representing a file-path or a file-like object</span>
+<span class="sd">            @type iniFile:                 string or file-like object</span>
+<span class="sd">            @param create:                 Whether or not to create a new file (Ignored if iniFile is a file-like object)</span>
+<span class="sd">            @type create: bool</span>
+<span class="sd">            @param removeWhenDereferenced: Whether or not to remove the file when this object is dereferenced</span>
+<span class="sd">            @type removeWhenDereferenced:  bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__removeWhenDereferenced</span> <span class="o">=</span> <span class="n">removeWhenDereferenced</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iniFile</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span> <span class="c"># iniFile is a filepath</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span> <span class="o">=</span> <span class="n">iniFile</span>
+            <span class="k">if</span> <span class="n">create</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">iniFile</span><span class="p">))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Create config file: &quot;</span><span class="o">+</span><span class="n">iniFile</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">iniFile</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">iniFile</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Inifile could not be found on location </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span>  <span class="n">iniFile</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c"># iniFile is a file-like object</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__file</span> <span class="o">=</span> <span class="n">iniFile</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__readFile</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns string representation of the IniFile&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&#39;&lt;IniFile&gt; filepath: </span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span>
+
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__removeWhenDereferenced</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__readFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c">#content=j.system.fs.fileGetContents(self.__inifilepath)</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">:</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">readfp</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">err</span>
+            <span class="k">if</span> <span class="n">fp</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fp</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Failed to read the inifile </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+
+<div class="viewcode-block" id="IniFile.getSections"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getSections">[docs]</a>    <span class="k">def</span> <span class="nf">getSections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return list of sections from this IniFile&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">sections</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&quot;Failed to get sections </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getParams"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getParams">[docs]</a>    <span class="k">def</span> <span class="nf">getParams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return list of params in a certain section of this IniFile</span>
+<span class="sd">        @param sectionName: Name of the section for which you wish the param&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">):</span> <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">sectionName</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&quot;Failed to get parameters under the specified section: </span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.checkSection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.checkSection">[docs]</a>    <span class="k">def</span> <span class="nf">checkSection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Boolean indicating whether section exists in this IniFile</span>
+<span class="sd">        @param sectionName: name of the section&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">sectionName</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Failed to check if the specified section: </span><span class="si">%s</span><span class="s"> exists </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.checkParam"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.checkParam">[docs]</a>    <span class="k">def</span> <span class="nf">checkParam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Boolean indicating whether parameter exists under this section in the IniFile</span>
+<span class="sd">        @param sectionName: name of the section where the param should be located</span>
+<span class="sd">        @param paramName:   name of the parameter you wish to check&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">has_option</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Failed to check if the parameter: </span><span class="si">%s</span><span class="s"> under section: </span><span class="si">%s</span><span class="s"> exists </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getValue"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getValue">[docs]</a>    <span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get value of the parameter from this IniFile</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter</span>
+<span class="sd">        @param raw:         boolean specifying whether you wish the value to be returned raw</span>
+<span class="sd">        @param default: if given and the value does not exist the default value will be given</span>
+<span class="sd">        @return: The value&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">default</span><span class="o">&lt;&gt;</span><span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkParam</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">default</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">raw</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: get </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> from </span><span class="si">%s</span><span class="s">, result:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span><span class="n">result</span><span class="p">),</span><span class="mi">7</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&#39;Failed to get value of the parameter: </span><span class="si">%s</span><span class="s"> under section: </span><span class="si">%s</span><span class="s"> in file </span><span class="si">%s</span><span class="s">.</span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getBooleanValue"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getBooleanValue">[docs]</a>    <span class="k">def</span> <span class="nf">getBooleanValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get boolean value of the specified parameter</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">getboolean</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: get boolean </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> from </span><span class="si">%s</span><span class="s">, result:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span><span class="n">result</span><span class="p">),</span><span class="mi">7</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&#39;Inifile: Failed to get boolean value of parameter:</span><span class="si">%s</span><span class="s"> under section:</span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getIntValue"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getIntValue">[docs]</a>    <span class="k">def</span> <span class="nf">getIntValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get an integer value of the specified parameter</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">getint</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: get integer </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> from </span><span class="si">%s</span><span class="s">, result:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span><span class="n">result</span><span class="p">),</span><span class="mi">7</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&#39;Failed to get integer value of parameter: </span><span class="si">%s</span><span class="s"> under section: </span><span class="si">%s</span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getFloatValue"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getFloatValue">[docs]</a>    <span class="k">def</span> <span class="nf">getFloatValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get float value of the specified parameter</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">getfloat</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: get integer </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> from </span><span class="si">%s</span><span class="s">, result:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">,</span><span class="n">result</span><span class="p">),</span><span class="mi">7</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s">&#39;Failed to get float value of parameter:</span><span class="si">%s</span><span class="s"> under section:</span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: %&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="IniFile.addSection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.addSection">[docs]</a>    <span class="k">def</span> <span class="nf">addSection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add a new section to this Inifile. If it already existed, silently pass</span>
+<span class="sd">        @param sectionName: name of the section&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">)):</span>
+                <span class="k">return</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: add section </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">sectionName</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to add section with sectionName: </span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.addParam"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.addParam">[docs]</a>    <span class="k">def</span> <span class="nf">addParam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add name-value pair to section of IniFile</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter</span>
+<span class="sd">        @param newValue:    value you wish to assign to the parameter&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">newvalue</span><span class="p">)</span><span class="o">==</span><span class="s">&quot;none&quot;</span><span class="p">:</span>
+                <span class="n">newvalue</span><span class="o">==</span><span class="s">&quot;*NONE*&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">newvalue</span><span class="p">))</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: set </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">newvalue</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">))</span>
+            <span class="c">#if self.checkParam(sectionName, paramName):</span>
+            <span class="c">#    return True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to add parameter with sectionName: </span><span class="si">%s</span><span class="s">, parameterName: </span><span class="si">%s</span><span class="s">, value: </span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.setParam"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.setParam">[docs]</a>    <span class="k">def</span> <span class="nf">setParam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Add name-value pair to section of IniFile</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter</span>
+<span class="sd">        @param newValue:    value you wish to assign to the parameter&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addParam</span><span class="p">(</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">,</span> <span class="n">newvalue</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="IniFile.removeSection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.removeSection">[docs]</a>    <span class="k">def</span> <span class="nf">removeSection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Remove a section from this IniFile</span>
+<span class="sd">        @param sectionName: name of the section&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">remove_section</span><span class="p">(</span><span class="n">sectionName</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;inifile: remove section </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="n">sectionName</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to remove section </span><span class="si">%s</span><span class="s"> with </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.removeParam"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.removeParam">[docs]</a>    <span class="k">def</span> <span class="nf">removeParam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Remove a param from this IniFile</span>
+<span class="sd">        @param sectionName: name of the section</span>
+<span class="sd">        @param paramName:   name of the parameter&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkParam</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">remove_option</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span> <span class="n">paramName</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile:remove </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> from </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">paramName</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to remove parameter: </span><span class="si">%s</span><span class="s"> under section: </span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">paramName</span><span class="p">,</span> <span class="n">sectionName</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.write"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filePath</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Write the IniFile content to disk</span>
+<span class="sd">        This completely overwrites the file</span>
+<span class="sd">        @param filePath: location where the file will be written</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">closeFileHandler</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Inifile: Write configfile </span><span class="si">%s</span><span class="s"> to disk&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filePath</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span><span class="p">:</span> <span class="c"># Use the inifilepath that was set in the constructor</span>
+                <span class="n">filePath</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inifilepath</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span><span class="p">:</span> <span class="c"># write to the file-like object that was set in the constructor</span>
+                <span class="n">closeFileHandler</span> <span class="o">=</span> <span class="bp">False</span> <span class="c"># We don&#39;t want to close this object</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span> <span class="c"># Clear the file-like object before writing to it</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c"># Nothing to write to</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;No filepath to write to&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="c"># Completely overwrite the file.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">closeFileHandler</span><span class="p">:</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fp</span> <span class="ow">and</span> <span class="n">closeFileHandler</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">fp</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Failed to update the inifile at &#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">ERROR: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="IniFile.getContent"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getContent">[docs]</a>    <span class="k">def</span> <span class="nf">getContent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Get the Inifile content to a string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#@todo jumpscale primitives should be used (no fp...)</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
+            <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__file</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+            <span class="n">fp</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__configParser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="IniFile.getSectionAsDict"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getSectionAsDict">[docs]</a>    <span class="k">def</span> <span class="nf">getSectionAsDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getParams</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+            <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retval</span>
+</div>
+<div class="viewcode-block" id="IniFile.getFileAsDict"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.inifile.html#JumpScale.baselib.inifile.IniFile.IniFile.getFileAsDict">[docs]</a>    <span class="k">def</span> <span class="nf">getFileAsDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSections</span><span class="p">():</span>
+            <span class="n">retval</span><span class="p">[</span><span class="n">section</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSectionAsDict</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retval</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

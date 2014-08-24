@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.hash.HashTool &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.hash.HashTool</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">with_statement</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="k">class</span> <span class="nc">HashTool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">hashDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rootpath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        walk over all files, calculate md5 and of sorted list also calc md5 this is the resulting hash for the dir independant from time and other metadata (appart from path)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">paths</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">rootpath</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">paths</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+        <span class="n">paths2</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">:</span>
+            <span class="n">path2</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rootpath</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span> 
+            <span class="k">if</span> <span class="n">path2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;/&quot;</span><span class="p">:</span>
+                <span class="n">path2</span><span class="o">=</span><span class="n">path2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">paths2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path2</span><span class="p">)</span>
+        <span class="n">paths2</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">path2</span> <span class="ow">in</span> <span class="n">paths2</span><span class="p">:</span>
+            <span class="n">realpath</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">rootpath</span><span class="p">,</span><span class="n">path2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="n">checkFileToIgnore</span><span class="p">(</span><span class="n">realpath</span><span class="p">):</span>
+<span class="c">#                print &quot;realpath %s %s&quot; % (rootpath,path2)</span>
+                <span class="n">hhash</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">hash</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">realpath</span><span class="p">)</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">|</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">hhash</span><span class="p">,</span><span class="n">path2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">byteprocessor</span><span class="o">.</span><span class="n">hashMd5</span><span class="p">(</span><span class="n">out</span><span class="p">),</span><span class="n">out</span>        
+
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">zlib</span>
+
+<span class="k">def</span> <span class="nf">_hash_funcs</span><span class="p">(</span><span class="n">alg</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Function generator for hashlib-compatible hashing implementations&#39;&#39;&#39;</span>
+    <span class="n">template_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;alg&#39;</span><span class="p">:</span> <span class="n">alg</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_string</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Calculate %(alg)s hash of input string</span>
+
+<span class="sd">        @param s: String value to hash</span>
+<span class="sd">        @type s: string</span>
+
+<span class="sd">        @returns: %(alg)s hash hex digest of the input value</span>
+<span class="sd">        @rtype: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">impl</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">alg</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">impl</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="c"># _string.__doc__ = _string.__doc__ % template_data</span>
+
+    <span class="k">def</span> <span class="nf">_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Calculate %(alg)s hash of content available on an FD</span>
+
+<span class="sd">        Blocks of the blocksize used by the hashing algorithm will be read from</span>
+<span class="sd">        the given FD, which should be a file-like object (i.e. it should</span>
+<span class="sd">        implement C{read(number)}).</span>
+
+<span class="sd">        @param fd: FD to read</span>
+<span class="sd">        @type fd: object</span>
+
+<span class="sd">        @returns: %(alg)s hash hex digest of data available on C{fd}</span>
+<span class="sd">        @rtype: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">impl</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">alg</span><span class="p">)</span>
+        <span class="c"># We use the blocksize used by the hashing implementation. This will be</span>
+        <span class="c"># fairly small, maybe this should be raised if this ever becomes an</span>
+        <span class="c"># issue</span>
+        <span class="n">blocksize</span> <span class="o">=</span> <span class="n">impl</span><span class="o">.</span><span class="n">block_size</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">blocksize</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">impl</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="c"># Maybe one day this will help the GC</span>
+            <span class="k">del</span> <span class="n">s</span>
+
+        <span class="k">return</span> <span class="n">impl</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="c"># _fd.__doc__ = _fd.__doc__ % template_data</span>
+
+    <span class="k">def</span> <span class="nf">_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Calculate %(alg)s hash of data available in a file</span>
+
+<span class="sd">        The file will be opened in read/binary mode and blocks of the blocksize</span>
+<span class="sd">        used by the hashing implementation will be read.</span>
+
+<span class="sd">        @param path: Path to file to calculate content hash</span>
+<span class="sd">        @type path: string</span>
+
+<span class="sd">        @returns: %(alg)s hash hex digest of data available in the given file</span>
+<span class="sd">        @rtype: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+
+    <span class="c"># _file.__doc__ = _file.__doc__ % template_data</span>
+
+    <span class="k">return</span> <span class="n">_string</span><span class="p">,</span> <span class="n">_fd</span><span class="p">,</span> <span class="n">_file</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="c"># List of all supported algoritms</span>
+<span class="n">SUPPORTED_ALGORITHMS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;md5&#39;</span><span class="p">,</span> <span class="s">&#39;sha1&#39;</span><span class="p">,</span> <span class="s">&#39;sha256&#39;</span><span class="p">,</span> <span class="s">&#39;sha512&#39;</span><span class="p">,</span> <span class="p">]</span>
+
+<span class="c"># For every supported algorithm, create the associated hash functions and add</span>
+<span class="c"># them to the module globals</span>
+<span class="n">_glob</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_alg</span> <span class="ow">in</span> <span class="n">SUPPORTED_ALGORITHMS</span><span class="p">:</span>
+    <span class="n">_string</span><span class="p">,</span> <span class="n">_fd</span><span class="p">,</span> <span class="n">_file</span> <span class="o">=</span> <span class="n">_hash_funcs</span><span class="p">(</span><span class="n">_alg</span><span class="p">)</span>
+    <span class="n">_glob</span><span class="p">[</span><span class="n">_alg</span><span class="p">]</span> <span class="o">=</span> <span class="n">_string</span>
+    <span class="n">_glob</span><span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_fd&#39;</span> <span class="o">%</span> <span class="n">_alg</span><span class="p">]</span> <span class="o">=</span> <span class="n">_fd</span>
+    <span class="n">_glob</span><span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_file&#39;</span> <span class="o">%</span> <span class="n">_alg</span><span class="p">]</span> <span class="o">=</span> <span class="n">_file</span>
+
+    <span class="n">__all__</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_alg</span><span class="p">)</span>
+    <span class="n">__all__</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_fd&#39;</span> <span class="o">%</span> <span class="n">_alg</span><span class="p">)</span>
+    <span class="n">__all__</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_file&#39;</span> <span class="o">%</span> <span class="n">_alg</span><span class="p">)</span>
+
+
+<span class="c"># CRC32 is not supported by hashlib</span>
+<div class="viewcode-block" id="crc32"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.hash.html#JumpScale.baselib.hash.HashTool.crc32">[docs]</a><span class="k">def</span> <span class="nf">crc32</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate CRC32 hash of input string</span>
+
+<span class="sd">    @param s: String value to hash</span>
+<span class="sd">    @type s: string</span>
+
+<span class="sd">    @returns: CRC32 hash of the input value</span>
+<span class="sd">    @rtype: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="crc32_fd"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.hash.html#JumpScale.baselib.hash.HashTool.crc32_fd">[docs]</a><span class="k">def</span> <span class="nf">crc32_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate CRC32 hash of content available on an FD</span>
+
+<span class="sd">    Blocks of the blocksize used by the hashing algorithm will be read from</span>
+<span class="sd">    the given FD, which should be a file-like object (i.e. it should</span>
+<span class="sd">    implement C{read(number)}).</span>
+
+<span class="sd">    @param fd: FD to read</span>
+<span class="sd">    @type fd: object</span>
+
+<span class="sd">    @returns: CRC32 hash of data available on C{fd}</span>
+<span class="sd">    @rtype: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">fd</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">crc32</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="crc32_file"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.hash.html#JumpScale.baselib.hash.HashTool.crc32_file">[docs]</a><span class="k">def</span> <span class="nf">crc32_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculate CRC32 hash of data available in a file</span>
+
+<span class="sd">    The file will be opened in read/binary mode and blocks of the blocksize</span>
+<span class="sd">    used by the hashing implementation will be read.</span>
+
+<span class="sd">    @param path: Path to file to calculate content hash</span>
+<span class="sd">    @type path: string</span>
+
+<span class="sd">    @returns: CRC32 hash of data available in the given file</span>
+<span class="sd">    @rtype: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">crc32_fd</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+</div>
+<span class="n">SUPPORTED_ALGORITHMS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;crc32&#39;</span><span class="p">)</span>
+<span class="n">__all__</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="s">&#39;crc32&#39;</span><span class="p">,</span> <span class="s">&#39;crc32_fd&#39;</span><span class="p">,</span> <span class="s">&#39;crc32_file&#39;</span><span class="p">,</span> <span class="p">))</span>
+
+<span class="n">SUPPORTED_ALGORITHMS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">SUPPORTED_ALGORITHMS</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">alg</span> <span class="ow">in</span> <span class="n">SUPPORTED_ALGORITHMS</span><span class="p">:</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">HashTool</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">_string&#39;</span> <span class="o">%</span> <span class="n">alg</span><span class="p">,</span><span class="nb">staticmethod</span><span class="p">(</span><span class="n">_glob</span><span class="p">[</span><span class="n">alg</span><span class="p">]))</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">HashTool</span><span class="p">,</span> <span class="n">alg</span><span class="p">,</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">_glob</span><span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">_file&#39;</span> <span class="o">%</span> <span class="n">alg</span><span class="p">]))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.portalloaders.LoaderBase &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.portalloaders.LoaderBase</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<div class="viewcode-block" id="LoaderBase"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBase">[docs]</a><span class="k">class</span> <span class="nc">LoaderBase</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    is loader for all objects e.g. for all actors or spaces</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">objectClass</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">s&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_objectClass</span> <span class="o">=</span> <span class="n">objectClass</span>
+
+<div class="viewcode-block" id="LoaderBase.getLoaderFromId"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.getLoaderFromId">[docs]</a>    <span class="k">def</span> <span class="nf">getLoaderFromId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find loader with id </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LoaderBase.removeLoader"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.removeLoader">[docs]</a>    <span class="k">def</span> <span class="nf">removeLoader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">s&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+                <span class="n">loader</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+
+    <span class="c"># def _getSystemLoaderForUsersGroups(self):</span>
+    <span class="c">#     lba = LoaderBaseObject(&quot;&quot;)</span>
+    <span class="c">#     userspath = j.system.fs.joinPaths(j.core.portal.active.cfgdir, &#39;users.cfg&#39;)</span>
+    <span class="c">#     if not j.system.fs.exists(userspath):</span>
+    <span class="c">#         ini = j.config.getInifile(userspath)</span>
+    <span class="c">#         ini.addSection(&#39;admin&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;admin&#39;, &#39;passwd&#39;, &#39;admin&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;admin&#39;, &#39;groups&#39;, &#39;admin&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;admin&#39;, &#39;reset&#39;, &#39;1&#39;)</span>
+    <span class="c">#         ini.addSection(&#39;guest&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;guest&#39;, &#39;passwd&#39;, &#39;&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;guest&#39;, &#39;groups&#39;, &#39;guest&#39;)</span>
+    <span class="c">#         ini.addParam(&#39;guest&#39;, &#39;reset&#39;, &#39;1&#39;)</span>
+
+    <span class="c">#     lba.processUsers(j.core.portal.active.cfgdir)</span>
+</div>
+<div class="viewcode-block" id="LoaderBase.scan"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.scan">[docs]</a>    <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        path can be 1 path or list of paths</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">reset</span><span class="p">)</span>
+            <span class="k">return</span> 
+
+        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">pathNormalize</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span>
+                 <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listDirsInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                 <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">]</span>
+
+        <span class="c">#find objects like spaces,actors,...</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="nb">object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_objectClass</span><span class="p">()</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">loadFromDisk</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;load </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">id2object</span><span class="p">[</span><span class="nb">object</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="nb">object</span>
+</div></div>
+<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">():</span>
+    <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="LoaderBaseObject"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject">[docs]</a><span class="k">class</span> <span class="nc">LoaderBaseObject</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    is loader for 1 object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">Model</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="o">==</span><span class="s">&quot;actor&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">application</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">actor</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">acl</span><span class="o">=</span><span class="p">{}</span> <span class="c">#dict with key the group or username; and the value is a string</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+        <span class="c"># self._osis=None</span>
+
+    <span class="k">def</span> <span class="nf">_createDefaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portalloader</span><span class="o">.</span><span class="n">getTemplatesPath</span><span class="p">(),</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+        <span class="n">dest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">keepsymlinks</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">eraseDestination</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwriteFiles</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>        
+
+    <span class="k">def</span> <span class="nf">_loadFromDisk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="c"># path=path.replace(&quot;\\&quot;,&quot;/&quot;)</span>
+        <span class="c"># print &quot;loadfromdisk:%s&quot; % path</span>
+
+        <span class="c"># remove old cfg and write new one with only id</span>
+        <span class="n">cfgpath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&quot;.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s">&quot;main.cfg&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cfgpath</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">createDefaults</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="c"># if j.system.fs.exists(cfgpath):</span>
+            <span class="c"># ini=j.tools.inifile.open(cfgpath)</span>
+        <span class="c"># if ini.checkParam(&quot;main&quot;,&quot;name&quot;):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cfgpath</span><span class="p">)</span>
+        <span class="n">ini</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">inifile</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">cfgpath</span><span class="p">)</span>
+        <span class="n">ini</span><span class="o">.</span><span class="n">addSection</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">ini</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span> <span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">ini</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processAcl</span><span class="p">()</span>
+
+    <span class="c"># def processUsers(self, cfgdir=None):</span>
+    <span class="c">#     if cfgdir == &quot;&quot;:</span>
+    <span class="c">#         cfgfile = j.system.fs.joinPaths(self.model.path, &quot;.%s&quot; % self.type, &quot;users.cfg&quot;)</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         cfgfile = j.system.fs.joinPaths(cfgdir, &quot;users.cfg&quot;)</span>
+
+    <span class="c">#     def iniManipulator(ini, section, existsInDb, obj, objFromIni, args):</span>
+    <span class="c">#         # for each obj this will be called</span>
+    <span class="c">#         # can manipulate the inifile or obj</span>
+    <span class="c">#         objFromIni.groups = [item.lower() for item in objFromIni.groups]</span>
+    <span class="c">#         skip = False</span>
+
+    <span class="c">#         if existsInDb:</span>
+    <span class="c">#             reset = False</span>
+    <span class="c">#             if ini.checkParam(section, &quot;reset&quot;):</span>
+    <span class="c">#                 if str(ini.getValue(section, &quot;reset&quot;)) == &quot;1&quot;:</span>
+    <span class="c">#                     reset = True</span>
+    <span class="c">#             if not reset:</span>
+    <span class="c">#                 # means is in actors,space or bucket cannot overwrite existing object when from system</span>
+    <span class="c">#                 print &quot;skipped user insert for user %s because already created by system.&quot; % objFromIni.id</span>
+    <span class="c">#                 return ini, obj, objFromIni, True  # will not use this entry from the config file</span>
+
+    <span class="c">#         if objFromIni.id.find(&quot;@&quot;) != -1 and objFromIni.emails == &quot;&quot;:</span>
+    <span class="c">#             # email in id needs to be set as email in obj</span>
+    <span class="c">#             objFromIni.emails = [obj.id]</span>
+    <span class="c">#             ini.setParam(section, &quot;emails&quot;, objFromIni.id)</span>
+    <span class="c">#         if ini.checkParam(section, &quot;key&quot;):</span>
+    <span class="c">#             objFromIni.secret = ini.getValue(section, &quot;key&quot;)</span>
+    <span class="c">#             ini.setParam(section, &quot;secret&quot;, objFromIni.secret)  # for backwards compatibility, no longer required</span>
+    <span class="c">#         if objFromIni.secret == &quot;&quot;:</span>
+    <span class="c">#             objFromIni.secret = objFromIni.guid.replace(&quot;-&quot;, &quot;&quot;)[:9]</span>
+    <span class="c">#             if not ini.checkParam(section, &quot;secret&quot;) or (ini.checkParam(section, &quot;secret&quot;) and ini.getValue(section, &quot;secret&quot;).lower() != &quot;none&quot;):</span>
+    <span class="c">#                 ini.setParam(section, &quot;secret&quot;, objFromIni.secret)</span>
+    <span class="c">#         if objFromIni.passwd == &quot;&quot;:</span>
+    <span class="c">#             objFromIni.passwd = objFromIni.secret</span>
+    <span class="c">#             # ini.setParam(section,&quot;passwd&quot;,obj.passwd)</span>
+    <span class="c">#         return ini, obj, objFromIni, skip</span>
+
+
+<div class="viewcode-block" id="LoaderBaseObject.processAcl"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.processAcl">[docs]</a>    <span class="k">def</span> <span class="nf">processAcl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfgdir</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="c"># populate acl</span>
+        <span class="k">if</span> <span class="n">cfgdir</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s">&quot;.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s">&quot;acl.cfg&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">cfgdir</span><span class="p">,</span> <span class="s">&quot;acl.cfg&quot;</span><span class="p">)</span>
+
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">cfgfile</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;#&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">separator</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;=&quot;</span><span class="p">,</span> <span class="s">&quot;:&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">name</span><span class="p">,</span> <span class="n">rights</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">rights</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rights</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">acl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rights</span>
+                    <span class="c"># print &quot;ACE:%s %s&quot;%(name,rights)</span>
+</div>
+<div class="viewcode-block" id="LoaderBaseObject.deleteOnDisk"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.deleteOnDisk">[docs]</a>    <span class="k">def</span> <span class="nf">deleteOnDisk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="LoaderBaseObject.reset"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portalloaders.html#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadFromDisk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

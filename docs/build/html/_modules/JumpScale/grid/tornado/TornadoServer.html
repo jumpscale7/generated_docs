@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.tornado.TornadoServer &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.tornado.TornadoServer</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+
+<span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+<span class="kn">import</span> <span class="nn">tornado.web</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.serverbase</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="MainHandlerRPC"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.MainHandlerRPC">[docs]</a><span class="k">class</span> <span class="nc">MainHandlerRPC</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    processes the incoming web requests</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MainHandlerRPC.initialize"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.MainHandlerRPC.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
+</div>
+<div class="viewcode-block" id="MainHandlerRPC.post"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.MainHandlerRPC.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">body</span>
+        
+        <span class="n">category</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">informat</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">sessionid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">_unserializeBinSend</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">resultcode</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">processRPCUnSerialized</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">informat</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="n">sessionid</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">)</span>
+        <span class="n">data3</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">_serializeBinReturn</span><span class="p">(</span><span class="n">resultcode</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="c"># resultcode,returnformat,result2=j.servers.base._unserializeBinReturn(data3)</span>
+        <span class="c"># if result&lt;&gt;result2:</span>
+        <span class="c">#     from IPython import embed</span>
+        <span class="c">#     print &quot;DEBUG NOW serialization not work in post&quot;</span>
+        <span class="c">#     embed()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span>
+        <span class="c"># self.set_header(&#39;Content-Type&#39;,&#39;application/octet-stream&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+
+<span class="c"># class MainHandlerGetWork(tornado.web.RequestHandler):</span>
+
+<span class="c">#     &quot;&quot;&quot;</span>
+<span class="c">#     processes the incoming web requests</span>
+<span class="c">#     &quot;&quot;&quot;</span>
+
+<span class="c">#     def initialize(self, server):</span>
+<span class="c">#         self.server = server</span>
+
+<span class="c">#     @tornado.web.asynchronous</span>
+<span class="c">#     def get(self):</span>
+<span class="c">#         print &#39;Request via GET&#39;, self</span>
+<span class="c">#         from IPython import embed</span>
+<span class="c">#         print &quot;DEBUG NOW get&quot;</span>
+<span class="c">#         embed()</span>
+
+<span class="c">#     def wait(self, nrsec):</span>
+<span class="c">#         self.server.ioloop.add_timeout(self.server.ioloop.time() + 10, self.done)</span>
+
+<span class="c">#     def done(self):</span>
+<span class="c">#         self.write(&quot;YES WORKED&quot;)</span>
+<span class="c">#         self.finish()</span>
+
+</div></div>
+<div class="viewcode-block" id="TornadoServer"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.TornadoServer">[docs]</a><span class="k">class</span> <span class="nc">TornadoServer</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">sslorg</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ssluser</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param handler is passed as a class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span> <span class="o">=</span> <span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s">&quot;1234&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c"># self.jobhandler = JobHandler()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">getDaemon</span><span class="p">(</span><span class="n">sslorg</span><span class="o">=</span><span class="n">sslorg</span><span class="p">,</span> <span class="n">ssluser</span><span class="o">=</span><span class="n">ssluser</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="o">=</span><span class="n">sslkeyvaluestor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">([(</span><span class="s">r&quot;/rpc/&quot;</span><span class="p">,</span> <span class="n">MainHandlerRPC</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="bp">self</span><span class="p">)),</span> <span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;tornado&quot;</span>
+
+<div class="viewcode-block" id="TornadoServer.start"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.TornadoServer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s">&quot;started on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ioloop</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TornadoServer.addCMDsInterface"><a class="viewcode-back" href="../../../../API/JumpScale.grid.tornado.html#JumpScale.grid.tornado.TornadoServer.TornadoServer.addCMDsInterface">[docs]</a>    <span class="k">def</span> <span class="nf">addCMDsInterface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">MyCommands</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">addCMDsInterface</span><span class="p">(</span><span class="n">MyCommands</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

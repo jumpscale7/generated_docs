@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.clients &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-clients">
+<h1>j.clients<a class="headerlink" href="#j-clients" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.graphite.html">j.clients.graphite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.graphite.html#close">close</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.graphite.html#query">query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.graphite.html#send">send</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.http.html">j.clients.http</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.http.html#getconnection">getConnection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.credis.html">j.clients.credis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.credis.html#getredisclient">getRedisClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.credis.html#getredisqueue">getRedisQueue</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.influxdb.html">j.clients.influxdb</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.influxdb.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.rogerthat.html">j.clients.rogerthat</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.rogerthat.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.gitlab.html">j.clients.gitlab</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.gitlab.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.gitlab.html#log">log</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.mercurial.html">j.clients.mercurial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.mercurial.html#getclient">getClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.mercurial.html#log">log</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.vcs.html">j.clients.vcs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.vcs.html#getclient">getClient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.elasticsearch.html">j.clients.elasticsearch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.elasticsearch.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.redis.html">j.clients.redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#checkallinstances">checkAllInstances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#configureinstance">configureInstance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#deleteinstance">deleteInstance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#emptyallinstances">emptyAllInstances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#emptyinstance">emptyInstance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getgeventredisclient">getGeventRedisClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getgeventredisqueue">getGeventRedisQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getport">getPort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getprocesspids">getProcessPids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getredisclient">getRedisClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#getredisqueue">getRedisQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#startinstance">startInstance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.redis.html#stopinstance">stopInstance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.blobstor.html">j.clients.blobstor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.blobstor.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.blobstor.html#log">log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.blobstor.html#parse">parse</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.mongodb.html">j.clients.mongodb</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.mongodb.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.routeros.html">j.clients.routeros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.routeros.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.github.html">j.clients.github</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.github.html#getclient">getClient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.bitbucket.config.html">j.clients.bitbucket.config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#add">add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#getconfig">getConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#review">review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#saveall">saveAll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.config.html#show">show</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.email.html">j.clients.email</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.email.html#send">send</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.git.html">j.clients.git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.git.html#getclient">getClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.git.html#log">log</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.bitbucket.html">j.clients.bitbucket</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#accountadd">accountAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#accountsremove">accountsRemove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#accountsreview">accountsReview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#accountsshow">accountsShow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#getbitbucketrepoclient">getBitbucketRepoClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#getmecurialrepoclient">getMecurialRepoClient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#getrepoinfo">getRepoInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucket.html#log">log</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.ciscoswitch.html">j.clients.ciscoswitch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.ciscoswitch.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.agentcontroller.html">j.clients.agentcontroller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.agentcontroller.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.agentcontroller.html#getbyinstance">getByInstance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.agentcontroller.html#getclientproxy">getClientProxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.agentcontroller.html#getinstanceconfig">getInstanceConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.webdis.html">j.clients.webdis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.webdis.html#check">check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.webdis.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.webdis.html#getbyinstance">getByInstance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.clients.bitbucketi.html">j.clients.bitbucketi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucketi.html#getaccount">getAccount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucketi.html#getrepo">getRepo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.clients.bitbucketi.html#init">init</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/clients/clients.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

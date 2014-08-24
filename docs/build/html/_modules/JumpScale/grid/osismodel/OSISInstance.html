@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.osismodel.OSISInstance &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.osismodel.OSISInstance</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="c"># from IndexerWhoosh import IndexerWhoosh</span>
+
+
+<div class="viewcode-block" id="OSISInstanceNoDB"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstanceNoDB">[docs]</a><span class="k">class</span> <span class="nc">OSISInstanceNoDB</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelname</span><span class="p">,</span> <span class="n">classs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span> <span class="o">=</span> <span class="n">classs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">appname</span> <span class="o">=</span> <span class="n">appname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actorname</span> <span class="o">=</span> <span class="n">actorname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span> <span class="o">=</span> <span class="n">modelname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">getModelSpec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">appname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+        <span class="n">idspec</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">properties</span> <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;id&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idspec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">idspec</span> <span class="o">=</span> <span class="n">idspec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idType</span> <span class="o">=</span> <span class="n">idspec</span><span class="o">.</span><span class="n">type</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idType</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">listProps</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">,</span> <span class="s">&quot;guid&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">propspec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">properties</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">propspec</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">propspec</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listProps</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">listProps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">propspec</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getObj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">dict2JSModelobject</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">(),</span> <span class="n">attributes</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_getDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">obj2dict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="OSISInstanceNoDB.new"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstanceNoDB.new">[docs]</a>    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create new object from class &amp; return</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">guid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+</div></div>
+<div class="viewcode-block" id="OSISRemoteOSISInstance"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance">[docs]</a><span class="k">class</span> <span class="nc">OSISRemoteOSISInstance</span><span class="p">(</span><span class="n">OSISInstanceNoDB</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelname</span><span class="p">,</span> <span class="n">classs</span><span class="p">):</span>
+        <span class="n">OSISInstanceNoDB</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelname</span><span class="p">,</span> <span class="n">classs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="s">&#39;root&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getObj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getDict</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">zobjects</span><span class="o">.</span><span class="n">getModelObject</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<div class="viewcode-block" id="OSISRemoteOSISInstance.set"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getObj</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">key</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">changed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">getSerializable</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">key</span>
+</div>
+<div class="viewcode-block" id="OSISRemoteOSISInstance.get"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c"># TODO invoke guid to id osis call</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">dict2JSModelobject</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">(),</span> <span class="n">obj</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISRemoteOSISInstance.delete"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c"># TODO invoke guid to id osis call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="k">return</span>
+</div>
+<div class="viewcode-block" id="OSISRemoteOSISInstance.find"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISRemoteOSISInstance.list"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISRemoteOSISInstance.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">remoteOSISClient</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="OSISInstance"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance">[docs]</a><span class="k">class</span> <span class="nc">OSISInstance</span><span class="p">(</span><span class="n">OSISInstanceNoDB</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelname</span><span class="p">,</span> <span class="n">classs</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">indexer</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">OSISInstanceNoDB</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">modelname</span><span class="p">,</span> <span class="n">classs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="n">db</span>
+        <span class="k">if</span> <span class="n">index</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">=</span> <span class="n">indexer</span>
+            <span class="c"># if indexer==None:</span>
+            <span class="c">#     self.indexer=IndexerWhoosh(&quot;%s_%s_%s&quot; % (appname,actorname,modelname))</span>
+            <span class="c"># else:</span>
+            <span class="c">#     self.indexer=indexer</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastNrRecords</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getNrRecords</span><span class="p">()</span>
+
+<div class="viewcode-block" id="OSISInstance.new"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.new">[docs]</a>    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create new object, generate id if needed, do not store !!!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">guid</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">guid</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">guid</span> <span class="o">=</span> <span class="n">guid</span>
+        <span class="k">if</span> <span class="nb">id</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">idType</span> <span class="o">==</span> <span class="s">&quot;int&quot;</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">obj</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.getNrRecords"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.getNrRecords">[docs]</a>    <span class="k">def</span> <span class="nf">getNrRecords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">getNrRecords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.link"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.link">[docs]</a>    <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">obj</span><span class="o">.</span><span class="n">guid</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.set"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getDict</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s">&#39;guid&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;guid&#39;</span><span class="p">]:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s">&#39;guid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]):</span>
+            <span class="n">saveddata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">obj2dict</span><span class="p">()</span>
+            <span class="n">saveddata</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">saveddata</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">saveddata</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">],</span> <span class="n">saveddata</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getObj</span><span class="p">(</span><span class="n">saveddata</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">getNrRecords</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">index</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span>
+</div>
+    <span class="k">def</span> <span class="nf">_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">spec</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">specparser</span><span class="o">.</span><span class="n">getModelSpec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">appname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+            <span class="n">indexcontent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">indexdef</span><span class="o">.</span><span class="n">getIndexArgs</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">objectToText4Index</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">spec</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">addIndexContent</span><span class="p">(</span><span class="n">indexcontent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getguid2id</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">guid</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="n">ignoreError</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">id</span>
+
+<div class="viewcode-block" id="OSISInstance.get"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">createIfNeeded</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span>
+        <span class="k">if</span> <span class="n">createIfNeeded</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+            <span class="c"># did not find object, will create</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;get object did not exist:</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">obj</span>
+
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getId</span><span class="p">(</span><span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">dict2JSModelobject</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelclass</span><span class="p">(),</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.getguid2id"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.getguid2id">[docs]</a>    <span class="k">def</span> <span class="nf">getguid2id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param guidCheck, if used will check that the guid returned is same as referenced by id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">guid</span><span class="p">)):</span>
+            <span class="n">dbid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">guid</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">id</span> <span class="ow">and</span> <span class="n">dbid</span> <span class="o">!=</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ignoreError</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Found an object (type:</span><span class="si">%s</span><span class="s">) starting from guid:</span><span class="si">%s</span><span class="s"> which had already id assigned which is different than the one asked for.</span><span class="se">\n</span><span class="s">Asked:</span><span class="si">%s</span><span class="s">, found:</span><span class="si">%s</span><span class="s">&quot;</span>
+                                       <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">dbid</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">dbid</span>
+        <span class="k">if</span> <span class="n">ignoreError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find object </span><span class="si">%s</span><span class="s"> with id </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">guid</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.exists"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">guid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getguid2id</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">guid</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">guid</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">exist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">exist</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># corruption in db, remove the reference</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">guid</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.delete"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c"># delete metadata about model in cat modellist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getId</span><span class="p">(</span><span class="n">guid</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">)):</span>
+            <span class="c"># now starting from object remove the id which also refers to this obj</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">guid</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;modeli_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">guid</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.optimize"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.find"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find indexer&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.destroyindex"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.destroyindex">[docs]</a>    <span class="k">def</span> <span class="nf">destroyindex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indexer</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.destroy"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.destroy">[docs]</a>    <span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        delete objects as well as index (all)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">destroyindex</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">incrementReset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+        <span class="c"># kkey=&quot;%s_%s_%s&quot; % (self.appname,self.actorname,self.modelname)</span>
+        <span class="c"># if j.core.osis.osisInstances.has_key(kkey):</span>
+        <span class="c">#     j.core.osis.osisInstances.pop(kkey)</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.obj2ini"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.obj2ini">[docs]</a>    <span class="k">def</span> <span class="nf">obj2ini</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[],</span> <span class="n">section</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert osis object to an inifile, only properties of root are used</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="c"># def ini2objects(self, cfgpath, overwriteInDB=True, deepcheck=True, ignoreWhenNotExist=False, manipulator=None,</span>
+    <span class="c">#                 manipulatorargs={}, limitVars=[], writeIni=True):</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     read inifile</span>
+    <span class="c">#     each section is a new object</span>
+    <span class="c">#     see if obj exists (starting from id &amp; guid)</span>
+    <span class="c">#     when overwriteInDB=True</span>
+    <span class="c">#       if obj found overwrite values in db from cfg file</span>
+    <span class="c">#     else:</span>
+    <span class="c">#       overwrite the ini file</span>
+    <span class="c">#     when deepcheck then check against inconsistencies</span>
+    <span class="c">#     @param ignoreWhenNotExist if true will continue even if ini file does not exists</span>
+
+    <span class="c">#     manipulator method allows you to manipulate ini file &amp; obj, if changes will be saved on disk or in db</span>
+    <span class="c">#     ini2,objFromDb,objFromIni,skip=manipulator(ini,section,existsInDb,objFromDB,objFromIni)</span>
+    <span class="c">#       existsInDb is True when it did exist in db</span>
+    <span class="c">#         when method puts skip on True then ini2object will return False</span>
+
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     result = []</span>
+    <span class="c">#     if j.system.fs.exists(cfgpath):</span>
+    <span class="c">#         ini = j.tools.inifile.open(cfgpath)</span>
+    <span class="c">#         for name in ini.getSections():</span>
+    <span class="c">#             if ini.checkParam(name, &quot;create&quot;):</span>
+    <span class="c">#                 create = ini.getIntValue(name, &quot;create&quot;) == 1</span>
+    <span class="c">#             else:</span>
+    <span class="c">#                 create = True</span>
+    <span class="c">#             # create true means we will overwrite the db</span>
+    <span class="c">#             obj = self.ini2object(cfgpath, section=name, overwriteInDB=create, manipulator=manipulator, manipulatorargs=manipulatorargs,</span>
+    <span class="c">#                                   limitVars=limitVars, writeIni=writeIni)</span>
+    <span class="c">#             if obj &lt;&gt; None:</span>
+    <span class="c">#                 result.append(obj)</span>
+    <span class="c">#         return result</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         if ignoreWhenNotExist:</span>
+    <span class="c">#             return []</span>
+    <span class="c">#         raise RuntimeError(&quot;Cannot find ini %s to convert to objects&quot; % cfgpath)</span>
+
+    <span class="c"># def ini2object(self, cfgpath, section=&quot;main&quot;, overwriteInDB=True, manipulator=None, manipulatorargs={}, limitVars=[], writeIni=True):</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     read inifile</span>
+    <span class="c">#     see if obj exists (starting from id &amp; guid)</span>
+    <span class="c">#     when overwriteInDB=True</span>
+    <span class="c">#       if obj found overwrite values in db from cfg file</span>
+    <span class="c">#     else:</span>
+    <span class="c">#       overwrite the ini file</span>
+    <span class="c">#     when deepcheck then check against inconsistencies</span>
+    <span class="c">#     if useId: then will use id when specified in inifile, if false will remove</span>
+
+
+
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     print &quot;ini2object for cfgpath:%s and section:%s&quot; % (cfgpath, section)</span>
+
+    <span class="c">#     if j.system.fs.exists(cfgpath):</span>
+    <span class="c">#         ini = j.tools.inifile.open(cfgpath)</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         ini = j.tools.inifile.new(cfgpath)</span>
+    <span class="c">#     if section &lt;&gt; &quot;main&quot;:</span>
+    <span class="c">#         id = section</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         if ini.checkParam(section, &quot;id&quot;):</span>
+    <span class="c">#             id = str(ini.getValue(section, &quot;id&quot;))</span>
+    <span class="c">#         else:</span>
+    <span class="c">#             id = None</span>
+
+    <span class="c">#     guid = None</span>
+    <span class="c">#     if ini.checkParam(section, &quot;guid&quot;):</span>
+    <span class="c">#         guid = str(ini.getValue(section, &quot;guid&quot;))</span>
+    <span class="c">#         if guid.strip() == &quot;&quot;:</span>
+    <span class="c">#             guid = None</span>
+
+    <span class="c">#     ini.setParam(section, &quot;id&quot;, id)</span>
+    <span class="c">#     if section == &quot;main&quot; and not ini.checkParam(section, &quot;id&quot;) and id &lt;&gt; None:</span>
+    <span class="c">#         ini.write()</span>
+
+    <span class="c">#     if ini.checkParam(section, &quot;reset&quot;):</span>
+    <span class="c">#         # if there is a reset value the overwriteindb will be adjusted following the reset value</span>
+    <span class="c">#         overwriteInDB = str(ini.getValue(section, &quot;reset&quot;)) == &quot;1&quot;</span>
+
+    <span class="c">#     existsInDb = self.exists(guid=guid, id=id)</span>
+    <span class="c">#     if not existsInDb:</span>
+    <span class="c">#         overwriteInDB = True</span>
+
+    <span class="c">#     obj = self.get(guid, id, createIfNeeded=True, ignoreError=True)</span>
+
+    <span class="c">#     if obj.guid &lt;&gt; guid and guid &lt;&gt; None:</span>
+    <span class="c">#         # found object but guid is not correct</span>
+    <span class="c">#         if overwriteInDB:</span>
+    <span class="c">#             obj.guid = guid</span>
+    <span class="c">#             self.set(obj)</span>
+    <span class="c">#         else:</span>
+    <span class="c">#             guid = obj.guid</span>
+    <span class="c">#             # will no longer remember guid on config files</span>
+    <span class="c">#             # ini.setParam(section,&quot;guid&quot;,guid)</span>
+    <span class="c">#             # ini.write()</span>
+
+    <span class="c">#     elif guid == None:</span>
+    <span class="c">#         guid = obj.guid</span>
+
+    <span class="c">#     if obj == None and self.exists(guid):</span>
+    <span class="c">#         # found object</span>
+    <span class="c">#         obj = self.get(guid)</span>
+    <span class="c">#         self.link(obj)</span>
+
+    <span class="c">#     objnew = self.new()  # is only in mem, does not get stored in DB</span>
+
+    <span class="c">#     def check2process(name):</span>
+    <span class="c">#         if name in [&quot;create&quot;, &quot;reset&quot;]:</span>
+    <span class="c">#             return False</span>
+    <span class="c">#         if limitVars &lt;&gt; [] and name not in limitVars:</span>
+    <span class="c">#             return False</span>
+    <span class="c">#         return True</span>
+
+    <span class="c">#     params = []</span>
+    <span class="c">#     spec = self.spec</span>
+    <span class="c">#     for prop in spec.properties:</span>
+    <span class="c">#         # print &quot;check2process:%s %s&quot;%(prop.name,check2process(prop.name))</span>
+    <span class="c">#         value = None</span>
+    <span class="c">#         if check2process(prop.name):</span>
+    <span class="c">#             # print &quot;section:%s propname:%s&quot; %(section,prop.name)</span>
+    <span class="c">#             default = prop.default</span>
+    <span class="c">#             ttype = prop.type</span>
+    <span class="c">#             name = prop.name</span>
+    <span class="c">#             params.append(name)</span>
+    <span class="c">#             if name &lt;&gt; &quot;id&quot; or section == &quot;main&quot;:</span>
+    <span class="c">#                 if not ini.checkParam(section, name):</span>
+    <span class="c">#                     ini.setParam(section, name, &quot;&quot;)</span>
+    <span class="c">#                     if writeIni:</span>
+    <span class="c">#                         ini.write()</span>
+    <span class="c">#                 if ttype == &quot;int&quot;:</span>
+    <span class="c">#                     value = ini.getValue(section, name)</span>
+    <span class="c">#                     if value == &quot;&quot; or value.lower() == &quot;none&quot;:</span>
+    <span class="c">#                         value = 0</span>
+    <span class="c">#                         ini.setParam(section, name, 0)</span>
+    <span class="c">#                         if writeIni:</span>
+    <span class="c">#                             ini.write()</span>
+    <span class="c">#                     else:</span>
+    <span class="c">#                         value = int(value)</span>
+    <span class="c">#                     if value == 0 and str(default) &lt;&gt; &quot;&quot;:</span>
+    <span class="c">#                         value = int(default)</span>
+    <span class="c">#                 elif ttype == &quot;str&quot;:</span>
+    <span class="c">#                     value = str(ini.getValue(section, name))</span>
+    <span class="c">#                     if not value and str(default):</span>
+    <span class="c">#                         value = str(default)</span>
+    <span class="c">#                 elif ttype == &quot;bool&quot;:</span>
+    <span class="c">#                     value = str(ini.getValue(section, name))</span>
+    <span class="c">#                     if value == &quot;1&quot;:</span>
+    <span class="c">#                         value = True</span>
+    <span class="c">#                     else:</span>
+    <span class="c">#                         value = False</span>
+    <span class="c">#                 elif ttype == &quot;list(str)&quot;:</span>
+    <span class="c">#                     value = [item.strip() for item in str(ini.getValue(section, name)).split(&quot;,&quot;)]</span>
+    <span class="c">#                 elif ttype == &quot;list(int)&quot;:</span>
+    <span class="c">#                     value = [int(item) for item in str(ini.getValue(section, name)).split(&quot;,&quot;)]</span>
+    <span class="c">#             else:</span>
+    <span class="c">#                 if name == &quot;id&quot;:</span>
+    <span class="c">#                     key = &quot;_P_%s&quot; % prop.name</span>
+    <span class="c">#                     objnew.__dict__[key] = id</span>
+
+    <span class="c">#             key = &quot;_P_%s&quot; % prop.name</span>
+    <span class="c">#             # print &quot;objnew: %s %s&quot; %(prop.name,value)</span>
+    <span class="c">#             if prop.name == &quot;guid&quot; and value == &quot;&quot;:</span>
+    <span class="c">#                 continue</span>
+    <span class="c">#             if value &lt;&gt; None:</span>
+    <span class="c">#                 objnew.__dict__[key] = value</span>
+
+    <span class="c">#     if manipulator &lt;&gt; None:</span>
+    <span class="c">#         ini2, obj, objnew, skip = manipulator(ini, section, existsInDb, obj, objnew, manipulatorargs)</span>
+    <span class="c">#         if ini2 &lt;&gt; ini and ini2 &lt;&gt; None:</span>
+    <span class="c">#             ini.write()</span>
+
+    <span class="c">#         if skip:</span>
+    <span class="c">#             return None</span>
+
+    <span class="c">#     if obj == None:</span>
+    <span class="c">#         obj = objnew</span>
+    <span class="c">#         obj.guid = j.base.idgenerator.generateGUID()</span>
+    <span class="c">#         self.link(obj)</span>
+    <span class="c">#         self.set(obj)</span>
+    <span class="c">#         ini.setParam(section, &quot;guid&quot;, obj.guid)</span>
+    <span class="c">#         if writeIni:</span>
+    <span class="c">#             ini.write()</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         # will compare if objects are alike</span>
+    <span class="c">#         if not self.checkEqualNoId(obj, objnew):</span>
+    <span class="c">#             # oeps objects are not alike</span>
+    <span class="c">#             if overwriteInDB:</span>
+    <span class="c">#                 self.set(objnew)</span>
+    <span class="c">#                 obj = objnew</span>
+    <span class="c">#             else:</span>
+    <span class="c">#                 self.set(obj)</span>
+
+    <span class="c">#     return obj</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.checkEqualNoId"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.checkEqualNoId">[docs]</a>    <span class="k">def</span> <span class="nf">checkEqualNoId</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert obj1 &amp; 2 to dict and remove id &amp; guid</span>
+<span class="sd">        check if all other fields are equal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">obj2dict</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">):</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;guid&quot;</span><span class="p">):</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;guid&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">normalize</span><span class="p">(</span><span class="n">obj1</span><span class="p">)</span> <span class="o">==</span> <span class="n">normalize</span><span class="p">(</span><span class="n">obj2</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.list"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">withcontent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return all object id&#39;s stored in DB</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span>
+        <span class="n">cat</span> <span class="o">=</span> <span class="s">&quot;model_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span>
+        <span class="c"># if self.lastNrRecords==0:</span>
+        <span class="c">#     return []</span>
+        <span class="c"># if cat not in db.listCategories():</span>
+
+        <span class="k">if</span> <span class="n">withcontent</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">r</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">):</span>
+            <span class="n">ob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listProps</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">ob</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;_P_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">r</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">,&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                    <span class="n">r</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;modellist&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modelname</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="OSISInstance.rebuildindex"><a class="viewcode-back" href="../../../../API/JumpScale.grid.osismodel.html#JumpScale.grid.osismodel.OSISInstance.OSISInstance.rebuildindex">[docs]</a>    <span class="k">def</span> <span class="nf">rebuildindex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">destroyindex</span><span class="p">()</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">ids</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

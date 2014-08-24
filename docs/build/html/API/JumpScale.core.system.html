@@ -1,0 +1,2423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.system package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-core-system-package">
+<h1>JumpScale.core.system package<a class="headerlink" href="#jumpscale-core-system-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.core.system.System">
+<span id="jumpscale-core-system-system-module"></span><h2>JumpScale.core.system.System module<a class="headerlink" href="#module-JumpScale.core.system.System" title="Permalink to this headline">¶</a></h2>
+<p>General system management methods</p>
+<dl class="class">
+<dt id="JumpScale.core.system.System.System">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.System.</tt><tt class="descname">System</tt><a class="reference internal" href="../_modules/JumpScale/core/system/System.html#System"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.System.System" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="JumpScale.core.system.System.System.fswalker">
+<tt class="descname">fswalker</tt><a class="headerlink" href="#JumpScale.core.system.System.System.fswalker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to FSWalker functionality</p>
+<p>alias of <tt class="xref py py-class docutils literal"><span class="pre">FSWalker</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="jumpscale-core-system-tarfile-module">
+<h2>JumpScale.core.system.TarFile module<a class="headerlink" href="#jumpscale-core-system-tarfile-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-JumpScale.core.system.TarFile"></span><p>The TarFile class provides convenience methods to work with tar archives</p>
+<dl class="class">
+<dt id="JumpScale.core.system.TarFile.TarFile">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.TarFile.</tt><tt class="descname">TarFile</tt><big>(</big><em>path</em>, <em>action=read</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/TarFile.html#TarFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseType.BaseType" title="JumpScale.core.baseclasses.BaseType.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseType.BaseType</span></tt></a></p>
+<p>Handle tar files</p>
+<dl class="method">
+<dt id="JumpScale.core.system.TarFile.TarFile.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/TarFile.html#TarFile.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the backing tar file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.TarFile.TarFile.extract">
+<tt class="descname">extract</tt><big>(</big><em>destination_path</em>, <em>files=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/TarFile.html#TarFile.extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract all or some files from the archive to destination_path</p>
+<p>The files argument can be a list of names (relative from the root of
+the archive) to extract. If no file list is provided, all files
+contained in the archive will be extracted.</p>
+<p>&#64;param destination_path: Extraction output folder
+&#64;type destination_path: string
+&#64;param files: Filenames to extract
+&#64;type files: iterable</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.system.TarFile.TarFile.pm_property_metadata">
+<tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2aaee3317650&gt;, 'doc': 'Access method of tar file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.TarFileActionType object at 0x2aaeec1469d0&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2aaee3317650&gt;, 'doc': 'Path of the on-disk tar file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0x2aaeec146d10&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.system.TarFile.TarFileAction">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.TarFile.</tt><tt class="descname">TarFileAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/TarFile.html#TarFileAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFileAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+<p>Enumeration of tar file access methods</p>
+<dl class="attribute">
+<dt id="JumpScale.core.system.TarFile.TarFileAction.READ">
+<tt class="descname">READ</tt><em class="property"> = read</em><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFileAction.READ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="jumpscale-core-system-zipfile-module">
+<h2>JumpScale.core.system.ZipFile module<a class="headerlink" href="#jumpscale-core-system-zipfile-module" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-JumpScale.core.system.ZipFile"></span><p>The ZipFile class provides convenience methods to work with zip archives</p>
+<dl class="class">
+<dt id="JumpScale.core.system.ZipFile.ZipFile">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.ZipFile.</tt><tt class="descname">ZipFile</tt><big>(</big><em>path</em>, <em>action=read</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/ZipFile.html#ZipFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseType.BaseType" title="JumpScale.core.baseclasses.BaseType.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseType.BaseType</span></tt></a></p>
+<p>Handle zip files</p>
+<dl class="method">
+<dt id="JumpScale.core.system.ZipFile.ZipFile.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/ZipFile.html#ZipFile.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the backing zip file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.ZipFile.ZipFile.extract">
+<tt class="descname">extract</tt><big>(</big><em>destination_path</em>, <em>files=None</em>, <em>folder=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/ZipFile.html#ZipFile.extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract all or some files from the archive to destination_path</p>
+<p>The files argument can be a list of names (relative from the root of
+the archive) to extract. If no file list is provided, all files
+contained in the archive will be extracted.</p>
+<p>&#64;param destination_path: Extraction output folder
+&#64;type destination_path: string
+&#64;param files: Filenames to extract
+&#64;type files: iterable
+&#64;param folder: Folder to extract
+&#64;type folder: string</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.system.ZipFile.ZipFile.pm_property_metadata">
+<tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2aaee3317650&gt;, 'doc': 'Access method of zip file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.ZipFileActionType object at 0x2aaeec191dd0&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2aaee3317650&gt;, 'doc': 'Path of the on-disk zip file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0x2aaeec191d50&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.system.ZipFile.ZipFileAction">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.ZipFile.</tt><tt class="descname">ZipFileAction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/ZipFile.html#ZipFileAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFileAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+<p>Enumeration of zip file access methods</p>
+<dl class="attribute">
+<dt id="JumpScale.core.system.ZipFile.ZipFileAction.READ">
+<tt class="descname">READ</tt><em class="property"> = read</em><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFileAction.READ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.fs">
+<span id="jumpscale-core-system-fs-module"></span><h2>JumpScale.core.system.fs module<a class="headerlink" href="#module-JumpScale.core.system.fs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.fs.Exceptions">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">Exceptions</tt><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#Exceptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.Exceptions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="exception">
+<dt id="JumpScale.core.system.fs.Exceptions.LockException">
+<em class="property">exception </em><tt class="descname">LockException</tt><big>(</big><em>message='Failed to get lock'</em>, <em>innerException=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.Exceptions.LockException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.core.system.fs.Exceptions.LockTimeoutException">
+<em class="property">exception </em><tt class="descclassname">Exceptions.</tt><tt class="descname">LockTimeoutException</tt><big>(</big><em>message='Lock request timed out'</em>, <em>innerException=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.Exceptions.LockTimeoutException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#JumpScale.core.system.fs.LockException" title="JumpScale.core.system.fs.LockException"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.system.fs.LockException</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.system.fs.FileLock">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">FileLock</tt><big>(</big><em>lock_name</em>, <em>reentry=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#FileLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.FileLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Context manager for file-based locks</p>
+<p>Context managers were introduced in Python 2.5, see the documentation on the
+&#8216;with&#8217; statement for more information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.python.org/dev/peps/pep-0343/">http://www.python.org/dev/peps/pep-0343/</a></li>
+<li><a class="reference external" href="http://pyref.infogami.com/with">http://pyref.infogami.com/with</a></li>
+</ul>
+</div></blockquote>
+<p>&#64;see: L{lock}
+&#64;see: L{unlock}</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.core.system.fs.LockException">
+<em class="property">exception </em><tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">LockException</tt><big>(</big><em>message='Failed to get lock'</em>, <em>innerException=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#LockException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.LockException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.core.system.fs.LockTimeoutException">
+<em class="property">exception </em><tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">LockTimeoutException</tt><big>(</big><em>message='Lock request timed out'</em>, <em>innerException=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#LockTimeoutException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.LockTimeoutException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#JumpScale.core.system.fs.LockException" title="JumpScale.core.system.fs.LockException"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.system.fs.LockException</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.system.fs.SystemFS">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">SystemFS</tt><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.changeDir">
+<tt class="descname">changeDir</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.changeDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.changeDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes Current Directory
+&#64;param path: string (Directory path to be changed to)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.changeFileNames">
+<tt class="descname">changeFileNames</tt><big>(</big><em>toReplace</em>, <em>replaceWith</em>, <em>pathToSearchIn</em>, <em>recursive=True</em>, <em>filter=None</em>, <em>minmtime=None</em>, <em>maxmtime=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.changeFileNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.changeFileNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param toReplace e.g. {name}
+&#64;param replace with e.g. &#8220;jumpscale&#8221;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.checkDirOrLink">
+<tt class="descname">checkDirOrLink</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.checkDirOrLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.checkDirOrLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if path is dir or link to a dir</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.checkDirOrLinkToDir">
+<tt class="descname">checkDirOrLinkToDir</tt><big>(</big><em>fullpath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.checkDirOrLinkToDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.checkDirOrLinkToDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if path is dir or link to a dir</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.checkDirParam">
+<tt class="descname">checkDirParam</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.checkDirParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.checkDirParam" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.chmod">
+<tt class="descname">chmod</tt><big>(</big><em>path</em>, <em>permissions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.chmod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.chmod" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param permissions e.g. 0o660 (USE OCTAL !!!)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.chown">
+<tt class="descname">chown</tt><big>(</big><em>path</em>, <em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.chown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.chown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.cleanupString">
+<em class="property">static </em><tt class="descname">cleanupString</tt><big>(</big><em>string</em>, <em>replacewith='_'</em>, <em>regex='([^A-Za-z0-9])'</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.cleanupString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all non-numeric or alphanumeric characters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.constructDirPathFromArray">
+<tt class="descname">constructDirPathFromArray</tt><big>(</big><em>array</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.constructDirPathFromArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.constructDirPathFromArray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.constructFilePathFromArray">
+<tt class="descname">constructFilePathFromArray</tt><big>(</big><em>array</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.constructFilePathFromArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.constructFilePathFromArray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.convertFileDirnamesSpaceToUnderscore">
+<tt class="descname">convertFileDirnamesSpaceToUnderscore</tt><big>(</big><em>rootdir</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.convertFileDirnamesSpaceToUnderscore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.convertFileDirnamesSpaceToUnderscore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.convertFileDirnamesUnicodeToAscii">
+<tt class="descname">convertFileDirnamesUnicodeToAscii</tt><big>(</big><em>rootdir</em>, <em>spacesToUnderscore=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.convertFileDirnamesUnicodeToAscii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.convertFileDirnamesUnicodeToAscii" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.copyDirTree">
+<tt class="descname">copyDirTree</tt><big>(</big><em>src</em>, <em>dst</em>, <em>keepsymlinks=False</em>, <em>eraseDestination=False</em>, <em>skipProtectedDirs=False</em>, <em>overwriteFiles=True</em>, <em>applyHrdOnDestPaths=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.copyDirTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.copyDirTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively copy an entire directory tree rooted at src.
+The dst directory may already exist; if not,
+it will be created as well as missing parent directories
+&#64;param src: string (source of directory tree to be copied)
+&#64;param dst: string (path directory to be copied to...should not already exist)
+&#64;param keepsymlinks: bool (True keeps symlinks instead of copying the content of the file)
+&#64;param eraseDestination: bool (Set to True if you want to erase destination first, be carefull, this can erase directories)
+&#64;param overwriteFiles: if True will overwrite files, otherwise will not overwrite when destination exists</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.copyFile">
+<tt class="descname">copyFile</tt><big>(</big><em>fileFrom</em>, <em>to</em>, <em>createDirIfNeeded=False</em>, <em>skipProtectedDirs=False</em>, <em>overwriteFile=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.copyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.copyFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy file</p>
+<p>Copies the file from C{fileFrom} to the file or directory C{to}.
+If C{to} is a directory, a file with the same basename as C{fileFrom} is
+created (or overwritten) in the directory specified.
+Permission bits are copied.</p>
+<p>&#64;param fileFrom: Source file path name
+&#64;type fileFrom: string
+&#64;param to: Destination file or folder path name
+&#64;type to: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.createDir">
+<tt class="descname">createDir</tt><big>(</big><em>newdir</em>, <em>skipProtectedDirs=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.createDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.createDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new Directory
+&#64;param newdir: string (Directory path/name)
+if newdir was only given as a directory name, the new directory will be created on the default path,
+if newdir was given as a complete path with the directory name, the new directory will be created in the specified path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.createEmptyFile">
+<tt class="descname">createEmptyFile</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.createEmptyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.createEmptyFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an empty file
+&#64;param filename: string (file path name to be created)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.dirEqual">
+<tt class="descname">dirEqual</tt><big>(</big><em>path1</em>, <em>path2</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.dirEqual"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.dirEqual" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="JumpScale.core.system.fs.SystemFS.exceptions">
+<tt class="descname">exceptions</tt><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.exceptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#JumpScale.core.system.fs.Exceptions" title="JumpScale.core.system.fs.Exceptions"><tt class="xref py py-class docutils literal"><span class="pre">Exceptions</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.exists">
+<tt class="descname">exists</tt><big>(</big><em>path</em>, <em>followlinks=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the specified path exists
+&#64;param path: string
+&#64;rtype: boolean (True if path refers to an existing path)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.fileConvertLineEndingCRLF">
+<tt class="descname">fileConvertLineEndingCRLF</tt><big>(</big><em>file</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.fileConvertLineEndingCRLF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.fileConvertLineEndingCRLF" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Convert CRLF line-endings in a file to LF-only endings (</dt>
+<dd>-&gt;</dd>
+</dl>
+<p>)</p>
+<blockquote>
+<div>&#64;param file: File to convert
+&#64;type file: string</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.fileGetContents">
+<tt class="descname">fileGetContents</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.fileGetContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.fileGetContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a file and get contents of that file
+&#64;param filename: string (filename to open for reading )
+&#64;rtype: string representing the file contents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.fileGetTextContents">
+<tt class="descname">fileGetTextContents</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.fileGetTextContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.fileGetTextContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a UTF-8 file and get contents of that file. Takes care of the [BOM](<a class="reference external" href="http://en.wikipedia.org/wiki/Byte_order_mark">http://en.wikipedia.org/wiki/Byte_order_mark</a>)
+&#64;param filename: string (filename to open for reading)
+&#64;rtype: string representing the file contents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.fileGetUncommentedContents">
+<tt class="descname">fileGetUncommentedContents</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.fileGetUncommentedContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.fileGetUncommentedContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a file and get uncommented contents of that file
+&#64;param filename: string (filename to open for reading )
+&#64;rtype: list of lines of uncommented file contents</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.fileSize">
+<tt class="descname">fileSize</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.fileSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.fileSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Filesize of file in bytes
+&#64;param filename: the file u want to know the filesize of
+&#64;return: int representing file size</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.find">
+<tt class="descname">find</tt><big>(</big><em>startDir</em>, <em>fileregex</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for files or folders matching a given pattern
+this is a very weard function, don&#8217;t use is better to use the list functions
+make sure you do changedir to the starting dir first
+example: find(&#8220;<a href="#id1"><span class="problematic" id="id2">*</span></a>.pyc&#8221;)
+&#64;param fileregex: The regex pattern to match
+&#64;type fileregex: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getBaseName">
+<tt class="descname">getBaseName</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getBaseName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getBaseName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the base name of pathname path.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getDirName">
+<tt class="descname">getDirName</tt><big>(</big><em>path</em>, <em>lastOnly=False</em>, <em>levelsUp=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getDirName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getDirName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a directory name from pathname path.
+&#64;param path the path to find a directory within
+&#64;param lastOnly means only the last part of the path which is a dir (overrides levelsUp to 0)
+&#64;param levelsUp means, return the parent dir levelsUp levels up</p>
+<blockquote>
+<div>e.g. ...getDirName(&#8220;/opt/qbase/bin/something/test.py&#8221;, levelsUp=0) would return something
+e.g. ...getDirName(&#8220;/opt/qbase/bin/something/test.py&#8221;, levelsUp=1) would return bin
+e.g. ...getDirName(&#8220;/opt/qbase/bin/something/test.py&#8221;, levelsUp=10) would raise an error</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getFileExtension">
+<tt class="descname">getFileExtension</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getFileExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getFileExtension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getParent">
+<tt class="descname">getParent</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getParent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getParent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the parent of the path:
+/dir1/dir2/file_or_dir -&gt; /dir1/dir2/
+/dir1/dir2/            -&gt; /dir1/
+&#64;todo why do we have 2 implementations which are almost the same see getParentDirName()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getParentDirName">
+<tt class="descname">getParentDirName</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getParentDirName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getParentDirName" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns parent of path (only for dirs)
+returns empty string when there is no parent</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getTempFileName">
+<tt class="descname">getTempFileName</tt><big>(</big><em>dir=None</em>, <em>prefix=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getTempFileName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getTempFileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a temp file for the directory specified
+&#64;param dir: Directory to generate the temp file
+&#64;param prefix: string to start the generated name with
+&#64;rtype: string representing the generated temp file path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getTmpDirPath">
+<tt class="descname">getTmpDirPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getTmpDirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getTmpDirPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a tmp dir name and makes sure the dir exists</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getTmpFilePath">
+<tt class="descname">getTmpFilePath</tt><big>(</big><em>cygwin=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getTmpFilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getTmpFilePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a temp file path
+Located in temp dir of qbase
+&#64;rtype: string representing the path of the temp file generated</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.getcwd">
+<tt class="descname">getcwd</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.getcwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.getcwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>get current working directory
+&#64;rtype: string (current working directory path)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.grep">
+<tt class="descname">grep</tt><big>(</big><em>fileregex</em>, <em>lineregex</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.grep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.grep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for lines matching a given regex in all files matching a regex</p>
+<p>&#64;param fileregex: Files to search in
+&#64;type fileregex: string
+&#64;param lineregex: Regex pattern to search for in each file
+&#64;type lineregex: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.gunzip">
+<tt class="descname">gunzip</tt><big>(</big><em>sourceFile</em>, <em>destFile</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.gunzip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.gunzip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.gzip">
+<tt class="descname">gzip</tt><big>(</big><em>sourceFile</em>, <em>destFile</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.gzip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.gzip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.hardlinkFile">
+<tt class="descname">hardlinkFile</tt><big>(</big><em>source</em>, <em>destin</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.hardlinkFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.hardlinkFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a hard link pointing to source named destin. Availability: Unix.
+&#64;param source: string
+&#64;param destin: string
+&#64;rtype: concatenation of dirname, and optionally linkname, etc.
+with exactly one directory separator (os.sep) inserted between components, unless path2 is empty</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isAsciiFile">
+<tt class="descname">isAsciiFile</tt><big>(</big><em>filename</em>, <em>checksize=4096</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isAsciiFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isAsciiFile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Read the first &lt;checksize&gt; bytes of &lt;filename&gt;.</dt>
+<dd>Validate that only valid ascii characters (32-126),</dd>
+<dt>,       , </dt>
+<dd><dl class="first last docutils">
+<dt>are</dt>
+<dd>present in the file</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isBinaryFile">
+<tt class="descname">isBinaryFile</tt><big>(</big><em>filename</em>, <em>checksize=4096</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isBinaryFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isBinaryFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isDir">
+<tt class="descname">isDir</tt><big>(</big><em>path</em>, <em>followSoftlink=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the specified Directory path exists
+&#64;param path: string
+&#64;param followSoftlink: boolean
+&#64;rtype: boolean (True if directory exists)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isEmptyDir">
+<tt class="descname">isEmptyDir</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isEmptyDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isEmptyDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the specified directory path is empty
+&#64;param path: string
+&#64;rtype: boolean (True if directory is empty)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isFile">
+<tt class="descname">isFile</tt><big>(</big><em>path</em>, <em>followSoftlink=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the specified file exists for the given path
+&#64;param path: string
+&#64;param followSoftlink: boolean
+&#64;rtype: boolean (True if file exists for the given path)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isLink">
+<tt class="descname">isLink</tt><big>(</big><em>path</em>, <em>checkJunction=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the specified path is a link
+&#64;param path: string
+&#64;rtype: boolean (True if the specified path is a link)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.isMount">
+<tt class="descname">isMount</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.isMount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.isMount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if pathname path is a mount point:
+A point in a file system where a different file system has been mounted.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.islocked">
+<em class="property">static </em><tt class="descname">islocked</tt><big>(</big><em>lockname</em>, <em>reentry=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.islocked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a system-wide interprocess exclusive lock is set</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.joinPaths">
+<tt class="descname">joinPaths</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.joinPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.joinPaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join one or more path components.
+If any component is an absolute path, all previous components are thrown away, and joining continues.
+&#64;param path1: string
+&#64;param path2: string
+&#64;param path3: string
+&#64;param .... : string
+&#64;rtype: Concatenation of path1, and optionally path2, etc...,
+with exactly one directory separator (os.sep) inserted between components, unless path2 is empty.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.listDirsInDir">
+<tt class="descname">listDirsInDir</tt><big>(</big><em>path</em>, <em>recursive=False</em>, <em>dirNameOnly=False</em>, <em>findDirectorySymlinks=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.listDirsInDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.listDirsInDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves list of directories found in the specified directory
+&#64;param path: string represents directory path to search in
+&#64;rtype: list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.listFilesAndDirsInDir">
+<tt class="descname">listFilesAndDirsInDir</tt><big>(</big><em>path</em>, <em>recursive=False</em>, <em>filter=None</em>, <em>minmtime=None</em>, <em>maxmtime=None</em>, <em>depth=None</em>, <em>type='fd'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.listFilesAndDirsInDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.listFilesAndDirsInDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves list of files found in the specified directory
+&#64;param path:       directory path to search in
+&#64;type  path:       string
+&#64;param recursive:  recursively look in all subdirs
+&#64;type  recursive:  boolean
+&#64;param filter:     unix-style wildcard (e.g. <a href="#id3"><span class="problematic" id="id4">*</span></a>.py) - this is not a regular expression
+&#64;type  filter:     string
+&#64;param minmtime:   if not None, only return files whose last modification time &gt; minmtime (epoch in seconds)
+&#64;type  minmtime:   integer
+&#64;param maxmtime:   if not None, only return files whose last modification time &lt; maxmtime (epoch in seconds)
+&#64;Param depth: is levels deep wich we need to go
+&#64;type  maxmtime:   integer
+&#64;param type is string with f &amp; d inside (f for when to find files, d for when to find dirs)
+&#64;rtype: list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.listFilesInDir">
+<tt class="descname">listFilesInDir</tt><big>(</big><em>path</em>, <em>recursive=False</em>, <em>filter=None</em>, <em>minmtime=None</em>, <em>maxmtime=None</em>, <em>depth=None</em>, <em>case_sensitivity='os'</em>, <em>exclude=</em>, <span class="optional">[</span><span class="optional">]</span><em>followSymlinks=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.listFilesInDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.listFilesInDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves list of files found in the specified directory
+&#64;param path:       directory path to search in
+&#64;type  path:       string
+&#64;param recursive:  recursively look in all subdirs
+&#64;type  recursive:  boolean
+&#64;param filter:     unix-style wildcard (e.g. <a href="#id5"><span class="problematic" id="id6">*</span></a>.py) - this is not a regular expression
+&#64;type  filter:     string
+&#64;param minmtime:   if not None, only return files whose last modification time &gt; minmtime (epoch in seconds)
+&#64;type  minmtime:   integer
+&#64;param maxmtime:   if not None, only return files whose last modification time &lt; maxmtime (epoch in seconds)
+&#64;Param depth: is levels deep wich we need to go
+&#64;type  maxmtime:   integer
+&#64;Param exclude: list of std filters if matches then exclude
+&#64;rtype: list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.listPyScriptsInDir">
+<tt class="descname">listPyScriptsInDir</tt><big>(</big><em>path</em>, <em>recursive=True</em>, <em>filter='*.py'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.listPyScriptsInDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.listPyScriptsInDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves list of python scripts (with extension .py) in the specified directory
+&#64;param path: string represents the directory path to search in
+&#64;rtype: list</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.lock">
+<em class="property">static </em><tt class="descname">lock</tt><big>(</big><em>lockname</em>, <em>locktimeout=60</em>, <em>reentry=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a system-wide interprocess exclusive lock. Default timeout is 60 seconds</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.lock_">
+<em class="property">static </em><tt class="descname">lock_</tt><big>(</big><em>lockname</em>, <em>locktimeout=60</em>, <em>reentry=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.lock_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a system-wide interprocess exclusive lock.</p>
+<p>Works similar to j.system.fs.lock but uses return values to denote lock
+success instead of raising fatal errors.</p>
+<p>This refactoring was mainly done to make the lock implementation easier
+to unit-test.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.log">
+<tt class="descname">log</tt><big>(</big><em>msg</em>, <em>level=5</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.md5sum">
+<tt class="descname">md5sum</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.md5sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.md5sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the hex digest of a file without loading it all into memory
+&#64;param filename: string (filename to get the hex digest of it)
+&#64;rtype: md5 of the file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.move">
+<tt class="descname">move</tt><big>(</big><em>source</em>, <em>destin</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main Move function
+&#64;param source: string (If the specified source is a File....Calls moveFile function)
+(If the specified source is a Directory....Calls moveDir function)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.moveDir">
+<tt class="descname">moveDir</tt><big>(</big><em>source</em>, <em>destin</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.moveDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.moveDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move Directory from source to destination
+&#64;param source: string (Source path where the directory should be removed from)
+&#64;param destin: string (Destination path where the directory should be moved into)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.moveFile">
+<tt class="descname">moveFile</tt><big>(</big><em>source</em>, <em>destin</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.moveFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.moveFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move a  File from source path to destination path
+&#64;param source: string (Source file path)
+&#64;param destination: string (Destination path the file should be moved to )</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.parsePath">
+<tt class="descname">parsePath</tt><big>(</big><em>path</em>, <em>baseDir=''</em>, <em>existCheck=True</em>, <em>checkIsFile=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.parsePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.parsePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse paths of form /root/tmp/33_adoc.doc into the path, priority which is numbers before _ at beginning of path
+also returns filename
+checks if path can be found, if not will fail
+when filename=&#8221;&#8221; then is directory which has been parsed
+if basedir specified that part of path will be removed</p>
+<p>example:
+j.system.fs.parsePath(&#8220;/opt/qbase3/apps/specs/myspecs/definitions/cloud/datacenter.txt&#8221;,&#8221;/opt/qbase3/apps/specs/myspecs/&#8221;,existCheck=False)
+&#64;param path is existing path to a file
+&#64;param baseDir, is the absolute part of the path not required
+&#64;return list of dirpath,filename,extension,priority</p>
+<blockquote>
+<div>priority = 0 if not specified</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathClean">
+<tt class="descname">pathClean</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathClean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathClean" title="Permalink to this definition">¶</a></dt>
+<dd><p>goal is to get a equal representation in / &amp; in relation to os.sep</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathDirClean">
+<tt class="descname">pathDirClean</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathDirClean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathDirClean" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathNormalize">
+<tt class="descname">pathNormalize</tt><big>(</big><em>path</em>, <em>root=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathNormalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathNormalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>paths are made absolute &amp; made sure they are in line with os.sep
+&#64;param path: path to normalize
+&#64;root is std the application you are in, can overrule</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathRemoveDirPart">
+<tt class="descname">pathRemoveDirPart</tt><big>(</big><em>path</em>, <em>toremove</em>, <em>removeTrailingSlash=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathRemoveDirPart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathRemoveDirPart" title="Permalink to this definition">¶</a></dt>
+<dd><p>goal remove dirparts of a dirpath e,g, a basepath which is not needed
+will look for part to remove in full path but only full dirs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathShorten">
+<tt class="descname">pathShorten</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathShorten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathShorten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clean path (change /var/www/../lib to /var/lib). On Windows, if the
+path exists, the short path name is returned.</p>
+<p>&#64;param path: Path to clean
+&#64;type path: string
+&#64;return: Cleaned (short) path
+&#64;rtype: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.pathToUnicode">
+<tt class="descname">pathToUnicode</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.pathToUnicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.pathToUnicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert path to unicode. Use the local filesystem encoding. Will return
+path unmodified if path already is unicode.</p>
+<p>Use this to convert paths you received from the os module to unicode.</p>
+<p>&#64;param path: path to convert to unicode
+&#64;type path: basestring
+&#64;return: unicode path
+&#64;rtype: unicode</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.processPathForDoubleDots">
+<tt class="descname">processPathForDoubleDots</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.processPathForDoubleDots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.processPathForDoubleDots" title="Permalink to this definition">¶</a></dt>
+<dd><p>/root/somepath/.. would become /root
+/root/../somepath/ would become /somepath</p>
+<p>result will always be with / slashes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.readObjectFromFile">
+<tt class="descname">readObjectFromFile</tt><big>(</big><em>filelocation</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.readObjectFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.readObjectFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a object from a file(file contents in pickle format)
+&#64;param filelocation: location of the file
+&#64;return: object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.readlink">
+<tt class="descname">readlink</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.readlink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.readlink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Works only for unix
+Return a string representing the path to which the symbolic link points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.remove">
+<tt class="descname">remove</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a File
+&#64;param path: string (File path required to be removed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.removeDir">
+<tt class="descname">removeDir</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.removeDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.removeDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a Directory
+&#64;param path: string (Directory path that should be removed)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.removeDirTree">
+<tt class="descname">removeDirTree</tt><big>(</big><em>path</em>, <em>onlyLogWarningOnRemoveError=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.removeDirTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.removeDirTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively delete a directory tree.
+&#64;param path: the path to be removed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.removeIrrelevantFiles">
+<tt class="descname">removeIrrelevantFiles</tt><big>(</big><em>path</em>, <em>followSymlinks=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.removeIrrelevantFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.removeIrrelevantFiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.removeLinks">
+<tt class="descname">removeLinks</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.removeLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.removeLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>find all links &amp; remove</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.renameDir">
+<tt class="descname">renameDir</tt><big>(</big><em>dirname</em>, <em>newname</em>, <em>overwrite=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.renameDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.renameDir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename Directory from dirname to newname
+&#64;param dirname: string (Directory original name)
+&#64;param newname: string (Directory new name to be changed to)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.renameFile">
+<tt class="descname">renameFile</tt><big>(</big><em>filePath</em>, <em>new_name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.renameFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.renameFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>OBSOLETE</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.replaceWordsInFiles">
+<tt class="descname">replaceWordsInFiles</tt><big>(</big><em>pathToSearchIn</em>, <em>templateengine</em>, <em>recursive=True</em>, <em>filter=None</em>, <em>minmtime=None</em>, <em>maxmtime=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.replaceWordsInFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.replaceWordsInFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>apply templateengine to list of found files
+&#64;param templateengine =te  #example below</p>
+<blockquote>
+<div>te=j.codetools.templateengine.new()
+te.add(&#8220;name&#8221;,self.jpackages.name)
+te.add(&#8220;description&#8221;,self.jpackages.description)
+te.add(&#8220;version&#8221;,self.jpackages.version)</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.statPath">
+<tt class="descname">statPath</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.statPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.statPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a stat() system call on the given path
+&#64;rtype: object whose attributes correspond to the members of the stat structure</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.symlink">
+<tt class="descname">symlink</tt><big>(</big><em>path</em>, <em>target</em>, <em>overwriteTarget=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.symlink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.symlink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a symbolic link
+&#64;param path: source path desired to create a symbolic link for
+&#64;param target: destination path required to create the symbolic link at
+&#64;param overwriteTarget: boolean indicating whether target can be overwritten</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.targzCompress">
+<tt class="descname">targzCompress</tt><big>(</big><em>sourcepath, destinationpath, followlinks=False, destInTar='', pathRegexIncludes=['.[a-zA-Z0-9]*'], pathRegexExcludes=[], contentRegexIncludes=[], contentRegexExcludes=[], depths=[], extrafiles=[]</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.targzCompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.targzCompress" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param sourcepath: Source directory .
+&#64;param destination: Destination filename.
+&#64;param followlinks: do not tar the links, follow the link and add that file or content of directory to the tar
+&#64;param pathRegexIncludes: / Excludes  match paths to array of regex expressions (array(strings))
+&#64;param contentRegexIncludes: / Excludes match content of files to array of regex expressions (array(strings))
+&#64;param depths: array of depth values e.g. only return depth 0 &amp; 1 (would mean first dir depth and then 1 more deep) (array(int))
+&#64;param destInTar when not specified the dirs, files under sourcedirpath will be added to root of</p>
+<blockquote>
+<div>tar.gz with this param can put something in front e.g. /qbase3/ prefix to dest in tgz</div></blockquote>
+<p>&#64;param extrafiles is array of array [[source,destpath],[source,destpath],...]  adds extra files to tar
+(TAR-GZ-Archive <a href="#id7"><span class="problematic" id="id8">*</span></a>.tar.gz)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.targzUncompress">
+<tt class="descname">targzUncompress</tt><big>(</big><em>sourceFile</em>, <em>destinationdir</em>, <em>removeDestinationdir=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.targzUncompress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.targzUncompress" title="Permalink to this definition">¶</a></dt>
+<dd><p>compress dirname recursive
+&#64;param sourceFile: file to uncompress
+&#64;param destinationpath: path of to destiniation dir, sourcefile will end up uncompressed in destination dir</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.touch">
+<tt class="descname">touch</tt><big>(</big><em>paths</em>, <em>overwrite=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.touch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.touch" title="Permalink to this definition">¶</a></dt>
+<dd><p>can be single path or multiple (then list)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.unlink">
+<tt class="descname">unlink</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.unlink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.unlink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the given file if it&#8217;s a file or a symlink</p>
+<p>&#64;param filename: File path to be removed
+&#64;type filename: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.unlinkFile">
+<tt class="descname">unlinkFile</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.unlinkFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.unlinkFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove the file path (only for files, not for symlinks)
+&#64;param filename: File path to be removed</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.unlock">
+<em class="property">static </em><tt class="descname">unlock</tt><big>(</big><em>lockname</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.unlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock system-wide interprocess lock</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fs.SystemFS.unlock_">
+<em class="property">static </em><tt class="descname">unlock_</tt><big>(</big><em>lockname</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.unlock_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock system-wide interprocess lock</p>
+<p>Works similar to j.system.fs.unlock but uses return values to denote unlock
+success instead of raising fatal errors.</p>
+<p>This refactoring was mainly done to make the lock implementation easier
+to unit-test.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.validateFilename">
+<tt class="descname">validateFilename</tt><big>(</big><em>filename</em>, <em>platform=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.validateFilename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.validateFilename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a filename for a given (or current) platform</p>
+<p>Check whether a given filename is valid on a given platform, or the
+current platform if no platform is specified.</p>
+<p>Zero-length filenames are not allowed</p>
+<p>Filenames can contain any character except 0x00. We also disallow a
+forward slash (&#8216;/&#8217;) in filenames.</p>
+<p>Filenames can be up to 255 characters long.</p>
+<p>Filenames should not contain any character in the 0x00-0x1F range, &#8216;&lt;&#8217;,
+&#8216;&gt;&#8217;, &#8216;:&#8217;, &#8216;&#8221;&#8217;, &#8216;/&#8217;, &#8216;&#8217;, &#8216;|&#8217;, &#8216;?&#8217; or &#8216;*&#8217;. Names should not end with a
+dot (&#8216;.&#8217;) or a space (&#8216; &#8216;).</p>
+<p>Several basenames are not allowed, including CON, PRN, AUX, CLOCK$,
+NUL, COM[1-9] and LPT[1-9].</p>
+<p>Filenames can be up to 255 characters long.</p>
+<p>Restrictions are based on information found at these URLs:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Filename">http://en.wikipedia.org/wiki/Filename</a></li>
+<li><a class="reference external" href="http://msdn.microsoft.com/en-us/library/aa365247.aspx">http://msdn.microsoft.com/en-us/library/aa365247.aspx</a></li>
+<li><a class="reference external" href="http://www.boost.org/doc/libs/1_35_0/libs/filesystem/doc/portability_guide.htm">http://www.boost.org/doc/libs/1_35_0/libs/filesystem/doc/portability_guide.htm</a></li>
+<li><a class="reference external" href="http://blogs.msdn.com/brian_dewey/archive/2004/01/19/60263.aspx">http://blogs.msdn.com/brian_dewey/archive/2004/01/19/60263.aspx</a></li>
+</ul>
+</div></blockquote>
+<p>&#64;param filename: Filename to check
+&#64;type filename: string
+&#64;param platform: Platform to validate against
+&#64;type platform: L{PlatformType}</p>
+<p>&#64;returns: Whether the filename is valid on the given platform
+&#64;rtype: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.walk">
+<tt class="descname">walk</tt><big>(</big><em>root</em>, <em>recurse=0</em>, <em>pattern='*'</em>, <em>return_folders=0</em>, <em>return_files=1</em>, <em>followSoftlinks=True</em>, <em>unicode=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.walk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is to provide ScanDir similar function
+It is going to be used wherever some one wants to list all files and subfolders
+under one given directly with specific or none matchers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.walkExtended">
+<tt class="descname">walkExtended</tt><big>(</big><em>root</em>, <em>recurse=0</em>, <em>dirPattern='*'</em>, <em>filePattern='*'</em>, <em>followSoftLinks=True</em>, <em>dirs=True</em>, <em>files=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.walkExtended"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.walkExtended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Walk version: seperate dir and file pattern
+&#64;param  root                : start directory to start the search.
+&#64;type   root                : string
+&#64;param  recurse             : search also in subdirectories.
+&#64;type   recurse             : number
+&#64;param  dirPattern          : search pattern to match directory names. Wildcards can be included.
+&#64;type   dirPattern          : string
+&#64;param  filePattern         : search pattern to match file names. Wildcards can be included.
+&#64;type   filePattern         : string
+&#64;param  followSoftLinks     : determine if links must be followed.
+&#64;type   followSoftLinks     : boolean
+&#64;param  dirs                : determine to return dir results.
+&#64;type   dirs                : boolean
+&#64;param  files               : determine to return file results.
+&#64;type   files               : boolean</p>
+<p>&#64;return                     : List of files and / or directories that match the search patterns.
+&#64;rtype                      : list of strings</p>
+<p>General guidelines in the usage of the method be means of some examples come next. For the example in /tmp there is</p>
+<ul class="simple">
+<li>a file test.rtt</li>
+<li>and ./folder1/subfolder/subsubfolder/small_test/test.rtt</li>
+</ul>
+<dl class="docutils">
+<dt>To find the first test you can use</dt>
+<dd>j.system.fs.walkExtended(&#8216;/tmp/&#8217;, dirPattern=&#8221;<em>tmp</em>&#8221;, filePattern=&#8221;<a href="#id9"><span class="problematic" id="id10">*</span></a>.rtt&#8221;)</dd>
+<dt>To find only the second one you could use</dt>
+<dd>j.system.fs.walkExtended(&#8216;tmp&#8217;, recurse=0, dirPattern=&#8221;<em>small_test</em>&#8221;, filePattern=&#8221;<a href="#id11"><span class="problematic" id="id12">*</span></a>.rtt&#8221;, dirs=False)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.writeFile">
+<tt class="descname">writeFile</tt><big>(</big><em>filename</em>, <em>contents</em>, <em>append=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.writeFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.writeFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a file and write file contents, close file afterwards
+&#64;param contents: string (file contents to be written)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.fs.SystemFS.writeObjectToFile">
+<tt class="descname">writeObjectToFile</tt><big>(</big><em>filelocation</em>, <em>obj</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#SystemFS.writeObjectToFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.SystemFS.writeObjectToFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a object to a file(pickle format)
+&#64;param filelocation: location of the file to which we write
+&#64;param obj: object to pickle and write to a file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.cleanupString">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">cleanupString</tt><big>(</big><em>string</em>, <em>replacewith='_'</em>, <em>regex='([^A-Za-z0-9])'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#cleanupString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.cleanupString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all non-numeric or alphanumeric characters</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.islocked">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">islocked</tt><big>(</big><em>lockname</em>, <em>reentry=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#islocked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.islocked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a system-wide interprocess exclusive lock is set</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.lock">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">lock</tt><big>(</big><em>lockname</em>, <em>locktimeout=60</em>, <em>reentry=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a system-wide interprocess exclusive lock. Default timeout is 60 seconds</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.lock_">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">lock_</tt><big>(</big><em>lockname</em>, <em>locktimeout=60</em>, <em>reentry=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#lock_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.lock_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a system-wide interprocess exclusive lock.</p>
+<p>Works similar to j.system.fs.lock but uses return values to denote lock
+success instead of raising fatal errors.</p>
+<p>This refactoring was mainly done to make the lock implementation easier
+to unit-test.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.unlock">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">unlock</tt><big>(</big><em>lockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.unlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock system-wide interprocess lock</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.fs.unlock_">
+<tt class="descclassname">JumpScale.core.system.fs.</tt><tt class="descname">unlock_</tt><big>(</big><em>lockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fs.html#unlock_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fs.unlock_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unlock system-wide interprocess lock</p>
+<p>Works similar to j.system.fs.unlock but uses return values to denote unlock
+success instead of raising fatal errors.</p>
+<p>This refactoring was mainly done to make the lock implementation easier
+to unit-test.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.fswalker">
+<span id="jumpscale-core-system-fswalker-module"></span><h2>JumpScale.core.system.fswalker module<a class="headerlink" href="#module-JumpScale.core.system.fswalker" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.fswalker.FSWalker">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.fswalker.</tt><tt class="descname">FSWalker</tt><a class="reference internal" href="../_modules/JumpScale/core/system/fswalker.html#FSWalker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fswalker.FSWalker" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="JumpScale.core.system.fswalker.FSWalker.find">
+<em class="property">static </em><tt class="descname">find</tt><big>(</big><em>root, recursive=True, includeFolders=False, pathRegexIncludes=['.*'], pathRegexExcludes=[], contentRegexIncludes=[], contentRegexExcludes=[], depths=[]</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fswalker.html#FSWalker.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fswalker.FSWalker.find" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fswalker.FSWalker.walk">
+<em class="property">static </em><tt class="descname">walk</tt><big>(</big><em>root, callback, arg='', recursive=True, includeFolders=False, pathRegexIncludes=['.*'], pathRegexExcludes=[], contentRegexIncludes=[], contentRegexExcludes=[], depths=[], followlinks=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fswalker.html#FSWalker.walk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fswalker.FSWalker.walk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk through filesystem and execute a method per file</p>
+<p>Walk through all files and folders starting at C{root}, recursive by
+default, calling a given callback with a provided argument and file
+path for every file we could find.</p>
+<p>If C{includeFolders} is True, the callback will be called for every
+folder we found as well.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_print</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">arg</span><span class="p">,</span> <span class="n">path</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FSWalker</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s">&#39;/foo&#39;</span><span class="p">,</span> <span class="n">my_print</span><span class="p">,</span> <span class="s">&#39;test:&#39;</span><span class="p">)</span>
+<span class="go">test: /foo/file1</span>
+<span class="go">test: /foo/file2</span>
+<span class="go">test: /foo/file3</span>
+<span class="go">test: /foo/bar/file4</span>
+</pre></div>
+</div>
+<p>return False if you want recursion to stop (means don&#8217;t go deeper)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">dirlister</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="s">&#39;Found&#39;</span><span class="p">,</span> <span class="n">path</span>
+<span class="gp">... </span>    <span class="n">arg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FSWalker</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s">&#39;/foo&#39;</span><span class="p">,</span> <span class="n">dirlister</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">includeFolders</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">/foo/file1</span>
+<span class="go">/foo/file2</span>
+<span class="go">/foo/file3</span>
+<span class="go">/foo/bar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">paths</span>
+<span class="go">[&#39;/foo/file1&#39;, &#39;/foo/file2&#39;, &#39;/foo/file3&#39;, &#39;/foo/bar&#39;]</span>
+</pre></div>
+</div>
+<p>&#64;param root: Filesystem root to crawl (string)
+&#64;param callback: Callable to call for every file found, func(arg, path) (callable)
+&#64;param arg: First argument to pass to callback
+&#64;param recursive: Walk recursive or not (bool)
+&#64;param includeFolders: Whether to call C{callable} for folders as well (bool)
+&#64;param pathRegexIncludes / Excludes  match paths to array of regex expressions (array(strings))
+&#64;param contentRegexIncludes / Excludes match content of files to array of regex expressions (array(strings))
+&#64;param depths array of depth values e.g. only return depth 0 &amp; 1 (would mean first dir depth and then 1 more deep) (array(int))</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.fswalker.FSWalker.walkFunctional">
+<em class="property">static </em><tt class="descname">walkFunctional</tt><big>(</big><em>root</em>, <em>callbackFunctionFile=None</em>, <em>callbackFunctionDir=None</em>, <em>arg=''</em>, <em>callbackForMatchDir=None</em>, <em>callbackForMatchFile=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/fswalker.html#FSWalker.walkFunctional"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.fswalker.FSWalker.walkFunctional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk through filesystem and execute a method per file and dirname</p>
+<p>Walk through all files and folders starting at C{root}, recursive by
+default, calling a given callback with a provided argument and file
+path for every file &amp; dir we could find.</p>
+<p>To match the function use the callbackForMatch function which are separate for dir or file
+when it returns True the path will be further processed
+when None (function not given match will not be done)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_print</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">arg</span><span class="p">,</span> <span class="n">path</span>
+<span class="gp">...</span>
+<span class="go">#if return False for callbackFunctionDir then recurse will not happen for that dir</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">matchDirOrFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="bp">True</span> <span class="c">#means will match all</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">FSWalker</span><span class="o">.</span><span class="n">walkFunctional</span><span class="p">(</span><span class="s">&#39;/foo&#39;</span><span class="p">,</span> <span class="n">my_print</span><span class="p">,</span><span class="n">my_print</span><span class="p">,</span> <span class="s">&#39;test:&#39;</span><span class="p">,</span><span class="n">matchDirOrFile</span><span class="p">,</span><span class="n">matchDirOrFile</span><span class="p">)</span>
+<span class="go">test: /foo/file1</span>
+<span class="go">test: /foo/file2</span>
+<span class="go">test: /foo/file3</span>
+<span class="go">test: /foo/bar/file4</span>
+</pre></div>
+</div>
+<p>&#64;param root: Filesystem root to crawl (string)
+<a class="reference external" href="mailto:#&#37;&#52;&#48;todo">#<span>&#64;</span>todo</a> complete</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.net">
+<span id="jumpscale-core-system-net-module"></span><h2>JumpScale.core.system.net module<a class="headerlink" href="#module-JumpScale.core.system.net" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.net.NetworkZone">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.net.</tt><tt class="descname">NetworkZone</tt><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#NetworkZone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.NetworkZone" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="JumpScale.core.system.net.NetworkZone.ipRanges">
+<tt class="descname">ipRanges</tt><em class="property"> = None</em><a class="headerlink" href="#JumpScale.core.system.net.NetworkZone.ipRanges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.core.system.net.PlatformNotSupportedError">
+<em class="property">exception </em><tt class="descclassname">JumpScale.core.system.net.</tt><tt class="descname">PlatformNotSupportedError</tt><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#PlatformNotSupportedError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.PlatformNotSupportedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.core.system.net.SystemNet">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.net.</tt><tt class="descname">SystemNet</tt><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.checkIpAddressIsLocal">
+<tt class="descname">checkIpAddressIsLocal</tt><big>(</big><em>ipaddr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.checkIpAddressIsLocal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.checkIpAddressIsLocal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.checkListenPort">
+<tt class="descname">checkListenPort</tt><big>(</big><em>port</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.checkListenPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.checkListenPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a certain port is listening on the system.</p>
+<p>&#64;param port: sets the port number to check
+&#64;return status: 0 if running 1 if not running</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.checkUrlReachable">
+<tt class="descname">checkUrlReachable</tt><big>(</big><em>url</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.checkUrlReachable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.checkUrlReachable" title="Permalink to this definition">¶</a></dt>
+<dd><p>raise operational critical if unreachable
+return True if reachable</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.download">
+<tt class="descname">download</tt><big>(</big><em>url</em>, <em>localpath</em>, <em>username=None</em>, <em>passwd=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download a url to a file or a directory, supported protocols: http, https, ftp, file
+&#64;param url: URL to download from
+&#64;type url: string
+&#64;param localpath: filename or directory to download the url to
+&#64;type localpath: string
+&#64;param username: username for the url if it requires authentication
+&#64;type username: string
+&#64;param passwd: password for the url if it requires authentication
+&#64;type passwd: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.enableProxy">
+<tt class="descname">enableProxy</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.enableProxy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.enableProxy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getDefaultRouter">
+<tt class="descname">getDefaultRouter</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getDefaultRouter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getDefaultRouter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get default router
+&#64;rtype: string representing the router interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getDomainName">
+<tt class="descname">getDomainName</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getDomainName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getDomainName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the dns domain name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getHostByName">
+<tt class="descname">getHostByName</tt><big>(</big><em>dnsHostname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getHostByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getHostByName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getHostNamesForIP">
+<tt class="descname">getHostNamesForIP</tt><big>(</big><em>hostsfile</em>, <em>ip</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getHostNamesForIP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getHostNamesForIP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get hostnames for ip address
+&#64;param hostsfile: File where hosts are defined
+&#64;param ip: Ip of the machine to get hostnames from
+&#64;return: List of machinehostnames</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getHostname">
+<tt class="descname">getHostname</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getHostname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getHostname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get hostname of the machine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getIpAddress">
+<tt class="descname">getIpAddress</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getIpAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getIpAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of ip addresses and netmasks assigned to this interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getIpAddresses">
+<tt class="descname">getIpAddresses</tt><big>(</big><em>up=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getIpAddresses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getIpAddresses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getMacAddress">
+<tt class="descname">getMacAddress</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getMacAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getMacAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the MAC address of this interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getMacAddressForIp">
+<tt class="descname">getMacAddressForIp</tt><big>(</big><em>ipaddress</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getMacAddressForIp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getMacAddressForIp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search the MAC address of the given IP address in the ARP table</p>
+<p>&#64;param ipaddress: IP address of the machine
+&#64;rtype: string
+&#64;return: The MAC address corresponding with the given IP
+&#64;raise: RuntimeError if no MAC found for IP or if platform is not suppported</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getNameServer">
+<tt class="descname">getNameServer</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getNameServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getNameServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first nameserver IP found in /etc/resolv.conf</p>
+<p>Only implemented for Unix based hosts.</p>
+<p>&#64;returns: Nameserver IP
+&#64;rtype: string</p>
+<p>&#64;raise NotImplementedError: Non-Unix systems
+&#64;raise RuntimeError: No nameserver could be found in /etc/resolv.conf</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getNetworkInfo">
+<tt class="descname">getNetworkInfo</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getNetworkInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getNetworkInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns {macaddr_name:[ipaddr,ipaddr],...}</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getNicType">
+<tt class="descname">getNicType</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getNicType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getNicType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Nic Type on a certain interface
+&#64;param interface: Interface to determine Nic type on
+&#64;raise RuntimeError: On linux if ethtool is not present on the system</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getNics">
+<tt class="descname">getNics</tt><big>(</big><em>up=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getNics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getNics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Nics on this machine
+Works only for Linux/Solaris systems
+&#64;param up: only returning nics which or up</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getReachableIpAddress">
+<tt class="descname">getReachableIpAddress</tt><big>(</big><em>ip</em>, <em>port</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getReachableIpAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getReachableIpAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first local ip address that can connect to the specified ip on the specified port</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getVlanTag">
+<tt class="descname">getVlanTag</tt><big>(</big><em>interface</em>, <em>nicType=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getVlanTag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getVlanTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get VLan tag on the specified interface and vlan type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.getVlanTagFromInterface">
+<tt class="descname">getVlanTagFromInterface</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.getVlanTagFromInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.getVlanTagFromInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get vlan tag from interface
+&#64;param interface: string interface to get vlan tag on
+&#64;rtype: integer representing the vlan tag</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.isIpInHostsFile">
+<tt class="descname">isIpInHostsFile</tt><big>(</big><em>hostsfile</em>, <em>ip</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.isIpInHostsFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.isIpInHostsFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if ip is in the hostsfile
+&#64;param hostsfile: File where hosts are defined
+&#64;param ip: Ip of the machine to check</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.isIpLocal">
+<tt class="descname">isIpLocal</tt><big>(</big><em>ipaddress</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.isIpLocal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.isIpLocal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.isNicConnected">
+<tt class="descname">isNicConnected</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.isNicConnected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.isNicConnected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.pingMachine">
+<tt class="descname">pingMachine</tt><big>(</big><em>ip</em>, <em>pingtimeout=60</em>, <em>recheck=False</em>, <em>allowhostname=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.pingMachine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.pingMachine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ping a machine to check if it&#8217;s up/running and accessible
+&#64;param ip: Machine Ip Address
+&#64;param pingtimeout: time in sec after which ip will be declared as unreachable
+&#64;param recheck: Unused, kept for backwards compatibility
+&#64;param allowhostname: allow pinging on hostname (default is false)
+&#64;rtype: True if machine is pingable, False otherwise</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.pm_formatMacAddress">
+<tt class="descname">pm_formatMacAddress</tt><big>(</big><em>macaddress</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.pm_formatMacAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.pm_formatMacAddress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.removeFromHostsFile">
+<tt class="descname">removeFromHostsFile</tt><big>(</big><em>hostsfile</em>, <em>ip</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.removeFromHostsFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.removeFromHostsFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a hostfile, delete ip from hostsfile
+&#64;param hostsfile: File where hosts are defined
+&#64;param ip: Ip of the machine to remove</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.tcpPortConnectionTest">
+<tt class="descname">tcpPortConnectionTest</tt><big>(</big><em>ipaddr</em>, <em>port</em>, <em>timeout=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.tcpPortConnectionTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.tcpPortConnectionTest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.updateHostsFile">
+<tt class="descname">updateHostsFile</tt><big>(</big><em>hostsfile</em>, <em>ip</em>, <em>hostname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.updateHostsFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.updateHostsFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a hostfile to contain the basic information install
+&#64;param hostsfile: File where hosts are defined
+&#64;param ip: Ip of the machine to add/modify
+&#64;param hostname: List of machinehostnames to add/modify</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.validateIpAddress">
+<tt class="descname">validateIpAddress</tt><big>(</big><em>ipaddress</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.validateIpAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.validateIpAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate wether this ip address is a valid ip address of 4 octets ranging from 0 to 255 or not
+&#64;param ipaddress: ip address to check on
+&#64;rtype: boolean...True if this ip is valid, False if not</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.waitConnectionTest">
+<tt class="descname">waitConnectionTest</tt><big>(</big><em>ipaddr</em>, <em>port</em>, <em>timeout</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.waitConnectionTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.waitConnectionTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>will return false if not successfull (timeout)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.net.SystemNet.waitConnectionTestStopped">
+<tt class="descname">waitConnectionTestStopped</tt><big>(</big><em>ipaddr</em>, <em>port</em>, <em>timeout</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#SystemNet.waitConnectionTestStopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.SystemNet.waitConnectionTestStopped" title="Permalink to this definition">¶</a></dt>
+<dd><p>will test that port is not active
+will return false if not successfull (timeout)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.net.getNetworkInfo">
+<tt class="descclassname">JumpScale.core.system.net.</tt><tt class="descname">getNetworkInfo</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#getNetworkInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.getNetworkInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.net.parseBlock">
+<tt class="descclassname">JumpScale.core.system.net.</tt><tt class="descname">parseBlock</tt><big>(</big><em>block</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/net.html#parseBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.net.parseBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.process">
+<span id="jumpscale-core-system-process-module"></span><h2>JumpScale.core.system.process module<a class="headerlink" href="#module-JumpScale.core.system.process" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.process.SystemProcess">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">SystemProcess</tt><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appCheckActive">
+<tt class="descname">appCheckActive</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appCheckActive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appCheckActive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appGetPids">
+<tt class="descname">appGetPids</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appGetPids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appGetPids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appGetPidsActive">
+<tt class="descname">appGetPidsActive</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appGetPidsActive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appGetPidsActive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appNrInstances">
+<tt class="descname">appNrInstances</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appNrInstances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appNrInstances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appNrInstancesActive">
+<tt class="descname">appNrInstancesActive</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appNrInstancesActive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appNrInstancesActive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appsGet">
+<tt class="descname">appsGet</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appsGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appsGet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.appsGetNames">
+<tt class="descname">appsGetNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.appsGetNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.appsGetNames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.checkProcess">
+<tt class="descname">checkProcess</tt><big>(</big><em>process</em>, <em>min=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.checkProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.checkProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a certain process is running on the system.
+you can specify minimal running processes needed.
+&#64;param process: String with the name of the process we</p>
+<blockquote>
+<div>are trying to check</div></blockquote>
+<p>&#64;param min: (int) minimal threads that should run.
+&#64;return status: (int) when ok, 1 when not ok.</p>
+<p>&#64;TODO: The process matching on strings is incorrect, it will match a partial match (e.g.: apache will match a process using apache2)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.checkProcessForPid">
+<tt class="descname">checkProcessForPid</tt><big>(</big><em>pid</em>, <em>process</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.checkProcessForPid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.checkProcessForPid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether a given pid actually does belong to a given process name.
+&#64;param pid: (int) the pid to check
+&#64;param process: (str) the process that should have the pid
+&#64;return status: (int) 0 when ok, 1 when not ok.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.checkstart">
+<tt class="descname">checkstart</tt><big>(</big><em>cmd</em>, <em>filterstr</em>, <em>nrtimes=1</em>, <em>retry=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.checkstart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.checkstart" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param cmd is which command to execute to start e.g. a daemon
+&#64;param filterstr is what to check on if its running
+&#64;param nrtimes is how many processes need to run</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.checkstop">
+<tt class="descname">checkstop</tt><big>(</big><em>cmd</em>, <em>filterstr</em>, <em>retry=1</em>, <em>nrinstances=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.checkstop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.checkstop" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param cmd is which command to execute to start e.g. a daemon
+&#64;param filterstr is what to check on if its running
+&#64;param nrtimes is how many processes need to run</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.execute">
+<tt class="descname">execute</tt><big>(</big><em>command</em>, <em>dieOnNonZeroExitCode=True</em>, <em>outputToStdout=False</em>, <em>useShell=False</em>, <em>ignoreErrorOutput=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a command, returns the exitcode and the output
+&#64;param command: command to execute
+&#64;param dieOnNonZeroExitCode: boolean to die if got non zero exitcode
+&#64;param outputToStdout: boolean to show/hide output to stdout
+&#64;param ignoreErrorOutput standard stderror is added to stdout in out result, if you want to make sure this does not happen put on True
+&#64;rtype: integer represents the exitcode plus the output of the executed command
+if exitcode is not zero then the executed command returned with errors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeAsync">
+<tt class="descname">executeAsync</tt><big>(</big><em>command</em>, <em>args=</em>, <span class="optional">[</span><span class="optional">]</span><em>printCommandToStdout=False</em>, <em>redirectStreams=True</em>, <em>argsInCommand=False</em>, <em>useShell=None</em>, <em>outputToStdout=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeAsync"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeAsync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute command asynchronous. By default, the input, output and error streams of the command will be piped to the returned Popen object. Be sure to call commands that don&#8217;t expect user input, or send input to the stdin parameter of the returning Popen object.
+&#64;param command: Command to execute. (string)
+&#64;param args: [Optional, [] by default] Arguments to be passed to the command. (Array of string)
+&#64;param printCommandToStdOut: [Optional, False by default] Indicates if the command to be executed needs to be printed to screen. (boolean)
+&#64;param redirectStreams: [Optional, True by default] Indicates if the input, output and error streams should be captured by the returned Popen object. If not, the output and input will be mixed with the streams of the calling process. (boolean)
+&#64;param argsInCommand: [Optional, False by default] Indicates if the command-parameter contains command-line arguments.  If argsInCommand is False and args is not empty, the contents of args will be added to the command when executing.
+&#64;param useShell: [Optional, False by default on Windows, True by default on Linux] Indicates if the command should be executed throug the shell.
+&#64;return: If redirectStreams is true, this function returns a subprocess.Popen object representing the started process. Otherwise, it will return the pid-number of the started process.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeCode">
+<tt class="descname">executeCode</tt><big>(</big><em>code</em>, <em>params=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute a method (python code with def)
+use params=j.core.params.get() as input</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeInSandbox">
+<tt class="descname">executeInSandbox</tt><big>(</big><em>command</em>, <em>timeout=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeInSandbox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeInSandbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a command
+&#64;param command: string (command to be executed)
+&#64;param timeout: 0 means to ever, expressed in seconds</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeIndependant">
+<tt class="descname">executeIndependant</tt><big>(</big><em>cmd</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeIndependant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeIndependant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeScript">
+<tt class="descname">executeScript</tt><big>(</big><em>scriptName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeScript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute python script from shell/Interactive Window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.executeWithoutPipe">
+<tt class="descname">executeWithoutPipe</tt><big>(</big><em>command</em>, <em>dieOnNonZeroExitCode=True</em>, <em>printCommandToStdout=False</em>, <em>outputToStdout='deprecatedArgument'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.executeWithoutPipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.executeWithoutPipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED, use system.process.executeAsync() instead, and call the wait() method of the returned object.</p>
+<p>Execute command without opening pipes, returns only the exitcode
+This is platform independent
+&#64;param command: command to execute
+&#64;param dieOnNonZeroExitCode: boolean to die if got non zero exitcode
+&#64;param printCommandToStdout: boolean to show/hide output to stdout
+&#64;param outputToStdout: Deprecated. Use &#8216;printCommandToStdout&#8217; instead.
+&#64;rtype: integer represents the exitcode
+if exitcode is not zero then the executed command returned with errors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getDefunctProcesses">
+<tt class="descname">getDefunctProcesses</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getDefunctProcesses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getDefunctProcesses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getEnviron">
+<tt class="descname">getEnviron</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getEnviron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getEnviron" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getMyProcessObject">
+<tt class="descname">getMyProcessObject</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getMyProcessObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getMyProcessObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getPidsByFilter">
+<tt class="descname">getPidsByFilter</tt><big>(</big><em>filterstr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getPidsByFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getPidsByFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getPidsByPort">
+<tt class="descname">getPidsByPort</tt><big>(</big><em>port</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getPidsByPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getPidsByPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns pid of the process that is listening on the given port</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getProcessByPort">
+<tt class="descname">getProcessByPort</tt><big>(</big><em>port</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getProcessByPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getProcessByPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the full name of the process that is listening on the given port</p>
+<p>&#64;param port: the port for which to find the command
+&#64;type port: int
+&#64;return: full process name
+&#64;rtype: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getProcessObject">
+<tt class="descname">getProcessObject</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getProcessObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getProcessObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getProcessPid">
+<tt class="descname">getProcessPid</tt><big>(</big><em>process</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getProcessPid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getProcessPid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getProcessPidsFromUser">
+<tt class="descname">getProcessPidsFromUser</tt><big>(</big><em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getProcessPidsFromUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getProcessPidsFromUser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.getSimularProcesses">
+<tt class="descname">getSimularProcesses</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.getSimularProcesses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.getSimularProcesses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.isPidAlive">
+<tt class="descname">isPidAlive</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.isPidAlive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.isPidAlive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether this pid is alive.
+For unix, a signal is sent to check that the process is alive.
+For windows, the process information is retrieved and it is double checked that the process is python.exe
+or pythonw.exe</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.process.SystemProcess.kill">
+<em class="property">static </em><tt class="descname">kill</tt><big>(</big><em>pid</em>, <em>sig=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.kill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kill a process with a signal
+&#64;param pid: pid of the process to kill
+&#64;param sig: signal. If no signal is specified signal.SIGKILL is used</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.killProcessByName">
+<tt class="descname">killProcessByName</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.killProcessByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.killProcessByName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.killProcessByPort">
+<tt class="descname">killProcessByPort</tt><big>(</big><em>port</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.killProcessByPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.killProcessByPort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.killUserProcesses">
+<tt class="descname">killUserProcesses</tt><big>(</big><em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.killUserProcesses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.killUserProcesses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.process.SystemProcess.run">
+<em class="property">static </em><tt class="descname">run</tt><big>(</big><em>commandline</em>, <em>showOutput=False</em>, <em>captureOutput=True</em>, <em>maxSeconds=0</em>, <em>stopOnError=True</em>, <em>user=None</em>, <em>group=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command and wait for its termination</p>
+<p>This function spawns a subprocess which executes the given command line in a
+subshell. The function waits for the spawned process to terminate, or until
+a time period of maxSeconds was exceeded.</p>
+<p>When showOutput is set to True, stdin, stderr and stdout handles of the
+subprocess are bound to the handles of the calling process. This can be used
+to run interactive commands.</p>
+<p>Both showOutput and captureOutput can&#8217;t be True at the same time.</p>
+<p>Any extra keyword arguments are passed to L{subprocess.Popen}. These
+arguments can overwrite any argument set by this function, so setting any of
+the arguments used by this function (including C{stdin}, C{stdout},
+C{stderr}, C{env}, C{shell} and C{preexec_fn}) can change the behavior
+of this function. This could e.g. be used to set C{cwd}.</p>
+<p>The exit code contained in the returned tuple is the exit code of the
+spawned process if equal to or larger than 0. If the subprocess was killed
+while running, the exit code will be -1. If the process was stopped because
+maxSeconds was exceeded, an exit code equal to -2 will be returned.</p>
+<p>If user or group is defined (as name of number), the process will
+setuid/setgid to this user and group before executing the command line,
+effectively running the child process with the privileges of the provided
+user and group.</p>
+<dl class="docutils">
+<dt>Remarks:</dt>
+<dd><ul class="first last simple">
+<li>Don&#8217;t use the &#8216;&amp;&#8217; shell operator to run a process in the background, use
+the startDaemon function instead</li>
+<li>Shell operators including pipes and redirects are allowed in the
+command line string</li>
+<li>When spawning processes which generate large amounts of output, make sure
+you set captureOutput to False, otherwise too much data will be buffered
+in memory</li>
+<li>If captureOutput is set to False, the values of stdout and stderr in the
+return value will be empty strings</li>
+<li>If stopOnError is set to True, the calling process will exit with exit
+code 44 if the child process returned a non-zero exit code, or 45 if the
+child process exceeds maxSeconds</li>
+</ul>
+</dd>
+</dl>
+<p>&#64;param commandline: Command line string to execute
+&#64;type commandline: string
+&#64;param showOutput: Bind stdin/stdout/stderr to parent process
+&#64;type showOutput: bool
+&#64;param captureOutput: Capture generated output
+&#64;type captureOutput: bool
+&#64;param maxSeconds: Maximum number of seconds the subprocess should be</p>
+<blockquote>
+<div>allowed to run</div></blockquote>
+<p>&#64;type maxSeconds: number
+&#64;param stopOnError: Quit the caller process when the subprocess fails
+&#64;type stopOnError: bool
+&#64;param user: Username or UID of user to setuid() to
+&#64;type user: string or number
+&#64;param group: Groupname of GID of group to setgid() to
+&#64;type group: string or number
+&#64;param kwargs: Extra arguments passed through to L{subprocess.Popen}</p>
+<p>&#64;return: Tuple containing subprocess exitcode, stdout and stderr output
+&#64;rtype: tuple(number, string, string)</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.process.SystemProcess.runDaemon">
+<em class="property">static </em><tt class="descname">runDaemon</tt><big>(</big><em>commandline</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>user=None</em>, <em>group=None</em>, <em>env=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.runDaemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run an application as a background process</p>
+<p>This function will execute the given commandline decoupled from the host
+process by forking first. The stdout and stderr streams of the spawned
+application can be redirected to files.</p>
+<p>This can be compared to using</p>
+<blockquote>
+<div>nohup myapplication -u -b 1 &amp;</div></blockquote>
+<p>in a Bash shell.</p>
+<p>If no stdout or stderr paths are provided, those streams are ignored.</p>
+<p>If user or group is defined (as name of number), the daemon process will
+setuid/setgid to this user and group before executing the child process,
+effectively running the daemon process with the privileges of the provided
+user and group.</p>
+<p>If C{env} is provided, it will be used as environment in which the daemon
+process will be executed. If it is not set, C{os.environ} will be used. Do
+note C{PYTHONUNBUFFERED} and C{PYTHONPATH} will be slightly altered (in a
+copy of the provided dictionary) by this function before spawning the
+daemon process.</p>
+<p>&#64;param commandline: Command line string to execute
+&#64;type commandline: string
+&#64;param stdout: Path to file to redirect stdout
+&#64;type stdout: string
+&#64;param stderr: Path to file to redirect stderr
+&#64;type stderr: string
+&#64;param user: Username or UID of user to setuid() to
+&#64;type user: string or number
+&#64;param group: Groupname of GID of group to setgid() to
+&#64;type group: string or number
+&#64;param env: Environment settings for the daemon
+&#64;type env: dict</p>
+<p>&#64;return: PID of the daemonized process
+&#64;rtype: number</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.process.SystemProcess.runScript">
+<em class="property">static </em><tt class="descname">runScript</tt><big>(</big><em>script</em>, <em>showOutput=False</em>, <em>captureOutput=True</em>, <em>maxSeconds=0</em>, <em>stopOnError=True</em><big>)</big><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.runScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a Python script</p>
+<p>This function executes a Python script, making sure the script output will
+not be buffered.</p>
+<p>For an overview of the parameters and function behaviour, see the
+documentation of L{jumpscale.system.process.run}.</p>
+<p>&#64;param script: Script to execute
+&#64;type script: string</p>
+<p>&#64;return: Tuple containing subprocess exitcode, stdout and stderr output
+&#64;rtype: tuple(number, string, string)</p>
+<p>&#64;raise ValueError: Script is not an existing file</p>
+<p>&#64;see: jumpscale.system.process.run</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.process.SystemProcess.setEnvironmentVariable">
+<tt class="descname">setEnvironmentVariable</tt><big>(</big><em>varnames</em>, <em>varvalues</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#SystemProcess.setEnvironmentVariable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.SystemProcess.setEnvironmentVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of the environment variables C{varnames}. Existing variable are overwritten</p>
+<p>&#64;param varnames: A list of the names of all the environment variables to set
+&#64;type varnames: list&lt;string&gt;
+&#64;param varvalues: A list of all values for the environment variables
+&#64;type varvalues: list&lt;string&gt;</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.process.calculateEnvironment">
+<tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">calculateEnvironment</tt><big>(</big><em>values</em>, <em>source=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#calculateEnvironment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.calculateEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge new keys in an environment dict</p>
+<p>All key/value pairs in the C{values} dict will be merged into the C{source}
+dict, which defaults to the current environment values, C{os.environ}.</p>
+<p>If L{UNSET} is used as a value in C{values}, the value will be removed from
+the result.</p>
+<p>Sample usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">os_environ</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s">&#39;PATH&#39;</span><span class="p">:</span> <span class="s">&#39;/bin:/usr/bin&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="s">&#39;root&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s">&#39;PWD&#39;</span><span class="p">:</span> <span class="s">&#39;/root&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myenv</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="s">&#39;USER&#39;</span><span class="p">:</span> <span class="n">UNSET</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s">&#39;PWD&#39;</span><span class="p">:</span> <span class="s">&#39;/tmp&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">calculateEnvironment</span><span class="p">(</span><span class="n">myenv</span><span class="p">,</span> <span class="n">os_environ</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;PATH&#39;</span><span class="p">]</span>
+<span class="go">/bin:/usr/bin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;PWD&#39;</span><span class="p">]</span>
+<span class="go">/tmp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;USER&#39;</span> <span class="ow">in</span> <span class="n">result</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>&#64;param values: Values to merge into the environment
+&#64;type values: dict
+&#64;param source: Source environment, defaults to os.environ
+&#64;type source: dict</p>
+<p>&#64;return: Merged environment
+&#64;rtype: dict</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.process.kill">
+<tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">kill</tt><big>(</big><em>pid</em>, <em>sig=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#kill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.kill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kill a process with a signal
+&#64;param pid: pid of the process to kill
+&#64;param sig: signal. If no signal is specified signal.SIGKILL is used</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.process.run">
+<tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">run</tt><big>(</big><em>commandline</em>, <em>showOutput=False</em>, <em>captureOutput=True</em>, <em>maxSeconds=0</em>, <em>stopOnError=True</em>, <em>user=None</em>, <em>group=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a command and wait for its termination</p>
+<p>This function spawns a subprocess which executes the given command line in a
+subshell. The function waits for the spawned process to terminate, or until
+a time period of maxSeconds was exceeded.</p>
+<p>When showOutput is set to True, stdin, stderr and stdout handles of the
+subprocess are bound to the handles of the calling process. This can be used
+to run interactive commands.</p>
+<p>Both showOutput and captureOutput can&#8217;t be True at the same time.</p>
+<p>Any extra keyword arguments are passed to L{subprocess.Popen}. These
+arguments can overwrite any argument set by this function, so setting any of
+the arguments used by this function (including C{stdin}, C{stdout},
+C{stderr}, C{env}, C{shell} and C{preexec_fn}) can change the behavior
+of this function. This could e.g. be used to set C{cwd}.</p>
+<p>The exit code contained in the returned tuple is the exit code of the
+spawned process if equal to or larger than 0. If the subprocess was killed
+while running, the exit code will be -1. If the process was stopped because
+maxSeconds was exceeded, an exit code equal to -2 will be returned.</p>
+<p>If user or group is defined (as name of number), the process will
+setuid/setgid to this user and group before executing the command line,
+effectively running the child process with the privileges of the provided
+user and group.</p>
+<dl class="docutils">
+<dt>Remarks:</dt>
+<dd><ul class="first last simple">
+<li>Don&#8217;t use the &#8216;&amp;&#8217; shell operator to run a process in the background, use
+the startDaemon function instead</li>
+<li>Shell operators including pipes and redirects are allowed in the
+command line string</li>
+<li>When spawning processes which generate large amounts of output, make sure
+you set captureOutput to False, otherwise too much data will be buffered
+in memory</li>
+<li>If captureOutput is set to False, the values of stdout and stderr in the
+return value will be empty strings</li>
+<li>If stopOnError is set to True, the calling process will exit with exit
+code 44 if the child process returned a non-zero exit code, or 45 if the
+child process exceeds maxSeconds</li>
+</ul>
+</dd>
+</dl>
+<p>&#64;param commandline: Command line string to execute
+&#64;type commandline: string
+&#64;param showOutput: Bind stdin/stdout/stderr to parent process
+&#64;type showOutput: bool
+&#64;param captureOutput: Capture generated output
+&#64;type captureOutput: bool
+&#64;param maxSeconds: Maximum number of seconds the subprocess should be</p>
+<blockquote>
+<div>allowed to run</div></blockquote>
+<p>&#64;type maxSeconds: number
+&#64;param stopOnError: Quit the caller process when the subprocess fails
+&#64;type stopOnError: bool
+&#64;param user: Username or UID of user to setuid() to
+&#64;type user: string or number
+&#64;param group: Groupname of GID of group to setgid() to
+&#64;type group: string or number
+&#64;param kwargs: Extra arguments passed through to L{subprocess.Popen}</p>
+<p>&#64;return: Tuple containing subprocess exitcode, stdout and stderr output
+&#64;rtype: tuple(number, string, string)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.process.runDaemon">
+<tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">runDaemon</tt><big>(</big><em>commandline</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>user=None</em>, <em>group=None</em>, <em>env=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#runDaemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.runDaemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run an application as a background process</p>
+<p>This function will execute the given commandline decoupled from the host
+process by forking first. The stdout and stderr streams of the spawned
+application can be redirected to files.</p>
+<p>This can be compared to using</p>
+<blockquote>
+<div>nohup myapplication -u -b 1 &amp;</div></blockquote>
+<p>in a Bash shell.</p>
+<p>If no stdout or stderr paths are provided, those streams are ignored.</p>
+<p>If user or group is defined (as name of number), the daemon process will
+setuid/setgid to this user and group before executing the child process,
+effectively running the daemon process with the privileges of the provided
+user and group.</p>
+<p>If C{env} is provided, it will be used as environment in which the daemon
+process will be executed. If it is not set, C{os.environ} will be used. Do
+note C{PYTHONUNBUFFERED} and C{PYTHONPATH} will be slightly altered (in a
+copy of the provided dictionary) by this function before spawning the
+daemon process.</p>
+<p>&#64;param commandline: Command line string to execute
+&#64;type commandline: string
+&#64;param stdout: Path to file to redirect stdout
+&#64;type stdout: string
+&#64;param stderr: Path to file to redirect stderr
+&#64;type stderr: string
+&#64;param user: Username or UID of user to setuid() to
+&#64;type user: string or number
+&#64;param group: Groupname of GID of group to setgid() to
+&#64;type group: string or number
+&#64;param env: Environment settings for the daemon
+&#64;type env: dict</p>
+<p>&#64;return: PID of the daemonized process
+&#64;rtype: number</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.process.runScript">
+<tt class="descclassname">JumpScale.core.system.process.</tt><tt class="descname">runScript</tt><big>(</big><em>script</em>, <em>showOutput=False</em>, <em>captureOutput=True</em>, <em>maxSeconds=0</em>, <em>stopOnError=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/process.html#runScript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.process.runScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a Python script</p>
+<p>This function executes a Python script, making sure the script output will
+not be buffered.</p>
+<p>For an overview of the parameters and function behaviour, see the
+documentation of L{jumpscale.system.process.run}.</p>
+<p>&#64;param script: Script to execute
+&#64;type script: string</p>
+<p>&#64;return: Tuple containing subprocess exitcode, stdout and stderr output
+&#64;rtype: tuple(number, string, string)</p>
+<p>&#64;raise ValueError: Script is not an existing file</p>
+<p>&#64;see: jumpscale.system.process.run</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.processhelper">
+<span id="jumpscale-core-system-processhelper-module"></span><h2>JumpScale.core.system.processhelper module<a class="headerlink" href="#module-JumpScale.core.system.processhelper" title="Permalink to this headline">¶</a></h2>
+<p>Process creation helper</p>
+<p>This script can be spawned as an intermediate process when creating a new
+process to be able to daemonize the result process, or setuid/setgid the result
+process.</p>
+<dl class="function">
+<dt id="JumpScale.core.system.processhelper.change_uid_gid">
+<tt class="descclassname">JumpScale.core.system.processhelper.</tt><tt class="descname">change_uid_gid</tt><big>(</big><em>uid</em>, <em>gid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/processhelper.html#change_uid_gid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.processhelper.change_uid_gid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Impersonate the given UID and/or GID</p>
+<p>Do note this will only work if the current process has the privileges to
+impersonate this user or group.</p>
+<p>Here&#8217;s how things are processed. Let&#8217;s assume we&#8217;re currently running as
+root (uid=0, groups=root(0)), and there&#8217;s one more user called &#8216;test&#8217;
+(uid=1000, gid=1001, groups=test1(1001), test2(1002)).</p>
+<p>+=======================================================+
+| Arguments   | Resulting process environment           |
+|             |                                         |
+| UID  | GID  | UID  | GID  | Extra groups              |
++======+======+======+======+===========================+
+| None | None | 0    | 0    | root                      |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 0    | None | 0    | 0    | root                      |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| None | 0    | 0    | 0    | root                      |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 0    | 0    | 0    | 0    | root                      |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 1000 | None | 1000 | 1001 | test1, test2              |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| None | 1001 | 0    | 1001 | root                      |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 1000 | 1001 | 1000 | 1001 | test1, test2              |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 1000 | 1002 | 1000 | 1002 | test1, test2              |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+
+| 1000 | 0    | 1000 | 0    | test1, test2, root        |
++&#8212;&#8212;&#8212;&#8212;-+&#8212;&#8212;+&#8212;&#8212;+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;+</p>
+<p>&#64;param uid: UID of the user to impersonate
+&#64;type uid: number
+&#64;param gid: GID of the group to impersonate
+&#64;type gid: number</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.processhelper.daemonize">
+<tt class="descclassname">JumpScale.core.system.processhelper.</tt><tt class="descname">daemonize</tt><big>(</big><em>stdout</em>, <em>stderr</em>, <em>chdir='/'</em>, <em>umask=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/processhelper.html#daemonize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.processhelper.daemonize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Daemonize a process using a double fork</p>
+<p>This method will fork the current process to create a daemon process.
+It will perform a double fork(2), chdir(2) to the given folder (or not
+chdir at all if the C{chdir} argument is C{None}), and set the new
+process umask(2) to the value of the C{umask} argument, or not reset
+it if this argument is -1.</p>
+<p>The stdout and stderr arguments can be used to output the output to the
+corresponding streams of the daemon process to files at the provided
+location. Make sure the parent folder of these files already exists. When
+set to None, all output will vanish.</p>
+<p>While forking, a setsid(2) call will be done to become session leader
+and detach from the controlling TTY.</p>
+<p>In the child process, all existing file descriptors will be closed,
+including stdin, stdout and stderr, which will be re-opened to
+/dev/null, unless a corresponding parameter is provided as an argument to
+this function.</p>
+<p>The method returns a tuple&lt;bool, number&gt;. If the first item is True,
+the current process is the daemonized process. If it is False,
+the current process is the process which called the C{daemonize}
+method, which can most likely be closed now. The second item is the
+PID of the current process.</p>
+<p>&#64;attention: Make sure you know really well what fork(2) does before using this method</p>
+<p>&#64;param stdout: Path to file to dump stdout output of daemon process to
+&#64;type stdout: string
+&#64;param stderr: Path to file to dump stderr output of daemon process to
+&#64;type stderr: string
+&#64;param chdir: Path to chdir(2) to after forking. Set to None to disable chdir&#8217;ing
+&#64;type chdir: string or None
+&#64;param umask: Umask to set after forking. Set to -1 not to set umask
+&#64;type umask: number
+&#64;param uid: UID of the user to impersonate
+&#64;type uid: number
+&#64;param gid: GID of the group to impersonate
+&#64;type gid: number</p>
+<p>&#64;returns: Daemon status and PID
+&#64;rtype: tuple&lt;bool, number&gt;</p>
+<p>&#64;raise RuntimeError: System does not support fork(2)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.processhelper.find_gids_for_uid">
+<tt class="descclassname">JumpScale.core.system.processhelper.</tt><tt class="descname">find_gids_for_uid</tt><big>(</big><em>uid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/processhelper.html#find_gids_for_uid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.processhelper.find_gids_for_uid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all GIDs of groups the user with given name belongs to</p>
+<p>&#64;param uid: User UID
+&#64;type uid: number</p>
+<p>&#64;returns: GIDs of all groups the user belongs to
+&#64;rtype: list&lt;number&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.processhelper.main">
+<tt class="descclassname">JumpScale.core.system.processhelper.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/processhelper.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.processhelper.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main entry point</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.string">
+<span id="jumpscale-core-system-string-module"></span><h2>JumpScale.core.system.string module<a class="headerlink" href="#module-JumpScale.core.system.string" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.string.String">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.string.</tt><tt class="descname">String</tt><a class="reference internal" href="../_modules/JumpScale/core/system/string.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.string.String" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.system.string.String.decodeUnicode2Asci">
+<tt class="descname">decodeUnicode2Asci</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/string.html#String.decodeUnicode2Asci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.string.String.decodeUnicode2Asci" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.string.String.toolStripNonAsciFromText">
+<tt class="descname">toolStripNonAsciFromText</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/string.html#String.toolStripNonAsciFromText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.string.String.toolStripNonAsciFromText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.text">
+<span id="jumpscale-core-system-text-module"></span><h2>JumpScale.core.system.text module<a class="headerlink" href="#module-JumpScale.core.system.text" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.text.Text">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.text.</tt><tt class="descname">Text</tt><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.addCmd">
+<em class="property">static </em><tt class="descname">addCmd</tt><big>(</big><em>out</em>, <em>entity</em>, <em>cmd</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.addCmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.addCmd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.addTimeHR">
+<em class="property">static </em><tt class="descname">addTimeHR</tt><big>(</big><em>line</em>, <em>epoch</em>, <em>start=50</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.addTimeHR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.addTimeHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.addVal">
+<em class="property">static </em><tt class="descname">addVal</tt><big>(</big><em>out</em>, <em>name</em>, <em>val</em>, <em>addtimehr=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.addVal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.addVal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.prefix">
+<em class="property">static </em><tt class="descname">prefix</tt><big>(</big><em>prefix</em>, <em>txt</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.prefix_remove">
+<em class="property">static </em><tt class="descname">prefix_remove</tt><big>(</big><em>prefix</em>, <em>txt</em>, <em>onlyPrefix=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.prefix_remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.prefix_remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param onlyPrefix if True means only when prefix found will be returned, rest discarded</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.prefix_remove_withtrailing">
+<em class="property">static </em><tt class="descname">prefix_remove_withtrailing</tt><big>(</big><em>prefix</em>, <em>txt</em>, <em>onlyPrefix=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.prefix_remove_withtrailing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.prefix_remove_withtrailing" title="Permalink to this definition">¶</a></dt>
+<dd><p>there can be chars for prefix (e.g. &#8216;&lt; :<em>: aline&#8217;  and this function looking for :</em>: would still work and ignore &#8216;&lt; &#8216;)
+&#64;param onlyPrefix if True means only when prefix found will be returned, rest discarded</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.toAscii">
+<em class="property">static </em><tt class="descname">toAscii</tt><big>(</big><em>value</em>, <em>maxlen=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.toAscii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.toAscii" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.toStr">
+<em class="property">static </em><tt class="descname">toStr</tt><big>(</big><em>value</em>, <em>codec='utf-8'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.toStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.toStr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.text.Text.toUnicode">
+<em class="property">static </em><tt class="descname">toUnicode</tt><big>(</big><em>value</em>, <em>codec='utf-8'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/text.html#Text.toUnicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.text.Text.toUnicode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.core.system.unix">
+<span id="jumpscale-core-system-unix-module"></span><h2>JumpScale.core.system.unix module<a class="headerlink" href="#module-JumpScale.core.system.unix" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.core.system.unix.UnixSystem">
+<em class="property">class </em><tt class="descclassname">JumpScale.core.system.unix.</tt><tt class="descname">UnixSystem</tt><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.addCronJob">
+<tt class="descname">addCronJob</tt><big>(</big><em>commandToExecute</em>, <em>interval=1</em>, <em>logFilePath=None</em>, <em>replaceLineIfCommandAlreadyInCrontab=True</em>, <em>unit=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.addCronJob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.addCronJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a cronjob to the system</p>
+<p>&#64;param commandToExecute: The command to execute
+&#64;type commandToExecute: string
+&#64;param interval: The interval at which to launch the commandToExecute
+&#64;type interval: number
+&#64;param logFilePath: the path of the logfile to redirect the output of crontab to
+&#64;type logFilePath: string
+&#64;param replaceLineIfCommandAlreadyInCrontab: Specifies whether to replace the line if a command already exists in crontab
+&#64;type replaceLineIfCommandAlreadyInCrontab: bool
+&#64;param unit: The unit of the interval
+&#64;type unit: TimeIntervalUnit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.addSystemGroup">
+<tt class="descname">addSystemGroup</tt><big>(</big><em>groupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.addSystemGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.addSystemGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a group to the system</p>
+<p>Note: you should be root to run this python command.</p>
+<p>&#64;param groupname: Name of the group to add
+&#64;type groupname : string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.addSystemUser">
+<tt class="descname">addSystemUser</tt><big>(</big><em>username</em>, <em>groupname=None</em>, <em>shell='/bin/bash'</em>, <em>homedir=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.addSystemUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.addSystemUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a user to the system</p>
+<p>Note: you should be root to run this python command.</p>
+<p>&#64;param username: Username of the user to add
+&#64;param groupname: Optional param to add user to existing systemgroup
+&#64;param shell: Optional param to specify the shell of the user
+&#64;type username: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.checkApplicationInstalled">
+<tt class="descname">checkApplicationInstalled</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.checkApplicationInstalled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.checkApplicationInstalled" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if app is installed,  if yes return True</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.chmod">
+<tt class="descname">chmod</tt><big>(</big><em>root</em>, <em>mode</em>, <em>recurse=0</em>, <em>dirPattern='*'</em>, <em>filePattern='*'</em>, <em>dirs=True</em>, <em>files=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.chmod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.chmod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chmod based on system.fs.walk</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.chown">
+<tt class="descname">chown</tt><big>(</big><em>path</em>, <em>user</em>, <em>group</em>, <em>recursive=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.chown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.chown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chown a file
+&#64;param path: the path of a file or a directory to be chown
+&#64;type path: string
+&#64;param user: username to be used as the new owner
+&#64;type user: string
+&#64;param group: groupname to be used as the new group owner (if None, then root is used as a groupname0
+&#64;type group: string
+&#64;param recursive: if path is a directory, all files underneath the path are also chown if True (default False)
+&#64;type recursive: boolean</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.chroot">
+<tt class="descname">chroot</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.chroot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.chroot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change root directory path</p>
+<p>&#64;param path: Path to chroot() to
+&#64;type path: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.daemonize">
+<tt class="descname">daemonize</tt><big>(</big><em>chdir='/'</em>, <em>umask=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.daemonize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.daemonize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Daemonize a process using a double fork</p>
+<p>This method will fork the current process to create a daemon process.
+It will perform a double fork(2), chdir(2) to the given folder (or not
+chdir at all if the C{chdir} argument is C{None}), and set the new
+process umask(2) to the value of the C{umask} argument, or not reset
+it if this argument is -1.</p>
+<p>While forking, a setsid(2) call will be done to become session leader
+and detach from the controlling TTY.</p>
+<p>In the child process, all existing file descriptors will be closed,
+including stdin, stdout and stderr, which will be re-opened to
+/dev/null.</p>
+<p>The method returns a tuple&lt;bool, number&gt;. If the first item is True,
+the current process is the daemonized process. If it is False,
+the current process is the process which called the C{daemonize}
+method, which can most likely be closed now. The second item is the
+PID of the current process.</p>
+<p>&#64;attention: Make sure you know really well what fork(2) does before using this method</p>
+<p>&#64;param chdir: Path to chdir(2) to after forking. Set to None to disable chdir&#8217;ing
+&#64;type chdir: string or None
+&#64;param umask: Umask to set after forking. Set to -1 not to set umask
+&#64;type umask: number</p>
+<p>&#64;returns: Daemon status and PID
+&#64;rtype: tuple&lt;bool, number&gt;</p>
+<p>&#64;raise RuntimeError: System does not support fork(2)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.disableUnixUser">
+<tt class="descname">disableUnixUser</tt><big>(</big><em>username</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.disableUnixUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.disableUnixUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disables a given unix user</p>
+<p>&#64;param username: Name of the user to disable
+&#64;type username: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.enableUnixUser">
+<tt class="descname">enableUnixUser</tt><big>(</big><em>username</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.enableUnixUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.enableUnixUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enables a given unix user</p>
+<p>&#64;param username: Name of the user to enable
+&#64;type username: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.executeAsUser">
+<tt class="descname">executeAsUser</tt><big>(</big><em>command</em>, <em>username</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.executeAsUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.executeAsUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a given command as a specific user</p>
+<p>When calling this method, the command will be wrapped inside &#8216;su&#8217; to
+be executed as some specific user. This requires the application which
+spawns the command to be running as root.</p>
+<p>Next to this, it behaves exactly as C{j.system.process.execute},
+including the same named arguments.</p>
+<p>&#64;param command: Command to execute
+&#64;type command: string
+&#64;param username: Name of the user to impersonate
+&#64;type username: string</p>
+<p>&#64;returns: Exit code and command output
+&#64;rtype: tuple</p>
+<p>&#64;raises RuntimeError: When the application is not running as root
+&#64;raises RuntimeError: If /bin/su is not available on the system
+&#64;raises ValueError: When the provided username can&#8217;t be resolved</p>
+<p>&#64;see: jumpscale.system.process.SystemProcess.execute</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.executeDaemonAsUser">
+<tt class="descname">executeDaemonAsUser</tt><big>(</big><em>command</em>, <em>username</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.executeDaemonAsUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.executeDaemonAsUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a given command as a background process as a specific user</p>
+<p>When calling this method, the command will be wrapped inside &#8216;su&#8217; to
+be executed as some specific user. This requires the application which
+spawns the command to be running as root.</p>
+<p>Next to this, it behaves exactly as C{j.system.process.runDaemon},
+including the same named arguments.</p>
+<p>&#64;param command: Command to execute
+&#64;type command: string
+&#64;param username: Name of the user to impersonate
+&#64;type username: string</p>
+<p>&#64;returns: pid of the process
+&#64;rtype: int</p>
+<p>&#64;raises RuntimeError: When the application is not running as root
+&#64;raises RuntimeError: If /bin/su is not available on the system
+&#64;raises ValueError: When the provided username can&#8217;t be resolved</p>
+<p>&#64;see: jumpscale.system.process.runDaemon</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.getBashEnvFromFile">
+<tt class="descname">getBashEnvFromFile</tt><big>(</big><em>file</em>, <em>var</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.getBashEnvFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.getBashEnvFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of an environment variable in a Bash file</p>
+<p>&#64;param file: Bash file defining the variable
+&#64;type file: string
+&#64;param var: Variable name
+&#64;type var: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.getMachineInfo">
+<tt class="descname">getMachineInfo</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.getMachineInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.getMachineInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get memory and CPU info about this machine</p>
+<p>&#64;returns: Amount of available memory, CPU speed and number of CPUs
+&#64;rtype: tuple</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.killGroup">
+<tt class="descname">killGroup</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.killGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.killGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kill a process group</p>
+<p>killGroup will get the parent pid from the pid given and kill the group with signal SIGKILL (default)</p>
+<p>&#64;type pid: int
+&#64;param pid: process id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.removeUnixUser">
+<tt class="descname">removeUnixUser</tt><big>(</big><em>username</em>, <em>removehome=False</em>, <em>die=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.removeUnixUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.removeUnixUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a given unix user</p>
+<p>&#64;param username: Name of the user to remove
+&#64;type username: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.setUnixUserPassword">
+<tt class="descname">setUnixUserPassword</tt><big>(</big><em>username</em>, <em>password</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.setUnixUserPassword"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.setUnixUserPassword" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a password on unix user</p>
+<p>&#64;param username: Name of the user to enable
+&#64;type username: string</p>
+<p>&#64;param password: Password to set on the user
+&#64;type username: string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.unixGroupExists">
+<tt class="descname">unixGroupExists</tt><big>(</big><em>groupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.unixGroupExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.unixGroupExists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a given group already exists in the system</p>
+<p>&#64;param groupname: Name of the group to check for
+&#64;type groupname: string</p>
+<p>&#64;returns: Whether the group exists
+&#64;rtype: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.core.system.unix.UnixSystem.unixUserExists">
+<tt class="descname">unixUserExists</tt><big>(</big><em>username</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.unixUserExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.unixUserExists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a given user already exists in the system</p>
+<p>&#64;param username: Username of the user to check for
+&#64;type username: string</p>
+<p>&#64;returns: Whether the user exists
+&#64;rtype: bool</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="JumpScale.core.system.unix.UnixSystem.unixUserIsInGroup">
+<em class="property">static </em><tt class="descname">unixUserIsInGroup</tt><big>(</big><em>username</em>, <em>groupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#UnixSystem.unixUserIsInGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.UnixSystem.unixUserIsInGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a given user is a member of the given group</p>
+<p>&#64;param username: Username to check for
+&#64;type username: string
+&#64;param groupname: Group to check for
+&#64;type groupname: string</p>
+<p>&#64;returns: Whether the user is a member of the group
+&#64;rtype: bool</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.core.system.unix.user_in_group">
+<tt class="descclassname">JumpScale.core.system.unix.</tt><tt class="descname">user_in_group</tt><big>(</big><em>username</em>, <em>groupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/system/unix.html#user_in_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.system.unix.user_in_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether a given user is member of a given group</p>
+<p>&#64;param username: Name of the user to check
+&#64;type username: string
+&#64;param groupname: Name of the group to check
+&#64;type groupname: string</p>
+<p>&#64;returns: Whether the user is member of the group
+&#64;rtype: bool</p>
+<p>&#64;raises KeyError: Unknown username or groupname</p>
+</dd></dl>
+
+</div>
+<div class="section" id="jumpscale-core-system-windows-module">
+<h2>JumpScale.core.system.windows module<a class="headerlink" href="#jumpscale-core-system-windows-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.core.system">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.system" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.core.system package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.System">JumpScale.core.system.System module</a></li>
+<li><a class="reference internal" href="#jumpscale-core-system-tarfile-module">JumpScale.core.system.TarFile module</a></li>
+<li><a class="reference internal" href="#jumpscale-core-system-zipfile-module">JumpScale.core.system.ZipFile module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.fs">JumpScale.core.system.fs module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.fswalker">JumpScale.core.system.fswalker module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.net">JumpScale.core.system.net module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.process">JumpScale.core.system.process module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.processhelper">JumpScale.core.system.processhelper module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.string">JumpScale.core.system.string module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.text">JumpScale.core.system.text module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system.unix">JumpScale.core.system.unix module</a></li>
+<li><a class="reference internal" href="#jumpscale-core-system-windows-module">JumpScale.core.system.windows module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.system">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.core.system.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

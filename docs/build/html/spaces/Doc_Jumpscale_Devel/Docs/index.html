@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="next" title="Starting application and configuration" href="DevelopYourFirstApp/Application Configuration.html" />
+    <link rel="prev" title="ZDaemon and ZClient" href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="DevelopYourFirstApp/Application Configuration.html" title="Starting application and configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html" title="ZDaemon and ZClient"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DevelopYourFirstApp/Application Configuration.html#application-start">Application start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevelopYourFirstApp/Application Configuration.html#j-dirs">j.dirs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actors/GenericSpecFormat.html">Generic Spec Format:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Actors/GenericSpecFormat.html#basic-types">basic types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actors/GenericSpecFormat.html#reference-to-enumerations-objects">reference to enumerations &amp; objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actors/GenericSpecFormat.html#default-val-posibilities">default val posibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actors/GenericSpecFormat.html#generic">Generic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Actors/ActorSpec.html">Actor Specs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Actors/ActorSpec.html#tags-which-can-be-used-in-actorspec">Tags Which Can Be Used In Actorspec</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actors/ModelSpec.html">Model Spec</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Actors/ModelSpec.html#nocrud">nocrud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actors/ModelSpec.html#index">index</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Portal/PortalWebserverFlow.html">Portal Webserver Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Portal/PortalWebserverFlow.html#startup">startup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Portal/PortalWebserverFlow.html#when-incoming-request">when incoming request</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced/HRDSerializerDeserializer.html">Format of HRD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Advanced/HRDSerializerDeserializer.html#to-dump-from-any-data-to-hrd">To dump from any data to HRD:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CodeManagement/jscode.html">jscode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CodeManagement/jscode.html#jscode-status">jscode status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeManagement/jscode.html#code-update">code update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeManagement/jscode.html#jscode-commit">jscode commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeManagement/jscode.html#jscode-push">jscode push</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html"
+                        title="previous chapter">ZDaemon and ZClient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="DevelopYourFirstApp/Application Configuration.html"
+                        title="next chapter">Starting application and configuration</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Devel/Docs/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="DevelopYourFirstApp/Application Configuration.html" title="Starting application and configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html" title="ZDaemon and ZClient"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

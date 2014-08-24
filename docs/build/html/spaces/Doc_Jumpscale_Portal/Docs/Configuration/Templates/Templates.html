@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How templates works &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Configuration" href="../index.html" />
+    <link rel="next" title="User Management" href="../UserManagement/UserManagement.html" />
+    <link rel="prev" title="Configuring a Space" href="../SpaceConfiguration/SpaceConfiguration.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../UserManagement/UserManagement.html" title="User Management"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../SpaceConfiguration/SpaceConfiguration.html" title="Configuring a Space"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Configuration</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-templates-works">
+<h1>How templates works<a class="headerlink" href="#how-templates-works" title="Permalink to this headline">¶</a></h1>
+<p>Instead of repeating the commont layout inside each wiki page, they can get their layout from a template.</p>
+<p>The template must contain the placeholder &#8216;{content}&#8217;. During rendering, the content of the wiki page is inserted in place of the placeholder, and the combined result is returned to the user.</p>
+<p>There are 3 different ways of specifying the template of the page</p>
+<ul class="simple">
+<li>Specify the template explicitly using the <a class="reference external" href="mailto:'&#37;&#52;&#48;template">'<span>&#64;</span>template</a>&#8216; directive, e.g. <a class="reference external" href="mailto:'&#37;&#52;&#48;template">'<span>&#64;</span>template</a> blog_post&#8217;, which will load the template from &#8216;.space/blog_post.wiki&#8217;.</li>
+<li>A wiki page inside a folder of the same name (e.g. Blogs/Blogs.wiki) will use the template &#8216;.space/default.wiki&#8217;. If you want to specify another template, either use the <a class="reference external" href="mailto:'&#37;&#52;&#48;template">'<span>&#64;</span>template</a>&#8216; directive, or use the <a class="reference external" href="mailto:'&#37;&#52;&#48;nodefault">'<span>&#64;</span>nodefault</a>&#8216; directive &amp; create your own layout.</li>
+<li>A wiki page inside a folder of a different name will not use any template, unless it uses the <a class="reference external" href="mailto:'&#37;&#52;&#48;template">'<span>&#64;</span>template</a>&#8216; directive or the <a class="reference external" href="mailto:'&#37;&#52;&#48;usedefault">'<span>&#64;</span>usedefault</a>&#8216; directive, which will use the &#8216;.space/default.wiki&#8217;.</li>
+</ul>
+<div class="section" id="example-of-page-with-custom-template">
+<h2>Example of page with custom template<a class="headerlink" href="#example-of-page-with-custom-template" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@template</span> <span class="n">blog_post</span>
+
+<span class="n">Content</span> <span class="n">of</span> <span class="n">the</span> <span class="n">page</span> <span class="k">with</span> <span class="n">custom</span> <span class="n">template</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-of-page-with-default-template">
+<h2>Example of page with default template<a class="headerlink" href="#example-of-page-with-default-template" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@usedefault</span>
+
+<span class="n">Content</span> <span class="n">of</span> <span class="n">the</span> <span class="n">page</span> <span class="k">with</span> <span class="n">default</span> <span class="n">template</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How templates works</a><ul>
+<li><a class="reference internal" href="#example-of-page-with-custom-template">Example of page with custom template</a></li>
+<li><a class="reference internal" href="#example-of-page-with-default-template">Example of page with default template</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../SpaceConfiguration/SpaceConfiguration.html"
+                        title="previous chapter">Configuring a Space</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../UserManagement/UserManagement.html"
+                        title="next chapter">User Management</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Configuration/Templates/Templates.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../UserManagement/UserManagement.html" title="User Management"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../SpaceConfiguration/SpaceConfiguration.html" title="Configuring a Space"
+             >previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" >Configuration</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.system.unix &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.system.unix</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">grp</span>
+<span class="kn">import</span> <span class="nn">pwd</span>
+<span class="kn">import</span> <span class="nn">commands</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.Time</span> <span class="kn">import</span> <span class="n">TimeIntervalUnit</span>
+<span class="c">#from JumpScale.core.decorators import deprecated</span>
+
+<span class="k">def</span> <span class="nf">user_in_group</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">groupname</span><span class="p">):</span>
+<div class="viewcode-block" id="user_in_group"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.user_in_group">[docs]</a>    <span class="sd">&#39;&#39;&#39;Check whether a given user is member of a given group</span>
+
+<span class="sd">    @param username: Name of the user to check</span>
+<span class="sd">    @type username: string</span>
+<span class="sd">    @param groupname: Name of the group to check</span>
+<span class="sd">    @type groupname: string</span>
+
+<span class="sd">    @returns: Whether the user is member of the group</span>
+<span class="sd">    @rtype: bool</span>
+
+<span class="sd">    @raises KeyError: Unknown username or groupname</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c"># Retieve information of the group</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">grp</span><span class="o">.</span><span class="n">getgrnam</span><span class="p">(</span><span class="n">groupname</span><span class="p">)</span>
+    <span class="c"># Check whether the user is member of the group</span>
+    <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">gr_mem</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="c"># If the user is not member of the group, the given group might still be</span>
+    <span class="c"># the primary group of the user</span>
+    <span class="c"># Retrieve user information</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwnam</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+    <span class="c"># Compare GIDs</span>
+    <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">pw_gid</span> <span class="o">==</span> <span class="n">group</span><span class="o">.</span><span class="n">gr_gid</span>
+
+
+<span class="k">class</span> <span class="nc">UnixSystem</span><span class="p">:</span></div>
+<div class="viewcode-block" id="UnixSystem"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem">[docs]</a>
+    <span class="k">def</span> <span class="nf">getBashEnvFromFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+<div class="viewcode-block" id="UnixSystem.getBashEnvFromFile"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.getBashEnvFromFile">[docs]</a>        <span class="sd">&#39;&#39;&#39;Get the value of an environment variable in a Bash file</span>
+
+<span class="sd">        @param file: Bash file defining the variable</span>
+<span class="sd">        @type file: string</span>
+<span class="sd">        @param var: Variable name</span>
+<span class="sd">        @type var: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;. </span><span class="si">%s</span><span class="s"> &gt; /dev/null &amp;&amp; echo $</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span><span class="n">var</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">exitcode</span> <span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">output</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getMachineInfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.getMachineInfo"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.getMachineInfo">[docs]</a>        <span class="sd">&#39;&#39;&#39;Get memory and CPU info about this machine</span>
+
+<span class="sd">        @returns: Amount of available memory, CPU speed and number of CPUs</span>
+<span class="sd">        @rtype: tuple</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">mem</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">cpumhz</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">nrcpu</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">()</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isESX</span><span class="p">():</span>
+            <span class="n">memcontent</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="s">&quot;/proc/meminfo&quot;</span><span class="p">)</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">&quot;^MemTotal\:\s+(\d+)\s+kB$&quot;</span><span class="p">,</span><span class="n">memcontent</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="c">#algorithme to round the memory again</span>
+                <span class="n">mem_in_gb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">1024.0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">percisions</span> <span class="o">=</span> <span class="mi">2</span> <span class="c"># means 1 / 2 GB precision</span>
+                <span class="c">#we use ceil because we can only loose memory used by system</span>
+                <span class="n">mem</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">mem_in_gb</span><span class="o">*</span><span class="n">percisions</span><span class="p">))</span><span class="o">/</span><span class="n">percisions</span><span class="p">)</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+            <span class="n">cpucontent</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="s">&quot;/proc/cpuinfo&quot;</span><span class="p">)</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&quot;^cpu\sMHz\s+:\s(\d+)\.\d+$&quot;</span><span class="p">,</span> <span class="n">cpucontent</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">nrcpu</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
+                <span class="n">cpumhz</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">mem</span><span class="p">,</span><span class="n">cpumhz</span><span class="p">,</span><span class="n">nrcpu</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isSolaris</span><span class="p">():</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;prtconf | grep Memory | awk &#39;{print $3}&#39;&quot;</span>
+            <span class="p">(</span><span class="n">exitcoude</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+            <span class="n">mem</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;psrinfo -v | grep &#39;processor operates&#39; | awk &#39;{print $6}&#39;&quot;</span>
+            <span class="p">(</span><span class="n">exitcoude</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+            <span class="n">tuples</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="n">nrcpu</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span>
+            <span class="n">cpumhz</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tuples</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">mem</span><span class="p">,</span><span class="n">cpumhz</span><span class="p">,</span><span class="n">nrcpu</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot; System.getMachineInfo not supported on this platform&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addCronJob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commandToExecute</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">logFilePath</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">replaceLineIfCommandAlreadyInCrontab</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">TimeIntervalUnit</span><span class="o">.</span><span class="n">MINUTES</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.addCronJob"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.addCronJob">[docs]</a>        <span class="sd">&#39;&#39;&#39;Add a cronjob to the system</span>
+
+<span class="sd">        @param commandToExecute: The command to execute</span>
+<span class="sd">        @type commandToExecute: string</span>
+<span class="sd">        @param interval: The interval at which to launch the commandToExecute</span>
+<span class="sd">        @type interval: number</span>
+<span class="sd">        @param logFilePath: the path of the logfile to redirect the output of crontab to</span>
+<span class="sd">        @type logFilePath: string</span>
+<span class="sd">        @param replaceLineIfCommandAlreadyInCrontab: Specifies whether to replace the line if a command already exists in crontab</span>
+<span class="sd">        @type replaceLineIfCommandAlreadyInCrontab: bool</span>
+<span class="sd">        @param unit: The unit of the interval</span>
+<span class="sd">        @type unit: TimeIntervalUnit</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;root&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;You have to be logged in as root to add a CronJob.&quot;</span><span class="p">)</span>
+
+        <span class="c"># Configuration dependent on the time interval</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">TimeIntervalUnit</span><span class="o">.</span><span class="n">MINUTES</span><span class="p">:</span>
+            <span class="n">allowedIntervals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">]</span>
+            <span class="n">unitRange</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span> <span class="n">startAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">unitPlace</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">TimeIntervalUnit</span><span class="o">.</span><span class="n">HOURS</span><span class="p">:</span>
+            <span class="n">allowedIntervals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+            <span class="n">unitRange</span> <span class="o">=</span> <span class="mi">24</span><span class="p">;</span> <span class="n">startAt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">unitPlace</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">TimeIntervalUnit</span><span class="o">.</span><span class="n">DAYS</span><span class="p">:</span>
+            <span class="n">allowedIntervals</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span> <span class="c"># 1,2,...,16</span>
+            <span class="n">unitRange</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span> <span class="n">startAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">unitPlace</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="n">TimeIntervalUnit</span><span class="o">.</span><span class="n">MONTHS</span><span class="p">:</span>
+            <span class="n">allowedIntervals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+            <span class="n">unitRange</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span> <span class="n">startAt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">unitPlace</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;This function only supports these interval units: minutes, hours, days and months.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">allowedIntervals</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;This function only supports following intervals: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">allowedIntervals</span><span class="p">))</span>
+
+        <span class="c"># Construct timing options</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">()</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isESX</span><span class="p">():</span>
+            <span class="n">crontabFilePath</span> <span class="o">=</span> <span class="s">&quot;/etc/crontab&quot;</span>
+            <span class="n">crontabItem</span> <span class="o">=</span> <span class="s">&quot;*/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isSolaris</span><span class="p">():</span>
+            <span class="n">crontabFilePath</span> <span class="o">=</span> <span class="s">&quot;/var/spool/cron/crontabs/root&quot;</span>
+            <span class="k">if</span> <span class="n">interval</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">crontabItem</span> <span class="o">=</span> <span class="s">&quot;*&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># Solaris crontab doesn&#39;t know the &quot;*/x&quot; syntax, we have to contruct options like &quot;0,15,30,45&quot; to run a command every quarter of an hour.</span>
+                <span class="n">crontabItem</span> <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">startAt</span><span class="p">,</span> <span class="n">unitRange</span> <span class="o">+</span> <span class="n">startAt</span><span class="p">,</span> <span class="n">interval</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Platform not supported.&quot;</span><span class="p">)</span>
+
+        <span class="c"># These lines generate strings like &quot;0 0 */3 * * &quot; specifing options for the crontab command.</span>
+        <span class="n">randomRanges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">29</span><span class="p">)]</span> <span class="c"># Execute command between x:00 and x:59 if they run hourly, between 0:00 and 2:59 if they run daily and on any day if they run monthly.</span>
+        <span class="n">crontabOptions</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">randomRanges</span><span class="p">[:(</span><span class="n">unitPlace</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">unitPlace</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">crontabOptions</span> <span class="o">=</span> <span class="n">crontabOptions</span> <span class="o">+</span> <span class="s">&quot; &quot;</span>
+        <span class="n">crontabOptions</span> <span class="o">=</span> <span class="n">crontabOptions</span> <span class="o">+</span> <span class="n">crontabItem</span> <span class="o">+</span> <span class="s">&quot; &quot;</span>
+        <span class="n">crontabOptions</span> <span class="o">=</span> <span class="n">crontabOptions</span> <span class="o">+</span> <span class="s">&quot;* &quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">unitPlace</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">():</span>
+            <span class="n">crontabOptions</span> <span class="o">=</span> <span class="n">crontabOptions</span> <span class="o">+</span> <span class="s">&quot;root    &quot;</span> <span class="c"># The Vixie cron (for Linux) has an extra option: username of running process.</span>
+
+        <span class="c"># Construct output redirection</span>
+        <span class="k">if</span> <span class="n">logFilePath</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">crontabOutputRedir</span> <span class="o">=</span> <span class="s">&quot; &gt;/dev/null&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">logFilePath</span><span class="p">)):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">logFilePath</span><span class="p">))</span>
+            <span class="n">crontabOutputRedir</span> <span class="o">=</span> <span class="s">&quot; &gt;&gt;&quot;</span> <span class="o">+</span> <span class="n">logFilePath</span>
+        <span class="n">crontabOutputRedir</span> <span class="o">=</span> <span class="n">crontabOutputRedir</span> <span class="o">+</span> <span class="s">&quot; 2&gt;&amp;1&quot;</span>
+
+        <span class="c"># Check if command already present.</span>
+        <span class="n">crontabLines</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">crontabFilePath</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="n">commandFoundInCrontab</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">crontabLines</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">crontabLines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">commandToExecute</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">crontabLines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">):</span>
+                <span class="n">commandFoundInCrontab</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="k">if</span> <span class="n">commandFoundInCrontab</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">replaceLineIfCommandAlreadyInCrontab</span><span class="p">:</span>
+            <span class="n">crontabLines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">crontabOptions</span> <span class="o">+</span> <span class="n">commandToExecute</span> <span class="o">+</span> <span class="n">crontabOutputRedir</span><span class="p">)</span>
+            <span class="n">crontabLines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>  <span class="c"># Adding second newline at the end, see BUGS section in crontab man page.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># replace existing line, maybe the timing options or output redirection have changed.</span>
+            <span class="n">crontabLines</span><span class="p">[</span><span class="n">commandFoundInCrontab</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">crontabOptions</span> <span class="o">+</span> <span class="n">commandToExecute</span> <span class="o">+</span> <span class="n">crontabOutputRedir</span><span class="p">)</span>
+
+        <span class="c"># Backup old crontab file and write modifications new crontab file.</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">crontabFilePath</span><span class="p">,</span> <span class="n">crontabFilePath</span> <span class="o">+</span> <span class="s">&quot;.backup&quot;</span><span class="p">)</span> <span class="c"># Create backup</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isSolaris</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">crontabFilePath</span> <span class="o">+</span> <span class="s">&quot;_new&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">crontabLines</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+            <span class="c"># On Solaris, we need to call the crontab command to activate the changes.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;crontab &quot;</span> <span class="o">+</span> <span class="n">crontabFilePath</span> <span class="o">+</span> <span class="s">&quot;_new&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">removeFile</span><span class="p">(</span><span class="n">crontabFilePath</span> <span class="o">+</span> <span class="s">&quot;_new&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isLinux</span><span class="p">()</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isESX</span><span class="p">():</span>
+            <span class="c"># On Linux, we edit the system-wide crontab of Vixie Cron, so don&#39;t have to run the &quot;crontab&quot; command to be sure changes have effect.</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">crontabFilePath</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">crontabLines</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Platform not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">killGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.killGroup"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.killGroup">[docs]</a>        <span class="sd">&quot;&quot;&quot; Kill a process group</span>
+
+<span class="sd">        killGroup will get the parent pid from the pid given and kill the group with signal SIGKILL (default)</span>
+
+<span class="sd">        @type pid: int</span>
+<span class="sd">        @param pid: process id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Killing process group of </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pid</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">signal</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">killpg</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpgid</span><span class="p">(</span><span class="n">pid</span><span class="p">),</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGKILL</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">chown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.chown"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.chown">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Chown a file</span>
+<span class="sd">        @param path: the path of a file or a directory to be chown</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        @param user: username to be used as the new owner</span>
+<span class="sd">        @type user: string</span>
+<span class="sd">        @param group: groupname to be used as the new group owner (if None, then root is used as a groupname0</span>
+<span class="sd">        @type group: string</span>
+<span class="sd">        @param recursive: if path is a directory, all files underneath the path are also chown if True (default False)</span>
+<span class="sd">        @type recursive: boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">group</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="s">&#39;root&#39;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Chown </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="n">group</span><span class="p">,</span><span class="n">path</span><span class="p">),</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">uid</span><span class="o">=</span><span class="n">pwd</span><span class="o">.</span><span class="n">getpwnam</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">pw_uid</span>
+        <span class="k">if</span> <span class="n">group</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">gid</span><span class="o">=</span><span class="n">grp</span><span class="o">.</span><span class="n">getgrnam</span><span class="p">(</span><span class="n">group</span><span class="p">)</span><span class="o">.</span><span class="n">gr_gid</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gid</span><span class="o">=</span><span class="n">grp</span><span class="o">.</span><span class="n">getgrnam</span><span class="p">(</span><span class="n">group</span><span class="p">)</span><span class="o">.</span><span class="n">gr_gid</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">gid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">recursive</span><span class="p">:</span>
+            <span class="n">files</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">return_folders</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">return_files</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">recurse</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span><span class="n">uid</span><span class="p">,</span><span class="n">gid</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">chmod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">recurse</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dirPattern</span><span class="o">=</span><span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="n">filePattern</span><span class="o">=</span><span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="n">dirs</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">files</span> <span class="o">=</span> <span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.chmod"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.chmod">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Chmod based on system.fs.walk</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Chmod </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">root</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">walkExtended</span><span class="p">(</span> <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="n">recurse</span> <span class="o">=</span> <span class="n">recurse</span><span class="p">,</span> <span class="n">dirPattern</span> <span class="o">=</span> <span class="n">dirPattern</span><span class="p">,</span> <span class="n">filePattern</span> <span class="o">=</span> <span class="n">filePattern</span><span class="p">,</span> <span class="n">dirs</span> <span class="o">=</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="o">=</span> <span class="n">files</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">executeAsUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.executeAsUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.executeAsUser">[docs]</a>        <span class="sd">&#39;&#39;&#39;Execute a given command as a specific user</span>
+
+<span class="sd">        When calling this method, the command will be wrapped inside &#39;su&#39; to</span>
+<span class="sd">        be executed as some specific user. This requires the application which</span>
+<span class="sd">        spawns the command to be running as root.</span>
+
+<span class="sd">        Next to this, it behaves exactly as C{j.system.process.execute},</span>
+<span class="sd">        including the same named arguments.</span>
+
+<span class="sd">        @param command: Command to execute</span>
+<span class="sd">        @type command: string</span>
+<span class="sd">        @param username: Name of the user to impersonate</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        @returns: Exit code and command output</span>
+<span class="sd">        @rtype: tuple</span>
+
+<span class="sd">        @raises RuntimeError: When the application is not running as root</span>
+<span class="sd">        @raises RuntimeError: If /bin/su is not available on the system</span>
+<span class="sd">        @raises ValueError: When the provided username can&#39;t be resolved</span>
+
+<span class="sd">        @see: jumpscale.system.process.SystemProcess.execute</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepareCommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;command&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span>
+
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c">#@deprecated(&#39;j.system.unix.executeDaemonAsUser&#39;,</span>
+    <span class="c">#            alternative=&#39;j.system.process.runDaemon&#39;, version=&#39;3.2&#39;)</span>
+    <span class="k">def</span> <span class="nf">executeDaemonAsUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.executeDaemonAsUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.executeDaemonAsUser">[docs]</a>        <span class="sd">&#39;&#39;&#39;Execute a given command as a background process as a specific user</span>
+
+<span class="sd">        When calling this method, the command will be wrapped inside &#39;su&#39; to</span>
+<span class="sd">        be executed as some specific user. This requires the application which</span>
+<span class="sd">        spawns the command to be running as root.</span>
+
+<span class="sd">        Next to this, it behaves exactly as C{j.system.process.runDaemon},</span>
+<span class="sd">        including the same named arguments.</span>
+
+<span class="sd">        @param command: Command to execute</span>
+<span class="sd">        @type command: string</span>
+<span class="sd">        @param username: Name of the user to impersonate</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        @returns: pid of the process</span>
+<span class="sd">        @rtype: int</span>
+
+<span class="sd">        @raises RuntimeError: When the application is not running as root</span>
+<span class="sd">        @raises RuntimeError: If /bin/su is not available on the system</span>
+<span class="sd">        @raises ValueError: When the provided username can&#39;t be resolved</span>
+
+<span class="sd">        @see: jumpscale.system.process.runDaemon</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">command</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepareCommand</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;commandline&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">command</span>
+
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">runDaemon</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_prepareCommand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span></div>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Attempt to run </span><span class="si">%s</span><span class="s"> as user </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">username</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pwent</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwnam</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The user </span><span class="si">%s</span><span class="s"> can</span><span class="se">\&#39;</span><span class="s">t be found on this system&#39;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Can</span><span class="se">\&#39;</span><span class="s">t execute as user when not running as root (UID 0)&#39;</span><span class="p">)</span>
+
+        <span class="n">subin</span> <span class="o">=</span> <span class="s">&#39;/bin/su&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">subin</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> not found on this system, I need it there&#39;</span> <span class="o">%</span> <span class="n">subin</span><span class="p">)</span>
+
+        <span class="n">command</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> --login --command </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">subin</span><span class="p">,</span> <span class="n">commands</span><span class="o">.</span><span class="n">mkarg</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="n">username</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">command</span>
+
+    <span class="k">def</span> <span class="nf">chroot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+<div class="viewcode-block" id="UnixSystem.chroot"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.chroot">[docs]</a>        <span class="sd">&#39;&#39;&#39;Change root directory path</span>
+
+<span class="sd">        @param path: Path to chroot() to</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">unixdirpath</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Path </span><span class="si">%s</span><span class="s"> is invalid&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Change root to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chroot</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addSystemUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">groupname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="s">&quot;/bin/bash&quot;</span><span class="p">,</span> <span class="n">homedir</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.addSystemUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.addSystemUser">[docs]</a>        <span class="sd">&#39;&#39;&#39;Add a user to the system</span>
+
+<span class="sd">        Note: you should be root to run this python command.</span>
+
+<span class="sd">        @param username: Username of the user to add</span>
+<span class="sd">        @param groupname: Optional param to add user to existing systemgroup</span>
+<span class="sd">        @param shell: Optional param to specify the shell of the user</span>
+<span class="sd">        @type username: string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixUserExists</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="s">&quot;User [</span><span class="si">%s</span><span class="s">] does not exist, creating an entry&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;useradd&quot;</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">groupname</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixGroupExists</span><span class="p">(</span><span class="n">groupname</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to add user because group </span><span class="si">%s</span><span class="s"> does not exist&#39;</span> <span class="o">%</span><span class="n">groupname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">groupname</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixGroupExists</span><span class="p">(</span><span class="n">groupname</span><span class="p">):</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;-g </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">groupname</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">shell</span><span class="p">:</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;-s </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">shell</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">homedir</span><span class="p">:</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;-d &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">homedir</span><span class="p">)</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">username</span><span class="p">)</span>
+            <span class="c"># print command</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to add user </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> \
+                                    <span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">homedir</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">homedir</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">chown</span><span class="p">(</span><span class="n">homedir</span><span class="p">,</span><span class="n">username</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">homedir</span><span class="p">,</span><span class="mi">0</span><span class="n">o700</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;User </span><span class="si">%s</span><span class="s"> already exists&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addSystemGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groupname</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.addSystemGroup"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.addSystemGroup">[docs]</a>        <span class="sd">&#39;&#39;&#39; Add a group to the system</span>
+<span class="sd">        </span>
+<span class="sd">        Note: you should be root to run this python command.</span>
+<span class="sd">        </span>
+<span class="sd">        @param groupname: Name of the group to add</span>
+<span class="sd">        @type groupname : string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixGroupExists</span><span class="p">(</span><span class="n">groupname</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Group [</span><span class="si">%s</span><span class="s">] does not exist, creating an entry&quot;</span> <span class="o">%</span><span class="n">groupname</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&quot;groupadd </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">groupname</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to add group </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">groupname</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Group </span><span class="si">%s</span><span class="s"> already exists&quot;</span> <span class="o">%</span> <span class="n">groupname</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unixUserExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.unixUserExists"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.unixUserExists">[docs]</a>        <span class="sd">&quot;&quot;&quot;Checks if a given user already exists in the system</span>
+
+<span class="sd">        @param username: Username of the user to check for</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        @returns: Whether the user exists</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pwd</span><span class="o">.</span><span class="n">getpwnam</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">unixGroupExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">groupname</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.unixGroupExists"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.unixGroupExists">[docs]</a>        <span class="sd">&quot;&quot;&quot;Checks if a given group already exists in the system</span>
+
+<span class="sd">        @param groupname: Name of the group to check for</span>
+<span class="sd">        @type groupname: string</span>
+
+<span class="sd">        @returns: Whether the group exists</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">getgrnam</span><span class="p">(</span><span class="n">groupname</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    
+    <span class="k">def</span> <span class="nf">disableUnixUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">username</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.disableUnixUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.disableUnixUser">[docs]</a>        <span class="sd">&quot;&quot;&quot;Disables a given unix user</span>
+
+<span class="sd">        @param username: Name of the user to disable</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixUserExists</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;User [</span><span class="si">%s</span><span class="s">] does not exist, cannot disable user&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&#39;passwd </span><span class="si">%s</span><span class="s"> -l&#39;</span> <span class="o">%</span><span class="n">username</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to disable user </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">enableUnixUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">username</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.enableUnixUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.enableUnixUser">[docs]</a>        <span class="sd">&quot;&quot;&quot;Enables a given unix user</span>
+
+<span class="sd">        @param username: Name of the user to enable</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixUserExists</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;User [</span><span class="si">%s</span><span class="s">] does not exist, cannot enable user&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&#39;passwd </span><span class="si">%s</span><span class="s"> -u&#39;</span> <span class="o">%</span><span class="n">username</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to enable user </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        
+    <span class="k">def</span> <span class="nf">removeUnixUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">removehome</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.removeUnixUser"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.removeUnixUser">[docs]</a>        <span class="sd">&quot;&quot;&quot;Remove a given unix user</span>
+
+<span class="sd">        @param username: Name of the user to remove</span>
+<span class="sd">        @type username: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixUserExists</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">die</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;User [</span><span class="si">%s</span><span class="s">] does not exist, cannot remove user&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">removehome</span> <span class="o">=</span> <span class="s">&quot;-r&quot;</span> <span class="k">if</span> <span class="n">removehome</span> <span class="k">else</span> <span class="s">&quot;&quot;</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&#39;userdel </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">removehome</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to remove user </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        
+    <span class="k">def</span> <span class="nf">setUnixUserPassword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.setUnixUserPassword"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.setUnixUserPassword">[docs]</a>        <span class="sd">&quot;&quot;&quot;Set a password on unix user</span>
+
+<span class="sd">        @param username: Name of the user to enable</span>
+<span class="sd">        @type username: string</span>
+<span class="sd">        </span>
+<span class="sd">        @param password: Password to set on the user</span>
+<span class="sd">        @type username: string        </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">unix</span><span class="o">.</span><span class="n">unixUserExists</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;User [</span><span class="si">%s</span><span class="s">] does not exist, cannot set password&quot;</span> <span class="o">%</span> <span class="n">username</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="s">&quot;echo &#39;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&#39; | chpasswd&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">stopOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;Stdout:&#39;</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="s">&#39;Stderr:&#39;</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to set password on user </span><span class="si">%s</span><span class="s">, error: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">username</span><span class="p">,</span><span class="n">output</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>   
+
+    <span class="nd">@staticmethod</span></div>
+    <span class="k">def</span> <span class="nf">unixUserIsInGroup</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">groupname</span><span class="p">):</span>
+<div class="viewcode-block" id="UnixSystem.unixUserIsInGroup"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.unixUserIsInGroup">[docs]</a>        <span class="sd">&quot;&quot;&quot;Checks if a given user is a member of the given group</span>
+
+<span class="sd">        @param username: Username to check for</span>
+<span class="sd">        @type username: string</span>
+<span class="sd">        @param groupname: Group to check for</span>
+<span class="sd">        @type groupname: string</span>
+
+<span class="sd">        @returns: Whether the user is a member of the group</span>
+<span class="sd">        @rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">user_in_group</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">groupname</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c"># Unknown user/group</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">daemonize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chdir</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">umask</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.daemonize"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.daemonize">[docs]</a>        <span class="sd">&#39;&#39;&#39;Daemonize a process using a double fork</span>
+
+<span class="sd">        This method will fork the current process to create a daemon process.</span>
+<span class="sd">        It will perform a double fork(2), chdir(2) to the given folder (or not</span>
+<span class="sd">        chdir at all if the C{chdir} argument is C{None}), and set the new</span>
+<span class="sd">        process umask(2) to the value of the C{umask} argument, or not reset</span>
+<span class="sd">        it if this argument is -1.</span>
+
+<span class="sd">        While forking, a setsid(2) call will be done to become session leader</span>
+<span class="sd">        and detach from the controlling TTY.</span>
+
+<span class="sd">        In the child process, all existing file descriptors will be closed,</span>
+<span class="sd">        including stdin, stdout and stderr, which will be re-opened to</span>
+<span class="sd">        /dev/null.</span>
+
+<span class="sd">        The method returns a tuple&lt;bool, number&gt;. If the first item is True,</span>
+<span class="sd">        the current process is the daemonized process. If it is False,</span>
+<span class="sd">        the current process is the process which called the C{daemonize}</span>
+<span class="sd">        method, which can most likely be closed now. The second item is the</span>
+<span class="sd">        PID of the current process.</span>
+
+<span class="sd">        @attention: Make sure you know really well what fork(2) does before using this method</span>
+
+<span class="sd">        @param chdir: Path to chdir(2) to after forking. Set to None to disable chdir&#39;ing</span>
+<span class="sd">        @type chdir: string or None</span>
+<span class="sd">        @param umask: Umask to set after forking. Set to -1 not to set umask</span>
+<span class="sd">        @type umask: number</span>
+
+<span class="sd">        @returns: Daemon status and PID</span>
+<span class="sd">        @rtype: tuple&lt;bool, number&gt;</span>
+
+<span class="sd">        @raise RuntimeError: System does not support fork(2)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c">#We display a warning here when threads are discovered in the current</span>
+        <span class="c">#process, because forking a threaded application is a pretty bad idea.</span>
+        <span class="c">#This is not an in-depth check, since it only checks whether any</span>
+        <span class="c">#threads were created using threading.Thread. On HPUX and maybe some</span>
+        <span class="c">#other UNIXes we could use pthread_is_multithreaded_np, but this is</span>
+        <span class="c">#not available on Linux at least.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;fork&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s">&#39;os.fork not found, daemon mode not supported on your system&#39;</span><span class="p">)</span>
+
+        <span class="kn">import</span> <span class="nn">threading</span>
+        <span class="k">if</span> <span class="n">threading</span><span class="o">.</span><span class="n">activeCount</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseWarning</span><span class="p">(</span>
+                <span class="s">&#39;You application got running threads, this can cause issues when using fork&#39;</span><span class="p">)</span>
+
+        <span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c">#First child</span>
+            <span class="c">#Become session leader...</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">setsid</span><span class="p">()</span>
+
+            <span class="c">#Double fork</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c">#Second child</span>
+                <span class="k">if</span> <span class="n">umask</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">umask</span><span class="p">(</span><span class="n">umask</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">chdir</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">chdir</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c">#First child is useless now</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+
+        <span class="c">#Close all FDs</span>
+        <span class="kn">import</span> <span class="nn">resource</span>
+        <span class="n">maxfd</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_NOFILE</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">maxfd</span> <span class="o">==</span> <span class="n">resource</span><span class="o">.</span><span class="n">RLIM_INFINITY</span><span class="p">:</span>
+            <span class="n">maxfd</span> <span class="o">=</span> <span class="mi">1024</span>
+
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">maxfd</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="c">#Open fd0 to /dev/null</span>
+        <span class="n">redirect</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;devnull&#39;</span><span class="p">,</span> <span class="s">&#39;/dev/null&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">redirect</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_RDWR</span><span class="p">)</span>
+
+        <span class="c">#dup to stdout and stderr</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">checkApplicationInstalled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">appname</span><span class="p">):</span></div>
+<div class="viewcode-block" id="UnixSystem.checkApplicationInstalled"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.unix.UnixSystem.checkApplicationInstalled">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if app is installed,  if yes return True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="p">,</span><span class="n">out</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;which </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">appname</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

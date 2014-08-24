@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuring a Space &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Configuration" href="../index.html" />
+    <link rel="next" title="How templates works" href="../Templates/Templates.html" />
+    <link rel="prev" title="Configuration" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Templates/Templates.html" title="How templates works"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Configuration</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuring-a-space">
+<h1>Configuring a Space<a class="headerlink" href="#configuring-a-space" title="Permalink to this headline">¶</a></h1>
+<p>A space is a collection of pages. Every page in a space must have a unique name. Every space can be configured independently, with its own style and user management.
+All configuration files of a space are stored in the .space directory, located in the root of the space.</p>
+<p>In this section you find the list of configuration files that can be used in a space.</p>
+<div class="section" id="acl-cfg">
+<h2>acl.cfg<a class="headerlink" href="#acl-cfg" title="Permalink to this headline">¶</a></h2>
+<p>In the acl.cfg configuration file, you can define the different rights to the defined groups. The following rights can be assigned:</p>
+<ul class="simple">
+<li>R: read-only</li>
+<li>W: read/write</li>
+<li>S: synchronize the documentation to a local file system</li>
+<li>A: administrator right</li>
+<li>: all rights</li>
+</ul>
+<p>The definition of user and group rights has the following structure:</p>
+<p>&lt;group name&gt;: &lt;rights&gt;
+&lt;user name&gt;: &lt;rights&gt;</p>
+</div>
+<div class="section" id="default-wiki">
+<h2>default.wiki<a class="headerlink" href="#default-wiki" title="Permalink to this headline">¶</a></h2>
+<p>The default.wiki file is the landing page of the space. This page defines the default parameters of the space. In this page you define the different sections that each page of the space will contain.</p>
+<p>The following parameters are accepted:</p>
+<ul class="simple">
+<li>&#8216;title&#8217;: defines the name that appears on your Internet browser&#8217;s tab and title bar.<ul>
+<li>Usage: &#8216;title: &lt;your title&gt;&#8217;</li>
+</ul>
+</li>
+<li>&#8216;projectname&#8217;: the name of your complete project, not limited to the documentation.<ul>
+<li>Usage: &#8216;projectname: &lt;your project name&gt;&#8217;</li>
+</ul>
+</li>
+<li>&#8216;find&#8217;: adds a search box to find information in the space.<ul>
+<li>Usage: &#8216;find&#8217;</li>
+</ul>
+</li>
+<li>&#8216;menu&#8217;: adds a menu item to the horizontal menu bar.<ul>
+<li>Usage: <a href="#id1"><span class="problematic" id="id2">`</span></a>menu:</li>
+</ul>
+</li>
+</ul>
+<p>&lt;menu label&gt;: &lt;root page name&gt;`</p>
+<ul class="simple">
+<li>&#8216;menuadmin&#8217;: adds the administrator menu to the horizontal menu bar.<ul>
+<li>Usage: &#8216;menuadmin&#8217;</li>
+</ul>
+</li>
+<li>&#8216;navigation&#8217;: adds a navigation menu.<ul>
+<li>Usage: &#8216;navigation&#8217;</li>
+</ul>
+</li>
+<li>&#8216;content&#8217;: adds the content of the wiki pages that you create.<ul>
+<li>Usage: &#8216;content&#8217;</li>
+<li>Single curly braces instead of double curly braces!</li>
+</ul>
+</li>
+</ul>
+<p>To define the sections of each page, you have the following parameters:</p>
+<ul class="simple">
+<li>&#8216;block&#8217;: displays a table in which you can define rows and columns. For example, when you want to add a fixed footer, you can add a block for the content and another one for the footer.</li>
+<li>&#8216;row&#8217;: creates a row in a block.</li>
+<li>&#8216;col&#8217;: creates a column in a block. You can add the width of the column as extra parameter, for example col 3.</li>
+<li>&#8216;divend&#8217;: indicates the end of an HTML div section.</li>
+</ul>
+</div>
+<div class="section" id="nav-wiki">
+<h2>nav.wiki<a class="headerlink" href="#nav-wiki" title="Permalink to this headline">¶</a></h2>
+<p>This page is the default navigation page of the space. The page is used by the navigation macro.</p>
+</div>
+<div class="section" id="notfound-wiki">
+<h2>notfound.wiki<a class="headerlink" href="#notfound-wiki" title="Permalink to this headline">¶</a></h2>
+<p>This page is shown when a requested page can not be found. This page will replace the default HTTP Not Found page. You can put any information on this page, using the default wiki style.</p>
+</div>
+<div class="section" id="template-wiki">
+<h2>template.wiki<a class="headerlink" href="#template-wiki" title="Permalink to this headline">¶</a></h2>
+<p>The template.wiki file is the default wiki file which is used as template when a new page is created in the space.</p>
+</div>
+</div>
+<div class="section" id="saving-the-space-to-mercurial">
+<h1>Saving the space to Mercurial<a class="headerlink" href="#saving-the-space-to-mercurial" title="Permalink to this headline">¶</a></h1>
+<p>Adding the space to bitbucket helps you save your work &amp; share your work with other team members.</p>
+<div class="section" id="create-mercurial-repository-for-the-space">
+<h2>Create Mercurial repository for the space<a class="headerlink" href="#create-mercurial-repository-for-the-space" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Open ssh to the server</li>
+<li>&#8216;cd&#8217; to the directory containing the code</li>
+<li>Create a repo &#8216;hg init&#8217;</li>
+<li>Add all files to the repo &#8216;hg add .&#8217;</li>
+<li>Commit the files (save the files) &#8216;hg commit -u my_username -m &#8220;Commit message describing what I did&#8221;&#8217;</li>
+</ul>
+</div>
+<div class="section" id="committing-after-changing-files">
+<h2>Committing after changing files<a class="headerlink" href="#committing-after-changing-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Tell Mercurial to consider missing files deleted, and add any new files to the repo &#8216;hg addremove&#8217;</li>
+<li>Commit the files (save the files) &#8216;hg commit -u my_username -m &#8220;Commit message describing what I did&#8221;&#8217;</li>
+</ul>
+</div>
+<div class="section" id="push-your-changes-to-bitbucket">
+<h2>Push your changes to bitbucket<a class="headerlink" href="#push-your-changes-to-bitbucket" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Make sure everything is comitted</li>
+<li>Inside this directory, add this content</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">paths</span><span class="p">]</span>
+<span class="n">default</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">incubaid</span><span class="o">/</span><span class="n">repo_name</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To push &#8216;hg push&#8217;</li>
+<li>Enter your bitbucket credentials</li>
+</ul>
+</div>
+<div class="section" id="how-to-pull-the-latest-changes-from-bitbucket">
+<h2>How to pull the latest changes from bitbucket<a class="headerlink" href="#how-to-pull-the-latest-changes-from-bitbucket" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To pull all the changes from bitbucket &amp; update to the latest version &#8216;hg pull -u&#8217;</li>
+</ul>
+</div>
+<div class="section" id="how-to-pull-update-from-the-admin-menu">
+<h2>How to pull &amp; update from the admin menu<a class="headerlink" href="#how-to-pull-update-from-the-admin-menu" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re logged in to the portal as admin, you will see the admin menu on the top. This allows you to pull &amp; update without being logged in to the server with ssh. To work, it requires the credentials to be configured on the server.</p>
+<p>To configure the credentials, add them to your &#8216;~/.hgrc&#8217; as the following example</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">auth</span><span class="p">]</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">incubaid</span>    <span class="c"># Apply these credentials when the bitbucket repo URL starts with this prefix</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">schemes</span> <span class="o">=</span> <span class="n">http</span> <span class="n">https</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">qp55pq</span>                  <span class="c"># bitbucket username</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">qp55pq</span>                  <span class="c"># bitbucket password</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="publishing-the-space-on-its-url">
+<h1>Publishing the space on its URL<a class="headerlink" href="#publishing-the-space-on-its-url" title="Permalink to this headline">¶</a></h1>
+<p>nginx is a web server just like Apache &amp; IIS. If you want to make a space has its own URL, you need to configure nginx.</p>
+<ul class="simple">
+<li>Login to nginx machine 172.19.49.230 (ask Tomas for access)</li>
+<li>&#8216;cd /etc/nginx/sites-available/&#8217;</li>
+<li>Create a new configuration file with the URL, e.g. &#8216;www.my_space.com.conf&#8217;. It works for subdomains also, e.g. &#8216;docs.my_space.com.conf&#8217;</li>
+<li>Add this content to the file (we will use &#8216;www.my_space.com&#8217; as an example)</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>server {
+        access_log  /var/log/nginx/www.my_space.com.log ;
+        listen 80;
+
+        server_name www.my_space.com;
+
+        location / {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/my_space/; # Put the space here
+        }
+
+        location /my_space {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/my_space;
+        }
+
+        location /images {
+                proxy_set_header  X-Real-IP $remote_addr;
+                proxy_pass http://172.19.49.185/images;
+        }
+
+
+        location /lib {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/lib/;
+        }
+
+        location /restmachine {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/restmachine/;
+        }
+
+}
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuring a Space</a><ul>
+<li><a class="reference internal" href="#acl-cfg">acl.cfg</a></li>
+<li><a class="reference internal" href="#default-wiki">default.wiki</a></li>
+<li><a class="reference internal" href="#nav-wiki">nav.wiki</a></li>
+<li><a class="reference internal" href="#notfound-wiki">notfound.wiki</a></li>
+<li><a class="reference internal" href="#template-wiki">template.wiki</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#saving-the-space-to-mercurial">Saving the space to Mercurial</a><ul>
+<li><a class="reference internal" href="#create-mercurial-repository-for-the-space">Create Mercurial repository for the space</a></li>
+<li><a class="reference internal" href="#committing-after-changing-files">Committing after changing files</a></li>
+<li><a class="reference internal" href="#push-your-changes-to-bitbucket">Push your changes to bitbucket</a></li>
+<li><a class="reference internal" href="#how-to-pull-the-latest-changes-from-bitbucket">How to pull the latest changes from bitbucket</a></li>
+<li><a class="reference internal" href="#how-to-pull-update-from-the-admin-menu">How to pull &amp; update from the admin menu</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#publishing-the-space-on-its-url">Publishing the space on its URL</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Templates/Templates.html"
+                        title="next chapter">How templates works</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Configuration/SpaceConfiguration/SpaceConfiguration.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Templates/Templates.html" title="How templates works"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Configuration"
+             >previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" >Configuration</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

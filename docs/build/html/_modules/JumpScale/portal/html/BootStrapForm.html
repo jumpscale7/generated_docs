@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.html.BootStrapForm &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.html.BootStrapForm</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="BootStrapForm"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.BootStrapForm">[docs]</a><span class="k">class</span> <span class="nc">BootStrapForm</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span> <span class="o">=</span> <span class="n">page</span>
+
+    <span class="c"># def getFormForModel(self,appname,actorname,modelname,guid):</span>
+    <span class="c">#     from JumpScale.core.Shell import ipshellDebug,ipshell</span>
+    <span class="c">#     print &quot;DEBUG NOW getFormForModel&quot;</span>
+    <span class="c">#     ipshell()</span>
+
+<div class="viewcode-block" id="BootStrapForm.getForm"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.BootStrapForm.getForm">[docs]</a>    <span class="k">def</span> <span class="nf">getForm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">actor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        actor is required if you want to remember position of e.g. a specific object property to a form name</span>
+
+<span class="sd">        how to use:</span>
+<span class="sd">        actor=j.apps.system.usermanager</span>
+
+<span class="sd">        user=actor.model_user_new()</span>
+<span class="sd">        user.name=&quot;removeme&quot;</span>
+<span class="sd">        guid=actor.model_user_set(user)</span>
+
+<span class="sd">        modifier=j.html.getPageModifierBootstrapForm(page)</span>
+<span class="sd">        form=modifier.getForm(actor=actor)</span>
+<span class="sd">        form.addTextInput(&quot;name&quot;,reference=form.getReference(user,&quot;name&quot;),default=&quot;&quot;,help=&quot;&quot;)</span>
+<span class="sd">        # form.addTextInput(&quot;name&quot;,reference=form.getReference(user,&quot;name&quot;),default=&quot;&quot;,help=&quot;&quot;)</span>
+<span class="sd">        params.page=modifier.addForm(form)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Form</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">actor</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="BootStrapForm.addForm"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.BootStrapForm.addForm">[docs]</a>    <span class="k">def</span> <span class="nf">addForm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">postBackUrl</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        actor is required if you want to remember position of e.g. a specific object property to a form name</span>
+
+<span class="sd">        if postBackUrl==&quot;&quot; then will be /wiki/model_$appname_$actorname/$modelname/set</span>
+<span class="sd">        the post is done by using all args &amp; the caching key (under cachekey)</span>
+<span class="sd">        get params will be:</span>
+<span class="sd">         - cachekey</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">postBackUrl</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">okey</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">osis</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">okey</span><span class="p">]</span>
+                <span class="c"># postBackUrl=&quot;/wiki/model_%s_%s/%s/set&quot;%(form.actor.appname,form.actor.actorname,osis._meta[2])</span>
+                <span class="n">postBackUrl</span> <span class="o">=</span> <span class="s">&quot;/restmachine/system/contentmanager/modelobjectupdate?appname=</span><span class="si">%s</span><span class="s">&amp;actorname=</span><span class="si">%s</span><span class="s">&amp;key=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span>\
+                    <span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">appname</span><span class="p">,</span> <span class="n">form</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="n">form</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">postBackUrl</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="c"># add postback button</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">addSaveButton</span><span class="p">(</span><span class="n">postBackUrl</span><span class="p">)</span>
+
+        <span class="n">form</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">form</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">page</span>
+
+</div></div>
+<div class="viewcode-block" id="References"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.References">[docs]</a><span class="k">class</span> <span class="nc">References</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">actor</span><span class="o">.</span><span class="n">dbmem</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="References.getNextId"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.References.getNextId">[docs]</a>    <span class="k">def</span> <span class="nf">getNextId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span>
+</div>
+<div class="viewcode-block" id="References.addReference"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.References.addReference">[docs]</a>    <span class="k">def</span> <span class="nf">addReference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">__</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">_meta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">_meta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">_meta</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">obj</span><span class="o">.</span><span class="n">guid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getNextId</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refs</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">reference</span><span class="p">]</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;obj.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">reference</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="References.save"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.References.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">cacheSet</span><span class="p">(</span><span class="s">&quot;form_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">refs</span><span class="p">],</span> <span class="n">expirationInSecondsFromNow</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+
+</div></div>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="Form"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.Form">[docs]</a><span class="k">class</span> <span class="nc">Form</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">formname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">actor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="n">References</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeStatements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actor</span> <span class="o">=</span> <span class="n">actor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lastId</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;form id=&quot;$formname&quot; class=&quot;form-horizontal&quot; method=&quot;post&quot; action=&quot;$postBackUrl&quot;&gt;</span>
+<span class="s">&lt;fieldset&gt;</span>
+<span class="s">&lt;div id=&quot;legend&quot; class=&quot;&quot;&gt;</span>
+<span class="s">    &lt;legend class=&quot;&quot;&gt;$formname&lt;/legend&gt;</span>
+<span class="s">&lt;/div&gt;</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$formname&quot;</span><span class="p">,</span> <span class="n">formname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$formname&quot;</span><span class="p">,</span> <span class="n">formname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeStatements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&lt;/form&gt;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeStatements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&lt;/fieldset&gt;&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Form.getReference"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.Form.getReference">[docs]</a>    <span class="k">def</span> <span class="nf">getReference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">reference</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        example:</span>
+<span class="sd">        user=j.apps.system.usermanager.model_user_new()</span>
+<span class="sd">        getReference(user,&quot;name&quot;)</span>
+<span class="sd">        getReference(user,&quot;contacts[1].tel&quot;) #means in list first element with property tel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="o">.</span><span class="n">addReference</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_addDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputt</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">classs</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param reference use self.getReference(...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;div class=&quot;control-group&quot;&gt;</span>
+<span class="s">&lt;label class=&quot;control-label&quot; for=&quot;$name&quot;&gt;$label&lt;/label&gt;</span>
+<span class="s">&lt;div class=&quot;controls&quot;&gt;</span>
+<span class="s">  $input  </span>
+<span class="s">  $help</span>
+<span class="s">&lt;/div&gt;</span>
+<span class="s">&lt;/div&gt;</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reference</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">reference</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="n">reference</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ref_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">reference</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">label</span>
+
+        <span class="k">if</span> <span class="n">help</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$help&quot;</span><span class="p">,</span> <span class="s">&quot;&lt;p class=</span><span class="se">\&quot;</span><span class="s">help-block</span><span class="se">\&quot;</span><span class="s">&gt;</span><span class="si">%s</span><span class="s">&lt;/p&gt;&quot;</span> <span class="o">%</span> <span class="n">help</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$help</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$input&quot;</span><span class="p">,</span> <span class="n">inputt</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$label&quot;</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$default&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">default</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">classs</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$classs&quot;</span><span class="p">,</span> <span class="s">&quot; class=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">classs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$classs&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">default</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$default&quot;</span><span class="p">,</span> <span class="s">&quot;placeholder=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">default</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">C</span>
+
+<div class="viewcode-block" id="Form.addTextInput"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.Form.addTextInput">[docs]</a>    <span class="k">def</span> <span class="nf">addTextInput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">classs</span><span class="o">=</span><span class="s">&quot;input-xlarge&quot;</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;&lt;input id=&quot;$name&quot; name=&quot;$name&quot; type=&quot;text&quot; placeholder=&quot;$default&quot; $classs&gt;</span><span class="se">\n</span><span class="s">&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addDefault</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">help</span><span class="p">,</span> <span class="n">classs</span><span class="o">=</span><span class="n">classs</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Form.addSelectFromList"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.Form.addSelectFromList">[docs]</a>    <span class="k">def</span> <span class="nf">addSelectFromList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">llist</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">classs</span><span class="o">=</span><span class="s">&quot;input=xlarge&quot;</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">multiple</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;select multiple=</span><span class="se">\&quot;</span><span class="s">multiple</span><span class="se">\&quot;</span><span class="s"> $class &gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;select class=</span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s"> &gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">classs</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">llist</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;option&gt;</span><span class="si">%s</span><span class="s">&lt;/option&gt;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;&lt;/select&gt;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_addDefault</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">help</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Form.addSaveButton"><a class="viewcode-back" href="../../../../API/JumpScale.portal.html.html#JumpScale.portal.html.BootStrapForm.Form.addSaveButton">[docs]</a>    <span class="k">def</span> <span class="nf">addSaveButton</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postBackUrl</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;div class=&quot;form-actions&quot;&gt;</span>
+<span class="s">    &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Save changes&lt;/button&gt;</span>
+<span class="s">&lt;/div&gt;&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$postBackUrl&quot;</span><span class="p">,</span> <span class="n">postBackUrl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">+=</span> <span class="n">C</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">closeStatements</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">closeStatements</span><span class="p">)</span>
+        <span class="n">closeStatements</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">closeStatements</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span>
+
+        <span class="k">return</span> <span class="n">c</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Childrentree &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Navigation" href="../index.html" />
+    <link rel="next" title="Code Macro" href="../Code/Code.html" />
+    <link rel="prev" title="Children Macro" href="../Children/Children.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Code/Code.html" title="Code Macro"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Children/Children.html" title="Children Macro"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Navigation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="childrentree">
+<h1>Childrentree<a class="headerlink" href="#childrentree" title="Permalink to this headline">¶</a></h1>
+<p>This macro shows a tree of all the children of the current document</p>
+<ul class="simple">
+<li>&#8216;page&#8217;: Define from which page to start. Optional. Default value is the current page.</li>
+<li>&#8216;bullets&#8217;: Show the children with bullets. Optional. Default value is &#8216;False&#8217;.</li>
+<li>&#8216;depth&#8217;: The depth of the children tree to go. Optional. The default is 0, causing it to view the complete children tree.</li>
+<li>&#8216;no-tree&#8217;: By default, the children list is viewed as tree with collapsed items. If &#8216;no-tree&#8217; is specified, it will be just plain nested &#8216;ul&#8217; elements, with no collapsing.</li>
+<li>&#8216;items&#8217;: A tree of the children to view. This can be used to show only some of the children in specific order. Take care that items must <em>not</em> be separated by spaces</li>
+</ul>
+<div class="section" id="children-ordering">
+<h2>Children ordering<a class="headerlink" href="#children-ordering" title="Permalink to this headline">¶</a></h2>
+<p>By default, children are sorted alphabetically. If you want to specify a specific order to be used in all trees, you can create a file &#8216;.order&#8217; inside the page directory, specifying the order of each page, as in this example</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="mi">1</span><span class="p">:</span><span class="n">ActorTaskletEngines</span>
+<span class="mi">2</span><span class="p">:</span><span class="n">GenericSpecFormat</span>
+<span class="mi">3</span><span class="p">:</span><span class="n">ActorSpec</span>
+<span class="mi">4</span><span class="p">:</span><span class="n">DbTags</span>
+<span class="mi">5</span><span class="p">:</span><span class="n">DirStructure</span>
+<span class="mi">6</span><span class="p">:</span><span class="n">ModelSpec</span>
+</pre></div>
+</div>
+<p>This specifies the ordering of elements under the &#8216;Actor&#8217; page. You can recognize its effect in all the below examples.</p>
+<p>The parameter &#8216;items&#8217; overrides the &#8216;.order&#8217; behavior.</p>
+</div>
+<div class="section" id="ui-customization">
+<h2>UI customization<a class="headerlink" href="#ui-customization" title="Permalink to this headline">¶</a></h2>
+<p>The macro depends on &#8216;pagetree.js&#8217; for tree behavior, and &#8216;pagetree.css&#8217; for default layout. These files exist in &#8216;pylabs-core-6.0xtensionsoretmltmllibagetree&#8217;.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="default-layout">
+<h3>Default layout<a class="headerlink" href="#default-layout" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">page</span><span class="p">:</span><span class="n">macros</span> \<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bullets">
+<h3>bullets<a class="headerlink" href="#bullets" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">page</span><span class="p">:</span><span class="n">Docs</span> <span class="n">bullets</span> <span class="n">no</span><span class="o">-</span><span class="n">tree</span>\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="no-tree">
+<h3>no-tree<a class="headerlink" href="#no-tree" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">page</span><span class="p">:</span><span class="n">Docs</span> <span class="n">no</span><span class="o">-</span><span class="n">tree</span>\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="items">
+<h3>items<a class="headerlink" href="#items" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">items</span><span class="p">:[</span><span class="n">Macros</span><span class="p">(</span><span class="n">Children</span><span class="p">,</span><span class="n">JGauge</span><span class="p">(</span><span class="n">JGauge3</span><span class="p">,</span><span class="s">&#39;St. Thomas&#39;</span><span class="p">),</span><span class="n">MenuAdmin</span><span class="p">),</span><span class="n">UserManagement</span><span class="p">]</span>\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="depth">
+<h3>depth<a class="headerlink" href="#depth" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">page</span><span class="p">:</span><span class="n">Docs</span> <span class="n">depth</span><span class="p">:</span><span class="mi">1</span>\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="page">
+<h3>page<a class="headerlink" href="#page" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">childrentree</span><span class="p">:</span> <span class="n">page</span><span class="p">:</span><span class="n">Macros</span> \<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Childrentree</a><ul>
+<li><a class="reference internal" href="#children-ordering">Children ordering</a></li>
+<li><a class="reference internal" href="#ui-customization">UI customization</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#default-layout">Default layout</a></li>
+<li><a class="reference internal" href="#bullets">bullets</a></li>
+<li><a class="reference internal" href="#no-tree">no-tree</a></li>
+<li><a class="reference internal" href="#items">items</a></li>
+<li><a class="reference internal" href="#depth">depth</a></li>
+<li><a class="reference internal" href="#page">page</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Children/Children.html"
+                        title="previous chapter">Children Macro</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Code/Code.html"
+                        title="next chapter">Code Macro</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Macros/Navigation/Childrentree/Childrentree.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Code/Code.html" title="Code Macro"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Children/Children.html" title="Children Macro"
+             >previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" >Navigation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

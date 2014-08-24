@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.portal.PortalRest &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.portal.PortalRest</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">import</span> <span class="nn">mimeparse</span>
+<span class="kn">import</span> <span class="nn">mimetypes</span>
+
+<span class="k">class</span> <span class="nc">PortalRest</span><span class="p">():</span>
+
+<div class="viewcode-block" id="PortalRest"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">webserver</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">=</span><span class="n">webserver</span>
+
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+<div class="viewcode-block" id="PortalRest.validate"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.validate">[docs]</a>            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;No parameters given to actormethod.&#39;</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&#39;400 Bad Request&#39;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">if</span> <span class="n">auth</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&#39;beaker.session&#39;</span><span class="p">][</span><span class="s">&#39;user&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;guest&#39;</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;NO VALID AUTHORIZATION KEY GIVEN, use get param called key (check key probably auth error).&#39;</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&#39;401 Unauthorized&#39;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">msg</span>
+
+        <span class="n">paramCriteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">routes</span><span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">paramOptional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">routes</span><span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">paramCriteria</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">criteria</span> <span class="o">=</span> <span class="n">paramCriteria</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">paramOptional</span><span class="p">:</span>
+                    <span class="c"># means is optional</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&#39;400 Bad Request&#39;</span><span class="p">,</span> <span class="p">[])</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="s">&#39;get param with name:</span><span class="si">%s</span><span class="s"> is missing.&#39;</span> <span class="o">%</span> <span class="n">key</span>
+                    <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">message</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">criteria</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)</span>\
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">criteria</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">matchAllText</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">])):</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&#39;400 Bad Request&#39;</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;value of param </span><span class="si">%s</span><span class="s"> not correct needs to comform to regex </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">criteria</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">restPathProcessor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span></div>
+<div class="viewcode-block" id="PortalRest.restPathProcessor"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.restPathProcessor">[docs]</a><span class="sd">        Function which parse a path, returning True or False depending on</span>
+<span class="sd">        successfull parsing, a error message and a dict of parameters.</span>
+<span class="sd">        When successfull the params dict contains the path elements otherwise it</span>
+<span class="sd">        contains if provided the actorname  and appname.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Process path </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">while</span> <span class="n">path</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;/&quot;</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">while</span> <span class="n">path</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;/&quot;</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="s">&quot;Bad input path was empty. Format of url need to be http://$ipaddr/rest/$appname/$actorname/$actormetho?...&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">msginfo</span> <span class="o">=</span> <span class="s">&quot;Format of url need to be http://$ipaddr/rest/$appname/$actorname/$actormethod?...</span><span class="se">\n\n</span><span class="s">&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">appname</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">appname</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                <span class="n">actor</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">actor</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">actor</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&quot;appname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">appname</span>
+            <span class="n">params</span><span class="p">[</span><span class="s">&quot;actorname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actor</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">msginfo</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">[</span><span class="s">&quot;paths&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">paths</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">restRouter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">routekey</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span></div>
+<div class="viewcode-block" id="PortalRest.restRouter"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.restRouter">[docs]</a><span class="sd">        does validaton &amp; authorization</span>
+<span class="sd">        returns right route key</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">routekey</span><span class="p">:</span>
+            <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">paths</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="c"># j.logger.log(&quot;Execute %s %s&quot; % (env[&quot;REMOTE_ADDR&quot;], routekey))</span>
+        <span class="n">routes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">routes</span>
+        <span class="k">if</span> <span class="n">routekey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activateActor</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="n">routekey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">:</span>
+            <span class="n">routekey</span><span class="o">=</span><span class="s">&quot;GET_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">routekey</span>
+
+        <span class="k">if</span> <span class="n">routekey</span> <span class="ow">in</span> <span class="n">routes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">fformat</span> <span class="o">=</span> <span class="s">&quot;human&quot;</span>
+            <span class="k">elif</span><span class="p">(</span><span class="s">&quot;format&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">):</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">fformat</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span><span class="n">routekey</span><span class="p">][</span><span class="mi">6</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">fformat</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">&quot;format&quot;</span><span class="p">]</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">routekey</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">fullpath</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">actor</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>            
+            <span class="n">ctx</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">auth</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span><span class="n">routekey</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+            <span class="n">resultcode</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span> <span class="c">#validation &amp; authorization (but user needs to be known)</span>
+            <span class="k">if</span> <span class="n">resultcode</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>                
+                <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s">&quot;error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Incorrect Request: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">msg</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s">&quot;appname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">application</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s">&quot;actorname&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">actor</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method</span>
+                    <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">returnDoc</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="s">&quot;system&quot;</span><span class="p">,</span>
+                                          <span class="s">&quot;restvalidationerror&quot;</span><span class="p">,</span> <span class="n">extraParams</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">)])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">routekey</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Could not find method, path was </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">appname</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">actor</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">contentType</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">restreturn</span><span class="o">=</span><span class="ow">not</span> <span class="n">human</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&quot;404 Not Found&quot;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="n">contentType</span><span class="p">)])</span>
+            <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getServicesInfo</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">,</span><span class="n">msginfo</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">contentType</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">restreturn</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">execute_rest_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">routekey</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">routes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">routes</span></div>
+<div class="viewcode-block" id="PortalRest.execute_rest_call"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.execute_rest_call">[docs]</a>        <span class="k">try</span><span class="p">:</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">routes</span><span class="p">[</span><span class="n">routekey</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">,</span> <span class="o">**</span><span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">errorObject</span><span class="p">:</span>
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">errorObject</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Execute method </span><span class="si">%s</span><span class="s"> failed.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">routekey</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">,</span> <span class="n">errorObject</span><span class="o">=</span><span class="n">eco</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">processor_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span></div>
+<div class="viewcode-block" id="PortalRest.processor_rest"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.processor_rest">[docs]</a><span class="sd">        orignal rest processor (get statements)</span>
+<span class="sd">        e.g. http://localhost/restmachine/system/contentmanager/notifySpaceModification?name=www_openvstorage&amp;authkey=1234</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ctx</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;ctx cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Routing request to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">respond</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+                <span class="c"># j.logger.log(&quot;Responding %s&quot; % msg, 5)</span>
+                <span class="k">if</span> <span class="n">contentType</span><span class="p">:</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="n">contentType</span><span class="p">)])</span>
+                <span class="c"># print msg</span>
+                <span class="k">return</span> <span class="n">msg</span>
+
+            <span class="n">success</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restPathProcessor</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="s">&quot;error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">msg</span>
+                <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                    <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">returnDoc</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="s">&quot;system&quot;</span><span class="p">,</span> <span class="s">&quot;rest&quot;</span><span class="p">,</span>
+                                          <span class="n">extraParams</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">httpcode</span> <span class="o">=</span> <span class="s">&quot;404 Not Found&quot;</span>
+                    <span class="n">contentType</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">restreturn</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="n">httpcode</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="n">contentType</span><span class="p">)])</span>
+                    <span class="k">return</span> <span class="n">data</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;paths&#39;</span><span class="p">]</span>
+
+            <span class="n">success</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">routekey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restRouter</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span>
+                                                   <span class="n">paths</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="n">human</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="c">#in this case routekey is really the errormsg</span>
+                <span class="k">return</span> <span class="n">routekey</span>
+
+
+            <span class="n">success</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_rest_call</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">routekey</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span>
+
+            <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="s">&quot;json&quot;</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">params</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">returnDoc</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="s">&quot;system&quot;</span><span class="p">,</span> <span class="s">&quot;restresult&quot;</span><span class="p">,</span> <span class="n">extraParams</span><span class="o">=</span><span class="n">params</span><span class="p">))]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">contentType</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">respond</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">result</span><span class="p">)]</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">errorObject</span><span class="p">:</span>
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">errorObject</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ctx</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;NO webserver context yet, serious error&quot;</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>
+                <span class="k">print</span> <span class="n">eco</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">errorObject</span><span class="o">=</span><span class="n">eco</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">processor_restext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        </div>
+<div class="viewcode-block" id="PortalRest.processor_restext"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.processor_restext">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        rest processer gen 2 (not used by the original get code)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">ctx</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;ctx cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Routing request to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">respond</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">contentType</span><span class="p">:</span>
+                    <span class="n">start_response</span><span class="p">(</span><span class="s">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="n">contentType</span><span class="p">)])</span>
+                <span class="k">return</span> <span class="n">msg</span>
+
+            <span class="n">success</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restPathProcessor</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="s">&quot;error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+                <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                    <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">returnDoc</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="s">&quot;system&quot;</span><span class="p">,</span> <span class="s">&quot;rest&quot;</span><span class="p">,</span>
+                                          <span class="n">extraParams</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+            <span class="n">paths</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;paths&#39;</span><span class="p">]</span>
+            <span class="n">appname</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">actor</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">actorfunction</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">subobject</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">getfind</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">getdatatables</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s">&#39;query&#39;</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                    <span class="n">getfind</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">elif</span> <span class="s">&#39;datatables&#39;</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                    <span class="n">getdatatables</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c"># we have only a actor function</span>
+                <span class="k">if</span> <span class="s">&#39;function&#39;</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                    <span class="n">actorfunction</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;function&#39;</span><span class="p">)</span>
+            <span class="n">requestmethod</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">modelgroup</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">objectid</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">objectid</span>
+                <span class="n">subobject</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="n">actorfunction</span><span class="p">:</span>
+                <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span>
+                                            <span class="n">actorfunction</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">requestmethod</span> <span class="o">==</span> <span class="s">&#39;GET&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">subobject</span><span class="p">:</span>
+                        <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_get&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span>
+                                                        <span class="n">modelgroup</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">getfind</span><span class="p">:</span>
+                        <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_find&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span>
+                                                         <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span> <span class="n">modelgroup</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">getdatatables</span><span class="p">:</span>
+                        <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_datatables&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span>
+                                                               <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span> <span class="n">modelgroup</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_list&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span>
+                                                         <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span> <span class="n">modelgroup</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">requestmethod</span> <span class="o">==</span> <span class="s">&#39;OPTIONS&#39;</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="s">&#39;Allow: HEAD,GET,PUT,DELETE,OPTIONS&#39;</span>
+                    <span class="n">contentType</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">respond</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">routekey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestmethod</span><span class="p">,</span>
+                                                <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">,</span> <span class="n">modelgroup</span><span class="p">)</span>
+            <span class="n">success</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">restRouter</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="n">routekey</span><span class="p">,</span> <span class="n">human</span><span class="p">)</span>
+            
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span>
+            <span class="n">success</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_rest_call</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span>
+            
+
+            <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="s">&quot;json&quot;</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">params</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">returnDoc</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">start_response</span><span class="p">,</span> <span class="s">&quot;system&quot;</span><span class="p">,</span> <span class="s">&quot;restresult&quot;</span><span class="p">,</span> <span class="n">extraParams</span><span class="o">=</span><span class="n">params</span><span class="p">))]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">contentType</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">reformatOutput</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">respond</span><span class="p">(</span><span class="n">contentType</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">errorObject</span><span class="p">:</span>
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">errorObject</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ctx</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;NO webserver context yet, serious error&quot;</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>
+                <span class="k">print</span> <span class="n">eco</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">raiseError</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">errorObject</span><span class="o">=</span><span class="n">eco</span><span class="p">)</span>
+ 
+    <span class="k">def</span> <span class="nf">activateActor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span></div>
+<div class="viewcode-block" id="PortalRest.activateActor"><a class="viewcode-back" href="../../../../API/JumpScale.portal.portal.html#JumpScale.portal.portal.PortalRest.PortalRest.activateActor">[docs]</a>            <span class="c"># need to activate</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ws</span><span class="o">.</span><span class="n">actorsloader</span><span class="o">.</span><span class="n">getActor</span><span class="p">(</span><span class="n">appname</span><span class="p">,</span> <span class="n">actor</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>
+                <span class="k">print</span> <span class="n">e</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c"># there was no actor</span>
+                <span class="k">return</span> <span class="bp">False</span>
+
+
+    <span class="c"># def _getActorInfoUrl(self, appname, actor):</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     used for during error show links to actor in browser</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     if actor == &quot;&quot;:</span>
+    <span class="c">#         url = &quot;/rest/%s/&quot; % (appname)</span>
+    <span class="c">#     else:</span>
+    <span class="c">#         url = &quot;/rest/%s/%s/&quot; % (appname, actor)</span>
+    <span class="c">#     # url=&quot;&lt;a href=\&quot;%s\&quot;&gt;go here for more info about actor %s in %s&lt;/a&gt; &quot; % (url,actor,appname)</span>
+    <span class="c">#     return url                </span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

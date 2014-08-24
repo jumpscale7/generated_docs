@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating a layout &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="HTML Elements" href="../index.html" />
+    <link rel="next" title="Title" href="../Title/Title.html" />
+    <link rel="prev" title="Padding" href="../Padding/Padding.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Title/Title.html" title="Title"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Padding/Padding.html" title="Padding"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">HTML Elements</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="creating-a-layout">
+<h1>Creating a layout<a class="headerlink" href="#creating-a-layout" title="Permalink to this headline">¶</a></h1>
+<p>It is possible to create a layout by using 3 elements, block, col, row.
+Every element should be closed with a end.
+They syntax is as following :</p>
+<div class="section" id="creating-and-closing-a-block">
+<h2>Creating and closing a block<a class="headerlink" href="#creating-and-closing-a-block" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@block</span>
+<span class="nd">@blockend</span>
+</pre></div>
+</div>
+<p>This will result in a div with bootstrap css <em>container</em> class</p>
+</div>
+<div class="section" id="creating-a-row">
+<h2>Creating a row<a class="headerlink" href="#creating-a-row" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@row</span>
+<span class="nd">@rowend</span>
+</pre></div>
+</div>
+<p>This will result i a div with bootstrap css <em>row-fluid</em> class</p>
+</div>
+<div class="section" id="creating-a-collumn">
+<h2>Creating a collumn<a class="headerlink" href="#creating-a-collumn" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@col</span> <span class="n">spannr</span>
+<span class="nd">@colend</span>
+</pre></div>
+</div>
+<p>This will result in a div with bootstrap spannr class.
+Check //twitter.github.com/bootstrap/scaffolding.html &lt;<a class="reference external" href="http://twitter.github.com/bootstrap/scaffolding.html">http://twitter.github.com/bootstrap/scaffolding.html</a>&gt; for a overview.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>@block
+@row
+@col 2
+h5. test1
+!test1.jpg!
+@colend
+@col 3
+h5. test2
+!test2.jpg!
+@colend
+@col 4
+h5. test3
+!test3.jpg!
+@colend
+@rowend
+
+@row
+@col 4
+h5. test5
+
+{{gallery: picturedir: | title:demo
+</pre></div>
+</div>
+<div class="section" id="test6">
+<h3>test6<a class="headerlink" href="#test6" title="Permalink to this headline">¶</a></h3>
+<p>}}</p>
+</div>
+<div class="section" id="test1">
+<h3>test1<a class="headerlink" href="#test1" title="Permalink to this headline">¶</a></h3>
+<p>unsupported image:/images/unknownspace/test1.jpg
+!test1.jpg!</p>
+</div>
+<div class="section" id="test2">
+<h3>test2<a class="headerlink" href="#test2" title="Permalink to this headline">¶</a></h3>
+<p>unsupported image:/images/unknownspace/test2.jpg
+!test2.jpg!</p>
+</div>
+<div class="section" id="test3">
+<h3>test3<a class="headerlink" href="#test3" title="Permalink to this headline">¶</a></h3>
+<p>unsupported image:/images/unknownspace/test3.jpg
+!test3.jpg!</p>
+</div>
+<div class="section" id="test5">
+<h3>test5<a class="headerlink" href="#test5" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>test6<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Creating a layout</a><ul>
+<li><a class="reference internal" href="#creating-and-closing-a-block">Creating and closing a block</a></li>
+<li><a class="reference internal" href="#creating-a-row">Creating a row</a></li>
+<li><a class="reference internal" href="#creating-a-collumn">Creating a collumn</a></li>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#test6">test6</a></li>
+<li><a class="reference internal" href="#test1">test1</a></li>
+<li><a class="reference internal" href="#test2">test2</a></li>
+<li><a class="reference internal" href="#test3">test3</a></li>
+<li><a class="reference internal" href="#test5">test5</a></li>
+<li><a class="reference internal" href="#id1">test6</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Padding/Padding.html"
+                        title="previous chapter">Padding</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Title/Title.html"
+                        title="next chapter">Title</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Macros/HtmlElements/Pagestructure/Pagestructure.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Title/Title.html" title="Title"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Padding/Padding.html" title="Padding"
+             >previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" >HTML Elements</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

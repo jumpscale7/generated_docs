@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.gui.dialog &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-gui-dialog">
+<h1>j.gui.dialog<a class="headerlink" href="#j-gui-dialog" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /core/gui/dialog/EasyDialog.py</li>
+</ul>
+<div class="section" id="askchoice">
+<h2>askChoice<a class="headerlink" href="#askchoice" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,choices,defaultValue,pageSize,sortChoices,sortCallBack</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:161)</li>
+</ul>
+<p>Ask the user the supplied question and list the choices to choose from, if no response given the default value is used</p>
+</div>
+<div class="section" id="askchoicemultiple">
+<h2>askChoiceMultiple<a class="headerlink" href="#askchoicemultiple" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,choices,defaultValue,pageSize,sortChoices,sortCallBack</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:177)</li>
+</ul>
+<p>Ask the user the supplied question and list the choices to choose from, if no response given the default values &lt;s&gt; is used</p>
+</div>
+<div class="section" id="askdate">
+<h2>askDate<a class="headerlink" href="#askdate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,minValue,maxValue,selectedValue,format</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:202)</li>
+</ul>
+<p>Asks user a question that its answer is a date between minValue and maxValue</p>
+<p>Note: this note my seem out of place, but is is important to note that currently in the EasyDialogConsole implementation only dates with format YYYY/MM/DD are supported</p>
+</div>
+<div class="section" id="askdatetime">
+<h2>askDateTime<a class="headerlink" href="#askdatetime" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,minValue,maxValue,selectedValue,format</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:217)</li>
+</ul>
+<p>Asks user a question that its answer is a datetime between minValue and maxValue</p>
+<p>Note: this note my seem out of place, but is is important to note that currently in the EasyDialogConsole implementation only dates with format YYYY/MM/DD are supported</p>
+</div>
+<div class="section" id="askdirpath">
+<h2>askDirPath<a class="headerlink" href="#askdirpath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,startPath</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:93)</li>
+</ul>
+<p>Prompts for a selection of a file path starting from startPath if given and &#8216;/&#8217; if not</p>
+</div>
+<div class="section" id="askfilepath">
+<h2>askFilePath<a class="headerlink" href="#askfilepath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,startPath</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:79)</li>
+</ul>
+<p>Prompts for a selection of a file path starting from startPath if given and &#8216;/&#8217; if not</p>
+</div>
+<div class="section" id="askform">
+<h2>askForm<a class="headerlink" href="#askform" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: form</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:250)</li>
+</ul>
+</div>
+<div class="section" id="askinteger">
+<h2>askInteger<a class="headerlink" href="#askinteger" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:139)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer, if none given the default value is used, the response and the default value must be valid integer</p>
+</div>
+<div class="section" id="askintegers">
+<h2>askIntegers<a class="headerlink" href="#askintegers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:151)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer</p>
+</div>
+<div class="section" id="askmultiline">
+<h2>askMultiline<a class="headerlink" href="#askmultiline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:193)</li>
+</ul>
+<p>Asks the user the supplied question, where the answer could be multi-lines</p>
+</div>
+<div class="section" id="askpassword">
+<h2>askPassword<a class="headerlink" href="#askpassword" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,confirm,regex,retry,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:130)</li>
+</ul>
+<p>Asks the supplied question and prompts for password</p>
+</div>
+<div class="section" id="askstring">
+<h2>askString<a class="headerlink" href="#askstring" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue,validator</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:107)</li>
+</ul>
+<p>Asks the user the supplied question and prompt for an answer, if none given the default value is used</p>
+</div>
+<div class="section" id="askyesno">
+<h2>askYesNo<a class="headerlink" href="#askyesno" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:118)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer, if none given the default value is used, the response and the default value one of the values [y|Y|yes|Yes..n|N|No..]</p>
+<p>Note:For the EasyDialogConol implementation, currently the default value effect is ignored since it would require changing the jumpscale vapp</p>
+</div>
+<div class="section" id="choosedialogtype">
+<h2>chooseDialogType<a class="headerlink" href="#choosedialogtype" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: type</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:50)</li>
+</ul>
+<p>supported types today: console,win32,wizardserver</p>
+</div>
+<div class="section" id="clear">
+<h2>clear<a class="headerlink" href="#clear" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:253)</li>
+</ul>
+</div>
+<div class="section" id="message">
+<h2>message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:70)</li>
+</ul>
+<p>prints the given message to the screen</p>
+</div>
+<div class="section" id="navigateto">
+<h2>navigateTo<a class="headerlink" href="#navigateto" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: url</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:247)</li>
+</ul>
+</div>
+<div class="section" id="pm-setdialoghandler">
+<h2>pm_setDialogHandler<a class="headerlink" href="#pm-setdialoghandler" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:44)</li>
+</ul>
+</div>
+<div class="section" id="showlogging">
+<h2>showLogging<a class="headerlink" href="#showlogging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: text</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:241)</li>
+</ul>
+<p>Shows logging message</p>
+</div>
+<div class="section" id="showmessagebox">
+<h2>showMessageBox<a class="headerlink" href="#showmessagebox" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,title,msgboxButtons,msgboxIcon,defaultButton</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:256)</li>
+</ul>
+<p>Shows a large message box</p>
+</div>
+<div class="section" id="showprogress">
+<h2>showProgress<a class="headerlink" href="#showprogress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: minvalue,maxvalue,currentvalue</li>
+<li>path:/core/gui/dialog/EasyDialog.py (line:231)</li>
+</ul>
+<p>Shows a progress bar according to the given values</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.gui.dialog</a><ul>
+<li><a class="reference internal" href="#askchoice">askChoice</a></li>
+<li><a class="reference internal" href="#askchoicemultiple">askChoiceMultiple</a></li>
+<li><a class="reference internal" href="#askdate">askDate</a></li>
+<li><a class="reference internal" href="#askdatetime">askDateTime</a></li>
+<li><a class="reference internal" href="#askdirpath">askDirPath</a></li>
+<li><a class="reference internal" href="#askfilepath">askFilePath</a></li>
+<li><a class="reference internal" href="#askform">askForm</a></li>
+<li><a class="reference internal" href="#askinteger">askInteger</a></li>
+<li><a class="reference internal" href="#askintegers">askIntegers</a></li>
+<li><a class="reference internal" href="#askmultiline">askMultiline</a></li>
+<li><a class="reference internal" href="#askpassword">askPassword</a></li>
+<li><a class="reference internal" href="#askstring">askString</a></li>
+<li><a class="reference internal" href="#askyesno">askYesNo</a></li>
+<li><a class="reference internal" href="#choosedialogtype">chooseDialogType</a></li>
+<li><a class="reference internal" href="#clear">clear</a></li>
+<li><a class="reference internal" href="#message">message</a></li>
+<li><a class="reference internal" href="#navigateto">navigateTo</a></li>
+<li><a class="reference internal" href="#pm-setdialoghandler">pm_setDialogHandler</a></li>
+<li><a class="reference internal" href="#showlogging">showLogging</a></li>
+<li><a class="reference internal" href="#showmessagebox">showMessageBox</a></li>
+<li><a class="reference internal" href="#showprogress">showProgress</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/gui/j.gui.dialog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

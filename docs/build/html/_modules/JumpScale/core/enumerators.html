@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.enumerators &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.enumerators</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">import</span> <span class="nn">JumpScale.core.system</span>
+
+<span class="c">##__all__ = [&#39;PlatformType&#39;, &#39;AppStatusType&#39;, &#39;ErrorconditionLevel&#39;, &#39;LogLevel&#39;, &#39;MessageType&#39;, &#39;ActionStatus&#39;, &#39;SeverityType&#39;, &#39;AppStatusType&#39;, &#39;JobStatusType&#39;, &#39;REST&#39;]</span>
+<span class="c">##from JumpScale.core.enumerators.SeverityType import SeverityType</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.enumerators.AppStatusType</span> <span class="kn">import</span> <span class="n">AppStatusType</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.enumerators.ErrorConditionLevel</span> <span class="kn">import</span> <span class="n">ErrorConditionLevel</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.enumerators.ErrorConditionType</span> <span class="kn">import</span> <span class="n">ErrorConditionType</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.enumerators.LogLevel</span> <span class="kn">import</span> <span class="n">LogLevel</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.enumerators.MessageType</span> <span class="kn">import</span> <span class="n">MessageType</span>
+
+<div class="viewcode-block" id="Empty"><a class="viewcode-back" href="../../../API/JumpScale.core.enumerators.html#JumpScale.core.enumerators.Empty">[docs]</a><span class="k">class</span> <span class="nc">Empty</span><span class="p">():</span>
+	<span class="k">pass</span>
+</div>
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">=</span><span class="n">Empty</span><span class="p">()</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">AppStatusType</span><span class="o">=</span><span class="n">AppStatusType</span>
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">ErrorConditionLevel</span><span class="o">=</span><span class="n">ErrorConditionLevel</span>
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">ErrorConditionType</span><span class="o">=</span><span class="n">ErrorConditionType</span>
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">LogLevel</span><span class="o">=</span><span class="n">LogLevel</span>
+<span class="n">j</span><span class="o">.</span><span class="n">enumerators</span><span class="o">.</span><span class="n">MessageType</span><span class="o">=</span><span class="n">MessageType</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.lib.diskmanager package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-lib-diskmanager-package">
+<h1>JumpScale.lib.diskmanager package<a class="headerlink" href="#jumpscale-lib-diskmanager-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.lib.diskmanager.Diskmanager">
+<span id="jumpscale-lib-diskmanager-diskmanager-module"></span><h2>JumpScale.lib.diskmanager.Diskmanager module<a class="headerlink" href="#module-JumpScale.lib.diskmanager.Diskmanager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Disk">
+<em class="property">class </em><tt class="descclassname">JumpScale.lib.diskmanager.Diskmanager.</tt><tt class="descname">Disk</tt><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Disk" title="Permalink to this definition">¶</a></dt>
+<dd><p>identifies a disk in the grid</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager">
+<em class="property">class </em><tt class="descclassname">JumpScale.lib.diskmanager.Diskmanager.</tt><tt class="descname">Diskmanager</tt><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.diskGetFreeRegions">
+<tt class="descname">diskGetFreeRegions</tt><big>(</big><em>disk</em>, <em>align</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.diskGetFreeRegions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.diskGetFreeRegions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a filtered list of free regions, excluding the gaps due to partition alignment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.mirrorsFind">
+<tt class="descname">mirrorsFind</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.mirrorsFind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.mirrorsFind" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionAdd">
+<tt class="descname">partitionAdd</tt><big>(</big><em>disk</em>, <em>free</em>, <em>align=None</em>, <em>length=None</em>, <em>fs_type=None</em>, <em>type=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionAdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind">
+<tt class="descname">partitionsFind</tt><big>(</big><em>mounted=None</em>, <em>ttype=None</em>, <em>ssd=None</em>, <em>prefix='sd'</em>, <em>minsize=5</em>, <em>maxsize=5000</em>, <em>devbusy=None</em>, <em>initialize=False</em>, <em>forceinitialize=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionsFind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind" title="Permalink to this definition">¶</a></dt>
+<dd><p>looks for disks which are know to be data disks &amp; are formatted ext4
+return [[$partpath,$size,$free,$ssd]]
+&#64;param ssd if None then ssd and other</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind_Ext4Data">
+<tt class="descname">partitionsFind_Ext4Data</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionsFind_Ext4Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind_Ext4Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>looks for disks which are know to be data disks &amp; are formatted ext4
+return [[$partpath,$gid,$partid,$size,$free]]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsGetMounted_Ext4Data">
+<tt class="descname">partitionsGetMounted_Ext4Data</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionsGetMounted_Ext4Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsGetMounted_Ext4Data" title="Permalink to this definition">¶</a></dt>
+<dd><p>find disks which are mounted
+&#64;return [[$partid,$size,$free]]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsMount_Ext4Data">
+<tt class="descname">partitionsMount_Ext4Data</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionsMount_Ext4Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsMount_Ext4Data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsUnmount_Ext4Data">
+<tt class="descname">partitionsUnmount_Ext4Data</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#Diskmanager.partitionsUnmount_Ext4Data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsUnmount_Ext4Data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.lib.diskmanager.Diskmanager.get_open_blks">
+<tt class="descclassname">JumpScale.lib.diskmanager.Diskmanager.</tt><tt class="descname">get_open_blks</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/diskmanager/Diskmanager.html#get_open_blks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.diskmanager.Diskmanager.get_open_blks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.lib.diskmanager">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.diskmanager" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.lib.diskmanager package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JumpScale.lib.diskmanager.Diskmanager">JumpScale.lib.diskmanager.Diskmanager module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.lib.diskmanager">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.lib.diskmanager.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

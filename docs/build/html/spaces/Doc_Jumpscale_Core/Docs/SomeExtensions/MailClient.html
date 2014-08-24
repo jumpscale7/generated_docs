@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>E-Mail client &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Installation" href="../index.html" />
+    <link rel="next" title="manipulate code" href="ModuleCodeTools.html" />
+    <link rel="prev" title="ByteProcessor" href="ByteProcessor.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ModuleCodeTools.html" title="manipulate code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ByteProcessor.html" title="ByteProcessor"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="e-mail-client">
+<h1>E-Mail client<a class="headerlink" href="#e-mail-client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jpackage">
+<h2>JPackage<a class="headerlink" href="#jpackage" title="Permalink to this headline">¶</a></h2>
+<p>This package is responsible for configuring the mail client</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">mailclient</span>
+<span class="n">jpackage_init</span>             <span class="p">::</span> <span class="n">JPackage</span> <span class="n">jumpscale</span> <span class="n">mailclient</span> <span class="mf">1.0</span><span class="p">:</span><span class="n">did</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">active</span> <span class="n">hrd</span> <span class="k">for</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jumpscale</span><span class="o">/</span><span class="n">cfg</span><span class="o">/</span><span class="n">hrd</span><span class="o">/</span><span class="n">mailclient</span><span class="o">.</span><span class="n">hrd</span><span class="p">,</span> <span class="n">will</span> <span class="n">now</span> <span class="n">put</span> <span class="n">there</span>
+<span class="n">Mail</span> <span class="n">server</span> <span class="p">[</span><span class="n">smtp</span><span class="o">.</span><span class="n">googlemail</span><span class="o">.</span><span class="n">com</span><span class="p">]:</span>
+<span class="n">Mail</span> <span class="n">port</span> <span class="p">[</span><span class="mi">587</span><span class="p">]:</span>
+<span class="n">Mail</span> <span class="n">ssl</span>
+ <span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">):</span><span class="n">y</span>
+<span class="n">Mail</span> <span class="n">username</span><span class="p">:</span> <span class="n">mymail</span><span class="nd">@gmail.com</span>
+<span class="n">Mail</span> <span class="n">passwd</span><span class="p">:</span> <span class="n">mypassword</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">JumpScale.baselib.mailclient</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="s">&#39;receipient@gmail.com&#39;</span><span class="p">],</span> <span class="s">&#39;sender@gmail.com&#39;</span><span class="p">,</span> <span class="s">&#39;my subject&#39;</span><span class="p">,</span> <span class="s">&#39;My email body&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;/root/.hgrc&#39;</span><span class="p">,</span> <span class="s">&#39;/opt/jumpscale/apps/portalbase/wiki/TestWebsite/Automate.png&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>This will send an email to <a class="reference external" href="mailto:receipient&#37;&#52;&#48;gmail&#46;com">receipient<span>&#64;</span>gmail<span>&#46;</span>com</a> from <a class="reference external" href="mailto:sender&#37;&#52;&#48;gmail&#46;com">sender<span>&#64;</span>gmail<span>&#46;</span>com</a> having two attachments &#8216;/root/.hgrc&#8217; and &#8216;/opt/jumpscale/apps/portalbase/wiki/TestWebsite/Automate.png&#8217;</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">E-Mail client</a><ul>
+<li><a class="reference internal" href="#jpackage">JPackage</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ByteProcessor.html"
+                        title="previous chapter">ByteProcessor</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ModuleCodeTools.html"
+                        title="next chapter">manipulate code</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Core/Docs/SomeExtensions/MailClient.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ModuleCodeTools.html" title="manipulate code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ByteProcessor.html" title="ByteProcessor"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

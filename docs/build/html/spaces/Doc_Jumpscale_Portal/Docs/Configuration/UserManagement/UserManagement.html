@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Management &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Configuration" href="../index.html" />
+    <link rel="next" title="Wiki Syntax" href="../../Wiki Syntax/Wiki Syntax.html" />
+    <link rel="prev" title="How templates works" href="../Templates/Templates.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../Wiki Syntax/Wiki Syntax.html" title="Wiki Syntax"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Templates/Templates.html" title="How templates works"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Configuration</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="user-management">
+<h1>User Management<a class="headerlink" href="#user-management" title="Permalink to this headline">¶</a></h1>
+<p>The system users &amp; groups come from the config dir</p>
+<p>users.cfg
+and optionally
+groups.cfg</p>
+<p>This links to a file of structure</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">admin</span><span class="p">]</span>
+<span class="n">passwd</span><span class="o">=</span><span class="mi">1234</span>
+<span class="n">groups</span><span class="o">=</span><span class="n">admin</span>
+<span class="n">reset</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">emails</span><span class="o">=</span>
+<span class="n">secret</span><span class="o">=</span>
+
+<span class="p">[</span><span class="n">anotheruser</span><span class="p">]</span>
+<span class="n">passwd</span><span class="o">=</span><span class="mi">123456</span>
+<span class="n">emails</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>If groups is not filled in then user will be part of the group guests.
+When reset=1 then the user info will be overwritten when appserver loads, everything in DB for that user will be overwritten.
+If reset 0 then the user will only be created if the user does not exist yet.
+When reset=1 the secret needs to be empty or filled in, same for groups.</p>
+<p>This file has priority on users.cfg files specified on space, bucket or actor level.</p>
+<p>Emails is comma separated list of email addresses, when not filled in it is not used.</p>
+<p>Secret is the authkey used to get a special url which does automatic login of the user
+Rhe url looks as follows:
+<a class="reference external" href="http://$addr/$space?authkey=$secret">http://$addr/$space?authkey=$secret</a>
+e.g.
+<a class="reference external" href="http://192.198.93.21/generic_funding_info_453?authkey=dwfasdfasdf157">http://192.198.93.21/generic_funding_info_453?authkey=dwfasdfasdf157</a></p>
+<p>If not filled in will be filled in automatically
+When secret is empty then will not be generated (recommend this for admin users, do not make secret keys !!!!)</p>
+<div class="section" id="remarks">
+<h2>remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h2>
+<p>users as defined in spaces, buckets &amp; actors can never be put in admin group
+The reset param is only used in the main usersfile, cannot not be used in spaces,buckets &amp; actor usercfg files.</p>
+</div>
+<div class="section" id="allow-guest-access">
+<h2>Allow guest access<a class="headerlink" href="#allow-guest-access" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to allow guest access to certain spaces.
+Todo the following has to be configured.</p>
+<ul class="simple">
+<li>Create a guest user in users.cfg</li>
+<li>Define a acl for the guest user.</li>
+</ul>
+<p>Example content of users.cfg</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">guest</span><span class="p">]</span>
+<span class="n">reset</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="n">guest</span>
+<span class="n">passwd</span> <span class="o">=</span>
+<span class="n">secret</span> <span class="o">=</span> <span class="n">c812013bd</span>
+<span class="n">emails</span> <span class="o">=</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">guest</span>
+<span class="n">system</span> <span class="o">=</span>
+</pre></div>
+</div>
+<p>Example content of .space/acl.cfg</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#rights:</span>
+<span class="c">##R: read</span>
+<span class="c">##W: write/modify</span>
+<span class="c">##S: sync to e.g. local PC</span>
+<span class="c">##A: admin rights</span>
+<span class="c">##*: means all rights</span>
+<span class="n">guest</span><span class="o">=</span><span class="n">R</span>
+<span class="n">admin</span><span class="o">=*</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User Management</a><ul>
+<li><a class="reference internal" href="#remarks">remarks</a></li>
+<li><a class="reference internal" href="#allow-guest-access">Allow guest access</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Templates/Templates.html"
+                        title="previous chapter">How templates works</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../Wiki Syntax/Wiki Syntax.html"
+                        title="next chapter">Wiki Syntax</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Configuration/UserManagement/UserManagement.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../Wiki Syntax/Wiki Syntax.html" title="Wiki Syntax"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Templates/Templates.html" title="How templates works"
+             >previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" >Configuration</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

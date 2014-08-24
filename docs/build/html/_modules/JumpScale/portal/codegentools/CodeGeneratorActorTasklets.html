@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.codegentools.CodeGeneratorActorTasklets &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.codegentools.CodeGeneratorActorTasklets</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">from</span> <span class="nn">CodeGeneratorBase</span> <span class="kn">import</span> <span class="n">CodeGeneratorBase</span>
+
+<span class="n">NOTGENSTR</span> <span class="o">=</span> <span class="s">&quot;##DONOTGENERATE##&quot;</span>
+
+<span class="n">tasklets</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;default&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    params.result=None</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modeldelete&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #delete</span>
+<span class="s">    appname={appname}</span>
+<span class="s">    actorname={actorname}</span>
+<span class="s">    modelname={modelname}</span>
+<span class="s">    params.result=None</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modelget&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #delete</span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+<span class="s">    try:</span>
+<span class="s">        obj=modeldb.get(params.id)</span>
+<span class="s">    except Exception,e:</span>
+<span class="s">        if str(e).find(&quot;Key value store doesnt have a value for key&quot;)&lt;&gt;-1:</span>
+<span class="s">            #did not find</span>
+<span class="s">            params.result=False</span>
+<span class="s">            return params</span>
+
+<span class="s">    params.result={}</span>
+<span class="s">    params.result[&quot;JSModelobject&quot;]=obj.obj2dict()</span>
+<span class="s">    params.result[&quot;JSModeltype&quot;]=&quot;{appname}__{actorname}__{modelname}&quot;</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modelcreate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #create</span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+
+<span class="s">    ddict=j.tools.json.decode(params.data)</span>
+<span class="s">    obj=modeldb.new()</span>
+<span class="s">    obj2=j.core.osis.dict2JSModelobject(obj,ddict)</span>
+<span class="s">    modeldb.set(obj2)</span>
+<span class="s">    params.result=[obj2.id,obj2.guid]</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modelupdate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #set</span>
+<span class="s">    #appname=&quot;{appname}&quot;</span>
+<span class="s">    #actorname=&quot;{actorname}&quot;</span>
+<span class="s">    #modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+
+<span class="s">    ddict=j.tools.json.decode(params.data)</span>
+<span class="s">    obj=modeldb.new()</span>
+<span class="s">    obj2=j.core.osis.dict2JSModelobject(obj,ddict)</span>
+<span class="s">    modeldb.set(obj2)</span>
+<span class="s">    params.result=[obj2.id,obj2.guid]</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modelfind&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #find</span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+<span class="s">    res=modeldb.find(params.query)</span>
+<span class="s">    if len(res)&gt;100:</span>
+<span class="s">        params.result=&quot;TOO MANY RESULTS, MAX 100&quot;</span>
+<span class="s">    else:</span>
+<span class="s">        params.result=res</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modellist&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #list</span>
+<span class="s">    from JumpScale.core.Shell import ipshellDebug,ipshell</span>
+<span class="s">    print &quot;DEBUG NOW model list&quot;</span>
+<span class="s">    ipshell()</span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+<span class="s">    res=modeldb.find(params.query)</span>
+<span class="s">    if len(res)&gt;100:</span>
+<span class="s">        params.result=&quot;TOO MANY RESULTS, MAX 100&quot;</span>
+<span class="s">    else:</span>
+<span class="s">        params.result=res</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modeldatatables&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #list</span>
+<span class="s">    from JumpScale.core.Shell import ipshellDebug,ipshell</span>
+<span class="s">    print &quot;DEBUG NOW model datatables&quot;</span>
+<span class="s">    ipshell()</span>
+<span class="s">    </span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+<span class="s">    res=modeldb.find(params.query)</span>
+<span class="s">    if len(res)&gt;100:</span>
+<span class="s">        params.result=&quot;TOO MANY RESULTS, MAX 100&quot;</span>
+<span class="s">    else:</span>
+<span class="s">        params.result=res</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">tasklets</span><span class="p">[</span><span class="s">&quot;modelnew&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">def main(j, params, service, tags, tasklet):</span>
+<span class="s">    #new</span>
+<span class="s">    appname=&quot;{appname}&quot;</span>
+<span class="s">    actorname=&quot;{actorname}&quot;</span>
+<span class="s">    modelname=&quot;{modelname}&quot;</span>
+<span class="s">    modeldb=j.apps.{appname}.{actorname}.models.{modelname}</span>
+<span class="s">    obj=modeldb.new()</span>
+<span class="s">    modeldb.set(obj)</span>
+<span class="s">    params.result={}</span>
+<span class="s">    params.result[&quot;JSModelobject&quot;]=obj.obj2dict()</span>
+<span class="s">    params.result[&quot;JSModeltype&quot;]=&quot;{appname}__{actorname}__{modelname}&quot;</span>
+<span class="s">    return params</span>
+
+<span class="s">def match(j, params, service, tags, tasklet):</span>
+<span class="s">    return True</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="CodeGeneratorActorTasklets"><a class="viewcode-back" href="../../../../API/JumpScale.portal.codegentools.html#JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets">[docs]</a><span class="k">class</span> <span class="nc">CodeGeneratorActorTasklets</span><span class="p">(</span><span class="n">CodeGeneratorBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">typecheck</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dieInGenCode</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">codepath</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">overwrite</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c"># can never overwrite</span>
+        <span class="n">CodeGeneratorBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">,</span> <span class="n">typecheck</span><span class="p">,</span> <span class="n">dieInGenCode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">codepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">codepath</span><span class="p">,</span> <span class="s">&quot;methodtasklets&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codepath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;tasklets&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="o">=</span> <span class="n">overwrite</span>
+
+<div class="viewcode-block" id="CodeGeneratorActorTasklets.generate"><a class="viewcode-back" href="../../../../API/JumpScale.portal.codegentools.html#JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets.generate">[docs]</a>    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span>
+
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">methods</span><span class="p">:</span>
+
+            <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codepath</span><span class="p">,</span> <span class="s">&quot;method_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codepath</span><span class="p">,</span> <span class="s">&quot;method_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                         <span class="s">&quot;5_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">.py&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">actorname</span><span class="p">,</span> <span class="n">method</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+            <span class="n">path2</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">codepath</span><span class="p">,</span> <span class="s">&quot;method_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;5_main.py&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path2</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">moveFile</span><span class="p">(</span><span class="n">path2</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="c"># content=j.system.fs.fileGetContents(path)</span>
+                <span class="c"># if content.find(NOTGENSTR)&lt;&gt;-1:</span>
+                    <span class="c"># path=j.system.fs.joinPaths(j.core.portal.active.codepath,spec.appname,spec.actorname,method.name,&quot;_5_main.py&quot;)</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="bp">None</span>
+
+            <span class="k">if</span> <span class="n">path</span> <span class="o">!=</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="c"># lets also check there are no files in it yet</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">path</span><span class="p">)))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">templ</span> <span class="o">=</span> <span class="s">&quot;default&quot;</span>
+                    <span class="n">tags</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagExists</span><span class="p">(</span><span class="s">&quot;tasklettemplate&quot;</span><span class="p">):</span>
+                        <span class="n">templ</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">tagGet</span><span class="p">(</span><span class="s">&quot;tasklettemplate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">templ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tasklets</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find tasklet template </span><span class="si">%s</span><span class="s"> in </span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">templ</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span>
+                    <span class="n">content</span> <span class="o">=</span> <span class="n">tasklets</span><span class="p">[</span><span class="n">templ</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">templ</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c"># is used for templates for crud methods</span>
+                        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{appname}&quot;</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">appname</span><span class="p">)</span>
+                        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{actorname}&quot;</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">actorname</span><span class="p">)</span>
+                        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;{modelname}&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getContent</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

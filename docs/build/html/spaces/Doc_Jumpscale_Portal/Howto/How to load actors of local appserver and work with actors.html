@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Loading and working with actors &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="How To" href="index.html" />
+    <link rel="next" title="Loading and working with actors remotely" href="How to connect to a remote appserver &amp; work with actors.html" />
+    <link rel="prev" title="How to use the wiki" href="How to use the wiki.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="How to connect to a remote appserver & work with actors.html" title="Loading and working with actors remotely"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="How to use the wiki.html" title="How to use the wiki"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How To</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="loading-and-working-with-actors">
+<h1>Loading and working with actors<a class="headerlink" href="#loading-and-working-with-actors" title="Permalink to this headline">¶</a></h1>
+<p>When calling j.core.portal.loadActorsInProcess(), then by default system actors will be available under j.apps.system</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">JumpScale.portal</span>
+
+<span class="c">#make sure you are in the appropriate appserver dir</span>
+<span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">changeDir</span><span class="p">(</span><span class="s">&quot;/opt/jumpscale/apps/exampleportal/&quot;</span><span class="p">)</span>
+
+<span class="c">#load the actors</span>
+<span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">loadActorsInProcess</span><span class="p">()</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">usermanager</span><span class="o">.</span><span class="n">model_user_list</span><span class="p">()</span> <span class="c"># returns [&#39;admin&#39;, &#39;guest&#39;]</span>
+</pre></div>
+</div>
+<p>If you want your app actors to be loaded under j.apps.&lt;your_app_name&gt;.&lt;your_actor_name&gt;, you will have to explicitly load them, cause they are lazy-loaded</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">JumpScale.portal</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">changeDir</span><span class="p">(</span><span class="s">&quot;/opt/jumpscale/apps/cloudbroker/&quot;</span><span class="p">)</span>
+<span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">portal</span><span class="o">.</span><span class="n">loadActorsInProcess</span><span class="p">()</span>
+<span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">actorsloader</span><span class="o">.</span><span class="n">getActor</span><span class="p">(</span><span class="s">&#39;cloud&#39;</span><span class="p">,</span> <span class="s">&#39;cloudbroker&#39;</span><span class="p">)</span>
+
+<span class="n">machines</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">apps</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">cloudbroker</span><span class="o">.</span><span class="n">machineList</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="How to use the wiki.html"
+                        title="previous chapter">How to use the wiki</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="How to connect to a remote appserver &amp; work with actors.html"
+                        title="next chapter">Loading and working with actors remotely</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Portal/Howto/How to load actors of local appserver and work with actors.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="How to connect to a remote appserver & work with actors.html" title="Loading and working with actors remotely"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="How to use the wiki.html" title="How to use the wiki"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >How To</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.lib.diskmanager.Diskmanager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.lib.diskmanager.Diskmanager</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">stat</span>
+
+
+<span class="k">def</span> <span class="nf">_is_block</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">raise</span>
+    <span class="k">return</span> <span class="n">stat</span><span class="o">.</span><span class="n">S_ISBLK</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_mode</span><span class="p">)</span>
+
+<div class="viewcode-block" id="get_open_blks"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.get_open_blks">[docs]</a><span class="k">def</span> <span class="nf">get_open_blks</span><span class="p">(</span><span class="n">pid</span><span class="p">):</span>
+    <span class="n">retlist</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s">&quot;/proc/</span><span class="si">%s</span><span class="s">/fd&quot;</span> <span class="o">%</span> <span class="n">pid</span><span class="p">)</span>
+    <span class="n">hit_enoent</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="nb">file</span> <span class="o">=</span> <span class="s">&quot;/proc/</span><span class="si">%s</span><span class="s">/fd/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">fd</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">readlink</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OSError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
+                    <span class="n">hit_enoent</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="k">continue</span>
+                <span class="k">raise</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">_is_block</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+                    <span class="n">retlist</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">fd</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">hit_enoent</span><span class="p">:</span>
+        <span class="c"># raise NSP if the process disappeared on us</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="s">&#39;/proc/</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pid</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retlist</span>
+</div>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">parted</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;python-parted&quot;</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">parted</span>
+
+<span class="c">#patch parted</span>
+<span class="n">_orig_getAllDevices</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">getAllDevices</span>
+<span class="k">def</span> <span class="nf">_patchedGetAllDevices</span><span class="p">():</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+    <span class="n">fds</span> <span class="o">=</span> <span class="n">get_open_blks</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_orig_getAllDevices</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">afds</span> <span class="o">=</span> <span class="n">get_open_blks</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">afds</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">fds</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+
+<span class="n">parted</span><span class="o">.</span><span class="n">getAllDevices</span> <span class="o">=</span> <span class="n">_patchedGetAllDevices</span>
+
+<div class="viewcode-block" id="Disk"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Disk">[docs]</a><span class="k">class</span> <span class="nc">Disk</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    identifies a disk in the grid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">free</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="o">=</span><span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mounted</span><span class="o">=</span><span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> free:</span><span class="si">%s</span><span class="s"> ssd:</span><span class="si">%s</span><span class="s"> fs:</span><span class="si">%s</span><span class="s"> model:</span><span class="si">%s</span><span class="s"> id:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">free</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ssd</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+    <span class="n">__repr__</span><span class="o">=</span><span class="n">__str__</span>
+</div>
+<div class="viewcode-block" id="Diskmanager"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager">[docs]</a><span class="k">class</span> <span class="nc">Diskmanager</span><span class="p">():</span> 
+<div class="viewcode-block" id="Diskmanager.partitionAdd"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionAdd">[docs]</a>    <span class="k">def</span> <span class="nf">partitionAdd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">disk</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fs_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">parted</span><span class="o">.</span><span class="n">PARTITION_NORMAL</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">free</span><span class="o">.</span><span class="n">start</span>
+        <span class="k">if</span> <span class="n">length</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">free</span><span class="o">.</span><span class="n">end</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">free</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span>
+     
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">align</span><span class="p">:</span>
+            <span class="n">align</span> <span class="o">=</span> <span class="n">disk</span><span class="o">.</span><span class="n">partitionAlignment</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">disk</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">optimumAlignment</span><span class="p">)</span>
+     
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">align</span><span class="o">.</span><span class="n">isAligned</span><span class="p">(</span><span class="n">free</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">align</span><span class="o">.</span><span class="n">alignNearest</span><span class="p">(</span><span class="n">free</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+     
+        <span class="n">end_align</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">Alignment</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="n">align</span><span class="o">.</span><span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grainSize</span><span class="o">=</span><span class="n">align</span><span class="o">.</span><span class="n">grainSize</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">end_align</span><span class="o">.</span><span class="n">isAligned</span><span class="p">(</span><span class="n">free</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">end_align</span><span class="o">.</span><span class="n">alignNearest</span><span class="p">(</span><span class="n">free</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+     
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">Geometry</span><span class="p">(</span><span class="n">disk</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fs_type</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">FileSystem</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">fs_type</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">partition</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">Partition</span><span class="p">(</span><span class="n">disk</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">constraint</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">exactGeom</span><span class="o">=</span><span class="n">partition</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="n">disk</span><span class="o">.</span><span class="n">addPartition</span><span class="p">(</span><span class="n">partition</span><span class="p">,</span> <span class="n">constraint</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">partition</span>
+     </div>
+<div class="viewcode-block" id="Diskmanager.diskGetFreeRegions"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.diskGetFreeRegions">[docs]</a>    <span class="k">def</span> <span class="nf">diskGetFreeRegions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">disk</span><span class="p">,</span> <span class="n">align</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a filtered list of free regions, excluding the gaps due to partition alignment&quot;&quot;&quot;</span>
+        <span class="n">regions</span> <span class="o">=</span> <span class="n">disk</span><span class="o">.</span><span class="n">getFreeSpaceRegions</span><span class="p">()</span>
+        <span class="n">new_regions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="n">align</span><span class="o">.</span><span class="n">grainSize</span><span class="p">:</span>
+                <span class="n">new_regions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_regions</span>
+     </div>
+    <span class="k">def</span> <span class="nf">_kib_to_sectors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">device</span><span class="p">,</span> <span class="n">kib</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">parted</span><span class="o">.</span><span class="n">sizeToSectors</span><span class="p">(</span><span class="n">kib</span><span class="p">,</span> <span class="s">&#39;KiB&#39;</span><span class="p">,</span> <span class="n">device</span><span class="o">.</span><span class="n">sectorSize</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Diskmanager.mirrorsFind"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.mirrorsFind">[docs]</a>    <span class="k">def</span> <span class="nf">mirrorsFind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;cat /proc/mdstat&quot;</span>
+        <span class="n">rcode</span><span class="p">,</span><span class="n">out</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</div>
+<div class="viewcode-block" id="Diskmanager.partitionsFind"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind">[docs]</a>    <span class="k">def</span> <span class="nf">partitionsFind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mounted</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">ssd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s">&quot;sd&quot;</span><span class="p">,</span><span class="n">minsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">devbusy</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>\
+            <span class="n">initialize</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">forceinitialize</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        looks for disks which are know to be data disks &amp; are formatted ext4</span>
+<span class="sd">        return [[$partpath,$size,$free,$ssd]]</span>
+<span class="sd">        @param ssd if None then ssd and other</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">parted</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.grid.osis</span>
+        <span class="kn">import</span> <span class="nn">psutil</span>
+        <span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">mounteddevices</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_partitions</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">getpsutilpart</span><span class="p">(</span><span class="n">partname</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mounteddevices</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">device</span><span class="o">==</span><span class="n">partname</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">part</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+        <span class="k">for</span> <span class="n">dev</span> <span class="ow">in</span> <span class="n">parted</span><span class="o">.</span><span class="n">getAllDevices</span><span class="p">():</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">dev</span><span class="o">.</span><span class="n">path</span>
+            <span class="c">#ssize = dev.sectorSize;</span>
+            <span class="c"># size = (geom[0] * geom[1] * geom[2] * ssize) / 1000 / 1000 / 1000;</span>
+            <span class="c"># size2=dev.getSize()</span>
+
+            <span class="k">if</span> <span class="n">devbusy</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">dev</span><span class="o">.</span><span class="n">busy</span><span class="o">==</span><span class="n">devbusy</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;/dev/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">prefix</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">disk</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">Disk</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+                        <span class="n">partitions</span> <span class="o">=</span> <span class="n">disk</span><span class="o">.</span><span class="n">partitions</span>
+                    <span class="k">except</span> <span class="n">parted</span><span class="o">.</span><span class="n">DiskLabelException</span><span class="p">:</span>
+                        <span class="n">partitions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+                        <span class="n">disko</span><span class="o">=</span><span class="n">Disk</span><span class="p">()</span>
+                        <span class="n">disko</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">dev</span><span class="o">.</span><span class="n">model</span>
+                        <span class="n">disko</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="n">partition</span><span class="o">.</span><span class="n">path</span> <span class="k">if</span> <span class="n">disk</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s">&#39;loop&#39;</span> <span class="k">else</span> <span class="n">disk</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">path</span>
+                        <span class="n">disko</span><span class="o">.</span><span class="n">size</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">getSize</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s">&quot;mb&quot;</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">disko</span><span class="o">.</span><span class="n">free</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">print</span> <span class="s">&quot;partition:</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">disko</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="n">disko</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">fs</span> <span class="o">=</span> <span class="n">parted</span><span class="o">.</span><span class="n">probeFileSystem</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="n">fs</span> <span class="o">=</span> <span class="s">&quot;unknown&quot;</span>
+
+                        <span class="n">disko</span><span class="o">.</span><span class="n">fs</span><span class="o">=</span><span class="n">fs</span>
+                        <span class="n">partfound</span><span class="o">=</span><span class="n">getpsutilpart</span><span class="p">(</span><span class="n">disko</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+                        <span class="n">mountpoint</span><span class="o">=</span><span class="bp">None</span>
+                        <span class="k">if</span> <span class="n">partfound</span><span class="o">==</span><span class="bp">None</span> <span class="ow">and</span> <span class="n">mounted</span><span class="o">&lt;&gt;</span><span class="bp">True</span><span class="p">:</span>
+                            <span class="n">mountpoint</span><span class="o">=</span><span class="s">&quot;/mnt/tmp&quot;</span>
+                            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;mount </span><span class="si">%s</span><span class="s"> /mnt/tmp&quot;</span><span class="o">%</span><span class="n">partition</span><span class="o">.</span><span class="n">path</span>
+                            <span class="n">rcode</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">ignoreErrorOutput</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">,)</span>
+                            <span class="k">if</span> <span class="n">rcode</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+                                <span class="c">#mount did not work</span>
+                                <span class="n">mountpoint</span><span class="o">==</span><span class="bp">None</span>
+
+                            <span class="n">disko</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">=</span><span class="bp">None</span>
+                            <span class="n">disko</span><span class="o">.</span><span class="n">mounted</span><span class="o">=</span><span class="bp">False</span>
+                        <span class="k">elif</span> <span class="n">partfound</span><span class="p">:</span>
+                            <span class="n">mountpoint</span><span class="o">=</span><span class="n">partfound</span><span class="o">.</span><span class="n">mountpoint</span>
+                            <span class="n">disko</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">=</span><span class="n">mountpoint</span>
+                            <span class="n">disko</span><span class="o">.</span><span class="n">mounted</span><span class="o">=</span><span class="bp">True</span>
+
+                        <span class="n">pathssdcheck</span><span class="o">=</span><span class="s">&quot;/sys/block/</span><span class="si">%s</span><span class="s">/queue/rotational&quot;</span><span class="o">%</span><span class="n">dev</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;/dev/&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                        <span class="n">ssd0</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">pathssdcheck</span><span class="p">))</span><span class="o">==</span><span class="mi">0</span>
+                        <span class="n">disko</span><span class="o">.</span><span class="n">ssd</span><span class="o">=</span><span class="n">ssd0</span>   
+                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disko</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">mountpoint</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+                            <span class="k">print</span> <span class="s">&quot;mountpoint:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">mountpoint</span>
+                            <span class="n">size</span><span class="p">,</span> <span class="n">used</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">percent</span><span class="o">=</span><span class="n">psutil</span><span class="o">.</span><span class="n">disk_usage</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">)</span>
+                            <span class="n">disko</span><span class="o">.</span><span class="n">free</span><span class="o">=</span><span class="n">disko</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">percent</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+
+                            <span class="n">size</span><span class="o">=</span><span class="n">disko</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="mi">1024</span>
+                            <span class="n">disko</span><span class="o">.</span><span class="n">free</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">disko</span><span class="o">.</span><span class="n">free</span><span class="p">)</span>
+
+                            <span class="k">if</span> <span class="p">(</span><span class="n">ttype</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">fs</span><span class="o">==</span><span class="n">ttype</span><span class="p">)</span> <span class="ow">and</span> <span class="n">size</span><span class="o">&gt;</span><span class="n">minsize</span> <span class="ow">and</span> <span class="p">(</span><span class="n">maxsize</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">size</span><span class="o">&lt;</span><span class="n">maxsize</span><span class="p">):</span>
+                                <span class="k">if</span> <span class="n">ssd</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">disko</span><span class="o">.</span><span class="n">ssd</span><span class="o">==</span><span class="n">ssd</span><span class="p">:</span>
+                                    <span class="c"># print disko</span>
+                                    <span class="n">hrdpath</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/disk.hrd&quot;</span><span class="o">%</span><span class="n">mountpoint</span>
+
+                                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">):</span>
+                                        <span class="n">hrd</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">getHRD</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">)</span>
+                                        <span class="n">partnr</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;diskinfo.partnr&quot;</span><span class="p">)</span>
+                                        <span class="k">if</span> <span class="n">partnr</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">forceinitialize</span><span class="p">:</span>
+                                            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">)</span>
+
+                                    <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">)</span> <span class="ow">and</span> <span class="n">initialize</span><span class="p">:</span>
+                                        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">diskinfo.partnr=</span>
+<span class="s">diskinfo.gid=</span>
+<span class="s">diskinfo.nid=</span>
+<span class="s">diskinfo.type=</span>
+<span class="s">diskinfo.epoch=</span>
+<span class="s">diskinfo.description=</span>
+<span class="s">&quot;&quot;&quot;</span>
+                                        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">hrdpath</span><span class="p">,</span><span class="n">contents</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+                                        <span class="n">hrd</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">getHRD</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">)</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.description&quot;</span><span class="p">,</span><span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&quot;please give description for disk&quot;</span><span class="p">))</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.type&quot;</span><span class="p">,</span><span class="s">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askChoiceMultiple</span><span class="p">([</span><span class="s">&quot;BOOT&quot;</span><span class="p">,</span><span class="s">&quot;CACHE&quot;</span><span class="p">,</span><span class="s">&quot;TMP&quot;</span><span class="p">,</span><span class="s">&quot;DATA&quot;</span><span class="p">,</span><span class="s">&quot;OTHER&quot;</span><span class="p">])))</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.gid&quot;</span><span class="p">,</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">gid</span><span class="p">)</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.nid&quot;</span><span class="p">,</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">nid</span><span class="p">)</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.epoch&quot;</span><span class="p">,</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">())</span>
+
+
+                                        <span class="n">masterip</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;grid.master.ip&quot;</span><span class="p">)</span>
+                                        <span class="n">client</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">masterip</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">)</span>
+                                        <span class="n">client_disk</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">getClientForCategory</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="s">&quot;system&quot;</span><span class="p">,</span><span class="s">&quot;disk&quot;</span><span class="p">)</span>
+
+                                        <span class="n">disk</span><span class="o">=</span><span class="n">client_disk</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+                                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="n">disko</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                                            <span class="n">disk</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">val</span>
+
+                                        <span class="n">disk</span><span class="o">.</span><span class="n">description</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;diskinfo.description&quot;</span><span class="p">)</span>
+                                        <span class="n">disk</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;diskinfo.type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+                                        <span class="n">disk</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                                        <span class="n">disk</span><span class="o">.</span><span class="n">nid</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">nid</span>
+                                        <span class="n">disk</span><span class="o">.</span><span class="n">gid</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">gid</span>
+
+
+                                        <span class="n">guid</span><span class="p">,</span><span class="n">new</span><span class="p">,</span><span class="n">changed</span><span class="o">=</span><span class="n">client_disk</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">disk</span><span class="p">)</span>
+                                        <span class="n">disk</span><span class="o">=</span><span class="n">client_disk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">guid</span><span class="p">)</span>
+                                        <span class="n">diskid</span><span class="o">=</span><span class="n">disk</span><span class="o">.</span><span class="n">id</span>
+                                        <span class="n">hrd</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;diskinfo.partnr&quot;</span><span class="p">,</span><span class="n">diskid</span><span class="p">)</span>
+                                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">):</span>
+                                        <span class="c"># hrd=j.core.hrd.getHRD(hrdpath)</span>
+                                        <span class="n">disko</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;diskinfo.partnr&quot;</span><span class="p">)</span>
+                                        <span class="n">disko</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;diskinfo.type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+                                        <span class="n">disko</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                                        <span class="n">disko</span><span class="o">.</span><span class="n">description</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;diskinfo.description&quot;</span><span class="p">)</span>
+                                        <span class="k">print</span> <span class="s">&quot;found disk:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">disko</span><span class="p">)</span>
+                                    <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;umount /mnt/tmp&quot;</span>
+                                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+                                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">ismount</span><span class="p">(</span><span class="s">&quot;/mnt/tmp&quot;</span><span class="p">)</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+                                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;/mnt/tmp should not be mounted&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Diskmanager.partitionsFind_Ext4Data"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsFind_Ext4Data">[docs]</a>    <span class="k">def</span> <span class="nf">partitionsFind_Ext4Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        looks for disks which are know to be data disks &amp; are formatted ext4</span>
+<span class="sd">        return [[$partpath,$gid,$partid,$size,$free]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="o">=</span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionsFind</span><span class="p">(</span><span class="n">busy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="s">&quot;ext4&quot;</span><span class="p">,</span><span class="n">ssd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">prefix</span><span class="o">=</span><span class="s">&quot;sd&quot;</span><span class="p">,</span><span class="n">minsize</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">5000</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">result</span>       
+</div>
+<div class="viewcode-block" id="Diskmanager.partitionsMount_Ext4Data"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsMount_Ext4Data">[docs]</a>    <span class="k">def</span> <span class="nf">partitionsMount_Ext4Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">path</span><span class="p">,</span><span class="n">gid</span><span class="p">,</span><span class="n">partnr</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">free</span><span class="p">,</span><span class="n">ssd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partitionsFind_Ext4Data</span><span class="p">():</span>
+            <span class="n">mntdir</span><span class="o">=</span><span class="s">&quot;/mnt/datadisks/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">partnr</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">mntdir</span><span class="p">)</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;mount </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">mntdir</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Diskmanager.partitionsUnmount_Ext4Data"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsUnmount_Ext4Data">[docs]</a>    <span class="k">def</span> <span class="nf">partitionsUnmount_Ext4Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">partitions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">partitionsGet_Ext4Data</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">partid</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">free</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+            <span class="n">mntdir</span><span class="o">=</span><span class="s">&quot;/mnt/datadisks/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">partnr</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;umount </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">mntdir</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Diskmanager.partitionsGetMounted_Ext4Data"><a class="viewcode-back" href="../../../../API/JumpScale.lib.diskmanager.html#JumpScale.lib.diskmanager.Diskmanager.Diskmanager.partitionsGetMounted_Ext4Data">[docs]</a>    <span class="k">def</span> <span class="nf">partitionsGetMounted_Ext4Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find disks which are mounted</span>
+<span class="sd">        @return [[$partid,$size,$free]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span>
+        <span class="k">print</span> <span class="s">&quot;DEBUG NOW iiiiii&quot;</span>
+        <span class="n">embed</span><span class="p">()</span>
+        
+
+
+        <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span>
+        <span class="k">print</span> <span class="s">&quot;DEBUG NOW partitionsGet_Ext4Data&quot;</span>
+        <span class="n">embed</span><span class="p">()</span>
+ </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>
