@@ -665,7 +665,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">()</span>
 
-        <span class="n">scriptName</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;SCRIPT_NAME&quot;</span><span class="p">]</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;PATH_INFO&quot;</span><span class="p">]</span>
         <span class="n">remoteAddress</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;REMOTE_ADDR&quot;</span><span class="p">]</span>
         <span class="n">queryString</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;QUERY_STRING&quot;</span><span class="p">]</span>
 
@@ -709,7 +709,7 @@
         <span class="n">ctx</span><span class="o">.</span><span class="n">start_response</span><span class="p">(</span><span class="n">httpcode</span><span class="p">,</span> <span class="p">[(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;text/html&#39;</span><span class="p">)])</span>
 
         <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;***ERROR***:</span><span class="si">%s</span><span class="s"> : method </span><span class="si">%s</span><span class="s"> from ip </span><span class="si">%s</span><span class="s"> with params </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span>
-            <span class="n">msg</span><span class="p">,</span> <span class="n">scriptName</span><span class="p">,</span> <span class="n">remoteAddress</span><span class="p">,</span> <span class="n">queryString</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">eco</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">remoteAddress</span><span class="p">,</span> <span class="n">queryString</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">msg</span>
         <span class="k">else</span><span class="p">:</span>
