@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+    <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+    <link rel="next" title="JumpScale.baselib.elasticsearch package" href="JumpScale.baselib.elasticsearch.html" />
+    <link rel="prev" title="JumpScale.baselib.credis package" href="JumpScale.baselib.credis.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +35,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.elasticsearch.html" title="JumpScale.baselib.elasticsearch package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.credis.html" title="JumpScale.baselib.credis package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,11 +60,49 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="jumpscale-baselib-dnsmasq-dnsmasq-module">
-<h2>JumpScale.baselib.dnsmasq.dnsmasq module<a class="headerlink" href="#jumpscale-baselib-dnsmasq-dnsmasq-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.baselib.dnsmasq.dnsmasq">
+<span id="jumpscale-baselib-dnsmasq-dnsmasq-module"></span><h2>JumpScale.baselib.dnsmasq.dnsmasq module<a class="headerlink" href="#module-JumpScale.baselib.dnsmasq.dnsmasq" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.dnsmasq.dnsmasq.</tt><tt class="descname">DNSMasq</tt><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.addHost">
+<tt class="descname">addHost</tt><big>(</big><em>macaddress</em>, <em>ipaddress</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.addHost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.addHost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.addToStartupManager">
+<tt class="descname">addToStartupManager</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.addToStartupManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.addToStartupManager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.reload">
+<tt class="descname">reload</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.reload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.reload" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.removeHost">
+<tt class="descname">removeHost</tt><big>(</big><em>macaddress</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.removeHost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.removeHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a dhcp-host entry from dnsmasq.conf file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.restart">
+<tt class="descname">restart</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.restart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restarts dnsmasq</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.setConfigPath">
+<tt class="descname">setConfigPath</tt><big>(</big><em>namespace=None</em>, <em>config_path=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/dnsmasq/dnsmasq.html#DNSMasq.setConfigPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.dnsmasq.dnsmasq.DNSMasq.setConfigPath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.baselib.dnsmasq">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.dnsmasq" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -64,12 +116,18 @@
   <ul>
 <li><a class="reference internal" href="#">JumpScale.baselib.dnsmasq package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#jumpscale-baselib-dnsmasq-dnsmasq-module">JumpScale.baselib.dnsmasq.dnsmasq module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.dnsmasq.dnsmasq">JumpScale.baselib.dnsmasq.dnsmasq module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.dnsmasq">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.credis.html"
+                        title="previous chapter">JumpScale.baselib.credis package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.elasticsearch.html"
+                        title="next chapter">JumpScale.baselib.elasticsearch package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/API/JumpScale.baselib.dnsmasq.txt"
@@ -98,7 +156,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.elasticsearch.html" title="JumpScale.baselib.elasticsearch package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.credis.html" title="JumpScale.baselib.credis package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

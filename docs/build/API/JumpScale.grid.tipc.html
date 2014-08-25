@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+    <link rel="up" title="JumpScale.grid package" href="JumpScale.grid.html" />
+    <link rel="next" title="JumpScale.grid.tlog package" href="JumpScale.grid.tlog.html" />
+    <link rel="prev" title="JumpScale.grid.socketserver package" href="JumpScale.grid.socketserver.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +35,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.tlog.html" title="JumpScale.grid.tlog package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.socketserver.html" title="JumpScale.grid.socketserver package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.grid.html" accesskey="U">JumpScale.grid package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,17 +60,107 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="jumpscale-grid-tipc-tipcfactory-module">
-<h2>JumpScale.grid.tipc.TipcFactory module<a class="headerlink" href="#jumpscale-grid-tipc-tipcfactory-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.tipc.TipcFactory">
+<span id="jumpscale-grid-tipc-tipcfactory-module"></span><h2>JumpScale.grid.tipc.TipcFactory module<a class="headerlink" href="#module-JumpScale.grid.tipc.TipcFactory" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.tipc.TipcFactory.TipcFactory">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.tipc.TipcFactory.</tt><tt class="descname">TipcFactory</tt><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcFactory.html#TipcFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcFactory.TipcFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcFactory.TipcFactory.getClient">
+<tt class="descname">getClient</tt><big>(</big><em>servaddr</em>, <em>category='core'</em>, <em>org='myorg'</em>, <em>user='root'</em>, <em>passwd='passwd'</em>, <em>ssl=False</em>, <em>roles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcFactory.html#TipcFactory.getClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcFactory.TipcFactory.getClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcFactory.TipcFactory.getServer">
+<tt class="descname">getServer</tt><big>(</big><em>servaddr</em>, <em>sslorg=None</em>, <em>ssluser=None</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcFactory.html#TipcFactory.getServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcFactory.TipcFactory.getServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>HOW TO USE:
+daemon=j.servers.tornado.getServer(port=4444)</p>
+<dl class="docutils">
+<dt>class MyCommands():</dt>
+<dd><dl class="first docutils">
+<dt>def __init__(self,daemon):</dt>
+<dd>self.daemon=daemon</dd>
+</dl>
+<p>#session always needs to be there
+def pingcmd(self,session=session):</p>
+<blockquote>
+<div>return &#8220;pong&#8221;</div></blockquote>
+<dl class="last docutils">
+<dt>def echo(self,msg=&#8221;&#8221;,session=session):</dt>
+<dd>return msg</dd>
+</dl>
+</dd>
+</dl>
+<p>daemon.addCMDsInterface(MyCommands,category=&#8221;optional&#8221;)  #pass as class not as object !!! chose category if only 1 then can leave &#8220;&#8221;</p>
+<p>daemon.start()</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-tipc-tipcserver-module">
-<h2>JumpScale.grid.tipc.TipcServer module<a class="headerlink" href="#jumpscale-grid-tipc-tipcserver-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.tipc.TipcServer">
+<span id="jumpscale-grid-tipc-tipcserver-module"></span><h2>JumpScale.grid.tipc.TipcServer module<a class="headerlink" href="#module-JumpScale.grid.tipc.TipcServer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.tipc.TipcServer.TipcServer">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.tipc.TipcServer.</tt><tt class="descname">TipcServer</tt><big>(</big><em>servaddr</em>, <em>sslorg=None</em>, <em>ssluser=None</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcServer.html#TipcServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcServer.TipcServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcServer.TipcServer.addCMDsInterface">
+<tt class="descname">addCMDsInterface</tt><big>(</big><em>MyCommands</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcServer.html#TipcServer.addCMDsInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcServer.TipcServer.addCMDsInterface" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcServer.TipcServer.handleData">
+<tt class="descname">handleData</tt><big>(</big><em>data</em>, <em>addr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcServer.html#TipcServer.handleData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcServer.TipcServer.handleData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcServer.TipcServer.start">
+<tt class="descname">start</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcServer.html#TipcServer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcServer.TipcServer.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-tipc-tipctransport-module">
-<h2>JumpScale.grid.tipc.TipcTransport module<a class="headerlink" href="#jumpscale-grid-tipc-tipctransport-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.tipc.TipcTransport">
+<span id="jumpscale-grid-tipc-tipctransport-module"></span><h2>JumpScale.grid.tipc.TipcTransport module<a class="headerlink" href="#module-JumpScale.grid.tipc.TipcTransport" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.tipc.TipcTransport.TipcTransport">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.tipc.TipcTransport.</tt><tt class="descname">TipcTransport</tt><big>(</big><em>servaddr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcTransport.html#TipcTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcTransport.TipcTransport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.DaemonClient.Transport" title="JumpScale.grid.serverbase.DaemonClient.Transport"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.grid.serverbase.DaemonClient.Transport</span></tt></a></p>
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcTransport.TipcTransport.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcTransport.html#TipcTransport.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcTransport.TipcTransport.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>close the connection (reset all required)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcTransport.TipcTransport.connect">
+<tt class="descname">connect</tt><big>(</big><em>sessionid=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcTransport.html#TipcTransport.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcTransport.TipcTransport.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>everwrite this method in implementation to init your connection to server (the transport layer)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.tipc.TipcTransport.TipcTransport.sendMsg">
+<tt class="descname">sendMsg</tt><big>(</big><em>category</em>, <em>cmd</em>, <em>data</em>, <em>sendformat=''</em>, <em>returnformat=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/tipc/TipcTransport.html#TipcTransport.sendMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.tipc.TipcTransport.TipcTransport.sendMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>overwrite this class in implementation to send &amp; retrieve info from the server (implement the transport layer)</p>
+<dl class="docutils">
+<dt>&#64;return (resultcode,returnformat,result)</dt>
+<dd>item 0=cmd, item 1=returnformat (str), item 2=args (dict)</dd>
+<dt>resultcode</dt>
+<dd>0=ok
+1= not authenticated
+2= method not found
+2+ any other error</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.tipc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.grid.tipc" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -70,14 +174,20 @@
   <ul>
 <li><a class="reference internal" href="#">JumpScale.grid.tipc package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-tipc-tipcfactory-module">JumpScale.grid.tipc.TipcFactory module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-tipc-tipcserver-module">JumpScale.grid.tipc.TipcServer module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-tipc-tipctransport-module">JumpScale.grid.tipc.TipcTransport module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.tipc.TipcFactory">JumpScale.grid.tipc.TipcFactory module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.tipc.TipcServer">JumpScale.grid.tipc.TipcServer module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.tipc.TipcTransport">JumpScale.grid.tipc.TipcTransport module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.tipc">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JumpScale.grid.socketserver.html"
+                        title="previous chapter">JumpScale.grid.socketserver package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScale.grid.tlog.html"
+                        title="next chapter">JumpScale.grid.tlog package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/API/JumpScale.grid.tipc.txt"
@@ -106,7 +216,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.tlog.html" title="JumpScale.grid.tlog package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.socketserver.html" title="JumpScale.grid.socketserver package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.grid.html" >JumpScale.grid package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

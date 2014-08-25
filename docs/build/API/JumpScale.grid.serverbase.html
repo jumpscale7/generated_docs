@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+    <link rel="up" title="JumpScale.grid package" href="JumpScale.grid.html" />
+    <link rel="next" title="JumpScale.grid.socketserver package" href="JumpScale.grid.socketserver.html" />
+    <link rel="prev" title="JumpScale.grid.processmanager package" href="JumpScale.grid.processmanager.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +35,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.socketserver.html" title="JumpScale.grid.socketserver package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.processmanager.html" title="JumpScale.grid.processmanager package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.grid.html" accesskey="U">JumpScale.grid package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,26 +60,333 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="jumpscale-grid-serverbase-daemon-module">
-<h2>JumpScale.grid.serverbase.Daemon module<a class="headerlink" href="#jumpscale-grid-serverbase-daemon-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.Daemon">
+<span id="jumpscale-grid-serverbase-daemon-module"></span><h2>JumpScale.grid.serverbase.Daemon module<a class="headerlink" href="#module-JumpScale.grid.serverbase.Daemon" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.Daemon.</tt><tt class="descname">Daemon</tt><big>(</big><em>name=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.addCMDsInterface">
+<tt class="descname">addCMDsInterface</tt><big>(</big><em>cmdInterfaceClass</em>, <em>category</em>, <em>proxy=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.addCMDsInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.addCMDsInterface" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.decrypt">
+<tt class="descname">decrypt</tt><big>(</big><em>message</em>, <em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.decrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.encrypt">
+<tt class="descname">encrypt</tt><big>(</big><em>message</em>, <em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.encrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.getTime">
+<tt class="descname">getTime</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.getTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.getTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.processRPC">
+<tt class="descname">processRPC</tt><big>(</big><em>cmd</em>, <em>data</em>, <em>returnformat</em>, <em>session</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.processRPC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.processRPC" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;return (resultcode,returnformat,result)</dt>
+<dd>item 0=cmd, item 1=returnformat (str), item 2=args (dict)</dd>
+<dt>resultcode</dt>
+<dd>0=ok
+1= not authenticated
+2= method not found
+2+ any other error</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.Daemon.processRPCUnSerialized">
+<tt class="descname">processRPCUnSerialized</tt><big>(</big><em>cmd</em>, <em>informat</em>, <em>returnformat</em>, <em>data</em>, <em>sessionid</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Daemon.processRPCUnSerialized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Daemon.processRPCUnSerialized" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&#64;return (resultcode,returnformat,result)</dt>
+<dd>item 0=cmd, item 1=returnformat (str), item 2=args (dict)</dd>
+<dt>resultcode</dt>
+<dd>0=ok
+1= not authenticated
+2= method not found
+2+ any other error</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.Daemon.</tt><tt class="descname">DaemonCMDS</tt><big>(</big><em>daemon</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.authenticate">
+<tt class="descname">authenticate</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.getpubkeyserver">
+<tt class="descname">getpubkeyserver</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.getpubkeyserver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.getpubkeyserver" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.introspect">
+<tt class="descname">introspect</tt><big>(</big><em>cat</em>, <em>session=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.introspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.introspect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.listCategories">
+<tt class="descname">listCategories</tt><big>(</big><em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.listCategories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.logeco">
+<tt class="descname">logeco</tt><big>(</big><em>eco</em>, <em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.logeco"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.logeco" title="Permalink to this definition">¶</a></dt>
+<dd><p>log eco object (as dict)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.registerpubkey">
+<tt class="descname">registerpubkey</tt><big>(</big><em>organization</em>, <em>user</em>, <em>pubkey</em>, <em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.registerpubkey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.registerpubkey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.Daemon.DaemonCMDS.registersession">
+<tt class="descname">registersession</tt><big>(</big><em>sessiondata</em>, <em>ssl</em>, <em>session</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#DaemonCMDS.registersession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.DaemonCMDS.registersession" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param sessiondata is encrypted data (SSL)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.Daemon.Session">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.Daemon.</tt><tt class="descname">Session</tt><big>(</big><em>ddict</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Daemon.html#Session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Daemon.Session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-serverbase-daemonclient-module">
-<h2>JumpScale.grid.serverbase.DaemonClient module<a class="headerlink" href="#jumpscale-grid-serverbase-daemonclient-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.DaemonClient">
+<span id="jumpscale-grid-serverbase-daemonclient-module"></span><h2>JumpScale.grid.serverbase.DaemonClient module<a class="headerlink" href="#module-JumpScale.grid.serverbase.DaemonClient" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.DaemonClient.</tt><tt class="descname">DaemonClient</tt><big>(</big><em>org='myorg'</em>, <em>user='root'</em>, <em>passwd='passwd'</em>, <em>ssl=False</em>, <em>encrkey=''</em>, <em>reset=False</em>, <em>roles=</em>, <span class="optional">[</span><span class="optional">]</span><em>transport=None</em>, <em>defaultSerialization='m'</em>, <em>id=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.decrypt">
+<tt class="descname">decrypt</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.decrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.encrypt">
+<tt class="descname">encrypt</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.encrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.getCmdClient">
+<tt class="descname">getCmdClient</tt><big>(</big><em>category</em>, <em>sendformat='m'</em>, <em>returnformat='m'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.getCmdClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.getCmdClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.initSession">
+<tt class="descname">initSession</tt><big>(</big><em>reset=False</em>, <em>ssl=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.initSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.initSession" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.perftest">
+<tt class="descname">perftest</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.perftest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.perftest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.sendMsgOverCMDChannel">
+<tt class="descname">sendMsgOverCMDChannel</tt><big>(</big><em>cmd</em>, <em>data</em>, <em>sendformat=None</em>, <em>returnformat=None</em>, <em>retry=0</em>, <em>maxretry=2</em>, <em>category=None</em>, <em>transporttimeout=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.sendMsgOverCMDChannel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.sendMsgOverCMDChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>cmd is command on server (is asci text)
+data is any to be serialized data</p>
+<p>formatstring is right order of formats e.g. mc means messagepack &amp; then compress
+formats see: j.db.serializers.get(?</p>
+<p>return is always multipart message [$resultcode(0=no error,1=autherror),$formatstr,$data]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.DaemonClient.sendcmd">
+<tt class="descname">sendcmd</tt><big>(</big><em>cmd</em>, <em>sendformat=None</em>, <em>returnformat=None</em>, <em>category=None</em>, <em>transporttimeout=5</em>, <em>**args</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#DaemonClient.sendcmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.DaemonClient.sendcmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>formatstring is right order of formats e.g. mc means messagepack &amp; then compress
+formats see: j.db.serializers.get(?</p>
+<p>return is the deserialized data object</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.DaemonClient.Session">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.DaemonClient.</tt><tt class="descname">Session</tt><big>(</big><em>id</em>, <em>organization</em>, <em>user</em>, <em>passwd</em>, <em>encrkey</em>, <em>netinfo</em>, <em>roles</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#Session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.Session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.DaemonClient.SimpleClient">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.DaemonClient.</tt><tt class="descname">SimpleClient</tt><big>(</big><em>client</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#SimpleClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.SimpleClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.DaemonClient.Transport">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.DaemonClient.</tt><tt class="descname">Transport</tt><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#Transport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.Transport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.Transport.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#Transport.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.Transport.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>close the connection (reset all required)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.Transport.connect">
+<tt class="descname">connect</tt><big>(</big><em>sessionid=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#Transport.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.Transport.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>everwrite this method in implementation to init your connection to server (the transport layer)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.DaemonClient.Transport.sendMsg">
+<tt class="descname">sendMsg</tt><big>(</big><em>category</em>, <em>cmd</em>, <em>data</em>, <em>sendformat='m'</em>, <em>returnformat='m'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/DaemonClient.html#Transport.sendMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.DaemonClient.Transport.sendMsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>overwrite this class in implementation to send &amp; retrieve info from the server (implement the transport layer)</p>
+<dl class="docutils">
+<dt>&#64;return (resultcode,returnformat,result)</dt>
+<dd>item 0=cmd, item 1=returnformat (str), item 2=args (dict)</dd>
+<dt>resultcode</dt>
+<dd>0=ok
+1= not authenticated
+2= method not found
+2+ any other error</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-serverbase-exceptions-module">
-<h2>JumpScale.grid.serverbase.Exceptions module<a class="headerlink" href="#jumpscale-grid-serverbase-exceptions-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.Exceptions">
+<span id="jumpscale-grid-serverbase-exceptions-module"></span><h2>JumpScale.grid.serverbase.Exceptions module<a class="headerlink" href="#module-JumpScale.grid.serverbase.Exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="JumpScale.grid.serverbase.Exceptions.AuthenticationError">
+<em class="property">exception </em><tt class="descclassname">JumpScale.grid.serverbase.Exceptions.</tt><tt class="descname">AuthenticationError</tt><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Exceptions.html#AuthenticationError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Exceptions.AuthenticationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.grid.serverbase.Exceptions.MethodNotFoundException">
+<em class="property">exception </em><tt class="descclassname">JumpScale.grid.serverbase.Exceptions.</tt><tt class="descname">MethodNotFoundException</tt><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/Exceptions.html#MethodNotFoundException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.Exceptions.MethodNotFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+</dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-serverbase-serverbasefactory-module">
-<h2>JumpScale.grid.serverbase.ServerBaseFactory module<a class="headerlink" href="#jumpscale-grid-serverbase-serverbasefactory-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.ServerBaseFactory">
+<span id="jumpscale-grid-serverbase-serverbasefactory-module"></span><h2>JumpScale.grid.serverbase.ServerBaseFactory module<a class="headerlink" href="#module-JumpScale.grid.serverbase.ServerBaseFactory" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.ServerBaseFactory.</tt><tt class="descname">ServerBaseFactory</tt><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/ServerBaseFactory.html#ServerBaseFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.getDaemon">
+<tt class="descname">getDaemon</tt><big>(</big><em>name='unknown'</em>, <em>sslorg=None</em>, <em>ssluser=None</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/ServerBaseFactory.html#ServerBaseFactory.getDaemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.getDaemon" title="Permalink to this definition">¶</a></dt>
+<dd><p>is the basis for every daemon we create which can be exposed over e.g. zmq or sockets or http</p>
+<p>daemon=j.servers.base.getDaemon()</p>
+<dl class="docutils">
+<dt>class MyCommands():</dt>
+<dd><dl class="first last docutils">
+<dt>def __init__(self,daemon):</dt>
+<dd>self.daemon=daemon</dd>
+<dt>#session always needs to be there</dt>
+<dd><dl class="first last docutils">
+<dt>def pingcmd(self,session=session):</dt>
+<dd>return &#8220;pong&#8221;</dd>
+<dt>def echo(self,msg=&#8221;&#8221;,session=session):</dt>
+<dd>return msg</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>daemon.addCMDsInterface(MyCommands,category=&#8221;optional&#8221;)  #pass as class not as object !!! chose category if only 1 then can leave &#8220;&#8221;</p>
+<p>#now you need to pass this to a protocol server, its not usable by itself</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.getDaemonClientClass">
+<tt class="descname">getDaemonClientClass</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/ServerBaseFactory.html#ServerBaseFactory.getDaemonClientClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.getDaemonClientClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>example usage, see example for server at self.getDaemon (implement transport still)</p>
+<p>DaemonClientClass=j.servers.base.getDaemonClientClass()</p>
+<dl class="docutils">
+<dt>myClient(DaemonClientClass):</dt>
+<dd><dl class="first last docutils">
+<dt>def __init__(self,ipaddr=&#8221;127.0.0.1&#8221;,port=5651,org=&#8221;myorg&#8221;,user=&#8221;root&#8221;,passwd=&#8221;1234&#8221;,ssl=False,roles=[]):</dt>
+<dd>self.init(org=org,user=user,passwd=passwd,ssl=ssl,roles=roles)</dd>
+<dt>def _connect(self):</dt>
+<dd>#everwrite this method in implementation to init your connection to server (the transport layer)
+pass</dd>
+<dt>def _close(self):</dt>
+<dd>#close the connection (reset all required)
+pass</dd>
+<dt>def _sendMsg(self, cmd,data,sendformat=&#8221;m&#8221;,returnformat=&#8221;m&#8221;):</dt>
+<dd>#overwrite this class in implementation to send &amp; retrieve info from the server (implement the transport layer)
+<a class="reference external" href="mailto:#&#37;&#52;&#48;return">#<span>&#64;</span>return</a> (resultcode,returnformat,result)
+#item 0=cmd, item 1=returnformat (str), item 2=args (dict)
+#resultcode
+#    0=ok
+#    1= not authenticated
+#    2= method not found
+#    2+ any other error
+pass
+#send message, retry if needed, retrieve message</dd>
+</dl>
+</dd>
+</dl>
+<p>client=myClient()
+print client.echo(&#8220;atest&#8221;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.initSSL4Server">
+<tt class="descname">initSSL4Server</tt><big>(</big><em>organization</em>, <em>serveruser</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/ServerBaseFactory.html#ServerBaseFactory.initSSL4Server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.ServerBaseFactory.ServerBaseFactory.initSSL4Server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-serverbase-tcphatransport-module">
-<h2>JumpScale.grid.serverbase.TCPHATransport module<a class="headerlink" href="#jumpscale-grid-serverbase-tcphatransport-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.TCPHATransport">
+<span id="jumpscale-grid-serverbase-tcphatransport-module"></span><h2>JumpScale.grid.serverbase.TCPHATransport module<a class="headerlink" href="#module-JumpScale.grid.serverbase.TCPHATransport" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.grid.serverbase.TCPHATransport.TCPHATransport">
+<em class="property">class </em><tt class="descclassname">JumpScale.grid.serverbase.TCPHATransport.</tt><tt class="descname">TCPHATransport</tt><big>(</big><em>connections</em>, <em>clientclass</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/TCPHATransport.html#TCPHATransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.TCPHATransport.TCPHATransport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#JumpScale.grid.serverbase.DaemonClient.Transport" title="JumpScale.grid.serverbase.DaemonClient.Transport"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.grid.serverbase.DaemonClient.Transport</span></tt></a></p>
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/TCPHATransport.html#TCPHATransport.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.connect">
+<tt class="descname">connect</tt><big>(</big><em>sessionid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/TCPHATransport.html#TCPHATransport.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.sendMsg">
+<tt class="descname">sendMsg</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/TCPHATransport.html#TCPHATransport.sendMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.TCPHATransport.TCPHATransport.sendMsg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="JumpScale.grid.serverbase.TCPHATransport.retry">
+<tt class="descclassname">JumpScale.grid.serverbase.TCPHATransport.</tt><tt class="descname">retry</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/serverbase/TCPHATransport.html#retry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.serverbase.TCPHATransport.retry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="jumpscale-grid-serverbase-returncodes-module">
-<h2>JumpScale.grid.serverbase.returnCodes module<a class="headerlink" href="#jumpscale-grid-serverbase-returncodes-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase.returnCodes">
+<span id="jumpscale-grid-serverbase-returncodes-module"></span><h2>JumpScale.grid.serverbase.returnCodes module<a class="headerlink" href="#module-JumpScale.grid.serverbase.returnCodes" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.grid.serverbase">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.grid.serverbase" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -79,17 +400,23 @@
   <ul>
 <li><a class="reference internal" href="#">JumpScale.grid.serverbase package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-daemon-module">JumpScale.grid.serverbase.Daemon module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-daemonclient-module">JumpScale.grid.serverbase.DaemonClient module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-exceptions-module">JumpScale.grid.serverbase.Exceptions module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-serverbasefactory-module">JumpScale.grid.serverbase.ServerBaseFactory module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-tcphatransport-module">JumpScale.grid.serverbase.TCPHATransport module</a></li>
-<li><a class="reference internal" href="#jumpscale-grid-serverbase-returncodes-module">JumpScale.grid.serverbase.returnCodes module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.Daemon">JumpScale.grid.serverbase.Daemon module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.DaemonClient">JumpScale.grid.serverbase.DaemonClient module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.Exceptions">JumpScale.grid.serverbase.Exceptions module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.ServerBaseFactory">JumpScale.grid.serverbase.ServerBaseFactory module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.TCPHATransport">JumpScale.grid.serverbase.TCPHATransport module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase.returnCodes">JumpScale.grid.serverbase.returnCodes module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.grid.serverbase">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JumpScale.grid.processmanager.html"
+                        title="previous chapter">JumpScale.grid.processmanager package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScale.grid.socketserver.html"
+                        title="next chapter">JumpScale.grid.socketserver package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/API/JumpScale.grid.serverbase.txt"
@@ -118,7 +445,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.socketserver.html" title="JumpScale.grid.socketserver package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.grid.processmanager.html" title="JumpScale.grid.processmanager package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.grid.html" >JumpScale.grid package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

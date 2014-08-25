@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+    <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+    <link rel="next" title="JumpScale.baselib.testengine package" href="JumpScale.baselib.testengine.html" />
+    <link rel="prev" title="JumpScale.baselib.tags package" href="JumpScale.baselib.tags.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +35,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.testengine.html" title="JumpScale.baselib.testengine package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.tags.html" title="JumpScale.baselib.tags package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,11 +60,109 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="jumpscale-baselib-taskletengine-taskletengine-module">
-<h2>JumpScale.baselib.taskletengine.TaskletEngine module<a class="headerlink" href="#jumpscale-baselib-taskletengine-taskletengine-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.baselib.taskletengine.TaskletEngine">
+<span id="jumpscale-baselib-taskletengine-taskletengine-module"></span><h2>JumpScale.baselib.taskletengine.TaskletEngine module<a class="headerlink" href="#module-JumpScale.baselib.taskletengine.TaskletEngine" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.InvalidTaskletFunction">
+<em class="property">exception </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">InvalidTaskletFunction</tt><big>(</big><em>name</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#InvalidTaskletFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.InvalidTaskletFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.RuntimeError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.RuntimeError</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.InvalidTaskletName">
+<em class="property">exception </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">InvalidTaskletName</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#InvalidTaskletName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.InvalidTaskletName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.ValueError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.ValueError</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.Tasklet">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">Tasklet</tt><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#Tasklet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.Tasklet" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecute">
+<tt class="descname">checkExecute</tt><big>(</big><em>q</em>, <em>i</em>, <em>params</em>, <em>service</em>, <em>tags</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#Tasklet.checkExecute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecute4method">
+<tt class="descname">checkExecute4method</tt><big>(</big><em>args={}</em>, <em>params={}</em>, <em>actor=None</em>, <em>tags=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#Tasklet.checkExecute4method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecute4method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecuteV2">
+<tt class="descname">checkExecuteV2</tt><big>(</big><em>args</em>, <em>params</em>, <em>tags</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#Tasklet.checkExecuteV2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.Tasklet.checkExecuteV2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">TaskletEngine</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.execute">
+<tt class="descname">execute</tt><big>(</big><em>params</em>, <em>service=None</em>, <em>tags=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngine.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param params is params object like from j.core.params.get() or a dict
+&#64;param service is an object which want to give to the tasklets, it will also be called service there</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.execute4method">
+<tt class="descname">execute4method</tt><big>(</big><em>args={}</em>, <em>params={}</em>, <em>actor=None</em>, <em>tags=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngine.execute4method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.execute4method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.executeV2">
+<tt class="descname">executeV2</tt><big>(</big><em>**args</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngine.executeV2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngine.executeV2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">TaskletEngineFactory</tt><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory.get">
+<tt class="descname">get</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineFactory.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory.getGroup">
+<tt class="descname">getGroup</tt><big>(</big><em>path=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineFactory.getGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineFactory.getGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>tasklets are grouped per subdir of directory, each name of subdir will become a taskletengine</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.taskletengine.TaskletEngine.</tt><tt class="descname">TaskletEngineGroup</tt><big>(</big><em>path=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.addTasklets">
+<tt class="descname">addTasklets</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineGroup.addTasklets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.addTasklets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.execute">
+<tt class="descname">execute</tt><big>(</big><em>groupname</em>, <em>params</em>, <em>service=None</em>, <em>tags=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineGroup.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param groupname always needs to be lowercase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.executeV2">
+<tt class="descname">executeV2</tt><big>(</big><em>groupname</em>, <em>**args</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineGroup.executeV2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.executeV2" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param groupname always needs to be lowercase</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.hasGroup">
+<tt class="descname">hasGroup</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/taskletengine/TaskletEngine.html#TaskletEngineGroup.hasGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.taskletengine.TaskletEngine.TaskletEngineGroup.hasGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param name always needs to be lowercase</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.baselib.taskletengine">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.taskletengine" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -64,12 +176,18 @@
   <ul>
 <li><a class="reference internal" href="#">JumpScale.baselib.taskletengine package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#jumpscale-baselib-taskletengine-taskletengine-module">JumpScale.baselib.taskletengine.TaskletEngine module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.taskletengine.TaskletEngine">JumpScale.baselib.taskletengine.TaskletEngine module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.taskletengine">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.tags.html"
+                        title="previous chapter">JumpScale.baselib.tags package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.testengine.html"
+                        title="next chapter">JumpScale.baselib.testengine package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/API/JumpScale.baselib.taskletengine.txt"
@@ -98,7 +216,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.testengine.html" title="JumpScale.baselib.testengine package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.tags.html" title="JumpScale.baselib.tags package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
