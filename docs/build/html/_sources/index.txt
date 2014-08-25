@@ -45,7 +45,7 @@ JumpScale API
    :maxdepth: 3
    :glob:
 
-   API/modules
+   API/JumpScale
 
 
 JumpScale Development
