@@ -32,9 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,74 +46,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.netconfig.Netconfig">
-<span id="jumpscale-baselib-netconfig-netconfig-module"></span><h2>JumpScale.baselib.netconfig.Netconfig module<a class="headerlink" href="#module-JumpScale.baselib.netconfig.Netconfig" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig">
-<em class="property">class </em><tt class="descclassname">JumpScale.baselib.netconfig.Netconfig.</tt><tt class="descname">Netconfig</tt><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.addIpToInterface">
-<tt class="descname">addIpToInterface</tt><big>(</big><em>dev</em>, <em>ipaddr</em>, <em>aliasnr=1</em>, <em>start=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.addIpToInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.addIpToInterface" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterface">
-<tt class="descname">enableInterface</tt><big>(</big><em>dev='eth0'</em>, <em>start=False</em>, <em>dhcp=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.enableInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterface" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeDhcp">
-<tt class="descname">enableInterfaceBridgeDhcp</tt><big>(</big><em>dev</em>, <em>bridgedev</em>, <em>start=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.enableInterfaceBridgeDhcp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeDhcp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeStatic">
-<tt class="descname">enableInterfaceBridgeStatic</tt><big>(</big><em>dev</em>, <em>ipaddr=None</em>, <em>bridgedev=None</em>, <em>gw=None</em>, <em>start=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.enableInterfaceBridgeStatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeStatic" title="Permalink to this definition">¶</a></dt>
-<dd><p>ipaddr in form of 192.168.10.2/24 (can be list)
-gateway in form of 192.168.10.254</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceStatic">
-<tt class="descname">enableInterfaceStatic</tt><big>(</big><em>dev</em>, <em>ipaddr</em>, <em>gw=None</em>, <em>start=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.enableInterfaceStatic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceStatic" title="Permalink to this definition">¶</a></dt>
-<dd><p>ipaddr in form of 192.168.10.2/24 (can be list)
-gateway in form of 192.168.10.254</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.remove">
-<tt class="descname">remove</tt><big>(</big><em>dev</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.remove" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.reset">
-<tt class="descname">reset</tt><big>(</big><em>shutdown=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>empty config of /etc/network/interfaces</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.setNameserver">
-<tt class="descname">setNameserver</tt><big>(</big><em>addr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.setNameserver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.setNameserver" title="Permalink to this definition">¶</a></dt>
-<dd><p>resolvconf will be disabled</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.setRoot">
-<tt class="descname">setRoot</tt><big>(</big><em>root</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.setRoot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.setRoot" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.netconfig.Netconfig.Netconfig.shutdownNetwork">
-<tt class="descname">shutdownNetwork</tt><big>(</big><em>excludes=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/netconfig/Netconfig.html#Netconfig.shutdownNetwork"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.netconfig.Netconfig.Netconfig.shutdownNetwork" title="Permalink to this definition">¶</a></dt>
-<dd><p>find all interfaces and shut them all down with ifdown
-this is to remove all networking things going on</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="jumpscale-baselib-netconfig-netconfig-module">
+<h2>JumpScale.baselib.netconfig.Netconfig module<a class="headerlink" href="#jumpscale-baselib-netconfig-netconfig-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.netconfig">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.netconfig" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -130,8 +64,8 @@ this is to remove all networking things going on</p>
   <ul>
 <li><a class="reference internal" href="#">JumpScale.baselib.netconfig package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.netconfig.Netconfig">JumpScale.baselib.netconfig.Netconfig module</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.netconfig">Module contents</a></li>
+<li><a class="reference internal" href="#jumpscale-baselib-netconfig-netconfig-module">JumpScale.baselib.netconfig.Netconfig module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -164,9 +98,6 @@ this is to remove all networking things going on</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

@@ -32,9 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,58 +46,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.lib.btrfs.BtrfsExtension">
-<span id="jumpscale-lib-btrfs-btrfsextension-module"></span><h2>JumpScale.lib.btrfs.BtrfsExtension module<a class="headerlink" href="#module-JumpScale.lib.btrfs.BtrfsExtension" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension">
-<em class="property">class </em><tt class="descclassname">JumpScale.lib.btrfs.BtrfsExtension.</tt><tt class="descname">BtrfsExtension</tt><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.deviceAdd">
-<tt class="descname">deviceAdd</tt><big>(</big><em>path</em>, <em>dev</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.deviceAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.deviceAdd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a device to a filesystem.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.deviceDelete">
-<tt class="descname">deviceDelete</tt><big>(</big><em>dev</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.deviceDelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.deviceDelete" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove a device from a filesystem.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.getSpaceUsage">
-<tt class="descname">getSpaceUsage</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.getSpaceUsage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.getSpaceUsage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.snapshotReadOnlyCreate">
-<tt class="descname">snapshotReadOnlyCreate</tt><big>(</big><em>path</em>, <em>dest</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.snapshotReadOnlyCreate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.snapshotReadOnlyCreate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a readonly snapshot</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeCreate">
-<tt class="descname">subvolumeCreate</tt><big>(</big><em>path</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.subvolumeCreate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeCreate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a subvolume in &lt;dest&gt; (or the current directory if not passed).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeDelete">
-<tt class="descname">subvolumeDelete</tt><big>(</big><em>path</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.subvolumeDelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeDelete" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delete the subvolume &lt;name&gt;.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeList">
-<tt class="descname">subvolumeList</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/btrfs/BtrfsExtension.html#BtrfsExtension.subvolumeList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.btrfs.BtrfsExtension.BtrfsExtension.subvolumeList" title="Permalink to this definition">¶</a></dt>
-<dd><p>List the snapshot/subvolume of a filesystem.</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="jumpscale-lib-btrfs-btrfsextension-module">
+<h2>JumpScale.lib.btrfs.BtrfsExtension module<a class="headerlink" href="#jumpscale-lib-btrfs-btrfsextension-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.lib.btrfs">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.btrfs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -114,8 +64,8 @@
   <ul>
 <li><a class="reference internal" href="#">JumpScale.lib.btrfs package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-JumpScale.lib.btrfs.BtrfsExtension">JumpScale.lib.btrfs.BtrfsExtension module</a></li>
-<li><a class="reference internal" href="#module-JumpScale.lib.btrfs">Module contents</a></li>
+<li><a class="reference internal" href="#jumpscale-lib-btrfs-btrfsextension-module">JumpScale.lib.btrfs.BtrfsExtension module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -148,9 +98,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

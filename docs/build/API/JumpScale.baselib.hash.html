@@ -32,9 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,186 +46,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.hash.HashTool">
-<span id="jumpscale-baselib-hash-hashtool-module"></span><h2>JumpScale.baselib.hash.HashTool module<a class="headerlink" href="#module-JumpScale.baselib.hash.HashTool" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.md5">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">md5</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.md5" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of input string</p>
-<p>&#64;param s: String value to hash
-&#64;type s: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of the input value
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.md5_fd">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">md5_fd</tt><big>(</big><em>fd</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.md5_fd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of content available on an FD</p>
-<p>Blocks of the blocksize used by the hashing algorithm will be read from
-the given FD, which should be a file-like object (i.e. it should
-implement C{read(number)}).</p>
-<p>&#64;param fd: FD to read
-&#64;type fd: object</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available on C{fd}
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.md5_file">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">md5_file</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.md5_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of data available in a file</p>
-<p>The file will be opened in read/binary mode and blocks of the blocksize
-used by the hashing implementation will be read.</p>
-<p>&#64;param path: Path to file to calculate content hash
-&#64;type path: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available in the given file
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha1">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha1</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of input string</p>
-<p>&#64;param s: String value to hash
-&#64;type s: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of the input value
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha1_fd">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha1_fd</tt><big>(</big><em>fd</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha1_fd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of content available on an FD</p>
-<p>Blocks of the blocksize used by the hashing algorithm will be read from
-the given FD, which should be a file-like object (i.e. it should
-implement C{read(number)}).</p>
-<p>&#64;param fd: FD to read
-&#64;type fd: object</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available on C{fd}
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha1_file">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha1_file</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha1_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of data available in a file</p>
-<p>The file will be opened in read/binary mode and blocks of the blocksize
-used by the hashing implementation will be read.</p>
-<p>&#64;param path: Path to file to calculate content hash
-&#64;type path: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available in the given file
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha256">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha256</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha256" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of input string</p>
-<p>&#64;param s: String value to hash
-&#64;type s: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of the input value
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha256_fd">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha256_fd</tt><big>(</big><em>fd</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha256_fd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of content available on an FD</p>
-<p>Blocks of the blocksize used by the hashing algorithm will be read from
-the given FD, which should be a file-like object (i.e. it should
-implement C{read(number)}).</p>
-<p>&#64;param fd: FD to read
-&#64;type fd: object</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available on C{fd}
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha256_file">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha256_file</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha256_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of data available in a file</p>
-<p>The file will be opened in read/binary mode and blocks of the blocksize
-used by the hashing implementation will be read.</p>
-<p>&#64;param path: Path to file to calculate content hash
-&#64;type path: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available in the given file
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha512">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha512</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha512" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of input string</p>
-<p>&#64;param s: String value to hash
-&#64;type s: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of the input value
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha512_fd">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha512_fd</tt><big>(</big><em>fd</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha512_fd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of content available on an FD</p>
-<p>Blocks of the blocksize used by the hashing algorithm will be read from
-the given FD, which should be a file-like object (i.e. it should
-implement C{read(number)}).</p>
-<p>&#64;param fd: FD to read
-&#64;type fd: object</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available on C{fd}
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.sha512_file">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">sha512_file</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.sha512_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate %(alg)s hash of data available in a file</p>
-<p>The file will be opened in read/binary mode and blocks of the blocksize
-used by the hashing implementation will be read.</p>
-<p>&#64;param path: Path to file to calculate content hash
-&#64;type path: string</p>
-<p>&#64;returns: %(alg)s hash hex digest of data available in the given file
-&#64;rtype: string</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.crc32">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">crc32</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/hash/HashTool.html#crc32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.crc32" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate CRC32 hash of input string</p>
-<p>&#64;param s: String value to hash
-&#64;type s: string</p>
-<p>&#64;returns: CRC32 hash of the input value
-&#64;rtype: number</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.crc32_fd">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">crc32_fd</tt><big>(</big><em>fd</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/hash/HashTool.html#crc32_fd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.crc32_fd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate CRC32 hash of content available on an FD</p>
-<p>Blocks of the blocksize used by the hashing algorithm will be read from
-the given FD, which should be a file-like object (i.e. it should
-implement C{read(number)}).</p>
-<p>&#64;param fd: FD to read
-&#64;type fd: object</p>
-<p>&#64;returns: CRC32 hash of data available on C{fd}
-&#64;rtype: number</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="JumpScale.baselib.hash.HashTool.crc32_file">
-<tt class="descclassname">JumpScale.baselib.hash.HashTool.</tt><tt class="descname">crc32_file</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/hash/HashTool.html#crc32_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.hash.HashTool.crc32_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate CRC32 hash of data available in a file</p>
-<p>The file will be opened in read/binary mode and blocks of the blocksize
-used by the hashing implementation will be read.</p>
-<p>&#64;param path: Path to file to calculate content hash
-&#64;type path: string</p>
-<p>&#64;returns: CRC32 hash of data available in the given file
-&#64;rtype: number</p>
-</dd></dl>
-
+<div class="section" id="jumpscale-baselib-hash-hashtool-module">
+<h2>JumpScale.baselib.hash.HashTool module<a class="headerlink" href="#jumpscale-baselib-hash-hashtool-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.hash">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.hash" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -242,8 +64,8 @@ used by the hashing implementation will be read.</p>
   <ul>
 <li><a class="reference internal" href="#">JumpScale.baselib.hash package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.hash.HashTool">JumpScale.baselib.hash.HashTool module</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.hash">Module contents</a></li>
+<li><a class="reference internal" href="#jumpscale-baselib-hash-hashtool-module">JumpScale.baselib.hash.HashTool module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -276,9 +98,6 @@ used by the hashing implementation will be read.</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

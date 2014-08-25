@@ -32,9 +32,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,95 +46,14 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.remote.ssh.SSHClient">
-<span id="jumpscale-baselib-remote-ssh-sshclient-module"></span><h2>JumpScale.baselib.remote.ssh.SSHClient module<a class="headerlink" href="#module-JumpScale.baselib.remote.ssh.SSHClient" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient">
-<em class="property">class </em><tt class="descclassname">JumpScale.baselib.remote.ssh.SSHClient.</tt><tt class="descname">SSHClient</tt><big>(</big><em>host</em>, <em>username</em>, <em>password</em>, <em>timeout</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.client">
-<tt class="descname">client</tt><em class="property"> = None</em><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.client" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.copyDirTree">
-<tt class="descname">copyDirTree</tt><big>(</big><em>source</em>, <em>destination=''</em>, <em>removeNonRelevantFiles=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.copyDirTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.copyDirTree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Recursively copy an entire directory tree rooted at source.
-The destination directory may already exist; if not, it will be created</p>
-<p>Parameters:        
-- source: string (source of directory tree to be copied)
-- destination: string (path directory to be copied to...should not already exist)</p>
-<blockquote>
-<div>if destination no specified will use same location as source</div></blockquote>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.execute">
-<tt class="descname">execute</tt><big>(</big><em>command</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute a command on the SSH server.  A new L{Channel} is opened and
-the requested command is executed.  The command&#8217;s input and output
-streams are returned as python C{file}-like objects representing
-stdin, stdout, and stderr.</p>
-<p>&#64;param command: the command to execute
-&#64;type command: str
-&#64;return: the stdin, stdout, and stderr of the executing command
-&#64;rtype: tuple(L{ChannelFile}, L{ChannelFile}, L{ChannelFile})</p>
-<p>&#64;raise SSHException: if the server fails to execute the command</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.executewait">
-<tt class="descname">executewait</tt><big>(</big><em>command</em>, <em>dieOnError=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.executewait"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.executewait" title="Permalink to this definition">¶</a></dt>
-<dd><p>only works for unix
-Execute a command on the SSH server.  Wait till output done.
-&#64;raise SSHException: if the server fails to execute the command</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.getOutPut">
-<tt class="descname">getOutPut</tt><big>(</big><em>channelFileStdOut</em>, <em>channelFileStdErr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.getOutPut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.getOutPut" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.getSFtpConnection">
-<tt class="descname">getSFtpConnection</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.getSFtpConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.getSFtpConnection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHClient.SSHClient.logSSHToFile">
-<tt class="descname">logSSHToFile</tt><big>(</big><em>logFile</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHClient.html#SSHClient.logSSHToFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHClient.SSHClient.logSSHToFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>send ssh logs to a logfile, if they&#8217;re not already going somewhere</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="jumpscale-baselib-remote-ssh-sshclient-module">
+<h2>JumpScale.baselib.remote.ssh.SSHClient module<a class="headerlink" href="#jumpscale-baselib-remote-ssh-sshclient-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.remote.ssh.SSHTool">
-<span id="jumpscale-baselib-remote-ssh-sshtool-module"></span><h2>JumpScale.baselib.remote.ssh.SSHTool module<a class="headerlink" href="#module-JumpScale.baselib.remote.ssh.SSHTool" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.baselib.remote.ssh.SSHTool.SSHTool">
-<em class="property">class </em><tt class="descclassname">JumpScale.baselib.remote.ssh.SSHTool.</tt><tt class="descname">SSHTool</tt><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHTool.html#SSHTool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHTool.SSHTool" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="JumpScale.baselib.remote.ssh.SSHTool.SSHTool.createClient">
-<tt class="descname">createClient</tt><big>(</big><em>host</em>, <em>username</em>, <em>password</em>, <em>timeout</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/ssh/SSHTool.html#SSHTool.createClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.ssh.SSHTool.SSHTool.createClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new SSHClient instance.</p>
-<p>&#64;param host: Hostname to connect to
-&#64;type host: string
-&#64;param username: Username to connect as
-&#64;type username: string
-&#64;param password: Password to authenticate with
-&#64;type password: string
-&#64;param timeout: Connection timeout
-&#64;type timeout: number</p>
-<p>&#64;return: SSHClient instance
-&#64;rtype: SSHClient</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="jumpscale-baselib-remote-ssh-sshtool-module">
+<h2>JumpScale.baselib.remote.ssh.SSHTool module<a class="headerlink" href="#jumpscale-baselib-remote-ssh-sshtool-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-JumpScale.baselib.remote.ssh">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.remote.ssh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -151,9 +67,9 @@ Execute a command on the SSH server.  Wait till output done.
   <ul>
 <li><a class="reference internal" href="#">JumpScale.baselib.remote.ssh package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.remote.ssh.SSHClient">JumpScale.baselib.remote.ssh.SSHClient module</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.remote.ssh.SSHTool">JumpScale.baselib.remote.ssh.SSHTool module</a></li>
-<li><a class="reference internal" href="#module-JumpScale.baselib.remote.ssh">Module contents</a></li>
+<li><a class="reference internal" href="#jumpscale-baselib-remote-ssh-sshclient-module">JumpScale.baselib.remote.ssh.SSHClient module</a></li>
+<li><a class="reference internal" href="#jumpscale-baselib-remote-ssh-sshtool-module">JumpScale.baselib.remote.ssh.SSHTool module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -186,9 +102,6 @@ Execute a command on the SSH server.  Wait till output done.
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

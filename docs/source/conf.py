@@ -17,18 +17,19 @@ import os
 import sphinx
 # from JumpScale import j
 
-class DummyBuilder(object):
-    def update():
-      pass
+# class DummyBuilder(object):
+#     def update():
+#       pass
 
-    def __call__(self, anotherarg=None,  summary=[]):
-      pass
-
+#     def __call__(self, anotherarg=None,  summary=[]):
+#       pass
+sys.path.append(os.path.abspath('.'))
+from .DummyBuilders import DummyBuilder
 sys.path.append("/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/")
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # if on_rtd:
-#   sphinx.builders.Builder.build = DummyBuilder()
+sphinx.builders.Builder = DummyBuilder
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
