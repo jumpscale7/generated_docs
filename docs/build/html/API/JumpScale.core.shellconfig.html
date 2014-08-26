@@ -62,131 +62,12 @@
 </div>
 <div class="section" id="module-JumpScale.core.shellconfig.ConfigFileManager">
 <span id="jumpscale-core-shellconfig-configfilemanager-module"></span><h2>JumpScale.core.shellconfig.ConfigFileManager module<a class="headerlink" href="#module-JumpScale.core.shellconfig.ConfigFileManager" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager">
-<em class="property">class </em><tt class="descclassname">JumpScale.core.shellconfig.ConfigFileManager.</tt><tt class="descname">ConfigFileManager</tt><big>(</big><em>configType</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.checkParam">
-<tt class="descname">checkParam</tt><big>(</big><em>section</em>, <em>paramName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.checkParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.checkParam" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.chooseSectionInteractive">
-<tt class="descname">chooseSectionInteractive</tt><big>(</big><em>sectionDescription='section'</em>, <em>sort=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.chooseSectionInteractive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.chooseSectionInteractive" title="Permalink to this definition">¶</a></dt>
-<dd><p>multiple choice of section in configtype
-return name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParam">
-<tt class="descname">getParam</tt><big>(</big><em>section</em>, <em>paramName</em>, <em>description=''</em>, <em>defaultValue=''</em>, <em>forceDefaultValue=False</em>, <em>forceAsk=False</em>, <em>password=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.getParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParam" title="Permalink to this definition">¶</a></dt>
-<dd><p>is default configuration management which is personal per user of jumpscale e.g. personal svn connections
-this method allows you to get a parameter, if not found it will interactive ask for that parameter and store it in the apropriate .cfg file in the jumpscale cfg dir</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParamAndFix">
-<tt class="descname">getParamAndFix</tt><big>(</big><em>section</em>, <em>paramname</em>, <em>fixmethod</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.getParamAndFix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParamAndFix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParams">
-<tt class="descname">getParams</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.getParams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getParams" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns all parameter names in the section.</p>
-<p>&#64;param section: section of which the parameter names should be returned
-&#64;type section: string
-&#64;return: list of string names of parameters</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getSections">
-<tt class="descname">getSections</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.getSections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getSections" title="Permalink to this definition">¶</a></dt>
-<dd><p>return array of found sections in config file</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getSetParam">
-<tt class="descname">getSetParam</tt><big>(</big><em>section</em>, <em>paramName</em>, <em>description=''</em>, <em>value=''</em>, <em>default=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.getSetParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.getSetParam" title="Permalink to this definition">¶</a></dt>
-<dd><p>if parameter filled in it will set it, 
-if not filled in</p>
-<blockquote>
-<div>it will read it from config file, 
-if &#8220;&#8221; in configfile it will ask for a value</div></blockquote>
-<p>if you want none in config file mark <em>NONE</em></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.removeSection">
-<tt class="descname">removeSection</tt><big>(</big><em>sectionName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.removeSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.removeSection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.setParam">
-<tt class="descname">setParam</tt><big>(</big><em>section</em>, <em>paramName</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.setParam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.setParam" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.showSection">
-<tt class="descname">showSection</tt><big>(</big><em>section</em>, <em>descr=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.showSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.showSection" title="Permalink to this definition">¶</a></dt>
-<dd><p>show all settings from a specific section</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.validateSectionInteractive">
-<tt class="descname">validateSectionInteractive</tt><big>(</big><em>section</em>, <em>descr=''</em>, <em>confirm=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ConfigFileManager.validateSectionInteractive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ConfigFileManager.validateSectionInteractive" title="Permalink to this definition">¶</a></dt>
-<dd><p>show all settings from a specific section and ask for confirmation if correct, if not ask to change</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="JumpScale.core.shellconfig.ConfigFileManager.ParamDetail">
-<em class="property">class </em><tt class="descclassname">JumpScale.core.shellconfig.ConfigFileManager.</tt><tt class="descname">ParamDetail</tt><big>(</big><em>nr</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ConfigFileManager.html#ParamDetail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ConfigFileManager.ParamDetail" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
-<div class="section" id="jumpscale-core-shellconfig-declarativeconfig-module">
-<h2>JumpScale.core.shellconfig.DeclarativeConfig module<a class="headerlink" href="#jumpscale-core-shellconfig-declarativeconfig-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-JumpScale.core.shellconfig.DeclarativeConfig">
+<span id="jumpscale-core-shellconfig-declarativeconfig-module"></span><h2>JumpScale.core.shellconfig.DeclarativeConfig module<a class="headerlink" href="#module-JumpScale.core.shellconfig.DeclarativeConfig" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-JumpScale.core.shellconfig.ShellConfig">
 <span id="jumpscale-core-shellconfig-shellconfig-module"></span><h2>JumpScale.core.shellconfig.ShellConfig module<a class="headerlink" href="#module-JumpScale.core.shellconfig.ShellConfig" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.core.shellconfig.ShellConfig.Group">
-<em class="property">class </em><tt class="descclassname">JumpScale.core.shellconfig.ShellConfig.</tt><tt class="descname">Group</tt><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.Group" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig">
-<em class="property">class </em><tt class="descclassname">JumpScale.core.shellconfig.ShellConfig.</tt><tt class="descname">ShellConfig</tt><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig" title="Permalink to this definition">¶</a></dt>
-<dd><p>attach configuration items to this configure object (can happen at runtime)</p>
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig.checkCreateConfigFile">
-<tt class="descname">checkCreateConfigFile</tt><big>(</big><em>configType</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig.checkCreateConfigFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig.checkCreateConfigFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>check if config file exists, if not create and reload</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig.getConfigFileManager">
-<tt class="descname">getConfigFileManager</tt><big>(</big><em>configType</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig.getConfigFileManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig.getConfigFileManager" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig.interactive">
-<tt class="descname">interactive</tt><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig.interactive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig.interactive" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig.loadConfigFile">
-<tt class="descname">loadConfigFile</tt><big>(</big><em>configType</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig.loadConfigFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig.loadConfigFile" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.core.shellconfig.ShellConfig.ShellConfig.refresh">
-<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/shellconfig/ShellConfig.html#ShellConfig.refresh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.shellconfig.ShellConfig.ShellConfig.refresh" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.core.shellconfig">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.shellconfig" title="Permalink to this headline">¶</a></h2>
@@ -204,7 +85,7 @@ if &#8220;&#8221; in configfile it will ask for a value</div></blockquote>
 <li><a class="reference internal" href="#">JumpScale.core.shellconfig package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-JumpScale.core.shellconfig.ConfigFileManager">JumpScale.core.shellconfig.ConfigFileManager module</a></li>
-<li><a class="reference internal" href="#jumpscale-core-shellconfig-declarativeconfig-module">JumpScale.core.shellconfig.DeclarativeConfig module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.core.shellconfig.DeclarativeConfig">JumpScale.core.shellconfig.DeclarativeConfig module</a></li>
 <li><a class="reference internal" href="#module-JumpScale.core.shellconfig.ShellConfig">JumpScale.core.shellconfig.ShellConfig module</a></li>
 <li><a class="reference internal" href="#module-JumpScale.core.shellconfig">Module contents</a></li>
 </ul>

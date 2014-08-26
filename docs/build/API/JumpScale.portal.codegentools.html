@@ -62,279 +62,30 @@
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGenerator">
 <span id="jumpscale-portal-codegentools-codegenerator-module"></span><h2>JumpScale.portal.codegentools.CodeGenerator module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGenerator" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGenerator.</tt><tt class="descname">CodeGenerator</tt><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.generate">
-<tt class="descname">generate</tt><big>(</big><em>spec</em>, <em>type</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>appserverclient=None</em>, <em>instance=0</em>, <em>redis=False</em>, <em>wsclient=None</em>, <em>codepath=None</em>, <em>classpath=None</em>, <em>returnClass=True</em>, <em>args={}</em>, <em>makeCopy=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.generate" title="Permalink to this definition">¶</a></dt>
-<dd><p>param: spec is spec we want to generate from
-param: type JSModel,actormethodgreenlet,enumeration,actorlocal
-param: typecheck (means in generated code the types will be checked)
-param: dieInGenCode  if true means in generated code we will die when something uneforeseen happens
-return: dict of classes if more than 1 otherwise just the class</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getActorClass">
-<tt class="descname">getActorClass</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getActorClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getActorClass" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassActorLocal">
-<tt class="descname">getClassActorLocal</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getClassActorLocal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassActorLocal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassActorRemote">
-<tt class="descname">getClassActorRemote</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>instance=0</em>, <em>redis=False</em>, <em>wsclient=None</em>, <em>codepath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getClassActorRemote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassActorRemote" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassEnumeration">
-<tt class="descname">getClassEnumeration</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>enumname</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getClassEnumeration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassEnumeration" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassJSModel">
-<tt class="descname">getClassJSModel</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>modelname</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getClassJSModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassJSModel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassesActorMethodGreenlet">
-<tt class="descname">getClassesActorMethodGreenlet</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getClassesActorMethodGreenlet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getClassesActorMethodGreenlet" title="Permalink to this definition">¶</a></dt>
-<dd><p>return: returns dict with key name methodname and then the class (for each method a class is generated)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeEveModel">
-<tt class="descname">getCodeEveModel</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>modelname</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getCodeEveModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeEveModel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeId">
-<tt class="descname">getCodeId</tt><big>(</big><em>spec</em>, <em>type</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getCodeId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeId" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeJSModel">
-<tt class="descname">getCodeJSModel</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>modelname</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.getCodeJSModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.getCodeJSModel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.removeFromMem">
-<tt class="descname">removeFromMem</tt><big>(</big><em>appname</em>, <em>actor</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.removeFromMem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.removeFromMem" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.resetMemNonSystem">
-<tt class="descname">resetMemNonSystem</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.resetMemNonSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.resetMemNonSystem" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.setTarget">
-<tt class="descname">setTarget</tt><big>(</big><em>target</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGenerator.html#CodeGenerator.setTarget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGenerator.CodeGenerator.setTarget" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the target to generate for server or client</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorActorClass">
 <span id="jumpscale-portal-codegentools-codegeneratoractorclass-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorActorClass module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorActorClass" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorActorClass.</tt><tt class="descname">CodeGeneratorActorClass</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=None</em>, <em>args={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addInitExtras">
-<tt class="descname">addInitExtras</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.addInitExtras"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addInitExtras" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addInitModel">
-<tt class="descname">addInitModel</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.addInitModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addInitModel" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addMethod">
-<tt class="descname">addMethod</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.addMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.addMethod" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.getClassName">
-<tt class="descname">getClassName</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.getClassName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.getClassName" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.getCodeTaskletExecute">
-<tt class="descname">getCodeTaskletExecute</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorClass.html#CodeGeneratorActorClass.getCodeTaskletExecute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorClass.CodeGeneratorActorClass.getCodeTaskletExecute" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorActorLocal">
 <span id="jumpscale-portal-codegentools-codegeneratoractorlocal-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorActorLocal module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorActorLocal" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorActorLocal.</tt><tt class="descname">CodeGeneratorActorLocal</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorLocal.html#CodeGeneratorActorLocal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.addInitExtras">
-<tt class="descname">addInitExtras</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorLocal.html#CodeGeneratorActorLocal.addInitExtras"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.addInitExtras" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.addMethod">
-<tt class="descname">addMethod</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorLocal.html#CodeGeneratorActorLocal.addMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.addMethod" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorLocal.html#CodeGeneratorActorLocal.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorLocal.CodeGeneratorActorLocal.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorActorRemote">
 <span id="jumpscale-portal-codegentools-codegeneratoractorremote-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorActorRemote module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorActorRemote" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorActorRemote.</tt><tt class="descname">CodeGeneratorActorRemote</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>instance=0</em>, <em>redis=False</em>, <em>wsclient=None</em>, <em>codepath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorRemote.html#CodeGeneratorActorRemote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote.addMethod">
-<tt class="descname">addMethod</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorRemote.html#CodeGeneratorActorRemote.addMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote.addMethod" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorRemote.html#CodeGeneratorActorRemote.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorRemote.CodeGeneratorActorRemote.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorActorTasklets">
 <span id="jumpscale-portal-codegentools-codegeneratoractortasklets-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorActorTasklets module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorActorTasklets" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorActorTasklets.</tt><tt class="descname">CodeGeneratorActorTasklets</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>overwrite=False</em>, <em>codepath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorTasklets.html#CodeGeneratorActorTasklets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorActorTasklets.html#CodeGeneratorActorTasklets.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorActorTasklets.CodeGeneratorActorTasklets.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorBase">
 <span id="jumpscale-portal-codegentools-codegeneratorbase-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorBase module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorBase" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorBase.</tt><tt class="descname">CodeGeneratorBase</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorBase.html#CodeGeneratorBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.addClass">
-<tt class="descname">addClass</tt><big>(</big><em>baseclass=''</em>, <em>className=''</em>, <em>importjumpscale=True</em>, <em>extraImport=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorBase.html#CodeGeneratorBase.addClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.addClass" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.descrTo1Line">
-<tt class="descname">descrTo1Line</tt><big>(</big><em>descr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorBase.html#CodeGeneratorBase.descrTo1Line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.descrTo1Line" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.getClassName">
-<tt class="descname">getClassName</tt><big>(</big><em>subitem=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorBase.html#CodeGeneratorBase.getClassName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.getClassName" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.getContent">
-<tt class="descname">getContent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorBase.html#CodeGeneratorBase.getContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase.getContent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorEnumeration">
 <span id="jumpscale-portal-codegentools-codegeneratorenumeration-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorEnumeration module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorEnumeration" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorEnumeration.</tt><tt class="descname">CodeGeneratorEnumeration</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEnumeration.html#CodeGeneratorEnumeration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.addClass">
-<tt class="descname">addClass</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEnumeration.html#CodeGeneratorEnumeration.addClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.addClass" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEnumeration.html#CodeGeneratorEnumeration.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.getClassName">
-<tt class="descname">getClassName</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEnumeration.html#CodeGeneratorEnumeration.getClassName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEnumeration.CodeGeneratorEnumeration.getClassName" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorEveModel">
 <span id="jumpscale-portal-codegentools-codegeneratorevemodel-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorEveModel module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorEveModel" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEveModel.CodeGeneratorEveModel">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorEveModel.</tt><tt class="descname">CodeGeneratorEveModel</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em>, <em>codepath=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEveModel.html#CodeGeneratorEveModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEveModel.CodeGeneratorEveModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorEveModel.CodeGeneratorEveModel.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorEveModel.html#CodeGeneratorEveModel.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorEveModel.CodeGeneratorEveModel.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools.CodeGeneratorModel">
 <span id="jumpscale-portal-codegentools-codegeneratormodel-module"></span><h2>JumpScale.portal.codegentools.CodeGeneratorModel module<a class="headerlink" href="#module-JumpScale.portal.codegentools.CodeGeneratorModel" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel">
-<em class="property">class </em><tt class="descclassname">JumpScale.portal.codegentools.CodeGeneratorModel.</tt><tt class="descname">CodeGeneratorModel</tt><big>(</big><em>spec</em>, <em>typecheck=True</em>, <em>dieInGenCode=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase" title="JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.codegentools.CodeGeneratorBase.CodeGeneratorBase</span></tt></a></p>
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addInitExtras">
-<tt class="descname">addInitExtras</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel.addInitExtras"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addInitExtras" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addNewObjectMethod">
-<tt class="descname">addNewObjectMethod</tt><big>(</big><em>propname</em>, <em>rtype</em>, <em>spec</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel.addNewObjectMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addNewObjectMethod" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addProperty">
-<tt class="descname">addProperty</tt><big>(</big><em>propertyname</em>, <em>type</em>, <em>default</em>, <em>description</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel.addProperty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.addProperty" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.generate">
-<tt class="descname">generate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.generate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.getPropertyCode">
-<tt class="descname">getPropertyCode</tt><big>(</big><em>name</em>, <em>type</em>, <em>indent=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/codegentools/CodeGeneratorModel.html#CodeGeneratorModel.getPropertyCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.codegentools.CodeGeneratorModel.CodeGeneratorModel.getPropertyCode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-JumpScale.portal.codegentools">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal.codegentools" title="Permalink to this headline">¶</a></h2>
