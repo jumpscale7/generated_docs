@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.codeexecutor.CodeExecutor &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.codeexecutor.CodeExecutor</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<div class="viewcode-block" id="CodeExecutor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codeexecutor.html#JumpScale.baselib.codeexecutor.CodeExecutor.CodeExecutor">[docs]</a><span class="k">class</span> <span class="nc">CodeExecutor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_getMacroCandidates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;{{&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;}}&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;}}&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;{{</span><span class="si">%s</span><span class="s">}}&quot;</span> <span class="o">%</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="CodeExecutor.eval"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codeexecutor.html#JumpScale.baselib.codeexecutor.CodeExecutor.CodeExecutor.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">code</span><span class="p">):</span>
+        <span class="n">candidates</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getMacroCandidates</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">itemfull</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">=</span><span class="n">itemfull</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;{{&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;}}&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">=</span><span class="nb">eval</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not execute code in codeExecutor,</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s">,Error was:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">code</span><span class="p">,</span><span class="n">e</span><span class="p">))</span>
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tostr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">itemfull</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">code</span>
+</div>
+<div class="viewcode-block" id="CodeExecutor.evalFile"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codeexecutor.html#JumpScale.baselib.codeexecutor.CodeExecutor.CodeExecutor.evalFile">[docs]</a>    <span class="k">def</span> <span class="nf">evalFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">content</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_tostr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">result</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">boolean</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">==</span><span class="bp">True</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">integer</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">float</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="ow">or</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="n">resout</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">resout</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">,&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">_tostr</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">resout</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+            <span class="n">resout</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">val</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tostr</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">resout</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">::</span><span class="si">%s</span><span class="s">,&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">resout</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not convert </span><span class="si">%s</span><span class="s"> to string&quot;</span><span class="o">%</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+
+
+
+        <span class="c"># from IPython import embed</span>
+        <span class="c"># print &quot;DEBUG NOW macroeval&quot;</span>
+        <span class="c"># embed()</span>
+        
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

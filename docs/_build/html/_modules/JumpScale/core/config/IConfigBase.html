@@ -1,0 +1,745 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.config.IConfigBase &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.config.IConfigBase</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">functools</span><span class="o">,</span> <span class="nn">types</span><span class="o">,</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">termios</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">termios</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">SINGLE_ITEM_SECTION_NAME</span> <span class="o">=</span> <span class="s">&quot;main&quot;</span>
+
+<span class="k">def</span> <span class="nf">isValidInifileSectionName</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+<div class="viewcode-block" id="isValidInifileSectionName"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.isValidInifileSectionName">[docs]</a>    <span class="sd">&quot;&quot;&quot; Check that this section name is valid to be used in inifiles, and to be used as a python property name on a q or i object &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^[\w_-]+$&quot;</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">isValidInifileKeyName</span><span class="p">(</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="isValidInifileKeyName"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.isValidInifileKeyName">[docs]</a>    <span class="sd">&quot;&quot;&quot; Check that this key name is valid to be used in inifiles, and to be used as a python property name on a q or i object &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^[\w_]+$&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">isValidInifileValue</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></div>
+<div class="viewcode-block" id="isValidInifileValue"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.isValidInifileValue">[docs]</a>    <span class="c"># It is illegal to have semicolon in inifile value</span>
+    <span class="c"># TODO: more checks</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="o">.</span><span class="n">StringTypes</span> <span class="ow">or</span> <span class="s">&#39;;&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">ConfigError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigError"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigError">[docs]</a>    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">autoCast</span><span class="p">(</span><span class="n">x</span><span class="p">):</span></div>
+<div class="viewcode-block" id="autoCast"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.autoCast">[docs]</a>    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">dialogMethod</span><span class="p">,</span> <span class="n">castMethod</span><span class="o">=</span><span class="n">autoCast</span><span class="p">,</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+    <span class="sd">&quot;&quot;&quot; This function is intended to avoid code duplication.</span>
+<span class="sd">        The ConfigManagementItem class has a lot of functions (dialogAskString, dialogAskInteger, ...) that have similar</span>
+<span class="sd">        functionality, but call another function on j.gui.dialog.</span>
+<span class="sd">        The fuction on j.gui.dialog is passed as argument (dialogMethod), and with this information a new function is constructed.</span>
+<span class="sd">        The parameter &quot;hasDefault&quot; defines if the constructed function should have a &quot;default&quot; paramter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">funcWithoutDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="n">autoFilledIn</span><span class="p">,</span> <span class="n">paramValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoFillIn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">castMethod</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">autoFilledIn</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">paramValue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dialogMethod</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">funcWithDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">autoFilledIn</span><span class="p">,</span> <span class="n">paramValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_autoFillIn</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">castMethod</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">autoFilledIn</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">paramValue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">REVIEW</span><span class="p">:</span>   <span class="c"># The user is reviewing configuration. The original value should be proposed as default.</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
+                    <span class="n">default</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dialogMethod</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">hasDefault</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">funcWithDefault</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">funcWithoutDefault</span>
+                    
+
+<span class="k">class</span> <span class="nc">ConfigManagementItem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigManagementItem"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem">[docs]</a>
+    <span class="k">class</span> <span class="nc">ConfigMode</span><span class="p">:</span>
+<div class="viewcode-block" id="ConfigManagementItem.ConfigMode"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode">[docs]</a>        <span class="n">IDLE</span> <span class="o">=</span> <span class="mi">0</span>          <span class="c"># No action.</span>
+
+        <span class="n">ADD</span> <span class="o">=</span> <span class="mi">1</span>           <span class="c"># interactive mode only</span>
+                          <span class="c"># Error if ask() is invoked on ConfigManagementItem object with non-empty params</span>
+                          <span class="c"># Ask function will behave fully interactively</span>
+                          <span class="c"># Will suggest default values or none</span>
+
+        <span class="n">CHECKCONFIG</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c"># interactive &amp; non-interacive mode</span>
+                          <span class="c"># Do not show any output!</span>
+                          <span class="c"># Run ask() function, and validate that all params that are asked for,</span>
+                          <span class="c">#   effectively exist in the params dict, and that they satisfy constraints </span>
+
+        <span class="n">REVIEW</span> <span class="o">=</span> <span class="mi">3</span>        <span class="c"># interactive mode only</span>
+                          <span class="c"># Run ask function.</span>
+                          <span class="c"># Suggest existing values if existing value is valid</span>
+                          <span class="c"># Suggest default value (or none) if existing value is not valid</span>
+                          <span class="c"># Interactively ask for keys which are missing in params + suggest default value or none</span>
+
+        <span class="n">PARTIALADD</span> <span class="o">=</span> <span class="mi">4</span>    <span class="c"># interactive mode only</span>
+                          <span class="c"># Run ask function.</span>
+                          <span class="c"># Behave as CHECKCONFIG for params whose value is known</span>
+                          <span class="c"># Behave as ADD for params whose value is not known</span>
+
+        <span class="n">SETDEFAULTS</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c"># Non-interactive mode</span>
+                          <span class="c"># Do not show any output or ask any question!</span>
+                          <span class="c"># Run ask() function and fill in the default values in the params dict</span>
+                          <span class="c"># If a parameter has no default, set value to None.</span>
+
+    <span class="k">class</span> <span class="nc">SortMethod</span><span class="p">:</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.SortMethod"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod">[docs]</a>        <span class="n">INT_ASCENDING</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># The parameter (defined in SORT_PARAM) should be casted to an integer value. The items should be sorted ascending based on this integer value.</span>
+
+        <span class="n">INT_DESCENDING</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="n">STRING_ASCENDING</span> <span class="o">=</span> <span class="mi">3</span> <span class="c"># The parameter (defined in SORT_PARAM) should be casted to a string value. The items should be sorted ascending based on this string value.</span>
+
+        <span class="n">STRING_DESCENDING</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configtype</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span></div>
+            <span class="n">partialadd</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">setDefaults</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a new ConfigManagementItem object</span>
+<span class="sd">        If params is given, it will be populated with those params, and self.validate() will be executed</span>
+<span class="sd">        If no params are given</span>
+<span class="sd">            If load == True, then config will be loaded from disk</span>
+<span class="sd">            If setDefaults == True, then default values will be loaded</span>
+<span class="sd">            If load == False and setDefaults == False, then config will be asked interactively </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configtype</span> <span class="o">=</span> <span class="n">configtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">itemname</span> <span class="o">=</span> <span class="n">itemname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+        <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+            <span class="k">if</span> <span class="n">partialadd</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c"># Check whether configuration is complete.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c"># If not, do a partialadd</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">partialadd</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">setDefaults</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setDefaultValues</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">load</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">validate</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfigManagementItem.ask"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.ask">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Smart wizard which asks user for configuration information.</span>
+<span class="sd">        Result is a filled in self.params dictionary with simple name-value pairs</span>
+<span class="sd">        To be implemented in subclass.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;ConfigManagementItem.ask() must be overridden by subclass.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">wrappedAsk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.wrappedAsk"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.wrappedAsk">[docs]</a>        <span class="sd">&quot;&quot;&quot; Wrapper around ask function. Here we can do things such as input buffer flushing and adding newlines when running in an action &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">termios</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">ADD</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">REVIEW</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">PARTIALADD</span><span class="p">]:</span>
+                <span class="n">termios</span><span class="o">.</span><span class="n">tcflush</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">termios</span><span class="o">.</span><span class="n">TCIFLUSH</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">startOutput</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialogMessage</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialogMessage</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">stopOutput</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">setDefaultValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.setDefaultValues"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.setDefaultValues">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">SETDEFAULTS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrappedAsk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+
+    <span class="k">def</span> <span class="nf">partialadd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.partialadd"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.partialadd">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Behaviour for PARTIALADD mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">PARTIALADD</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrappedAsk</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.add"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.add">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">ADD</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrappedAsk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+
+    <span class="k">def</span> <span class="nf">review</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.review"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.review">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot review configuration of [</span><span class="si">%s</span><span class="s">]/[</span><span class="si">%s</span><span class="s">] in non-interactive mode&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">REVIEW</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrappedAsk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.validate"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.validate">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check that configuration is consistent. This happens by dry-running the ask() method</span>
+<span class="sd">        and detecting whether config keys are missing or not matching constraints.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">CHECKCONFIG</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrappedAsk</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">ConfigError</span><span class="p">:</span>
+            <span class="c">#TODO do we want to change the return type?</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span>
+        <span class="k">return</span> <span class="bp">True</span>
+        
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.save"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.save">[docs]</a>        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isValidInifileSectionName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;Invalid item name [</span><span class="si">%s</span><span class="s">]</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isValidInifileKeyName</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;Invalid key name item [</span><span class="si">%s</span><span class="s">] / key [</span><span class="si">%s</span><span class="s">]</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isValidInifileValue</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;Invalid value item [</span><span class="si">%s</span><span class="s">] / key [</span><span class="si">%s</span><span class="s">] / value [</span><span class="si">%s</span><span class="s">]</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid configuration:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">))</span>
+        <span class="nb">file</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">file</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">):</span>
+            <span class="nb">file</span><span class="o">.</span><span class="n">addSection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="nb">file</span><span class="o">.</span><span class="n">setParam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.load"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.load">[docs]</a>        <span class="nb">file</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">file</span><span class="o">.</span><span class="n">checkSection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ConfigError</span><span class="p">(</span><span class="s">&quot;Cannot find configuration for configtype [</span><span class="si">%s</span><span class="s">] configitem [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">getSectionAsDict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.show"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.show">[docs]</a>        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">itemname</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;  - &quot;</span> <span class="o">+</span> <span class="n">k</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_autoFillIn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">castMethod</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot; To be used in the ask*-methods: This function will check if it&#39;s possible to automatically add the parameter.</span>
+<span class="sd">            This is the case in following situations:</span>
+<span class="sd">              - The item is in CHECKCONFIG state, and the parameter is in self.params.</span>
+<span class="sd">              - The item is in PARTIALADD state, and the parameter is passed to the Add() function.</span>
+<span class="sd">            This function will return:</span>
+<span class="sd">              - A boolean indicating if the parameter can be filled in automatically</span>
+<span class="sd">              - The parameter that should be filled in automatically.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">IDLE</span><span class="p">:</span>  <span class="c"># When this method is called, we should be in state ADD, CHECKCONFIG or REVIEW.</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Should never reach here&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">SETDEFAULTS</span><span class="p">:</span> <span class="c"># Fill in the default value.</span>
+            <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ConfigError</span><span class="p">(</span><span class="s">&quot;The parameter [</span><span class="si">%s</span><span class="s">] has no default value. All parameters should have a default value in order to use this method.&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">default</span>
+            <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">CHECKCONFIG</span><span class="p">:</span>   <span class="c"># Don&#39;t ask anything, just check if the parameter exists.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ConfigError</span><span class="p">(</span><span class="s">&quot;Missing parameter: [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">castMethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+                <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">PARTIALADD</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">castMethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+                <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">None</span>   <span class="c"># Can&#39;t auto-fill in.</span>
+
+    <span class="c"># The functions below are automatically created based on the function templates in _dialogFunctionConstruct().</span>
+    <span class="c"># The parameter hasDefault determines whether the template funcWithDefault or funcWithoutDefault is used.</span>
+    <span class="n">dialogAskFilePath</span>  <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askFilePath</span><span class="p">,</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">dialogAskDirPath</span>   <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askDirPath</span><span class="p">,</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">dialogAskString</span>    <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askString</span><span class="p">)</span>
+    <span class="n">dialogAskYesNo</span>     <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">,</span> <span class="n">castMethod</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s">&#39;true&#39;</span><span class="p">))</span>
+    <span class="n">dialogAskPassword</span>  <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askPassword</span><span class="p">,</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">dialogAskInteger</span>   <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askInteger</span><span class="p">,</span> <span class="n">castMethod</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">dialogAskIntegers</span>  <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askIntegers</span><span class="p">,</span> <span class="n">castMethod</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)]),</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">dialogAskMultiline</span> <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askMultiline</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">dialogAskChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>           <span class="c"># This is a special case: we have an additional parameter &quot;choices&quot;</span>
+<div class="viewcode-block" id="ConfigManagementItem.dialogAskChoice"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoice">[docs]</a>        <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="ow">in</span> <span class="n">types</span><span class="o">.</span><span class="n">StringTypes</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;All choices should be strings&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askChoice</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> 
+    
+    <span class="k">def</span> <span class="nf">dialogAskChoiceMultiple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.dialogAskChoiceMultiple"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoiceMultiple">[docs]</a>        <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="n">choices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="ow">in</span> <span class="n">types</span><span class="o">.</span><span class="n">StringTypes</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;All choices should be strings&quot;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">partFunc</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askChoiceMultiple</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="n">constructedFunc</span> <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">partFunc</span><span class="p">,</span> \
+                                                   <span class="n">castMethod</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)]))</span>
+        <span class="k">return</span> <span class="n">constructedFunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">dialogAskDate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">minValue</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">maxValue</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.dialogAskDate"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskDate">[docs]</a>            <span class="n">selectedValue</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;YYYY/MM/DD&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">partFunc</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askDate</span><span class="p">,</span> <span class="n">minValue</span><span class="o">=</span><span class="n">minValue</span><span class="p">,</span> <span class="n">maxValue</span><span class="o">=</span><span class="n">maxValue</span><span class="p">,</span> <span class="n">selectedValue</span><span class="o">=</span><span class="n">selectedValue</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">format</span><span class="p">)</span>
+        <span class="n">constructedFunc</span> <span class="o">=</span> <span class="n">_dialogFunctionConstruct</span><span class="p">(</span><span class="n">partFunc</span><span class="p">,</span> <span class="n">hasDefault</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">constructedFunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">dialogMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.dialogMessage"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogMessage">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ConfigMode</span><span class="o">.</span><span class="n">CHECKCONFIG</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">msg</span>
+    
+    <span class="k">def</span> <span class="nf">dialogShowProgress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minvalue</span><span class="p">,</span> <span class="n">maxvalue</span><span class="p">,</span> <span class="n">currentvalue</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.dialogShowProgress"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowProgress">[docs]</a>        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">showProgress</span><span class="p">(</span><span class="n">minvalue</span><span class="p">,</span> <span class="n">maxvalue</span><span class="p">,</span> <span class="n">currentvalue</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dialogShowLogging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ConfigManagementItem.dialogShowLogging"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowLogging">[docs]</a>        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">showLogging</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">generateGroupConfigManagementMethods</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div></div>
+<div class="viewcode-block" id="generateGroupConfigManagementMethods"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.generateGroupConfigManagementMethods">[docs]</a>
+    <span class="sd">&quot;&quot;&quot; Generate UI-visible config management methods for Group config objects.</span>
+<span class="sd">        (i.e. config objects which have multiple instances)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add and configure [%(description)s].</span>
+<span class="sd">        @param itemname: (optional) Name of the [%(description)s] to be added</span>
+<span class="sd">        @type  itemname: string</span>
+<span class="sd">        @param params:   (optional) Partial or full set of parameters to configure this object (e.g. to be used non-interactively), is a dict </span>
+<span class="sd">        @type  params:   dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Ask name of item to be added - check for duplicates, check for invalid inifile</span>
+        <span class="c"># Create new ConfigManagementItem instance and invoke ask(.) function on that item</span>
+        <span class="k">if</span> <span class="n">itemname</span><span class="p">:</span>   <span class="c"># Itemname is given as parameter...</span>
+            <span class="k">if</span> <span class="n">itemname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>  <span class="c"># Check if there isn&#39;t another item with this name.</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;There is already a </span><span class="si">%s</span><span class="s"> with this name. Please try again.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c"># Itemname is not given as parameter.</span>
+            <span class="k">while</span> <span class="n">itemname</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="c"># Ask the user to enter a name. (Until he entered a valid name.)</span>
+                <span class="n">itemname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itemnameAsk</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">itemname</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s">&quot;The name can only contain lowercase letter, numbers and underscores. Please try again.&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">itemname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s">&quot;There is already a </span><span class="si">%s</span><span class="s"> with this name. Please try again.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+                    <span class="n">itemname</span> <span class="o">=</span> <span class="bp">None</span>            
+        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># When params are given</span>
+            <span class="c">#   If interactive mode: Use these params as a partial set of params. Ask the values, but populate existing values as defaults in UI.</span>
+            <span class="c">#   If non-interactive mode: Use these params as full set of params. If values are missing --&gt; error</span>
+            <span class="n">partialadd</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">partialadd</span><span class="o">=</span><span class="n">partialadd</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># No parameters are given, the user should answer all questions defined in the ask() method.</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">itemname</span><span class="o">=</span><span class="n">itemname</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;commit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c"># If commit() is defined by the ItemClass, signal that configuration has been changed.</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">add</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">add</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">_sortConfigList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_SORT_PARAM&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_SORT_METHOD&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+            <span class="n">itemA</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">_SORT_PARAM</span><span class="p">]</span>
+            <span class="n">itemB</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">_SORT_PARAM</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_SORT_METHOD</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">SortMethod</span><span class="o">.</span><span class="n">INT_ASCENDING</span> <span class="ow">or</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_SORT_METHOD</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">SortMethod</span><span class="o">.</span><span class="n">INT_DESCENDING</span><span class="p">:</span>
+                <span class="n">itemA</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">itemA</span><span class="p">)</span>
+                <span class="n">itemB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">itemB</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">itemA</span><span class="p">,</span> <span class="n">itemB</span><span class="p">)</span>
+
+        <span class="n">configKeys</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+        <span class="n">reverse</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_SORT_METHOD</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">SortMethod</span><span class="o">.</span><span class="n">INT_DESCENDING</span> <span class="ow">or</span> \
+                   <span class="bp">self</span><span class="o">.</span><span class="n">_SORT_METHOD</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">SortMethod</span><span class="o">.</span><span class="n">STRING_DESCENDING</span><span class="p">)</span>
+
+        <span class="n">configKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="nb">cmp</span><span class="o">=</span><span class="n">_sort</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">configKeys</span>
+
+    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List all [%(description)s]s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># return list of names of ConfigManagementItem instances</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sortConfigList</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">saveAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">itemname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get config dictionary for a [%(description)s]</span>
+<span class="sd">        @param itemname: (optional) Name of the [%(description)s]</span>
+<span class="sd">        @type  itemname: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">itemname</span><span class="p">:</span>
+            <span class="n">itemname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itemnameSelect</span><span class="p">(</span><span class="s">&quot;Please select a </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">)[</span><span class="n">itemname</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="nf">review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In interactive mode: modify/review configuration of [%(description)s].</span>
+<span class="sd">        In non-interactive mode: validate configuration of [%(description)s].</span>
+<span class="sd">        @param itemname: (optional) Name of the [%(description)s] to be reviewed</span>
+<span class="sd">        @type  itemname: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># (if itemname==None) show list of items and let user choose an item</span>
+        <span class="c"># Invoke review(.) on that item</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">itemname</span><span class="p">:</span>
+            <span class="n">itemname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itemnameSelect</span><span class="p">(</span><span class="s">&quot;Please select a </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">validate</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">review</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;commit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemnames</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show [%(description)s] configuration.</span>
+<span class="sd">        @param itemnames: (optional) List of [%(description)s] item names (default = all items shown)</span>
+<span class="sd">        @type  itemnames: list of string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">itemnames</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">itemnames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">itemnames</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">startOutput</span><span class="p">()</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">stopOutput</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove [%(description)s].</span>
+<span class="sd">        @param itemname: (optional) Name of [%(description)s]</span>
+<span class="sd">        @type  itemname: string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># If no itemname given, show list of items and let user choose one</span>
+        <span class="c"># Remove ConfigManagementItem from internal list</span>
+        <span class="c">#</span>
+        <span class="c"># Remove item and remove it from the q tree</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">itemname</span><span class="p">:</span>
+            <span class="n">itemname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itemnameSelect</span><span class="p">(</span><span class="s">&quot;Please select a </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;remove&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">remove</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_itemRemove</span><span class="p">(</span><span class="n">itemname</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">newparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reconfigure or add a [%(description)s] non-interactively.</span>
+<span class="sd">        @param itemname:  Name of [%(description)s]</span>
+<span class="sd">        @type  itemname:  string</span>
+<span class="sd">        @param newparams: Complete or partial set of new configuration settings [%(keys)s]</span>
+<span class="sd">        @type  newparams: dict of (string, value) </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">existingItem</span> <span class="o">=</span> <span class="p">(</span><span class="n">itemname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">existingItem</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;No existing item found. (type: [</span><span class="si">%s</span><span class="s">], name: [</span><span class="si">%s</span><span class="s">]) If you want to add a new item, please use the add() method.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">newparams</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+            <span class="k">return</span>   <span class="c"># Nothing changed.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">newparams</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;commit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+
+    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;add&quot;</span><span class="p">:</span> <span class="n">add</span><span class="p">,</span> <span class="s">&quot;list&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s">&quot;getConfig&quot;</span><span class="p">:</span> <span class="n">getConfig</span><span class="p">,</span> <span class="s">&quot;review&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">,</span> <span class="s">&quot;show&quot;</span><span class="p">:</span> <span class="n">show</span><span class="p">,</span> <span class="s">&quot;remove&quot;</span><span class="p">:</span> <span class="n">remove</span><span class="p">,</span> <span class="s">&quot;configure&quot;</span><span class="p">:</span> <span class="n">configure</span><span class="p">,</span> <span class="s">&quot;_sortConfigList&quot;</span><span class="p">:</span><span class="n">_sortConfigList</span><span class="p">,</span> <span class="s">&quot;saveAll&quot;</span><span class="p">:</span> <span class="n">saveAll</span><span class="p">}</span>
+
+
+
+<span class="k">class</span> <span class="nc">GroupConfigManagement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="GroupConfigManagement"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.GroupConfigManagement">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classes inheriting from GroupConfigManagement will be put on i tree.</span>
+<span class="sd">    Serves for configuration of a collection of ConfigManagementItem classes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">__metaclass__</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">GroupConfigManagement</span>
+            <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+            <span class="n">docstringInformation</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;description&quot;</span> <span class="p">:</span> <span class="n">attrs</span><span class="p">[</span><span class="s">&quot;_DESCRIPTION&quot;</span><span class="p">]</span> <span class="p">}</span>
+            <span class="k">if</span> <span class="n">attrs</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span> <span class="s">&quot;_KEYS&quot;</span><span class="p">):</span>
+                <span class="n">docstringInformation</span><span class="p">[</span><span class="s">&#39;keys&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s">&quot;_KEYS&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">docstringInformation</span><span class="p">[</span><span class="s">&#39;keys&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="s">&quot;_ITEMCLASS&quot;</span><span class="p">],</span> <span class="s">&quot;retrieve&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="n">attrs</span><span class="p">[</span><span class="s">&quot;_ITEMCLASS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">retrieve</span><span class="p">):</span>
+                <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                    Find configured [%(description)s]</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">itemname</span><span class="p">:</span>
+                        <span class="n">itemname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itemnameSelect</span><span class="p">(</span><span class="s">&quot;Please select a </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">itemname</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">retrieve</span><span class="p">()</span>
+                <span class="n">find</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">docstringInformation</span>
+                <span class="n">attrs</span><span class="p">[</span><span class="s">&#39;find&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span>
+
+            <span class="n">myMethods</span> <span class="o">=</span> <span class="n">generateGroupConfigManagementMethods</span><span class="p">(</span><span class="o">**</span><span class="n">docstringInformation</span><span class="p">)</span>
+            <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">myMethods</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_itemnameSelect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No configured items of type [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askChoice</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_itemnameAsk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Ask itemname to user.</span>
+        <span class="c"># If self._itemdescription has been defined, use it to make a useful question</span>
+        <span class="c"># Check that the name is compatible with the persistency technology (e.g. inifile sectionname)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askString</span><span class="p">(</span><span class="s">&quot;Please enter a name for the </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DESCRIPTION</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">isValidInifileSectionName</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">_itemRemove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="p">):</span>
+        <span class="c"># Remove item from configuration file</span>
+        <span class="n">inifile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getInifile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">)</span>
+        <span class="n">inifile</span><span class="o">.</span><span class="n">removeSection</span><span class="p">(</span><span class="n">itemname</span><span class="p">)</span>
+        <span class="n">inifile</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+
+
+
+
+<span class="k">def</span> <span class="nf">generateSingleConfigManagementMethods</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
+<div class="viewcode-block" id="generateSingleConfigManagementMethods"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.generateSingleConfigManagementMethods">[docs]</a>
+    <span class="sd">&quot;&quot;&quot; Generate UI-visible config management methods for Single config objects.</span>
+<span class="sd">        (i.e. config objects which have only one &#39;main&#39; section and no other sections)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">review</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In interactive mode: modify/review configuration of [%(description)s].</span>
+<span class="sd">        In non-interactive mode: validate configuration of [%(description)s].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checkConfigItemExists</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">review</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;commit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="n">review</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">review</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show [%(description)s] configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">startOutput</span><span class="p">()</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">action</span><span class="o">.</span><span class="n">stopOutput</span><span class="p">()</span>
+
+    <span class="n">show</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">show</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">setDefaultValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the default values of [%(description)s] configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">setDefaults</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="n">setDefaultValues</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">setDefaultValues</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newparams</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reconfigure a [%(description)s] non-interactively.</span>
+<span class="sd">        @param newparams: New configuration settings</span>
+<span class="sd">        @type  newparams: dict of (string, value)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">newparams</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConfigError</span><span class="p">(</span><span class="s">&quot;configure called with None parameters&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checkConfigItemExists</span><span class="p">():</span>
+            <span class="c"># Completely new [main] section</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">newparams</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># Existing [main] section which we potentially modify</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">,</span> <span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">newparams</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+
+        <span class="n">item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="p">,</span> <span class="s">&quot;commit&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ITEMCLASS</span><span class="o">.</span><span class="n">commit</span><span class="p">):</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="n">configure</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">configure</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemname</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get config dictionary for [%(description)s]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">)[</span><span class="n">SINGLE_ITEM_SECTION_NAME</span><span class="p">]</span>
+
+    <span class="n">getConfig</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">getConfig</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">%</span> <span class="n">kwargs</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&quot;review&quot;</span><span class="p">:</span> <span class="n">review</span><span class="p">,</span> <span class="s">&quot;show&quot;</span><span class="p">:</span> <span class="n">show</span><span class="p">,</span> <span class="s">&quot;configure&quot;</span><span class="p">:</span> <span class="n">configure</span><span class="p">,</span> <span class="s">&quot;setDefaultValues&quot;</span><span class="p">:</span> <span class="n">setDefaultValues</span><span class="p">,</span> <span class="s">&quot;getConfig&quot;</span><span class="p">:</span> <span class="n">getConfig</span><span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">SingleConfigManagement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="SingleConfigManagement"><a class="viewcode-back" href="../../../../API/JumpScale.core.config.html#JumpScale.core.config.IConfigBase.SingleConfigManagement">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Classes inheriting from ConfigManagement will be put on i tree.</span>
+<span class="sd">    Serves for configuration of a single ConfigManagementItem class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+   
+    <span class="k">class</span> <span class="nc">__metaclass__</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">SingleConfigManagement</span>
+            <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+            <span class="n">docstringInformation</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;description&quot;</span> <span class="p">:</span> <span class="n">attrs</span><span class="p">[</span><span class="s">&quot;_DESCRIPTION&quot;</span><span class="p">]}</span>
+
+            <span class="n">myMethods</span> <span class="o">=</span> <span class="n">generateSingleConfigManagementMethods</span><span class="p">(</span><span class="o">**</span><span class="n">docstringInformation</span><span class="p">)</span>
+            <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">myMethods</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_checkConfigItemExists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list</span><span class="p">()):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getConfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_CONFIGTYPE</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

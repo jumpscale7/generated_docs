@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.core.osis &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-core-osis">
+<h1>j.core.osis<a class="headerlink" href="#j-core-osis" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /grid/osis/OSISFactory.py</li>
+</ul>
+<div class="section" id="decrypt">
+<h2>decrypt<a class="headerlink" href="#decrypt" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: val,json</li>
+<li>path:/grid/osis/OSISFactory.py (line:89)</li>
+</ul>
+</div>
+<div class="section" id="encrypt">
+<h2>encrypt<a class="headerlink" href="#encrypt" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: obj</li>
+<li>path:/grid/osis/OSISFactory.py (line:76)</li>
+</ul>
+</div>
+<div class="section" id="generateosismodeldefaults">
+<h2>generateOsisModelDefaults<a class="headerlink" href="#generateosismodeldefaults" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: namespace,specpath</li>
+<li>path:/grid/osis/OSISFactory.py (line:271)</li>
+</ul>
+</div>
+<div class="section" id="getclient">
+<h2>getClient<a class="headerlink" href="#getclient" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddr,port,user,passwd,ssl,gevent</li>
+<li>path:/grid/osis/OSISFactory.py (line:127)</li>
+</ul>
+</div>
+<div class="section" id="getclientbyinstance">
+<h2>getClientByInstance<a class="headerlink" href="#getclientbyinstance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: instance,ssl,gevent</li>
+<li>path:/grid/osis/OSISFactory.py (line:169)</li>
+</ul>
+</div>
+<div class="section" id="getclientforcategory">
+<h2>getClientForCategory<a class="headerlink" href="#getclientforcategory" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: client,namespace,category</li>
+<li>path:/grid/osis/OSISFactory.py (line:186)</li>
+</ul>
+<p>how to use</p>
+<p>client=j.core.osis.getClient(&#8220;localhost&#8221;,port=5544,user=&#8221;root&#8221;,passwd=&#8221;rooter&#8221;,ssl=False)
+client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;node&#8221;)</p>
+</div>
+<div class="section" id="getclientfornamespace">
+<h2>getClientForNamespace<a class="headerlink" href="#getclientfornamespace" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: namespace,client</li>
+<li>path:/grid/osis/OSISFactory.py (line:181)</li>
+</ul>
+</div>
+<div class="section" id="getlocal">
+<h2>getLocal<a class="headerlink" href="#getlocal" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,overwriteHRD,overwriteImplementation,namespacename</li>
+<li>path:/grid/osis/OSISFactory.py (line:98)</li>
+</ul>
+<p>create local instance starting from path</p>
+</div>
+<div class="section" id="getmodeltemplate">
+<h2>getModelTemplate<a class="headerlink" href="#getmodeltemplate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/grid/osis/OSISFactory.py (line:283)</li>
+</ul>
+</div>
+<div class="section" id="getosisbaseobjectcomplextype">
+<h2>getOSISBaseObjectComplexType<a class="headerlink" href="#getosisbaseobjectcomplextype" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/grid/osis/OSISFactory.py (line:200)</li>
+</ul>
+</div>
+<div class="section" id="getosisbaseobjectclass">
+<h2>getOsisBaseObjectClass<a class="headerlink" href="#getosisbaseobjectclass" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/grid/osis/OSISFactory.py (line:197)</li>
+</ul>
+</div>
+<div class="section" id="getosisimplementationparentclass">
+<h2>getOsisImplementationParentClass<a class="headerlink" href="#getosisimplementationparentclass" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: namespacename</li>
+<li>path:/grid/osis/OSISFactory.py (line:203)</li>
+</ul>
+<p>return parent class for osis implementation (is the implementation from which each namespace &amp; category inherits)</p>
+</div>
+<div class="section" id="getosismodelclass">
+<h2>getOsisModelClass<a class="headerlink" href="#getosismodelclass" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: namespace,category,specpath</li>
+<li>path:/grid/osis/OSISFactory.py (line:288)</li>
+</ul>
+<p>returns class generated from spec file or from model.py file</p>
+</div>
+<div class="section" id="startdaemon">
+<h2>startDaemon<a class="headerlink" href="#startdaemon" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,overwriteHRD,overwriteImplementation,key,port,superadminpasswd,dbconnections,hrd</li>
+<li>path:/grid/osis/OSISFactory.py (line:106)</li>
+</ul>
+<p>start deamon</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.core.osis</a><ul>
+<li><a class="reference internal" href="#decrypt">decrypt</a></li>
+<li><a class="reference internal" href="#encrypt">encrypt</a></li>
+<li><a class="reference internal" href="#generateosismodeldefaults">generateOsisModelDefaults</a></li>
+<li><a class="reference internal" href="#getclient">getClient</a></li>
+<li><a class="reference internal" href="#getclientbyinstance">getClientByInstance</a></li>
+<li><a class="reference internal" href="#getclientforcategory">getClientForCategory</a></li>
+<li><a class="reference internal" href="#getclientfornamespace">getClientForNamespace</a></li>
+<li><a class="reference internal" href="#getlocal">getLocal</a></li>
+<li><a class="reference internal" href="#getmodeltemplate">getModelTemplate</a></li>
+<li><a class="reference internal" href="#getosisbaseobjectcomplextype">getOSISBaseObjectComplexType</a></li>
+<li><a class="reference internal" href="#getosisbaseobjectclass">getOsisBaseObjectClass</a></li>
+<li><a class="reference internal" href="#getosisimplementationparentclass">getOsisImplementationParentClass</a></li>
+<li><a class="reference internal" href="#getosismodelclass">getOsisModelClass</a></li>
+<li><a class="reference internal" href="#startdaemon">startDaemon</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/core/j.core.osis.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

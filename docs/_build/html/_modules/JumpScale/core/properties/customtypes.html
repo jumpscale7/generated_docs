@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.properties.customtypes &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="JumpScale.core.properties" href="../properties.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../properties.html" accesskey="U">JumpScale.core.properties</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.properties.customtypes</h1><div class="highlight"><pre>
+<span class="c"># &lt;License type=&quot;Sun Cloud BSD&quot; version=&quot;2.2&quot;&gt;</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2005-2009, Sun Microsystems, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or</span>
+<span class="c"># without modification, are permitted provided that the following</span>
+<span class="c"># conditions are met:</span>
+<span class="c">#</span>
+<span class="c"># 1. Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#</span>
+<span class="c"># 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer in</span>
+<span class="c">#    the documentation and/or other materials provided with the</span>
+<span class="c">#    distribution.</span>
+<span class="c">#</span>
+<span class="c"># 3. Neither the name Sun Microsystems, Inc. nor the names of other</span>
+<span class="c">#    contributors may be used to endorse or promote products derived</span>
+<span class="c">#    from this software without specific prior written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY SUN MICROSYSTEMS, INC. &quot;AS IS&quot; AND ANY</span>
+<span class="c"># EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</span>
+<span class="c"># PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SUN MICROSYSTEMS, INC. OR</span>
+<span class="c"># CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,</span>
+<span class="c"># EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,</span>
+<span class="c"># PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR</span>
+<span class="c"># PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY</span>
+<span class="c"># OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="c">#</span>
+<span class="c"># &lt;/License&gt;</span>
+
+<span class="sd">&#39;&#39;&#39;Descriptors for jumpscale custom types</span>
+
+<span class="sd">See the documentation of jumpscale.properties.common for more info.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale.core.properties</span> <span class="kn">import</span> <span class="n">BaseDescriptor</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.CustomTypes</span> <span class="kn">import</span> <span class="n">Guid</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.CustomTypes</span> <span class="kn">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">DirPath</span><span class="p">,</span> <span class="n">FilePath</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.CustomTypes</span> <span class="kn">import</span> <span class="n">UnixDirPath</span><span class="p">,</span> <span class="n">UnixFilePath</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.CustomTypes</span> <span class="kn">import</span> <span class="n">WindowsDirPath</span><span class="p">,</span> <span class="n">WindowsFilePath</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.pmtypes.CustomTypes</span> <span class="kn">import</span> <span class="n">IPv4Address</span>
+
+<div class="viewcode-block" id="Guid"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.Guid">[docs]</a><span class="k">class</span> <span class="nc">Guid</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.Guid}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">Guid</span>
+
+</div>
+<div class="viewcode-block" id="Path"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.Path">[docs]</a><span class="k">class</span> <span class="nc">Path</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.Path}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">Path</span>
+
+</div>
+<div class="viewcode-block" id="DirPath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.DirPath">[docs]</a><span class="k">class</span> <span class="nc">DirPath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.DirPath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">DirPath</span>
+
+</div>
+<div class="viewcode-block" id="FilePath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.FilePath">[docs]</a><span class="k">class</span> <span class="nc">FilePath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.FilePath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">FilePath</span>
+
+</div>
+<div class="viewcode-block" id="UnixDirPath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.UnixDirPath">[docs]</a><span class="k">class</span> <span class="nc">UnixDirPath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.UnixDirPath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">UnixDirPath</span>
+
+</div>
+<div class="viewcode-block" id="UnixFilePath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.UnixFilePath">[docs]</a><span class="k">class</span> <span class="nc">UnixFilePath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.UnixFilePath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">UnixFilePath</span>
+
+</div>
+<div class="viewcode-block" id="WindowsDirPath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.WindowsDirPath">[docs]</a><span class="k">class</span> <span class="nc">WindowsDirPath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.WindowsDirPath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">WindowsDirPath</span>
+
+</div>
+<div class="viewcode-block" id="WindowsFilePath"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.WindowsFilePath">[docs]</a><span class="k">class</span> <span class="nc">WindowsFilePath</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.WindowsFilePath}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">WindowsFilePath</span>
+
+</div>
+<div class="viewcode-block" id="IPv4Address"><a class="viewcode-back" href="../../../../API/JumpScale.core.properties.html#JumpScale.core.properties.customtypes.IPv4Address">[docs]</a><span class="k">class</span> <span class="nc">IPv4Address</span><span class="p">(</span><span class="n">BaseDescriptor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Descriptor for L{jumpscale.pmtypes.CustomTypes.IPv4Address}&#39;&#39;&#39;</span>
+    <span class="n">PMTYPE</span> <span class="o">=</span> <span class="n">IPv4Address</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../properties.html" >JumpScale.core.properties</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

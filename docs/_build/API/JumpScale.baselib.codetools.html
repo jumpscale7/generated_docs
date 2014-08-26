@@ -1,0 +1,1039 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.codetools package &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+    <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+    <link rel="next" title="JumpScale.baselib.credis package" href="JumpScale.baselib.credis.html" />
+    <link rel="prev" title="JumpScale.baselib.codeexecutor package" href="JumpScale.baselib.codeexecutor.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.credis.html" title="JumpScale.baselib.credis package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.codeexecutor.html" title="JumpScale.baselib.codeexecutor package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jumpscale-baselib-codetools-package">
+<h1>JumpScale.baselib.codetools package<a class="headerlink" href="#jumpscale-baselib-codetools-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.ClassDef">
+<span id="jumpscale-baselib-codetools-classdef-module"></span><h2>JumpScale.baselib.codetools.ClassDef module<a class="headerlink" href="#module-JumpScale.baselib.codetools.ClassDef" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.ClassDef.ClassDef">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.ClassDef.</tt><tt class="descname">ClassDef</tt><big>(</big><em>filePath</em>, <em>name=''</em>, <em>inheritance=''</em>, <em>comments=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/ClassDef.html#ClassDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.ClassDef.ClassDef" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.ClassDef.ClassDef.addMethodDef">
+<tt class="descname">addMethodDef</tt><big>(</big><em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/ClassDef.html#ClassDef.addMethodDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.ClassDef.ClassDef.addMethodDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.ClassDef.ClassDef.addPropertyDef">
+<tt class="descname">addPropertyDef</tt><big>(</big><em>prop</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/ClassDef.html#ClassDef.addPropertyDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.ClassDef.ClassDef.addPropertyDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.ClassDef.ClassDef.getProp">
+<tt class="descname">getProp</tt><big>(</big><em>propname</em>, <em>includeInheritedClasses=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/ClassDef.html#ClassDef.getProp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.ClassDef.ClassDef.getProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the propertyDef of the property with the given name.
+Returns None if the property could not be found.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.CodeElements">
+<span id="jumpscale-baselib-codetools-codeelements-module"></span><h2>JumpScale.baselib.codetools.CodeElements module<a class="headerlink" href="#module-JumpScale.baselib.codetools.CodeElements" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.CodeElements.CodeElements">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.CodeElements.</tt><tt class="descname">CodeElements</tt><big>(</big><em>filepath=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeElements.html#CodeElements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeElements.CodeElements" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeElements.CodeElements.addClassDef">
+<tt class="descname">addClassDef</tt><big>(</big><em>classDef</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeElements.html#CodeElements.addClassDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeElements.CodeElements.addClassDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeElements.CodeElements.addMethodDef">
+<tt class="descname">addMethodDef</tt><big>(</big><em>methodDef</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeElements.html#CodeElements.addMethodDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeElements.CodeElements.addMethodDef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeElements.CodeElements.getClass">
+<tt class="descname">getClass</tt><big>(</big><em>classname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeElements.html#CodeElements.getClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeElements.CodeElements.getClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the classDef of a class with the given name.        Returns None if the class can&#8217;t be found.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.CodeManager">
+<span id="jumpscale-baselib-codetools-codemanager-module"></span><h2>JumpScale.baselib.codetools.CodeManager module<a class="headerlink" href="#module-JumpScale.baselib.codetools.CodeManager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.CodeManager.</tt><tt class="descname">CodeManager</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager.getCodeManagerForFile">
+<tt class="descname">getCodeManagerForFile</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager.getCodeManagerForFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager.getCodeManagerForFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager.getUserId">
+<tt class="descname">getUserId</tt><big>(</big><em>username</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager.getUserId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager.getUserId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager.parse">
+<tt class="descname">parse</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>directory to walk over and find story, task, ... statements</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager.setgroups">
+<tt class="descname">setgroups</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager.setgroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager.setgroups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManager.setusers">
+<tt class="descname">setusers</tt><big>(</big><em>config</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManager.setusers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManager.setusers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.CodeManager.</tt><tt class="descname">CodeManagerFile</tt><big>(</big><em>codemanager</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>manages code for one file</p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.addUniqueId">
+<tt class="descname">addUniqueId</tt><big>(</big><em>line</em>, <em>fullPath</em>, <em>ttype='sprint'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.addUniqueId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.addUniqueId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.errorTrap">
+<tt class="descname">errorTrap</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.errorTrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.errorTrap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findId">
+<tt class="descname">findId</tt><big>(</big><em>text</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.findId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findItems">
+<tt class="descname">findItems</tt><big>(</big><em>item='&#64;owner'</em>, <em>maxitems=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.findItems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findItems" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findLine">
+<tt class="descname">findLine</tt><big>(</big><em>text</em>, <em>item='&#64;owner'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.findLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findLine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findLineNr">
+<tt class="descname">findLineNr</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.findLineNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findLineNr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findReviews">
+<tt class="descname">findReviews</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.findReviews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.findReviews" title="Permalink to this definition">¶</a></dt>
+<dd><p>return [[name,description,users,linefrom,lineto]]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.getUsers">
+<tt class="descname">getUsers</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.getUsers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.getUsers" title="Permalink to this definition">¶</a></dt>
+<dd><p>return [$text,$users] with unique id and the usergroup construct is taken out of text, all groups are resolved to users</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.parseBasics">
+<tt class="descname">parseBasics</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.parseBasics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.parseBasics" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;return  [infoitems,timeitem,users,tags,descr]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.parseTimeInfo">
+<tt class="descname">parseTimeInfo</tt><big>(</big><em>timestring, modelobj, defaults=[8, 16, 8, 4, 8]</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.parseTimeInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.parseTimeInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.process">
+<tt class="descname">process</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeManager.CodeManagerFile.shortenDescr">
+<tt class="descname">shortenDescr</tt><big>(</big><em>text</em>, <em>maxnrchars=60</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeManager.html#CodeManagerFile.shortenDescr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeManager.CodeManagerFile.shortenDescr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.CodeTools">
+<span id="jumpscale-baselib-codetools-codetools-module"></span><h2>JumpScale.baselib.codetools.CodeTools module<a class="headerlink" href="#module-JumpScale.baselib.codetools.CodeTools" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.CodeTools.CodeTools">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.CodeTools.</tt><tt class="descname">CodeTools</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeTools.html#CodeTools"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeTools.CodeTools" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeTools.CodeTools.getTextFileEditor">
+<tt class="descname">getTextFileEditor</tt><big>(</big><em>filepath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeTools.html#CodeTools.getTextFileEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeTools.CodeTools.getTextFileEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a class which helps you to edit a text file
+e.g. find blocks, replace lines, ...</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeTools.CodeTools.getWordReplacerTool">
+<tt class="descname">getWordReplacerTool</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeTools.html#CodeTools.getWordReplacerTool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeTools.CodeTools.getWordReplacerTool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.CodeTools.CodeTools.textToTitle">
+<tt class="descname">textToTitle</tt><big>(</big><em>text</em>, <em>maxnrchars=60</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/CodeTools.html#CodeTools.textToTitle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.CodeTools.CodeTools.textToTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>try to create a title out of text, ignoring irrelevant words and making lower case and removing 
+not needed chars</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.MethodDef">
+<span id="jumpscale-baselib-codetools-methoddef-module"></span><h2>JumpScale.baselib.codetools.MethodDef module<a class="headerlink" href="#module-JumpScale.baselib.codetools.MethodDef" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.MethodDef.MethodDef">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.MethodDef.</tt><tt class="descname">MethodDef</tt><big>(</big><em>classDef</em>, <em>fileDef</em>, <em>name=''</em>, <em>paramstring=''</em>, <em>comments=''</em>, <em>decorators=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/MethodDef.html#MethodDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.MethodDef.MethodDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.MethodDef.MethodDef.addLine2body">
+<tt class="descname">addLine2body</tt><big>(</big><em>line=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/MethodDef.html#MethodDef.addLine2body"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.MethodDef.MethodDef.addLine2body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.PropertyDef">
+<span id="jumpscale-baselib-codetools-propertydef-module"></span><h2>JumpScale.baselib.codetools.PropertyDef module<a class="headerlink" href="#module-JumpScale.baselib.codetools.PropertyDef" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.PropertyDef.PropertyDef">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.PropertyDef.</tt><tt class="descname">PropertyDef</tt><big>(</big><em>classDef</em>, <em>name=''</em>, <em>defaultVal=''</em>, <em>type=''</em>, <em>comments=''</em>, <em>isArray=False</em>, <em>isDict=False</em>, <em>dictKey=''</em>, <em>decorators=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/PropertyDef.html#PropertyDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.PropertyDef.PropertyDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.RegexTools">
+<span id="jumpscale-baselib-codetools-regextools-module"></span><h2>JumpScale.baselib.codetools.RegexTools module<a class="headerlink" href="#module-JumpScale.baselib.codetools.RegexTools" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.RegexTools.Empty">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.RegexTools.</tt><tt class="descname">Empty</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#Empty"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.Empty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexMatch">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.RegexTools.</tt><tt class="descname">RegexMatch</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexMatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexMatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexMatches">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.RegexTools.</tt><tt class="descname">RegexMatches</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexMatches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexMatches" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexMatches.addMatch">
+<tt class="descname">addMatch</tt><big>(</big><em>match</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexMatches.addMatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexMatches.addMatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.RegexTools.</tt><tt class="descname">RegexTemplates_FindLines</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTemplates_FindLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>regexexamples which find lines</p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findClasslines">
+<tt class="descname">findClasslines</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTemplates_FindLines.findClasslines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findClasslines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findCommentlines">
+<tt class="descname">findCommentlines</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTemplates_FindLines.findCommentlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findCommentlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findDeflines">
+<tt class="descname">findDeflines</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTemplates_FindLines.findDeflines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTemplates_FindLines.findDeflines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.RegexTools.</tt><tt class="descname">RegexTools</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.extractBlocks">
+<tt class="descname">extractBlocks</tt><big>(</big><em>text, blockStartPatterns=['.*'], blockStartPatternsNegative=[], blockStopPatterns=[], blockStopPatternsNegative=[], linesIncludePatterns=['.*'], linesExcludePatterns=[], includeMatchingLine=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.extractBlocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.extractBlocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>look for blocks starting with line which matches one of patterns in blockStartPatterns and not matching one of patterns in blockStartPatternsNegative
+block will stop when line found which matches one of patterns in blockStopPatterns and not in blockStopPatternsNegative or when next match for start is found
+in block lines matching linesIncludePatterns will be kept and reverse for linesExcludePatterns
+example pattern: &#8216;^class &#8216; looks for class at beginning of line with space behind</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.extractFirstFoundBlock">
+<tt class="descname">extractFirstFoundBlock</tt><big>(</big><em>text, blockStartPatterns, blockStartPatternsNegative=[], blockStopPatterns=[], blockStopPatternsNegative=[], linesIncludePatterns=['.*'], linesExcludePatterns=[], includeMatchingLine=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.extractFirstFoundBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.extractFirstFoundBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.findAll">
+<tt class="descname">findAll</tt><big>(</big><em>pattern</em>, <em>text</em>, <em>flags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.findAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.findAll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search all matches of pattern in text and returns an array
+&#64;param pattern: Regex pattern to search for
+&#64;param text: Text to search in</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.findHtmlBlock">
+<tt class="descname">findHtmlBlock</tt><big>(</big><em>subject</em>, <em>tofind</em>, <em>path</em>, <em>dieIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.findHtmlBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.findHtmlBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>only find 1 block ideal to find e.g. body &amp; header of html doc</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.findHtmlElement">
+<tt class="descname">findHtmlElement</tt><big>(</big><em>subject</em>, <em>tofind</em>, <em>path</em>, <em>dieIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.findHtmlElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.findHtmlElement" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.findLine">
+<tt class="descname">findLine</tt><big>(</big><em>regex</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.findLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.findLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns line when found
+&#64;param regex is what we are looking for
+&#64;param text, we are looking into</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.findOne">
+<tt class="descname">findOne</tt><big>(</big><em>pattern</em>, <em>text</em>, <em>flags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.findOne"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.findOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for a one match only on pattern inside text, will throw a RuntimeError if more than one match found
+&#64;param pattern: Regex pattern to search for
+&#64;param text: Text to search in</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.getINIAlikeVariableFromText">
+<tt class="descname">getINIAlikeVariableFromText</tt><big>(</big><em>variableName</em>, <em>text</em>, <em>isArray=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.getINIAlikeVariableFromText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.getINIAlikeVariableFromText" title="Permalink to this definition">¶</a></dt>
+<dd><p>e.g. in text
+&#8216;
+test= something
+testarray = 1,2,4,5
+&#8216;
+getINIAlikeVariable(&#8220;test&#8221;,text) will return &#8216;something&#8217;
+&#64;isArray when True and , in result will make array out of 
+getINIAlikeVariable(&#8220;testarray&#8221;,text,True) will return [1,2,4,5]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.getRegexMatch">
+<tt class="descname">getRegexMatch</tt><big>(</big><em>pattern</em>, <em>text</em>, <em>flags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.getRegexMatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.getRegexMatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>find the first match in the string that matches the pattern.
+&#64;return RegexMatch object, or None if didn&#8217;t match any.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.getRegexMatches">
+<tt class="descname">getRegexMatches</tt><big>(</big><em>pattern</em>, <em>text</em>, <em>flags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.getRegexMatches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.getRegexMatches" title="Permalink to this definition">¶</a></dt>
+<dd><p>match all occurences and find start and stop in text
+return RegexMatches  (is array of RegexMatch)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.match">
+<tt class="descname">match</tt><big>(</big><em>pattern</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>search if there is at least 1 match</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.matchAllText">
+<tt class="descname">matchAllText</tt><big>(</big><em>pattern</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.matchAllText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.matchAllText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.matchMultiple">
+<tt class="descname">matchMultiple</tt><big>(</big><em>patterns</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.matchMultiple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.matchMultiple" title="Permalink to this definition">¶</a></dt>
+<dd><p>see if any patterns matched
+if patterns=[] then will return False</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.processLines">
+<tt class="descname">processLines</tt><big>(</big><em>text</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.processLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.processLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>includes happens first
+excludes last
+both are arrays</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.removeLines">
+<tt class="descname">removeLines</tt><big>(</big><em>pattern</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.removeLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.removeLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove lines based on pattern</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.replace">
+<tt class="descname">replace</tt><big>(</big><em>regexFind</em>, <em>regexFindsubsetToReplace</em>, <em>replaceWith</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for regexFind in text and if found, replace the subset regexFindsubsetToReplace of regexFind with replacewith and returns the new text
+Example:</p>
+<blockquote>
+<div>replace(&#8220;Q-Layer Server&#8221;, &#8220;Server&#8221;, &#8220;Computer&#8221;, &#8220;This is a Q-Layer Server&#8221;)
+will return &#8220;This is a Q-Layer Computer&#8221;</div></blockquote>
+<p>&#64;param regexFind: String to search for, can be a regular expression
+&#64;param regexFindsubsetToReplace: The subset within regexFind that you want to replace
+&#64;param replacewith: The replacement
+&#64;param text: Text where you want to search and replace</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.replaceLines">
+<tt class="descname">replaceLines</tt><big>(</big><em>replaceFunction</em>, <em>arg</em>, <em>text</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.replaceLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.replaceLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>includes happens first (includes of regexes eg &#64;process.* matches full line starting with &#64;process)
+excludes last
+both are arrays
+replace the matched line with line being processed by the functionreplaceFunction(arg,lineWhichMatches)
+the replace function has 2 params, argument &amp; the matching line</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.RegexTools.RegexTools.yieldRegexMatches">
+<tt class="descname">yieldRegexMatches</tt><big>(</big><em>pattern</em>, <em>text</em>, <em>flags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/RegexTools.html#RegexTools.yieldRegexMatches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.RegexTools.RegexTools.yieldRegexMatches" title="Permalink to this definition">¶</a></dt>
+<dd><p>The same as getRegexMatches but instead of returning a list that contains all matches it uses yield to return a generator object
+witch would improve the performance of the search function.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.TemplateEngine">
+<span id="jumpscale-baselib-codetools-templateengine-module"></span><h2>JumpScale.baselib.codetools.TemplateEngine module<a class="headerlink" href="#module-JumpScale.baselib.codetools.TemplateEngine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TemplateEngine.</tt><tt class="descname">TemplateEngine</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.add">
+<tt class="descname">add</tt><big>(</big><em>search</em>, <em>replace</em>, <em>variants=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.capitalize">
+<tt class="descname">capitalize</tt><big>(</big><em>txt</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.capitalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.capitalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.getOutputFromTemplate">
+<tt class="descname">getOutputFromTemplate</tt><big>(</big><em>templatePath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.getOutputFromTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.getOutputFromTemplate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.makePlural">
+<tt class="descname">makePlural</tt><big>(</big><em>txt</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.makePlural"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.makePlural" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.replace">
+<tt class="descname">replace</tt><big>(</big><em>body</em>, <em>replaceCount=3</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.replace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.replaceInsideFile">
+<tt class="descname">replaceInsideFile</tt><big>(</big><em>filePath</em>, <em>replaceCount=3</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.replaceInsideFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.replaceInsideFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.writeFileFromTemplate">
+<tt class="descname">writeFileFromTemplate</tt><big>(</big><em>templatePath</em>, <em>targetPath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngine.html#TemplateEngine.writeFileFromTemplate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngine.TemplateEngine.writeFileFromTemplate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.TemplateEngineWrapper">
+<span id="jumpscale-baselib-codetools-templateenginewrapper-module"></span><h2>JumpScale.baselib.codetools.TemplateEngineWrapper module<a class="headerlink" href="#module-JumpScale.baselib.codetools.TemplateEngineWrapper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TemplateEngineWrapper.TemplateEngineWrapper">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TemplateEngineWrapper.</tt><tt class="descname">TemplateEngineWrapper</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngineWrapper.html#TemplateEngineWrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngineWrapper.TemplateEngineWrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TemplateEngineWrapper.TemplateEngineWrapper.new">
+<tt class="descname">new</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TemplateEngineWrapper.html#TemplateEngineWrapper.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TemplateEngineWrapper.TemplateEngineWrapper.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.TextCharEditor">
+<span id="jumpscale-baselib-codetools-textchareditor-module"></span><h2>JumpScale.baselib.codetools.TextCharEditor module<a class="headerlink" href="#module-JumpScale.baselib.codetools.TextCharEditor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TextCharEditor.</tt><tt class="descname">TextCharEditor</tt><big>(</big><em>text</em>, <em>textfileeditor</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>represents a piece of text but broken appart in blocks
+this one works on a char basis</p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.appendBlock">
+<tt class="descname">appendBlock</tt><big>(</big><em>startpos</em>, <em>text</em>, <em>blockname=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.appendBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.appendBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param match means block was found and matching</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.delete1Block">
+<tt class="descname">delete1Block</tt><big>(</big><em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.delete1Block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.delete1Block" title="Permalink to this definition">¶</a></dt>
+<dd><p>will check there is only 1 block and that block will be deleted, otherwise raise error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlock">
+<tt class="descname">deleteBlock</tt><big>(</big><em>blockname</em>, <em>blocknr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.deleteBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete 1 specified block
+&#64;param blocknr</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlocks">
+<tt class="descname">deleteBlocks</tt><big>(</big><em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.deleteBlocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlocks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.existsBlock">
+<tt class="descname">existsBlock</tt><big>(</big><em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.existsBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.existsBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.get1Block">
+<tt class="descname">get1Block</tt><big>(</big><em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.get1Block"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.get1Block" title="Permalink to this definition">¶</a></dt>
+<dd><p>will check there is only 1 block and that block will be returned, otherwise raise error</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlock">
+<tt class="descname">getBlock</tt><big>(</big><em>blockname</em>, <em>blocknr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>get block based on blockname and blocknr</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockNames">
+<tt class="descname">getBlockNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getBlockNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockNames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockPosition">
+<tt class="descname">getBlockPosition</tt><big>(</big><em>blockname</em>, <em>blocknr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getBlockPosition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockPosition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getHighestBlockNr">
+<tt class="descname">getHighestBlockNr</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getHighestBlockNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getHighestBlockNr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getNrChars">
+<tt class="descname">getNrChars</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getNrChars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getNrChars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getText">
+<tt class="descname">getText</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.getText"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.insertBlock">
+<tt class="descname">insertBlock</tt><big>(</big><em>start</em>, <em>text</em>, <em>blockname=''</em>, <em>blocknr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.insertBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.insertBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>block will be inserted at linenr, means line with linenr will be moved backwards</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksDelimiter">
+<tt class="descname">matchBlocksDelimiter</tt><big>(</big><em>startpattern</em>, <em>blockname</em>, <em>delimiteropen='{'</em>, <em>delimiterclose='}'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.matchBlocksDelimiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksDelimiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>will look for startpattern, then scan for delimeropen and then start counting, block will stop when asmany closes are found as open delimiters
+ideal find e.g. a code block which is not line based
+will only work on text which is not part of known blocks yet
+&#64;startpattern example to find &#8216;{listen,&#8217;  startpattern=&#8221;^[      ]*{[ 
+]*listen[ 
+]*,&#8221;   #note the way how we allow tabs,newlines and spaces</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksPattern">
+<tt class="descname">matchBlocksPattern</tt><big>(</big><em>startpattern</em>, <em>stoppattern</em>, <em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.matchBlocksPattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksPattern" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>will look for startpattern, then scan for stoppattern
+will only work on text which is not part of known blocks yet
+example to find comments which are full line based startpattern=&#8217;^[     ]*%%&#8217;  stoppattern=&#8221;</div></blockquote>
+<p>&#8220;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.printtext">
+<tt class="descname">printtext</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.printtext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.printtext" title="Permalink to this definition">¶</a></dt>
+<dd><p>print line then blocknames then blocknrs</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.replaceBlock">
+<tt class="descname">replaceBlock</tt><big>(</big><em>blockname</em>, <em>blocknr</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.replaceBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.replaceBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>replace block with new content</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.save">
+<tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextCharEditor.html#TextCharEditor.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.TextFileEditor">
+<span id="jumpscale-baselib-codetools-textfileeditor-module"></span><h2>JumpScale.baselib.codetools.TextFileEditor module<a class="headerlink" href="#module-JumpScale.baselib.codetools.TextFileEditor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TextFileEditor.</tt><tt class="descname">TextFileEditor</tt><big>(</big><em>filepath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow manipulate of a text file
+ideal to manipulate e.g. config files
+BE CAREFULL, CHANGES ON textfileeditor and chareditor can overwrite each other</p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.addItemToFoundLineOnlyOnce">
+<tt class="descname">addItemToFoundLineOnlyOnce</tt><big>(</big><em>tofind</em>, <em>add</em>, <em>ignoreRegex=None</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.addItemToFoundLineOnlyOnce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.addItemToFoundLineOnlyOnce" title="Permalink to this definition">¶</a></dt>
+<dd><p>look for tofind and only one add $add to it,
+will not do this on lines matching the regexes
+&#64;param reset if True, will remove the regex first, means will always be added</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendLine">
+<tt class="descname">appendLine</tt><big>(</big><em>line</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.appendLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendLine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendReplaceLine">
+<tt class="descname">appendReplaceLine</tt><big>(</big><em>pattern</em>, <em>line</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.appendReplaceLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendReplaceLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>find line which match the pattern (regex) (only 1 pattern) and then change
+if not found append to end of file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.deleteLines">
+<tt class="descname">deleteLines</tt><big>(</big><em>pattern</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.deleteLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.deleteLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove lines which match the pattern (regex) (only 1 pattern)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.existsLine">
+<tt class="descname">existsLine</tt><big>(</big><em>pattern</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.existsLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.existsLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>return True if pattern found (regex) False if not</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.find1Line">
+<tt class="descname">find1Line</tt><big>(</big><em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.find1Line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.find1Line" title="Permalink to this definition">¶</a></dt>
+<dd><p>if moren than 1 line or 0 line error will be raised
+&#64;param includes are include patters (regular expressions)
+&#64;param excludes
+&#64;return [linenr,line]</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getRegexMatches">
+<tt class="descname">getRegexMatches</tt><big>(</big><em>pattern</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.getRegexMatches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getRegexMatches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextCharEditor">
+<tt class="descname">getTextCharEditor</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.getTextCharEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextCharEditor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextLineEditor">
+<tt class="descname">getTextLineEditor</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.getTextLineEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextLineEditor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.removeSection">
+<tt class="descname">removeSection</tt><big>(</big><em>sectionName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.removeSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.removeSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>look for section starting with ### $sectionName
+end of section starts with ###END $sectionName
+delete that part</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace">
+<tt class="descname">replace</tt><big>(</big><em>regexFind</em>, <em>regexFindsubsetToReplace</em>, <em>replaceWith</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for regexFind in text and if found, replace the subset regexFindsubsetToReplace of regexFind with replacewith and returns the new text
+Example:</p>
+<blockquote>
+<div>replace(&#8220;Q-Layer Server&#8221;, &#8220;Server&#8221;, &#8220;Computer&#8221;, &#8220;This is a Q-Layer Server&#8221;)
+will return &#8220;This is a Q-Layer Computer&#8221;</div></blockquote>
+<p>&#64;param regexFind: String to search for, can be a regular expression
+&#64;param regexFindsubsetToReplace: The subset within regexFind that you want to replace
+&#64;param replacewith: The replacement</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1Line">
+<tt class="descname">replace1Line</tt><big>(</big><em>newcontent</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replace1Line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1Line" title="Permalink to this definition">¶</a></dt>
+<dd><p>includes happens first
+excludes last
+both are arrays
+replace matching lines with new content</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1LineFromFunction">
+<tt class="descname">replace1LineFromFunction</tt><big>(</big><em>replaceFunction</em>, <em>argument</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replace1LineFromFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1LineFromFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>same as with replaceLinesFromFunction, but only 1 line will be matched</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLines">
+<tt class="descname">replaceLines</tt><big>(</big><em>newcontent</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replaceLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>includes happens first (is regex!!!!)
+excludes last
+both are arrays
+replace matching lines with new content</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLinesFromFunction">
+<tt class="descname">replaceLinesFromFunction</tt><big>(</big><em>replaceFunction</em>, <em>argument</em>, <em>includes=''</em>, <em>excludes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replaceLinesFromFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLinesFromFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>includes happens first
+excludes last
+both are arrays
+&#64;param argument which is going to be give to replacefunction
+&#64;replaceFunction is the replace function has 2 params, argument &amp; the matching line, returns the processed line
+replace the matched line with line being processed by the functionreplaceFunction(argument,lineWhichMatches)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceNonRegex">
+<tt class="descname">replaceNonRegex</tt><big>(</big><em>tofind</em>, <em>replaceWith</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.replaceNonRegex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceNonRegex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.save">
+<tt class="descname">save</tt><big>(</big><em>filepath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>write the manipulated file to a new path or to the original</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.setSection">
+<tt class="descname">setSection</tt><big>(</big><em>sectionName</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextFileEditor.html#TextFileEditor.setSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.setSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>look for section starting with ### $sectionName
+end of section starts with ###END $sectionName
+whatever inbetween will be replaced by content</p>
+<p>if section does not exist yet then it will be added at end of file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.TextLineEditor">
+<span id="jumpscale-baselib-codetools-textlineeditor-module"></span><h2>JumpScale.baselib.codetools.TextLineEditor module<a class="headerlink" href="#module-JumpScale.baselib.codetools.TextLineEditor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.LTLine">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TextLineEditor.</tt><tt class="descname">LTLine</tt><big>(</big><em>line</em>, <em>blockname=''</em>, <em>blocknr=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#LTLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.LTLine" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.TextLineEditor.</tt><tt class="descname">TextLineEditor</tt><big>(</big><em>text</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>represents a piece of text but broken appart in blocks/tokens
+this one works on a line basis</p>
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.addBlock">
+<tt class="descname">addBlock</tt><big>(</big><em>blockname</em>, <em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.addBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.addBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.appendBlock">
+<tt class="descname">appendBlock</tt><big>(</big><em>text</em>, <em>blockname=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.appendBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.appendBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param match means block was found and matching</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.deleteBlock">
+<tt class="descname">deleteBlock</tt><big>(</big><em>blockname</em>, <em>blocknr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.deleteBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.deleteBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>mark block as not matching based on startline</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.existsBlock">
+<tt class="descname">existsBlock</tt><big>(</big><em>blockname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.existsBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.existsBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getBlock">
+<tt class="descname">getBlock</tt><big>(</big><em>blockname</em>, <em>blocknr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>get block based on startline</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getBlockNames">
+<tt class="descname">getBlockNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getBlockNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getBlockNames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getFirstLineNrForBlock">
+<tt class="descname">getFirstLineNrForBlock</tt><big>(</big><em>blockname</em>, <em>blocknr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getFirstLineNrForBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getFirstLineNrForBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getHighestBlockNr">
+<tt class="descname">getHighestBlockNr</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getHighestBlockNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getHighestBlockNr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getNextBlockNr">
+<tt class="descname">getNextBlockNr</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getNextBlockNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getNextBlockNr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getNrLines">
+<tt class="descname">getNrLines</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.getNrLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.getNrLines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.insertBlock">
+<tt class="descname">insertBlock</tt><big>(</big><em>linenr</em>, <em>text</em>, <em>blockname=''</em>, <em>blocknr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.insertBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.insertBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>block will be inserted at linenr, means line with linenr will be moved backwards</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.matchBlocks">
+<tt class="descname">matchBlocks</tt><big>(</big><em>blockname, blockStartPatterns=['.*'], blockStartPatternsNegative=[], blockStopPatterns=[], blockStopPatternsNegative=[], blockfilter=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.matchBlocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.matchBlocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>walk over blocks which are marked as matched and split blocks in more blocks depending criteria
+can be usefull to do this multiple times (sort of iterative) e.g. find class and then in class remove comments
+&#64;param blockfilter will always match beginning of blockname e.g. can use userauth.sites  then change userauth.sites  will match all sites
+look for blocks starting with line which matches one of patterns in blockStartPatterns and not matching one of patterns in blockStartPatternsNegative
+block will stop when line found which matches one of patterns in blockStopPatterns and not in blockStopPatternsNegative or when next match for start is found
+example pattern: &#8216;^class &#8216; looks for class at beginning of line with space behind</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.replaceBlock">
+<tt class="descname">replaceBlock</tt><big>(</big><em>blockname</em>, <em>text</em>, <em>blocknr=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.replaceBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.replaceBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>set block based on startline with new content</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.save">
+<tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/TextLineEditor.html#TextLineEditor.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.TextLineEditor.TextLineEditor.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools.WordReplacer">
+<span id="jumpscale-baselib-codetools-wordreplacer-module"></span><h2>JumpScale.baselib.codetools.WordReplacer module<a class="headerlink" href="#module-JumpScale.baselib.codetools.WordReplacer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.WordReplacer.Synonym">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.WordReplacer.</tt><tt class="descname">Synonym</tt><big>(</big><em>name=''</em>, <em>replaceWith=''</em>, <em>simpleSearch=''</em>, <em>addConfluenceLinkTags=False</em>, <em>replaceExclude=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#Synonym"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.Synonym" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.Synonym.replace">
+<tt class="descname">replace</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#Synonym.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.Synonym.replace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.Synonym.setRegexSearch">
+<tt class="descname">setRegexSearch</tt><big>(</big><em>regexFind</em>, <em>regexFindForReplace</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#Synonym.setRegexSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.Synonym.setRegexSearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer">
+<em class="property">class </em><tt class="descclassname">JumpScale.baselib.codetools.WordReplacer.</tt><tt class="descname">WordReplacer</tt><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.removeConfluenceLinks">
+<tt class="descname">removeConfluenceLinks</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.removeConfluenceLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.removeConfluenceLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>find [...] and remove the [ and the ]
+&#64;todo 2  (id:19)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.replace">
+<tt class="descname">replace</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.replace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.replaceInConfluence">
+<tt class="descname">replaceInConfluence</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.replaceInConfluence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.replaceInConfluence" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;[..|.] will also be looked for and replaced</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.reset">
+<tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymAdd">
+<tt class="descname">synonymAdd</tt><big>(</big><em>name=''</em>, <em>simpleSearch=''</em>, <em>regexFind=''</em>, <em>regexFindForReplace=''</em>, <em>replaceWith=''</em>, <em>replaceExclude=''</em>, <em>addConfluenceLinkTags=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.synonymAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymAdd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new synonym to this replacer
+&#64;param name: Synonym name
+&#64;param simpleSearch: Search text for sysnonym, if you supply this, then the synonym will automatically generate a matching regex pattern that&#8217;ll be used to search for this string, if you want to specificy the regex explicitly then use regexFind instead.
+&#64;param regexFind: Provide this regex only if you didn&#8217;t provide simpleSearch, it represents the regex that&#8217;ll be used in search for this synonym . It overrides the default synonym search pattern
+&#64;param regexFindForReplace: The subset within regexFind that&#8217;ll be replaced for this synonym</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsAddFromFile">
+<tt class="descname">synonymsAddFromFile</tt><big>(</big><em>path</em>, <em>addConfluenceLinkTags=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.synonymsAddFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsAddFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>load synonym satements from a file in the following format
+[searchStatement]:[replaceto]
+or
+&#8216;[regexFind]&#8217;:&#8217;[regexReplace]&#8217;:replaceto
+note: delimiter is :
+note: &#8216;&#8217; around regex statements
+e.g.
+<strong>**</strong>
+master?daemon:ApplicationServer
+application?server:ApplicationServer
+&#8216;application[ -_]+server&#8217;:&#8217;application[ -_]+server&#8217;:ApplicationServer
+&#8216;[application[ -_]+server]&#8217;:&#8217;application[ -_]+server&#8217;:ApplicationServer        
+<strong>**</strong>
+&#64;param addConfluenceLinkTags id True then replaced items will be surrounded by [] (Boolean)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsPrint">
+<tt class="descname">synonymsPrint</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/codetools/WordReplacer.html#WordReplacer.synonymsPrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsPrint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-JumpScale.baselib.codetools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.codetools" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">JumpScale.baselib.codetools package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.ClassDef">JumpScale.baselib.codetools.ClassDef module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.CodeElements">JumpScale.baselib.codetools.CodeElements module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.CodeManager">JumpScale.baselib.codetools.CodeManager module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.CodeTools">JumpScale.baselib.codetools.CodeTools module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.MethodDef">JumpScale.baselib.codetools.MethodDef module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.PropertyDef">JumpScale.baselib.codetools.PropertyDef module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.RegexTools">JumpScale.baselib.codetools.RegexTools module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.TemplateEngine">JumpScale.baselib.codetools.TemplateEngine module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.TemplateEngineWrapper">JumpScale.baselib.codetools.TemplateEngineWrapper module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.TextCharEditor">JumpScale.baselib.codetools.TextCharEditor module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.TextFileEditor">JumpScale.baselib.codetools.TextFileEditor module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.TextLineEditor">JumpScale.baselib.codetools.TextLineEditor module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools.WordReplacer">JumpScale.baselib.codetools.WordReplacer module</a></li>
+<li><a class="reference internal" href="#module-JumpScale.baselib.codetools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.codeexecutor.html"
+                        title="previous chapter">JumpScale.baselib.codeexecutor package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScale.baselib.credis.html"
+                        title="next chapter">JumpScale.baselib.credis package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/API/JumpScale.baselib.codetools.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.credis.html" title="JumpScale.baselib.credis package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JumpScale.baselib.codeexecutor.html" title="JumpScale.baselib.codeexecutor package"
+             >previous</a> |</li>
+        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

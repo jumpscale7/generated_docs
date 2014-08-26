@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Agent controller usage of redis &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="AgentController" href="../index.html" />
+    <link rel="next" title="OSIS" href="../../OSIS/index.html" />
+    <link rel="prev" title="Schedule work" href="../ScheduleWork.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../OSIS/index.html" title="OSIS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ScheduleWork.html" title="Schedule work"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">AgentController</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="agent-controller-usage-of-redis">
+<h1>Agent controller usage of redis<a class="headerlink" href="#agent-controller-usage-of-redis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="webdis-based">
+<h2>webdis based<a class="headerlink" href="#webdis-based" title="Permalink to this headline">¶</a></h2>
+<p>webdis is webfrontend for redis and hosted on port 7779.
+redis behind is on port 7770
+you can use the excelent <a class="reference external" href="http://redisdesktop.com/">http://redisdesktop.com/</a> to visualize redis.</p>
+<p>webdis only allows certain actions to make it secure</p>
+<p>webdis default configuration</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;redis_host&quot;</span><span class="p">:</span>   <span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+
+    <span class="s">&quot;redis_port&quot;</span><span class="p">:</span>   <span class="mi">7770</span><span class="p">,</span>
+    <span class="s">&quot;redis_auth&quot;</span><span class="p">:</span>   <span class="n">null</span><span class="p">,</span>
+
+    <span class="s">&quot;http_host&quot;</span><span class="p">:</span>    <span class="s">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+    <span class="s">&quot;http_port&quot;</span><span class="p">:</span>    <span class="mi">7779</span><span class="p">,</span>
+
+    <span class="s">&quot;threads&quot;</span><span class="p">:</span>  <span class="mi">5</span><span class="p">,</span>
+    <span class="s">&quot;pool_size&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+
+    <span class="s">&quot;daemonize&quot;</span><span class="p">:</span>    <span class="n">false</span><span class="p">,</span>
+    <span class="s">&quot;websockets&quot;</span><span class="p">:</span>   <span class="n">false</span><span class="p">,</span>
+
+    <span class="s">&quot;database&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+
+    <span class="s">&quot;acl&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">&quot;enabled&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="s">&quot;SET&quot;</span><span class="p">,</span> <span class="s">&quot;DEL&quot;</span><span class="p">,</span><span class="s">&quot;HGET&quot;</span><span class="p">,</span><span class="s">&quot;HSET&quot;</span><span class="p">,</span> <span class="s">&quot;HDEL&quot;</span><span class="p">,</span><span class="s">&quot;EXISTS&quot;</span><span class="p">,</span> <span class="s">&quot;HEXISTS&quot;</span><span class="p">,</span><span class="s">&quot;PING&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+
+        <span class="s">&quot;verbosity&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s">&quot;logfile&quot;</span><span class="p">:</span> <span class="s">&quot;/opt/jumpscale/var/webdis/webdis.log&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="structure-in-database">
+<h3>structure in database<a class="headerlink" href="#structure-in-database" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Agent controller usage of redis</a><ul>
+<li><a class="reference internal" href="#webdis-based">webdis based</a><ul>
+<li><a class="reference internal" href="#structure-in-database">structure in database</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ScheduleWork.html"
+                        title="previous chapter">Schedule work</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../OSIS/index.html"
+                        title="next chapter">OSIS</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/AgentController/ACRedis/ACRedis.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../OSIS/index.html" title="OSIS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ScheduleWork.html" title="Schedule work"
+             >previous</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../index.html" >AgentController</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

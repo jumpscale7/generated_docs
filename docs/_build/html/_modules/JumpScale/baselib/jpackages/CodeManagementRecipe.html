@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.jpackages.CodeManagementRecipe &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.jpackages.CodeManagementRecipe</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.vcs</span>
+
+<span class="k">class</span> <span class="nc">RecipeItem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="RecipeItem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem">[docs]</a>    <span class="sd">&#39;&#39;&#39;Ingredient of a CodeRecipe&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repoinfo</span><span class="p">,</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span><span class="n">platform</span><span class="o">=</span><span class="s">&quot;generic&quot;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s">&quot;base&quot;</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">recipe</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param types sitepackages, root, base, etc, tmp,bin</span>
+<span class="sd">        @param tagslabels: e.g. config as str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repoinfo</span><span class="o">=</span><span class="n">repoinfo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recipe</span><span class="o">=</span><span class="n">recipe</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="o">=</span><span class="n">destination</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span>
+
+        <span class="k">if</span> <span class="n">platform</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">platform</span><span class="o">=</span><span class="s">&quot;generic&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">platform</span><span class="o">=</span><span class="n">platform</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">getTypePath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span><span class="n">jp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">recipe</span><span class="o">.</span><span class="n">jp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">=</span><span class="n">tags</span>
+        
+        <span class="c"># determine supported platforms </span>
+        <span class="n">hostPlatform</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">myplatform</span>
+        <span class="n">supportedPlatforms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+        <span class="n">supportedPlatforms</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">getParents</span><span class="p">(</span><span class="n">hostPlatform</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">platform</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_isPlatformSupported</span> <span class="o">=</span> <span class="n">hostPlatform</span> <span class="ow">in</span> <span class="n">supportedPlatforms</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_isPlatformSupported</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">platform</span> <span class="ow">in</span> <span class="n">supportedPlatforms</span>
+
+    <span class="k">def</span> <span class="nf">_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">message</span><span class="o">=</span><span class="s">&quot;recipeitem:</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">  </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">category</span><span class="o">=</span><span class="s">&quot;recipeitem.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">category</span>
+        <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">level</span><span class="p">)</span>     
+
+    <span class="k">def</span> <span class="nf">getSource</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RecipeItem.getSource"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.getSource">[docs]</a>        <span class="n">account</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repoinfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.account&quot;</span><span class="p">)</span>
+        <span class="n">repo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repoinfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.repo&quot;</span><span class="p">)</span>
+        <span class="n">branch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repoinfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.branch&quot;</span><span class="p">)</span>
+        <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repoinfo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.provider&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">branch</span><span class="o">=</span><span class="s">&quot;default&quot;</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">codeDir</span><span class="p">,</span><span class="n">provider</span><span class="p">,</span><span class="n">account</span><span class="p">,</span><span class="n">repo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">exportToSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="RecipeItem.exportToSystem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.exportToSystem">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Copy files from coderepo to destination, without metadata of coderepo</span>
+<span class="sd">        This is only done when the recipe item is relevant for our platform</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;export to system.&quot;</span><span class="p">,</span><span class="s">&quot;export&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isPlatformSupported</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSource</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;System destination was not defined, cannot export:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span>
+            <span class="k">print</span> <span class="s">&quot;export:</span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isLink</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>   
+                <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">removeProtectedDir</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span> <span class="ow">and</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>                            
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Do you want to overwrite </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+                            <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s">&quot;Not overwriting </span><span class="si">%s</span><span class="s">, item will not be exported&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">)</span>
+                            <span class="k">return</span>        
+                <span class="bp">self</span><span class="o">.</span><span class="n">_removeDest</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>  
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span><span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="c"># self._setSecurityFromSource(source,destination)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span><span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                             
+        
+    <span class="k">def</span> <span class="nf">_copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find:</span><span class="si">%s</span><span class="s"> for recipeitem:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">src</span><span class="p">,</span><span class="bp">self</span><span class="p">))</span>
+        
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+            <span class="n">destDir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">destDir</span><span class="p">,</span><span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span><span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>            
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyDirTree</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span><span class="n">skipProtectedDirs</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot handle destination </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="se">\n</span><span class="s"> Did you codecheckout your code already? Code was not found to package.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">codeToFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jpackage</span><span class="p">):</span>
+<div class="viewcode-block" id="RecipeItem.codeToFiles"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.codeToFiles">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        copy code from repo&#39;s (using the recipes) to the file location for packaging</span>
+<span class="sd">        this is done per platform as specified in recipe, if not specified then generic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;package code to files for </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">jpackage</span><span class="p">),</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;codetofiles&quot;</span><span class="p">)</span>        
+        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSource</span><span class="p">()</span>        
+        <span class="n">platformFilesPath</span> <span class="o">=</span> <span class="n">jpackage</span><span class="o">.</span><span class="n">getPathFilesPlatform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">platform</span><span class="p">)</span>
+        <span class="n">dest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">platformFilesPath</span><span class="p">,</span> <span class="s">&quot;cr_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_removeDest</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+        
+        
+    <span class="k">def</span> <span class="nf">linkToSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="RecipeItem.linkToSystem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.linkToSystem">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        link parts of the coderepo to the destination and put this  entry in the protected dirs section so data cannot be overwritten by jpackages</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;link to system&quot;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;link&quot;</span><span class="p">)</span>
+        <span class="n">force</span><span class="o">=</span><span class="bp">True</span> <span class="c">#@todo will have to change, now always true</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s">&quot;config&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exportToSystem</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_isPlatformSupported</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSource</span><span class="p">()</span>        
+            <span class="n">destination</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;System destination was not defined, cannot export:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="p">)</span>
+
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&quot;CONFIG:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">exportToSystem</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;link:</span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">destination</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isLink</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>   
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span> <span class="ow">and</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>                            
+                            <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">askYesNo</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Do you want to overwrite </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+                                <span class="n">j</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s">&quot;Not overwriting </span><span class="si">%s</span><span class="s">, it will not be linked&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">)</span>
+                                <span class="k">return</span>        
+        
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_removeDest</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">source</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find source to put link to, link was from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">destination</span><span class="p">))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+                <span class="c"># self._setSecurityFromSource(source,destination)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">addProtectedDir</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+
+    <span class="c"># def _setSecurityFromSource(self,src,dest):</span>
+    <span class="c">#     stat=j.system.fs.statPath(src)</span>
+    <span class="c">#     j.system.fs.chmod(dest,stat.st_mode)</span>
+    <span class="c">#     print &quot;%s %s&quot; % (stat.st_mode,j.system.fs.statPath(src).st_mode)</span>
+
+
+    <span class="k">def</span> <span class="nf">addToProtectedDirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="RecipeItem.addToProtectedDirs"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.addToProtectedDirs">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;System destination was not defined, cannot export:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">addProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">removeFromProtectedDirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="RecipeItem.removeFromProtectedDirs"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.removeFromProtectedDirs">[docs]</a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;System destination was not defined, cannot export:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">removeProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unlinkSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="RecipeItem.unlinkSystem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.unlinkSystem">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        unlink the system, remove the links and copy the content instead</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">(</span><span class="s">&quot;unlink system&quot;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;link&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s">&quot;config&quot;</span><span class="p">:</span>
+            <span class="k">return</span> 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;System destination was not defined, cannot export:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isLink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">removeProtectedDir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">systemdest</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">exportToSystem</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_removeDest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot; Remove a destionation file or directory.&quot;&quot;&quot;</span>
+        <span class="n">isFile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isFile</span>
+        <span class="n">isDir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span>
+        <span class="n">removeFile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span>
+        <span class="n">removeDirTree</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span>
+        <span class="n">exists</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">isFile</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+            <span class="n">removeFile</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">isDir</span><span class="p">(</span><span class="n">dest</span><span class="p">):</span>
+            <span class="n">removeDirTree</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot remove destination of unknown type &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="n">dest</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;from:</span><span class="si">%s</span><span class="s"> to:</span><span class="si">%s</span><span class="s"> type:</span><span class="si">%s</span><span class="s"> platf:</span><span class="si">%s</span><span class="s"> tags:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">destination</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">platform</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">CodeManagementRecipe</span><span class="p">:</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe">[docs]</a>    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Recipe providing guidelines how to cook a JPackage from source code in a repo, is populated from a config file</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hrdpath</span><span class="p">,</span><span class="n">configpath</span><span class="p">,</span><span class="n">jp</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repoconnection</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configpath</span><span class="o">=</span><span class="n">configpath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">getHRD</span><span class="p">(</span><span class="n">hrdpath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jp</span><span class="o">=</span><span class="n">jp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_getSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">source</span><span class="p">):</span>
+        <span class="n">account</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.account&quot;</span><span class="p">)</span>
+        <span class="n">repo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.repo&quot;</span><span class="p">)</span>
+        <span class="n">branch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.branch&quot;</span><span class="p">)</span>
+        <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.provider&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">repo</span><span class="o">==</span><span class="s">&quot;&quot;</span> <span class="ow">or</span> <span class="n">account</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot define codemgmt recipe with empty account or repo, please adjust: hrd/code.hrd in jpackage dir </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">configpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">branch</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">branch</span><span class="o">=</span><span class="s">&quot;default&quot;</span>
+
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">codeDir</span><span class="p">,</span><span class="n">provider</span><span class="p">,</span><span class="n">account</span><span class="p">,</span><span class="n">repo</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configpath</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">==</span><span class="s">&quot;&quot;</span> <span class="ow">or</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;#&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">splitted</span><span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span><span class="o">&lt;&gt;</span><span class="mi">5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;error in coderecipe config file: </span><span class="si">%s</span><span class="s"> on line:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">configpath</span><span class="p">,</span><span class="n">line</span><span class="p">))</span>
+            <span class="n">splitted</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">splitted</span><span class="p">]</span>
+            <span class="n">source</span><span class="p">,</span><span class="n">dest</span><span class="p">,</span><span class="n">platform</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="n">splitted</span>
+            <span class="n">tags</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">source</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">source2</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getSource</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">source2</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+                    <span class="n">item</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>                    
+                    <span class="n">source3</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+                    <span class="n">source3</span><span class="o">=</span><span class="n">source3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;//&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+                    <span class="c"># print &quot;*%s*&quot;%source3</span>
+                    <span class="n">idest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>                    
+                    <span class="n">item</span><span class="o">=</span><span class="n">RecipeItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">source3</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">idest</span><span class="p">,</span><span class="n">platform</span><span class="o">=</span><span class="n">platform</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span><span class="n">recipe</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>                                                
+                <span class="k">if</span> <span class="n">tags</span><span class="o">.</span><span class="n">labelExists</span><span class="p">(</span><span class="s">&quot;nodirs&quot;</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listDirsInDir</span><span class="p">(</span><span class="n">source2</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+                    <span class="n">item</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">item</span><span class="o">+</span><span class="s">&quot;/&quot;</span><span class="p">)</span>                    
+                    <span class="n">idest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+                    <span class="n">source3</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+                    <span class="n">source3</span><span class="o">=</span><span class="n">source3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;//&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+                    <span class="n">source3</span><span class="o">=</span><span class="n">source3</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;//&quot;</span><span class="p">,</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+                    <span class="c"># print &quot;*%s*&quot;%source3</span>
+                    <span class="n">item</span><span class="o">=</span><span class="n">RecipeItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">source3</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">idest</span><span class="p">,</span><span class="n">platform</span><span class="o">=</span><span class="n">platform</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span><span class="n">recipe</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> 
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">=</span><span class="n">RecipeItem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">dest</span><span class="p">,</span><span class="n">platform</span><span class="o">=</span><span class="n">platform</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span><span class="n">recipe</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CodeManagementRecipe.export"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.export">[docs]</a>        <span class="sd">&#39;&#39;&#39;Export all items from VCS to the system sandbox or other location specifed&#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">exportToSystem</span><span class="p">()</span>
+            
+    <span class="k">def</span> <span class="nf">addToProtectedDirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.addToProtectedDirs"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.addToProtectedDirs">[docs]</a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">addToProtectedDirs</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">removeFromProtectedDirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.removeFromProtectedDirs"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromProtectedDirs">[docs]</a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">removeFromProtectedDirs</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.link"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.link">[docs]</a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">linkToSystem</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>    
+
+    <span class="k">def</span> <span class="nf">unlink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.unlink"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.unlink">[docs]</a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">unlinkSystem</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>    
+
+    <span class="c"># def importFromSystem(self,jpackages):</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     go from system to files section</span>
+    <span class="c">#     &quot;&quot;&quot;</span>
+    <span class="c">#     for item in self.items:</span>
+    <span class="c">#         item.importFromSystem(jpackages)                </span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">jpackage</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.package"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.package">[docs]</a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">codeToFiles</span><span class="p">(</span><span class="n">jpackage</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.push"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.push">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">push</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.update"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.update">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">pullupdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.pullupdate"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullupdate">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">pullmerge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.pullmerge"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullmerge">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.commit"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.commit">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repoconnection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="nd">@property</span></div>
+    <span class="k">def</span> <span class="nf">repoconnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CodeManagementRecipe.repoconnection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.repoconnection">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repoconnection</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repoconnection</span>
+        <span class="n">account</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.account&quot;</span><span class="p">)</span>
+        <span class="n">repo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.repo&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">repo</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;repo not filled in, so coderecipe probably not used for </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span>
+            <span class="k">return</span> 
+
+        <span class="n">branch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.branch&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">None</span>
+        <span class="n">ttype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.type&quot;</span><span class="p">)</span>
+        <span class="n">provider</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;jp.code.provider&quot;</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="s">&quot;getrepo connection: </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="n">branch</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repoconnection</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">vcs</span><span class="o">.</span><span class="n">getClient</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repoconnection</span>
+
+    <span class="k">def</span> <span class="nf">isDestinationClean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.isDestinationClean"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.isDestinationClean">[docs]</a>        <span class="sd">&#39;&#39;&#39;Check whether the final destination is clean (means do the folders exist)</span>
+
+<span class="sd">        Returns C{True} if none of the destination folders exist, C{False}</span>
+<span class="sd">        otherwise.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">destination</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">removeFromSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="CodeManagementRecipe.removeFromSystem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.jpackages.html#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromSystem">[docs]</a>        <span class="sd">&#39;&#39;&#39;Remove all folders the recipe has written to&#39;&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">destination</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">removeDirTree</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">destination</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="n">s</span><span class="o">=</span><span class="s">&quot;recipe:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">+=</span><span class="s">&quot;- </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="n">s</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

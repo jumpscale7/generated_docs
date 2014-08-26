@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.webdis.Webdis &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.webdis.Webdis</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ujson</span> <span class="kn">as</span> <span class="nn">json</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">msgpack</span>
+
+<span class="k">class</span> <span class="nc">WebdisFactory</span><span class="p">:</span>
+<div class="viewcode-block" id="WebdisFactory"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.WebdisFactory">[docs]</a>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_webdis</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">7779</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="viewcode-block" id="WebdisFactory.get"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.WebdisFactory.get">[docs]</a>        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webdis</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_webdis</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">Webdis</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_webdis</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">opserror_critical</span><span class="p">(</span><span class="s">&quot;could not connect to webdis: &#39;</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&#39;&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="n">port</span><span class="p">),</span> <span class="s">&quot;webdis.connect&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_webdis</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getByInstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WebdisFactory.getByInstance"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.WebdisFactory.getByInstance">[docs]</a>        <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">instanceconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;webdis.connection&#39;</span><span class="p">)</span>
+        <span class="n">webdiscljp</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">findNewest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;webdis_client&quot;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s">&quot;jumpscale&quot;</span><span class="p">)</span>
+        <span class="n">webdiscljp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+        <span class="n">hrd</span> <span class="o">=</span> <span class="n">webdiscljp</span><span class="o">.</span><span class="n">hrd_instance</span>
+        <span class="n">ipaddr</span> <span class="o">=</span> <span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;addr&quot;</span><span class="p">)</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;port&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">7779</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WebdisFactory.check"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.WebdisFactory.check">[docs]</a>        <span class="n">key</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">Webdis</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rs</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">Webdis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div></div>
+<div class="viewcode-block" id="Webdis"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis">[docs]</a>    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">8889</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="o">=</span><span class="n">addr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="o">=</span><span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">url</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Webdis.execute"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.execute">[docs]</a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># headers = {&#39;content-type&#39;: &#39;application/json&#39;}</span>
+                <span class="c"># if url&lt;&gt;&quot;&quot;:</span>
+                <span class="c">#     data2=&quot;%s/%s&quot;%(cmd,url)</span>
+                <span class="c"># else:</span>
+                <span class="c">#     data2=&quot;%s&quot;%cmd</span>
+                <span class="c"># if data&lt;&gt;None:</span>
+                <span class="c">#     data2=&quot;%s/%s&quot;%(data2,data)</span>
+                <span class="c"># print &quot;data:&#39;%s&#39;&quot;%data2</span>
+                <span class="n">headers</span><span class="o">=</span><span class="p">{}</span>
+                <span class="c"># if data&lt;&gt;None:</span>
+                <span class="c">#     headers = {&#39;content-type&#39;: &#39;binary/octet-stream&#39;}</span>
+                <span class="k">if</span> <span class="n">url</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">url2</span><span class="o">=</span><span class="s">&#39;http://</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.png&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">url2</span><span class="o">=</span><span class="s">&#39;http://</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span><span class="n">cmd</span><span class="p">)</span>
+                <span class="c"># print url2</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url2</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># data=msgpack.dumps(data)                    </span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+                <span class="c"># if data&lt;&gt;None:</span>
+                <span class="c">#     print len(data)</span>
+                <span class="c"># r=requests.get(&#39;http://%s:%s/%s&#39;%(self.addr,self.port,data2),headers=headers)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                <span class="c"># print e</span>
+                <span class="k">if</span> <span class="n">die</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Max retries exceeded with url&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="s">&quot;Webdis not available&quot;</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">==</span><span class="mi">200</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">content</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;content-type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;application/x-msgpack&#39;</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">=</span><span class="n">msgpack</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;content-type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;application/json&#39;</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">res</span>
+                
+            <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">==</span><span class="mi">403</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Webdis could not execute </span><span class="si">%s</span><span class="s">,forbidden.&quot;</span><span class="o">%</span><span class="n">url2</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">==</span><span class="mi">404</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+                <span class="c"># raise RuntimeError(&quot;Key not found&quot;)</span>
+            <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">==</span><span class="mi">405</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Webdis could not execute </span><span class="si">%s</span><span class="s">,not supported&quot;</span><span class="o">%</span><span class="n">url2</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">==</span><span class="mi">503</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Webdis not available for url:&#39;</span><span class="si">%s</span><span class="s">&#39;,please restart webdis on server.&quot;</span><span class="o">%</span><span class="n">url2</span><span class="p">)</span>                
+            <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="o">&lt;&gt;</span><span class="mi">200</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;Unknown status code webdis:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Webdis not available for url:&#39;</span><span class="si">%s</span><span class="s">&#39;,unknown status code:&#39;</span><span class="si">%s</span><span class="s">&#39;.&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># from IPython import embed</span>
+                <span class="c"># print &quot;DEBUG NOW wedis.execute, check errorcondition&quot;</span>
+                <span class="c"># embed()</span>
+                <span class="c">##TODO</span>
+                <span class="k">pass</span>
+                
+        <span class="c"># eco=j.errorconditionhandler.parsePythonErrorObject(e)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseOperationalCritical</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">&#39;Webdis is down on port </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&#39;webdis.down&#39;</span><span class="p">,</span> \
+            <span class="n">msgpub</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">eco</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>                
+
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.ping"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.ping">[docs]</a>        <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;PING&#39;</span><span class="p">,</span><span class="n">die</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">==</span><span class="bp">False</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">&lt;&gt;</span><span class="mi">2</span> <span class="ow">or</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">u&quot;PONG&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">llen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.llen"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.llen">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;LLEN&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rpush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.rpush"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.rpush">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;RPUSH&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">blpop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="s">&quot;60&quot;</span><span class="p">):</span> <span class="c">#@todo timeout?</span></div>
+<div class="viewcode-block" id="Webdis.blpop"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.blpop">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;BLPOP&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">lpop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.lpop"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.lpop">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;LPOP&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hkeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hkeys"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hkeys">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HKEYS&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.exists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.exists">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;EXISTS&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span>
+        
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.get"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.get">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;GET&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.set"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.set">[docs]</a>        <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;SET&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">res</span><span class="o">&lt;&gt;</span><span class="s">&quot;+OK&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not set </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hset">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HSET&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">),</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hget"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hget">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HGET&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">hgetall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hkey</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hgetall"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hgetall">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HGETALL&#39;</span><span class="p">,</span><span class="n">hkey</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">hdelete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hdelete"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hdelete">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HDEL&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">hexists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.hexists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.hexists">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;HEXISTS&#39;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">hkey</span><span class="p">,</span><span class="n">key</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">incr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.incr"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.incr">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;INCR&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">incrby</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">nr</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.incrby"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.incrby">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;INCRBY&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">nr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.delete"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.delete">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;DEL&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">expire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">timeout</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Webdis.expire"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.webdis.html#JumpScale.baselib.webdis.Webdis.Webdis.expire">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&#39;EXPIRE&#39;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">timeout</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

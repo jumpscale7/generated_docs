@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.codetools.TextCharEditor &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.codetools.TextCharEditor</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="TextCharEditor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor">[docs]</a><span class="k">class</span> <span class="nc">TextCharEditor</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    represents a piece of text but broken appart in blocks</span>
+<span class="sd">    this one works on a char basis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">textfileeditor</span><span class="p">):</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;    &quot;</span><span class="p">)</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="o">=</span><span class="p">[[</span><span class="n">char</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>  <span class="c">#is the array of the text, each value = [char,blockname,blocknr]</span>
+        <span class="c">##self.charsBlocknames=[]  #position as in chars will have as value the blockname, if blockname==&quot;&quot; then not matched</span>
+        <span class="c">##self.charsBlocknrs=[]  #position as in chars will have as value the blocknr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="o">=</span><span class="p">{}</span> <span class="c">#key is name of block, the value is the last used blocknr </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_textfileeditor</span><span class="o">=</span><span class="n">textfileeditor</span>
+    
+<div class="viewcode-block" id="TextCharEditor.save"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_textfileeditor</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getText</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_textfileeditor</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>        
+        </div>
+<div class="viewcode-block" id="TextCharEditor.getText"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getText">[docs]</a>    <span class="k">def</span> <span class="nf">getText</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">char</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">])</span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.getNrChars"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getNrChars">[docs]</a>    <span class="k">def</span> <span class="nf">getNrChars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.existsBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.existsBlock">[docs]</a>    <span class="k">def</span> <span class="nf">existsBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="TextCharEditor.getBlockNames"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockNames">[docs]</a>    <span class="k">def</span> <span class="nf">getBlockNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TextCharEditor.matchBlocksPattern"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksPattern">[docs]</a>    <span class="k">def</span> <span class="nf">matchBlocksPattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">startpattern</span><span class="p">,</span><span class="n">stoppattern</span><span class="p">,</span><span class="n">blockname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        will look for startpattern, then scan for stoppattern</span>
+<span class="sd">        will only work on text which is not part of known blocks yet</span>
+<span class="sd">        example to find comments which are full line based startpattern=&#39;^[ \t]*%%&#39;  stoppattern=&quot;\n&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatches</span><span class="p">(</span><span class="n">startpattern</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">getText</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">matches</span><span class="p">:</span>    
+            <span class="n">start</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">start</span>
+            <span class="n">textToInvestigate</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">char</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">:]],</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">result2</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatches</span><span class="p">(</span><span class="n">stoppattern</span><span class="p">,</span><span class="n">textToInvestigate</span><span class="p">)</span>     
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;could not find stoppattern </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">stoppattern</span><span class="p">)</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">result2</span><span class="o">.</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span>
+            <span class="n">skip</span><span class="o">=</span><span class="bp">False</span>
+            <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">,</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="o">+</span><span class="n">end</span><span class="p">):</span> <span class="c">#scan first time if somewhere there is already a char part of a block</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">skip</span><span class="o">=</span><span class="bp">True</span>
+                    <span class="c">#j.logger.log(&quot;Could not match the pattern because as part of result there was already another block found, posstart:%s posstop%s&quot; % (match.start,match.start+end-1),5)</span>
+            <span class="n">blocknr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getNextBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">skip</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">,</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="o">+</span><span class="n">end</span><span class="p">):</span>                    
+                    <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">blockname</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">blocknr</span>
+<span class="c">#            ipshell()    </span>
+            </div>
+<div class="viewcode-block" id="TextCharEditor.matchBlocksDelimiter"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.matchBlocksDelimiter">[docs]</a>    <span class="k">def</span> <span class="nf">matchBlocksDelimiter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">startpattern</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">delimiteropen</span><span class="o">=</span><span class="s">&quot;{&quot;</span><span class="p">,</span><span class="n">delimiterclose</span><span class="o">=</span><span class="s">&quot;}&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        will look for startpattern, then scan for delimeropen and then start counting, block will stop when asmany closes are found as open delimiters</span>
+<span class="sd">        ideal find e.g. a code block which is not line based</span>
+<span class="sd">        will only work on text which is not part of known blocks yet</span>
+<span class="sd">        @startpattern example to find &#39;{listen,&#39;  startpattern=&quot;^[ \t]*{[ \r\n\t]*listen[ \r\n\t]*,&quot;   #note the way how we allow tabs,newlines and spaces</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatches</span><span class="p">(</span><span class="n">startpattern</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">getText</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">matches</span><span class="p">:</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">start</span>
+            <span class="n">nrchars</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">)</span>
+            <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">state</span><span class="o">=</span><span class="s">&quot;start&quot;</span>
+            <span class="n">blocknr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getNextBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span>
+            <span class="n">endpos</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">for</span> <span class="n">charpos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">nrchars</span><span class="p">):</span>
+                <span class="n">char</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charpos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">char</span><span class="o">==</span><span class="n">delimiteropen</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">state</span><span class="o">==</span><span class="s">&quot;start&quot;</span><span class="p">:</span>
+                        <span class="n">startpos</span><span class="o">=</span><span class="n">charpos</span>
+                    <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+                    <span class="n">state</span><span class="o">=</span><span class="s">&quot;scanning&quot;</span>
+                <span class="k">if</span> <span class="n">state</span><span class="o">==</span><span class="s">&quot;scanning&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charpos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charpos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">blockname</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charpos</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">blocknr</span>
+                <span class="k">if</span> <span class="n">char</span><span class="o">==</span><span class="n">delimiterclose</span><span class="p">:</span>
+                    <span class="n">counter</span><span class="o">-=</span><span class="mi">1</span>
+                <span class="k">if</span> <span class="n">counter</span><span class="o">==</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">state</span><span class="o">&lt;&gt;</span><span class="s">&quot;start&quot;</span><span class="p">:</span>
+                    <span class="n">endpos</span><span class="o">=</span><span class="n">charpos</span><span class="o">+</span><span class="mi">1</span>
+                    <span class="k">break</span>
+                          </div>
+    <span class="k">def</span> <span class="nf">_getNextBlockNr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<div class="viewcode-block" id="TextCharEditor.getHighestBlockNr"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getHighestBlockNr">[docs]</a>    <span class="k">def</span> <span class="nf">getHighestBlockNr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cound not find block with name </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_higestblocknr</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="TextCharEditor.appendBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.appendBlock">[docs]</a>    <span class="k">def</span> <span class="nf">appendBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">startpos</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">blockname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param match means block was found and matching</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">blocknr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getNextBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LTLine</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">))</span>
+         </div>
+<div class="viewcode-block" id="TextCharEditor.deleteBlocks"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlocks">[docs]</a>    <span class="k">def</span> <span class="nf">deleteBlocks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="o">=</span><span class="p">[</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span> <span class="k">if</span> <span class="n">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="n">blockname</span><span class="p">]</span>
+            </div>
+<div class="viewcode-block" id="TextCharEditor.deleteBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.deleteBlock">[docs]</a>    <span class="k">def</span> <span class="nf">deleteBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        delete 1 specified block</span>
+<span class="sd">        @param blocknr </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="o">=</span><span class="p">[</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">blockname</span> <span class="ow">and</span> <span class="n">char</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">blocknr</span><span class="p">)]</span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.delete1Block"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.delete1Block">[docs]</a>    <span class="k">def</span> <span class="nf">delete1Block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        will check there is only 1 block and that block will be deleted, otherwise raise error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHighestBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Found more than 1 block, cannot delete blockname=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">blockname</span><span class="p">)</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="o">=</span><span class="p">[</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span> <span class="k">if</span> <span class="n">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="n">blockname</span> <span class="p">]</span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.getBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlock">[docs]</a>    <span class="k">def</span> <span class="nf">getBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get block based on blockname and blocknr</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">char</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span> <span class="k">if</span> <span class="p">(</span><span class="n">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">blockname</span> <span class="ow">and</span> <span class="n">char</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">blocknr</span><span class="p">)],</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="TextCharEditor.get1Block"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.get1Block">[docs]</a>    <span class="k">def</span> <span class="nf">get1Block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        will check there is only 1 block and that block will be returned, otherwise raise error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHighestBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Found more than 1 block, cannot get blockname=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">blockname</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">char</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span> <span class="k">if</span> <span class="n">char</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">blockname</span> <span class="p">],</span><span class="s">&quot;&quot;</span><span class="p">)</span>    
+    </div>
+<div class="viewcode-block" id="TextCharEditor.insertBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.insertBlock">[docs]</a>    <span class="k">def</span> <span class="nf">insertBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">blockname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">blocknr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        block will be inserted at linenr, means line with linenr will be moved backwards</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">blocknr</span><span class="o">==</span><span class="bp">None</span> <span class="ow">and</span> <span class="n">blockname</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">blocknr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getNextBlockNr</span><span class="p">(</span><span class="n">blockname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">blocknr</span><span class="o">==</span><span class="bp">None</span> <span class="ow">and</span> <span class="n">blockname</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">blocknr</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">blocknr</span><span class="o">&lt;&gt;</span><span class="bp">None</span> <span class="ow">and</span> <span class="n">blockname</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot have a blockname &lt;&gt;</span><span class="se">\&quot;\&quot;</span><span class="s"> with blocknr&gt;0&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot insert empty block of text.&quot;</span><span class="p">)</span>
+        <span class="n">counter</span><span class="o">=</span><span class="n">start</span>
+        <span class="n">textarray</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="c">#text needs to be reversed otherwise inserting does not go well</span>
+        <span class="n">textarray</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">textarray</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span> 
+        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">start</span><span class="p">,[</span><span class="n">char</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">])</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.replaceBlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.replaceBlock">[docs]</a>    <span class="k">def</span> <span class="nf">replaceBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        replace block with new content</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pos</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getBlockPosition</span><span class="p">(</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deleteBlock</span><span class="p">(</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">insertBlock</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">)</span>
+        
+<span class="c">#    def replace1Block(self,blockname,text):</span>
+<span class="c">#        &quot;&quot;&quot;</span>
+<span class="c">#        set block based on startline with new content</span>
+<span class="c">#        &quot;&quot;&quot;</span>
+<span class="c">#        pos=self.getBlockPosition(blockname)</span>
+<span class="c">#        blocknr=self.chars[pos][2]</span>
+<span class="c">#        self.delete1Block(blockname)</span>
+<span class="c">#        self.insertBlock(pos,text,blockname,blocknr) </span>
+        </div>
+<div class="viewcode-block" id="TextCharEditor.getBlockPosition"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.getBlockPosition">[docs]</a>    <span class="k">def</span> <span class="nf">getBlockPosition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">charnr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">)):</span>
+            <span class="c">#print &quot;%s %s %s&quot; % (charnr,self.chars[charnr][1],self.chars[charnr][2])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charnr</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">blockname</span> <span class="ow">and</span> <span class="p">(</span><span class="n">blocknr</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">charnr</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="n">blocknr</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">charnr</span>        
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find block with name </span><span class="si">%s</span><span class="s"> and blocknr </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">blockname</span><span class="p">,</span><span class="n">blocknr</span><span class="p">))</span>
+    
+    
+    <span class="c">#def __repr__(self):</span>
+        <span class="c">#return self.__str__()</span>
+    
+    <span class="c">#def __str__(self):</span>
+        <span class="c">#return &quot;&quot;</span>
+    </div>
+<div class="viewcode-block" id="TextCharEditor.printtext"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextCharEditor.TextCharEditor.printtext">[docs]</a>    <span class="k">def</span> <span class="nf">printtext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        print line then blocknames then blocknrs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">linepositions</span><span class="o">=</span><span class="p">[]</span>        
+        <span class="n">line</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">)):</span>
+            <span class="n">linepositions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="n">line</span><span class="o">+=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">:</span>
+                <span class="k">print</span> <span class="n">line</span><span class="p">,</span>
+                <span class="c">#print blocknames</span>
+                <span class="k">print</span> <span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">linepositions</span><span class="p">])</span>
+                <span class="c">#print blocknrs</span>
+                <span class="k">print</span> <span class="n">string</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">chars</span><span class="p">[</span><span class="n">pos</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">linepositions</span><span class="p">])</span>
+                <span class="n">line</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+                <span class="n">linepositions</span><span class="o">=</span><span class="p">[]</span>
+        
+            
+            
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

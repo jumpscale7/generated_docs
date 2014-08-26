@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.platforms.ubuntu.Ubuntu &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.platforms.ubuntu.Ubuntu</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<div class="viewcode-block" id="Ubuntu"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu">[docs]</a><span class="k">class</span> <span class="nc">Ubuntu</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_aptupdated</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">=</span><span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="o">=</span><span class="p">[]</span>
+
+<div class="viewcode-block" id="Ubuntu.initApt"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.initApt">[docs]</a>    <span class="k">def</span> <span class="nf">initApt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">apt</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="c">#we dont wont jshell to break, self.check will take of this</span>
+            <span class="k">return</span>
+        <span class="n">apt</span><span class="o">.</span><span class="n">apt_pkg</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">apt</span><span class="o">.</span><span class="n">apt_pkg</span><span class="p">,</span> <span class="s">&#39;Config&#39;</span><span class="p">):</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">apt</span><span class="o">.</span><span class="n">apt_pkg</span><span class="o">.</span><span class="n">Config</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">apt</span><span class="o">.</span><span class="n">apt_pkg</span><span class="o">.</span><span class="n">Configuration</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cfg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;APT::Install-Recommends&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>
+            <span class="n">cfg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;APT::Install-Suggests&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="n">apt</span><span class="o">.</span><span class="n">Cache</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aptCache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apt</span><span class="o">=</span><span class="n">apt</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.check"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if ubuntu or mint (which is based on ubuntu)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">lsb_release</span>
+                <span class="n">info</span> <span class="o">=</span> <span class="n">lsb_release</span><span class="o">.</span><span class="n">get_distro_information</span><span class="p">()[</span><span class="s">&#39;ID&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">info</span> <span class="o">!=</span> <span class="s">&#39;Ubuntu&#39;</span> <span class="ow">and</span> <span class="n">info</span> <span class="o">!=</span><span class="s">&#39;LinuxMint&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Only ubuntu or mint supported.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">if</span> <span class="n">die</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Only ubuntu or mint supported.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checked</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.getVersion"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.getVersion">[docs]</a>    <span class="k">def</span> <span class="nf">getVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        returns codename,descr,id,release</span>
+<span class="sd">        known ids&quot; raring, linuxmint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="kn">import</span> <span class="nn">lsb_release</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">lsb_release</span><span class="o">.</span><span class="n">get_distro_information</span><span class="p">()</span>        
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s">&quot;CODENAME&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;DESCRIPTION&quot;</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span><span class="n">result</span><span class="p">[</span><span class="s">&quot;RELEASE&quot;</span><span class="p">],</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.createUser"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.createUser">[docs]</a>    <span class="k">def</span> <span class="nf">createUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">passwd</span><span class="p">,</span><span class="n">home</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">creategroup</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.remote.cuisine</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cuisine</span><span class="o">.</span><span class="n">api</span>
+
+        <span class="k">if</span> <span class="n">home</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">homeexists</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">homeexists</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">home</span><span class="p">)</span>
+
+        <span class="n">c</span><span class="o">.</span><span class="n">user_ensure</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="n">passwd</span><span class="p">,</span> <span class="n">home</span><span class="o">=</span><span class="n">home</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">gid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fullname</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">encrypted_passwd</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">creategroup</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">createGroup</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addUser2Group</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">home</span><span class="o">&lt;&gt;</span><span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">homeexists</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">dir_ensure</span><span class="p">(</span><span class="n">home</span><span class="p">,</span><span class="n">owner</span><span class="o">=</span><span class="n">name</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.createGroup"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.createGroup">[docs]</a>    <span class="k">def</span> <span class="nf">createGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.remote.cuisine</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cuisine</span><span class="o">.</span><span class="n">api</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">group_ensure</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.addUser2Group"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.addUser2Group">[docs]</a>    <span class="k">def</span> <span class="nf">addUser2Group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">group</span><span class="p">,</span><span class="n">user</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.remote.cuisine</span>
+        <span class="n">c</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">cuisine</span><span class="o">.</span><span class="n">api</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">group_user_ensure</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+
+            
+</div>
+<div class="viewcode-block" id="Ubuntu.checkInstall"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.checkInstall">[docs]</a>    <span class="k">def</span> <span class="nf">checkInstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packagenames</span><span class="p">,</span> <span class="n">cmdname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param packagenames is name or array of names of ubuntu package to install e.g. curl</span>
+<span class="sd">        @param cmdname is cmd to check e.g. curl</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">list</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">packagenames</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">packagename</span> <span class="ow">in</span> <span class="n">packagenames</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checkInstall</span><span class="p">(</span><span class="n">packagename</span><span class="p">,</span><span class="n">cmdname</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">packagename</span><span class="o">=</span><span class="n">packagenames</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;which </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">cmdname</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">packagename</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;which </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">cmdname</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not install package </span><span class="si">%s</span><span class="s"> and check for command </span><span class="si">%s</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">packagename</span><span class="p">,</span> <span class="n">cmdname</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.install"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packagename</span><span class="p">):</span>
+        
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&#39;unset JSBASE;unset PYTHONPATH;apt-get install </span><span class="si">%s</span><span class="s"> --force-yes -y&#39;</span><span class="o">%</span><span class="n">packagename</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">executeWithoutPipe</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+
+        <span class="c"># self.check()</span>
+        <span class="c"># if self._cache==None:</span>
+        <span class="c">#     self.initApt()</span>
+
+        <span class="c"># if isinstance(packagename, basestring):</span>
+        <span class="c">#     packagename = [packagename]</span>
+        <span class="c"># for package in packagename:</span>
+        <span class="c">#     pkg = self._cache[package]</span>
+        <span class="c">#     if not pkg.is_installed:</span>
+        <span class="c">#         print &quot;install %s&quot; % packagename</span>
+        <span class="c">#         pkg.mark_install()</span>
+        <span class="c"># self._cache.commit()</span>
+        <span class="c"># self._cache.clear()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.installVersion"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.installVersion">[docs]</a>    <span class="k">def</span> <span class="nf">installVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packageName</span><span class="p">,</span> <span class="n">version</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Installs a specific version of an ubuntu package.</span>
+
+<span class="sd">        @param packageName: name of the package</span>
+<span class="sd">        @type packageName: str</span>
+
+<span class="sd">        @param version: version of the package</span>
+<span class="sd">        @type version: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>
+
+        <span class="n">mainPackage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">packageName</span><span class="p">]</span>
+        <span class="n">versionPackage</span> <span class="o">=</span> <span class="n">mainPackage</span><span class="o">.</span><span class="n">versions</span><span class="p">[</span><span class="n">version</span><span class="p">]</span><span class="o">.</span><span class="n">package</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">versionPackage</span><span class="o">.</span><span class="n">is_installed</span><span class="p">:</span>
+            <span class="n">versionPackage</span><span class="o">.</span><span class="n">mark_install</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.installDebFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.installDebFile">[docs]</a>    <span class="k">def</span> <span class="nf">installDebFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>
+        <span class="kn">import</span> <span class="nn">apt.debfile</span>
+        <span class="n">deb</span> <span class="o">=</span> <span class="n">apt</span><span class="o">.</span><span class="n">debfile</span><span class="o">.</span><span class="n">DebPackage</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">)</span>
+        <span class="n">deb</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.remove"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packagename</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ubuntu remove package:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">packagename</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;ubuntu.remove&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>        
+        <span class="n">pkg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">packagename</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">pkg</span><span class="o">.</span><span class="n">is_installed</span><span class="p">:</span>
+            <span class="n">pkg</span><span class="o">.</span><span class="n">mark_delete</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">packagename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">packagename</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.serviceInstall"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.serviceInstall">[docs]</a>    <span class="k">def</span> <span class="nf">serviceInstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">servicename</span><span class="p">,</span> <span class="n">daemonpath</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">respawn</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">env</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="nb">reload</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">start on runlevel [2345]</span>
+<span class="s">stop on runlevel [016]</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">respawn</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">+=</span> <span class="s">&quot;respawn</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">if</span> <span class="n">pwd</span><span class="p">:</span>
+            <span class="n">C</span> <span class="o">+=</span> <span class="s">&quot;chdir </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">pwd</span>
+        <span class="k">if</span> <span class="n">env</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">env</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="n">C</span><span class="o">+=</span><span class="s">&quot;env </span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">+=</span><span class="s">&quot;exec </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">daemonpath</span><span class="p">,</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">replaceTxtDirVars</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s">&quot;/etc/init/</span><span class="si">%s</span><span class="s">.conf&quot;</span><span class="o">%</span><span class="n">servicename</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">reload</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;initctl reload-configuration&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.serviceUninstall"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.serviceUninstall">[docs]</a>    <span class="k">def</span> <span class="nf">serviceUninstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">servicename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stopService</span><span class="p">(</span><span class="n">servicename</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;/etc/init/</span><span class="si">%s</span><span class="s">.conf&quot;</span><span class="o">%</span><span class="n">servicename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.startService"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.startService">[docs]</a>    <span class="k">def</span> <span class="nf">startService</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;start service on ubuntu for:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">servicename</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;ubuntu.start&quot;</span><span class="p">)</span>  <span class="c">#@todo P1 add log statements for all other methods of this class</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">statusService</span><span class="p">(</span><span class="n">servicename</span><span class="p">):</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;sudo start </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">servicename</span>
+            <span class="c"># print cmd</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.stopService"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.stopService">[docs]</a>    <span class="k">def</span> <span class="nf">stopService</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;sudo stop </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">servicename</span>
+        <span class="c"># print cmd</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.restartService"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.restartService">[docs]</a>    <span class="k">def</span> <span class="nf">restartService</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;sudo restart </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">servicename</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.statusService"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.statusService">[docs]</a>    <span class="k">def</span> <span class="nf">statusService</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;sudo status </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">servicename</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;=</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;start&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.serviceDisableStartAtBoot"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.serviceDisableStartAtBoot">[docs]</a>    <span class="k">def</span> <span class="nf">serviceDisableStartAtBoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+         <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;update-rc.d -f </span><span class="si">%s</span><span class="s"> remove&quot;</span> <span class="o">%</span> <span class="n">servicename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.serviceEnableStartAtBoot"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.serviceEnableStartAtBoot">[docs]</a>    <span class="k">def</span> <span class="nf">serviceEnableStartAtBoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">servicename</span><span class="p">):</span>
+         <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;update-rc.d -f </span><span class="si">%s</span><span class="s"> defaults&quot;</span> <span class="o">%</span> <span class="n">servicename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.updatePackageMetadata"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.updatePackageMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">updatePackageMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.upgradePackages"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.upgradePackages">[docs]</a>    <span class="k">def</span> <span class="nf">upgradePackages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">updatePackageMetadata</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">upgrade</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.getPackageNamesRepo"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.getPackageNamesRepo">[docs]</a>    <span class="k">def</span> <span class="nf">getPackageNamesRepo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.getPackageNamesInstalled"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.getPackageNamesInstalled">[docs]</a>    <span class="k">def</span> <span class="nf">getPackageNamesInstalled</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="o">==</span><span class="p">[]:</span>            
+            <span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPackageNamesRepo</span><span class="p">():</span>
+                <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">installed</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">installedPackageNames</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.getPackage"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.getPackage">[docs]</a>    <span class="k">def</span> <span class="nf">getPackage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.findPackagesRepo"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.findPackagesRepo">[docs]</a>    <span class="k">def</span> <span class="nf">findPackagesRepo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">packagename</span><span class="p">):</span>
+        <span class="n">packagename</span><span class="o">=</span><span class="n">packagename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>        
+        <span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPackageNamesRepo</span><span class="p">():</span>
+            <span class="n">item2</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">item2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">packagename</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.findPackagesInstalled"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.findPackagesInstalled">[docs]</a>    <span class="k">def</span> <span class="nf">findPackagesInstalled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">packagename</span><span class="p">):</span>
+        <span class="n">packagename</span><span class="o">=</span><span class="n">packagename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initApt</span><span class="p">()</span>        
+        <span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPackageNamesInstalled</span><span class="p">():</span>
+            <span class="n">item2</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">item2</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">packagename</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+</div>
+<div class="viewcode-block" id="Ubuntu.find1packageInstalled"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.find1packageInstalled">[docs]</a>    <span class="k">def</span> <span class="nf">find1packageInstalled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">packagename</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;find 1 package in ubuntu&quot;</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s">&quot;ubuntu.find&quot;</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">findPackagesInstalled</span><span class="p">(</span><span class="n">packagename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Found more than 1 package for </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">packagename</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find package </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">packagename</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.listSources"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.listSources">[docs]</a>    <span class="k">def</span> <span class="nf">listSources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">aptsources</span> <span class="kn">import</span> <span class="n">sourceslist</span>
+        <span class="k">return</span> <span class="n">sourceslist</span><span class="o">.</span><span class="n">SourcesList</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Ubuntu.changeSourceUri"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.platforms.ubuntu.html#JumpScale.baselib.platforms.ubuntu.Ubuntu.Ubuntu.changeSourceUri">[docs]</a>    <span class="k">def</span> <span class="nf">changeSourceUri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newuri</span><span class="p">):</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listSources</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">list</span><span class="p">:</span>
+            <span class="n">entry</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">newuri</span>
+        <span class="n">src</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

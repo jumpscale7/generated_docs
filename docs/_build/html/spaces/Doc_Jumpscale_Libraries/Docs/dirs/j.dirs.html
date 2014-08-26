@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.dirs &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-dirs">
+<h1>j.dirs<a class="headerlink" href="#j-dirs" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /core/Dirs.py</li>
+</ul>
+<p>Utility class to configure and store all relevant directory paths</p>
+<div class="section" id="addprotecteddir">
+<h2>addProtectedDir<a class="headerlink" href="#addprotecteddir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,name</li>
+<li>path:/core/Dirs.py (line:255)</li>
+</ul>
+</div>
+<div class="section" id="checkinprotecteddir">
+<h2>checkInProtectedDir<a class="headerlink" href="#checkinprotecteddir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/core/Dirs.py (line:288)</li>
+</ul>
+</div>
+<div class="section" id="deploydefaultfilesinsandbox">
+<h2>deployDefaultFilesInSandbox<a class="headerlink" href="#deploydefaultfilesinsandbox" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Dirs.py (line:295)</li>
+</ul>
+</div>
+<div class="section" id="getpathofrunningfunction">
+<h2>getPathOfRunningFunction<a class="headerlink" href="#getpathofrunningfunction" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: function</li>
+<li>path:/core/Dirs.py (line:234)</li>
+</ul>
+</div>
+<div class="section" id="init">
+<h2>init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: reinit</li>
+<li>path:/core/Dirs.py (line:191)</li>
+</ul>
+<p>Initializes all the configured directories if needed</p>
+<p>If a folder attribute is None, set its value to the corresponding
+default path.</p>
+</div>
+<div class="section" id="loadprotecteddirs">
+<h2>loadProtectedDirs<a class="headerlink" href="#loadprotecteddirs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Dirs.py (line:237)</li>
+</ul>
+</div>
+<div class="section" id="removeprotecteddir">
+<h2>removeProtectedDir<a class="headerlink" href="#removeprotecteddir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/core/Dirs.py (line:267)</li>
+</ul>
+</div>
+<div class="section" id="replacefilesdirvars">
+<h2>replaceFilesDirVars<a class="headerlink" href="#replacefilesdirvars" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,recursive,filter,additionalArgs</li>
+<li>path:/core/Dirs.py (line:179)</li>
+</ul>
+</div>
+<div class="section" id="replacetxtdirvars">
+<h2>replaceTxtDirVars<a class="headerlink" href="#replacetxtdirvars" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: txt,additionalArgs</li>
+<li>path:/core/Dirs.py (line:158)</li>
+</ul>
+<p>replace $base,$vardir,$cfgdir,$bindir,$codedir,$tmpdir,$logdir,$appdir with props of this class</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.dirs</a><ul>
+<li><a class="reference internal" href="#addprotecteddir">addProtectedDir</a></li>
+<li><a class="reference internal" href="#checkinprotecteddir">checkInProtectedDir</a></li>
+<li><a class="reference internal" href="#deploydefaultfilesinsandbox">deployDefaultFilesInSandbox</a></li>
+<li><a class="reference internal" href="#getpathofrunningfunction">getPathOfRunningFunction</a></li>
+<li><a class="reference internal" href="#init">init</a></li>
+<li><a class="reference internal" href="#loadprotecteddirs">loadProtectedDirs</a></li>
+<li><a class="reference internal" href="#removeprotecteddir">removeProtectedDir</a></li>
+<li><a class="reference internal" href="#replacefilesdirvars">replaceFilesDirVars</a></li>
+<li><a class="reference internal" href="#replacetxtdirvars">replaceTxtDirVars</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/dirs/j.dirs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

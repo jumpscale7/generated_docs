@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.Util &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.Util</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;linux&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;sunos&#39;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">fcntl</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="c"># THIS METHOD IS NOT THREADSAFE</span>
+
+<span class="c">#TODO Fixup singleton-like behaviour</span>
+<span class="k">class</span> <span class="nc">Util</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Util"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Util.Util">[docs]</a>    <span class="n">_LOCKPATHLINUX</span> <span class="o">=</span> <span class="s">&quot;/tmp/run&quot;</span>
+    <span class="n">__LOCKDICTIONARY</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">__shared_state</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shared_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_LOCKPATHWIN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="s">&#39;tmp&#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">+</span><span class="s">&#39;run&#39;</span><span class="o">+</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+
+    <span class="k">def</span> <span class="nf">cleanupString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">replacewith</span><span class="o">=</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s">&quot;([^A-Za-z0-9])&quot;</span><span class="p">):</span>
+        <span class="c"># Please don&#39;t use the logging system here. The logging system</span>
+<div class="viewcode-block" id="Util.cleanupString"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Util.Util.cleanupString">[docs]</a>        <span class="c"># needs this method, using the logging system here would</span>
+        <span class="c"># introduce a circular dependency. Be careful not to call other</span>
+        <span class="c"># functions that use the logging system.</span>
+
+        <span class="sd">&quot;&quot;&quot; remove all non numeric or alphanumeric characters &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">replacewith</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">lock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lockname</span><span class="p">,</span> <span class="n">locktimeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Take a system-wide interprocess exclusive lock. Default timeout is 60 seconds &quot;&quot;&quot;</span></div>
+<div class="viewcode-block" id="Util.lock"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Util.Util.lock">[docs]</a>
+        <span class="k">if</span> <span class="n">locktimeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot take lock [</span><span class="si">%s</span><span class="s">] with negative timeout [</span><span class="si">%d</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lockname</span><span class="p">,</span> <span class="n">locktimeout</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isUnix</span><span class="p">():</span>
+            <span class="c"># linux implementation</span>
+            <span class="n">lockfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_LOCKPATHLINUX</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleanupString</span><span class="p">(</span><span class="n">lockname</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">Util</span><span class="o">.</span><span class="n">_LOCKPATHLINUX</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createEmptyFile</span><span class="p">(</span><span class="n">lockfile</span><span class="p">)</span>
+
+            <span class="c"># Do the locking</span>
+            <span class="n">lockAcquired</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">locktimeout</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">myfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">lockfile</span><span class="p">,</span> <span class="s">&quot;r+&quot;</span><span class="p">)</span>
+                    <span class="n">fcntl</span><span class="o">.</span><span class="n">flock</span><span class="p">(</span><span class="n">myfile</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">LOCK_EX</span> <span class="o">|</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">LOCK_NB</span><span class="p">)</span>
+                    <span class="n">lockAcquired</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__LOCKDICTIONARY</span><span class="p">[</span><span class="n">lockname</span><span class="p">]</span> <span class="o">=</span> <span class="n">myfile</span>
+                    <span class="k">break</span>
+                <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                    <span class="c"># Did not get the lock :( Sleep 1 second and then retry</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">lockAcquired</span><span class="p">:</span>
+                <span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot acquire lock [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lockname</span><span class="p">))</span>
+
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">unlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lockname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Unlock system-wide interprocess lock &quot;&quot;&quot;</span></div>
+<div class="viewcode-block" id="Util.unlock"><a class="viewcode-back" href="../../../API/JumpScale.core.html#JumpScale.core.Util.Util.unlock">[docs]</a>        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isUnix</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">myfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__LOCKDICTIONARY</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">lockname</span><span class="p">)</span>
+                <span class="n">fcntl</span><span class="o">.</span><span class="n">flock</span><span class="p">(</span><span class="n">myfile</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">LOCK_UN</span><span class="p">)</span>
+                <span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot unlock [</span><span class="si">%s</span><span class="s">] with ERROR:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lockname</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)))</span>
+
+        <span class="k">elif</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">isWindows</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

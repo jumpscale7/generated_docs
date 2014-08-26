@@ -1,0 +1,942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.remote.remotesystem.RemoteSystem &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.remote.remotesystem.RemoteSystem</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="c"># This extension is available at j.remote.system</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s">&#39;ignore&#39;</span><span class="p">,</span> <span class="s">r&#39;.*sha.*&#39;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">paramiko</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;python-paramiko&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;Could not install python-paramiko, this only works on ubuntu, please install it.&quot;</span>
+<span class="kn">import</span> <span class="nn">paramiko</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">SocketServer</span>
+<span class="kn">import</span> <span class="nn">select</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+
+
+<div class="viewcode-block" id="InvalidIpAddressError"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.InvalidIpAddressError">[docs]</a><span class="k">class</span> <span class="nc">InvalidIpAddressError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="RemoteSystemNotReachableError"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemNotReachableError">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemNotReachableError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="RemoteSystemAuthenticationError"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemAuthenticationError">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemAuthenticationError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="Exceptions"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.Exceptions">[docs]</a><span class="k">class</span> <span class="nc">Exceptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">RemoteSystemNotReachableError</span> <span class="o">=</span> <span class="n">RemoteSystemNotReachableError</span>
+    <span class="n">RemoteSystemAuthenticationError</span> <span class="o">=</span> <span class="n">RemoteSystemAuthenticationError</span>
+    <span class="n">InvalidIpAddressError</span> <span class="o">=</span> <span class="n">InvalidIpAddressError</span>
+
+</div>
+<div class="viewcode-block" id="RemoteSystem"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystem">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;j.remote.system&quot;</span>
+
+    <span class="n">exceptions</span> <span class="o">=</span> <span class="n">Exceptions</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">=</span><span class="p">{}</span>
+
+<div class="viewcode-block" id="RemoteSystem.connect"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystem.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">login</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">120.0</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a connection object to a remote system via ssh.</span>
+<span class="sd">        </span>
+<span class="sd">        @param ip: Ipaddress of the remote system</span>
+<span class="sd">        @type ip: string</span>
+<span class="sd">        @param login: Username used for login on remote system</span>
+<span class="sd">        @type login: string</span>
+<span class="sd">        @param password: Password used for login on remote system</span>
+<span class="sd">        @type password: string</span>
+<span class="sd">        @param timeout: Timeout for the SSH session</span>
+<span class="sd">        @type timeout: float</span>
+<span class="sd">        </span>
+<span class="sd">        @rtype: RemoteSystemConnection</span>
+<span class="sd">        @return: A connection object to the remote system</span>
+<span class="sd">        </span>
+<span class="sd">        @raise RemoteSystemNotReachableError: An error occurred while connecting to the remote system</span>
+<span class="sd">        @raise RemoteSystemAuthenticationError: Could not authenticate to the remote system</span>
+<span class="sd">        @raise socket.error: Unhandeld network error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># if not j.basetype.ipaddress.check(ip):</span>
+        <span class="c">#     raise InvalidIpAddressError(&quot;IP address is not a valid IPv4 address&quot;)</span>
+
+        <span class="n">key</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span><span class="n">login</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">remoteConnection</span> <span class="o">=</span> <span class="n">RemoteSystemConnection</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">AuthenticationException</span> <span class="k">as</span> <span class="n">authEx</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RemoteSystemAuthenticationError</span><span class="p">(</span><span class="n">authEx</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHException</span> <span class="k">as</span> <span class="n">sshEx</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RemoteSystemNotReachableError</span><span class="p">(</span><span class="n">sshEx</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RemoteSystemNotReachableError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">reraise</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">146</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">RemoteSystemNotReachableError</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">reraise</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">if</span> <span class="n">reraise</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">RemoteSystem</span>
+        <span class="k">return</span> <span class="n">remoteConnection</span>
+
+</div></div>
+<div class="viewcode-block" id="RemoteSystemConnection"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemConnection">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">login</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span> <span class="o">=</span> <span class="n">ip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">set_missing_host_key_policy</span><span class="p">(</span><span class="n">paramiko</span><span class="o">.</span><span class="n">AutoAddPolicy</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">password</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">allow_agent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">look_for_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_portforward</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="RemoteSystemConnection.close"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemConnection.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Closes the connection to the remote system&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_closed</span> <span class="o">=</span> <span class="bp">True</span>
+</div>
+    <span class="k">def</span> <span class="nf">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_closed&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;There is no active connection.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_getProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_process</span> <span class="o">=</span> <span class="n">RemoteSystemProcess</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span>
+
+    <span class="k">def</span> <span class="nf">_getFs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span> <span class="o">=</span> <span class="n">RemoteSystemFS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fs</span>
+
+    <span class="k">def</span> <span class="nf">_getIpAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span>
+
+    <span class="k">def</span> <span class="nf">_getPortForward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_portforward</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_portforward</span> <span class="o">=</span> <span class="n">RemoteSystemPortForward</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getProcess</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_portforward</span>
+
+    <span class="n">process</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">_getProcess</span><span class="p">)</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">_getFs</span><span class="p">)</span>
+
+    <span class="n">ipaddress</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">_getIpAddress</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;IP address of the machine you are connected to&quot;</span><span class="p">)</span>
+
+    <span class="n">portforward</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="o">=</span><span class="n">_getPortForward</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s">&quot;Executes remote and local port forwarding using the connecting machine as ssh server&quot;</span><span class="p">)</span>
+
+</div>
+<span class="k">class</span> <span class="nc">_remoteSystemObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">ipaddress</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">paramiko</span><span class="o">.</span><span class="n">SSHClient</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;The connection parameter is not of type paramiko.SSHClient&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span> <span class="o">=</span> <span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span> <span class="o">=</span> <span class="n">ipaddress</span> <span class="ow">or</span> <span class="n">connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">()</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="RemoteSystemProcess"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemProcess">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemProcess</span><span class="p">(</span><span class="n">_remoteSystemObject</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_execute_common</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">tostdout</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        only works on all platforms</span>
+<span class="sd">        return a tuple of (exitcode, stdout, stderr)</span>
+<span class="sd">        Execute a command on the SSH server.  Wait till output done.</span>
+<span class="sd">        @raise SSHException: if the server fails to execute the command</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Execute ssh command </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span><span class="p">))</span>
+        <span class="c">#channel = self._connection.get_transport().open_session()</span>
+        <span class="c"># ipshell()</span>
+        <span class="c"># stdin, channelFileStdOut, channelFileStdErr=self._connection.exec_command(command)</span>
+
+        <span class="c"># Code stolen from self._connection.exec_command(command), it identitical</span>
+        <span class="n">bufsize</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">()</span><span class="o">.</span><span class="n">open_session</span><span class="p">()</span>
+        <span class="n">chan</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="n">channelFileStdin</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s">&#39;wb&#39;</span><span class="p">,</span> <span class="n">bufsize</span><span class="p">)</span>
+        <span class="n">channelFileStdOut</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">makefile</span><span class="p">(</span><span class="s">&#39;rb&#39;</span><span class="p">,</span> <span class="n">bufsize</span><span class="p">)</span>
+        <span class="n">channelFileStdErr</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">makefile_stderr</span><span class="p">(</span><span class="s">&#39;rb&#39;</span><span class="p">,</span> <span class="n">bufsize</span><span class="p">)</span>
+        <span class="c"># return stdin, stdout, stderr</span>
+
+        <span class="n">myOut</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="n">myErr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="ow">not</span> <span class="n">channelFileStdOut</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">eof_received</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">channelFileStdErr</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">eof_received</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">channelFileStdOut</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">recv_ready</span><span class="p">():</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">channelFileStdOut</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ssh </span><span class="si">%s</span><span class="s"> out:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span><span class="p">,</span> <span class="n">tmp</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tostdout</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="n">tmp</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">myOut</span> <span class="o">+=</span> <span class="n">tmp</span>
+            <span class="k">if</span> <span class="n">channelFileStdErr</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">recv_stderr_ready</span><span class="p">():</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">channelFileStdErr</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">recv_stderr</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ssh </span><span class="si">%s</span><span class="s"> err:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span><span class="p">,</span> <span class="n">tmp</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+                <span class="n">myErr</span> <span class="o">+=</span> <span class="n">tmp</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">channelFileStdOut</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ssh </span><span class="si">%s</span><span class="s"> out:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span><span class="p">,</span> <span class="n">tmp</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">myOut</span> <span class="o">+=</span> <span class="n">tmp</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">channelFileStdErr</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ssh </span><span class="si">%s</span><span class="s"> err:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ipaddress</span><span class="p">,</span> <span class="n">tmp</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">myErr</span> <span class="o">+=</span> <span class="n">tmp</span>
+
+        <span class="n">exitcode</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">recv_exit_status</span><span class="p">()</span>
+
+        <span class="c"># print &#39;Output:&#39;   + myOut</span>
+        <span class="c"># print &#39;Error:&#39;    + myErr</span>
+        <span class="c"># print &#39;ExitCode:&#39; + str(exitcode)</span>
+
+        <span class="c"># Only die if exitcode != 0, error != &#39;&#39; is not enough to conclude that the process went wrong because it may only be warnings!</span>
+        <span class="k">if</span> <span class="n">dieOnNonZeroExitCode</span> <span class="ow">and</span> <span class="n">exitcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Process terminated with non 0 exitcode, got exitcode </span><span class="si">%s</span><span class="s">.</span><span class="se">\n</span><span class="s">out:</span><span class="si">%s</span><span class="se">\n</span><span class="s">error:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">exitcode</span><span class="p">),</span> <span class="n">myOut</span><span class="p">,</span> <span class="n">myErr</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">exitcode</span><span class="p">,</span> <span class="n">myOut</span><span class="p">,</span> <span class="n">myErr</span>
+
+    <span class="c"># Todo tomorow refactor other methods to use this one</span>
+    <span class="c"># For now don&#39;t break code</span>
+
+<div class="viewcode-block" id="RemoteSystemProcess.execute"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemProcess.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">outputToStdout</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">loglevel</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Executes a command, returns the exitcode and the output</span>
+<span class="sd">        </span>
+<span class="sd">        @param command: command to execute</span>
+<span class="sd">        @type command: string</span>
+<span class="sd">        @param dieOnNonZeroExitCode: die if got non zero exitcode</span>
+<span class="sd">        @type dieOnNonZeroExitCode: bool</span>
+<span class="sd">        @param outputToStdout</span>
+<span class="sd">        @param timeout: seconds to wait for a pending read/write operation.  Infinity if omitted</span>
+<span class="sd">        @type timeout: float</span>
+<span class="sd">        @param withError: If true the error is also returned</span>
+<span class="sd">        @type timeout: bool</span>
+<span class="sd">        </span>
+<span class="sd">        @rtype: number</span>
+<span class="sd">        @return: represents the exitcode plus the output and error output (if enabled by withError) of the executed command. If exitcode is not zero then the executed command returned with errors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c">#@Todo: Timeout, outputToStdout, loglevel not used</span>
+        <span class="c"># are they usefull are simply there for backwards compatibility?</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platformtype</span><span class="o">.</span><span class="n">has_parent</span><span class="p">(</span><span class="s">&quot;unix&quot;</span><span class="p">):</span>
+            <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_executeUnix</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_common</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="p">,</span> <span class="n">tostdout</span><span class="o">=</span><span class="n">outputToStdout</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span>
+</div>
+    <span class="k">def</span> <span class="nf">_executeUnix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        only works for unix</span>
+<span class="sd">        Execute a command on the SSH server.  Wait till output done.</span>
+<span class="sd">        @raise SSHException: if the server fails to execute the command</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">command</span> <span class="o">+</span> <span class="s">&#39; ; echo &quot;***EXITCODE***:$?&quot;&#39;</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_common</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="c"># Not correct, many command issue warnings on stderr!</span>
+        <span class="c"># if len(error.strip())&gt;0 and dieOnError:</span>
+        <span class="c">#    raise RuntimeError(&quot;Could not execute %s on %s, output was \n%s\n%s\n&quot; % (command,self._ipaddress,myOut,myErr))</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;***EXITCODE***:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c"># Something unknown when wrong, we did not recieve all output</span>
+            <span class="n">exitcode</span> <span class="o">=</span> <span class="mi">1000</span>
+            <span class="c"># raise RuntimeError(&quot;Did not get all output from executing the SSH command %s&quot; % command) ??</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lenght</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s">&quot;***EXITCODE***:&quot;</span><span class="p">)</span>
+            <span class="n">exitcodestr</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="n">lenght</span><span class="p">:]</span>
+            <span class="n">exitcode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">exitcodestr</span><span class="p">)</span>  <span class="c"># get the exit code</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span>   <span class="c"># clean the output</span>
+
+        <span class="k">if</span> <span class="n">dieOnError</span> <span class="ow">and</span> <span class="n">exitcode</span> <span class="o">==</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Process terminated with unknown exitcode!!.</span><span class="se">\n</span><span class="s">Output:</span><span class="se">\n</span><span class="si">%s</span><span class="s">.</span><span class="se">\n</span><span class="s">Error:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseOperationalCritical</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;system.remote.execute.fatalerror&quot;</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dieOnError</span> <span class="ow">and</span> <span class="n">exitcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Process terminated with non 0 exitcode, got exitcode: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exitcode</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; and Error:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">error</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n\n</span><span class="s">Output:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">output</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseOperationalCritical</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;system.remote.execute.fatalerror&quot;</span><span class="p">,</span> <span class="n">die</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span>
+
+<div class="viewcode-block" id="RemoteSystemProcess.killProcess"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemProcess.killProcess">[docs]</a>    <span class="k">def</span> <span class="nf">killProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Kills a process using sigterm signal</span>
+<span class="sd">        </span>
+<span class="sd">        @param pid: process id of the process to be killed</span>
+<span class="sd">        @type pid: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s">&#39;kill -</span><span class="si">%(signum)s</span><span class="s"> </span><span class="si">%(pid)s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s">&#39;pid&#39;</span><span class="p">:</span> <span class="n">pid</span><span class="p">,</span> <span class="s">&#39;signum&#39;</span><span class="p">:</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">}</span>
+        <span class="n">exitCode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">dieOnNonZeroExitCode</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">outputToStdout</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&#39;Failed to execute remote command </span><span class="si">%s</span><span class="s">. Reason </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">exitCode</span><span class="p">,</span> <span class="n">output</span>
+
+</div></div>
+<div class="viewcode-block" id="RemoteSystemFS"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemFS</span><span class="p">(</span><span class="n">_remoteSystemObject</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RemoteSystemFS.uploadFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.uploadFile">[docs]</a>    <span class="k">def</span> <span class="nf">uploadFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localpath</span><span class="p">,</span> <span class="n">remotepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copy a local file (localpath) to the remote system as remotepath</span>
+<span class="sd">        </span>
+<span class="sd">        @param localpath: the local file to copy</span>
+<span class="sd">        @type localpath: string</span>
+<span class="sd">        </span>
+<span class="sd">        @param remotepath: the destination path on the remote system</span>
+<span class="sd">        @type remotepath: string</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: localpath or remotepath is None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">localpath</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Local path is None in remotesystem.fs.uploadFile&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">remotepath</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Remote path is None in remotesystem.fs.uploadFile&#39;</span><span class="p">)</span>
+
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">localpath</span><span class="p">,</span> <span class="n">remotepath</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Uploaded file </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">localpath</span><span class="p">,</span> <span class="n">remotepath</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.fileGetContents"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.fileGetContents">[docs]</a>    <span class="k">def</span> <span class="nf">fileGetContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read a file and get contents of that file</span>
+<span class="sd">        </span>
+<span class="sd">        @param filename: filename to open for reading</span>
+<span class="sd">        @type filename: string</span>
+<span class="sd">        </span>
+<span class="sd">        @rtype: string </span>
+<span class="sd">        @return: representing the file contents</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: filename is None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;File name is None in remotesystem.fs.fileGetContents&#39;</span><span class="p">)</span>
+
+        <span class="n">localfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getTempFileName</span><span class="p">()</span>
+
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Opened SFTP connection to receive file </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">localfile</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Saved </span><span class="si">%s</span><span class="s"> file to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">localfile</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">localfile</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">localfile</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.writeFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.writeFile">[docs]</a>    <span class="k">def</span> <span class="nf">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">contents</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Open a file and write file contents, close file afterwards</span>
+<span class="sd">        </span>
+<span class="sd">        @param filename: filename to open for writing</span>
+<span class="sd">        @type filename: string</span>
+<span class="sd">        @param contents: file contents to be written</span>
+<span class="sd">        @type contents: string</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: filename or contents passed are None</span>
+<span class="sd">        @raise ValueError: filename should be a full path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">contents</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Passed None parameters in remotesystem.fs.writeFile&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Filename should be a full path!&#39;</span><span class="p">)</span>
+
+        <span class="n">localfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getTempFileName</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># Don&#39;t bother copying the file first - we&#39;re going to clobber it anyway</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="n">contents</span><span class="p">)</span>
+            <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Opened SFTP connection to send </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+                <span class="n">sf</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">localfile</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">localfile</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.exists"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the specified path exists</span>
+<span class="sd">        @param path: string</span>
+<span class="sd">        @rtype: boolean (True if path refers to an existing path, False for broken symcolic links)</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Path is not passed in remote.system.fs.exists&#39;</span><span class="p">)</span>
+
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;path </span><span class="si">%s</span><span class="s"> does not exit&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)),</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;path </span><span class="si">%s</span><span class="s"> exists&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)),</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.isDir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.isDir">[docs]</a>    <span class="k">def</span> <span class="nf">isDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the specified Directory path exists</span>
+<span class="sd">        @param path: string</span>
+<span class="sd">        @rtype: boolean (True if directory exists)</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: path is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Directory path is None in system.fs.isDir&#39;</span><span class="p">)</span>
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;path [</span><span class="si">%s</span><span class="s">] is not a directory&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;path [</span><span class="si">%s</span><span class="s">] is a directory&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.createDir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.createDir">[docs]</a>    <span class="k">def</span> <span class="nf">createDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newdir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new Directory</span>
+<span class="sd">        @param newdir: string (Directory path/name)</span>
+<span class="sd">        if newdir was only given as a directory name, the new directory will be created on the default path,</span>
+<span class="sd">        if newdir was given as a complete path with the directory name, the new directory will be created in the specified path</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: newdir parameter is empty</span>
+<span class="sd">        @raise RuntimeError: failed to create directory</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Creating directory if not exists </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">newdir</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">newdir</span> <span class="o">==</span> <span class="s">&#39;&#39;</span> <span class="ow">or</span> <span class="n">newdir</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;The newdir-parameter of system.fs.createDir() is None or an empty string.&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">newdir</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Directory trying to create: [</span><span class="si">%s</span><span class="s">] already exists&#39;</span> <span class="o">%</span> <span class="n">newdir</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">newdir</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">head</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">tail</span><span class="p">:</span>
+                    <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">sf</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">newdir</span><span class="p">)</span>
+                    <span class="k">finally</span><span class="p">:</span>
+                        <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Created the directory [</span><span class="si">%s</span><span class="s">]&#39;</span> <span class="o">%</span> <span class="n">newdir</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Failed to create the directory [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="n">newdir</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.copyDirTree"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.copyDirTree">[docs]</a>    <span class="k">def</span> <span class="nf">copyDirTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">keepsymlinks</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Recursively copy an entire directory tree rooted at src</span>
+<span class="sd">        </span>
+<span class="sd">        The dst directory may already exist; if not,</span>
+<span class="sd">        it will be created as well as missing parent directories</span>
+<span class="sd">        </span>
+<span class="sd">        @param src: string (source of directory tree to be copied)</span>
+<span class="sd">        @param dst: string (path directory to be copied to...should not already exist)</span>
+<span class="sd">        @param keepsymlinks: bool (True keeps symlinks instead of copying the content of the file)</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: src or dst is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">src</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dst</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Not enough parameters passed in system.fs.copyDirTree to copy directory from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">))</span>
+        <span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="s">&#39;uname -s&#39;</span><span class="p">)</span>
+        <span class="n">solaris</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;SunOS&#39;</span><span class="p">):</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Solaris&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+                <span class="n">solaris</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="n">solaris</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">keepsymlinks</span><span class="p">:</span>
+                <span class="n">symlinks</span> <span class="o">=</span> <span class="s">&#39;-P&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">symlinks</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;No solaris&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">keepsymlinks</span><span class="p">:</span>
+                <span class="n">symlinks</span> <span class="o">=</span> <span class="s">&#39;-L&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">symlinks</span> <span class="o">=</span> <span class="s">&#39;-P&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dst</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;cp -rf </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">/* </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">symlinks</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Executing [</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="n">cmd</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Source path </span><span class="si">%s</span><span class="s"> in remote.system.fs.copyDirTree is not a directory&#39;</span> <span class="o">%</span> <span class="n">src</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.copyDirTreeLocalRemote"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.copyDirTreeLocalRemote">[docs]</a>    <span class="k">def</span> <span class="nf">copyDirTreeLocalRemote</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">removeNonRelevantFiles</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Recursively copy an entire directory tree rooted at source.</span>
+<span class="sd">        The destination directory may already exist; if not, it will be created</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters:        </span>
+<span class="sd">        - source: string (source of directory tree to be copied)</span>
+<span class="sd">        - destination: string (path directory to be copied to...should not already exist)</span>
+<span class="sd">          if destination no specified will use same location as source</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#@todo check and fix</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;not fully implemented yet&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">destination</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">destination</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executewait</span><span class="p">(</span><span class="s">&quot;mkdir -p </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">)</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSFtpConnection</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">removeNonRelevantFiles</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_removeRedundantFiles</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Coppy </span><span class="si">%s</span><span class="s"> files from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">),</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">dest</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">pathRemoveDirPart</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">source</span><span class="p">))</span>
+            <span class="n">destdir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">destdir</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Create dir </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">destdir</span><span class="p">))</span>
+                <span class="c"># ftp.mkdir(destdir)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">executewait</span><span class="p">(</span><span class="s">&quot;mkdir -p </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destdir</span><span class="p">)</span>
+                <span class="n">dirs</span><span class="p">[</span><span class="n">destdir</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;put </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">dest</span><span class="p">))</span>
+            <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.moveFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.moveFile">[docs]</a>    <span class="k">def</span> <span class="nf">moveFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move a file from source path to destination path</span>
+<span class="sd">        </span>
+<span class="sd">        @param source: Source file path</span>
+<span class="sd">        @type source: string</span>
+<span class="sd">        @param destination: Destination path the file should be moved to </span>
+<span class="sd">        @type destination: string</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: source or destin is empty</span>
+<span class="sd">        @raise RuntimeError: Specified source / destination does not exist</span>
+<span class="sd">        @raise RuntimeError: file could not be moved</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Move file from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">source</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">destination</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Not enough parameters given to remote.system.fs.moveFile: move from </span><span class="si">%s</span><span class="s">, to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">source</span><span class="p">)):</span>
+                <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">destination</span><span class="p">)):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">removeFile</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;The specified destination path in system.fs.moveFile does not exist: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destination</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;The specified source path in system.fs.moveFile does not exist: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">source</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;File could not be moved...in remote.system.fs.moveFile: from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.isFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.isFile">[docs]</a>    <span class="k">def</span> <span class="nf">isFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if the specified file exists for the given path</span>
+<span class="sd">        </span>
+<span class="sd">        @param name: string</span>
+<span class="sd">        @rtype: boolean (True if file exists for the given path)</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: name is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;isfile:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;File name is None in remote.system.fs.isFile&#39;</span><span class="p">)</span>
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sf</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] is a file&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;[</span><span class="si">%s</span><span class="s">] is not a file&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.removeFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.removeFile">[docs]</a>    <span class="k">def</span> <span class="nf">removeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove a file</span>
+<span class="sd">        </span>
+<span class="sd">        @param path: File path required to be removed</span>
+<span class="sd">        @type path: string</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: path is empty</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Removing file with path: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Not enough parameters passed to system.fs.removeFile: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+            <span class="k">if</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">path</span><span class="p">)):</span>
+                <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">sf</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Done removing file with path: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;File with path: </span><span class="si">%s</span><span class="s"> could not be removed</span><span class="se">\n</span><span class="s">Details: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="k">finally</span><span class="p">:</span>
+                    <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Path: </span><span class="si">%s</span><span class="s"> is not a file in remote.system.fs.removeFile&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Path: </span><span class="si">%s</span><span class="s"> does not exist in remote.system.fs.removeFile&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.copyFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.copyFile">[docs]</a>    <span class="k">def</span> <span class="nf">copyFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileFrom</span><span class="p">,</span> <span class="n">fileTo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copy file</span>
+
+<span class="sd">        Copies the file from C{fileFrom} to the file or directory C{to}.</span>
+<span class="sd">        If C{to} is a directory, a file with the same basename as C{fileFrom} is </span>
+<span class="sd">        created (or overwritten) in the directory specified.</span>
+<span class="sd">        Permission bits are copied.</span>
+
+<span class="sd">        @param fileFrom: Source file path name</span>
+<span class="sd">        @type fileFrom: string</span>
+<span class="sd">        @param fileTo: Destination file or folder path name</span>
+<span class="sd">        @type fileTo: string</span>
+<span class="sd">        </span>
+<span class="sd">        @raise TypeError: fileFrom or to is empty</span>
+<span class="sd">        @raise RuntimeError: Cannot copy file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;Copy file from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileFrom</span><span class="p">,</span> <span class="n">fileTo</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fileFrom</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">fileTo</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;No parameters given to system.fs.copyFile from </span><span class="si">%s</span><span class="s">, to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileFrom</span><span class="p">,</span> <span class="n">fileTo</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isFile</span><span class="p">(</span><span class="n">fileFrom</span><span class="p">):</span>
+                <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#39;cp </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileFrom</span><span class="p">,</span> <span class="n">fileTo</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot copy file, file: </span><span class="si">%s</span><span class="s"> does not exist in system.fs.copyFile&quot;</span> <span class="o">%</span> <span class="n">fileFrom</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Failed to copy file from </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileFrom</span><span class="p">,</span> <span class="n">fileTo</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemFS.isEmptyDir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.isEmptyDir">[docs]</a>    <span class="k">def</span> <span class="nf">isEmptyDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether a directory is empty</span>
+
+<span class="sd">        @param path: Directory to check</span>
+<span class="sd">        @type path: string&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;Not enough parameters passed to system.fs.isEmptyDir: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Remote path </span><span class="si">%s</span><span class="s"> does not exist&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isDir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Remote path </span><span class="si">%s</span><span class="s"> is not a directory&#39;</span> <span class="o">%</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="n">sf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">subcount</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subcount</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">sf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</div></div>
+<div class="viewcode-block" id="RemotePortForwardHander"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemotePortForwardHander">[docs]</a><span class="k">class</span> <span class="nc">RemotePortForwardHander</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Keep  trac of registered forwards forwards[(server_addr, server_port)] = (local_addr, local_port)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forwards</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="RemotePortForwardHander.accept"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemotePortForwardHander.accept">[docs]</a>    <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">xxx_todo_changeme</span><span class="p">,</span> <span class="n">xxx_todo_changeme1</span><span class="p">):</span>
+        <span class="p">(</span><span class="n">origin_addr</span><span class="p">,</span> <span class="n">origin_port</span><span class="p">)</span> <span class="o">=</span> <span class="n">xxx_todo_changeme</span>
+        <span class="p">(</span><span class="n">server_addr</span><span class="p">,</span> <span class="n">server_port</span><span class="p">)</span> <span class="o">=</span> <span class="n">xxx_todo_changeme1</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;port_forward_handler:accept  New connection: &quot;</span><span class="si">%s</span><span class="s">&quot; </span><span class="si">%s</span><span class="s">&quot; &quot;</span><span class="si">%s</span><span class="s">&quot; &quot;</span><span class="si">%s</span><span class="s">&quot; &quot;</span><span class="si">%s</span><span class="s">&quot; &quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span>
+                     <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">channel</span><span class="p">),</span> <span class="n">origin_addr</span><span class="p">,</span> <span class="n">origin_port</span><span class="p">,</span> <span class="n">server_addr</span><span class="p">,</span> <span class="n">server_port</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;port_forward_handler:accept  channel.fileno: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">channel</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">server_addr</span><span class="p">,</span> <span class="n">server_port</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">forwards</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Failed to handle RemoteForward: No forward registered for </span><span class="si">%s</span><span class="s">.</span><span class="se">\n</span><span class="s">Registered forwards: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+                             <span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="n">server_addr</span><span class="p">,</span> <span class="n">server_port</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">forwards</span><span class="p">))</span>
+
+        <span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forwards</span><span class="p">[(</span><span class="n">server_addr</span><span class="p">,</span> <span class="n">server_port</span><span class="p">)]</span>
+
+        <span class="n">handler_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">))</span>
+        <span class="n">handler_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">handler_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="RemotePortForwardHander.handle"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemotePortForwardHander.handle">[docs]</a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Is called from a different thread whenever a forwarded connection arrives.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c">#j.logger.log(&#39;port_forward_handler: New connection: &quot;%s&quot; &quot;%s&quot; &quot;%s&quot; &quot;%s&quot; &quot;%s&quot;&#39; % (id(channel), origin_addr, origin_port, server_addr, server_port))</span>
+
+        <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;port_forward_handler:handle Forwarding request to </span><span class="si">%s</span><span class="s">:</span><span class="si">%d</span><span class="s"> failed: </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;port_forward_handler:handle Connected!  Tunnel open </span><span class="si">%r</span><span class="s"> -&gt; </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span>
+                     <span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">getpeername</span><span class="p">(),</span> <span class="p">(</span><span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">sock</span><span class="p">,</span> <span class="n">channel</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="n">sock</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">sock</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;port_forward_handler:handle Tunnel closed from </span><span class="si">%r</span><span class="s"> to </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">channel</span><span class="o">.</span><span class="n">getpeername</span><span class="p">(),</span> <span class="p">(</span><span class="n">local_address</span><span class="p">,</span> <span class="n">local_port</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">channel</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">sock</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+</div></div>
+<div class="viewcode-block" id="RemoteSystemPortForward"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemPortForward">[docs]</a><span class="k">class</span> <span class="nc">RemoteSystemPortForward</span><span class="p">(</span><span class="n">_remoteSystemObject</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">process</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a Remote Port forward system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">_remoteSystemObject</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">process</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_forward_handler</span> <span class="o">=</span> <span class="n">RemotePortForwardHander</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RemoteSystemPortForward.forwardRemotePort"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemPortForward.forwardRemotePort">[docs]</a>    <span class="k">def</span> <span class="nf">forwardRemotePort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">,</span> <span class="n">remoteHost</span><span class="p">,</span> <span class="n">remotePort</span><span class="p">,</span> <span class="n">serverHost</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">inThread</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up a reverse forwarding tunnel across an SSH server</span>
+<span class="sd">        </span>
+<span class="sd">        @param serverPort: port on server to forward (0 to let server assign port)</span>
+<span class="sd">        @param remoteHost: remote host to forward to</span>
+<span class="sd">        @param remotePort: remote port to forward to</span>
+<span class="sd">        @param serverHost: host on the server to bind to</span>
+<span class="sd">        @param inThread: should we run the forward in a separate thread</span>
+<span class="sd">        </span>
+<span class="sd">        @return:            Port number used on ther server</span>
+<span class="sd">        @rtype:             int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transport</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">()</span>
+
+        <span class="n">serverPort</span> <span class="o">=</span> <span class="n">transport</span><span class="o">.</span><span class="n">request_port_forward</span><span class="p">(</span><span class="n">serverHost</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">remote_forward_handler</span><span class="o">.</span><span class="n">accept</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote_forward_handler</span><span class="o">.</span><span class="n">forwards</span><span class="p">[(</span><span class="n">serverHost</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">remoteHost</span><span class="p">,</span> <span class="n">remotePort</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">inThread</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">transport</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+                <span class="n">transport</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">serverPort</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemPortForward.forwardLocalPort"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemPortForward.forwardLocalPort">[docs]</a>    <span class="k">def</span> <span class="nf">forwardLocalPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">localPort</span><span class="p">,</span> <span class="n">remoteHost</span><span class="p">,</span> <span class="n">remotePort</span><span class="p">,</span> <span class="n">inThread</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up a forward tunnel across an SSH server</span>
+<span class="sd">        </span>
+<span class="sd">        @param localPort: local port to forward</span>
+<span class="sd">        @param remoteHost: remote host to forward to</span>
+<span class="sd">        @param remotePort: remote port to forward to</span>
+<span class="sd">        @param inThread: should we run the forward in a separate thread</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transport</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection</span><span class="o">.</span><span class="n">get_transport</span><span class="p">()</span>
+        <span class="c"># this is a little convoluted, but lets me configure things for the Handler</span>
+        <span class="c"># object.  (SocketServer doesn&#39;t give Handlers any way to access the outer</span>
+        <span class="c"># server normally.)</span>
+
+        <span class="k">class</span> <span class="nc">SubHandler</span> <span class="p">(</span><span class="n">LocalPortForwardHandler</span><span class="p">):</span>
+            <span class="n">chain_host</span> <span class="o">=</span> <span class="n">remoteHost</span>
+            <span class="n">chain_port</span> <span class="o">=</span> <span class="n">remotePort</span>
+            <span class="n">ssh_transport</span> <span class="o">=</span> <span class="n">transport</span>
+
+        <span class="k">if</span> <span class="n">inThread</span><span class="p">:</span>
+            <span class="c"># Start a thread with the server -- that thread will then start one</span>
+            <span class="c"># more thread for each request</span>
+            <span class="c"># @todo: Find a way to stop the forward without havinf to stop the process</span>
+            <span class="n">server_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">LocalForwardServer</span><span class="p">((</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">localPort</span><span class="p">),</span> <span class="n">SubHandler</span><span class="p">)</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
+            <span class="c"># Exit the server thread when the main thread terminates</span>
+            <span class="n">server_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">LocalForwardServer</span><span class="p">((</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">localPort</span><span class="p">),</span> <span class="n">SubHandler</span><span class="p">)</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="RemoteSystemPortForward.cancelForwardRemotePort"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemPortForward.cancelForwardRemotePort">[docs]</a>    <span class="k">def</span> <span class="nf">cancelForwardRemotePort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stops any connections from being forwarded using the ssh server on the remote sever port</span>
+<span class="sd">        </span>
+<span class="sd">        @param serverPort: the remote port on the server that needs to be canceled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+<span class="c">#        transport = self._connection.get_transport()</span>
+<span class="c">#        transport.cancel_port_forward(&#39;&#39;, serverPort)</span>
+        <span class="n">pid</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">getPidForPort</span><span class="p">(</span><span class="n">serverPort</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;PID IS </span><span class="si">%s</span><span class="s"> and output is </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pid</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">pid</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">exitCode</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">killProcess</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exitCode</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to cancel remote port forwarding for remote port </span><span class="si">%s</span><span class="s">. Reason: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">serverPort</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Failed to cancel remote port forwarding for remote port </span><span class="si">%s</span><span class="s">. Reason: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">serverPort</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+
+</div></div>
+<div class="viewcode-block" id="LocalForwardServer"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.LocalForwardServer">[docs]</a><span class="k">class</span> <span class="nc">LocalForwardServer</span><span class="p">(</span><span class="n">SocketServer</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="p">):</span>
+    <span class="n">daemon_threads</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">allow_reuse_address</span> <span class="o">=</span> <span class="bp">True</span>
+
+</div>
+<div class="viewcode-block" id="LocalPortForwardHandler"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.LocalPortForwardHandler">[docs]</a><span class="k">class</span> <span class="nc">LocalPortForwardHandler</span><span class="p">(</span><span class="n">SocketServer</span><span class="o">.</span><span class="n">BaseRequestHandler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LocalPortForwardHandler.handle"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.remotesystem.html#JumpScale.baselib.remote.remotesystem.RemoteSystem.LocalPortForwardHandler.handle">[docs]</a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">requestPeername</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">getpeername</span><span class="p">()</span>
+            <span class="n">chan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssh_transport</span><span class="o">.</span><span class="n">open_channel</span><span class="p">(</span><span class="s">&#39;direct-tcpip&#39;</span><span class="p">,</span>
+                                                   <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_port</span><span class="p">),</span>
+                                                   <span class="n">requestPeername</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Incoming request to </span><span class="si">%s</span><span class="s">:</span><span class="si">%d</span><span class="s"> failed: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_host</span><span class="p">,</span>
+                                                                   <span class="bp">self</span><span class="o">.</span><span class="n">chain_port</span><span class="p">,</span>
+                                                                   <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Incoming request to </span><span class="si">%s</span><span class="s">:</span><span class="si">%d</span><span class="s"> was rejected by the SSH server.&#39;</span> <span class="o">%</span>
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_port</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Connected!  Tunnel open </span><span class="si">%r</span><span class="s"> -&gt; </span><span class="si">%r</span><span class="s"> -&gt; </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestPeername</span><span class="p">,</span>
+                                                                 <span class="n">chan</span><span class="o">.</span><span class="n">getpeername</span><span class="p">(),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chain_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_port</span><span class="p">)),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="p">,</span> <span class="n">chan</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">chan</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">chan</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&#39;Tunnel closed from </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requestPeername</span><span class="p">,),</span> <span class="mi">5</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

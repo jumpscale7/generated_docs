@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ZDaemon and ZClient &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="index.html" />
+    <link rel="next" title="JumpScale package" href="../../../API/JumpScale.html" />
+    <link rel="prev" title="ZDaemon" href="ZDaemon.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../API/JumpScale.html" title="JumpScale package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ZDaemon.html" title="ZDaemon"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="zdaemon-and-zclient">
+<h1>ZDaemon and ZClient<a class="headerlink" href="#zdaemon-and-zclient" title="Permalink to this headline">¶</a></h1>
+<p>ZDaemon listens on a ZMQ tcp socket</p>
+<div class="section" id="identification-and-session">
+<h2>Identification and session<a class="headerlink" href="#identification-and-session" title="Permalink to this headline">¶</a></h2>
+<p>A client should have the identify socketopt set &#8216;setsockopt(zmq.IDENTIFY, &#8216;sessionid&#8217;)&#8217;
+This value of this indentify should be an unique session id which should be registered on the server by calling, registersession.</p>
+</div>
+<div class="section" id="calling-cmds">
+<h2>Calling cmds<a class="headerlink" href="#calling-cmds" title="Permalink to this headline">¶</a></h2>
+<p>Thx to the socketopt IDNENTIFY the session is passed with all requests and we dont have to care about this ourself.
+Fruther to call a command you need to pass it 4 multipart messages.</p>
+<p>1st: the command to call eg. registersession
+2nd: the format the data is sent int m == messagepack j == json...
+3th: the format the result should be received in
+4th: the data itself</p>
+<div class="section" id="example-python-code">
+<h3>Example python code:<a class="headerlink" href="#example-python-code" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#!python</span>
+<span class="kn">import</span> <span class="nn">zmq</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+<span class="n">sock</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
+<span class="n">sock</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">IDENTIFY</span><span class="p">,</span> <span class="s">&#39;&lt;sessionid&gt;&#39;</span><span class="p">)</span>
+<span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://&lt;ip&gt;:&lt;port&gt;&quot;</span><span class="p">)</span>
+<span class="n">sock</span><span class="o">.</span><span class="n">send_multipart</span><span class="p">([</span><span class="s">&#39;pingcmd&#39;</span><span class="p">,</span> <span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ZDaemon and ZClient</a><ul>
+<li><a class="reference internal" href="#identification-and-session">Identification and session</a></li>
+<li><a class="reference internal" href="#calling-cmds">Calling cmds</a><ul>
+<li><a class="reference internal" href="#example-python-code">Example python code:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ZDaemon.html"
+                        title="previous chapter">ZDaemon</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../../API/JumpScale.html"
+                        title="next chapter">JumpScale package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../../API/JumpScale.html" title="JumpScale package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ZDaemon.html" title="ZDaemon"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >&lt;no title&gt;</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.grid.BrokerMainActions &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.grid.BrokerMainActions</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<div class="viewcode-block" id="BrokerMainActions"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions">[docs]</a><span class="k">class</span> <span class="nc">BrokerMainActions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">daemon</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="n">daemon</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broker</span> <span class="o">=</span> <span class="n">daemon</span><span class="o">.</span><span class="n">broker</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">methods</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">applicationtypes</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="BrokerMainActions.getactivejobs"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.getactivejobs">[docs]</a>    <span class="k">def</span> <span class="nf">getactivejobs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">activeJobs</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.ping"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.ping">[docs]</a>    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;pong&quot;</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.registerNode"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.registerNode">[docs]</a>    <span class="k">def</span> <span class="nf">registerNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">obj</span><span class="p">[</span><span class="s">&quot;gid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">print</span> <span class="s">&#39;#####registernode&#39;</span>
+        <span class="k">print</span> <span class="n">obj</span>
+        <span class="k">print</span> <span class="s">&#39;#################&#39;</span>
+        <span class="n">guid</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">changed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">osis_node</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>  <span class="c"># @todo urgent new &amp; changed does not return well (P1)</span>
+
+        <span class="n">gid</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">guid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">id</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.registerProcess"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.registerProcess">[docs]</a>    <span class="k">def</span> <span class="nf">registerProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">obj</span><span class="p">[</span><span class="s">&quot;gid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">print</span> <span class="s">&#39;#####registerprocess&#39;</span>
+        <span class="k">print</span> <span class="n">obj</span>
+        <span class="k">print</span> <span class="s">&#39;#################&#39;</span>
+        <span class="n">guid</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">changed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">osis_process</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="n">gid</span><span class="p">,</span> <span class="n">bid</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">guid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">id</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.registerApplication"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.registerApplication">[docs]</a>    <span class="k">def</span> <span class="nf">registerApplication</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">pid</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">zappl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">zobjects</span><span class="o">.</span><span class="n">getZApplicationObject</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">zappl</span><span class="o">.</span><span class="n">bid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">print</span> <span class="s">&#39;#####appl&#39;</span>
+        <span class="k">print</span> <span class="n">zappl</span>
+        <span class="k">print</span> <span class="s">&#39;#################&#39;</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="n">zappl</span><span class="o">.</span><span class="n">getUniqueKey</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">applicationtypes</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="n">guid</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">changed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">osis_application</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">zappl</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+            <span class="n">gid</span><span class="p">,</span> <span class="n">bid</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">guid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+            <span class="n">zappl</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+            <span class="n">zappl</span><span class="o">.</span><span class="n">getSetGuid</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">applicationtypes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">zappl</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">zappl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">applicationtypes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">zappl</span><span class="o">.</span><span class="n">id</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.registerAction"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.registerAction">[docs]</a>    <span class="k">def</span> <span class="nf">registerAction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">guid</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">changed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">osis_action</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">gid</span><span class="p">,</span> <span class="n">bid</span><span class="p">,</span> <span class="nb">id</span> <span class="o">=</span> <span class="n">guid</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">action</span>
+        <span class="k">return</span> <span class="nb">id</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.getAction"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.getAction">[docs]</a>    <span class="k">def</span> <span class="nf">getAction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actionid</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">actionid</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">raiseBug</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;could not find action with id </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">actionid</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;broker.actions&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">actionid</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="BrokerMainActions.registerWorker"><a class="viewcode-back" href="../../../../API/JumpScale.grid.grid.html#JumpScale.grid.grid.BrokerMainActions.BrokerMainActions.registerWorker">[docs]</a>    <span class="k">def</span> <span class="nf">registerWorker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">roles</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">workerprocess</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">zobjects</span><span class="o">.</span><span class="n">getZProcessObject</span><span class="p">(</span><span class="n">ddict</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">workers</span><span class="p">[</span><span class="n">identity</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">instance</span><span class="p">,</span> <span class="n">roles</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">:</span>
+            <span class="n">role</span> <span class="o">=</span> <span class="n">role</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">registerRole4NewWorker</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;REGISTER WORKER:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">identity</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;broker.config&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">True</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

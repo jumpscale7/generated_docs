@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.serverbase.Daemon &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.serverbase.Daemon</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.serializers</span>
+<span class="kn">from</span> <span class="nn">JumpScale.grid.serverbase</span> <span class="kn">import</span> <span class="n">returnCodes</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">ujson</span>
+
+
+<div class="viewcode-block" id="Session"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Session">[docs]</a><span class="k">class</span> <span class="nc">Session</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ddict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">ddict</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+    <span class="n">__str__</span> <span class="o">=</span> <span class="n">__repr__</span>
+
+</div>
+<div class="viewcode-block" id="DaemonCMDS"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS">[docs]</a><span class="k">class</span> <span class="nc">DaemonCMDS</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">daemon</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="n">daemon</span>
+
+<div class="viewcode-block" id="DaemonCMDS.authenticate"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.authenticate">[docs]</a>    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>  <span class="c"># will authenticall all (is std)</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.registerpubkey"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.registerpubkey">[docs]</a>    <span class="k">def</span> <span class="nf">registerpubkey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">organization</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">pubkey</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">keystor</span><span class="o">.</span><span class="n">setPubKey</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">pubkey</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.listCategories"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.listCategories">[docs]</a>    <span class="k">def</span> <span class="nf">listCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.getpubkeyserver"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.getpubkeyserver">[docs]</a>    <span class="k">def</span> <span class="nf">getpubkeyserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">keystor</span><span class="o">.</span><span class="n">getPubKey</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sslorg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">ssluser</span><span class="p">,</span> <span class="n">returnAsString</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.registersession"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.registersession">[docs]</a>    <span class="k">def</span> <span class="nf">registersession</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessiondata</span><span class="p">,</span> <span class="n">ssl</span><span class="p">,</span><span class="n">session</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param sessiondata is encrypted data (SSL)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># ser=j.db.serializers.getMessagePack()</span>
+        <span class="c"># sessiondictstr=ser.loads(data)</span>
+        <span class="k">print</span> <span class="s">&quot;register session:</span><span class="si">%s</span><span class="s"> &quot;</span><span class="o">%</span><span class="n">session</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">(</span><span class="n">sessiondata</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ssl</span><span class="p">:</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">encrkey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">encrkey</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">passwd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">passwd</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot Authenticate User:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">session</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">sessions</span><span class="p">[</span><span class="n">session</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="k">print</span> <span class="s">&quot;OK&quot;</span>
+
+        <span class="k">return</span> <span class="s">&quot;OK&quot;</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.logeco"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.logeco">[docs]</a>    <span class="k">def</span> <span class="nf">logeco</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eco</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        log eco object (as dict)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">eco</span><span class="p">[</span><span class="s">&quot;epoch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">now</span>
+        <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">(</span><span class="n">ddict</span><span class="o">=</span><span class="n">eco</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">eventhandlingTE</span><span class="o">.</span><span class="n">executeV2</span><span class="p">(</span><span class="n">eco</span><span class="o">=</span><span class="n">eco</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">eventsMemLog</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DaemonCMDS.introspect"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.DaemonCMDS.introspect">[docs]</a>    <span class="k">def</span> <span class="nf">introspect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cat</span><span class="p">,</span><span class="n">session</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">methods</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">daemon</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="p">[</span><span class="n">cat</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismethod</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            <span class="c"># Remove the &#39;session&#39; parameter</span>
+            <span class="k">if</span> <span class="s">&#39;session&#39;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="n">session_index</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;session&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">session_index</span><span class="o">&lt;&gt;</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;session arg needs to be last argument of method. Cat:</span><span class="si">%s</span><span class="s"> Method:</span><span class="si">%s</span><span class="s"> </span><span class="se">\n</span><span class="s">Args:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">args</span><span class="p">))</span>
+                <span class="k">del</span> <span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">session_index</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">defaults</span><span class="p">:</span>
+                    <span class="n">session_default_index</span> <span class="o">=</span> <span class="n">session_index</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                    <span class="n">defaults</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">defaults</span><span class="p">)</span>
+                    <span class="k">del</span> <span class="n">defaults</span><span class="p">[</span><span class="n">session_default_index</span><span class="p">]</span>
+                    <span class="n">args</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ArgSpec</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">varargs</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">keywords</span><span class="p">,</span> <span class="n">defaults</span><span class="p">)</span>
+
+            <span class="n">methods</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;args&#39;</span><span class="p">:</span> <span class="n">args</span><span class="p">,</span> <span class="s">&#39;doc&#39;</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">method</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="n">methods</span>
+
+</div></div>
+<div class="viewcode-block" id="Daemon"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon">[docs]</a><span class="k">class</span> <span class="nc">Daemon</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span> <span class="o">=</span> <span class="bp">False</span> <span class="c"># make sure errorhandler does not require input we are daemon</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfacesProxy</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_now</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errorconditionserializer</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">getSerializerType</span><span class="p">(</span><span class="s">&quot;m&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addCMDsInterface</span><span class="p">(</span><span class="n">DaemonCMDS</span><span class="p">,</span> <span class="s">&quot;core&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Daemon.getTime"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.getTime">[docs]</a>    <span class="k">def</span> <span class="nf">getTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># can overrule this to e.g. in gevent set the time every sec, takes less resource (using self._now)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="Daemon.decrypt"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.decrypt">[docs]</a>    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">session</span><span class="o">.</span><span class="n">encrkey</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keystor</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">orgsender</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">organization</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                                        <span class="n">orgreader</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sslorg</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ssluser</span><span class="p">,</span>
+                                        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">signature</span><span class="o">=</span><span class="n">message</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">message</span>
+</div>
+<div class="viewcode-block" id="Daemon.encrypt"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.encrypt">[docs]</a>    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">session</span> <span class="ow">and</span> <span class="n">session</span><span class="o">.</span><span class="n">encrkey</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s">&#39;publickey&#39;</span><span class="p">):</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">publickey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">keystor</span><span class="o">.</span><span class="n">getPubKey</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">organization</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">organization</span><span class="p">,</span> <span class="n">returnAsString</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keystor</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sslorg</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ssluser</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="n">pubkeyReader</span><span class="o">=</span><span class="n">session</span><span class="o">.</span><span class="n">publickey</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">message</span>
+</div>
+<div class="viewcode-block" id="Daemon.addCMDsInterface"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.addCMDsInterface">[docs]</a>    <span class="k">def</span> <span class="nf">addCMDsInterface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmdInterfaceClass</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span><span class="n">proxy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">category</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">proxy</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">cmdInterfaceClass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">cmdInterfaceClass</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfacesProxy</span><span class="p">[</span><span class="n">category</span><span class="p">]</span><span class="o">=</span><span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="p">[</span><span class="n">category</span><span class="p">]</span><span class="o">=</span><span class="n">obj</span>
+</div>
+<div class="viewcode-block" id="Daemon.processRPC"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.processRPC">[docs]</a>    <span class="k">def</span> <span class="nf">processRPC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        @return (resultcode,returnformat,result)</span>
+<span class="sd">                item 0=cmd, item 1=returnformat (str), item 2=args (dict)</span>
+<span class="sd">        resultcode</span>
+<span class="sd">            0=ok</span>
+<span class="sd">            1= not authenticated</span>
+<span class="sd">            2= method not found</span>
+<span class="sd">            2+ any other error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inputisdict</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+
+        <span class="c"># print &quot;process rpc:\n%s&quot;%data</span>
+        <span class="n">cmdkey</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+        <span class="c"># cmd2 = {}</span>
+        <span class="k">if</span> <span class="n">cmdkey</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span>
+            <span class="n">ffunction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="n">cmdkey</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ffunction</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">category</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">METHOD_NOT_FOUND</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="bp">None</span>
+
+            <span class="n">cmdinterface</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="p">[</span><span class="n">category</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cmdinterface</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+                <span class="n">ffunction</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cmdinterface</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">METHOD_NOT_FOUND</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="bp">None</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="n">cmdkey</span><span class="p">]</span> <span class="o">=</span> <span class="n">ffunction</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">inputisdict</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;_agentid&quot;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&quot;_agentid&quot;</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">cmds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmdsInterfaces</span><span class="p">[</span><span class="s">&quot;agent&quot;</span><span class="p">]</span>
+                        <span class="n">gid</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmI</span><span class="o">.</span><span class="n">gid</span>
+                        <span class="n">nid</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;_agentid&quot;</span><span class="p">])</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;_agentid&quot;</span><span class="p">)</span>
+                        <span class="n">category2</span><span class="o">=</span><span class="n">category</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;processmanager_&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+                        <span class="n">scriptid</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category2</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+                        <span class="n">job</span><span class="o">=</span><span class="n">cmds</span><span class="o">.</span><span class="n">scheduleCmd</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span><span class="n">nid</span><span class="p">,</span><span class="n">cmdcategory</span><span class="o">=</span><span class="n">category2</span><span class="p">,</span><span class="n">jscriptid</span><span class="o">=</span><span class="n">scriptid</span><span class="p">,</span><span class="n">cmdname</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">queue</span><span class="o">=</span><span class="s">&quot;internal&quot;</span><span class="p">,</span><span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">roles</span><span class="o">=</span><span class="p">[],</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span><span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                        <span class="n">jobqueue</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">_getJobQueue</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s">&quot;guid&quot;</span><span class="p">])</span>
+                        <span class="n">jobr</span><span class="o">=</span><span class="n">jobqueue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">jobr</span><span class="p">:</span>
+                            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s">&quot;Command </span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s"> with args: </span><span class="si">%s</span><span class="s"> timeout&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category2</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+                            <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span><span class="n">returnformat</span><span class="p">,</span><span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span>
+                        <span class="n">jobr</span><span class="o">=</span><span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">jobr</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">jobr</span><span class="p">[</span><span class="s">&quot;state&quot;</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;OK&quot;</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">jobr</span><span class="p">[</span><span class="s">&quot;resultcode&quot;</span><span class="p">],</span><span class="n">returnformat</span><span class="p">,</span><span class="n">jobr</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span><span class="n">returnformat</span><span class="p">,</span><span class="n">jobr</span><span class="p">[</span><span class="s">&quot;result&quot;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">data</span><span class="p">[</span><span class="s">&#39;session&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session</span>
+                        <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;_agentid&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">ffunction</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">ffunction</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c"># if str(e)==&quot;STOP APPLICATION 112299&quot;:  #needs to be cryptic otherwise smart developers can fake this</span>
+            <span class="c">#     j.application.stop()</span>
+            
+            <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="c"># print eco</span>
+            <span class="c"># eco.errormessage += &quot;\nfunction arguments were:%s\n&quot; % str(inspect.getargspec(ffunction).args)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">1024</span><span class="p">:</span>
+                <span class="n">data</span><span class="o">=</span><span class="s">&quot;too much data to show.&quot;</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">errormessage</span> <span class="o">=</span> <span class="s">&quot;ERROR IN RPC CALL </span><span class="si">%s</span><span class="s">: </span><span class="si">%s</span><span class="se">\n</span><span class="s">Data:</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">cmdkey</span><span class="p">,</span><span class="n">eco</span><span class="o">.</span><span class="n">errormessage</span> <span class="p">,</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">processErrorConditionObject</span><span class="p">(</span><span class="n">eco</span><span class="p">)</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;tb&quot;</span><span class="p">)</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">tb</span><span class="o">=</span><span class="bp">None</span>
+            <span class="n">errorres</span> <span class="o">=</span> <span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span>
+            <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">errorres</span> 
+
+        <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">result</span>
+</div>
+<div class="viewcode-block" id="Daemon.processRPCUnSerialized"><a class="viewcode-back" href="../../../../API/JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.Daemon.Daemon.processRPCUnSerialized">[docs]</a>    <span class="k">def</span> <span class="nf">processRPCUnSerialized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">informat</span><span class="p">,</span> <span class="n">returnformat</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">sessionid</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @return (resultcode,returnformat,result)</span>
+<span class="sd">                item 0=cmd, item 1=returnformat (str), item 2=args (dict)</span>
+<span class="sd">        resultcode</span>
+<span class="sd">            0=ok</span>
+<span class="sd">            1= not authenticated</span>
+<span class="sd">            2= method not found</span>
+<span class="sd">            2+ any other error</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">sessionid</span><span class="p">):</span>
+            <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sessions</span><span class="p">[</span><span class="n">sessionid</span><span class="p">]</span>
+            <span class="n">encrkey</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">encrkey</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;registerpubkey&quot;</span><span class="p">,</span> <span class="s">&quot;getpubkeyserver&quot;</span><span class="p">,</span> <span class="s">&quot;registersession&quot;</span><span class="p">]:</span>
+                <span class="n">session</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">encrkey</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="s">&quot;Authentication  or Session error, session not known with id:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sessionid</span>
+                <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">error</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">AUTHERROR</span><span class="p">,</span> <span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorconditionserializer</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">informat</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">informat</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="n">eco</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">parsePythonErrorObject</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">eco</span><span class="o">.</span><span class="n">tb</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+            <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">SERIALIZATIONERRORIN</span><span class="p">,</span> <span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorconditionserializer</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+
+        <span class="n">parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processRPC</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="n">returnformat</span><span class="p">,</span> <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">category</span><span class="p">)</span>
+        <span class="n">returnformat</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># return format as comes back from processRPC</span>
+        <span class="k">if</span> <span class="n">returnformat</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="p">:</span>  <span class="c"># is</span>
+            <span class="n">returnser</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">serializers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">returnformat</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">encrkey</span><span class="p">)</span>
+            <span class="n">error</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">returnser</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">session</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                <span class="n">error</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">error</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">returnser</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">__dict__</span><span class="p">),</span> <span class="n">session</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">eco</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">errorconditionhandler</span><span class="o">.</span><span class="n">getErrorConditionObject</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s">&quot;could not serialize result from </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">cmd</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">returnCodes</span><span class="o">.</span><span class="n">SERIALIZATIONERROROUT</span><span class="p">,</span> <span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorconditionserializer</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">eco</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

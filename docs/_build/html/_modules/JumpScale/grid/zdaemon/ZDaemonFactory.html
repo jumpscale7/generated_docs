@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.zdaemon.ZDaemonFactory &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.zdaemon.ZDaemonFactory</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="ZDaemonFactory"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory">[docs]</a><span class="k">class</span> <span class="nc">ZDaemonFactory</span><span class="p">():</span>
+
+<div class="viewcode-block" id="ZDaemonFactory.getZDaemon"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemon">[docs]</a>    <span class="k">def</span> <span class="nf">getZDaemon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">4444</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">nrCmdGreenlets</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">sslorg</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">ssluser</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        is a generic usable zmq daemon which has a data &amp; cmd channel (data channel not completely implemented for now)</span>
+
+
+<span class="sd">        zd=j.core.zdaemon.getZDaemon(port=5651,nrCmdGreenlets=50)</span>
+
+<span class="sd">        class MyCommands():</span>
+<span class="sd">            def __init__(self,daemon):</span>
+<span class="sd">                self.daemon=daemon</span>
+
+<span class="sd">            def pingcmd(self,session=None):</span>
+<span class="sd">                return &quot;pong&quot;</span>
+
+<span class="sd">            def echo(self,msg=&quot;&quot;,session=None):</span>
+<span class="sd">                return msg</span>
+
+<span class="sd">        #remark always need to add **args in method because user &amp; returnformat are passed as params which can </span>
+<span class="sd">          be used in method</span>
+
+<span class="sd">        zd.addCMDsInterface(MyCommands)  #pass as class not as object !!!</span>
+<span class="sd">        zd.start()</span>
+
+<span class="sd">        use self.getZDaemonClientClass as client to this daemon</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">ZDaemon</span> <span class="kn">import</span> <span class="n">ZDaemon</span>
+        <span class="n">zd</span> <span class="o">=</span> <span class="n">ZDaemon</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">nrCmdGreenlets</span><span class="o">=</span><span class="n">nrCmdGreenlets</span><span class="p">,</span> <span class="n">sslorg</span><span class="o">=</span><span class="n">sslorg</span><span class="p">,</span> <span class="n">ssluser</span><span class="o">=</span><span class="n">ssluser</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="o">=</span><span class="n">sslkeyvaluestor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">zd</span>
+</div>
+<div class="viewcode-block" id="ZDaemonFactory.getZDaemonClient"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonClient">[docs]</a>    <span class="k">def</span> <span class="nf">getZDaemonClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5651</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="s">&quot;myorg&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">&quot;1234&quot;</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;core&quot;</span><span class="p">,</span>\
+            <span class="n">sendformat</span><span class="o">=</span><span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="s">&quot;m&quot;</span> <span class="p">,</span><span class="n">gevent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        example usage, see example for server at self.getZDaemon</span>
+
+<span class="sd">        client=j.core.zdaemon.getZDaemonClient(ipaddr=&quot;127.0.0.1&quot;,port=5651,login=&quot;root&quot;,passwd=&quot;1234&quot;,ssl=False)</span>
+
+<span class="sd">                print client.echo(&quot;Hello World.&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.ZDaemonTransport</span> <span class="kn">import</span> <span class="n">ZDaemonTransport</span>
+        <span class="kn">from</span> <span class="nn">JumpScale.grid.serverbase.DaemonClient</span> <span class="kn">import</span> <span class="n">DaemonClient</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="n">ZDaemonTransport</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span><span class="n">gevent</span><span class="o">=</span><span class="n">gevent</span><span class="p">)</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">DaemonClient</span><span class="p">(</span><span class="n">org</span><span class="o">=</span><span class="n">org</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="n">passwd</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="n">ssl</span><span class="p">,</span> <span class="n">transport</span><span class="o">=</span><span class="n">trans</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cl</span><span class="o">.</span><span class="n">getCmdClient</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">sendformat</span><span class="o">=</span><span class="n">sendformat</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="n">returnformat</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ZDaemonFactory.getZDaemonHAClient"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonHAClient">[docs]</a>    <span class="k">def</span> <span class="nf">getZDaemonHAClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connections</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="s">&quot;myorg&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">&quot;1234&quot;</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;core&quot;</span><span class="p">,</span>\
+            <span class="n">sendformat</span><span class="o">=</span><span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="s">&quot;m&quot;</span> <span class="p">,</span><span class="n">gevent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        example usage, see example for server at self.getZDaemon</span>
+
+<span class="sd">        client=j.core.zdaemon.getZDaemonHAClient([(&#39;127.0.0.1&#39;, 5544)],login=&quot;root&quot;,passwd=&quot;1234&quot;,ssl=False)</span>
+
+<span class="sd">                print client.echo(&quot;Hello World.&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.ZDaemonTransport</span> <span class="kn">import</span> <span class="n">ZDaemonHATransport</span>
+        <span class="kn">from</span> <span class="nn">JumpScale.grid.serverbase.DaemonClient</span> <span class="kn">import</span> <span class="n">DaemonClient</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="n">ZDaemonHATransport</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">gevent</span><span class="o">=</span><span class="n">gevent</span><span class="p">)</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">DaemonClient</span><span class="p">(</span><span class="n">org</span><span class="o">=</span><span class="n">org</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="n">passwd</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="n">ssl</span><span class="p">,</span> <span class="n">transport</span><span class="o">=</span><span class="n">trans</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cl</span><span class="o">.</span><span class="n">getCmdClient</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">sendformat</span><span class="o">=</span><span class="n">sendformat</span><span class="p">,</span> <span class="n">returnformat</span><span class="o">=</span><span class="n">returnformat</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ZDaemonFactory.getZDaemonTransportClass"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonTransportClass">[docs]</a>    <span class="k">def</span> <span class="nf">getZDaemonTransportClass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        #example usage:</span>
+<span class="sd">        import JumpScale.grid.zdaemon</span>
+<span class="sd">        class BlobStorTransport(j.core.zdaemon.getZDaemonTransportClass()):</span>
+<span class="sd">            def sendMsg(self,timeout=0, *args):</span>
+<span class="sd">                self._cmdchannel.send_multipart(args)</span>
+<span class="sd">                result=self._cmdchannel.recv_multipart()</span>
+<span class="sd">                return result</span>
+<span class="sd">        transp=BlobStorTransport(addr=ipaddr,port=port,gevent=True)        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.ZDaemonTransport</span> <span class="kn">import</span> <span class="n">ZDaemonTransport</span>
+        <span class="k">return</span> <span class="n">ZDaemonTransport</span>
+
+</div>
+<div class="viewcode-block" id="ZDaemonFactory.getZDaemonAgent"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonAgent">[docs]</a>    <span class="k">def</span> <span class="nf">getZDaemonAgent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipaddr</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5651</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="s">&quot;myorg&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s">&quot;root&quot;</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">&quot;1234&quot;</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        example usage, see example for server at self.getZDaemon</span>
+
+<span class="sd">        agent=j.core.zdaemon.getZDaemonAgent(ipaddr=&quot;127.0.0.1&quot;,port=5651,login=&quot;root&quot;,passwd=&quot;1234&quot;,ssl=False,roles=[&quot;*&quot;])</span>
+<span class="sd">        agent.start()</span>
+
+<span class="sd">        @param roles describes which roles the agent can execute e.g. node.1,hypervisor.virtualbox.1,*</span>
+<span class="sd">            * means all</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">ZDaemonAgent</span> <span class="kn">import</span> <span class="n">ZDaemonAgent</span>
+        <span class="n">cl</span> <span class="o">=</span> <span class="n">ZDaemonAgent</span><span class="p">(</span><span class="n">ipaddr</span><span class="o">=</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="n">org</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="n">passwd</span><span class="p">,</span> <span class="n">ssl</span><span class="o">=</span><span class="n">ssl</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="n">roles</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cl</span>
+</div>
+<div class="viewcode-block" id="ZDaemonFactory.initSSL4Server"><a class="viewcode-back" href="../../../../API/JumpScale.grid.zdaemon.html#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.initSSL4Server">[docs]</a>    <span class="k">def</span> <span class="nf">initSSL4Server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">organization</span><span class="p">,</span> <span class="n">serveruser</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        use this to init your ssl keys for the server (they can be used over all transports)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.grid.serverbase</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">servers</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">initSSL4Server</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span> <span class="n">serveruser</span><span class="p">,</span> <span class="n">sslkeyvaluestor</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

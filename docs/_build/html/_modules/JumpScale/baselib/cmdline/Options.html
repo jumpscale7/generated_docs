@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.cmdline.Options &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.cmdline.Options</h1><div class="highlight"><pre>
+<span class="c"># &lt;License type=&quot;Sun Cloud BSD&quot; version=&quot;2.2&quot;&gt;</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2005-2009, Sun Microsystems, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or</span>
+<span class="c"># without modification, are permitted provided that the following</span>
+<span class="c"># conditions are met:</span>
+<span class="c">#</span>
+<span class="c"># 1. Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#</span>
+<span class="c"># 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer in</span>
+<span class="c">#    the documentation and/or other materials provided with the</span>
+<span class="c">#    distribution.</span>
+<span class="c">#</span>
+<span class="c"># 3. Neither the name Sun Microsystems, Inc. nor the names of other</span>
+<span class="c">#    contributors may be used to endorse or promote products derived</span>
+<span class="c">#    from this software without specific prior written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY SUN MICROSYSTEMS, INC. &quot;AS IS&quot; AND ANY</span>
+<span class="c"># EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</span>
+<span class="c"># PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SUN MICROSYSTEMS, INC. OR</span>
+<span class="c"># CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,</span>
+<span class="c"># EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,</span>
+<span class="c"># PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR</span>
+<span class="c"># PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY</span>
+<span class="c"># OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="c"># (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span>
+<span class="c"># OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="c">#</span>
+<span class="c"># &lt;/License&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;Generic option parser class. This class can be used</span>
+<span class="sd">to write code that will parse command line options for</span>
+<span class="sd">an application by invoking one of the standard Python</span>
+<span class="sd">library command argument parser modules optparse or</span>
+<span class="sd">getopt.</span>
+
+<span class="sd">To parse the arguments, call the method &#39;parse_arguments&#39;.</span>
+<span class="sd">The return value is a dictionary of the option-value pairs.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">__author__</span><span class="o">=</span><span class="s">&quot;Anand Pillai&quot;</span>
+
+<div class="viewcode-block" id="GenericOptionParserError"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.cmdline.html#JumpScale.baselib.cmdline.Options.GenericOptionParserError">[docs]</a><span class="k">class</span> <span class="nc">GenericOptionParserError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="GenericOptionParser"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.cmdline.html#JumpScale.baselib.cmdline.Options.GenericOptionParser">[docs]</a><span class="k">class</span> <span class="nc">GenericOptionParser</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Generic option parser using either C{optparse} or C{getopt} &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optmap</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_optmap</span><span class="p">(</span><span class="n">optmap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optdict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxw</span> <span class="o">=</span> <span class="mi">24</span>
+        
+    <span class="k">def</span> <span class="nf">_parse_optmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">map</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Internal method -&gt; Parse option</span>
+<span class="sd">        map containing tuples and convert the</span>
+<span class="sd">        tuples to a dictionary &quot;&quot;&quot;</span>
+
+        <span class="n">optmap</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="p">:</span> <span class="k">continue</span>
+                <span class="n">var</span><span class="p">,</span><span class="n">val</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">var</span><span class="p">]</span><span class="o">=</span><span class="n">val</span>
+                
+            <span class="n">optmap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+
+        <span class="k">return</span> <span class="n">optmap</span>
+        
+<div class="viewcode-block" id="GenericOptionParser.parse_arguments"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.cmdline.html#JumpScale.baselib.cmdline.Options.GenericOptionParser.parse_arguments">[docs]</a>    <span class="k">def</span> <span class="nf">parse_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Parse command line arguments and</span>
+<span class="sd">        return a dictionary of option-value pairs &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optparse</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;optparse&#39;</span><span class="p">)</span>
+            <span class="c"># For invoking help, when no arguments</span>
+            <span class="c"># are passed.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;-h&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_arguments1</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">getopt</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">getopt</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="s">&#39;getopt&#39;</span><span class="p">)</span>                
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parse_arguments2</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">GenericOptionParserError</span><span class="p">(</span><span class="s">&#39;Fatal Error: No optparse or getopt modules found&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optdict</span>
+                </div>
+    <span class="k">def</span> <span class="nf">_parse_arguments1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Parse command-line arguments using optparse &quot;&quot;&quot;</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c"># Option destination is the key itself</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="c"># Default action is &#39;store&#39;</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="s">&#39;store&#39;</span>
+            <span class="c"># Short option string</span>
+            <span class="n">sopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;short&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="c"># Long option string</span>
+            <span class="n">lopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;long&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="c"># Help string</span>
+            <span class="n">helpstr</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;help&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="c"># Meta var</span>
+            <span class="n">meta</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;meta&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="c"># Default value</span>
+            <span class="n">defl</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="c"># Default type is &#39;string&#39;</span>
+            <span class="n">typ</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;string&#39;</span><span class="p">)</span>
+            
+            <span class="c"># If bool type...</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s">&#39;bool&#39;</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="s">&#39;store_true&#39;</span>
+                <span class="n">defl</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">defl</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;True&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">sopt</span><span class="p">:</span> <span class="n">sopt</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">sopt</span>
+            <span class="k">if</span> <span class="n">lopt</span><span class="p">:</span> <span class="n">lopt</span> <span class="o">=</span> <span class="s">&#39;--&#39;</span> <span class="o">+</span> <span class="n">lopt</span>
+            
+            <span class="c"># Add option</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="n">sopt</span><span class="p">,</span><span class="n">lopt</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">option</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="n">helpstr</span><span class="p">,</span><span class="n">metavar</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span>
+                         <span class="n">default</span><span class="o">=</span><span class="n">defl</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">options</span><span class="p">,</span><span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optdict</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">__dict__</span>
+
+    <span class="k">def</span> <span class="nf">_parse_arguments2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Parse command-line arguments using getopt &quot;&quot;&quot;</span>
+
+        <span class="c"># getopt requires help string to</span>
+        <span class="c"># be generated.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_usage</span><span class="p">())</span>
+        
+        <span class="n">shortopt</span><span class="p">,</span><span class="n">longopt</span><span class="o">=</span><span class="s">&#39;h&#39;</span><span class="p">,[</span><span class="s">&#39;help&#39;</span><span class="p">]</span>
+        <span class="c"># Create short option string and long option</span>
+        <span class="c"># list for getopt</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">sopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;short&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">lopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;long&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">typ</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;string&#39;</span><span class="p">)</span>            
+            <span class="n">defl</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;default&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="c"># If bool type...</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s">&#39;bool&#39;</span><span class="p">:</span>
+                <span class="n">defl</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">defl</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;True&#39;</span><span class="p">)</span>
+            <span class="c"># Set default value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_optdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">defl</span>
+
+            <span class="k">if</span> <span class="n">typ</span><span class="o">==</span><span class="s">&#39;bool&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sopt</span><span class="p">:</span> <span class="n">shortopt</span> <span class="o">+=</span> <span class="n">sopt</span>
+                <span class="k">if</span> <span class="n">lopt</span><span class="p">:</span> <span class="n">longopt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lopt</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sopt</span><span class="p">:</span> <span class="n">shortopt</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">shortopt</span><span class="p">,</span><span class="n">sopt</span><span class="p">,</span><span class="s">&#39;:&#39;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">lopt</span><span class="p">:</span> <span class="n">longopt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lopt</span><span class="o">+</span><span class="s">&#39;=&#39;</span><span class="p">)</span>
+
+        <span class="c"># Parse</span>
+        <span class="p">(</span><span class="n">optlist</span><span class="p">,</span><span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">shortopt</span><span class="p">,</span><span class="n">longopt</span><span class="p">)</span>
+
+        <span class="c"># Match options</span>
+        <span class="k">for</span> <span class="n">opt</span><span class="p">,</span><span class="n">val</span> <span class="ow">in</span> <span class="n">optlist</span><span class="p">:</span>
+            <span class="c"># Invoke help</span>
+            <span class="k">if</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;-h&#39;</span><span class="p">,</span><span class="s">&#39;--help&#39;</span><span class="p">):</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_usage</span><span class="p">())</span>
+                
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">sopt</span> <span class="o">=</span> <span class="s">&#39;-&#39;</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;short&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">lopt</span> <span class="o">=</span> <span class="s">&#39;--&#39;</span> <span class="o">+</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;long&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+                <span class="n">typ</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;string&#39;</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">opt</span> <span class="ow">in</span> <span class="p">(</span><span class="n">sopt</span><span class="p">,</span><span class="n">lopt</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">typ</span><span class="o">==</span><span class="s">&#39;bool&#39;</span><span class="p">:</span> <span class="n">val</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_optdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">val</span>
+                    <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                    <span class="k">break</span>
+
+    <span class="k">def</span> <span class="nf">_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Generate and return a help string</span>
+<span class="sd">        for the program, similar to the one</span>
+<span class="sd">        generated by optparse &quot;&quot;&quot;</span>
+
+        <span class="n">usage</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;usage: </span><span class="si">%s</span><span class="s"> [options]</span><span class="se">\n\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">usage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;options:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+        <span class="n">options</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;  -h, --help&#39;</span><span class="p">,</span> <span class="s">&#39;show this help message and exit</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)]</span>
+        <span class="n">maxlen</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optmap</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">sopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;short&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">lopt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;long&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">help</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;help&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">meta</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;meta&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+            
+            <span class="n">optstr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">sopt</span><span class="p">:</span> <span class="n">optstr</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s">&#39;  -&#39;</span><span class="p">,</span><span class="n">sopt</span><span class="p">,</span><span class="n">meta</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">lopt</span><span class="p">:</span> <span class="n">optstr</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">optstr</span><span class="p">,</span><span class="s">&#39;, --&#39;</span><span class="p">,</span><span class="n">lopt</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">meta</span><span class="p">:</span> <span class="n">optstr</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">optstr</span><span class="p">,</span><span class="s">&#39;=&#39;</span><span class="p">,</span><span class="n">meta</span><span class="p">))</span>
+            
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">optstr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">l</span><span class="o">&gt;</span><span class="n">maxlen</span><span class="p">:</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">l</span>
+            <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">optstr</span><span class="p">,</span><span class="n">help</span><span class="p">))</span>
+            
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)):</span>
+            <span class="n">optstr</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">helpstr</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">maxlen</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">maxw</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">usage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">optstr</span><span class="p">,(</span><span class="n">maxlen</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">optstr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">helpstr</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)))</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">optstr</span><span class="p">)</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">maxw</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">usage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">optstr</span><span class="p">,(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxw</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">optstr</span><span class="p">))</span><span class="o">*</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">helpstr</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">usage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">optstr</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">maxw</span><span class="o">*</span><span class="s">&#39; &#39;</span><span class="p">,</span> <span class="n">helpstr</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">message</span><span class="p">:</span> 
+            <span class="n">usage</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">message</span><span class="p">,</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">d</span><span class="o">=</span><span class="p">{</span> <span class="s">&#39;infile&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s">&#39;short=i&#39;</span><span class="p">,</span><span class="s">&#39;long=in&#39;</span><span class="p">,</span><span class="s">&#39;help=Input file for the program&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;meta=IN&#39;</span><span class="p">),</span>
+        <span class="s">&#39;outfile&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;short=o&#39;</span><span class="p">,</span><span class="s">&#39;long=out&#39;</span><span class="p">,</span><span class="s">&#39;help=Output file for the program&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;meta=OUT&#39;</span><span class="p">),</span>
+        <span class="s">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;short=V&#39;</span><span class="p">,</span><span class="s">&#39;long=verbose&#39;</span><span class="p">,</span><span class="s">&#39;help=Be verbose in output&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;type=bool&#39;</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="n">g</span><span class="o">=</span><span class="n">GenericOptionParser</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">optdict</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">parse_arguments</span><span class="p">()</span>
+ 
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">optdict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+         <span class="c"># Use the option and the value in</span>
+         <span class="c"># your program</span>
+         <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> -&gt; </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

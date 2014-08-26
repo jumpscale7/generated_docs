@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.lib.ovsnetconfig.VXNet.vxlan &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.lib.ovsnetconfig.VXNet.vxlan</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;delandtj&#39;</span>
+
+<span class="kn">from</span> <span class="nn">netaddr</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">netclasses</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">systemlist</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="n">command_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="NetLayout"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout">[docs]</a><span class="k">class</span> <span class="nc">NetLayout</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span> <span class="o">=</span> <span class="n">get_all_ifaces</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bridges</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="NetLayout.load"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span> <span class="o">=</span> <span class="n">get_nic_params</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="NetLayout.reload"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.reload">[docs]</a>    <span class="k">def</span> <span class="nf">reload</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="NetLayout.is_phys"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.is_phys">[docs]</a>    <span class="k">def</span> <span class="nf">is_phys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">interface</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">&#39;PHYS&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">[</span><span class="n">interface</span><span class="p">][</span><span class="s">&#39;detail&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="NetLayout.has_ip"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.has_ip">[docs]</a>    <span class="k">def</span> <span class="nf">has_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">,</span> <span class="n">ipnetobj</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">[</span><span class="n">interface</span><span class="p">][</span><span class="s">&#39;ipaddr&#39;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">ipnetobj</span><span class="o">.</span><span class="n">ip</span> <span class="o">==</span> <span class="n">i</span><span class="o">.</span><span class="n">ip</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="NetLayout.exist_ip"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.exist_ip">[docs]</a>    <span class="k">def</span> <span class="nf">exist_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipobj</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">interface</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">[</span><span class="n">interface</span><span class="p">][</span><span class="s">&#39;ipaddr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ip</span> <span class="o">==</span> <span class="n">ipobj</span><span class="o">.</span><span class="n">ip</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="NetLayout.exist_interface"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.NetLayout.exist_interface">[docs]</a>    <span class="k">def</span> <span class="nf">exist_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">interface</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">interface</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+</div></div>
+<div class="viewcode-block" id="VXNet"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.VXNet">[docs]</a><span class="k">class</span> <span class="nc">VXNet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">netid</span><span class="p">,</span><span class="n">backend</span><span class="o">=</span><span class="s">&#39;vxbackend&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">netid</span> <span class="o">=</span> <span class="n">NetID</span><span class="p">(</span><span class="n">netid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ipv4</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">existing</span> <span class="o">=</span> <span class="n">NetLayout</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="VXNet.apply"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.VXNet.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ethpairs : left always to bridge, right to namespace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">existing</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">innamespace</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="c"># IP in Namespace</span>
+            <span class="n">vxlan</span> <span class="o">=</span> <span class="n">VXlan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">vxlan</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">existing</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">:</span>
+                <span class="n">send_to_syslog</span><span class="p">(</span><span class="s">&#39;VXLan </span><span class="si">%s</span><span class="s"> exists, not creating&#39;</span> <span class="o">%</span> <span class="n">vxlan</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vxlan</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+                <span class="n">vxlan</span><span class="o">.</span><span class="n">no6</span><span class="p">()</span>
+
+            <span class="n">bridge</span> <span class="o">=</span> <span class="n">VXBridge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">bridge</span>
+            <span class="k">if</span> <span class="n">bridge</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">existing</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">:</span>
+                <span class="n">send_to_syslog</span><span class="p">(</span><span class="s">&#39;Bridge </span><span class="si">%s</span><span class="s"> exists, not creating&#39;</span> <span class="o">%</span> <span class="n">bridge</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bridge</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+                <span class="n">bridge</span><span class="o">.</span><span class="n">no6</span><span class="p">()</span>
+                <span class="n">bridge</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">vxlan</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+            <span class="n">namespace</span> <span class="o">=</span> <span class="n">VXNameSpace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">namespace</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">existing</span><span class="o">.</span><span class="n">nicdetail</span><span class="p">:</span>
+                <span class="n">send_to_syslog</span><span class="p">(</span><span class="s">&#39;NameSpace </span><span class="si">%s</span><span class="s"> exists, not creating&#39;</span> <span class="o">%</span> <span class="n">namespace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">namespace</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="n">veth</span> <span class="o">=</span> <span class="n">VethPair</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">)</span>
+            <span class="n">veth</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="n">bridge</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">veth</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+            <span class="n">namespace</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">veth</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+            <span class="n">addIPv4</span><span class="p">(</span><span class="n">veth</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv4</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span> <span class="o">==</span> <span class="bp">None</span> <span class="p">:</span> <span class="n">addIPv6</span><span class="p">(</span><span class="n">veth</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">inbridge</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="c"># IP on bridge</span>
+            <span class="n">vxlan</span> <span class="o">=</span> <span class="n">VXlan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+            <span class="n">vxlan</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="n">vxlan</span><span class="o">.</span><span class="n">no6</span><span class="p">()</span>
+            <span class="n">bridge</span> <span class="o">=</span> <span class="n">VXBridge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">bridge</span>
+            <span class="n">bridge</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="n">bridge</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">vxlan</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv4</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="n">addIPv4</span><span class="p">(</span><span class="n">bridge</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv4</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="n">addIPv6</span><span class="p">(</span><span class="n">bridge</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># no bridge, no namespace, just IP</span>
+            <span class="n">vxlan</span> <span class="o">=</span> <span class="n">VXlan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+            <span class="n">vxlan</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+            <span class="n">addIPv4</span><span class="p">(</span><span class="n">vxlan</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv4</span><span class="p">)</span>
+            <span class="n">addIPv6</span><span class="p">(</span><span class="n">vxlan</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipv6</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VXNet.rebuild"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.VXNet.rebuild">[docs]</a>    <span class="k">def</span> <span class="nf">rebuild</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">netid</span><span class="p">):</span>
+        <span class="c"># destroy all connected with id</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="VXNet.destroy"><a class="viewcode-back" href="../../../../../API/JumpScale.lib.ovsnetconfig.VXNet.html#JumpScale.lib.ovsnetconfig.VXNet.vxlan.VXNet.destroy">[docs]</a>    <span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">netid</span><span class="p">):</span>
+        <span class="c"># destroy all connected with id</span>
+        <span class="k">pass</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

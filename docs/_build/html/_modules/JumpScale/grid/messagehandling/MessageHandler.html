@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.grid.messagehandling.MessageHandler &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.grid.messagehandling.MessageHandler</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">LogHandlerDB</span> <span class="kn">import</span> <span class="n">LogHandlerDB</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">simplejson</span>
+<span class="c"># import zmq</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">import</span> <span class="nn">zlib</span>
+<span class="kn">import</span> <span class="nn">cPickle</span>
+
+
+<span class="c"># MESSAGETYPES</span>
+<span class="c"># 1:log</span>
+<span class="c"># 2:signal</span>
+<span class="c"># 3:errorcondition</span>
+<span class="c"># 4:alert</span>
+<span class="c"># 5:stat</span>
+
+
+<span class="k">class</span> <span class="nc">MessageHandler</span><span class="p">:</span>
+<div class="viewcode-block" id="MessageHandler"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler">[docs]</a>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        for doc see messagehandler part in doc section of jumpscale repo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">localLogServerEnabled</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_silentRetry</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="bp">False</span>  <span class="c"># when true will queue to local FS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loghandlerdb</span> <span class="o">=</span> <span class="n">LogHandlerDB</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmIBytestr</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot start messagehandler, the whoAmiBytestr on j.application should be 6 bytes&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data2Message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttype</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="MessageHandler.data2Message"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.data2Message">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param data is already compressed/serialzed data block</span>
+<span class="sd">        @param ttype is 1:log, 2:signal, 3:ec, 4:alert, 5:perfinfo, 6:raw</span>
+<span class="sd">                                         type : 10 = uncompressed, json</span>
+<span class="sd">                                         type : 11 = uncompressed, cpickle</span>
+<span class="sd">                                         type : 12 = compressed, json</span>
+<span class="sd">                                         type : 13 = compressed, cpickle</span>
+<span class="sd">        @return 4byte_sizepacket,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># print len(data)</span>
+        <span class="c"># print &quot;who:%s&quot; % len(j.application.whoAmIBytestr)</span>
+        <span class="c"># print &quot;crc:%s&quot; % zlib.crc32(data)</span>
+        <span class="n">dataLength</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dataLength</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Couln</span><span class="se">\&#39;</span><span class="s">t format message, data length is 0&#39;</span><span class="p">)</span>
+        <span class="n">ttype</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span> <span class="n">ttype</span><span class="p">)</span>
+        <span class="n">crc</span> <span class="o">=</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="c"># 25 is length of everything before the data</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&quot;I&quot;</span><span class="p">,</span> <span class="n">dataLength</span> <span class="o">+</span> <span class="mi">25</span><span class="p">)</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&quot;I&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span>\
+            <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">whoAmIBytestr</span> <span class="o">+</span> <span class="n">ttype</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&quot;i&quot;</span><span class="p">,</span> <span class="n">crc</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span>
+
+        <span class="k">return</span> <span class="n">msg</span>
+
+    <span class="k">def</span> <span class="nf">getRPCMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="n">actorname</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">methodname</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span></div>
+<div class="viewcode-block" id="MessageHandler.getRPCMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getRPCMessage">[docs]</a>                      <span class="n">sync</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">serializertype</span><span class="o">=</span><span class="mi">11</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        JSModelid= appname,actorname,modelname    (use the commas)</span>
+<span class="sd">        data = dict with data (can be used to create JSModel from) or a var dict</span>
+<span class="sd">        timeout = in seconds how long the call can take, 0 is not specified</span>
+<span class="sd">        @param serializertype:</span>
+<span class="sd">          12 = compressed &amp; json</span>
+<span class="sd">          13 = compressed &amp; cpickle</span>
+<span class="sd">          10 = json</span>
+<span class="sd">          11 = cpickle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data2</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;app&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">appname</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;actor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actorname</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">methodname</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;inst&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">data2</span><span class="p">[</span><span class="s">&quot;sync&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sync</span>
+        <span class="k">if</span> <span class="n">serializertype</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data2</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getMessageSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.getMessageSize"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageSize">[docs]</a>        <span class="c"># @TODO: Document.</span>
+        <span class="k">return</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&#39;I&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getMessageType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.getMessageType"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageType">[docs]</a>        <span class="c"># @TODO: Document.</span>
+        <span class="n">typeIdStr</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">[</span><span class="mi">20</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">typeIdStr</span><span class="p">)</span>
+        <span class="c"># return o.enumerators.MessageServerMessageType.getByLevel(typeId)  #@REMARK do not use this, too slow</span>
+
+    <span class="k">def</span> <span class="nf">getErrorConditionMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errorconditionObject</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.getErrorConditionMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getErrorConditionMessage">[docs]</a>        <span class="c"># protocol see http://confluence.incubaid.com/display/SHAREDPROJ/Protocol</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">simplejson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">errorconditionObject</span><span class="o">.</span><span class="n">obj2dict</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">redirectStdOutStdErrorToLogger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">yesno</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.redirectStdOutStdErrorToLogger"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.redirectStdOutStdErrorToLogger">[docs]</a>        <span class="k">if</span> <span class="n">yesno</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;REDIRECT STD &amp; STERR to LOGGER&quot;</span>
+            <span class="kn">from</span> <span class="nn">JumpScale.core.logging.RedirectStreams</span> <span class="kn">import</span> <span class="n">redirectStreams</span>
+            <span class="n">redirectStreams</span><span class="p">(</span><span class="n">hideoutput</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># print &quot;stdout to stderror are not redirected&quot;</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;_stdout_ori&quot;</span><span class="p">):</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_stdout_ori</span>
+            <span class="c"># else:</span>
+            <span class="c">#    print &quot;WARNING could not find original stdout&quot;</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;_stderr_ori&quot;</span><span class="p">):</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_stderr_ori</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+            <span class="c">#   print &quot;WARNING could not find original stderror&quot;</span>
+            <span class="k">print</span> <span class="s">&quot;restored redirection&quot;</span>
+
+    <span class="k">def</span> <span class="nf">connect2localLogserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reconnect</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.connect2localLogserver"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.connect2localLogserver">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">localLogServerEnabled</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">REQ</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">&quot;tcp://127.0.0.1:7777&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_poll</span> <span class="o">=</span> <span class="n">zmq</span><span class="o">.</span><span class="n">Poller</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_poll</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_silentRetry</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">reconnect</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">redirectStdOutStdErrorToLogger</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_monkeyPatch</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">queueMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.queueMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.queueMessage">[docs]</a>        <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span> <span class="s">&quot;messagequeue&quot;</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">appname</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.queue&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span> <span class="o">/</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">300</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>  <span class="c"># will append to file</span>
+
+    <span class="k">def</span> <span class="nf">resendQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">applicationName</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.resendQueue"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.resendQueue">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        will read the queue and try to resend</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">resend</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processQueue</span><span class="p">(</span><span class="n">resend</span><span class="p">,</span> <span class="n">applicationName</span><span class="o">=</span><span class="n">applicationName</span><span class="p">,</span> <span class="n">removeWhenDone</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unPackMessageSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.unPackMessageSeries"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessageSeries">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        unpack text to series of messages</span>
+<span class="sd">        #format is concatenation of</span>
+<span class="sd">        4byte_sizepacket,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data</span>
+<span class="sd">        @return [[dtype,length,epoch,gid,nid,pid,data]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">content</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;I&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">20</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">epoch</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">pid</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;IIII&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+            <span class="n">crc</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;i&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">25</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="n">length</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="n">crc</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not decode data from message, crc was not valid, data:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">length</span><span class="p">:]</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">dtype</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">nid</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>
+        <span class="c"># I LEAVE THIS CODE TO SHOW HOW how it is constructed (documentation)</span>
+        <span class="c"># while content:</span>
+            <span class="c"># [size|unknown|epoch|gid|nid|pid|logType|crc|data]</span>
+            <span class="c"># [4|1|4|4|4|4|1|4] =&gt; 26</span>
+            <span class="c"># size = struct.unpack(&#39;I&#39;, content[0:4])[0]</span>
+            <span class="c"># epoch = struct.unpack(&#39;I&#39;, content[5:9])[0]</span>
+            <span class="c"># gid = struct.unpack(&#39;I&#39;, content[9:13])[0]</span>
+            <span class="c"># nid = struct.unpack(&#39;I&#39;, content[13:17])[0]</span>
+            <span class="c"># pid = struct.unpack(&#39;I&#39;, content[17:21])[0]</span>
+            <span class="c"># logType = struct.unpack(&#39;B&#39;, content[21:22])[0]</span>
+            <span class="c"># crc = struct.unpack(&#39;i&#39;, content[22:26])[0]</span>
+            <span class="c"># data = content[26:size]</span>
+            <span class="c"># crcCheck = zlib.crc32(data)</span>
+            <span class="c"># if crc != crcCheck:</span>
+                <span class="c"># raise RuntimeError(&#39;Could not unpack message series, crc invalid&#39;)</span>
+
+            <span class="c"># result.append([logType, size, epoch, gid, nid, pid, data])</span>
+            <span class="c"># content = content[size:]</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">unPackMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.unPackMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessage">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        unpack 1 message</span>
+<span class="sd">        #format is</span>
+<span class="sd">        4byte_sizepacket,1byte_type,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data</span>
+<span class="sd">        @return dtype,length,epoch,gid,nid,pid,data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unPackMessageSeries</span><span class="p">(</span><span class="n">message</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">processQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">messageType</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">applicationName</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">removeWhenDone</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.processQueue"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.processQueue">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        read the queue and call method with as param the message</span>
+<span class="sd">        @param messageType 0 means all types, 1=log,2=signal,3=error,5=stat</span>
+<span class="sd">        @removeWhenDone if True then when message processed succesfully, remove from queue succesfull means method needs to return True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">applicationName</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">applicationName</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">appname</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">varDir</span><span class="p">,</span> <span class="s">&quot;messagequeue&quot;</span><span class="p">,</span> <span class="n">applicationName</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                    <span class="n">contentOut</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+                    <span class="n">content</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">content</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                        <span class="n">length</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;I&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">dtype</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span> <span class="n">content</span><span class="p">[</span><span class="mi">21</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">messageType</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">messageType</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">messageType</span> <span class="o">==</span> <span class="n">dtype</span><span class="p">):</span>
+                            <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">content</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">length</span><span class="p">])</span>
+                            <span class="k">if</span> <span class="n">removeWhenDone</span> <span class="ow">and</span> <span class="n">result</span><span class="p">:</span>
+                                <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">length</span><span class="p">:]</span>
+                    <span class="k">if</span> <span class="n">removeWhenDone</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">contentOut</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                            <span class="c"># means all processed well</span>
+                            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">contentOut</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.ping"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.ping">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="s">&quot;ping&quot;</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">modifyTimeInMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.modifyTimeInMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.modifyTimeInMessage">[docs]</a>        <span class="k">return</span> <span class="n">message</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&quot;I&quot;</span><span class="p">,</span> <span class="n">epoch</span><span class="p">)</span> <span class="o">+</span> <span class="n">message</span><span class="p">[</span><span class="mi">9</span><span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ignoreError</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.sendMessage"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendMessage">[docs]</a>
+        <span class="k">def</span> <span class="nf">echo2</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_silentRetry</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>  <span class="c"># if none means logserver is not available</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span> <span class="ow">or</span> <span class="n">ignoreError</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connect2localLogserver</span><span class="p">()</span>  <span class="c"># every 60 sec retry to connect to logserver</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ping</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># could still not connect</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">queue</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">queueMessage</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">retries_left</span> <span class="o">=</span> <span class="n">retries</span>
+            <span class="k">while</span> <span class="n">retries_left</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                <span class="n">socks</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>  <span class="c"># is request time out in ms</span>
+                <span class="k">if</span> <span class="n">socks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">)</span> <span class="o">==</span> <span class="n">zmq</span><span class="o">.</span><span class="n">POLLIN</span><span class="p">:</span>
+                    <span class="n">reply</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="s">&quot;1&quot;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">True</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># Socket is confused. Close and remove it.</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">zmq</span><span class="o">.</span><span class="n">LINGER</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_poll</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">)</span>
+                    <span class="n">retries_left</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">retries_left</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">echo2</span><span class="p">(</span><span class="s">&quot;Local Log Server seems to be offline, will not use.&quot;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="bp">None</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">term</span><span class="p">()</span>
+                        <span class="k">return</span> <span class="bp">False</span>
+                    <span class="c"># Create new connection</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_silentRetry</span> <span class="o">=</span> <span class="bp">True</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">connect2localLogserver</span><span class="p">(</span><span class="n">reconnect</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_monkeyPatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">cleanup</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplemented</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">logTargets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">cleanupLogsOnFilesystem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplemented</span>
+        <span class="c"># j.logger.consoleloglevel</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">clear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplementedIgnore</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">decodeLogMessage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplemented</span>
+        <span class="c"># j.logger.maxlevel</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">close</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplementedIgnore</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplemented</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">logTargetAdd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_notImplemented</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">nolog</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log</span>
+
+    <span class="k">def</span> <span class="nf">_notImplemented</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Not implemented on messagehandler 6&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_notImplementedIgnore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">dontprint</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="MessageHandler.log"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.log">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param category is in dot notation e.g. appserver3.status or system.fs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">consoleloglevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">dontprint</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">shellconfig</span><span class="o">.</span><span class="n">interactive</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">nolog</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">maxlevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c"># send to logserver</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">message</span><span class="p">)),</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;HAVE SERIOUS BUG IN LOGGER 4 MESSAGEHANDLER 6</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="kn">import</span> <span class="nn">pdb</span>
+            <span class="n">pdb</span><span class="o">.</span><span class="n">Pdb</span><span class="p">()</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+            <span class="c"># pdb.pm()</span>
+
+    <span class="k">def</span> <span class="nf">sendSignal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signalcategory</span><span class="p">,</span> <span class="n">jumpscaletags</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.sendSignal"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendSignal">[docs]</a>        <span class="k">if</span> <span class="n">jumpscaletags</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">jumpscaletags</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">signalcategory</span><span class="p">,</span> <span class="n">jumpscaletags</span><span class="p">)),</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sendErrorConditionObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">errorConditionObject</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.sendErrorConditionObject"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendErrorConditionObject">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        send errorcondtion object from jumpscale 6 to local logserver</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getErrorConditionMessage</span><span class="p">(</span><span class="n">errorConditionObject</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sendStat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">stat</span><span class="p">):</span></div>
+<div class="viewcode-block" id="MessageHandler.sendStat"><a class="viewcode-back" href="../../../../API/JumpScale.grid.messagehandling.html#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendStat">[docs]</a>        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">,</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">signalcategory</span><span class="p">,</span> <span class="n">jumpscaletags</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data2Message</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">msg</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

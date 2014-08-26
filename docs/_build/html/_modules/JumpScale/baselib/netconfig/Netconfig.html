@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.netconfig.Netconfig &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.netconfig.Netconfig</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">netaddr</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">JumpScale.lib.ovsnetconfig</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="Netconfig"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig">[docs]</a><span class="k">class</span> <span class="nc">Netconfig</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">=</span><span class="s">&quot;/&quot;</span>
+
+<div class="viewcode-block" id="Netconfig.setRoot"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.setRoot">[docs]</a>    <span class="k">def</span> <span class="nf">setRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">=</span><span class="n">root</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">root</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find root for netconfig:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">root</span><span class="p">)</span>
+        <span class="c">#set base files</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;etc/network/interfaces&quot;</span><span class="p">,</span><span class="s">&quot;etc/resolv.conf&quot;</span><span class="p">]:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span><span class="n">item</span><span class="p">),</span><span class="n">overwrite</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Netconfig.shutdownNetwork"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.shutdownNetwork">[docs]</a>    <span class="k">def</span> <span class="nf">shutdownNetwork</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find all interfaces and shut them all down with ifdown</span>
+<span class="sd">        this is to remove all networking things going on</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">excludes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;lo&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nic</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">getNics</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">nic</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">excludes</span><span class="p">:</span>
+                <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;ifdown </span><span class="si">%s</span><span class="s"> --force&quot;</span><span class="o">%</span><span class="n">nic</span>
+                <span class="k">print</span> <span class="s">&quot;shutdown:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">nic</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        </div>
+    <span class="k">def</span> <span class="nf">_getInterfacePath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span><span class="s">&quot;etc/network/interfaces&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find network interface path: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">path</span>
+
+    <span class="k">def</span> <span class="nf">_backup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">backuppath</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s">&quot;.backup&quot;</span>
+        <span class="n">counter</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">backuppath</span><span class="p">):</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">backuppath</span><span class="o">=</span><span class="n">path</span><span class="o">+</span><span class="s">&quot;.backup.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">counter</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copyFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">backuppath</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Netconfig.reset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">shutdown</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        empty config of /etc/network/interfaces</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">shutdown</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutdownNetwork</span><span class="p">()</span>
+        <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getInterfacePath</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_backup</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s">&quot;auto lo</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">)</span>
+        
+</div>
+<div class="viewcode-block" id="Netconfig.enableInterface"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterface">[docs]</a>    <span class="k">def</span> <span class="nf">enableInterface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="o">=</span><span class="s">&quot;eth0&quot;</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">dhcp</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">dhcp</span><span class="p">:</span>
+
+            <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int</span>
+<span class="s">iface eth0 inet dhcp</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int</span>
+<span class="s">iface eth0 inet manual</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$int&quot;</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+        <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getInterfacePath</span><span class="p">()</span>
+        <span class="n">ed</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">getTextFileEditor</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">ed</span><span class="o">.</span><span class="n">setSection</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">dhcp</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;ifup </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">dev</span>
+            <span class="k">print</span> <span class="s">&quot;up:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">dev</span>
+            <span class="k">print</span> <span class="n">cmd</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>     
+</div>
+<div class="viewcode-block" id="Netconfig.remove"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="p">):</span>
+        <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getInterfacePath</span><span class="p">()</span>
+        <span class="n">ed</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">getTextFileEditor</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">ed</span><span class="o">.</span><span class="n">removeSection</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+
+
+</div>
+<div class="viewcode-block" id="Netconfig.setNameserver"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.setNameserver">[docs]</a>    <span class="k">def</span> <span class="nf">setNameserver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">addr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        resolvconf will be disabled</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;resolvconf --disable-updates&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;nameserver </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">addr</span>    
+        <span class="n">path</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span><span class="s">&quot;etc/resolv.conf&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">pass</span>  <span class="c">#@todo???? does not work         </span>
+            <span class="c"># raise RuntimeError(&quot;Could not find resolv.conf path: &#39;%s&#39;&quot;%path)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Netconfig.enableInterfaceStatic"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceStatic">[docs]</a>    <span class="k">def</span> <span class="nf">enableInterfaceStatic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="p">,</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">gw</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ipaddr in form of 192.168.10.2/24 (can be list)</span>
+<span class="sd">        gateway in form of 192.168.10.254</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int        </span>
+<span class="s">iface $int inet static</span>
+<span class="s">       address $ip</span>
+<span class="s">       netmask $mask</span>
+<span class="s">       network $net</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">gw</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">+=</span><span class="s">&quot;       gateway </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">gw</span>
+
+        <span class="n">args</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;dev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dev</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;ipaddr&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ipaddr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_applyNetconfig</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Netconfig.enableInterfaceBridgeStatic"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeStatic">[docs]</a>    <span class="k">def</span> <span class="nf">enableInterfaceBridgeStatic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="p">,</span><span class="n">ipaddr</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">bridgedev</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">gw</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ipaddr in form of 192.168.10.2/24 (can be list)</span>
+<span class="sd">        gateway in form of 192.168.10.254</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int        </span>
+<span class="s">iface $int inet static</span>
+<span class="s">       bridge_fd 0</span>
+<span class="s">       bridge_maxwait 0</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ipaddr</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">+=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">       address $ip</span>
+<span class="s">       netmask $mask</span>
+<span class="s">       network $net            </span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;static&quot;</span><span class="p">,</span><span class="s">&quot;manual&quot;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">bridgedev</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">+=</span><span class="s">&quot;       bridge_ports $bridgedev&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">+=</span><span class="s">&quot;       bridge_ports none&quot;</span>
+
+        <span class="k">if</span> <span class="n">gw</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">C</span><span class="o">+=</span><span class="s">&quot;       gateway </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">gw</span>
+
+<span class="c">#         future=&quot;&quot;&quot;</span>
+<span class="c">#        #broadcast &lt;broadcast IP here, e.g. 192.168.1.255&gt;</span>
+<span class="c">#        # dns-* options are implemented by the resolvconf package, if installed</span>
+<span class="c">#        #dns-nameservers &lt;name server IP address here, e.g. 192.168.1.1&gt;</span>
+<span class="c">#        #dns-search your.search.domain.here</span>
+
+<span class="c"># &quot;&quot;&quot;</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;dev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dev</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;ipaddr&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ipaddr</span>
+        <span class="k">if</span> <span class="n">bridgedev</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s">&quot;bridgedev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">bridgedev</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_applyNetconfig</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">)</span>        
+</div>
+<div class="viewcode-block" id="Netconfig.enableInterfaceBridgeDhcp"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.enableInterfaceBridgeDhcp">[docs]</a>    <span class="k">def</span> <span class="nf">enableInterfaceBridgeDhcp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="p">,</span><span class="n">bridgedev</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int        </span>
+<span class="s">iface $int inet dhcp</span>
+<span class="s">       bridge_ports $bridgedev</span>
+<span class="s">       bridge_fd 0</span>
+<span class="s">       bridge_maxwait 0</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+        <span class="n">args</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;dev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dev</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;bridgedev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">bridgedev</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_applyNetconfig</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">)</span>        
+</div>
+<div class="viewcode-block" id="Netconfig.addIpToInterface"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.netconfig.html#JumpScale.baselib.netconfig.Netconfig.Netconfig.addIpToInterface">[docs]</a>    <span class="k">def</span> <span class="nf">addIpToInterface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dev</span><span class="p">,</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">aliasnr</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">auto $int:$aliasnr        </span>
+<span class="s">iface $int:$aliasnr inet static</span>
+<span class="s">       name $int Alias</span>
+<span class="s">       address $ip</span>
+<span class="s">       netmask $mask</span>
+<span class="s">       network $net</span>
+<span class="s">&quot;&quot;&quot;</span> 
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$aliasnr&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">aliasnr</span><span class="p">))</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$int&quot;</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+
+        <span class="n">args</span><span class="o">=</span><span class="p">{}</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;dev&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">dev</span>
+        <span class="n">args</span><span class="p">[</span><span class="s">&quot;ipaddr&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ipaddr</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_applyNetconfig</span><span class="p">(</span><span class="n">dev</span><span class="o">+</span><span class="s">&quot;:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">aliasnr</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">)</span>  
+</div>
+    <span class="k">def</span> <span class="nf">_applyNetconfig</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">devToApplyTo</span><span class="p">,</span><span class="n">template</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">template</span>
+        <span class="n">dev</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;dev&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;ipaddr&quot;</span><span class="p">):</span>
+            <span class="n">ipaddr</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;ipaddr&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ipaddr</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">netaddr</span><span class="o">.</span><span class="n">IPNetwork</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">)</span>
+                <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$ip&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">ip</span><span class="p">))</span>
+                <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$mask&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">netmask</span><span class="p">))</span>
+                <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$net&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">ip</span><span class="o">.</span><span class="n">network</span><span class="p">))</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$int&quot;</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;gw&quot;</span><span class="p">):</span>
+            <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$gw&quot;</span><span class="p">,</span><span class="s">&quot;gateway </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;gw&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="s">&quot;bridgedev&quot;</span><span class="p">):</span>
+            <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$bridgedev&quot;</span><span class="p">,</span><span class="n">args</span><span class="p">[</span><span class="s">&quot;bridgedev&quot;</span><span class="p">])</span>
+        <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getInterfacePath</span><span class="p">()</span>
+        <span class="n">ed</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">getTextFileEditor</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">ed</span><span class="o">.</span><span class="n">setSection</span><span class="p">(</span><span class="n">devToApplyTo</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;up:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">devToApplyTo</span>
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;ifdown </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">devToApplyTo</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> 
+            <span class="n">cmd</span><span class="o">=</span><span class="s">&quot;ifup </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">devToApplyTo</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> 
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

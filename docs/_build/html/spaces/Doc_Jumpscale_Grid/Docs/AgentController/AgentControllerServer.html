@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Agentcontroller &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="AgentController" href="index.html" />
+    <link rel="next" title="JumpScripts" href="JumpScript.html" />
+    <link rel="prev" title="Distributed Work Controller" href="AgentController.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScript.html" title="JumpScripts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="AgentController.html" title="Distributed Work Controller"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">AgentController</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="agentcontroller">
+<h1>Agentcontroller<a class="headerlink" href="#agentcontroller" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="description">
+<h2>Description.<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The Agentcontroller is repsonsible of distrubuting the work over the nodes.
+This can be accomplished by specifying a specific node id to execute on or based on a role.</p>
+</div>
+<div class="section" id="roles">
+<h2>Roles.<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h2>
+<p>Each node can provided a role.
+Roles define what each node is capable of doing.</p>
+</div>
+<div class="section" id="executing-of-a-task-jumpscript">
+<h2>Executing of a task (JumpScript)<a class="headerlink" href="#executing-of-a-task-jumpscript" title="Permalink to this headline">¶</a></h2>
+<p>In JumpScale one can define a task in a JumpScript &lt;JumpScript&gt;
+As JumpScript &lt;JumpScript&gt; defines a set of intruction to execute how and where to do so.</p>
+</div>
+<div class="section" id="agentcontroller-client">
+<h2>Agentcontroller client<a class="headerlink" href="#agentcontroller-client" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="excecutejumpscript">
+<h3>ExcecuteJumpScript<a class="headerlink" href="#excecutejumpscript" title="Permalink to this headline">¶</a></h3>
+<p>In the JSShell one can execute a task as followed</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">JumpScale.grid.agentcontroller</span>
+<span class="n">acl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">agentcontroller</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">acl</span><span class="o">.</span><span class="n">executeJumpScript</span><span class="p">(</span><span class="n">organization</span><span class="o">=</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;jumpscale&#39;</span><span class="p">,</span> <span class="n">nid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;msg&#39;</span><span class="p">:</span><span class="s">&#39;bleh&#39;</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">job</span><span class="p">[</span><span class="s">&#39;result&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="paramters-explained">
+<h4>Paramters Explained<a class="headerlink" href="#paramters-explained" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>organization: is the organization the JumpScript is written by</li>
+<li>name: the name of the jumpscript</li>
+<li>nid: This is the node id of the node that should execute is (can be overruled by role)</li>
+<li>role: If role is specified it will be used instead of nid, the agentcontroller will search for a node which specifies this role and execute it on this node. If multiple nodes match a role the first available will be chosen.</li>
+<li>args: This is a dictionary of arguments to give to the JumpScript</li>
+<li>wait: When we want to perform a task either async or sync we can choose to wait for the result when providing False this method will return a Job object which is either queued or in progress.</li>
+<li>queue: With the parameter queue one can specify on which worker to execute his/her task.</li>
+</ul>
+</div>
+<div class="section" id="remarks">
+<h4>remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h4>
+<p>when more than 1 node matches the role then only the first matching one will be used</p>
+</div>
+</div>
+<div class="section" id="listsessions">
+<h3>ListSessions<a class="headerlink" href="#listsessions" title="Permalink to this headline">¶</a></h3>
+<p>This method provides an insight on which nodes are connected to the AgentController.
+It provides which nodes is connected with which roles.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">JumpScale.grid.agentcontroller</span>
+<span class="n">acl</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">agentcontroller</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">sessions</span> <span class="o">=</span> <span class="n">acl</span><span class="o">.</span><span class="n">listSessions</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Agentcontroller</a><ul>
+<li><a class="reference internal" href="#description">Description.</a></li>
+<li><a class="reference internal" href="#roles">Roles.</a></li>
+<li><a class="reference internal" href="#executing-of-a-task-jumpscript">Executing of a task (JumpScript)</a></li>
+<li><a class="reference internal" href="#agentcontroller-client">Agentcontroller client</a><ul>
+<li><a class="reference internal" href="#excecutejumpscript">ExcecuteJumpScript</a><ul>
+<li><a class="reference internal" href="#paramters-explained">Paramters Explained</a></li>
+<li><a class="reference internal" href="#remarks">remarks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#listsessions">ListSessions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="AgentController.html"
+                        title="previous chapter">Distributed Work Controller</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JumpScript.html"
+                        title="next chapter">JumpScripts</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/AgentController/AgentControllerServer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="JumpScript.html" title="JumpScripts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="AgentController.html" title="Distributed Work Controller"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >AgentController</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

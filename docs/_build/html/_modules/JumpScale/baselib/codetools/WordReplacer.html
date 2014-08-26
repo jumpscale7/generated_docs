@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.codetools.WordReplacer &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.codetools.WordReplacer</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span><span class="nn">random</span>
+
+
+<span class="k">class</span> <span class="nc">Synonym</span><span class="p">():</span>
+<div class="viewcode-block" id="Synonym"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.Synonym">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">replaceWith</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">simpleSearch</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">addConfluenceLinkTags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">replaceExclude</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param name: Name of the sysnoym</span>
+<span class="sd">        @param replaceWith: The replacement of simpleSearch</span>
+<span class="sd">        @param simpleSearch: Search string that&#39;ll be replaced with replaceWith</span>
+<span class="sd">        @addConfluenceLinkTags: True to add confluence tags around the synonym</span>
+<span class="sd">        @defSynonym: If True then this is a definition synonym, which can be used in spectools</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simpleSearch</span><span class="o">=</span><span class="n">simpleSearch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regexFindForReplace</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaceWith</span><span class="o">=</span><span class="n">replaceWith</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addConfluenceLinkTags</span><span class="o">=</span><span class="n">addConfluenceLinkTags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaceExclude</span> <span class="o">=</span> <span class="n">replaceExclude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">simpleSearch</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">search</span><span class="o">=</span><span class="n">simpleSearch</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;?&quot;</span><span class="p">,</span><span class="s">&quot;[ -_]?&quot;</span><span class="p">)</span>  <span class="c">#match &quot; &quot; or &quot;-&quot; or &quot;_&quot;  one or 0 time  </span>
+            <span class="k">if</span> <span class="n">addConfluenceLinkTags</span><span class="p">:</span>
+                <span class="n">bracketMatchStart</span><span class="o">=</span><span class="s">&quot;(\[ *|)&quot;</span>
+                <span class="n">bracketMatchStop</span><span class="o">=</span><span class="s">&quot;( *\]|)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bracketMatchStart</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+                <span class="n">bracketMatchStop</span><span class="o">=</span><span class="s">&quot;&quot;</span>                                
+            <span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span><span class="o">=</span><span class="s">r&quot;(?i)</span><span class="si">%s</span><span class="s">\b</span><span class="si">%s</span><span class="s">\b</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">bracketMatchStart</span><span class="p">,</span><span class="n">search</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span><span class="n">bracketMatchStop</span><span class="p">)</span>
+            <span class="c">#self.regexFind=r&quot;%s\b%s\b%s&quot; % (bracketMatchStart,search.lower(),bracketMatchStop)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">regexFindForReplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span>
+        
+    <span class="k">def</span> <span class="nf">setRegexSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regexFind</span><span class="p">,</span><span class="n">regexFindForReplace</span><span class="p">):</span>
+<div class="viewcode-block" id="Synonym.setRegexSearch"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.Synonym.setRegexSearch">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span><span class="o">=</span><span class="n">regexFind</span>
+        <span class="k">if</span> <span class="n">regexFindForReplace</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">regexFindForReplace</span><span class="o">=</span><span class="n">regexFind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regexFindForReplace</span><span class="o">=</span><span class="n">regexFindForReplace</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simpleSearch</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Synonym.replace"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.Synonym.replace">[docs]</a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">replaceExclude</span><span class="p">:</span>
+            <span class="c"># Check for any def tag that contains name &quot;e.g: [ Q-Layer ]&quot;, remove them and put markers in place</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_replaceDefsWithMarkers</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regexFind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span><span class="p">,</span><span class="n">regexFindsubsetToReplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">regexFindForReplace</span>\
+                                       <span class="p">,</span><span class="n">replaceWith</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replaceWith</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">replaceExclude</span><span class="p">:</span>
+            <span class="c"># Remove the markers and put the original def tags back</span>
+            <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_replaceMarkersWithDefs</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>
+
+    <span class="k">def</span> <span class="nf">_replaceDefsWithMarkers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for any def tags that contains the name of this synonym  &quot;e.g [Q-layer]&quot; in text and replace that with a special marker. Also it stores markers and replaced string into the dict _markers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># patterns you don&#39;t want to be replaced</span>
+        <span class="n">pat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">replaceExclude</span>
+
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+            <span class="n">mark</span> <span class="o">=</span> <span class="s">&quot;$$MARKER$$</span><span class="si">%s</span><span class="s">$$&quot;</span><span class="o">%</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="p">[</span><span class="n">mark</span><span class="p">]</span> <span class="o">=</span> <span class="n">match</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regexFind</span><span class="o">=</span><span class="n">match</span><span class="p">,</span><span class="n">regexFindsubsetToReplace</span><span class="o">=</span><span class="n">match</span><span class="p">,</span><span class="n">replaceWith</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>
+
+    <span class="k">def</span> <span class="nf">_replaceMarkersWithDefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes markers out of text and puts the original strings back</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">marker</span><span class="p">,</span><span class="n">replacement</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_markers</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regexFind</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span><span class="n">regexFindsubsetToReplace</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span><span class="n">replaceWith</span><span class="o">=</span><span class="n">replacement</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;name:</span><span class="si">%s</span><span class="s"> simple:</span><span class="si">%s</span><span class="s"> regex:</span><span class="si">%s</span><span class="s"> regereplace:</span><span class="si">%s</span><span class="s"> replacewith:</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">simpleSearch</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">regexFind</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">regexFindForReplace</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">replaceWith</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+    
+<span class="k">class</span> <span class="nc">WordReplacer</span><span class="p">():</span></div>
+<div class="viewcode-block" id="WordReplacer"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer">[docs]</a>    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="o">=</span><span class="p">[]</span> <span class="c">#array Synonym()</span>
+            
+    <span class="k">def</span> <span class="nf">synonymsPrint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WordReplacer.synonymsPrint"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsPrint">[docs]</a>        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">syn</span>
+
+    <span class="k">def</span> <span class="nf">synonymAdd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">simpleSearch</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">regexFind</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">regexFindForReplace</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">replaceWith</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">replaceExclude</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">addConfluenceLinkTags</span> <span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WordReplacer.synonymAdd"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymAdd">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a new synonym to this replacer</span>
+<span class="sd">        @param name: Synonym name</span>
+<span class="sd">        @param simpleSearch: Search text for sysnonym, if you supply this, then the synonym will automatically generate a matching regex pattern that&#39;ll be used to search for this string, if you want to specificy the regex explicitly then use regexFind instead.</span>
+<span class="sd">        @param regexFind: Provide this regex only if you didn&#39;t provide simpleSearch, it represents the regex that&#39;ll be used in search for this synonym . It overrides the default synonym search pattern</span>
+<span class="sd">        @param regexFindForReplace: The subset within regexFind that&#39;ll be replaced for this synonym</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">synonym</span> <span class="o">=</span> <span class="n">Synonym</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">replaceWith</span><span class="p">,</span> <span class="n">simpleSearch</span><span class="p">,</span> <span class="n">addConfluenceLinkTags</span><span class="p">,</span> <span class="n">replaceExclude</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regexFind</span><span class="p">:</span>
+            <span class="n">synonym</span><span class="o">.</span><span class="n">setRegexSearch</span><span class="p">(</span><span class="n">regexFind</span><span class="p">,</span> <span class="n">regexFindForReplace</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">synonym</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WordReplacer.reset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.reset">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="o">=</span><span class="p">[]</span>
+                    
+    <span class="k">def</span> <span class="nf">synonymsAddFromFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">addConfluenceLinkTags</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WordReplacer.synonymsAddFromFile"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.synonymsAddFromFile">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        load synonym satements from a file in the following format</span>
+<span class="sd">        [searchStatement]:[replaceto]</span>
+<span class="sd">        or</span>
+<span class="sd">        &#39;[regexFind]&#39;:&#39;[regexReplace]&#39;:replaceto</span>
+<span class="sd">        note: delimiter is :</span>
+<span class="sd">        note: &#39;&#39; around regex statements</span>
+<span class="sd">        e.g.</span>
+<span class="sd">        ******</span>
+<span class="sd">        master?daemon:ApplicationServer</span>
+<span class="sd">        application?server:ApplicationServer</span>
+<span class="sd">        &#39;application[ -_]+server&#39;:&#39;application[ -_]+server&#39;:ApplicationServer</span>
+<span class="sd">        &#39;\[application[ -_]+server\]&#39;:&#39;application[ -_]+server&#39;:ApplicationServer        </span>
+<span class="sd">        ******</span>
+<span class="sd">        @param addConfluenceLinkTags id True then replaced items will be surrounded by [] (Boolean)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">txt</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^&#39;&quot;</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+                    <span class="c">#found line which is regex format</span>
+                    <span class="n">splitted</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;&#39;&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span><span class="o">&lt;&gt;</span><span class="mi">4</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;syntax error in synonym line (has to be 2 &#39;regex&#39; statements&quot;</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+                    <span class="n">syn</span><span class="o">=</span><span class="n">Synonym</span><span class="p">(</span><span class="n">replaceWith</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="n">syn</span><span class="o">.</span><span class="n">setRegexSearch</span><span class="p">(</span><span class="n">regexFind</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">regexFindForReplace</span><span class="o">=</span><span class="n">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>    
+                    <span class="n">find</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">replace</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">syn</span><span class="o">=</span><span class="n">Synonym</span><span class="p">(</span><span class="n">replaceWith</span><span class="o">=</span><span class="n">replace</span><span class="p">,</span><span class="n">simpleSearch</span><span class="o">=</span><span class="n">find</span><span class="p">,</span><span class="n">addConfluenceLinkTags</span><span class="o">=</span><span class="n">addConfluenceLinkTags</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">syn</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">removeConfluenceLinks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WordReplacer.removeConfluenceLinks"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.removeConfluenceLinks">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find [...] and remove the [ and the ]</span>
+<span class="sd">        @todo 2  (id:19)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;todo needs to be done, is not working now&quot;</span><span class="p">)</span> 
+        <span class="k">def</span> <span class="nf">replaceinside</span><span class="p">(</span><span class="n">matchobj</span><span class="p">):</span>
+            <span class="n">match</span><span class="o">=</span><span class="n">matchobj</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+            <span class="c">#we found a match now</span>
+            <span class="c">#print &quot;regex:%s match:%s replace:%s&quot; % (searchitem[1],match,searchitem[2])</span>
+            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">match</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;( *\])|(\[ *)&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">match</span><span class="p">)</span>
+                <span class="n">toreplace</span><span class="o">=</span><span class="n">searchitem</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">searchregexReplace</span><span class="o">=</span><span class="n">searchitem</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">searchregexReplace</span><span class="p">,</span> <span class="n">toreplace</span><span class="p">,</span><span class="n">match</span><span class="p">)</span>  
+                <span class="k">return</span> <span class="n">match</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">match</span>
+        <span class="k">for</span> <span class="n">searchitem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="p">:</span>
+            <span class="c">#text = re.sub(searchitem[0],searchitem[1], text)               </span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">searchitem</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">replaceinside</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>        
+        
+    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>        </div>
+<div class="viewcode-block" id="WordReplacer.replace"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.replace">[docs]</a>        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="p">:</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">syn</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>        
+        
+    <span class="k">def</span> <span class="nf">replaceInConfluence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WordReplacer.replaceInConfluence"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.WordReplacer.WordReplacer.replaceInConfluence">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @[..|.] will also be looked for and replaced</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">replaceinside</span><span class="p">(</span><span class="n">matchobj</span><span class="p">):</span>
+            <span class="n">match</span><span class="o">=</span><span class="n">matchobj</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+            <span class="c">#we found a match now</span>
+            <span class="c">#print &quot;regex:%s match:%s replace:%s&quot; % (searchitem[1],match,searchitem[2])</span>
+            <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">match</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;( *\])|(\[ *)&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">match</span><span class="p">)</span>
+                <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">regexFind</span><span class="p">,</span> <span class="n">syn</span><span class="o">.</span><span class="n">replaceWith</span><span class="p">,</span><span class="n">match</span><span class="p">)</span>  
+                <span class="k">return</span> <span class="n">match</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">match</span>
+        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">synonyms</span><span class="p">:</span>       
+            <span class="c">#call function replaceinside when match</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">syn</span><span class="o">.</span><span class="n">regexFind</span><span class="p">,</span> <span class="n">replaceinside</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>
+        
+    <span class="k">def</span> <span class="nf">_addConfluenceLinkTags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">word</span><span class="p">):</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        add [ &amp; ] to word</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">word</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;]&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">word</span><span class="o">=</span><span class="s">&quot;[</span><span class="si">%s</span><span class="s">]&quot;</span> <span class="o">%</span> <span class="n">word</span>
+        <span class="k">return</span> <span class="n">word</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

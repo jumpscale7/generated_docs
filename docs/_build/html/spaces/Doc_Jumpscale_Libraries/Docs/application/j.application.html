@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.application &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-application">
+<h1>j.application<a class="headerlink" href="#j-application" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /core/Application.py</li>
+</ul>
+<div class="section" id="connectredis">
+<h2>connectRedis<a class="headerlink" href="#connectredis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:60)</li>
+</ul>
+</div>
+<div class="section" id="getagentid">
+<h2>getAgentId<a class="headerlink" href="#getagentid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:112)</li>
+</ul>
+</div>
+<div class="section" id="getcpuusage">
+<h2>getCPUUsage<a class="headerlink" href="#getcpuusage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:228)</li>
+</ul>
+<p>try to get cpu usage, if it doesn&#8217;t work will return 0
+By default 0 for windows</p>
+</div>
+<div class="section" id="getmemoryusage">
+<h2>getMemoryUsage<a class="headerlink" href="#getmemoryusage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:252)</li>
+</ul>
+<p>try to get memory usage, if it doesn&#8217;t work will return 0i
+By default 0 for windows</p>
+</div>
+<div class="section" id="getuniquemachineid">
+<h2>getUniqueMachineId<a class="headerlink" href="#getuniquemachineid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:277)</li>
+</ul>
+<p>will look for network interface and return a hash calculated from lowest mac address from all physical nics</p>
+</div>
+<div class="section" id="getwhoamistr">
+<h2>getWhoAmiStr<a class="headerlink" href="#getwhoamistr" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:109)</li>
+</ul>
+</div>
+<div class="section" id="initgrid">
+<h2>initGrid<a class="headerlink" href="#initgrid" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:103)</li>
+</ul>
+</div>
+<div class="section" id="initwhoami">
+<h2>initWhoAmI<a class="headerlink" href="#initwhoami" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:68)</li>
+</ul>
+<p>when in grid:
+is gid,nid,pid</p>
+</div>
+<div class="section" id="loadconfig">
+<h2>loadConfig<a class="headerlink" href="#loadconfig" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/Application.py (line:115)</li>
+</ul>
+</div>
+<div class="section" id="start">
+<h2>start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name,appdir</li>
+<li>path:/core/Application.py (line:121)</li>
+</ul>
+<p>Start the application</p>
+<p>You can only stop the application with return code 0 by calling
+j.Application.stop(). Don&#8217;t call sys.exit yourself, don&#8217;t try to run
+to end-of-script, I will find you anyway!</p>
+</div>
+<div class="section" id="stop">
+<h2>stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: exitcode</li>
+<li>path:/core/Application.py (line:161)</li>
+</ul>
+<p>Stop the application cleanly using a given exitcode</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.application</a><ul>
+<li><a class="reference internal" href="#connectredis">connectRedis</a></li>
+<li><a class="reference internal" href="#getagentid">getAgentId</a></li>
+<li><a class="reference internal" href="#getcpuusage">getCPUUsage</a></li>
+<li><a class="reference internal" href="#getmemoryusage">getMemoryUsage</a></li>
+<li><a class="reference internal" href="#getuniquemachineid">getUniqueMachineId</a></li>
+<li><a class="reference internal" href="#getwhoamistr">getWhoAmiStr</a></li>
+<li><a class="reference internal" href="#initgrid">initGrid</a></li>
+<li><a class="reference internal" href="#initwhoami">initWhoAmI</a></li>
+<li><a class="reference internal" href="#loadconfig">loadConfig</a></li>
+<li><a class="reference internal" href="#start">start</a></li>
+<li><a class="reference internal" href="#stop">stop</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/application/j.application.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

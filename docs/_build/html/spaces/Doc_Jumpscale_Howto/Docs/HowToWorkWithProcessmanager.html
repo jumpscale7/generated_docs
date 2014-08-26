@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>how to work with process manager &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="How To Use JumpScale" href="index.html" />
+    <link rel="next" title="How to play tricks with blobstor 1" href="HowToBlobStorTricks.html" />
+    <link rel="prev" title="Rebuilding JPackages" href="HowToRebuildBunchJpackages.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HowToBlobStorTricks.html" title="How to play tricks with blobstor 1"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="HowToRebuildBunchJpackages.html" title="Rebuilding JPackages"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">How To Use JumpScale</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-work-with-process-manager">
+<h1>how to work with process manager<a class="headerlink" href="#how-to-work-with-process-manager" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-install">
+<h2>how to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">processmanager</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-does-process-manager-do">
+<h2>what does process manager do<a class="headerlink" href="#what-does-process-manager-do" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>check monitoring</li>
+<li>run scheduled jobs</li>
+<li>coordinate agents on local node</li>
+<li>be API to local methods in process manager</li>
+</ul>
+</div>
+<div class="section" id="some-examples">
+<h2>some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">¶</a></h2>
+<p>check is running</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsprocess</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>to start:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsprocess</span> <span class="n">start</span> <span class="o">-</span><span class="n">n</span> <span class="n">processmanager</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">how to work with process manager</a><ul>
+<li><a class="reference internal" href="#how-to-install">how to install</a></li>
+<li><a class="reference internal" href="#what-does-process-manager-do">what does process manager do</a></li>
+<li><a class="reference internal" href="#some-examples">some examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="HowToRebuildBunchJpackages.html"
+                        title="previous chapter">Rebuilding JPackages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="HowToBlobStorTricks.html"
+                        title="next chapter">How to play tricks with blobstor 1</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/spaces/Doc_Jumpscale_Howto/Docs/HowToWorkWithProcessmanager.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="HowToBlobStorTricks.html" title="How to play tricks with blobstor 1"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="HowToRebuildBunchJpackages.html" title="Rebuilding JPackages"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >How To Use JumpScale</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.base.FSWALKER_test &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html" />
+    <link rel="up" title="JumpScale.base" href="../base.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../base.html" accesskey="U">JumpScale.base</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.base.FSWALKER_test</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<div class="viewcode-block" id="FSWALKER_test"><a class="viewcode-back" href="../../../API/JumpScale.base.html#JumpScale.base.FSWALKER_test.FSWALKER_test">[docs]</a><span class="k">class</span> <span class="nc">FSWALKER_test</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="FSWALKER_test.setUp"><a class="viewcode-back" href="../../../API/JumpScale.base.html#JumpScale.base.FSWALKER_test.FSWALKER_test.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/dir1&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/dir2&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/differentdir3&#39;</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/f.file&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/dir1/f1.file&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/dir1/f.donotinclude&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test/dir2/f2.file&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;this is a test file&#39;</span><span class="p">)</span>
+        
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink/dir1link&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink/dir2link&#39;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink/differentdir3link&#39;</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink/flink.file&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">open</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink/dir1link/f1link.file&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink&#39;</span><span class="p">,</span> <span class="s">&#39;/tmp/FSWALKER_test/linked&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="s">&#39;/tmp/FSWALKER_test/&#39;</span>
+    </div>
+<div class="viewcode-block" id="FSWALKER_test.tearDown"><a class="viewcode-back" href="../../../API/JumpScale.base.html#JumpScale.base.FSWALKER_test.FSWALKER_test.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test&#39;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s">&#39;/tmp/FSWALKER_test_tolink&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="FSWALKER_test.registerType"><a class="viewcode-back" href="../../../API/JumpScale.base.html#JumpScale.base.FSWALKER_test.FSWALKER_test.registerType">[docs]</a>    <span class="k">def</span> <span class="nf">registerType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ttype</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="FSWALKER_test.test_find"><a class="viewcode-back" href="../../../API/JumpScale.base.html#JumpScale.base.FSWALKER_test.FSWALKER_test.test_find">[docs]</a>    <span class="k">def</span> <span class="nf">test_find</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fswalker</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">fswalker</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fswalker</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">includeFolders</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">includeLinks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pathRegexIncludes</span><span class="o">=</span><span class="p">{},</span> <span class="n">pathRegexExcludes</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;F&#39;</span><span class="p">:[</span><span class="s">&#39;.*.donotinclude&#39;</span><span class="p">]},</span> <span class="n">followlinks</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">childrenRegexExcludes</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;.*/log/.*&#39;</span><span class="p">,</span> <span class="s">&#39;/dev/.*&#39;</span><span class="p">,</span> <span class="s">&#39;/proc/.*&#39;</span><span class="p">],</span> <span class="n">mdserverclient</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">result</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRegexpMatches</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="s">&#39;.*f2.*&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotRegexpMatches</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="s">&#39;.*.donotinclude&#39;</span><span class="p">)</span>
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../base.html" >JumpScale.base</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.system.btrfs &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-system-btrfs">
+<h1>j.system.btrfs<a class="headerlink" href="#j-system-btrfs" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /lib/btrfs/BtrfsExtension.py</li>
+</ul>
+<div class="section" id="deviceadd">
+<h2>deviceAdd<a class="headerlink" href="#deviceadd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,dev</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:63)</li>
+</ul>
+<p>Add a device to a filesystem.</p>
+</div>
+<div class="section" id="devicedelete">
+<h2>deviceDelete<a class="headerlink" href="#devicedelete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,path</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:69)</li>
+</ul>
+<p>Remove a device from a filesystem.</p>
+</div>
+<div class="section" id="getspaceusage">
+<h2>getSpaceUsage<a class="headerlink" href="#getspaceusage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:82)</li>
+</ul>
+</div>
+<div class="section" id="snapshotreadonlycreate">
+<h2>snapshotReadOnlyCreate<a class="headerlink" href="#snapshotreadonlycreate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,dest</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:33)</li>
+</ul>
+<p>Create a readonly snapshot</p>
+</div>
+<div class="section" id="subvolumecreate">
+<h2>subvolumeCreate<a class="headerlink" href="#subvolumecreate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,name</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:40)</li>
+</ul>
+<p>Create a subvolume in &lt;dest&gt; (or the current directory if not passed).</p>
+</div>
+<div class="section" id="subvolumedelete">
+<h2>subvolumeDelete<a class="headerlink" href="#subvolumedelete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,name</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:47)</li>
+</ul>
+<p>Delete the subvolume &lt;name&gt;.</p>
+</div>
+<div class="section" id="subvolumelist">
+<h2>subvolumeList<a class="headerlink" href="#subvolumelist" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/lib/btrfs/BtrfsExtension.py (line:53)</li>
+</ul>
+<p>List the snapshot/subvolume of a filesystem.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.system.btrfs</a><ul>
+<li><a class="reference internal" href="#deviceadd">deviceAdd</a></li>
+<li><a class="reference internal" href="#devicedelete">deviceDelete</a></li>
+<li><a class="reference internal" href="#getspaceusage">getSpaceUsage</a></li>
+<li><a class="reference internal" href="#snapshotreadonlycreate">snapshotReadOnlyCreate</a></li>
+<li><a class="reference internal" href="#subvolumecreate">subvolumeCreate</a></li>
+<li><a class="reference internal" href="#subvolumedelete">subvolumeDelete</a></li>
+<li><a class="reference internal" href="#subvolumelist">subvolumeList</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.btrfs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

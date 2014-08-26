@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.system.processhelper &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.system.processhelper</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;Process creation helper</span>
+
+<span class="sd">This script can be spawned as an intermediate process when creating a new</span>
+<span class="sd">process to be able to daemonize the result process, or setuid/setgid the result</span>
+<span class="sd">process.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="k">def</span> <span class="nf">find_gids_for_uid</span><span class="p">(</span><span class="n">uid</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Find all GIDs of groups the user with given name belongs to</span>
+<div class="viewcode-block" id="find_gids_for_uid"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.processhelper.find_gids_for_uid">[docs]</a>
+<span class="sd">    @param uid: User UID</span>
+<span class="sd">    @type uid: number</span>
+
+<span class="sd">    @returns: GIDs of all groups the user belongs to</span>
+<span class="sd">    @rtype: list&lt;number&gt;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">import</span> <span class="nn">grp</span>
+    <span class="kn">import</span> <span class="nn">pwd</span>
+
+    <span class="c"># Primary group</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">user</span><span class="o">.</span><span class="n">pw_gid</span>
+
+    <span class="n">username</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">pw_name</span>
+
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">grp</span><span class="o">.</span><span class="n">getgrall</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">gr_mem</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">group</span><span class="o">.</span><span class="n">gr_gid</span>
+
+
+<span class="k">def</span> <span class="nf">change_uid_gid</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">gid</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Impersonate the given UID and/or GID</span></div>
+<div class="viewcode-block" id="change_uid_gid"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.processhelper.change_uid_gid">[docs]</a>
+<span class="sd">    Do note this will only work if the current process has the privileges to</span>
+<span class="sd">    impersonate this user or group.</span>
+
+<span class="sd">    Here&#39;s how things are processed. Let&#39;s assume we&#39;re currently running as</span>
+<span class="sd">    root (uid=0, groups=root(0)), and there&#39;s one more user called &#39;test&#39;</span>
+<span class="sd">    (uid=1000, gid=1001, groups=test1(1001), test2(1002)).</span>
+
+<span class="sd">    +=======================================================+</span>
+<span class="sd">    | Arguments   | Resulting process environment           |</span>
+<span class="sd">    |             |                                         |</span>
+<span class="sd">    | UID  | GID  | UID  | GID  | Extra groups              |</span>
+<span class="sd">    +======+======+======+======+===========================+</span>
+<span class="sd">    | None | None | 0    | 0    | root                      |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 0    | None | 0    | 0    | root                      |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | None | 0    | 0    | 0    | root                      |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 0    | 0    | 0    | 0    | root                      |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 1000 | None | 1000 | 1001 | test1, test2              |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | None | 1001 | 0    | 1001 | root                      |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 1000 | 1001 | 1000 | 1001 | test1, test2              |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 1000 | 1002 | 1000 | 1002 | test1, test2              |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+<span class="sd">    | 1000 | 0    | 1000 | 0    | test1, test2, root        |</span>
+<span class="sd">    +-------------+------+------+---------------------------+</span>
+
+<span class="sd">    @param uid: UID of the user to impersonate</span>
+<span class="sd">    @type uid: number</span>
+<span class="sd">    @param gid: GID of the group to impersonate</span>
+<span class="sd">    @type gid: number</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">gid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c"># Nothing to do</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c"># Set up correct groups</span>
+        <span class="c">#</span>
+        <span class="c"># We need to make sure correct GIDs are set. Here&#39;s how it works:</span>
+        <span class="c">#</span>
+        <span class="c"># * If a GID is given, this one is added to the set of target GIDs</span>
+        <span class="c"># * The GIDs of all groups the user with target UID belongs to is added</span>
+        <span class="c">#   to the set of target GIDs</span>
+        <span class="c">#</span>
+        <span class="c"># Do note we&#39;re not using libc.initgroups() since this doesn&#39;t take</span>
+        <span class="c"># primary groups into account, and only works with /etc/group</span>
+        <span class="k">if</span> <span class="n">gid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">standard_gids</span> <span class="o">=</span> <span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">standard_gids</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+
+        <span class="n">gids</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">standard_gids</span><span class="p">,</span> <span class="n">find_gids_for_uid</span><span class="p">(</span><span class="n">uid</span><span class="p">))</span>
+
+        <span class="c"># Calculate unique list of GIDs</span>
+        <span class="n">gids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">gids</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;setgroups&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;setgroups() not available on this platform&#39;</span><span class="p">)</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">setgroups</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">gids</span><span class="p">))</span>
+
+    <span class="c"># Note: we need to call setgid() before calling setuid() because it might be</span>
+    <span class="c"># possible setgid() fails once we impersonated another user</span>
+    <span class="k">if</span> <span class="n">gid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;setgid&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;GID provided but setgid() not available on this &#39;</span>
+                           <span class="s">&#39;platform&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">setgid</span><span class="p">(</span><span class="n">gid</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">gid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c"># Set primary group to GID of given UID</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;setgid&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;setgid() not available on this platform&#39;</span><span class="p">)</span>
+
+        <span class="kn">import</span> <span class="nn">pwd</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">setgid</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pw_gid</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;setuid&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;UID provided by setuid() not available on this &#39;</span>
+                           <span class="s">&#39;platform&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">setuid</span><span class="p">(</span><span class="n">uid</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">daemonize</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">chdir</span><span class="o">=</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">umask</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Daemonize a process using a double fork</span></div>
+<div class="viewcode-block" id="daemonize"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.processhelper.daemonize">[docs]</a>
+<span class="sd">    This method will fork the current process to create a daemon process.</span>
+<span class="sd">    It will perform a double fork(2), chdir(2) to the given folder (or not</span>
+<span class="sd">    chdir at all if the C{chdir} argument is C{None}), and set the new</span>
+<span class="sd">    process umask(2) to the value of the C{umask} argument, or not reset</span>
+<span class="sd">    it if this argument is -1.</span>
+
+<span class="sd">    The stdout and stderr arguments can be used to output the output to the</span>
+<span class="sd">    corresponding streams of the daemon process to files at the provided</span>
+<span class="sd">    location. Make sure the parent folder of these files already exists. When</span>
+<span class="sd">    set to None, all output will vanish.</span>
+
+<span class="sd">    While forking, a setsid(2) call will be done to become session leader</span>
+<span class="sd">    and detach from the controlling TTY.</span>
+
+<span class="sd">    In the child process, all existing file descriptors will be closed,</span>
+<span class="sd">    including stdin, stdout and stderr, which will be re-opened to</span>
+<span class="sd">    /dev/null, unless a corresponding parameter is provided as an argument to</span>
+<span class="sd">    this function.</span>
+
+<span class="sd">    The method returns a tuple&lt;bool, number&gt;. If the first item is True,</span>
+<span class="sd">    the current process is the daemonized process. If it is False,</span>
+<span class="sd">    the current process is the process which called the C{daemonize}</span>
+<span class="sd">    method, which can most likely be closed now. The second item is the</span>
+<span class="sd">    PID of the current process.</span>
+
+<span class="sd">    @attention: Make sure you know really well what fork(2) does before using this method</span>
+
+<span class="sd">    @param stdout: Path to file to dump stdout output of daemon process to</span>
+<span class="sd">    @type stdout: string</span>
+<span class="sd">    @param stderr: Path to file to dump stderr output of daemon process to</span>
+<span class="sd">    @type stderr: string</span>
+<span class="sd">    @param chdir: Path to chdir(2) to after forking. Set to None to disable chdir&#39;ing</span>
+<span class="sd">    @type chdir: string or None</span>
+<span class="sd">    @param umask: Umask to set after forking. Set to -1 not to set umask</span>
+<span class="sd">    @type umask: number</span>
+<span class="sd">    @param uid: UID of the user to impersonate</span>
+<span class="sd">    @type uid: number</span>
+<span class="sd">    @param gid: GID of the group to impersonate</span>
+<span class="sd">    @type gid: number</span>
+
+<span class="sd">    @returns: Daemon status and PID</span>
+<span class="sd">    @rtype: tuple&lt;bool, number&gt;</span>
+
+<span class="sd">    @raise RuntimeError: System does not support fork(2)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c">#pylint: disable-msg=R0912</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;fork&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s">&#39;os.fork not found, daemon mode not supported on your system&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_output_permissions</span><span class="p">(</span><span class="n">file_</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Test whether the current user (which might no longer be the user</span>
+<span class="sd">        running the parent process) is allowed to write to the requested</span>
+<span class="sd">        output files, before performing a double fork.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_WRONLY</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IOError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">errno</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="c"># We can&#39;t provide a nicer error message, re-raise the original</span>
+                <span class="c"># exception</span>
+                <span class="c"># Note we can&#39;t use plain &#39;raise&#39; here, since this would</span>
+                <span class="c"># re-raise the ImportError we&#39;re catching</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">errno</span><span class="p">,</span> <span class="s">&#39;EACCES&#39;</span><span class="p">):</span>
+                <span class="c"># Same as above</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">EACCES</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">import</span> <span class="nn">pwd</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="c"># Same as above</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">user</span> <span class="o">=</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">())</span><span class="o">.</span><span class="n">pw_name</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+                    <span class="c"># Unknown user or no os.getuid() available or something</span>
+                    <span class="c"># alike</span>
+                    <span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+
+                <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;User </span><span class="si">%s</span><span class="s"> has no permissions to open &#39;</span>
+                                       <span class="s">&#39;file </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s"> for writing&#39;</span> <span class="o">%</span> \
+                                       <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">file_</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Current user has no permissions to &#39;</span>
+                                       <span class="s">&#39;open file </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s"> for writing&#39;</span> <span class="o">%</span> <span class="n">file_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="n">check_output_permissions</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">stderr</span><span class="p">:</span>
+        <span class="n">check_output_permissions</span><span class="p">(</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="c"># Output redirection should be safe once we&#39;re here</span>
+
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c">#First child</span>
+        <span class="c">#Become session leader...</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">setsid</span><span class="p">()</span>
+
+        <span class="c">#Double fork</span>
+        <span class="n">pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c">#Second child</span>
+            <span class="k">if</span> <span class="n">umask</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">umask</span><span class="p">(</span><span class="n">umask</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">chdir</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">chdir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c">#First child is useless now</span>
+            <span class="k">print</span> <span class="s">&#39;CHILDPID=</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">pid</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;getuid&#39;</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&#39;UID=</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;getgid&#39;</span><span class="p">):</span>
+                <span class="k">print</span> <span class="s">&#39;GID=</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">getgid</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+
+    <span class="c">#Close all FDs</span>
+    <span class="kn">import</span> <span class="nn">resource</span>
+    <span class="n">maxfd</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_NOFILE</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">maxfd</span> <span class="o">==</span> <span class="n">resource</span><span class="o">.</span><span class="n">RLIM_INFINITY</span><span class="p">:</span>
+        <span class="n">maxfd</span> <span class="o">=</span> <span class="mi">1024</span>
+
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stderr</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">close_safe</span><span class="p">(</span><span class="n">fd</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Close a file descriptor ignoring any exception it generates&#39;&#39;&#39;</span>
+        <span class="c">#pylint: disable-msg=W0704</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="n">close_safe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="n">close_safe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stderr</span><span class="p">:</span>
+        <span class="n">close_safe</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">fd</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxfd</span><span class="p">):</span>
+        <span class="n">close_safe</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+
+    <span class="c">#Open fd0 to /dev/null</span>
+    <span class="n">redirect</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s">&#39;devnull&#39;</span><span class="p">,</span> <span class="s">&#39;/dev/null&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">redirect</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_RDWR</span><span class="p">)</span>
+
+    <span class="c">#dup to stdout and stderr</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stdout</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_WRONLY</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">close_safe</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">stderr</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">O_CREAT</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">O_WRONLY</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">close_safe</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="bp">True</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;Main entry point&#39;&#39;&#39;</span></div>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../../API/JumpScale.core.system.html#JumpScale.core.system.processhelper.main">[docs]</a>    <span class="kn">import</span> <span class="nn">optparse</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-d&#39;</span><span class="p">,</span> <span class="s">&#39;--daemonize&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;daemonize&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;daemonize the child process&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="s">&#39;--stdout&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;stdout&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;file to redirect stdout output&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;FILE&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-e&#39;</span><span class="p">,</span> <span class="s">&#39;--stderr&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;stderr&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;file to redirect stderr output&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;FILE&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-u&#39;</span><span class="p">,</span> <span class="s">&#39;--uid&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;uid&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;UID of user to setuid() to before running the daemon &#39;</span> \
+                 <span class="s">&#39;process&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;UID&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;int&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s">&#39;-g&#39;</span><span class="p">,</span> <span class="s">&#39;--gid&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">&#39;gid&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s">&#39;GID of group to setgid() to before running the daemon &#39;</span> \
+                 <span class="s">&#39;process&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;GID&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;int&#39;</span><span class="p">)</span>
+
+    <span class="c">#Only parse until a &#39;--&#39; argument</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;--&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;No -- argument found&#39;</span><span class="p">)</span>
+
+    <span class="n">begin_idx</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;-c&#39;</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="n">options</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">begin_idx</span><span class="p">:</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;--&#39;</span><span class="p">)])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="o">.</span><span class="n">daemonize</span> <span class="ow">and</span> <span class="n">options</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Stdout redirection is not available in &#39;</span>
+                           <span class="s">&#39;foreground mode&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="o">.</span><span class="n">daemonize</span> <span class="ow">and</span> <span class="n">options</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Stderr redirection is not available in &#39;</span>
+                           <span class="s">&#39;foreground mode&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">stdout</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">stdout</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Folder of stdout file does not exist&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">stderr</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">stderr</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Folder of stderr file does not exist&#39;</span><span class="p">)</span>
+
+    <span class="n">change_uid_gid</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">uid</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">gid</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">daemonize</span><span class="p">:</span>
+        <span class="n">daemon</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">daemonize</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">daemon</span><span class="p">:</span>
+            <span class="c">#Give first fork time to print daemon info</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="c"># We&#39;re the daemon now, or no daemonization was requested.</span>
+    <span class="c"># execlp to replace ourself with the application our consumer actually</span>
+    <span class="c"># wants to run</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;--&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c"># Reset all signal handlers</span>
+    <span class="c"># Check reset_signals in process.py for a more in-depth explanation</span>
+    <span class="kn">import</span> <span class="nn">signal</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">NSIG</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">signal</span><span class="o">.</span><span class="n">getsignal</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIG_DFL</span><span class="p">:</span>
+            <span class="c">#pylint: disable-msg=W0704</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIG_DFL</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">execlp</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

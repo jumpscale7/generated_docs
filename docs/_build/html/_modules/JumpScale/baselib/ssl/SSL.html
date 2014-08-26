@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.ssl.SSL &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.ssl.SSL</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="c"># from OpenSSL import crypto</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">M2Crypto</span> <span class="kn">as</span> <span class="nn">m2c</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="c"># PASSWD=&quot;apasswd_now2easy&quot;</span>
+
+<div class="viewcode-block" id="empty_callback"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.empty_callback">[docs]</a><span class="k">def</span> <span class="nf">empty_callback</span> <span class="p">():</span>
+    <span class="k">return</span> <span class="bp">None</span>
+
+<span class="c">#howto used from http://e1ven.com/2011/04/06/how-to-use-m2crypto-tutorial/</span>
+</div>
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.key_value_store</span>
+
+<div class="viewcode-block" id="SSL"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.SSL">[docs]</a><span class="k">class</span> <span class="nc">SSL</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SSL.getSSLHandler"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.SSL.getSSLHandler">[docs]</a>    <span class="k">def</span> <span class="nf">getSSLHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyvaluestor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        default keyvaluestor=j.db.keyvaluestore.getFileSystemStore(&quot;sslkeys&quot;, serializers=[])  #make sure to use no serializers</span>
+<span class="sd">        pass another keyvaluestor if required (first do &#39;import JumpScale.baselib.key_value_store&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">keyvaluestor</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">keyvaluestor</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">keyvaluestore</span><span class="o">.</span><span class="n">getFileSystemStore</span><span class="p">(</span><span class="s">&quot;sslkeys&quot;</span><span class="p">,</span> <span class="n">serializers</span><span class="o">=</span><span class="p">[])</span>
+        <span class="k">return</span> <span class="n">KeyStor</span><span class="p">(</span><span class="n">keyvaluestor</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="KeyStor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor">[docs]</a><span class="k">class</span> <span class="nc">KeyStor</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">keyvaluestor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">=</span><span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="n">keyvaluestor</span>
+
+
+<div class="viewcode-block" id="KeyStor.createKeyPair"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.createKeyPair">[docs]</a>    <span class="k">def</span> <span class="nf">createKeyPair</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">organization</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        creates keypairs &amp; stores in localdb</span>
+<span class="sd">        @return (priv,pub) keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m2c</span><span class="o">.</span><span class="n">Rand</span><span class="o">.</span><span class="n">rand_seed</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span> <span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
+        <span class="c"># print &quot;Generating a 1024 bit private/public key pair ...&quot;</span>
+        <span class="c">#If you don&#39;t like the default M2Crypto ASCII &quot;progress&quot; bar it makes when generating keys, you can use:</span>
+        <span class="c">#You can change the key size, though key lengths &lt; 1024 are considered insecure</span>
+        <span class="c">#The larger the key size the longer it will take to generate the key and the larger the signature will be when signing</span>
+        <span class="c">#You should probably leave the public exponent at 65537 (http://en.wikipedia.org/wiki/Rsa#Key_generation_2)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">m2c</span><span class="o">.</span><span class="n">RSA</span><span class="o">.</span><span class="n">gen_key</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">65537</span><span class="p">,</span> <span class="n">empty_callback</span><span class="p">)</span>
+
+        <span class="c">#Save Alice&#39;s private key</span>
+        <span class="c">#The &#39;None&#39; tells it to save the private key in an unencrypted format</span>
+        <span class="c">#For best security practices, you&#39;d use:</span>
+        <span class="c">#That would cause the private key to be saved in an encrypted format</span>
+        <span class="c">#Python would ask you to enter a password to use to encrypt the key file</span>
+        <span class="c">#For a demo script though it&#39;s easier/quicker to just use &#39;None&#39; :) </span>
+
+        <span class="k">if</span> <span class="n">path</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="n">p1</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/priv.pem&quot;</span><span class="o">%</span><span class="n">path</span>
+            <span class="n">p2</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/pub.pem&quot;</span><span class="o">%</span><span class="n">path</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p1</span><span class="o">=</span><span class="s">&#39;/tmp/_key_</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+            <span class="n">p2</span><span class="o">=</span><span class="s">&#39;/tmp/_key_</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+
+        <span class="n">keys</span><span class="o">.</span><span class="n">save_key</span> <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">save_pub_key</span> <span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+        <span class="n">priv</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+        <span class="n">pub</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">path</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="s">&quot;private_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">user</span><span class="p">,</span><span class="n">priv</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="s">&quot;public_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">user</span><span class="p">,</span><span class="n">pub</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">priv</span><span class="p">,</span><span class="n">pub</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_getKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">cat</span><span class="p">,</span><span class="n">returnAsString</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">keyoverrule</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">cachekey</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">cat</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">cachekey</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">returnAsString</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">cachekey</span><span class="p">]</span><span class="o">.</span><span class="n">as_pem</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">cachekey</span><span class="p">]</span>
+        <span class="n">p1</span><span class="o">=</span><span class="s">&#39;/tmp/_key_</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">keyoverrule</span><span class="p">:</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">keyoverrule</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span><span class="n">user</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">returnAsString</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">key</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cat</span><span class="o">==</span><span class="s">&quot;public&quot;</span><span class="p">:</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">m2c</span><span class="o">.</span><span class="n">RSA</span><span class="o">.</span><span class="n">load_pub_key</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">m2c</span><span class="o">.</span><span class="n">RSA</span><span class="o">.</span><span class="n">load_key</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">empty_callback</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot load key:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">cachekey</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">cachekey</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+        <span class="k">return</span> <span class="n">key</span>
+
+<div class="viewcode-block" id="KeyStor.getPrivKey"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.getPrivKey">[docs]</a>    <span class="k">def</span> <span class="nf">getPrivKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">):</span>
+        <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getKey</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="s">&quot;private&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key</span>
+</div>
+<div class="viewcode-block" id="KeyStor.getPubKey"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.getPubKey">[docs]</a>    <span class="k">def</span> <span class="nf">getPubKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">returnAsString</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">pubkeyReader</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getKey</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="s">&quot;public&quot;</span><span class="p">,</span><span class="n">returnAsString</span><span class="p">,</span><span class="n">keyoverrule</span><span class="o">=</span><span class="n">pubkeyReader</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key</span>
+</div>
+<div class="viewcode-block" id="KeyStor.setPubKey"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.setPubKey">[docs]</a>    <span class="k">def</span> <span class="nf">setPubKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">organization</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">pemstr</span><span class="p">):</span>
+        <span class="n">key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">organization</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="s">&quot;public&quot;</span><span class="p">,</span><span class="n">user</span><span class="p">),</span><span class="n">pemstr</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyStor.test"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">org</span><span class="o">=</span><span class="s">&quot;myorg.com&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createKeyPair</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;alice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">createKeyPair</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;bob&quot;</span><span class="p">)</span>
+        <span class="n">msg</span><span class="p">,</span><span class="n">signature</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="s">&quot;bob&quot;</span><span class="p">,</span><span class="s">&quot;this is a test message.&quot;</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&quot;msg&quot;</span>
+        <span class="k">print</span> <span class="n">msg</span>
+        <span class="k">print</span> <span class="s">&quot;signature&quot;</span>
+        <span class="k">print</span> <span class="n">signature</span>
+        <span class="k">print</span> <span class="s">&quot;decrypt&quot;</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="s">&quot;bob&quot;</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">signature</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="KeyStor.perftest"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.perftest">[docs]</a>    <span class="k">def</span> <span class="nf">perftest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nrrounds</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">sign</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">org</span><span class="o">=</span><span class="s">&quot;myorg.com&quot;</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n\n</span><span class="s">start perftest for encryption, nrrounds:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">nrrounds</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrrounds</span><span class="p">):</span>
+            <span class="n">msg</span><span class="p">,</span><span class="n">signature</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="s">&quot;bob&quot;</span><span class="p">,</span><span class="s">&quot;this is a test message.&quot;</span><span class="p">,</span><span class="n">sign</span><span class="o">=</span><span class="n">sign</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">org</span><span class="p">,</span><span class="s">&quot;alice&quot;</span><span class="p">,</span><span class="s">&quot;bob&quot;</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">signature</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">nrrounds</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyStor.encrypt"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.encrypt">[docs]</a>    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orgsender</span><span class="p">,</span><span class="n">sender</span><span class="p">,</span><span class="n">orgreader</span><span class="p">,</span><span class="n">reader</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="n">sign</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">base64</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">pubkeyReader</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param sender, name of person sending</span>
+<span class="sd">        @param name of person reading</span>
+<span class="sd">        @return encryptedtext,signature</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># print &quot;encrypt org:%s for:%s from:%s message:%s&quot;%(organization,reader,sender,message)</span>
+
+        <span class="c">#Alice wants to send a message to reader, which only reader will be able to decrypt</span>
+        <span class="c">#Step 1, load reader&#39;s public key</span>
+        <span class="n">WriteRSA</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getPubKey</span><span class="p">(</span><span class="n">orgreader</span><span class="p">,</span><span class="n">reader</span><span class="p">,</span><span class="n">pubkeyReader</span><span class="o">=</span><span class="n">pubkeyReader</span><span class="p">)</span>
+
+        <span class="c">#Step 2, encrypt the message using that public key</span>
+        <span class="c">#Only reader&#39;s private key can decrypt a message encrypted using reader&#39;s public key</span>
+        <span class="n">CipherText</span> <span class="o">=</span> <span class="n">WriteRSA</span><span class="o">.</span><span class="n">public_encrypt</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">m2c</span><span class="o">.</span><span class="n">RSA</span><span class="o">.</span><span class="n">pkcs1_oaep_padding</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base64</span><span class="p">:</span>
+            <span class="n">CipherText2</span><span class="o">=</span><span class="n">CipherText</span><span class="o">.</span><span class="n">encode</span> <span class="p">(</span><span class="s">&#39;base64&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">CipherText2</span><span class="o">=</span><span class="n">CipherText</span>
+
+        <span class="k">if</span> <span class="n">sign</span><span class="p">:</span>
+            <span class="c">#Generate a signature</span>
+            <span class="n">MsgDigest</span> <span class="o">=</span> <span class="n">m2c</span><span class="o">.</span><span class="n">EVP</span><span class="o">.</span><span class="n">MessageDigest</span> <span class="p">(</span><span class="s">&#39;sha1&#39;</span><span class="p">)</span>
+            <span class="n">MsgDigest</span><span class="o">.</span><span class="n">update</span> <span class="p">(</span><span class="n">CipherText</span><span class="p">)</span>
+
+            <span class="n">RSAsender</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPrivKey</span><span class="p">(</span><span class="n">orgsender</span><span class="p">,</span><span class="n">sender</span><span class="p">)</span>
+
+            <span class="n">signature</span> <span class="o">=</span> <span class="n">RSAsender</span><span class="o">.</span><span class="n">sign_rsassa_pss</span> <span class="p">(</span><span class="n">MsgDigest</span><span class="o">.</span><span class="n">digest</span> <span class="p">())</span>
+            <span class="k">if</span> <span class="n">base64</span><span class="p">:</span>
+                <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="o">.</span><span class="n">encode</span> <span class="p">(</span><span class="s">&#39;base64&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">signature</span><span class="o">=</span><span class="n">signature</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">signature</span><span class="o">=</span><span class="bp">None</span>
+
+        <span class="k">return</span> <span class="n">CipherText2</span><span class="p">,</span><span class="n">signature</span>
+</div>
+<div class="viewcode-block" id="KeyStor.decrypt"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.ssl.html#JumpScale.baselib.ssl.SSL.KeyStor.decrypt">[docs]</a>    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orgsender</span><span class="p">,</span><span class="n">sender</span><span class="p">,</span><span class="n">orgreader</span><span class="p">,</span><span class="n">reader</span><span class="p">,</span><span class="n">message</span><span class="p">,</span><span class="n">signature</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">base64</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="c"># print &quot;decrypt org:%s for:%s from:%s\nmessage:%s&quot;%(organization,reader,sender,message)</span>
+        <span class="n">ReadRSA</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getPrivKey</span><span class="p">(</span><span class="n">orgreader</span><span class="p">,</span><span class="n">reader</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base64</span><span class="p">:</span>
+            <span class="n">message2</span><span class="o">=</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;base64&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message2</span><span class="o">=</span><span class="n">message</span>
+        <span class="n">plainText</span> <span class="o">=</span> <span class="n">ReadRSA</span><span class="o">.</span><span class="n">private_decrypt</span> <span class="p">(</span><span class="n">message2</span><span class="p">,</span> <span class="n">m2c</span><span class="o">.</span><span class="n">RSA</span><span class="o">.</span><span class="n">pkcs1_oaep_padding</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">signature</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">base64</span><span class="p">:</span>
+                <span class="n">signature2</span><span class="o">=</span><span class="n">signature</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;base64&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">signature2</span><span class="o">=</span><span class="n">signature</span>
+
+            <span class="n">PubKey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPubKey</span><span class="p">(</span><span class="n">orgsender</span><span class="p">,</span><span class="n">sender</span><span class="p">)</span>
+
+            <span class="n">MsgDigest</span> <span class="o">=</span> <span class="n">m2c</span><span class="o">.</span><span class="n">EVP</span><span class="o">.</span><span class="n">MessageDigest</span> <span class="p">(</span><span class="s">&#39;sha1&#39;</span><span class="p">)</span>
+            <span class="n">MsgDigest</span><span class="o">.</span><span class="n">update</span> <span class="p">(</span><span class="n">message2</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">PubKey</span><span class="o">.</span><span class="n">verify_rsassa_pss</span> <span class="p">(</span><span class="n">MsgDigest</span><span class="o">.</span><span class="n">digest</span> <span class="p">(),</span> <span class="n">signature2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not verify the message&quot;</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">plainText</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

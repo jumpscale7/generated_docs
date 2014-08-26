@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using OSIS &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="OSIS" href="index.html" />
+    <link rel="next" title="Remote OSIS server" href="OSISRemote.html" />
+    <link rel="prev" title="Osis Model Specs" href="OsisModelSpec.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="OSISRemote.html" title="Remote OSIS server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="OsisModelSpec.html" title="Osis Model Specs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">OSIS</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-osis">
+<h1>Using OSIS<a class="headerlink" href="#using-osis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-elasticsearch-client">
+<h2>install elasticsearch client<a class="headerlink" href="#install-elasticsearch-client" title="Permalink to this headline">¶</a></h2>
+<p>is optional</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">elasticsearch_client</span> <span class="o">-</span><span class="n">m</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>this installs client with name main (instancename=main)</p>
+</div>
+<div class="section" id="install-mongodb-client">
+<h2>install mongodb client<a class="headerlink" href="#install-mongodb-client" title="Permalink to this headline">¶</a></h2>
+<p>is optional</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">mongodb_client</span> <span class="o">-</span><span class="n">i</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>this installs client with name main (instancename=main)</p>
+</div>
+<div class="section" id="install-redis-client">
+<h2>install redis client<a class="headerlink" href="#install-redis-client" title="Permalink to this headline">¶</a></h2>
+<p>is optional</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">redis_client</span> <span class="o">-</span><span class="n">i</span> <span class="n">rediskvs</span>
+</pre></div>
+</div>
+<p>this installs client with name rediskvs (instancename=rediskvs)
+e.g. to use redis as backendstor for 1 or more osis namespaces</p>
+</div>
+<div class="section" id="install-influxdb-client">
+<h2>install influxdb client<a class="headerlink" href="#install-influxdb-client" title="Permalink to this headline">¶</a></h2>
+<p>is optional</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">influxdb_client</span> <span class="o">-</span><span class="n">i</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>this installs client with name main (instancename=main)
+e.g. to store statistics</p>
+</div>
+<div class="section" id="install-osis">
+<h2>install osis<a class="headerlink" href="#install-osis" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="n">osis</span> <span class="o">-</span><span class="n">i</span> <span class="n">main</span> <span class="o">-</span><span class="n">r</span> <span class="o">--</span><span class="n">data</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\</span>
+<span class="s">osis.key= #</span><span class="se">\</span>
+<span class="s">osis.connection=mongodb:main influxdb:main&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-manually-start-osis">
+<h2>how to manually start osis<a class="headerlink" href="#how-to-manually-start-osis" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cd</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jsbox</span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">osis</span><span class="p">;</span><span class="n">python</span> <span class="n">osisServerStart</span><span class="o">.</span><span class="n">py</span> <span class="n">mongodb</span><span class="p">:</span><span class="n">main</span> <span class="n">redis</span><span class="p">:</span><span class="n">rediskvs</span> <span class="n">influxdb</span><span class="p">:</span><span class="n">main</span> <span class="n">elasticsearch</span><span class="p">:</span><span class="n">main</span>
+</pre></div>
+</div>
+<p>note the tag based forat at end
+each time the name of the client &amp; the instance name combination is specified</p>
+</div>
+<div class="section" id="an-example-osis-start-script">
+<h2>an example osis start script<a class="headerlink" href="#an-example-osis-start-script" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">monkey</span>
+<span class="c">#monkey.patch_all()</span>
+<span class="n">monkey</span><span class="o">.</span><span class="n">patch_socket</span><span class="p">()</span>
+<span class="n">monkey</span><span class="o">.</span><span class="n">patch_ssl</span><span class="p">()</span>
+<span class="n">monkey</span><span class="o">.</span><span class="n">patch_thread</span><span class="p">()</span>
+<span class="n">monkey</span><span class="o">.</span><span class="n">patch_time</span><span class="p">()</span>
+
+
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.osis</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;osisserver&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">args</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+<span class="n">osis_instance</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">osisjp</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">findNewest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;osis&quot;</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="s">&quot;jumpscale&quot;</span><span class="p">)</span>
+<span class="n">osisjp</span><span class="o">=</span><span class="n">osisjp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">osis_instance</span><span class="p">)</span>
+
+<span class="n">argstag</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="n">connectionsconfig</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">argstag</span><span class="p">)</span><span class="o">.</span><span class="n">getDict</span><span class="p">()</span>
+<span class="n">connections</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c">#example to start osis :</span>
+<span class="c">#cd /opt/jsbox/apps/osis;python osisServerStart.py elasticsearch:main mongodb:main</span>
+
+<span class="k">for</span> <span class="n">dbname</span><span class="p">,</span> <span class="n">instancename</span> <span class="ow">in</span> <span class="n">connectionsconfig</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">dbname</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&quot;influxdb&quot;</span><span class="p">]:</span>
+        <span class="n">domain</span><span class="o">=</span><span class="s">&quot;serverapps&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">domain</span><span class="o">=</span><span class="s">&quot;jumpscale&quot;</span>
+    <span class="n">jp</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">findNewest</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_client&quot;</span><span class="o">%</span><span class="n">dbname</span><span class="p">,</span><span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">)</span>
+    <span class="n">jp</span><span class="o">=</span><span class="n">jp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">instancename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">jp</span><span class="o">.</span><span class="n">isInstalled</span><span class="p">():</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">opserror_critical</span><span class="p">(</span><span class="s">&quot;cannot start osis, db connection </span><span class="si">%s</span><span class="s"> was not available, please install.&quot;</span><span class="o">%</span><span class="n">dbname</span><span class="p">)</span>
+    <span class="n">hrd</span><span class="o">=</span><span class="n">jp</span><span class="o">.</span><span class="n">hrd_instance</span>
+    <span class="k">if</span> <span class="n">hrd</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">opserror_critical</span><span class="p">(</span><span class="s">&quot;cannot start osis, db connection </span><span class="si">%s</span><span class="s"> was not available, please install &amp; configure properly, did not find active hrd.&quot;</span><span class="o">%</span><span class="n">dbname</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="s">&quot;connect to: </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">dbname</span>
+
+    <span class="k">if</span> <span class="n">dbname</span><span class="o">==</span><span class="s">&quot;elasticsearch&quot;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.elasticsearch</span>
+        <span class="n">ipaddr</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;es.client.addr&quot;</span><span class="p">)</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;es.client.port&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;cannot connect to elasticsearch, will keep on trying forever, please start (</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">elasticsearch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">dbname</span><span class="o">==</span><span class="s">&quot;mongodb&quot;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.grid.mongodbclient</span>
+        <span class="n">ipaddr</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;mongodb.client.addr&quot;</span><span class="p">)</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;mongodb.client.port&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;cannot connect to mongodb, will keep on trying forever, please start (</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">mongodb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">dbname</span><span class="o">==</span><span class="s">&quot;redis&quot;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.redis</span>
+        <span class="n">ipaddr</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;redis.client.addr&quot;</span><span class="p">)</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;redis.client.port&quot;</span><span class="p">)</span>
+        <span class="n">passwd</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;redis.client.passwd&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;cannot connect to redis, will keep on trying forever, please start (</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">redis</span><span class="o">.</span><span class="n">getGeventRedisClient</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">fromcache</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">passwd</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">dbname</span><span class="o">==</span><span class="s">&quot;influxdb&quot;</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">JumpScale.baselib.influxdb</span>
+        <span class="n">ipaddr</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;influxdb.client.addr&quot;</span><span class="p">)</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">getInt</span><span class="p">(</span><span class="s">&quot;influxdb.client.port&quot;</span><span class="p">)</span>
+        <span class="n">login</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;influxdb.client.login&quot;</span><span class="p">)</span>
+        <span class="n">passwd</span><span class="o">=</span><span class="n">hrd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;influxdb.client.passwd&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">tcpPortConnectionTest</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s">&quot;cannot connect to influxdb, will keep on trying forever, please start (</span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">)&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+
+        <span class="n">client</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">influxdb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span><span class="n">username</span><span class="o">=</span><span class="n">login</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">passwd</span><span class="p">,</span> <span class="n">database</span><span class="o">=</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">hrd</span><span class="o">=</span><span class="n">hrd</span> <span class="c">#remember hrd as well</span>
+
+    <span class="n">connections</span><span class="p">[</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">dbname</span><span class="p">,</span><span class="n">instancename</span><span class="p">)]</span><span class="o">=</span><span class="n">client</span>
+
+<span class="n">superadminpasswd</span><span class="o">=</span><span class="n">osisjp</span><span class="o">.</span><span class="n">hrd_instance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;osis.superadmin.passwd&quot;</span><span class="p">)</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">osis</span><span class="o">.</span><span class="n">startDaemon</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">overwriteHRD</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">overwriteImplementation</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="mi">5544</span><span class="p">,</span><span class="n">superadminpasswd</span><span class="o">=</span><span class="n">superadminpasswd</span><span class="p">,</span><span class="n">dbconnections</span><span class="o">=</span><span class="n">connections</span><span class="p">,</span><span class="n">hrd</span><span class="o">=</span><span class="n">osisjp</span><span class="o">.</span><span class="n">hrd_instance</span><span class="p">)</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>using gevent in this case
+all connections are being made and stored in a dict, this dict is given to osis.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using OSIS</a><ul>
+<li><a class="reference internal" href="#install-elasticsearch-client">install elasticsearch client</a></li>
+<li><a class="reference internal" href="#install-mongodb-client">install mongodb client</a></li>
+<li><a class="reference internal" href="#install-redis-client">install redis client</a></li>
+<li><a class="reference internal" href="#install-influxdb-client">install influxdb client</a></li>
+<li><a class="reference internal" href="#install-osis">install osis</a></li>
+<li><a class="reference internal" href="#how-to-manually-start-osis">how to manually start osis</a></li>
+<li><a class="reference internal" href="#an-example-osis-start-script">an example osis start script</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="OsisModelSpec.html"
+                        title="previous chapter">Osis Model Specs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="OSISRemote.html"
+                        title="next chapter">Remote OSIS server</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/OSIS/OSISInitialization.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="OSISRemote.html" title="Remote OSIS server"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="OsisModelSpec.html" title="Osis Model Specs"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >OSIS</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

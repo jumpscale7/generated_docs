@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.codetools.TextFileEditor &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.codetools.TextFileEditor</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">TextLineEditor</span> <span class="kn">import</span> <span class="n">TextLineEditor</span>
+<span class="kn">from</span> <span class="nn">TextCharEditor</span> <span class="kn">import</span> <span class="n">TextCharEditor</span>
+
+        
+<div class="viewcode-block" id="TextFileEditor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor">[docs]</a><span class="k">class</span> <span class="nc">TextFileEditor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allow manipulate of a text file</span>
+<span class="sd">    ideal to manipulate e.g. config files</span>
+<span class="sd">    BE CAREFULL, CHANGES ON textfileeditor and chareditor can overwrite each other</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="TextFileEditor.getTextLineEditor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextLineEditor">[docs]</a>    <span class="k">def</span> <span class="nf">getTextLineEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TextLineEditor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="TextFileEditor.getTextCharEditor"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getTextCharEditor">[docs]</a>    <span class="k">def</span> <span class="nf">getTextCharEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+        <span class="n">te</span><span class="o">=</span><span class="n">TextCharEditor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_textCharEditorActive</span><span class="o">=</span><span class="bp">True</span>
+        <span class="k">return</span> <span class="n">te</span>
+    </div>
+<div class="viewcode-block" id="TextFileEditor.existsLine"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.existsLine">[docs]</a>    <span class="k">def</span> <span class="nf">existsLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return True if pattern found (regex) False if not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>        
+        <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">findOne</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="o">&lt;&gt;</span><span class="s">&quot;&quot;</span>
+                
+    </div>
+<div class="viewcode-block" id="TextFileEditor.find1Line"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.find1Line">[docs]</a>    <span class="k">def</span> <span class="nf">find1Line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">includes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        if moren than 1 line or 0 line error will be raised</span>
+<span class="sd">        @param includes are include patters (regular expressions)</span>
+<span class="sd">        @param excludes</span>
+<span class="sd">        @return [linenr,line]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;try to find 1 line which matches the specified includes </span><span class="si">%s</span><span class="s"> &amp; excludes </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">),</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">linenr</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">includes</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">includes</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;.*&quot;</span><span class="p">]</span>  <span class="c">#match all</span>
+        <span class="k">if</span> <span class="n">excludes</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">excludes</span><span class="o">=</span><span class="p">[]</span>  <span class="c">#match none</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">matchMultiple</span><span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">matchMultiple</span><span class="p">(</span><span class="n">excludes</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">linenrfound</span><span class="o">=</span><span class="n">linenr</span>
+                <span class="n">linefound</span><span class="o">=</span><span class="n">line</span>
+            <span class="n">linenr</span><span class="o">+=</span><span class="mi">1</span>
+            
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find a line matching </span><span class="si">%s</span><span class="s"> and not matching </span><span class="si">%s</span><span class="s"> in file </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Found more than 1 line matching </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">linenrfound</span><span class="p">,</span><span class="n">linefound</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="TextFileEditor.replaceLinesFromFunction"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLinesFromFunction">[docs]</a>    <span class="k">def</span> <span class="nf">replaceLinesFromFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">replaceFunction</span><span class="p">,</span><span class="n">argument</span><span class="p">,</span><span class="n">includes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        includes happens first</span>
+<span class="sd">        excludes last</span>
+<span class="sd">        both are arrays</span>
+<span class="sd">        @param argument which is going to be give to replacefunction</span>
+<span class="sd">        @replaceFunction is the replace function has 2 params, argument &amp; the matching line, returns the processed line</span>
+<span class="sd">        replace the matched line with line being processed by the functionreplaceFunction(argument,lineWhichMatches)</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="c">#@todo add good logging statements everywhere   (id:49)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replaceLines</span><span class="p">(</span><span class="n">replaceFunction</span><span class="p">,</span><span class="n">argument</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TextFileEditor.replace1LineFromFunction"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1LineFromFunction">[docs]</a>    <span class="k">def</span> <span class="nf">replace1LineFromFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">replaceFunction</span><span class="p">,</span><span class="n">argument</span><span class="p">,</span><span class="n">includes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        same as with replaceLinesFromFunction, but only 1 line will be matched</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="bp">self</span><span class="o">.</span><span class="n">find1Line</span><span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span> <span class="c">#make sure only 1 line can match otherwise error will be raised</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaceLinesFromFunction</span><span class="p">(</span><span class="n">replaceFunction</span><span class="p">,</span><span class="n">argument</span><span class="p">,</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span>      
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TextFileEditor.replace1Line"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace1Line">[docs]</a>    <span class="k">def</span> <span class="nf">replace1Line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newcontent</span><span class="p">,</span><span class="n">includes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        includes happens first</span>
+<span class="sd">        excludes last</span>
+<span class="sd">        both are arrays</span>
+<span class="sd">        replace matching lines with new content</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">find1Line</span><span class="p">(</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span> <span class="c">#make sure only 1 line can match otherwise error will be raised</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaceLines</span><span class="p">(</span><span class="n">newcontent</span><span class="p">,</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span>               
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        
+        </div>
+<div class="viewcode-block" id="TextFileEditor.replaceLines"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceLines">[docs]</a>    <span class="k">def</span> <span class="nf">replaceLines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newcontent</span><span class="p">,</span><span class="n">includes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">excludes</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        includes happens first (is regex!!!!)</span>
+<span class="sd">        excludes last</span>
+<span class="sd">        both are arrays</span>
+<span class="sd">        replace matching lines with new content</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">replfunc</span><span class="p">(</span><span class="n">newline</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">newcontent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">replaceLinesFromFunction</span><span class="p">(</span><span class="n">replfunc</span><span class="p">,</span><span class="n">newcontent</span><span class="p">,</span><span class="n">includes</span><span class="p">,</span><span class="n">excludes</span><span class="p">)</span>                    
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TextFileEditor.deleteLines"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.deleteLines">[docs]</a>    <span class="k">def</span> <span class="nf">deleteLines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        remove lines which match the pattern (regex) (only 1 pattern)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">removeLines</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="TextFileEditor.appendReplaceLine"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendReplaceLine">[docs]</a>    <span class="k">def</span> <span class="nf">appendReplaceLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pattern</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        find line which match the pattern (regex) (only 1 pattern) and then change</span>
+<span class="sd">        if not found append to end of file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">existsLine</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">appendLine</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">replace1Line</span><span class="p">(</span><span class="n">line</span><span class="p">,[</span><span class="n">pattern</span><span class="p">])</span>
+        
+        </div>
+<div class="viewcode-block" id="TextFileEditor.appendLine"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.appendLine">[docs]</a>    <span class="k">def</span> <span class="nf">appendLine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">line</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">line</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">line</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&gt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+</div>
+<div class="viewcode-block" id="TextFileEditor.setSection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.setSection">[docs]</a>    <span class="k">def</span> <span class="nf">setSection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sectionName</span><span class="p">,</span><span class="n">content</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        look for section starting with ### $sectionName</span>
+<span class="sd">        end of section starts with ###END $sectionName</span>
+<span class="sd">        whatever inbetween will be replaced by content</span>
+
+<span class="sd">        if section does not exist yet then it will be added at end of file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">lineEditor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getTextLineEditor</span><span class="p">()</span>
+        <span class="n">lineEditor</span><span class="o">.</span><span class="n">matchBlocks</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,[</span><span class="s">&quot;### </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">sectionName</span><span class="p">],[],[</span><span class="s">&quot;###END </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">sectionName</span><span class="p">],[])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">lineEditor</span><span class="o">.</span><span class="n">existsBlock</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">):</span>
+            <span class="n">lineEditor</span><span class="o">.</span><span class="n">addBlock</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;### </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">###END </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">content</span><span class="p">,</span><span class="n">sectionName</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lineEditor</span><span class="o">.</span><span class="n">replaceBlock</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,</span><span class="s">&quot;### </span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">###END </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">sectionName</span><span class="p">,</span><span class="n">content</span><span class="p">,</span><span class="n">sectionName</span><span class="p">))</span>
+
+        <span class="n">lineEditor</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+        
+</div>
+<div class="viewcode-block" id="TextFileEditor.removeSection"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.removeSection">[docs]</a>    <span class="k">def</span> <span class="nf">removeSection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sectionName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        look for section starting with ### $sectionName</span>
+<span class="sd">        end of section starts with ###END $sectionName</span>
+<span class="sd">        delete that part</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lineEditor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getTextLineEditor</span><span class="p">()</span>
+        <span class="n">lineEditor</span><span class="o">.</span><span class="n">matchBlocks</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">,[</span><span class="s">&quot;### </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">sectionName</span><span class="p">],[],[</span><span class="s">&quot;###END </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">sectionName</span><span class="p">],[])</span>        
+        <span class="n">lineEditor</span><span class="o">.</span><span class="n">deleteBlock</span><span class="p">(</span><span class="s">&quot;main&quot;</span><span class="p">)</span>
+        <span class="n">lineEditor</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="TextFileEditor.replace"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regexFind</span><span class="p">,</span><span class="n">regexFindsubsetToReplace</span><span class="p">,</span><span class="n">replaceWith</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for regexFind in text and if found, replace the subset regexFindsubsetToReplace of regexFind with replacewith and returns the new text</span>
+<span class="sd">        Example:</span>
+<span class="sd">            replace(&quot;Q-Layer Server&quot;, &quot;Server&quot;, &quot;Computer&quot;, &quot;This is a Q-Layer Server&quot;)</span>
+<span class="sd">            will return &quot;This is a Q-Layer Computer&quot;</span>
+<span class="sd">        @param regexFind: String to search for, can be a regular expression</span>
+<span class="sd">        @param regexFindsubsetToReplace: The subset within regexFind that you want to replace</span>
+<span class="sd">        @param replacewith: The replacement</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regexFind</span><span class="p">,</span><span class="n">regexFindsubsetToReplace</span><span class="p">,</span><span class="n">replaceWith</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                </div>
+<div class="viewcode-block" id="TextFileEditor.replaceNonRegex"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.replaceNonRegex">[docs]</a>    <span class="k">def</span> <span class="nf">replaceNonRegex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tofind</span><span class="p">,</span><span class="n">replaceWith</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tofind</span><span class="p">,</span><span class="n">replaceWith</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="TextFileEditor.addItemToFoundLineOnlyOnce"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.addItemToFoundLineOnlyOnce">[docs]</a>    <span class="k">def</span> <span class="nf">addItemToFoundLineOnlyOnce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tofind</span><span class="p">,</span><span class="n">add</span><span class="p">,</span><span class="n">ignoreRegex</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">reset</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        look for tofind and only one add $add to it,</span>
+<span class="sd">        will not do this on lines matching the regexes</span>
+<span class="sd">        @param reset if True, will remove the regex first, means will always be added</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="n">done</span><span class="o">=</span><span class="bp">False</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">reset</span>  <span class="ow">and</span> <span class="n">done</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tofind</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">ignoreRegex</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+                <span class="c">#found right line</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">ignoreRegex</span><span class="p">,</span> <span class="n">ignoreRegex</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">+</span><span class="n">add</span>
+                <span class="k">print</span> <span class="s">&quot;CH:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">line</span>
+                <span class="n">done</span><span class="o">=</span><span class="bp">True</span>
+            <span class="k">if</span> <span class="n">done</span><span class="o">==</span><span class="bp">False</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tofind</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span> <span class="ow">and</span>  \
+               <span class="p">(</span><span class="n">ignoreRegex</span><span class="o">&lt;&gt;</span><span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">ignoreRegex</span><span class="p">,</span><span class="n">line</span><span class="p">)):</span>
+                <span class="c">#found line we can change</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tofind</span><span class="p">,</span><span class="n">tofind</span><span class="o">+</span><span class="n">add</span><span class="p">)</span>
+                <span class="n">done</span><span class="o">=</span><span class="bp">True</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">=</span><span class="n">out</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            
+        </div>
+<div class="viewcode-block" id="TextFileEditor.getRegexMatches"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.getRegexMatches">[docs]</a>    <span class="k">def</span> <span class="nf">getRegexMatches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">codetools</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">getRegexMatches</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+            </div>
+<div class="viewcode-block" id="TextFileEditor.save"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.codetools.html#JumpScale.baselib.codetools.TextFileEditor.TextFileEditor.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filepath</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        write the manipulated file to a new path or to the original</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filepath</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">filepath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span>
+        <span class="k">if</span> <span class="n">filepath</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot write the textfile because path is None&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>            
+        
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.remote.fabric.FabricTool &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.remote.fabric.FabricTool</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">fabric</span>
+<span class="kn">import</span> <span class="nn">fabric.api</span>
+
+<span class="c"># from fabric.api import run as frun</span>
+<span class="c"># from fabric.api import execute as fexecute</span>
+<span class="c"># from fabric.api import env as fenv</span>
+<span class="c"># from fabric.api import open_shell as fopen_shell</span>
+<span class="c"># from fabric.api import path as fpath</span>
+<span class="c"># from fabric.api import show as fshow</span>
+<span class="c"># from fabric.api import put as fput</span>
+
+<div class="viewcode-block" id="FabricTool"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.fabric.html#JumpScale.baselib.remote.fabric.FabricTool.FabricTool">[docs]</a><span class="k">class</span> <span class="nc">FabricTool</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">fabric</span><span class="o">.</span><span class="n">api</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHost</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">passwords</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="FabricTool.setDefaultPasswd"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.fabric.html#JumpScale.baselib.remote.fabric.FabricTool.FabricTool.setDefaultPasswd">[docs]</a>    <span class="k">def</span> <span class="nf">setDefaultPasswd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">passwd</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s">&quot;localhost&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">passwd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">passwords</span><span class="p">[</span><span class="s">&quot;root@</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">host</span><span class="p">]</span><span class="o">=</span><span class="n">passwd</span>
+        <span class="c"># self.api.env.hosts = [&#39;user1@host1:port1&#39;, &#39;user2@host2.port2&#39;]</span>
+        <span class="c"># self.api.env.passwords = {&#39;user1@host1:port1&#39;: &#39;password1&#39;, &#39;user2@host2.port2&#39;: &#39;password2&#39;}</span>
+</div>
+<div class="viewcode-block" id="FabricTool.setHost"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.fabric.html#JumpScale.baselib.remote.fabric.FabricTool.FabricTool.setHost">[docs]</a>    <span class="k">def</span> <span class="nf">setHost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s">&quot;localhost&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">&quot;host_string&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">host</span>
+</div>
+<div class="viewcode-block" id="FabricTool.setHosts"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.fabric.html#JumpScale.baselib.remote.fabric.FabricTool.FabricTool.setHosts">[docs]</a>    <span class="k">def</span> <span class="nf">setHosts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;localhost&quot;</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        list of hosts on which the commands will work</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span><span class="n">hosts</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="FabricTool.help"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.fabric.html#JumpScale.baselib.remote.fabric.FabricTool.FabricTool.help">[docs]</a>    <span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">easiest way to use do:</span>
+<span class="s">f=j.remote.fabric.api</span>
+<span class="s">and then</span>
+
+<span class="s">f.api.run(...)</span>
+<span class="s">        &quot;&quot;&quot;</span>
+        <span class="k">print</span> <span class="n">C</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

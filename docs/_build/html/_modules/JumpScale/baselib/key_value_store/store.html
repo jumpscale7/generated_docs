@@ -1,0 +1,496 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.key_value_store.store &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.key_value_store.store</h1><div class="highlight"><pre>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">ujson</span> <span class="kn">as</span> <span class="nn">json</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+<span class="c">#import JSModel</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="kn">from</span> <span class="nn">JumpScale.core.baseclasses</span> <span class="kn">import</span> <span class="n">BaseEnumeration</span>
+
+
+<div class="viewcode-block" id="KeyValueStoreType"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreType">[docs]</a><span class="k">class</span> <span class="nc">KeyValueStoreType</span><span class="p">(</span><span class="n">BaseEnumeration</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_initItems</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;arakoon&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;file_system&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;memory&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">registerItem</span><span class="p">(</span><span class="s">&#39;redis&#39;</span><span class="p">)</span>
+        <span class="n">cls</span><span class="o">.</span><span class="n">finishItemRegistration</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase">[docs]</a><span class="k">class</span> <span class="nc">KeyValueStoreBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;KeyValueStoreBase defines a store interface.&#39;&#39;&#39;</span>
+
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializers</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="c">#self.id = j.application.getUniqueMachineId()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serializers</span> <span class="o">=</span> <span class="n">serializers</span> <span class="ow">or</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unserializers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serializers</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Copies the doc strings (when available) from the base implementation</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">__doc__</span> <span class="ow">and</span>\
+               <span class="nb">hasattr</span><span class="p">(</span><span class="n">KeyValueStoreBase</span><span class="p">,</span> <span class="n">attrName</span><span class="p">)</span> <span class="ow">and</span>\
+               <span class="ow">not</span> <span class="n">attrName</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)</span>\
+            <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">attr</span><span class="p">):</span>
+
+                <span class="n">baseAttr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">KeyValueStoreBase</span><span class="p">,</span> <span class="n">attrName</span><span class="p">)</span>
+                <span class="n">attr</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">baseAttr</span><span class="o">.</span><span class="n">__doc__</span>
+
+        <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.get"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Gets a key value pair from the store.</span>
+
+<span class="sd">        @param: category of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @param: key of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @return: value of the key value pair</span>
+<span class="sd">        @rtype: Objects</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.checkChangeLog"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.checkChangeLog">[docs]</a>    <span class="k">def</span> <span class="nf">checkChangeLog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.serialize"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">serializer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializers</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.unserialize"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unserialize">[docs]</a>    <span class="k">def</span> <span class="nf">unserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">serializer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unserializers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">serializer</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheSet"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheSet">[docs]</a>    <span class="k">def</span> <span class="nf">cacheSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">expirationInSecondsFromNow</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="c">#time in minutes for expiration</span>
+        <span class="n">ttime</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">ttime</span><span class="o">+</span><span class="n">expirationInSecondsFromNow</span><span class="p">,</span><span class="n">value</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">==</span><span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateGUID</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">key</span>
+        <span class="c"># if nrMinutesExpiration&gt;0:            </span>
+        <span class="c">#     self.set(&quot;cache&quot;, key, value)</span>
+        <span class="c">#     tt=j.base.time.getMinuteId()</span>
+        <span class="c">#     actor.dbmem.set(&quot;mcache_%s&quot;%tt, key, &quot;&quot;)</span>
+        <span class="c"># elif nrHoursExpiration&gt;0:            </span>
+        <span class="c">#     self.set(&quot;cache&quot;, key, value)</span>
+        <span class="c">#     tt=j.base.time.getHourId()</span>
+        <span class="c">#     actor.dbmem.set(&quot;hcache_%s&quot;%tt, key, &quot;&quot;)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheGet"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheGet">[docs]</a>    <span class="k">def</span> <span class="nf">cacheGet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">deleteAfterGet</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">r</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">deleteAfterGet</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheDelete"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheDelete">[docs]</a>    <span class="k">def</span> <span class="nf">cacheDelete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheExists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExists">[docs]</a>    <span class="k">def</span> <span class="nf">cacheExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheList"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheList">[docs]</a>    <span class="k">def</span> <span class="nf">cacheList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="s">&quot;cache&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listCategories</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.cacheExpire"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExpire">[docs]</a>    <span class="k">def</span> <span class="nf">cacheExpire</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">now</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">():</span>
+            <span class="n">expiretime</span><span class="p">,</span><span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">expiretime</span><span class="o">&gt;</span><span class="n">now</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;cache&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.set"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Sets a key value pair in the store.</span>
+
+<span class="sd">        @param: category of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @param: key of the key value pair</span>
+<span class="sd">        @type: String</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.delete"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Deletes a key value pair from the store.</span>
+
+<span class="sd">        @param: category of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @param: key of the key value pair</span>
+<span class="sd">        @type: String</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.exists"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if a key value pair exists in the store.</span>
+
+<span class="sd">        @param: category of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @param: key of the key value pair</span>
+<span class="sd">        @type: String</span>
+
+<span class="sd">        @return: flag that states if the key value pair exists or not</span>
+<span class="sd">        @rtype: Boolean</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.list"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Lists the keys matching `prefix` in `category`.</span>
+
+<span class="sd">        @param category: category the keys should be in</span>
+<span class="sd">        @type category: String</span>
+<span class="sd">        @param prefix: prefix the keys should start with</span>
+<span class="sd">        @type prefix: String</span>
+<span class="sd">        @return: keys that match `prefix` in `category`.</span>
+<span class="sd">        @rtype: List(String)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="KeyValueStoreBase.listCategories"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.listCategories">[docs]</a>    <span class="k">def</span> <span class="nf">listCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Lists the categories in this db.</span>
+
+<span class="sd">        @return: categories in this db</span>
+<span class="sd">        @rtype: List(String)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_categoryExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Checks if a category exists</span>
+
+<span class="sd">        @param category: category to check</span>
+<span class="sd">        @type category: String</span>
+<span class="sd">        @return: True if the category exists, False otherwise</span>
+<span class="sd">        @rtype: Boolean</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="KeyValueStoreBase.lock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lock">[docs]</a>    <span class="k">def</span> <span class="nf">lock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">locktype</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">timeoutwait</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        if locked will wait for time specified</span>
+<span class="sd">        @param locktype of lock is in style machine.disk.import  (dot notation)</span>
+<span class="sd">        @param timeout is the time we want our lock to last</span>
+<span class="sd">        @param timeoutwait wait till lock becomes free</span>
+<span class="sd">        @param info is info which will be kept in lock, can be handy to e.g. mention why lock taken</span>
+<span class="sd">        @param force, if force will erase lock when timeout is reached</span>
+<span class="sd">        @return None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">category</span><span class="o">=</span><span class="s">&quot;lock&quot;</span>
+        <span class="n">lockfree</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lockWait</span><span class="p">(</span><span class="n">locktype</span><span class="p">,</span> <span class="n">timeoutwait</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">lockfree</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot lock </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">locktype</span><span class="p">,</span> <span class="n">info</span><span class="p">))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
+        <span class="n">encodedValue</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settest</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">locktype</span><span class="p">,</span> <span class="n">encodedValue</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.lockCheck"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lockCheck">[docs]</a>    <span class="k">def</span> <span class="nf">lockCheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">locktype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param locktype of lock is in style machine.disk.import  (dot notation)</span>
+<span class="sd">        @return result,id,lockEnd,info  (lockEnd is time when lock times out, info is descr of lock, id is who locked)</span>
+<span class="sd">                       result is False when free, True when lock is active</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">,</span><span class="n">locktype</span><span class="p">):</span>
+            <span class="n">encodedValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">,</span> <span class="n">locktype</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">id</span><span class="p">,</span> <span class="n">lockEnd</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">encodedValue</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Failed to decode lock value&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid lock type </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">locktype</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">lockEnd</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">,</span><span class="n">locktype</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">False</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="bp">True</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">lockEnd</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s">&quot;&quot;</span>
+</div>
+    <span class="k">def</span> <span class="nf">_lockWait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locktype</span><span class="p">,</span><span class="n">timeoutwait</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        wait till lock free</span>
+<span class="sd">        @return True when free, False when unable to free</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">locked</span><span class="p">,</span><span class="nb">id</span><span class="p">,</span> <span class="n">lockEnd</span><span class="p">,</span><span class="n">info</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lockCheck</span><span class="p">(</span><span class="n">locktype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">locked</span><span class="p">:</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">lockEnd</span> <span class="o">+</span> <span class="n">timeoutwait</span> <span class="o">&lt;</span> <span class="n">start</span><span class="p">:</span>
+                <span class="c">#the lock was already timed out so is free</span>
+                <span class="k">return</span> <span class="bp">True</span>
+
+            <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="n">now</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">now</span><span class="o">&gt;</span><span class="n">start</span><span class="o">+</span><span class="n">timeoutwait</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">False</span>
+                <span class="k">if</span> <span class="n">now</span> <span class="o">&gt;</span> <span class="n">lockEnd</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">True</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<div class="viewcode-block" id="KeyValueStoreBase.unlock"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unlock">[docs]</a>    <span class="k">def</span> <span class="nf">unlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">locktype</span><span class="p">,</span><span class="n">timeoutwait</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param locktype of lock is in style machine.disk.import  (dot notation)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lockfree</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lockWait</span><span class="p">(</span><span class="n">locktype</span><span class="p">,</span> <span class="n">timeoutwait</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">lockfree</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">force</span><span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot unlock </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">locktype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">,</span><span class="n">locktype</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.incrementReset"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.incrementReset">[docs]</a>    <span class="k">def</span> <span class="nf">incrementReset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">,</span> <span class="n">newint</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param incrementtype : type of increment is in style machine.disk.nrdisk  (dot notation)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">newint</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.increment"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.increment">[docs]</a>    <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param incrementtype : type of increment is in style machine.disk.nrdisk  (dot notation)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+            <span class="n">incr</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rawOldIncr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span><span class="n">incrementtype</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">rawOldIncr</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Increment type </span><span class="si">%s</span><span class="s"> does not have a digit value: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">incrementtype</span><span class="p">,</span> <span class="n">rawOldIncr</span><span class="p">))</span>
+            <span class="n">oldIncr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rawOldIncr</span><span class="p">)</span>
+            <span class="n">incr</span> <span class="o">=</span> <span class="n">oldIncr</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">incr</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">incr</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.getNrRecords"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getNrRecords">[docs]</a>    <span class="k">def</span> <span class="nf">getNrRecords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span> <span class="n">incrementtype</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+            <span class="n">incr</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;increment&quot;</span><span class="p">,</span><span class="n">incrementtype</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.settest"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.settest">[docs]</a>    <span class="k">def</span> <span class="nf">settest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        if well stored return True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">==</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</div>
+    <span class="k">def</span> <span class="nf">_assertValidCategory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">category</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid category, non empty string expected&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_assertValidKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid key, non empty string expected&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_assertExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="n">errorMessage</span> <span class="o">=</span> <span class="s">&#39;Key value store doesnt have a value for key &#39;</span>\
+                           <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; in category &quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_assertCategoryExists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_categoryExists</span><span class="p">(</span><span class="n">category</span><span class="p">):</span>
+            <span class="n">errorMessage</span> <span class="o">=</span> <span class="s">&#39;Key value store doesn</span><span class="se">\&#39;</span><span class="s">t have a category </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">errorMessage</span><span class="p">)</span>
+
+<div class="viewcode-block" id="KeyValueStoreBase.now"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.now">[docs]</a>    <span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return current time (when in appserver will require less time then calling native jumpscale function)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">appserver6</span><span class="o">.</span><span class="n">runningAppserver</span><span class="o">&lt;&gt;</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">appserver6</span><span class="o">.</span><span class="n">runningAppserver</span><span class="o">.</span><span class="n">time</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getTimeEpoch</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.getModifySet"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getModifySet">[docs]</a>    <span class="k">def</span> <span class="nf">getModifySet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">modfunction</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get value</span>
+<span class="sd">        give as parameter to modfunction</span>
+<span class="sd">        try to set by means of testset, if not succesfull try again, will use random function to maximize chance to set</span>
+<span class="sd">        @param kwargs are other parameters as required (see usage in subscriber function)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">while</span> <span class="n">counter</span><span class="o">&lt;</span><span class="mi">30</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">data2</span><span class="o">=</span><span class="n">modfunction</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settest</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">data2</span><span class="p">):</span>
+                <span class="k">break</span>  <span class="c">#go out  of loop, could store well</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">idgenerator</span><span class="o">.</span><span class="n">generateRandomInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">data2</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.subscribe"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscribe">[docs]</a>    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">startid</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        each subscriber is identified by a key</span>
+<span class="sd">        in db there is a dict stored on key for category = category of this method</span>
+<span class="sd">        value= dict with as keys the subscribers</span>
+<span class="sd">        {&quot;kristof&quot;:[lastaccessedTime,lastId],&quot;pol&quot;:...}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;subscribers&quot;</span><span class="p">,</span><span class="n">category</span><span class="p">):</span>
+            <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="n">subscriberid</span><span class="p">:[</span><span class="bp">self</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span><span class="n">startid</span><span class="p">]}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">startid</span><span class="o">&lt;&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">startid</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s"> in db, cannot subscribe, select valid startid&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">startid</span><span class="p">))</span>
+
+                <span class="k">def</span> <span class="nf">modfunction</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">startid</span><span class="p">):</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">subscriberid</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span><span class="n">startid</span><span class="p">]</span>
+                    <span class="k">return</span> <span class="n">data</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">getModifySet</span><span class="p">(</span><span class="s">&quot;subscribers&quot;</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">modfunction</span><span class="p">,</span><span class="n">subscriberid</span><span class="o">=</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span><span class="n">startid</span><span class="o">=</span><span class="n">startid</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.subscriptionGetNextItem"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionGetNextItem">[docs]</a>    <span class="k">def</span> <span class="nf">subscriptionGetNextItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">autoConfirm</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get next item from subscription</span>
+<span class="sd">        returns</span>
+<span class="sd">           False,None when no next</span>
+<span class="sd">           True,the data when a next</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;subscribers&quot;</span><span class="p">,</span><span class="n">category</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot find subscription&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;subscribers&quot;</span><span class="p">,</span><span class="n">category</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">subscriberid</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;cannot find subscriber&quot;</span><span class="p">)</span>
+        <span class="n">lastaccesstime</span><span class="p">,</span><span class="n">lastid</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">subscriberid</span><span class="p">]</span>
+        <span class="n">lastid</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">startid</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span><span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">startid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">autoConfirm</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">subscriptionAdvance</span><span class="p">(</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">lastid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="KeyValueStoreBase.subscriptionAdvance"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.key_value_store.html#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionAdvance">[docs]</a>    <span class="k">def</span> <span class="nf">subscriptionAdvance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">lastProcessedId</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">modfunction</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">lastProcessedId</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">subscriberid</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">db</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span><span class="n">lastProcessedId</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">getModifySet</span><span class="p">(</span><span class="s">&quot;subscribers&quot;</span><span class="p">,</span><span class="n">category</span><span class="p">,</span><span class="n">modfunction</span><span class="p">,</span><span class="n">subscriberid</span><span class="o">=</span><span class="n">subscriberid</span><span class="p">,</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span><span class="n">lastProcessedId</span><span class="o">=</span><span class="n">lastProcessedId</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

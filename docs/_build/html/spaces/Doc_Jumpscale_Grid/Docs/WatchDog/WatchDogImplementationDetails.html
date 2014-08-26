@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Implementation Details &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="WatchDog" href="index.html" />
+    <link rel="next" title="Types" href="WatchDogTypes.html" />
+    <link rel="prev" title="watchdog" href="WatchDog.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="WatchDogTypes.html" title="Types"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="WatchDog.html" title="watchdog"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">WatchDog</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="implementation-details">
+<h1>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h1>
+<p>value is send to 2 destinations
+over http post, rest call
+format/destination:
+escalation flow</p>
+<ul class="simple">
+<li>when critical -&gt; escalate to contact 1</li>
+<li>when no response in 5 min -&gt; escalate to contact 2&amp;3</li>
+<li>when no response in 15 min -&gt; escalate to all, send SMS to Jan,Kristof,Rob</li>
+<li>response means confirm on rogerthat working on issue</li>
+<li>format</li>
+<li>json</li>
+<li>fields used at client</li>
+<li>nid</li>
+<li>gid</li>
+<li>category e.g. cpu.core</li>
+<li>state= OK, CRITICAL, WARNING</li>
+<li>value (int) is last measured value (percent:0-100, otherwise real value)</li>
+<li>ecoguid : optional errorcondition guid</li>
+<li>remark: for status checks there is no value, only use state &amp; category</li>
+</ul>
+<p>fields used at server</p>
+<ul class="simple">
+<li>epoch</li>
+<li>escalationstate<ul>
+<li>L1 = escalated to contact 1</li>
+<li>L2 = escalated to contact 2 &amp; 3 (so contact 1 did not reply in 5 min)</li>
+<li>L3 = escalated to all, Jan, Kristof, Rob (2 and 3 did not reply in 15 min)</li>
+<li>C = confirmed  (the support person confirmed the issue, means will now look at it)</li>
+<li>A = accepted (the support person accepted the issue, means will work on it and resolve)</li>
+<li>R = resolved (now support person need to talk with customer if required, or if not needed can close)</li>
+<li>Z = closed (no need to look at it)</li>
+</ul>
+</li>
+<li>log = [$epoch,$userid,$state &lt;$epoch,$userid,$state&gt;] e.g. at 14h, despiegk confirmed the issue ©</li>
+</ul>
+<p>each grid has a unique GUID (generated at grid level)
+alerts are stored under following key</p>
+<ul class="simple">
+<li>$gridguid:alerts:$nid_$category</li>
+<li>$nid is 0 when for grid e.g. grid.healthcheck</li>
+</ul>
+<div class="section" id="how-on-server">
+<h2>how on server<a class="headerlink" href="#how-on-server" title="Permalink to this headline">¶</a></h2>
+<p>2 servers
+1 server process on each server
+this server process
+does the rogerthat handling <a class="reference external" href="http://www.rogerthat.net/developers/example-code/#Python_Example">http://www.rogerthat.net/developers/example-code/#Python_Example</a>
+the main loop puts marker in redis
+does the escalation process
+2 core watchdogprocesses which use redis of other side to see that the 2 main server processes are working</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Implementation Details</a><ul>
+<li><a class="reference internal" href="#how-on-server">how on server</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="WatchDog.html"
+                        title="previous chapter">watchdog</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="WatchDogTypes.html"
+                        title="next chapter">Types</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/WatchDog/WatchDogImplementationDetails.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="WatchDogTypes.html" title="Types"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="WatchDog.html" title="watchdog"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="index.html" >WatchDog</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

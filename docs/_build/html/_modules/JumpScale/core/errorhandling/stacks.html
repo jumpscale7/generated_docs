@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.core.errorhandling.stacks &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.core.errorhandling.stacks</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">raven.utils.stacks</span>
+<span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">:copyright: (c) 2010-2012 by the Sentry Team, see AUTHORS for more details.</span>
+<span class="sd">:license: BSD, see LICENSE for more details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="c"># from raven.utils.serializer import transform</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+
+<span class="n">_coding_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;coding[:=]\s*([-\w.]+)&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_lines_from_file"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.get_lines_from_file">[docs]</a><span class="k">def</span> <span class="nf">get_lines_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="n">context_lines</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">module_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns context_lines before and after lineno from file.</span>
+<span class="sd">    Returns (pre_context_lineno, pre_context, context_line, post_context).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="s">&quot;get_source&quot;</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_source</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="c"># Traceback (most recent call last):</span>
+            <span class="c">#   File &quot;/Users/dcramer/Development/django-sentry/sentry/client/handlers.py&quot;, line 31, in emit</span>
+            <span class="c">#     get_client().create_from_record(record, request=request)</span>
+            <span class="c">#   File &quot;/Users/dcramer/Development/django-sentry/sentry/client/base.py&quot;, line 325, in create_from_record</span>
+            <span class="c">#     data[&#39;__sentry__&#39;][&#39;frames&#39;] = varmap(shorten, get_stack_info(stack))</span>
+            <span class="c">#   File &quot;/Users/dcramer/Development/django-sentry/sentry/utils/stacks.py&quot;, line 112, in get_stack_info</span>
+            <span class="c">#     pre_context_lineno, pre_context, context_line, post_context = get_lines_from_file(filename, lineno, 7, loader, module_name)</span>
+            <span class="c">#   File &quot;/Users/dcramer/Development/django-sentry/sentry/utils/stacks.py&quot;, line 24, in get_lines_from_file</span>
+            <span class="c">#     source = loader.get_source(module_name)</span>
+            <span class="c">#   File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/pkgutil.py&quot;, line 287, in get_source</span>
+            <span class="c">#     fullname = self._fix_name(fullname)</span>
+            <span class="c">#   File &quot;/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/pkgutil.py&quot;, line 262, in _fix_name</span>
+            <span class="c">#     &quot;module %s&quot; % (self.fullname, fullname))</span>
+            <span class="c"># ImportError: Loader for module cProfile cannot handle module __main__</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+        <span class="n">encoding</span> <span class="o">=</span> <span class="s">&#39;utf8&#39;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">source</span><span class="p">[:</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="c"># File coding may be specified. Match pattern from PEP-263</span>
+            <span class="c"># (http://www.python.org/dev/peps/pep-0263/)</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">_coding_re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">))</span>  <span class="c"># let&#39;s assume utf8</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">encoding</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">sline</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="s">&#39;replace&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">sline</span> <span class="ow">in</span> <span class="n">source</span><span class="p">]</span>
+
+    <span class="n">lower_bound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lineno</span> <span class="o">-</span> <span class="n">context_lines</span><span class="p">)</span>
+    <span class="n">upper_bound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lineno</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">context_lines</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pre_context</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r\n</span><span class="s">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">source</span><span class="p">[</span><span class="n">lower_bound</span><span class="p">:</span><span class="n">lineno</span><span class="p">]]</span>
+        <span class="n">context_line</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">lineno</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r\n</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="n">post_context</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r\n</span><span class="s">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">source</span><span class="p">[(</span><span class="n">lineno</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span><span class="n">upper_bound</span><span class="p">]]</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="c"># the file may have changed since it was loaded into memory</span>
+        <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+    <span class="k">return</span> <span class="n">pre_context</span><span class="p">,</span> <span class="n">context_line</span><span class="p">,</span> <span class="n">post_context</span>
+
+</div>
+<div class="viewcode-block" id="label_from_frame"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.label_from_frame">[docs]</a><span class="k">def</span> <span class="nf">label_from_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;module&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;?&#39;</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;function&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;?&#39;</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="o">==</span> <span class="n">function</span> <span class="o">==</span> <span class="s">&#39;?&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span>
+    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> in </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="get_culprit"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.get_culprit">[docs]</a><span class="k">def</span> <span class="nf">get_culprit</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c"># We iterate through each frame looking for a deterministic culprit</span>
+    <span class="c"># When one is found, we mark it as last &quot;best guess&quot; (best_guess) and then</span>
+    <span class="c"># check it against ``exclude_paths``. If it isnt listed, then we</span>
+    <span class="c"># use this option. If nothing is found, we use the &quot;best guess&quot;.</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">or</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;get_culprit no longer does application detection&#39;</span><span class="p">)</span>
+
+    <span class="n">best_guess</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">culprit</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span>
+        <span class="n">culprit</span> <span class="o">=</span> <span class="n">label_from_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">culprit</span><span class="p">:</span>
+            <span class="n">culprit</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;in_app&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">culprit</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">best_guess</span><span class="p">:</span>
+            <span class="n">best_guess</span> <span class="o">=</span> <span class="n">culprit</span>
+        <span class="k">elif</span> <span class="n">best_guess</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="c"># Return either the best guess or the last frames call</span>
+    <span class="k">return</span> <span class="n">best_guess</span> <span class="ow">or</span> <span class="n">culprit</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_getitem_from_frame</span><span class="p">(</span><span class="n">f_locals</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    f_locals is not guaranteed to have .get(), but it will always</span>
+<span class="sd">    support __getitem__. Even if it doesnt, we return ``default``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f_locals</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">default</span>
+
+
+<div class="viewcode-block" id="to_dict"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.to_dict">[docs]</a><span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="n">dictish</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given something that closely resembles a dictionary, we attempt</span>
+<span class="sd">    to coerce it into a propery dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dictish</span><span class="p">,</span> <span class="s">&#39;iterkeys&#39;</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">dictish</span><span class="o">.</span><span class="n">iterkeys</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dictish</span><span class="p">,</span> <span class="s">&#39;keys&#39;</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">dictish</span><span class="o">.</span><span class="n">keys</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">dictish</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">dictish</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">m</span><span class="p">())</span>
+
+</div>
+<div class="viewcode-block" id="iter_traceback_frames"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.iter_traceback_frames">[docs]</a><span class="k">def</span> <span class="nf">iter_traceback_frames</span><span class="p">(</span><span class="n">tb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a traceback object, it will iterate over all</span>
+<span class="sd">    frames that do not contain the ``__traceback_hide__``</span>
+<span class="sd">    local variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="n">tb</span><span class="p">:</span>
+        <span class="c"># support for __traceback_hide__ which is used by a few libraries</span>
+        <span class="c"># to hide internal frames.</span>
+        <span class="n">f_locals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tb</span><span class="o">.</span><span class="n">tb_frame</span><span class="p">,</span> <span class="s">&#39;f_locals&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_getitem_from_frame</span><span class="p">(</span><span class="n">f_locals</span><span class="p">,</span> <span class="s">&#39;__traceback_hide__&#39;</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">tb</span><span class="o">.</span><span class="n">tb_frame</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">tb</span><span class="p">,</span> <span class="s">&#39;tb_lineno&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">tb</span> <span class="o">=</span> <span class="n">tb</span><span class="o">.</span><span class="n">tb_next</span>
+
+</div>
+<div class="viewcode-block" id="iter_stack_frames"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.iter_stack_frames">[docs]</a><span class="k">def</span> <span class="nf">iter_stack_frames</span><span class="p">(</span><span class="n">frames</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an optional list of frames (defaults to current stack),</span>
+<span class="sd">    iterates over all frames that do not contain the ``__traceback_hide__``</span>
+<span class="sd">    local variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">frames</span><span class="p">:</span>
+        <span class="n">frames</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">lineno</span> <span class="ow">in</span> <span class="p">((</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">):</span>
+        <span class="n">f_locals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s">&#39;f_locals&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">_getitem_from_frame</span><span class="p">(</span><span class="n">f_locals</span><span class="p">,</span> <span class="s">&#39;__traceback_hide__&#39;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">yield</span> <span class="n">frame</span><span class="p">,</span> <span class="n">lineno</span>
+
+</div>
+<div class="viewcode-block" id="get_stack_info"><a class="viewcode-back" href="../../../../API/JumpScale.core.errorhandling.html#JumpScale.core.errorhandling.stacks.get_stack_info">[docs]</a><span class="k">def</span> <span class="nf">get_stack_info</span><span class="p">(</span><span class="n">frames</span><span class="p">):</span><span class="c">#, transformer=transform):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of frames, returns a list of stack information</span>
+<span class="sd">    dictionary objects that are JSON-ready.</span>
+
+<span class="sd">    We have to be careful here as certain implementations of the</span>
+<span class="sd">    _Frame class do not contain the nescesary data to lookup all</span>
+<span class="sd">    of the information we want.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__traceback_hide__</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c"># NOQA</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">frame_info</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
+        <span class="c"># Old, terrible API</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame_info</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">frame</span><span class="p">,</span> <span class="n">lineno</span> <span class="o">=</span> <span class="n">frame_info</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">frame_info</span>
+            <span class="n">lineno</span> <span class="o">=</span> <span class="n">frame_info</span><span class="o">.</span><span class="n">f_lineno</span>
+
+        <span class="c"># Support hidden frames</span>
+        <span class="n">f_locals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s">&#39;f_locals&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">_getitem_from_frame</span><span class="p">(</span><span class="n">f_locals</span><span class="p">,</span> <span class="s">&#39;__traceback_hide__&#39;</span><span class="p">):</span>
+            <span class="k">continue</span>
+
+        <span class="n">f_globals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s">&#39;f_globals&#39;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="n">f_code</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s">&#39;f_code&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">f_code</span><span class="p">:</span>
+            <span class="n">abs_path</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span>
+            <span class="n">function</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">abs_path</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">function</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">_getitem_from_frame</span><span class="p">(</span><span class="n">f_globals</span><span class="p">,</span> <span class="s">&#39;__loader__&#39;</span><span class="p">)</span>
+        <span class="n">module_name</span> <span class="o">=</span> <span class="n">_getitem_from_frame</span><span class="p">(</span><span class="n">f_globals</span><span class="p">,</span> <span class="s">&#39;__name__&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">lineno</span><span class="p">:</span>
+            <span class="n">lineno</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">lineno</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">abs_path</span><span class="p">:</span>
+            <span class="n">pre_context</span><span class="p">,</span> <span class="n">context_line</span><span class="p">,</span> <span class="n">post_context</span> <span class="o">=</span> <span class="n">get_lines_from_file</span><span class="p">(</span><span class="n">abs_path</span><span class="p">,</span> <span class="n">lineno</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pre_context</span><span class="p">,</span> <span class="n">context_line</span><span class="p">,</span> <span class="n">post_context</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+
+        <span class="c"># Try to pull a relative file path</span>
+        <span class="c"># This changes /foo/site-packages/baz/bar.py into baz/bar.py</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">base_filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">__file__</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">abs_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">base_filename</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">abs_path</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">abs_path</span>
+
+        <span class="k">if</span> <span class="n">f_locals</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_locals</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="c"># XXX: Genshi (and maybe others) have broken implementations of</span>
+            <span class="c"># f_locals that are not actually dictionaries</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">f_locals</span> <span class="o">=</span> <span class="n">to_dict</span><span class="p">(</span><span class="n">f_locals</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">f_locals</span> <span class="o">=</span> <span class="s">&#39;&lt;invalid local scope&gt;&#39;</span>
+
+        <span class="n">frame_result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;abs_path&#39;</span><span class="p">:</span> <span class="n">abs_path</span><span class="p">,</span>
+            <span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
+            <span class="s">&#39;module&#39;</span><span class="p">:</span> <span class="n">module_name</span> <span class="ow">or</span> <span class="bp">None</span><span class="p">,</span>
+            <span class="s">&#39;function&#39;</span><span class="p">:</span> <span class="n">function</span> <span class="ow">or</span> <span class="s">&#39;&lt;unknown&gt;&#39;</span><span class="p">,</span>
+            <span class="s">&#39;lineno&#39;</span><span class="p">:</span> <span class="n">lineno</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="c"># &#39;vars&#39;: transformer(f_locals),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">context_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">frame_result</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+                <span class="s">&#39;pre_context&#39;</span><span class="p">:</span> <span class="n">pre_context</span><span class="p">,</span>
+                <span class="s">&#39;context_line&#39;</span><span class="p">:</span> <span class="n">context_line</span><span class="p">,</span>
+                <span class="s">&#39;post_context&#39;</span><span class="p">:</span> <span class="n">post_context</span><span class="p">,</span>
+            <span class="p">})</span>
+
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

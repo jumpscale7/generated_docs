@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.portal.macrolib.div_base &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.portal.macrolib.div_base</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<div class="viewcode-block" id="tag_params_to_html_attrs"><a class="viewcode-back" href="../../../../API/JumpScale.portal.macrolib.html#JumpScale.portal.macrolib.div_base.tag_params_to_html_attrs">[docs]</a><span class="k">def</span> <span class="nf">tag_params_to_html_attrs</span><span class="p">(</span><span class="n">tag_params</span><span class="p">):</span>
+    <span class="n">tag_params</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;=&#39;</span><span class="p">)]</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">tag_params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;|&#39;</span><span class="p">)]</span>
+    <span class="n">tag_params</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;{0}=&quot;{1}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">tag_params</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tag_params</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="macro"><a class="viewcode-back" href="../../../../API/JumpScale.portal.macrolib.html#JumpScale.portal.macrolib.div_base.macro">[docs]</a><span class="k">def</span> <span class="nf">macro</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">self_closing</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">additional_tag_params</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A generic HTML tag macro, similar to div/span macros in Confluence.</span>
+<span class="sd">    In practice, this supports any macro in this format:</span>
+
+<span class="sd">        {{tag_name: id=id1|class=x y x|style=background-color: green|src=123}}</span>
+
+<span class="sd">    and all attributes will be converted to HTML attributes. To close the macro, use the same macro name without any</span>
+<span class="sd">    parameters, like:</span>
+
+<span class="sd">        {{tag_name}}</span>
+
+<span class="sd">    Nesting macros is through a number added to the macro name which represents the level, e.g. {{div2}}.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">        {{div}}</span>
+<span class="sd">            {{div2 id=left-panel|class=clearbox column8}}</span>
+<span class="sd">                {{span id=span1}}Text inside{{span}}</span>
+<span class="sd">            {{div2}}</span>
+<span class="sd">        {{div}}</span>
+
+<span class="sd">    The generated HTML will be:</span>
+
+<span class="sd">        &lt;div&gt;</span>
+<span class="sd">            &lt;div id=&quot;left-panel&quot; class=&quot;clearbox column8&quot;&gt;</span>
+<span class="sd">                &lt;span id=&quot;span1&quot;&gt;Text inside&lt;/span&gt;</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        &lt;/div&gt;</span>
+
+<span class="sd">    It also allows specifying the tag name explicitly, or adding additional HTML attributes. This is used to implement</span>
+<span class="sd">    the input macros, e.g.</span>
+
+<span class="sd">        {{email}}</span>
+
+<span class="sd">    will generate</span>
+<span class="sd">        &lt;input type=&quot;email&quot; /&gt;</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">page</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">page</span>
+
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">r&#39;{{\s*([a-zA-Z]+)(\d*):?(\s*.*?)?}}&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">macrostr</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&#39;Invalid syntax for macro div/span ({0})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">macrostr</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">params</span>
+
+    <span class="n">tag_name</span><span class="p">,</span> <span class="n">tag_level</span><span class="p">,</span> <span class="n">tag_params</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tag_level</span><span class="p">:</span>
+        <span class="n">tag_level</span> <span class="o">=</span> <span class="s">&#39;1&#39;</span>
+
+    <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
+        <span class="n">tag_name</span> <span class="o">=</span> <span class="n">tag</span>
+
+    <span class="k">if</span> <span class="n">tag_params</span><span class="p">:</span>
+        <span class="n">tag_params</span> <span class="o">=</span> <span class="n">tag_params_to_html_attrs</span><span class="p">(</span><span class="n">tag_params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">additional_tag_params</span><span class="p">:</span>
+            <span class="n">tag_params</span> <span class="o">=</span> <span class="n">tag_params</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;{0}=&quot;{1}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">additional_tag_params</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="n">tag_stack_entry</span> <span class="o">=</span> <span class="n">tag_name</span> <span class="o">+</span> <span class="n">tag_level</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s">&#39;tags_stack&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c"># There are 3 possible situation of calling this macro</span>
+    <span class="c"># 1. Macro is called with parameters                                =&gt; start tag &amp; convert macro parameters to tag</span>
+    <span class="c">#                                                                      attributes</span>
+    <span class="c"># 2. Macro is called with no parameters, but it&#39;s the first call    =&gt; start tag</span>
+    <span class="c"># 3. Macro is called with no parameters, but the 2nd time           =&gt; end tag</span>
+    <span class="c">#</span>
+    <span class="c"># To differentiate between 2nd &amp; 3rd case, I add a stack to the page itself.</span>
+    <span class="c">#</span>
+    <span class="c"># Why dynamic? Because the stack is specific to this macro. But in case we want to add this functionality to other</span>
+    <span class="c"># macros then we must move it to PageHTML itself.</span>
+    <span class="k">if</span> <span class="n">tag_params</span><span class="p">:</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&#39;&lt;{0} {1}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">tag_params</span><span class="p">))</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag_stack_entry</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span> <span class="ow">and</span> <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">tag_stack_entry</span><span class="p">:</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&#39;&lt;/{0}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag_name</span><span class="p">))</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&#39;&lt;{0}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag_name</span><span class="p">))</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag_stack_entry</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">self_closing</span><span class="p">:</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">addMessage</span><span class="p">(</span><span class="s">&#39;&lt;/{0}&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag_name</span><span class="p">))</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">tags_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">params</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

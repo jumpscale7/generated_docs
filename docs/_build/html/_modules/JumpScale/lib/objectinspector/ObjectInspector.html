@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.lib.objectinspector.ObjectInspector &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.lib.objectinspector.ObjectInspector</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+    <span class="c"># api codes</span>
+<span class="c"># 4 function with params</span>
+<span class="c"># 7 ???</span>
+<span class="c"># 8 property</span>
+
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="k">class</span> <span class="nc">MethodDoc</span><span class="p">():</span>
+<div class="viewcode-block" id="MethodDoc"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.MethodDoc">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">ClassDoc</span><span class="p">():</span></div>
+<div class="viewcode-block" id="ClassDoc"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ClassDoc">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">classobj</span><span class="p">,</span><span class="n">location</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">=</span><span class="n">location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">methods</span><span class="o">=</span><span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="o">=</span><span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">classobj</span><span class="p">)</span>
+        <span class="n">module</span><span class="o">=</span><span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">classobj</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="n">inspect</span><span class="o">.</span><span class="n">getabsfile</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">addMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">method</span><span class="p">):</span>
+<div class="viewcode-block" id="ClassDoc.addMethod"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ClassDoc.addMethod">[docs]</a>        <span class="n">source</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+        <span class="n">inspected</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getargspec</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+        <span class="n">comments</span><span class="o">=</span><span class="n">inspect</span><span class="o">.</span><span class="n">getdoc</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+            
+        <span class="n">params</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">inspected</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;self&quot;</span><span class="p">:</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">+</span> <span class="n">param</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">md</span><span class="o">=</span><span class="n">MethodDoc</span><span class="p">()</span>
+        <span class="n">md</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">params</span>
+        <span class="n">md</span><span class="o">.</span><span class="n">comments</span><span class="o">=</span><span class="n">comments</span>
+        <span class="n">md</span><span class="o">.</span><span class="n">linenr</span><span class="o">=</span><span class="n">inspect</span><span class="o">.</span><span class="n">getsourcelines</span><span class="p">(</span><span class="n">method</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">md</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">methods</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">md</span>
+
+        <span class="k">return</span> <span class="n">source</span><span class="p">,</span><span class="n">params</span>
+
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dest</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ClassDoc.write"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ClassDoc.write">[docs]</a>        <span class="n">dest2</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.wiki&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;h3. </span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;JumpScale&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>        
+            <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;JumpScale&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;python.zip&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">=</span><span class="s">&quot;python.zip/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;python.zip&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span>
+            <span class="k">print</span> <span class="s">&quot;DEBUG NOW write objectinspector, found new location&quot;</span>
+            <span class="n">embed</span><span class="p">()</span>
+            
+        <span class="n">out</span><span class="o">+=</span><span class="s">&quot;* path: </span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">comments</span>
+
+        <span class="n">keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">methods</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">methods</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;h4. </span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;* params: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">+=</span><span class="s">&quot;* path:</span><span class="si">%s</span><span class="s"> (line:</span><span class="si">%s</span><span class="s">)</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">method</span><span class="o">.</span><span class="n">linenr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">comments</span><span class="o">&lt;&gt;</span><span class="bp">None</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">method</span><span class="o">.</span><span class="n">comments</span>
+
+        <span class="n">destdir</span><span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">dest2</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">destdir</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">dest2</span><span class="p">,</span><span class="n">contents</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="n">catname</span><span class="o">=</span><span class="n">destdir</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">h2. j.$name</span>
+
+<span class="s">{{rst:</span>
+<span class="s">.. toctree::</span>
+<span class="s">   :maxdepth: 2</span>
+<span class="s">   :glob:  </span>
+
+<span class="s">$names</span>
+<span class="s">}}</span>
+
+<span class="s">&quot;&quot;&quot;</span>        
+        <span class="n">names</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">destdir</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="s">&quot;j.*.wiki&quot;</span><span class="p">):</span>
+            <span class="n">n</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">item</span><span class="p">)[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+            <span class="n">names</span><span class="o">+=</span><span class="s">&quot;   </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">n</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$names&quot;</span><span class="p">,</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$name&quot;</span><span class="p">,</span><span class="n">catname</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">destdir</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.wiki&quot;</span><span class="o">%</span><span class="n">catname</span><span class="p">),</span><span class="n">contents</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+        
+
+
+
+
+<span class="k">class</span> <span class="nc">ObjectInspector</span><span class="p">():</span></div></div>
+<div class="viewcode-block" id="ObjectInspector"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector">[docs]</a>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    functionality to inspect objectr structure and generate apifile</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apiFileLocation</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&quot;codecompletionapi&quot;</span><span class="p">,</span> <span class="s">&quot;jumpscale.api&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">createDir</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">cfgDir</span><span class="p">,</span> <span class="s">&quot;codecompletionapi&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classDocs</span><span class="o">=</span><span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">importAllLibs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ignore</span><span class="o">=</span><span class="p">[],</span><span class="n">base</span><span class="o">=</span><span class="s">&quot;/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="ObjectInspector.importAllLibs"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector.importAllLibs">[docs]</a>        <span class="n">towalk</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">towalk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;baselib&quot;</span><span class="p">)</span>
+        <span class="n">towalk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;lib&quot;</span><span class="p">)</span>
+        <span class="n">towalk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;grid&quot;</span><span class="p">)</span>
+        <span class="n">towalk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;portal&quot;</span><span class="p">)</span>
+        <span class="n">errors</span><span class="o">=</span><span class="s">&quot;h3. errors while trying to import libraries</span><span class="se">\n\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">towalk</span><span class="p">:</span>
+            
+            <span class="n">path</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">modname</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listDirsInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="bp">True</span><span class="p">,</span><span class="bp">True</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">modname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ignore</span><span class="p">:</span>
+                    <span class="n">toexec</span><span class="o">=</span><span class="s">&quot;import JumpScale.</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">modname</span><span class="p">)</span>
+                    <span class="k">print</span> <span class="n">toexec</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">exec</span><span class="p">(</span><span class="n">toexec</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                        <span class="k">print</span> <span class="s">&quot;COULD NOT IMPORT </span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">toexec</span>
+                        <span class="n">errors</span><span class="o">+=</span><span class="s">&quot;**</span><span class="si">%s</span><span class="s">**</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">toexec</span>
+                        <span class="n">errors</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">e</span>
+        <span class="k">return</span> <span class="n">errors</span>
+
+
+    <span class="k">def</span> <span class="nf">generateDocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dest</span><span class="p">,</span><span class="n">ignore</span><span class="o">=</span><span class="p">[]):</span></div>
+<div class="viewcode-block" id="ObjectInspector.generateDocs"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector.generateDocs">[docs]</a>        <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">importAllLibs</span><span class="p">(</span><span class="n">ignore</span><span class="o">=</span><span class="n">ignore</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/errors.wiki&quot;</span><span class="o">%</span><span class="n">dest</span><span class="p">,</span><span class="n">contents</span><span class="o">=</span><span class="n">errors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inspect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeDocs</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_processMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span><span class="n">method</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">classobj</span><span class="p">):</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">classDocs</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">classDocs</span><span class="p">[</span><span class="n">path</span><span class="p">]</span><span class="o">=</span><span class="n">ClassDoc</span><span class="p">(</span><span class="n">classobj</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">classDocs</span><span class="p">[</span><span class="n">path</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">addMethod</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">method</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objectLocationPath</span><span class="o">=</span><span class="s">&quot;j&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="ObjectInspector.inspect"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector.inspect">[docs]</a>        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        walk over objects in memory and create code completion api in jumpscale cfgdir under codecompletionapi</span>
+<span class="sd">        @param object is start object</span>
+<span class="sd">        @param objectLocationPath is full location name in object tree e.g. j.system.fs , no need to fill in</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">basetype</span><span class="o">.</span><span class="n">string</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">objectLocationPath</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;objectLocationPath needs to be string&quot;</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">objectLocationPath</span>
+        <span class="k">if</span> <span class="n">objectLocationPath</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_object.&quot;</span><span class="p">)</span><span class="o">==-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">obj</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">objectLocationPath</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processObject</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">objectLocationPath</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">processObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">obj</span><span class="p">,</span><span class="n">objectLocationPath</span><span class="o">=</span><span class="s">&quot;j&quot;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ObjectInspector.processObject"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector.processObject">[docs]</a>        <span class="k">for</span> <span class="n">dictitem</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">objectLocationPath2</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objectLocationPath</span><span class="p">,</span> <span class="n">dictitem</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">objectLocationPath2</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictitem</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dictitem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;__getChildObjectsExamples&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">getChildObjectsExamples</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">objectLocationPath2</span><span class="p">)</span>
+                    <span class="n">res</span><span class="o">=</span><span class="n">getChildObjectsExamples</span><span class="p">()</span>
+                    
+                    <span class="k">for</span> <span class="n">objectLocationPath2</span><span class="p">,</span><span class="n">obj2</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">processObject</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span><span class="n">objectLocationPath2</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictitem</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">dictitem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;_&quot;</span><span class="p">:</span>
+                <span class="k">print</span> <span class="n">objectLocationPath2</span>
+                <span class="n">objectNew</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c"># objectNew = eval(&quot;%s&quot; % objectLocationPath2)</span>
+                    <span class="n">objectNew</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s">&quot;obj.</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">dictitem</span><span class="p">))</span>
+                <span class="k">except</span><span class="p">:</span>                    
+                    <span class="k">print</span> <span class="s">&quot;COULD NOT EVAL </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">objectLocationPath2</span>
+                <span class="k">if</span> <span class="n">objectNew</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="n">dictitem</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="n">dictitem</span><span class="p">:</span>
+                    <span class="c"># is special type or constant</span>
+                    <span class="n">objectLocationPath2</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objectLocationPath</span><span class="p">,</span> <span class="n">dictitem</span><span class="p">)</span>
+                    <span class="c"># print &quot;special type: %s&quot; % objectLocationPath2</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apiFileLocation</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">?7</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">objectLocationPath2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;instance&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&lt;class&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;classobj&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apiFileLocation</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">?8</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">objectLocationPath2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                    <span class="c"># print &quot;class or instance: %s&quot; % objectLocationPath2</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">inspect</span><span class="p">(</span><span class="n">objectLocationPath2</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;instancemethod&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;function&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>\
+                        <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;staticmethod&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;classmethod&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="c"># is instancemethod</span>
+                    <span class="n">source</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_processMethod</span><span class="p">(</span><span class="n">dictitem</span><span class="p">,</span><span class="n">objectNew</span><span class="p">,</span><span class="n">objectLocationPath</span><span class="p">,</span><span class="n">obj</span><span class="p">)</span>
+                    <span class="n">objectLocationPath2</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objectLocationPath</span><span class="p">,</span> <span class="n">dictitem</span><span class="p">)</span>
+                    <span class="c"># print &quot;instancemethod: %s&quot; % objectLocationPath2</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apiFileLocation</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">?4(</span><span class="si">%s</span><span class="s">)</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objectLocationPath2</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;str&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;type&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;list&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>\
+                    <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;bool&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;int&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;NoneType&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>\
+                        <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;dict&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;property&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;&#39;tuple&#39;&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="c"># is instancemethod</span>
+                    <span class="n">objectLocationPath2</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objectLocationPath</span><span class="p">,</span> <span class="n">dictitem</span><span class="p">)</span>
+                    <span class="c"># print &quot;property: %s&quot; % objectLocationPath2</span>
+                    <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apiFileLocation</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">?8</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">objectLocationPath2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">print</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">objectNew</span><span class="p">))</span> <span class="o">+</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">objectLocationPath2</span>
+
+    <span class="k">def</span> <span class="nf">writeDocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ObjectInspector.writeDocs"><a class="viewcode-back" href="../../../../API/JumpScale.lib.objectinspector.html#JumpScale.lib.objectinspector.ObjectInspector.ObjectInspector.writeDocs">[docs]</a>        <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">doc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">classDocs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">doc</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">h2. Lib docs</span>
+
+<span class="s">{{rst:</span>
+<span class="s">.. toctree::</span>
+<span class="s">   :maxdepth: 2</span>
+<span class="s">   :glob:  </span>
+
+<span class="s">$names</span>
+<span class="s">}}</span>
+
+<span class="s">&quot;&quot;&quot;</span>        
+        <span class="n">names</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listDirsInDir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="bp">True</span><span class="p">):</span>
+            <span class="n">names</span><span class="o">+=</span><span class="s">&quot;   </span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$names&quot;</span><span class="p">,</span><span class="n">names</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="s">&quot;index.wiki&quot;</span><span class="p">),</span><span class="n">contents</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+        
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

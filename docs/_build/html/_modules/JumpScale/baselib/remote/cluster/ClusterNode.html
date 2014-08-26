@@ -1,0 +1,513 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.remote.cluster.ClusterNode &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.remote.cluster.ClusterNode</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="c"># from ClusterSSHClient import ClusterSSHClient</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">JumpScale.baselib.remote</span>
+
+<div class="viewcode-block" id="ClusterNode"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode">[docs]</a><span class="k">class</span> <span class="nc">ClusterNode</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cluster</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hostname</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span> <span class="o">=</span> <span class="n">cluster</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isPreparedForSSODebug</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ubuntuPackagesUpdated</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ubuntuPackagesInstalled</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c"># self.sshclient = ClusterSSHClient(cluster, self)</span>
+
+
+<div class="viewcode-block" id="ClusterNode.execute"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.execute">[docs]</a>    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Execute </span><span class="si">%s</span><span class="s"> on node </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sshclient</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">exitcode</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">error</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.executeJS"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.executeJS">[docs]</a>    <span class="k">def</span> <span class="nf">executeJS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">commands</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;Commands is empty!&#39;</span><span class="p">)</span>
+        <span class="k">print</span> <span class="s">&#39;COMMANDS: &#39;</span> <span class="o">+</span> <span class="n">commands</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Execute jshellcmd </span><span class="si">%s</span><span class="s"> on node </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="n">tmpfilepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getTmpFilePath</span><span class="p">()</span>
+
+        <span class="c">#</span>
+        <span class="c"># p = &quot;&quot;&quot; some texts %s blabla &quot;&quot;&quot; % &#39;insert me&#39;</span>
+        <span class="c"># does not work so we do a replace.</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">from JumpScale.core.InitBase import *</span>
+
+<span class="s">j.application.start(&quot;jshellexecute&quot;)</span>
+
+<span class="s">j.logger.maxlevel=6 #to make sure we see output from SSH sessions </span>
+<span class="s">j.logger.consoleloglevel=2</span>
+<span class="s">j.application.shellconfig.interactive=False</span>
+<span class="s">$COMMANDS</span>
+<span class="s">j.application.stop()</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="n">commands</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;$COMMANDS&#39;</span><span class="p">,</span> <span class="n">commands</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">tmpfilepath</span><span class="p">,</span> <span class="n">commands</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sendfile</span><span class="p">(</span><span class="n">tmpfilepath</span><span class="p">,</span> <span class="n">tmpfilepath</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sshclient</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;js-f </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tmpfilepath</span><span class="p">,</span> <span class="n">dieOnError</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmpfilepath</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.sendfile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.sendfile">[docs]</a>    <span class="k">def</span> <span class="nf">sendfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;send file </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find source file </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">source</span><span class="p">)</span>
+
+        <span class="c"># If source == dest and we are on localhost and we do a put, the end result will be that the source files has been emptied</span>
+        <span class="c"># we we check here and do nothing in that case</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="n">dest</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">checkIpAddressIsLocal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">):</span>
+            <span class="k">pass</span>  <span class="c"># do nothing</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+        <span class="c"># trying to fix problem paramico wait_for_event() SSHException: Channel closed.</span>
+        <span class="c"># ftp.close() # Closing the connecrions did not work, now trying to keep the same connection open</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.ping"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.ping">[docs]</a>    <span class="k">def</span> <span class="nf">ping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">pingMachine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.sshtest"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.sshtest">[docs]</a>    <span class="k">def</span> <span class="nf">sshtest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sshclient</span><span class="o">.</span><span class="n">sshtest</span><span class="p">(),</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.connect"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sshclient</span><span class="o">.</span><span class="n">connect</span><span class="p">(),</span> <span class="s">&quot;&quot;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.activateAvahi"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.activateAvahi">[docs]</a>    <span class="k">def</span> <span class="nf">activateAvahi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">avahiInstallOnly</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.prepare"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">avahiInstallOnly</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">ignoreUpgradeError</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        prepare a node for cluster operation</span>
+<span class="sd">        uses ssh</span>
+<span class="sd">        only works for ubuntu        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;&lt;?xml version=</span><span class="se">\&quot;</span><span class="s">1.0</span><span class="se">\&quot;</span><span class="s"> standalone=</span><span class="se">\&#39;</span><span class="s">no</span><span class="se">\&#39;</span><span class="s">?&gt;</span>
+<span class="s">&lt;!--*-nxml-*--&gt;</span>
+<span class="s">&lt;!DOCTYPE service-group SYSTEM &quot;avahi-service.dtd&quot;&gt;</span>
+<span class="s">&lt;!-- $Id$ --&gt;</span>
+<span class="s">&lt;service-group&gt;</span>
+<span class="s">&lt;name replace-wildcards=&quot;yes&quot;&gt;daascluster %h&lt;/name&gt;</span>
+
+<span class="s">&lt;service&gt;</span>
+<span class="s">&lt;type&gt;_daascluster._tcp&lt;/type&gt;</span>
+<span class="s">&lt;port&gt;9999&lt;/port&gt;</span>
+<span class="s">&lt;/service&gt;</span>
+
+<span class="s">&lt;service&gt;</span>
+<span class="s">&lt;type&gt;_ssh._tcp&lt;/type&gt;</span>
+<span class="s">&lt;port&gt;22&lt;/port&gt;</span>
+<span class="s">&lt;/service&gt;</span>
+
+<span class="s">&lt;/service-group&gt;</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;daascluster&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">domainname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="s">&quot;__&quot;</span><span class="p">))</span>
+        <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">tmpDir</span><span class="p">,</span> <span class="s">&quot;avahi&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Try to configure nodes for cluster usage (will use SSH to do so).&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Ping machine </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">pingMachine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;ERROR: Could not ping to machine </span><span class="si">%s</span><span class="s">, please check machine is reacheable.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># ping</span>
+            <span class="c">##j.transaction.start(&quot;Open SSH connection to %s&quot; %self.ipaddr)</span>
+            <span class="c"># sshclient=j.clients.ssh.createClient(ipaddr,&quot;root&quot;,rootpasswd,60)</span>
+            <span class="k">if</span> <span class="n">avahiInstallOnly</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Upgrade ubuntu on </span><span class="si">%s</span><span class="s"> to newest packages, this can take a long time (apt-get update &amp; upgrade).&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get update&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+                <span class="c">#returncode,stdout,stderr=self.execute(&quot;apt-get upgrade -y&quot;,False)</span>
+                <span class="c"># if returncode&gt;0:</span>
+                    <span class="c"># if not ignoreUpgradeError or j.application.shellconfig.interactive==False or not j.console.askYesNo(&quot;Could not upgrade system, do you want to ignore and continue?&quot;):</span>
+                        <span class="c">#raise &quot;Could not upgrade system (apt-get upgrade), probably because there was interactivity required.&quot;</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Install mc on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get install mc -y&quot;</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Update ubuntu package metadata on </span><span class="si">%s</span><span class="s"> (apt-get update).&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get update&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Install avahi on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get install avahi-daemon avahi-utils -y&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p /etc/avahi/services&quot;</span><span class="p">)</span>
+            <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;put </span><span class="si">%s</span><span class="s"> to /etc/avahi/services/daascluster.service&quot;</span> <span class="o">%</span> <span class="n">tmpfile</span><span class="p">)</span>
+            <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="s">&quot;/etc/avahi/services/daascluster.service&quot;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># reload avahi</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Reload Avahi Config&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;avahi-daemon --reload&quot;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># end of avahi</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Disable ssh name resolution&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;UseDNS no&#39; &gt;&gt; /etc/ssh/sshd_config&quot;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;/etc/init.d/ssh restart&quot;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># end of ssh connection</span>
+
+            <span class="c"># if j.application.shellconfig.interactive:</span>
+                <span class="c"># if copyqbase or j.console.askYesNo(&quot;Do you want to copy qbasedir to remote node over ssh?&quot;):</span>
+                    <span class="c"># self._removeRedundantFiles()</span>
+                    <span class="c"># if rsync==False:</span>
+                        <span class="c"># sshclient.copyDirTree(&quot;/opt/qbase3/&quot;)</span>
+                        <span class="c"># sshclient.copyDirTree(&quot;/opt/code/&quot;)</span>
+                    <span class="c"># else:</span>
+                        <span class="c">#j.system.process.executeWithoutPipe(&quot;rsync -avzEp -e ssh /opt/qbase3/ root@%s:/opt/qbase3/ &quot; %self.ipaddr)</span>
+                        <span class="c">#j.system.process.executeWithoutPipe(&quot;rsync -avzEp -e ssh /opt/qbase3/ root@%s:/opt/code/ &quot; %self.ipaddr)</span></div>
+<div class="viewcode-block" id="ClusterNode.halt"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.halt">[docs]</a>    <span class="k">def</span> <span class="nf">halt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Halt node </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;halt&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.copyQbase"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.copyQbase">[docs]</a>    <span class="k">def</span> <span class="nf">copyQbase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sandboxname</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">deletesandbox</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Not implemented, check code and adjust for qbase6&quot;</span><span class="p">)</span>
+        <span class="n">sandboxdir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;..&quot;</span><span class="p">,</span> <span class="s">&quot;sandboxes&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sandboxdir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find sandbox in </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sandboxdir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sandboxname</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">sandboxes</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span><span class="n">sandboxdir</span><span class="p">)</span>
+            <span class="n">sandboxname</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">askChoice</span><span class="p">(</span><span class="n">sandboxes</span><span class="p">,</span> <span class="s">&quot;Select sandbox to copy&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">sandboxpath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">sandboxdir</span><span class="p">,</span> <span class="n">sandboxname</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Connect over ssh to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Copy sandbox </span><span class="si">%s</span><span class="s"> over sftp to remote /tmp dir&quot;</span> <span class="o">%</span> <span class="n">sandboxpath</span><span class="p">)</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">sandboxpath</span><span class="p">,</span> <span class="s">&quot;/tmp/qbase3.tgz&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># sftp</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Expand remote sandbox /tmp/qbase3.tgz to /opt/qbase3&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">deletesandbox</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;rm -rf /opt/qbase3&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p opt ; cd /opt ; tar xvfz /tmp/qbase3.tgz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>  <span class="c"># tar xvfz /tmp/qbase3.tgz #@todo complete</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># expand</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># sshconnection</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s">&quot;Qbase copied and expanded into </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.sendQbaseDebug"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.sendQbaseDebug">[docs]</a>    <span class="k">def</span> <span class="nf">sendQbaseDebug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Not implemented, check code and adjust for qbase6&quot;</span><span class="p">)</span>
+        <span class="n">sandboxdir</span> <span class="o">=</span> <span class="s">&quot;/opt/qbase3debug_*&quot;</span>
+        <span class="n">tarfile</span> <span class="o">=</span> <span class="s">&quot;/tmp/qbase3debug.tgz&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Copy tgz sandbox </span><span class="si">%s</span><span class="s"> over sftp to remote /tmp dir </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sandboxdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">tarfile</span><span class="p">,</span> <span class="n">tarfile</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># sftp</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Expand remote sandbox /tmp/qbase3debug.tgz to /opt/qbase3&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cd /opt ; tar xvfz /tmp/qbase3debug.tgz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.sendExportedQbase"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.sendExportedQbase">[docs]</a>    <span class="k">def</span> <span class="nf">sendExportedQbase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sandboxname</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Copy tgz sandbox </span><span class="si">%s</span><span class="s"> over sftp to remote /tmp dir </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sandboxname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+        <span class="n">tarfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;..&quot;</span><span class="p">,</span> <span class="s">&quot;sandboxes&quot;</span><span class="p">,</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">.tgz&quot;</span> <span class="o">%</span> <span class="n">sandboxname</span><span class="p">)</span>
+        <span class="n">tarfiledest</span> <span class="o">=</span> <span class="s">&quot;/tmp/qbase3debug.tgz&quot;</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">tarfile</span><span class="p">,</span> <span class="n">tarfiledest</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>  <span class="c"># sftp</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Expand remote sandbox /tmp/qbase3debug.tgz to /opt/qbase3&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cd /opt ; tar xvfz /tmp/qbase3debug.tgz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.getSftpConnection"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.getSftpConnection">[docs]</a>    <span class="k">def</span> <span class="nf">getSftpConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sshclient</span><span class="o">.</span><span class="n">getSFtpConnection</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.mkdir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.mkdir">[docs]</a>    <span class="k">def</span> <span class="nf">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destpath</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;mkdir </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">destpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">destpath</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.writeFile"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.writeFile">[docs]</a>    <span class="k">def</span> <span class="nf">writeFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destpath</span><span class="p">,</span> <span class="n">fileContent</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;writefile </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">destpath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">destpath</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">tmpfile</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">tmpDir</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">fileContent</span><span class="p">)</span>
+        <span class="n">ftp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getSftpConnection</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;ftpput: </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">destpath</span><span class="p">))</span>
+        <span class="n">ftp</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">tmpfile</span><span class="p">,</span> <span class="n">destpath</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.writeTemplate"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.writeTemplate">[docs]</a>    <span class="k">def</span> <span class="nf">writeTemplate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">destpath</span><span class="p">,</span> <span class="n">templatepath</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="p">[],</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        @param destpath: path of node where writing to is starting from root</span>
+<span class="sd">            if destpath==&quot;&quot; will be same as templatepath but in qbase in other words destpath=/opt/qbase3/$templatepath</span>
+<span class="sd">        @param templatepath : /opt/qbase3/utils/defaults/$templatepath</span>
+<span class="sd">        @param replace  [[find,replacewith],[find2,replace2]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;write file </span><span class="si">%s</span><span class="s"> from template utils/defaults/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">destpath</span><span class="p">,</span> <span class="n">templatepath</span><span class="p">),</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">destpath</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">destpath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="n">templatepath</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;clusternode.writetemplate: templatepath=</span><span class="si">%s</span><span class="s"> destpath=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">templatepath</span><span class="p">,</span> <span class="n">destpath</span><span class="p">)),</span> <span class="mi">5</span>
+        <span class="n">templatepath</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;utils&quot;</span><span class="p">,</span> <span class="s">&quot;defaults&quot;</span><span class="p">,</span> <span class="n">templatepath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">templatepath</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot find template on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">templatepath</span><span class="p">)</span>
+        <span class="n">fileContent</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">templatepath</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">replaceitem</span> <span class="ow">in</span> <span class="n">replace</span><span class="p">:</span>
+            <span class="n">fileContent</span> <span class="o">=</span> <span class="n">fileContent</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">replaceitem</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">replaceitem</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">destpath</span><span class="p">,</span> <span class="n">fileContent</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.changeRootPassword"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.changeRootPassword">[docs]</a>    <span class="k">def</span> <span class="nf">changeRootPassword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newPassword</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Change root passwd &quot;</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeTemplate</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="s">&quot;utils/sysadminscripts/changePassword.sh&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="s">&quot;$passwd$&quot;</span><span class="p">,</span> <span class="n">newPassword</span><span class="p">]])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;utils&quot;</span><span class="p">,</span> <span class="s">&quot;sysadminscripts&quot;</span><span class="p">,</span> <span class="s">&quot;changePassword.sh&quot;</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;expect&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;expect &quot;</span> <span class="o">+</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;utils&quot;</span><span class="p">,</span> <span class="s">&quot;sysadminscripts&quot;</span><span class="p">,</span> <span class="s">&quot;changePassword.sh&quot;</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.setHostname"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.setHostname">[docs]</a>    <span class="k">def</span> <span class="nf">setHostname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newhostname</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Set hostname to %&quot;</span> <span class="o">%</span> <span class="n">newhostname</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo </span><span class="si">%s</span><span class="s"> &gt; /etc/hostname&quot;</span> <span class="o">%</span> <span class="n">newhostname</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;hostname </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">newhostname</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.install"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packagename</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ubuntuPackagesUpdated</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Upgrade ubuntu package metadata&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get update&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Install ubuntu package </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">packagename</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">packagename</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ubuntuPackagesInstalled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get install </span><span class="si">%s</span><span class="s"> -y&quot;</span> <span class="o">%</span> <span class="n">packagename</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ubuntuPackagesInstalled</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">packagename</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.createCifsShare"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.createCifsShare">[docs]</a>    <span class="k">def</span> <span class="nf">createCifsShare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sharename</span><span class="o">=</span><span class="s">&quot;opt&quot;</span><span class="p">,</span> <span class="n">sharepath</span><span class="o">=</span><span class="s">&quot;/opt&quot;</span><span class="p">,</span> <span class="n">rootpasswd</span><span class="o">=</span><span class="s">&quot;rooter&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        only creates 1 cifs share, other shares will be lost</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;samba&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeTemplate</span><span class="p">(</span><span class="s">&quot;/etc/samba/smb.conf&quot;</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">joinPaths</span><span class="p">(</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">baseDir</span><span class="p">,</span> <span class="s">&quot;utils&quot;</span><span class="p">,</span> <span class="s">&quot;defaults&quot;</span><span class="p">,</span> <span class="s">&quot;etc&quot;</span><span class="p">,</span> <span class="s">&quot;smb.conf&quot;</span><span class="p">),</span> <span class="p">[[</span><span class="s">&quot;$sharename$&quot;</span><span class="p">,</span> <span class="n">sharename</span><span class="p">],</span> <span class="p">[</span><span class="s">&quot;$sharepath$&quot;</span><span class="p">,</span> <span class="n">sharepath</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo -ne </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\\</span><span class="s">n</span><span class="si">%s</span><span class="se">\\</span><span class="s">n</span><span class="se">\&quot;</span><span class="s"> | smbpasswd -a -s root&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rootpasswd</span><span class="p">,</span> <span class="n">rootpasswd</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;/etc/init.d/samba restart&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.createPublicNfsShare"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.createPublicNfsShare">[docs]</a>    <span class="k">def</span> <span class="nf">createPublicNfsShare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sharepath</span><span class="o">=</span><span class="s">&quot;/opt&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        only creates 1 nfs share, no passwords for now!!!!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepareForSSODebug</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;nfs-kernel-server&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s">&quot;/etc/exports&quot;</span><span class="p">,</span> <span class="s">&quot;/opt *(rw,sync,no_root_squash,no_subtree_check)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;&#39; &gt; /etc/hosts.allow&quot;</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;&#39; &gt; /etc/hosts.deny&quot;</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;exportfs -rav&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.connectCodedir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.connectCodedir">[docs]</a>    <span class="k">def</span> <span class="nf">connectCodedir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        mount /opt/code to /opt/code of the specified node (ipaddr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dirpath</span> <span class="o">=</span> <span class="s">&quot;/opt/code&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectToNFSServer</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.connectJpackagedir"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.connectJpackagedir">[docs]</a>    <span class="k">def</span> <span class="nf">connectJpackagedir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        mount /opt/code to /opt/code of the specified node (ipaddr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Not implemented, check code and adjust for qbase6&quot;</span><span class="p">)</span>
+        <span class="n">dirpath</span> <span class="o">=</span> <span class="s">&quot;/opt/qbase6/var/owpackages&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectToNFSServer</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">,</span> <span class="n">delete</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.installJPackage"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.installJPackage">[docs]</a>    <span class="k">def</span> <span class="nf">installJPackage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        install owpackage name, domain, version onto cluster node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jshellscript</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">jp=i.jp.findByName(&quot;$name&quot;)</span>
+<span class="s">jp.install()</span>
+<span class="s">&quot;&quot;&quot;</span>
+        <span class="n">jshellscript</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;$name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executeQshell</span><span class="p">([</span><span class="n">jshellscript</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.connectToNFSServer"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.connectToNFSServer">[docs]</a>    <span class="k">def</span> <span class="nf">connectToNFSServer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        e.g. if dirpath=/opt/code</span>
+<span class="sd">        then: this code will mount /opt/code to /opt/code of the specified node (ipaddr)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;mount </span><span class="si">%s</span><span class="s"> to </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">ipaddr</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;nfs-common&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;umount </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="c"># if delete:</span>
+        <span class="n">outp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mount | grep </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dieOnError</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;There is still a mount on the directory </span><span class="si">%s</span><span class="s">, could not umount&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;rm -rf </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">dirpath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">dirpath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mount </span><span class="si">%s</span><span class="s">:</span><span class="si">%s</span><span class="s">/ </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ipaddr</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">,</span> <span class="n">dirpath</span><span class="p">))</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.symlink"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.symlink">[docs]</a>    <span class="k">def</span> <span class="nf">symlink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">linkname</span><span class="p">):</span>
+        <span class="c"># @type linkname</span>
+<span class="c">#        if linkname.find(&#39;//&#39;) != -1:</span>
+<span class="c">#            print &#39;Raising exception////////////////////////////&#39;</span>
+<span class="c">#            raise</span>
+        <span class="c"># replace double //</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;//&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="n">linkname</span> <span class="o">=</span> <span class="n">linkname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;//&#39;</span><span class="p">,</span> <span class="s">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">linkname</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Linkname should be more than 2 chars to be valid, is check to make sure we don&#39;t remove / of system&quot;</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Creating symlink </span><span class="si">%s</span><span class="s"> -&gt; </span><span class="si">%s</span><span class="s"> on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">linkname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">))</span>
+        <span class="c"># It the file exists remove it</span>
+        <span class="c"># if self.execute(&quot;test -e &#39;%s&#39;&quot; % (linkname), False)[0] == 0: # the file exists</span>
+            <span class="c"># if linkname == &#39;/&#39;: # just to be sure we don&#39;t delete the harddrive!</span>
+                <span class="c"># raise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;rm  -Rf &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">linkname</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="c"># if the directory does not exist create it</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getDirName</span><span class="p">(</span><span class="n">linkname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p &#39;</span><span class="si">%s</span><span class="s">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">dir</span><span class="p">),</span> <span class="bp">True</span><span class="p">)</span>
+
+            <span class="c"># make the directory</span>
+            <span class="c">#self.execute(&quot;rm &#39;%s&#39;&quot; % (linkname), True)</span>
+        <span class="c"># Make the link</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;ln -s </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">linkname</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.backupQbase"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.backupQbase">[docs]</a>    <span class="k">def</span> <span class="nf">backupQbase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Backup opt/qbase6 on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/opt/backups/qbase6_</span><span class="si">%s</span><span class="s">.tgz&quot;</span> <span class="o">%</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getLocalTimeHRForFilesystem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p /opt/backups&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;tar zcvfh </span><span class="si">%s</span><span class="s"> /opt/qbase6&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;</span><span class="si">%s</span><span class="s">&#39; &gt;  /opt/backups/path_to_last_backup.txt&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.restoreQbase"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.restoreQbase">[docs]</a>    <span class="k">def</span> <span class="nf">restoreQbase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Restoring opt/qbase6 on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cat &#39;/opt/backups/path_to_last_backup.txt&#39;&quot;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;rm -Rf /opt/qbase6&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="c"># cd /; is redundant, don&#39;t know why it wont work without it?</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cd /; tar vxzf </span><span class="si">%s</span><span class="s"> -C /&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.backupQbaseCode"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.backupQbaseCode">[docs]</a>    <span class="k">def</span> <span class="nf">backupQbaseCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        backup only the small files, excludes the 30 biggest files, iso&#39;s, .so&#39;s and stuff ..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Backup /opt/qbase6 jumpscale code on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;mkdir -p /opt/backups&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;/opt/backups/jumpscalecore_</span><span class="si">%s</span><span class="s">.tgz&quot;</span> <span class="o">%</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">getLocalTimeHRForFilesystem</span><span class="p">()</span>
+        <span class="n">pathstobackup</span> <span class="o">=</span> <span class="s">&#39;/opt/qbase3/lib/jumpscale/extensions /opt/code/jumpscale-core/code/utils /opt/code/jumpscale-core/code/packages/jumpscale/core&#39;</span>
+        <span class="c"># compress them</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;tar zcvfh </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">pathstobackup</span><span class="p">),</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="c"># remember last compressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;</span><span class="si">%s</span><span class="s">&#39; &gt;  /opt/backups/path_to_last_jumpscalecode_backup.txt&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.restoreQbaseCode"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.restoreQbaseCode">[docs]</a>    <span class="k">def</span> <span class="nf">restoreQbaseCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Restore partial /opt/qbase/ jumpscalecode on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+        <span class="n">exitcode</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cat &#39;/opt/backups/path_to_last_jumpscalecode_backup.txt&#39;&quot;</span><span class="p">)</span>
+        <span class="c"># remove all files in the tar, cd is needed or wont work!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cd /; tar zft &#39;</span><span class="si">%s</span><span class="s">&#39; | grep -v ^d | awk {&#39;print $6&#39;} | xargs rm&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="c"># extract all files in the tar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;echo &#39;cd /; tar xzf &#39;</span><span class="si">%s</span><span class="s">&#39; -C /&#39; &gt; /tmp/out.tmp&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cd /; tar xzf &#39;</span><span class="si">%s</span><span class="s">&#39; -C /&quot;</span> <span class="o">%</span> <span class="n">path</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="ClusterNode.prepareForSSODebug"><a class="viewcode-back" href="../../../../../API/JumpScale.baselib.remote.cluster.html#JumpScale.baselib.remote.cluster.ClusterNode.ClusterNode.prepareForSSODebug">[docs]</a>    <span class="k">def</span> <span class="nf">prepareForSSODebug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isPreparedForSSODebug</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s">&quot;Prepare for debug on </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;cp /etc/apt/sources.list.disabled /etc/apt/sources.list&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;apt-get update&quot;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s">&quot;mc&quot;</span><span class="p">)</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">transaction</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isPreparedForSSODebug</span> <span class="o">=</span> <span class="bp">True</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hostname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ipaddr</span><span class="p">)</span>
+
+    <span class="n">__repr__</span> <span class="o">=</span> <span class="n">__str__</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>
