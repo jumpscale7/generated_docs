@@ -16,6 +16,11 @@ import os
 
 sys.path.append("/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/")
 
+
+# sys.path.append(os.path.abspath('.'))
+# from .DummyBuilders import DummyBuilder   
+
+
 # from mock import MagicMock
 
 # class Mock(MagicMock):
@@ -591,9 +596,7 @@ sys.path.append("/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/")
 
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 # if True: #on_rtd:
-#     sys.path.append(os.path.abspath('.'))
-#     from .DummyBuilders import DummyBuilder
-#     # sphinx.builders.Builder = DummyBuilder
+     # sphinx.builders.Builder = DummyBuilder
 #     sphinx.builders.Builder.name =  'DummyBuilder'
 
 # If extensions (or modules to document with autodoc) are in another directory,
