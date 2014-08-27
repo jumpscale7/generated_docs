@@ -33,12 +33,12 @@ print "UPDATED"
 
 print "\nUPDATING DOCS..."
 doccl = j.clients.git.getClient('/opt/code/github/jumpscale/jumpscale_docs/')
-corecl.pull()
+doccl.pull()
 print "UPDATED"
 
 print "\nUPDATING GENERATED DOCS..."
 gencl = j.clients.git.getClient('/opt/code/github/jumpscale/generated_docs/')
-corecl.pull()
+gencl.pull()
 print "UPDATED"
 
 print "\nGenerating API docs..."
