@@ -1,197 +1,22 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.lib.qemu_img package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
-       <link rel="next" title="JumpScale.lib.rogerthat package" href="JumpScale.lib.rogerthat.html" />
-       <link rel="prev" title="JumpScale.lib.puppet package" href="JumpScale.lib.puppet.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.rogerthat.html" title="JumpScale.lib.rogerthat package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.puppet.html" title="JumpScale.lib.puppet package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.html" accesskey="U">JumpScale.lib package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-lib-qemu-img-package">
-   <h1>JumpScale.lib.qemu_img package<a class="headerlink" href="#jumpscale-lib-qemu-img-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.lib.qemu_img.qemu_img">
-   <span id="jumpscale-lib-qemu-img-qemu-img-module"></span><h2>JumpScale.lib.qemu_img.qemu_img module<a class="headerlink" href="#module-JumpScale.lib.qemu_img.qemu_img" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.lib.qemu_img.qemu_img.QemuImg">
-   <em class="property">class </em><tt class="descclassname">JumpScale.lib.qemu_img.qemu_img.</tt><tt class="descname">QemuImg</tt><a class="reference internal" href="../_modules/JumpScale/lib/qemu_img/qemu_img.html#QemuImg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.qemu_img.qemu_img.QemuImg" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-   <dl class="method">
-   <dt id="JumpScale.lib.qemu_img.qemu_img.QemuImg.commit">
-   <tt class="descname">commit</tt><big>(</big><em>fileName</em>, <em>diskImageFormat</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/qemu_img/qemu_img.html#QemuImg.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.qemu_img.qemu_img.QemuImg.commit" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Commit the changes recorded in &lt;fileName&gt; in its base image.
-   &#64;param fileName: a disk image filename
-   &#64;param diskImageFormat: disk image format</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.lib.qemu_img.qemu_img.QemuImg.convert">
-   <tt class="descname">convert</tt><big>(</big><em>fileName</em>, <em>diskImageFormat</em>, <em>outputFileName</em>, <em>outputFormat</em>, <em>compressTargetImage=False</em>, <em>encryptTargetImage=False</em>, <em>useCompatibilityLevel6=False</em>, <em>isTargetImageTypeSCSI=False</em>, <em>logger=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/qemu_img/qemu_img.html#QemuImg.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.qemu_img.qemu_img.QemuImg.convert" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Convert the disk image &lt;fileName&gt; to disk image &lt;outputFileName&gt; using format &lt;outputFormat&gt;.
-   It can be optionally encrypted (&#8220;-e&#8221; option) or compressed (&#8220;-c&#8221; option).
-   Only the format &#8220;qcow&#8221; supports encryption or compression. The compression is read-only.
-   It means that if a compressed sector is rewritten, then it is rewritten as uncompressed data.</p>
-   <p>&#64;param fileName: a disk image filename
-   &#64;param diskImageFormat: disk image format
-   &#64;param outputFileName: is the destination disk image filename
-   &#64;param outputFormat: is the destination format
-   &#64;param compressTargetImage: indicates that target image must be compressed (qcow format only)
-   &#64;param encryptTargetImage: indicates that the target image must be encrypted (qcow format only)
-   &#64;param useCompatibilityLevel6: indicates that the target image must use compatibility level 6 (vmdk format only)
-   &#64;param isTargetImageTypeSCSI: indicates that the target image must be of type SCSI (vmdk format only)
-   &#64;param logger: Callback method to report progress
-   &#64;type logger: function</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.lib.qemu_img.qemu_img.QemuImg.create">
-   <tt class="descname">create</tt><big>(</big><em>fileName</em>, <em>diskImageFormat</em>, <em>size</em>, <em>baseImage=None</em>, <em>encryptTargetImage=False</em>, <em>useCompatibilityLevel6=False</em>, <em>isTargetImageTypeSCSI=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/qemu_img/qemu_img.html#QemuImg.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.qemu_img.qemu_img.QemuImg.create" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Create a new disk image &lt;fileName&gt; of size &lt;size&gt; and format &lt;diskImageFormat&gt;.
-   If base_image is specified, then the image will record only the differences from base_image. No size needs to be specified in this case. base_image will never be modified unless you use the &#8220;commit&#8221; monitor command.
-   &#64;param fileName: a disk image filename
-   &#64;param diskImageFormat: disk image format
-   &#64;param size: the disk image size in kilobytes. Optional suffixes &#8216;M&#8217; (megabyte) and &#8216;G&#8217; (gigabyte) are supported
-   &#64;param baseImage: the read-only disk image which is used as base for a copy on write image; the copy on write image only stores the modified data
-   &#64;param encryptTargetImage: indicates that the target image must be encrypted (qcow format only)
-   &#64;param useCompatibilityLevel6: indicates that the target image must use compatibility level 6 (vmdk format only)
-   &#64;param isTargetImageTypeSCSI: indicates that the target image must be of type SCSI (vmdk format only)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.lib.qemu_img.qemu_img.QemuImg.info">
-   <tt class="descname">info</tt><big>(</big><em>fileName</em>, <em>diskImageFormat=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/qemu_img/qemu_img.html#QemuImg.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.qemu_img.qemu_img.QemuImg.info" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Give information about the disk image &lt;fileName&gt;. Use it in particular to know the size reserved on
-   disk which can be different from the displayed size. If VM snapshots are stored in the disk image,
-   they are displayed too.</p>
-   <p>&#64;param fileName: a disk image filename
-   &#64;param diskImageFormat: disk image format
-   &#64;result: dict with info in KB</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.lib.qemu_img">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.qemu_img" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.lib.qemu_img package</a><ul>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.lib.qemu_img.qemu_img">JumpScale.lib.qemu_img.qemu_img module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.lib.qemu_img">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.lib.puppet.html"
-                           title="previous chapter">JumpScale.lib.puppet package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.lib.rogerthat.html"
-                           title="next chapter">JumpScale.lib.rogerthat package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.lib.qemu_img.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.rogerthat.html" title="JumpScale.lib.rogerthat package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.puppet.html" title="JumpScale.lib.puppet package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.lib.qemu_img package
+==============================
+
+Submodules
+----------
+
+JumpScale.lib.qemu_img.qemu_img module
+--------------------------------------
+
+.. automodule:: JumpScale.lib.qemu_img.qemu_img
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.lib.qemu_img
+    :members:
+    :undoc-members:
+    :show-inheritance:

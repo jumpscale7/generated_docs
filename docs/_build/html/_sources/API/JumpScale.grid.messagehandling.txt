@@ -1,449 +1,85 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.grid.messagehandling package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.grid package" href="JumpScale.grid.html" />
-       <link rel="next" title="JumpScale.grid.messagehandling.gevent_zeromq package" href="JumpScale.grid.messagehandling.gevent_zeromq.html" />
-       <link rel="prev" title="JumpScale.grid.master package" href="JumpScale.grid.master.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.grid.messagehandling.gevent_zeromq.html" title="JumpScale.grid.messagehandling.gevent_zeromq package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.grid.master.html" title="JumpScale.grid.master package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.grid.html" accesskey="U">JumpScale.grid package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-grid-messagehandling-package">
-   <h1>JumpScale.grid.messagehandling package<a class="headerlink" href="#jumpscale-grid-messagehandling-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="subpackages">
-   <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
-   <div class="toctree-wrapper compound">
-   <ul>
-   <li class="toctree-l1"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html">JumpScale.grid.messagehandling.gevent_zeromq package</a><ul>
-   <li class="toctree-l2"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html#submodules">Submodules</a></li>
-   <li class="toctree-l2"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html#jumpscale-grid-messagehandling-gevent-zeromq-core-module">JumpScale.grid.messagehandling.gevent_zeromq.core module</a></li>
-   <li class="toctree-l2"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html#id1">JumpScale.grid.messagehandling.gevent_zeromq.core module</a></li>
-   <li class="toctree-l2"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html#jumpscale-grid-messagehandling-gevent-zeromq-tests-module">JumpScale.grid.messagehandling.gevent_zeromq.tests module</a></li>
-   <li class="toctree-l2"><a class="reference internal" href="JumpScale.grid.messagehandling.gevent_zeromq.html#module-contents">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   </div>
-   </div>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.grid.messagehandling.LogHandlerDB">
-   <span id="jumpscale-grid-messagehandling-loghandlerdb-module"></span><h2>JumpScale.grid.messagehandling.LogHandlerDB module<a class="headerlink" href="#module-JumpScale.grid.messagehandling.LogHandlerDB" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB">
-   <em class="property">class </em><tt class="descclassname">JumpScale.grid.messagehandling.LogHandlerDB.</tt><tt class="descname">LogHandlerDB</tt><big>(</big><em>baseLogDir=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB" title="Permalink to this definition">¶</a></dt>
-   <dd><dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.ARAKOON_CATEGORIES_KEY">
-   <tt class="descname">ARAKOON_CATEGORIES_KEY</tt><em class="property"> = 'log.category.entries'</em><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.ARAKOON_CATEGORIES_KEY" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.FILEHANDLER_FLUSH_INTERVAL">
-   <tt class="descname">FILEHANDLER_FLUSH_INTERVAL</tt><em class="property"> = 5</em><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.FILEHANDLER_FLUSH_INTERVAL" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.MAX_FIND_RESULTS">
-   <tt class="descname">MAX_FIND_RESULTS</tt><em class="property"> = 10000</em><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.MAX_FIND_RESULTS" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.PERIOD_LENGTH">
-   <tt class="descname">PERIOD_LENGTH</tt><em class="property"> = 3600</em><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.PERIOD_LENGTH" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.find">
-   <tt class="descname">find</tt><big>(</big><em>gid=None</em>, <em>nid=None</em>, <em>pid=None</em>, <em>fromDateTime=None</em>, <em>toDateTime=None</em>, <em>categories=None</em>, <em>levels=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.find" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.findByIdCombinations">
-   <tt class="descname">findByIdCombinations</tt><big>(</big><em>idCombinations=None</em>, <em>fromDateTime=None</em>, <em>toDateTime=None</em>, <em>categories=None</em>, <em>levels=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.findByIdCombinations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.findByIdCombinations" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.getKnownCategories">
-   <tt class="descname">getKnownCategories</tt><big>(</big><em>sync=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.getKnownCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.getKnownCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.pm_getLogDir">
-   <tt class="descname">pm_getLogDir</tt><big>(</big><em>gid</em>, <em>nid</em>, <em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.pm_getLogDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.pm_getLogDir" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.pm_getLogDirName">
-   <tt class="descname">pm_getLogDirName</tt><big>(</big><em>gid</em>, <em>nid</em>, <em>pid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.pm_getLogDirName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.pm_getLogDirName" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.save">
-   <tt class="descname">save</tt><big>(</big><em>logmessage</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.save" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.setArakoonClient">
-   <tt class="descname">setArakoonClient</tt><big>(</big><em>client</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.setArakoonClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.setArakoonClient" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.syncKnownCategories">
-   <tt class="descname">syncKnownCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/LogHandlerDB.html#LogHandlerDB.syncKnownCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.LogHandlerDB.LogHandlerDB.syncKnownCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.grid.messagehandling.MessageHandler">
-   <span id="jumpscale-grid-messagehandling-messagehandler-module"></span><h2>JumpScale.grid.messagehandling.MessageHandler module<a class="headerlink" href="#module-JumpScale.grid.messagehandling.MessageHandler" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler">
-   <em class="property">class </em><tt class="descclassname">JumpScale.grid.messagehandling.MessageHandler.</tt><tt class="descname">MessageHandler</tt><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler" title="Permalink to this definition">¶</a></dt>
-   <dd><dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.connect2localLogserver">
-   <tt class="descname">connect2localLogserver</tt><big>(</big><em>reconnect=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.connect2localLogserver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.connect2localLogserver" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.data2Message">
-   <tt class="descname">data2Message</tt><big>(</big><em>ttype</em>, <em>data</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.data2Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.data2Message" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param data is already compressed/serialzed data block
-   &#64;param ttype is 1:log, 2:signal, 3:ec, 4:alert, 5:perfinfo, 6:raw</p>
-   <blockquote>
-   <div>type : 10 = uncompressed, json
-   type : 11 = uncompressed, cpickle
-   type : 12 = compressed, json
-   type : 13 = compressed, cpickle</div></blockquote>
-   <p>&#64;return 4byte_sizepacket,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getErrorConditionMessage">
-   <tt class="descname">getErrorConditionMessage</tt><big>(</big><em>errorconditionObject</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.getErrorConditionMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getErrorConditionMessage" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageSize">
-   <tt class="descname">getMessageSize</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.getMessageSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageSize" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageType">
-   <tt class="descname">getMessageType</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.getMessageType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getMessageType" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getRPCMessage">
-   <tt class="descname">getRPCMessage</tt><big>(</big><em>appname</em>, <em>actorname</em>, <em>instance</em>, <em>methodname</em>, <em>data</em>, <em>timeout=0</em>, <em>sync=True</em>, <em>serializertype=11</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.getRPCMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.getRPCMessage" title="Permalink to this definition">¶</a></dt>
-   <dd><p>JSModelid= appname,actorname,modelname    (use the commas)
-   data = dict with data (can be used to create JSModel from) or a var dict
-   timeout = in seconds how long the call can take, 0 is not specified
-   &#64;param serializertype:</p>
-   <blockquote>
-   <div>12 = compressed &amp; json
-   13 = compressed &amp; cpickle
-   10 = json
-   11 = cpickle</div></blockquote>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.log">
-   <tt class="descname">log</tt><big>(</big><em>message</em>, <em>level=5</em>, <em>tags=''</em>, <em>dontprint=False</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.log" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param category is in dot notation e.g. appserver3.status or system.fs</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.modifyTimeInMessage">
-   <tt class="descname">modifyTimeInMessage</tt><big>(</big><em>message</em>, <em>epoch</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.modifyTimeInMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.modifyTimeInMessage" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.ping">
-   <tt class="descname">ping</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.ping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.ping" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.processQueue">
-   <tt class="descname">processQueue</tt><big>(</big><em>method</em>, <em>messageType=0</em>, <em>applicationName=None</em>, <em>removeWhenDone=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.processQueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.processQueue" title="Permalink to this definition">¶</a></dt>
-   <dd><p>read the queue and call method with as param the message
-   &#64;param messageType 0 means all types, 1=log,2=signal,3=error,5=stat
-   &#64;removeWhenDone if True then when message processed succesfully, remove from queue succesfull means method needs to return True</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.queueMessage">
-   <tt class="descname">queueMessage</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.queueMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.queueMessage" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.redirectStdOutStdErrorToLogger">
-   <tt class="descname">redirectStdOutStdErrorToLogger</tt><big>(</big><em>yesno</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.redirectStdOutStdErrorToLogger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.redirectStdOutStdErrorToLogger" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.resendQueue">
-   <tt class="descname">resendQueue</tt><big>(</big><em>applicationName=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.resendQueue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.resendQueue" title="Permalink to this definition">¶</a></dt>
-   <dd><p>will read the queue and try to resend</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendErrorConditionObject">
-   <tt class="descname">sendErrorConditionObject</tt><big>(</big><em>errorConditionObject</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.sendErrorConditionObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendErrorConditionObject" title="Permalink to this definition">¶</a></dt>
-   <dd><p>send errorcondtion object from jumpscale 6 to local logserver</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendMessage">
-   <tt class="descname">sendMessage</tt><big>(</big><em>message</em>, <em>retries=3</em>, <em>ignoreError=False</em>, <em>queue=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.sendMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendMessage" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendSignal">
-   <tt class="descname">sendSignal</tt><big>(</big><em>signalcategory</em>, <em>jumpscaletags=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.sendSignal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendSignal" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendStat">
-   <tt class="descname">sendStat</tt><big>(</big><em>category</em>, <em>stat</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.sendStat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.sendStat" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessage">
-   <tt class="descname">unPackMessage</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.unPackMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessage" title="Permalink to this definition">¶</a></dt>
-   <dd><p>unpack 1 message
-   #format is
-   4byte_sizepacket,1byte_type,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data
-   &#64;return dtype,length,epoch,gid,nid,pid,data</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessageSeries">
-   <tt class="descname">unPackMessageSeries</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/MessageHandler.html#MessageHandler.unPackMessageSeries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.MessageHandler.MessageHandler.unPackMessageSeries" title="Permalink to this definition">¶</a></dt>
-   <dd><p>unpack text to series of messages
-   #format is concatenation of
-   4byte_sizepacket,4byte_epoch,4byte_grid_id,4byte_nodeid,4byte_pid,1byteDataType,crcOfData,data
-   &#64;return [[dtype,length,epoch,gid,nid,pid,data]]</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="jumpscale-grid-messagehandling-client-management-module">
-   <h2>JumpScale.grid.messagehandling.client_management module<a class="headerlink" href="#jumpscale-grid-messagehandling-client-management-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="jumpscale-grid-messagehandling-logserverlocal-module">
-   <h2>JumpScale.grid.messagehandling.logServerLocal module<a class="headerlink" href="#jumpscale-grid-messagehandling-logserverlocal-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.grid.messagehandling.logger_patch">
-   <span id="jumpscale-grid-messagehandling-logger-patch-module"></span><h2>JumpScale.grid.messagehandling.logger_patch module<a class="headerlink" href="#module-JumpScale.grid.messagehandling.logger_patch" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch">
-   <em class="property">class </em><tt class="descclassname">JumpScale.grid.messagehandling.logger_patch.</tt><tt class="descname">LoggerPatch</tt><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/logger_patch.html#LoggerPatch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-   <p>This logger patch extension changes the log behaviour of Qshell. This is
-   done by monkey patching the logger which makes it forward all logging to
-   a message server. Note that this patch is automatically applied when the
-   extension is loaded. However, it will not if the necessary message server
-   isn&#8217;t available or not running.</p>
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch.CONFIG_PATH">
-   <tt class="descname">CONFIG_PATH</tt><em class="property"> = '/opt/jumpscale/cfg/logger_patch.cfg'</em><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch.CONFIG_PATH" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch.DEFAULT_ADDRESS">
-   <tt class="descname">DEFAULT_ADDRESS</tt><em class="property"> = '127.0.0.1:7777'</em><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch.DEFAULT_ADDRESS" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch.apply">
-   <tt class="descname">apply</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/logger_patch.html#LoggerPatch.apply"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch.apply" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch.configure">
-   <tt class="descname">configure</tt><big>(</big><em>address='127.0.0.1:7777'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/logger_patch.html#LoggerPatch.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch.configure" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.logger_patch.LoggerPatch.isApplied">
-   <tt class="descname">isApplied</tt><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/logger_patch.html#LoggerPatch.isApplied"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.logger_patch.LoggerPatch.isApplied" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="jumpscale-grid-messagehandling-server-module">
-   <h2>JumpScale.grid.messagehandling.server module<a class="headerlink" href="#jumpscale-grid-messagehandling-server-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="jumpscale-grid-messagehandling-server-management-module">
-   <h2>JumpScale.grid.messagehandling.server_management module<a class="headerlink" href="#jumpscale-grid-messagehandling-server-management-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.grid.messagehandling.utils">
-   <span id="jumpscale-grid-messagehandling-utils-module"></span><h2>JumpScale.grid.messagehandling.utils module<a class="headerlink" href="#module-JumpScale.grid.messagehandling.utils" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.grid.messagehandling.utils.MessageServerMessageType">
-   <em class="property">class </em><tt class="descclassname">JumpScale.grid.messagehandling.utils.</tt><tt class="descname">MessageServerMessageType</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/utils.html#MessageServerMessageType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.MessageServerMessageType" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.utils.MessageServerMessageType.ERROR">
-   <tt class="descname">ERROR</tt><em class="property"> = error</em><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.MessageServerMessageType.ERROR" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.utils.MessageServerMessageType.LOG">
-   <tt class="descname">LOG</tt><em class="property"> = log</em><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.MessageServerMessageType.LOG" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.utils.MessageServerMessageType.SIGNAL">
-   <tt class="descname">SIGNAL</tt><em class="property"> = signal</em><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.MessageServerMessageType.SIGNAL" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.grid.messagehandling.utils.MessageServerMessageType.STATUS">
-   <tt class="descname">STATUS</tt><em class="property"> = status</em><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.MessageServerMessageType.STATUS" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.grid.messagehandling.utils.printInDebugMode">
-   <tt class="descclassname">JumpScale.grid.messagehandling.utils.</tt><tt class="descname">printInDebugMode</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/messagehandling/utils.html#printInDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.messagehandling.utils.printInDebugMode" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Prints a message only when Qshell is running in debug mode.</p>
-   <p>&#64;param message: message to print
-   &#64;type message: str</p>
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.grid.messagehandling">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.grid.messagehandling" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.grid.messagehandling package</a><ul>
-   <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.grid.messagehandling.LogHandlerDB">JumpScale.grid.messagehandling.LogHandlerDB module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.grid.messagehandling.MessageHandler">JumpScale.grid.messagehandling.MessageHandler module</a></li>
-   <li><a class="reference internal" href="#jumpscale-grid-messagehandling-client-management-module">JumpScale.grid.messagehandling.client_management module</a></li>
-   <li><a class="reference internal" href="#jumpscale-grid-messagehandling-logserverlocal-module">JumpScale.grid.messagehandling.logServerLocal module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.grid.messagehandling.logger_patch">JumpScale.grid.messagehandling.logger_patch module</a></li>
-   <li><a class="reference internal" href="#jumpscale-grid-messagehandling-server-module">JumpScale.grid.messagehandling.server module</a></li>
-   <li><a class="reference internal" href="#jumpscale-grid-messagehandling-server-management-module">JumpScale.grid.messagehandling.server_management module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.grid.messagehandling.utils">JumpScale.grid.messagehandling.utils module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.grid.messagehandling">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.grid.master.html"
-                           title="previous chapter">JumpScale.grid.master package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.grid.messagehandling.gevent_zeromq.html"
-                           title="next chapter">JumpScale.grid.messagehandling.gevent_zeromq package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.grid.messagehandling.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.grid.messagehandling.gevent_zeromq.html" title="JumpScale.grid.messagehandling.gevent_zeromq package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.grid.master.html" title="JumpScale.grid.master package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.grid.html" >JumpScale.grid package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.grid.messagehandling package
+======================================
+
+Subpackages
+-----------
+
+.. toctree::
+
+    JumpScale.grid.messagehandling.gevent_zeromq
+
+Submodules
+----------
+
+JumpScale.grid.messagehandling.LogHandlerDB module
+--------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.LogHandlerDB
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.MessageHandler module
+----------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.MessageHandler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.client_management module
+-------------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.client_management
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.logServerLocal module
+----------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.logServerLocal
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.logger_patch module
+--------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.logger_patch
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.server module
+--------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.server
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.server_management module
+-------------------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.server_management
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.grid.messagehandling.utils module
+-------------------------------------------
+
+.. automodule:: JumpScale.grid.messagehandling.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.grid.messagehandling
+    :members:
+    :undoc-members:
+    :show-inheritance:

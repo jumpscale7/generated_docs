@@ -1,204 +1,30 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.lib.platform.inventoryscan.cmdtools package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.lib.platform.inventoryscan package" href="JumpScale.lib.platform.inventoryscan.html" />
-       <link rel="next" title="JumpScale.lib.platform.inventoryscan.manage package" href="JumpScale.lib.platform.inventoryscan.manage.html" />
-       <link rel="prev" title="JumpScale.lib.platform.inventoryscan package" href="JumpScale.lib.platform.inventoryscan.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.platform.inventoryscan.manage.html" title="JumpScale.lib.platform.inventoryscan.manage package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.platform.inventoryscan.html" title="JumpScale.lib.platform.inventoryscan package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.platform.html" >JumpScale.lib.platform package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.platform.inventoryscan.html" accesskey="U">JumpScale.lib.platform.inventoryscan package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-lib-platform-inventoryscan-cmdtools-package">
-   <h1>JumpScale.lib.platform.inventoryscan.cmdtools package<a class="headerlink" href="#jumpscale-lib-platform-inventoryscan-cmdtools-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="jumpscale-lib-platform-inventoryscan-cmdtools-enumerateresourcescommand-module">
-   <h2>JumpScale.lib.platform.inventoryscan.cmdtools.EnumerateResourcesCommand module<a class="headerlink" href="#jumpscale-lib-platform-inventoryscan-cmdtools-enumerateresourcescommand-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums">
-   <span id="jumpscale-lib-platform-inventoryscan-cmdtools-inventoryscanenums-module"></span><h2>JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums module<a class="headerlink" href="#module-JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType">
-   <em class="property">class </em><tt class="descclassname">JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.</tt><tt class="descname">HypervisorsType</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/platform/inventoryscan/cmdtools/InventoryScanEnums.html#HypervisorsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue" title="JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue</span></tt></a></p>
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.NOHYPERVISOR">
-   <tt class="descname">NOHYPERVISOR</tt><em class="property"> = noHypervisor</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.NOHYPERVISOR" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.VBOX">
-   <tt class="descname">VBOX</tt><em class="property"> = vbox</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.VBOX" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.VMWARE">
-   <tt class="descname">VMWARE</tt><em class="property"> = vmware</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.VMWARE" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.XEN">
-   <tt class="descname">XEN</tt><em class="property"> = xen</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.HypervisorsType.XEN" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   <dl class="class">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes">
-   <em class="property">class </em><tt class="descclassname">JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.</tt><tt class="descname">NicTypes</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/platform/inventoryscan/cmdtools/InventoryScanEnums.html#NicTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue" title="JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.EnumerationWithValue</span></tt></a></p>
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.HUNDREDBASET">
-   <tt class="descname">HUNDREDBASET</tt><em class="property"> = 100BaseT</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.HUNDREDBASET" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.INFINIBAND">
-   <tt class="descname">INFINIBAND</tt><em class="property"> = Infiniband</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.INFINIBAND" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.TENBASET">
-   <tt class="descname">TENBASET</tt><em class="property"> = 10BaseT</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.TENBASET" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.THOUSANDBASET">
-   <tt class="descname">THOUSANDBASET</tt><em class="property"> = 1000BaseT</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.THOUSANDBASET" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.UNKNOWN">
-   <tt class="descname">UNKNOWN</tt><em class="property"> = Unknown</em><a class="headerlink" href="#JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums.NicTypes.UNKNOWN" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.lib.platform.inventoryscan.cmdtools">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.platform.inventoryscan.cmdtools" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.lib.platform.inventoryscan.cmdtools package</a><ul>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#jumpscale-lib-platform-inventoryscan-cmdtools-enumerateresourcescommand-module">JumpScale.lib.platform.inventoryscan.cmdtools.EnumerateResourcesCommand module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums">JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.lib.platform.inventoryscan.cmdtools">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.lib.platform.inventoryscan.html"
-                           title="previous chapter">JumpScale.lib.platform.inventoryscan package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.lib.platform.inventoryscan.manage.html"
-                           title="next chapter">JumpScale.lib.platform.inventoryscan.manage package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.lib.platform.inventoryscan.cmdtools.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.platform.inventoryscan.manage.html" title="JumpScale.lib.platform.inventoryscan.manage package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.lib.platform.inventoryscan.html" title="JumpScale.lib.platform.inventoryscan package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.platform.html" >JumpScale.lib.platform package</a> &raquo;</li>
-             <li><a href="JumpScale.lib.platform.inventoryscan.html" >JumpScale.lib.platform.inventoryscan package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.lib.platform.inventoryscan.cmdtools package
+=====================================================
+
+Submodules
+----------
+
+JumpScale.lib.platform.inventoryscan.cmdtools.EnumerateResourcesCommand module
+------------------------------------------------------------------------------
+
+.. automodule:: JumpScale.lib.platform.inventoryscan.cmdtools.EnumerateResourcesCommand
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums module
+-----------------------------------------------------------------------
+
+.. automodule:: JumpScale.lib.platform.inventoryscan.cmdtools.InventoryScanEnums
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.lib.platform.inventoryscan.cmdtools
+    :members:
+    :undoc-members:
+    :show-inheritance:
