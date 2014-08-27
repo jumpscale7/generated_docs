@@ -26,72 +26,80 @@ class Parser(HTMLParser):
         return self.tb.close()
 
 
-print "UPDATING CORE..."
-corecl = j.clients.git.getClient('/opt/code/github/jumpscale/jumpscale_core/')
-corecl.pull()
-print "UPDATED"
+# print "UPDATING CORE..."
+# corecl = j.clients.git.getClient('/opt/code/github/jumpscale/jumpscale_core/')
+# corecl.pull()
+# print "UPDATED"
 
-print "\nUPDATING DOCS..."
-doccl = j.clients.git.getClient('/opt/code/github/jumpscale/jumpscale_docs/')
-doccl.pull()
-print "UPDATED"
+# print "\nUPDATING DOCS..."
+# doccl = j.clients.git.getClient('/opt/code/github/jumpscale/jumpscale_docs/')
+# doccl.pull()
+# print "UPDATED"
 
-print "\nUPDATING GENERATED DOCS..."
-gencl = j.clients.git.getClient('/opt/code/github/jumpscale/generated_docs/')
-gencl.pull()
-print "UPDATED"
+# print "\nUPDATING GENERATED DOCS..."
+# gencl = j.clients.git.getClient('/opt/code/github/jumpscale/generated_docs/')
+# gencl.pull()
+# print "UPDATED"
 
-print "\nGenerating API docs..."
-j.system.process.execute("""cd /opt/code/github/jumpscale/generated_docs/docs/;
-    sphinx-apidoc -o _source/API/ /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/console /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/baselib/zredisgw /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/Shell.py /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/debugger/Debugger.py /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/gui/
-""")
+# print "\nGenerating API docs..."
+# j.system.process.execute("""cd /opt/code/github/jumpscale/generated_docs/docs/;
+#     sphinx-apidoc -o _source/API/ /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/console /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/baselib/zredisgw /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/Shell.py /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/debugger/Debugger.py /opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/core/gui/
+# """)
 
-print "Generated"
+# print "Generated"
 
-print "\nConverting Confluence to RST..."
-j.system.process.execute("""cd /opt/code/github/jumpscale/jumpscale_prototypes/prototypes/confluence2rst; python confluence2rst.py""")
-print "Converted"
+# print "\nConverting Confluence to RST..."
+# j.system.process.execute("""cd /opt/code/github/jumpscale/jumpscale_prototypes/prototypes/confluence2rst; python confluence2rst.py""")
+# print "Converted"
 
-originalcontents = '***********************************\nWelcome to Jumpscale documentation!\n***********************************\n\nJumpScale Core\n##############\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Core/Docs/index\n\n\nJumpScale How Tos\n#################\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Howto/Docs/index\n\n\nJumpScale Portal\n################\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Portal/index\n\n\nJumpScale Grid\n##############\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Grid/Docs/index\n\n\nJumpScale API\n#############\n\n.. toctree::\n   :maxdepth: 3\n   :glob:\n\n   API/JumpScale\n\n\nJumpScale Development\n#####################\n.. include:: spaces/Doc_Jumpscale_Devel/Home.rst\n\nComponents and Tools\n^^^^^^^^^^^^^^^^^^^^\n\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Devel/Docs/index\n\nIndices and tables\n==================\n\n* :ref:`genindex`\n* :ref:`modindex`\n* :ref:`search`\n\n'
-
-
-j.system.fs.remove('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst')
-j.system.fs.writeFile('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst', originalcontents, append=False)
-
-print "\nBuilding..."
-j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; sphinx-build _source/ _build/")
-print "Built"
-
-print "\nMaking HTML"
-j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; make html")
-print "DONE"
+# originalcontents = '***********************************\nWelcome to Jumpscale documentation!\n***********************************\n\nJumpScale Core\n##############\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Core/Docs/index\n\n\nJumpScale How Tos\n#################\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Howto/Docs/index\n\n\nJumpScale Portal\n################\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Portal/index\n\n\nJumpScale Grid\n##############\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Grid/Docs/index\n\n\nJumpScale API\n#############\n\n.. toctree::\n   :maxdepth: 3\n   :glob:\n\n   API/JumpScale\n\n\nJumpScale Development\n#####################\n.. include:: spaces/Doc_Jumpscale_Devel/Home.rst\n\nComponents and Tools\n^^^^^^^^^^^^^^^^^^^^\n\n.. toctree::\n   :maxdepth: 2\n   :glob:\n\n   spaces/Doc_Jumpscale_Devel/Docs/index\n\nIndices and tables\n==================\n\n* :ref:`genindex`\n* :ref:`modindex`\n* :ref:`search`\n\n'
 
 
-contents = j.system.fs.fileGetContents('/opt/code/github/jumpscale/generated_docs/docs/_build/html/index.html')
-contents = contents.decode('utf-8')
+# j.system.fs.remove('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst')
+# j.system.fs.writeFile('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst', originalcontents, append=False)
 
-parser = Parser()
-parser.feed(contents)
-root = parser.close()
-div = root.find(".//div[@id='jumpscale-api']")
+# print "\nBuilding..."
+# j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; sphinx-build _source/ _build/")
+# print "Built"
 
-divcontents = '\n'
-for child in div:
-    divcontents += etree.tostring(child, encoding='utf-8')
-
-divcontents = divcontents.replace('\n', '\n   ')
-
-rstcontents = originalcontents
-rstcontents = rstcontents.replace("""JumpScale API\n#############\n\n.. toctree::\n   :maxdepth: 3\n   :glob:\n\n   API/JumpScale""", '.. raw:: html\n%s' % divcontents)
-
-j.system.fs.remove('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst')
-j.system.fs.writeFile('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst', rstcontents, append=False)
+# print "\nMaking HTML"
+# j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; make html")
+# print "DONE"
 
 
-j.system.fs.removeDirTree('/opt/code/github/jumpscale/generated_docs/docs/_source/API')
+# contents = j.system.fs.fileGetContents('/opt/code/github/jumpscale/generated_docs/docs/_build/html/index.html')
+# contents = contents.decode('utf-8')
+
+# parser = Parser()
+# parser.feed(contents)
+# root = parser.close()
+# div = root.find(".//div[@id='jumpscale-api']")
+
+# divcontents = '\n'
+# for child in div:
+#     divcontents += etree.tostring(child, encoding='utf-8')
+
+# divcontents = divcontents.replace('\n', '\n   ')
+
+# rstcontents = originalcontents
+# rstcontents = rstcontents.replace("""JumpScale API\n#############\n\n.. toctree::\n   :maxdepth: 3\n   :glob:\n\n   API/JumpScale""", '.. raw:: html\n%s' % divcontents)
+
+# j.system.fs.remove('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst')
+# j.system.fs.writeFile('/opt/code/github/jumpscale/generated_docs/docs/_source/index.rst', rstcontents, append=False)
+
+for module in j.system.fs.listFilesInDir('/opt/code/github/jumpscale/generated_docs/docs/_build/html/API', recursive=False, filter='*.html'):
+    basepath = "/opt/code/github/jumpscale/generated_docs/docs/_source/API"
+    basename = j.system.fs.getBaseName(module).replace('.html', '.rst')
+    contents = j.system.fs.fileGetContents(module)
+    contents = '.. raw:: html\n%s' % contents
+    contents = contents.replace('\n', '\n   ')
+    newpath = j.system.fs.joinPaths(basepath, basename)
+    j.system.fs.remove(newpath)
+    j.system.fs.writeFile(newpath, contents)
 
 
-gencl.addRemoveFiles()
-gencl.commit('auto generated docs')
-gencl.push()
+
+# gencl.addRemoveFiles()
+# gencl.commit('auto generated docs')
+# gencl.push()
 

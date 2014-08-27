@@ -1,102 +1,1121 @@
-JumpScale.portal.docgenerator package
-=====================================
-
-Submodules
-----------
-
-JumpScale.portal.docgenerator.Confluence2HTML module
-----------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.Confluence2HTML
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.Confluence2RST module
----------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.Confluence2RST
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.Docgenerator module
--------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.Docgenerator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.Page module
------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.Page
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.PageAlkira module
------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.PageAlkira
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.PageConfluence module
----------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.PageConfluence
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.PageGroup module
-----------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.PageGroup
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.PageHTML module
----------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.PageHTML
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.PageRST module
---------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.PageRST
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.WikiClientAlkira module
------------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.WikiClientAlkira
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.docgenerator.WikiClientConfluence module
----------------------------------------------------------
-
-.. automodule:: JumpScale.portal.docgenerator.WikiClientConfluence
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.portal.docgenerator
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.portal.docgenerator package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.portal package" href="JumpScale.portal.html" />
+       <link rel="next" title="JumpScale.portal.docpreprocessor package" href="JumpScale.portal.docpreprocessor.html" />
+       <link rel="prev" title="JumpScale.portal.codegentools package" href="JumpScale.portal.codegentools.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.docpreprocessor.html" title="JumpScale.portal.docpreprocessor package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.codegentools.html" title="JumpScale.portal.codegentools package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" accesskey="U">JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-portal-docgenerator-package">
+   <h1>JumpScale.portal.docgenerator package<a class="headerlink" href="#jumpscale-portal-docgenerator-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.Confluence2HTML">
+   <span id="jumpscale-portal-docgenerator-confluence2html-module"></span><h2>JumpScale.portal.docgenerator.Confluence2HTML module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.Confluence2HTML" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.Confluence2HTML.</tt><tt class="descname">Confluence2HTML</tt><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.convert">
+   <tt class="descname">convert</tt><big>(</big><em>content</em>, <em>page=None</em>, <em>doc=None</em>, <em>requestContext=None</em>, <em>paramsExtra={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.convert" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.createImage">
+   <tt class="descname">createImage</tt><big>(</big><em>title</em>, <em>imagePath</em>, <em>width=None</em>, <em>height=None</em>, <em>styles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML.createImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.createImage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param title alt text of the image
+   &#64;param imagePath can be url or local path
+   &#64;param width width of the image
+   &#64;param height height of the image
+   &#64;param styles a list of tuples, containing CSS attributes for the image, e.g. [(&#8220;background-color&#8221;, &#8220;green), (&#8220;border&#8221;, &#8220;1px solid green&#8221;)]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.defGet">
+   <tt class="descname">defGet</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML.defGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.defGet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="staticmethod">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.findLinks">
+   <em class="property">static </em><tt class="descname">findLinks</tt><big>(</big><em>line</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML.findLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.findLinks" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.processDefs">
+   <tt class="descname">processDefs</tt><big>(</big><em>line</em>, <em>doc</em>, <em>page</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2HTML.html#Confluence2HTML.processDefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2HTML.Confluence2HTML.processDefs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.Confluence2RST">
+   <span id="jumpscale-portal-docgenerator-confluence2rst-module"></span><h2>JumpScale.portal.docgenerator.Confluence2RST module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.Confluence2RST" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.Confluence2RST.</tt><tt class="descname">Confluence2RST</tt><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2RST.html#Confluence2RST"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.convert">
+   <tt class="descname">convert</tt><big>(</big><em>content</em>, <em>page=None</em>, <em>doc=None</em>, <em>requestContext=None</em>, <em>paramsExtra={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2RST.html#Confluence2RST.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.convert" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="staticmethod">
+   <dt id="JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.findLinks">
+   <em class="property">static </em><tt class="descname">findLinks</tt><big>(</big><em>line</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2RST.html#Confluence2RST.findLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.findLinks" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.processDefs">
+   <tt class="descname">processDefs</tt><big>(</big><em>line</em>, <em>doc</em>, <em>page</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2RST.html#Confluence2RST.processDefs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.processDefs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.processMacro">
+   <tt class="descname">processMacro</tt><big>(</big><em>macro</em>, <em>page</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Confluence2RST.html#Confluence2RST.processMacro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Confluence2RST.Confluence2RST.processMacro" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.Docgenerator">
+   <span id="jumpscale-portal-docgenerator-docgenerator-module"></span><h2>JumpScale.portal.docgenerator.Docgenerator module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.Docgenerator" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.Docgenerator.</tt><tt class="descname">DocgeneratorFactory</tt><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.convertConfluenceToRST">
+   <tt class="descname">convertConfluenceToRST</tt><big>(</big><em>src</em>, <em>dest</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.convertConfluenceToRST"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.convertConfluenceToRST" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluence2htmlConvertor">
+   <tt class="descname">getConfluence2htmlConvertor</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.getConfluence2htmlConvertor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluence2htmlConvertor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluence2rstConvertor">
+   <tt class="descname">getConfluence2rstConvertor</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.getConfluence2rstConvertor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluence2rstConvertor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluenceClient">
+   <tt class="descname">getConfluenceClient</tt><big>(</big><em>url</em>, <em>login</em>, <em>passwd</em>, <em>spacename</em>, <em>erasespace=False</em>, <em>erasepages=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.getConfluenceClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getConfluenceClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param url e.g. <a class="reference external" href="http://10.0.1.193:8080/confluence">http://10.0.1.193:8080/confluence</a></p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getMacroPath">
+   <tt class="descname">getMacroPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.getMacroPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.getMacroPath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageGroupNew">
+   <tt class="descname">pageGroupNew</tt><big>(</big><em>pages={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.pageGroupNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageGroupNew" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewConfluence">
+   <tt class="descname">pageNewConfluence</tt><big>(</big><em>pagename</em>, <em>parent='Home'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.pageNewConfluence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewConfluence" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewHTML">
+   <tt class="descname">pageNewHTML</tt><big>(</big><em>pagename</em>, <em>htmllibPath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.pageNewHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewHTML" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewRST">
+   <tt class="descname">pageNewRST</tt><big>(</big><em>pagename</em>, <em>htmllibPath=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Docgenerator.html#DocgeneratorFactory.pageNewRST"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Docgenerator.DocgeneratorFactory.pageNewRST" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.Page">
+   <span id="jumpscale-portal-docgenerator-page-module"></span><h2>JumpScale.portal.docgenerator.Page module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.Page" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.Page.Page">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.Page.</tt><tt class="descname">Page</tt><big>(</big><em>name</em>, <em>content</em>, <em>parent='Home'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addActionBox">
+   <tt class="descname">addActionBox</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addActionBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addActionBox" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addBarChart">
+   <tt class="descname">addBarChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em>, <em>onclickfunction=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addBarChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addBarChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>order is list of items in rows &amp; headers, defines the order and which columns to show</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addBullet">
+   <tt class="descname">addBullet</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addBullet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addBullet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addCodeBlock">
+   <tt class="descname">addCodeBlock</tt><big>(</big><em>code</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addCodeBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addCodeBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addCodePythonBlock">
+   <tt class="descname">addCodePythonBlock</tt><big>(</big><em>code</em>, <em>title=''</em>, <em>removeLeadingTab=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addCodePythonBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addCodePythonBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addDict">
+   <tt class="descname">addDict</tt><big>(</big><em>dictobject</em>, <em>description=''</em>, <em>keystoshow=</em>, <span class="optional">[</span><span class="optional">]</span><em>aliases={}</em>, <em>roundingDigits=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addDict" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;params aliases is dict with mapping between name in dict and name to use</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addHeading">
+   <tt class="descname">addHeading</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addHeading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addHeading" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addImage">
+   <tt class="descname">addImage</tt><big>(</big><em>imagePath</em>, <em>width=800</em>, <em>height=300</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addImage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param imagePath can be url or local path</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addLineChart">
+   <tt class="descname">addLineChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addLineChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addLineChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue
+   &#64;param headers [] first value is name of the different rowtypes e.g. P&amp;L</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addLink">
+   <tt class="descname">addLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addList">
+   <tt class="descname">addList</tt><big>(</big><em>rows</em>, <em>headers=''</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addList" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[col1,col2, ...]]  (array of array of column values)
+   &#64;param headers [header1, header2, ...]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addMessage">
+   <tt class="descname">addMessage</tt><big>(</big><em>message</em>, <em>newline=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addNewLine">
+   <tt class="descname">addNewLine</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addNewLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addNewLine" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.addPageBreak">
+   <tt class="descname">addPageBreak</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.addPageBreak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.addPageBreak" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.getLink">
+   <tt class="descname">getLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.getLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.getLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.Page.Page.getRound">
+   <tt class="descname">getRound</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/Page.html#Page.getRound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.Page.Page.getRound" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="jumpscale-portal-docgenerator-pagealkira-module">
+   <h2>JumpScale.portal.docgenerator.PageAlkira module<a class="headerlink" href="#jumpscale-portal-docgenerator-pagealkira-module" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.PageConfluence">
+   <span id="jumpscale-portal-docgenerator-pageconfluence-module"></span><h2>JumpScale.portal.docgenerator.PageConfluence module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.PageConfluence" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.PageConfluence.</tt><tt class="descname">PageConfluence</tt><big>(</big><em>name</em>, <em>content</em>, <em>parent='Home'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.docgenerator.Page.Page" title="JumpScale.portal.docgenerator.Page.Page"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.docgenerator.Page.Page</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addActionBox">
+   <tt class="descname">addActionBox</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addActionBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addActionBox" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addBarChart">
+   <tt class="descname">addBarChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addBarChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addBarChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>order is list of items in rows &amp; headers, defines the order and which columns to show</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addBullet">
+   <tt class="descname">addBullet</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addBullet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addBullet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addCodeBlock">
+   <tt class="descname">addCodeBlock</tt><big>(</big><em>code</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addCodeBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addCodeBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addCodePythonBlock">
+   <tt class="descname">addCodePythonBlock</tt><big>(</big><em>code</em>, <em>title=''</em>, <em>removeLeadingTab=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addCodePythonBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addCodePythonBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addDict">
+   <tt class="descname">addDict</tt><big>(</big><em>dictobject</em>, <em>description=''</em>, <em>keystoshow=</em>, <span class="optional">[</span><span class="optional">]</span><em>aliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addDict" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;params aliases is dict with mapping between name in dict and name to use</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addHeading">
+   <tt class="descname">addHeading</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addHeading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addHeading" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addLineChart">
+   <tt class="descname">addLineChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addLineChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addLineChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue
+   &#64;param headers [] first value is name of the different rowtypes e.g. P&amp;L</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addLink">
+   <tt class="descname">addLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addList">
+   <tt class="descname">addList</tt><big>(</big><em>rows</em>, <em>headers=''</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addList" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[col1,col2, ...]]  (array of array of column values)
+   &#64;param headers [header1, header2, ...]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addMessage">
+   <tt class="descname">addMessage</tt><big>(</big><em>message</em>, <em>newline=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addNewLine">
+   <tt class="descname">addNewLine</tt><big>(</big><em>nrlines=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addNewLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addNewLine" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addPageBreak">
+   <tt class="descname">addPageBreak</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addPageBreak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addPageBreak" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addTOC">
+   <tt class="descname">addTOC</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addTOC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addTOC" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addTable">
+   <tt class="descname">addTable</tt><big>(</big><em>rows</em>, <em>columnAliases=None</em>, <em>columnsToShow=None</em>, <em>defaultCellValue=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.addTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.addTable" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Adds a table to the confluence page.</p>
+   <p><em>Important!</em>
+   When rows is a list of objects, the columnsToShow argument is required. It is used to
+   determine which attributes should be included in the table. But when rows objects are
+   of type dictionary, the columnsToShow argument becomes optional. And used to determine
+   which columns should be included in the table. The keys of the dictionaries map to the
+   table column names.</p>
+   <p><em>Code sample:</em>
+   rows = list()
+   rows.append({&#8216;col_1&#8217;: &#8216;col_1_val&#8217;, &#8216;col_3&#8217;: &#8216;col_3_val&#8217;})
+   rows.append({&#8216;col_1&#8217;: &#8216;col_1_val&#8217;, &#8216;col_2&#8217;: &#8216;col_2_val&#8217;})
+   rows.append({&#8216;col_1&#8217;: &#8216;col_1_val&#8217;, &#8216;col_2&#8217;: &#8216;col_2_val&#8217;, &#8216;col_3&#8217;: &#8216;col_3_val&#8217;})
+   rows.append({&#8216;col_2&#8217;: &#8216;col_2_val&#8217;, &#8216;col_3&#8217;: &#8216;col_3_val&#8217;})</p>
+   <p>page = j.tools.wikigenerator.pageNewConfluence(&#8216;confluence_test_page&#8217;)
+   columnAliases = {&#8216;col_1&#8217;: &#8216;column 1&#8217;, &#8216;col_3&#8217;: &#8216;column 3&#8217;}
+   columnsToShow = [&#8216;col_3&#8217;, &#8216;col_1&#8217;]
+   defaultCellValue = &#8216;    /    &#8216;
+   page.addTable(rows, columnAliases, columnsToShow, defaultCellValue)</p>
+   <p><em>Generated table macro:</em>
+   ||column 3||column 1||
+   <a href="#id1"><span class="problematic" id="id2">|col_3_val|col_1_val|</span></a>
+   |    /    <a href="#id3"><span class="problematic" id="id4">|col_1_val|</span></a>
+   <a href="#id5"><span class="problematic" id="id6">|col_3_val|col_1_val|</span></a>
+   <a href="#id7"><span class="problematic" id="id8">|col_3_val|</span></a>    /    |</p>
+   <p>&#64;param rows: rows of the table
+   &#64;type rows: List(Object)</p>
+   <p>&#64;param columnAliases: aliases for the column names, defaults to an empty dict
+   &#64;type columnAliases: Dict(String)</p>
+   <p>&#64;param columnsToShow: columns to show in the page, defaults to a set containing all available columns
+   &#64;type columnsToShow: Set(String)</p>
+   <p>&#64;defaultCellValue: default value for an empty or non existing row column (cell) , defaults to a string with one space char
+   &#64;type defaultCellValue: String</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageConfluence.PageConfluence.getLink">
+   <tt class="descname">getLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageConfluence.html#PageConfluence.getLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageConfluence.PageConfluence.getLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.PageGroup">
+   <span id="jumpscale-portal-docgenerator-pagegroup-module"></span><h2>JumpScale.portal.docgenerator.PageGroup module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.PageGroup" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.PageGroup.</tt><tt class="descname">PageGroup</tt><big>(</big><em>pages</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addActionBox">
+   <tt class="descname">addActionBox</tt><big>(</big><em>types</em>, <em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addActionBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addActionBox" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addBarChart">
+   <tt class="descname">addBarChart</tt><big>(</big><em>types</em>, <em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addBarChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addBarChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>order is list of items in rows &amp; headers, defines the order and which columns to show</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addBullet">
+   <tt class="descname">addBullet</tt><big>(</big><em>types</em>, <em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addBullet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addBullet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addCodeBlock">
+   <tt class="descname">addCodeBlock</tt><big>(</big><em>types</em>, <em>code</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addCodeBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addCodeBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addCodePythonBlock">
+   <tt class="descname">addCodePythonBlock</tt><big>(</big><em>types</em>, <em>code</em>, <em>title=''</em>, <em>removeLeadingTab=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addCodePythonBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addCodePythonBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addDict">
+   <tt class="descname">addDict</tt><big>(</big><em>types</em>, <em>dictobject</em>, <em>description=''</em>, <em>keystoshow=</em>, <span class="optional">[</span><span class="optional">]</span><em>aliases={}</em>, <em>roundingDigits=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addDict" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;params aliases is dict with mapping between name in dict and name to use</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addHeading">
+   <tt class="descname">addHeading</tt><big>(</big><em>types</em>, <em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addHeading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addHeading" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addLineChart">
+   <tt class="descname">addLineChart</tt><big>(</big><em>types</em>, <em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=300</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addLineChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addLineChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue
+   &#64;param headers [] first value is name of the different rowtypes e.g. P&amp;L</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addLink">
+   <tt class="descname">addLink</tt><big>(</big><em>types</em>, <em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addList">
+   <tt class="descname">addList</tt><big>(</big><em>types</em>, <em>rows</em>, <em>headers=''</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addList" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[col1,col2, ...]]  (array of array of column values)
+   &#64;param headers [header1, header2, ...]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addMessage">
+   <tt class="descname">addMessage</tt><big>(</big><em>types</em>, <em>message</em>, <em>newline=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addNewLine">
+   <tt class="descname">addNewLine</tt><big>(</big><em>types</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addNewLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addNewLine" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.addPageBreak">
+   <tt class="descname">addPageBreak</tt><big>(</big><em>types</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.addPageBreak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.addPageBreak" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.getPages">
+   <tt class="descname">getPages</tt><big>(</big><em>types</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.getPages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.getPages" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageGroup.PageGroup.initActions">
+   <tt class="descname">initActions</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageGroup.html#PageGroup.initActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageGroup.PageGroup.initActions" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is dict with as key the name of the action, the value is the link with {params} which will be filled in with the remainder of the link</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.PageHTML">
+   <span id="jumpscale-portal-docgenerator-pagehtml-module"></span><h2>JumpScale.portal.docgenerator.PageHTML module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.PageHTML" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.PageHTML.</tt><tt class="descname">PageHTML</tt><big>(</big><em>name</em>, <em>content=''</em>, <em>htmllibPath=None</em>, <em>online=False</em>, <em>stylesheet=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.docgenerator.Page.Page" title="JumpScale.portal.docgenerator.Page.Page"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.docgenerator.Page.Page</span></tt></a></p>
+   <p>the methods add code to the self.body part !!!!!</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addActionBox">
+   <tt class="descname">addActionBox</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addActionBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addActionBox" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addBarChart">
+   <tt class="descname">addBarChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=900</em>, <em>height=400</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em>, <em>onclickfunction=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addBarChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addBarChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>order is list of items in rows &amp; headers, defines the order and which columns to show</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addBodyAttribute">
+   <tt class="descname">addBodyAttribute</tt><big>(</big><em>attribute</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addBodyAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addBodyAttribute" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addBootstrap">
+   <tt class="descname">addBootstrap</tt><big>(</big><em>jquery=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addBootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addBootstrap" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addBullet">
+   <tt class="descname">addBullet</tt><big>(</big><em>message</em>, <em>level=1</em>, <em>bullet_type='bullet'</em>, <em>tag='ul'</em>, <em>attributes=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addBullet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addBullet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addBullets">
+   <tt class="descname">addBullets</tt><big>(</big><em>messages</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addBullets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addBullets" title="Permalink to this definition">¶</a></dt>
+   <dd><p>messages: list of bullets</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addCSS">
+   <tt class="descname">addCSS</tt><big>(</big><em>cssLink=None</em>, <em>cssContent=None</em>, <em>exlcude=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addCSS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addCodeBlock">
+   <tt class="descname">addCodeBlock</tt><big>(</big><em>code</em>, <em>template='python'</em>, <em>path=''</em>, <em>edit=True</em>, <em>exitpage=True</em>, <em>spacename=''</em>, <em>pagename=''</em>, <em>linenr=False</em>, <em>linecolor='#eee'</em>, <em>linecolortopbottom='1px solid black'</em>, <em>wrap=True</em>, <em>wrapwidth=100</em>, <em>querystr=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addCodeBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addCodeBlock" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;todo define types of templates supported
+   &#64;template e.g. python
+   if path is given and edit=True then file can be editted and a edit button will appear on editor</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addCodePythonBlock">
+   <tt class="descname">addCodePythonBlock</tt><big>(</big><em>code</em>, <em>title=''</em>, <em>removeLeadingTab=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addCodePythonBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addCodePythonBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addDescr">
+   <tt class="descname">addDescr</tt><big>(</big><em>name</em>, <em>descr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addDescr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addDescr" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addDict">
+   <tt class="descname">addDict</tt><big>(</big><em>dictobject</em>, <em>description=''</em>, <em>keystoshow=</em>, <span class="optional">[</span><span class="optional">]</span><em>aliases={}</em>, <em>roundingDigits=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addDict" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;params aliases is dict with mapping between name in dict and name to use</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addDocumentReadyJSfunction">
+   <tt class="descname">addDocumentReadyJSfunction</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addDocumentReadyJSfunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addDocumentReadyJSfunction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>e.g. $(&#8216;.dataTable&#8217;).dataTable();</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addExplorer">
+   <tt class="descname">addExplorer</tt><big>(</big><em>path=''</em>, <em>dockey=None</em>, <em>height=500</em>, <em>width=750</em>, <em>readonly=False</em>, <em>tree=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addExplorer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addExplorer" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTML">
+   <tt class="descname">addHTML</tt><big>(</big><em>htmlcode</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTML" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTMLBody">
+   <tt class="descname">addHTMLBody</tt><big>(</big><em>body</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addHTMLBody"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTMLBody" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTMLHeader">
+   <tt class="descname">addHTMLHeader</tt><big>(</big><em>header</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addHTMLHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addHTMLHeader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addHeading">
+   <tt class="descname">addHeading</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addHeading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addHeading" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addHostBasedContent">
+   <tt class="descname">addHostBasedContent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addHostBasedContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addHostBasedContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addImage">
+   <tt class="descname">addImage</tt><big>(</big><em>title</em>, <em>imagePath</em>, <em>width=None</em>, <em>height=None</em>, <em>styles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addImage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param title alt text of the image
+   &#64;param imagePath can be url or local path
+   &#64;param width width of the image
+   &#64;param height height of the image
+   &#64;param styles a list of tuples, containing CSS attributes for the image, e.g. [(&#8220;background-color&#8221;, &#8220;green), (&#8220;border&#8221;, &#8220;1px solid green&#8221;)]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addJS">
+   <tt class="descname">addJS</tt><big>(</big><em>jsLink=None</em>, <em>jsContent=None</em>, <em>header=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addJS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addJS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addLineChart">
+   <tt class="descname">addLineChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=400</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addLineChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addLineChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue
+   &#64;param headers [] first value is name of the different rowtypes e.g. P&amp;L</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addLink">
+   <tt class="descname">addLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addList">
+   <tt class="descname">addList</tt><big>(</big><em>rows</em>, <em>headers=''</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em>, <em>classparams='table-condensed table-hover'</em>, <em>linkcolumns=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addList" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[col1,col2, ...]]  (array of array of column values)
+   &#64;param headers [header1, header2, ...]
+   &#64;param linkcolumns has pos (starting 0) of columns which should be formatted as links  (in that column format needs to be $description__$link</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addMessage">
+   <tt class="descname">addMessage</tt><big>(</big><em>message</em>, <em>newline=False</em>, <em>isElement=True</em>, <em>blockcheck=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addNewLine">
+   <tt class="descname">addNewLine</tt><big>(</big><em>nrlines=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addNewLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addNewLine" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addPageBreak">
+   <tt class="descname">addPageBreak</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addPageBreak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addPageBreak" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addParagraph">
+   <tt class="descname">addParagraph</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addParagraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addParagraph" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addPieChart">
+   <tt class="descname">addPieChart</tt><big>(</big><em>title</em>, <em>data</em>, <em>legend</em>, <em>width=1000</em>, <em>height=600</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addPieChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addPieChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add pie chart as the HTML element
+   &#64;param data is array of data points
+   &#64;param legend [legendDataPoint1, legendDataPoint2, ..]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addScriptBodyJS">
+   <tt class="descname">addScriptBodyJS</tt><big>(</big><em>jsContent</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addScriptBodyJS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addScriptBodyJS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.addTableWithContent">
+   <tt class="descname">addTableWithContent</tt><big>(</big><em>columnsWidth</em>, <em>colContents</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.addTableWithContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.addTableWithContent" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param columnsWidth = Array with each element a nr, when None then HTML does the formatting, otherwise relative to each other
+   &#64;param colContents = array with each element HTML code</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.getContent">
+   <tt class="descname">getContent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.getContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.getContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="staticmethod">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.getLink">
+   <em class="property">static </em><tt class="descname">getLink</tt><big>(</big><em>description</em>, <em>link</em>, <em>link_id=None</em>, <em>link_class=None</em>, <em>htmlelements=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.getLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.getLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageHTML.PageHTML.removeCSS">
+   <tt class="descname">removeCSS</tt><big>(</big><em>exclude</em>, <em>permanent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageHTML.html#PageHTML.removeCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageHTML.PageHTML.removeCSS" title="Permalink to this definition">¶</a></dt>
+   <dd><p>will walk over header and remove css links
+   link need to be full e.g. bootstrap.min.css</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.PageRST">
+   <span id="jumpscale-portal-docgenerator-pagerst-module"></span><h2>JumpScale.portal.docgenerator.PageRST module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.PageRST" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.PageRST.</tt><tt class="descname">PageRST</tt><big>(</big><em>name</em>, <em>content=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.docgenerator.Page.Page" title="JumpScale.portal.docgenerator.Page.Page"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.docgenerator.Page.Page</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addActionBox">
+   <tt class="descname">addActionBox</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addActionBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addActionBox" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is array of array, [[$actionname1,$params1],[$actionname2,$params2]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addBarChart">
+   <tt class="descname">addBarChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=900</em>, <em>height=400</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em>, <em>onclickfunction=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addBarChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addBarChart" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addBodyAttribute">
+   <tt class="descname">addBodyAttribute</tt><big>(</big><em>attribute</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addBodyAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addBodyAttribute" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addBootstrap">
+   <tt class="descname">addBootstrap</tt><big>(</big><em>jquery=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addBootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addBootstrap" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addBullet">
+   <tt class="descname">addBullet</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addBullet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addBullet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addBullets">
+   <tt class="descname">addBullets</tt><big>(</big><em>messages</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addBullets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addBullets" title="Permalink to this definition">¶</a></dt>
+   <dd><p>messages: list of bullets</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addCSS">
+   <tt class="descname">addCSS</tt><big>(</big><em>cssLink=None</em>, <em>cssContent=None</em>, <em>exlcude=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addCSS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addCodeBlock">
+   <tt class="descname">addCodeBlock</tt><big>(</big><em>code</em>, <em>template='python'</em>, <em>path=''</em>, <em>edit=True</em>, <em>exitpage=True</em>, <em>spacename=''</em>, <em>pagename=''</em>, <em>linenr=False</em>, <em>linecolor='#eee'</em>, <em>linecolortopbottom='1px solid black'</em>, <em>wrap=True</em>, <em>wrapwidth=100</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addCodeBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addCodeBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addCodePythonBlock">
+   <tt class="descname">addCodePythonBlock</tt><big>(</big><em>code</em>, <em>title=''</em>, <em>removeLeadingTab=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addCodePythonBlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addCodePythonBlock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addDescr">
+   <tt class="descname">addDescr</tt><big>(</big><em>name</em>, <em>descr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addDescr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addDescr" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addDict">
+   <tt class="descname">addDict</tt><big>(</big><em>dictobject</em>, <em>description=''</em>, <em>keystoshow=</em>, <span class="optional">[</span><span class="optional">]</span><em>aliases={}</em>, <em>roundingDigits=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addDict" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;params aliases is dict with mapping between name in dict and name to use</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addDocumentReadyJSfunction">
+   <tt class="descname">addDocumentReadyJSfunction</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addDocumentReadyJSfunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addDocumentReadyJSfunction" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addExplorer">
+   <tt class="descname">addExplorer</tt><big>(</big><em>path=''</em>, <em>dockey=None</em>, <em>height=500</em>, <em>width=750</em>, <em>readonly=False</em>, <em>tree=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addExplorer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addExplorer" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addHTML">
+   <tt class="descname">addHTML</tt><big>(</big><em>htmlcode</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addHTML" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLBody">
+   <tt class="descname">addHTMLBody</tt><big>(</big><em>body</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addHTMLBody"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLBody" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLHeader">
+   <tt class="descname">addHTMLHeader</tt><big>(</big><em>header</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addHTMLHeader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addHTMLHeader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addHeading">
+   <tt class="descname">addHeading</tt><big>(</big><em>message</em>, <em>level=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addHeading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addHeading" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addHostBasedContent">
+   <tt class="descname">addHostBasedContent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addHostBasedContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addHostBasedContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addImage">
+   <tt class="descname">addImage</tt><big>(</big><em>title</em>, <em>imagePath</em>, <em>width=None</em>, <em>height=None</em>, <em>styles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addImage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addImage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param title alt text of the image
+   &#64;param imagePath can be url or local path
+   &#64;param width width of the image
+   &#64;param height height of the image
+   &#64;param styles a list of tuples, containing CSS attributes for the image, e.g. [(&#8220;background-color&#8221;, &#8220;green), (&#8220;border&#8221;, &#8220;1px solid green&#8221;)]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addJS">
+   <tt class="descname">addJS</tt><big>(</big><em>jsLink=None</em>, <em>jsContent=None</em>, <em>header=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addJS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addJS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addLineChart">
+   <tt class="descname">addLineChart</tt><big>(</big><em>title</em>, <em>rows</em>, <em>headers=''</em>, <em>width=800</em>, <em>height=400</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addLineChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addLineChart" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[values, ...],]  first value of the row is the rowname e.g. cost, revenue
+   &#64;param headers [] first value is name of the different rowtypes e.g. P&amp;L</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addLink">
+   <tt class="descname">addLink</tt><big>(</big><em>description</em>, <em>link</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addList">
+   <tt class="descname">addList</tt><big>(</big><em>rows</em>, <em>headers=''</em>, <em>showcolumns=</em>, <span class="optional">[</span><span class="optional">]</span><em>columnAliases={}</em>, <em>classparams='table-condensed table-hover'</em>, <em>linkcolumns=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addList" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows [[col1,col2, ...]]  (array of array of column values)
+   &#64;param headers [header1, header2, ...]
+   &#64;param linkcolumns has pos (starting 0) of columns which should be formatted as links  (in that column format needs to be $description__$link</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addMessage">
+   <tt class="descname">addMessage</tt><big>(</big><em>message</em>, <em>blockcheck=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addNewLine">
+   <tt class="descname">addNewLine</tt><big>(</big><em>nrlines=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addNewLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addNewLine" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addPageBreak">
+   <tt class="descname">addPageBreak</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addPageBreak"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addPageBreak" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addParagraph">
+   <tt class="descname">addParagraph</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addParagraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addParagraph" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addPieChart">
+   <tt class="descname">addPieChart</tt><big>(</big><em>title</em>, <em>data</em>, <em>legend</em>, <em>width=1000</em>, <em>height=600</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addPieChart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addPieChart" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addScriptBodyJS">
+   <tt class="descname">addScriptBodyJS</tt><big>(</big><em>jsContent</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addScriptBodyJS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addScriptBodyJS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.addTableWithContent">
+   <tt class="descname">addTableWithContent</tt><big>(</big><em>columnsWidth</em>, <em>colContents</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.addTableWithContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.addTableWithContent" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param columnsWidth = Array with each element a nr, when None then HTML does the formatting, otherwise relative to each other
+   &#64;param colContents = array with each element HTML code</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.getContent">
+   <tt class="descname">getContent</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.getContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.getContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.PageRST.PageRST.removeCSS">
+   <tt class="descname">removeCSS</tt><big>(</big><em>exclude</em>, <em>permanent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/PageRST.html#PageRST.removeCSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.PageRST.PageRST.removeCSS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.WikiClientAlkira">
+   <span id="jumpscale-portal-docgenerator-wikiclientalkira-module"></span><h2>JumpScale.portal.docgenerator.WikiClientAlkira module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.WikiClientAlkira" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.WikiClientAlkira.</tt><tt class="descname">WikiClientAlkira</tt><big>(</big><em>spacename</em>, <em>erasespace=False</em>, <em>erasepages=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.createPagetree">
+   <tt class="descname">createPagetree</tt><big>(</big><em>pagetree</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.createPagetree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.createPagetree" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;pagetree $toppage/$subpage1/$subpage2/...</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.generate">
+   <tt class="descname">generate</tt><big>(</big><em>page</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.generate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.generatePagegroup">
+   <tt class="descname">generatePagegroup</tt><big>(</big><em>pagegroup</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.generatePagegroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.generatePagegroup" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.initActions">
+   <tt class="descname">initActions</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.initActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.initActions" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is dict with as key the name of the action, the value is the link with {params} which will be filled in with the remainder of the link</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageContentGet">
+   <tt class="descname">pageContentGet</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageContentGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageContentGet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageContentSet">
+   <tt class="descname">pageContentSet</tt><big>(</big><em>pagename</em>, <em>content</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageContentSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageContentSet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param parent can be a single name of a home page or a pagetree e.g. $toppage/$subpage1/$subpage2/...</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageDelete">
+   <tt class="descname">pageDelete</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageDelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageDelete" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageExists">
+   <tt class="descname">pageExists</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageExists" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageGet">
+   <tt class="descname">pageGet</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageGet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageNew">
+   <tt class="descname">pageNew</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageNew" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageSet">
+   <tt class="descname">pageSet</tt><big>(</big><em>page</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.pageSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.pageSet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param parent is name of wikipage to use as parent</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.removeAllPages">
+   <tt class="descname">removeAllPages</tt><big>(</big><em>exclude=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientAlkira.html#WikiClientAlkira.removeAllPages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientAlkira.WikiClientAlkira.removeAllPages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>remove all pages in space</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator.WikiClientConfluence">
+   <span id="jumpscale-portal-docgenerator-wikiclientconfluence-module"></span><h2>JumpScale.portal.docgenerator.WikiClientConfluence module<a class="headerlink" href="#module-JumpScale.portal.docgenerator.WikiClientConfluence" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.docgenerator.WikiClientConfluence.</tt><tt class="descname">WikiClientConfluence</tt><big>(</big><em>spacename</em>, <em>erasespace=False</em>, <em>erasepages=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.createPagetree">
+   <tt class="descname">createPagetree</tt><big>(</big><em>pagetree</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.createPagetree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.createPagetree" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;pagetree $toppage/$subpage1/$subpage2/...</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.generate">
+   <tt class="descname">generate</tt><big>(</big><em>page</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.generate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.generate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.generatePagegroup">
+   <tt class="descname">generatePagegroup</tt><big>(</big><em>pagegroup</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.generatePagegroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.generatePagegroup" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.initActions">
+   <tt class="descname">initActions</tt><big>(</big><em>actions</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.initActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.initActions" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;actions is dict with as key the name of the action, the value is the link with {params} which will be filled in with the remainder of the link</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageContentGet">
+   <tt class="descname">pageContentGet</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageContentGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageContentGet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageContentSet">
+   <tt class="descname">pageContentSet</tt><big>(</big><em>pagename</em>, <em>content</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageContentSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageContentSet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param parent can be a single name of a home page or a pagetree e.g. $toppage/$subpage1/$subpage2/...</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageDelete">
+   <tt class="descname">pageDelete</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageDelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageDelete" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageExists">
+   <tt class="descname">pageExists</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageExists" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageGet">
+   <tt class="descname">pageGet</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageGet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageNew">
+   <tt class="descname">pageNew</tt><big>(</big><em>pagename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageNew" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageSet">
+   <tt class="descname">pageSet</tt><big>(</big><em>page</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.pageSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.pageSet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param parent is name of wikipage to use as parent</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.removeAllPages">
+   <tt class="descname">removeAllPages</tt><big>(</big><em>exclude=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#WikiClientConfluence.removeAllPages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.WikiClientConfluence.removeAllPages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>remove all pages in space</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.portal.docgenerator.WikiClientConfluence.extractDetails">
+   <tt class="descclassname">JumpScale.portal.docgenerator.WikiClientConfluence.</tt><tt class="descname">extractDetails</tt><big>(</big><em>remoteException</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/docgenerator/WikiClientConfluence.html#extractDetails"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.docgenerator.WikiClientConfluence.extractDetails" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Extract the details of an xml-rpc exception error message</p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.docgenerator">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal.docgenerator" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.portal.docgenerator package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.Confluence2HTML">JumpScale.portal.docgenerator.Confluence2HTML module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.Confluence2RST">JumpScale.portal.docgenerator.Confluence2RST module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.Docgenerator">JumpScale.portal.docgenerator.Docgenerator module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.Page">JumpScale.portal.docgenerator.Page module</a></li>
+   <li><a class="reference internal" href="#jumpscale-portal-docgenerator-pagealkira-module">JumpScale.portal.docgenerator.PageAlkira module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.PageConfluence">JumpScale.portal.docgenerator.PageConfluence module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.PageGroup">JumpScale.portal.docgenerator.PageGroup module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.PageHTML">JumpScale.portal.docgenerator.PageHTML module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.PageRST">JumpScale.portal.docgenerator.PageRST module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.WikiClientAlkira">JumpScale.portal.docgenerator.WikiClientAlkira module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator.WikiClientConfluence">JumpScale.portal.docgenerator.WikiClientConfluence module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.docgenerator">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.portal.codegentools.html"
+                           title="previous chapter">JumpScale.portal.codegentools package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.portal.docpreprocessor.html"
+                           title="next chapter">JumpScale.portal.docpreprocessor package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.portal.docgenerator.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.docpreprocessor.html" title="JumpScale.portal.docpreprocessor package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.codegentools.html" title="JumpScale.portal.codegentools package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" >JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

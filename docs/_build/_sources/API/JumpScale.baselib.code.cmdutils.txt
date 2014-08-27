@@ -1,10 +1,159 @@
-JumpScale.baselib.code.cmdutils package
-=======================================
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.code.cmdutils
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.code.cmdutils package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib.code package" href="JumpScale.baselib.code.html" />
+       <link rel="next" title="JumpScale.baselib.codeexecutor package" href="JumpScale.baselib.codeexecutor.html" />
+       <link rel="prev" title="JumpScale.baselib.code package" href="JumpScale.baselib.code.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.codeexecutor.html" title="JumpScale.baselib.codeexecutor package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.code.html" title="JumpScale.baselib.code package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.code.html" accesskey="U">JumpScale.baselib.code package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-code-cmdutils-package">
+   <h1>JumpScale.baselib.code.cmdutils package<a class="headerlink" href="#jumpscale-baselib-code-cmdutils-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="module-JumpScale.baselib.code.cmdutils">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.code.cmdutils" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.code.cmdutils.ArgumentParser">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.code.cmdutils.</tt><tt class="descname">ArgumentParser</tt><big>(</big><em>prog=None</em>, <em>usage=None</em>, <em>description=None</em>, <em>epilog=None</em>, <em>version=None</em>, <em>parents=</em>, <span class="optional">[</span><span class="optional">]</span><em>formatter_class=&lt;class 'argparse.HelpFormatter'&gt;</em>, <em>prefix_chars='-'</em>, <em>fromfile_prefix_chars=None</em>, <em>argument_default=None</em>, <em>conflict_handler='error'</em>, <em>add_help=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/code/cmdutils.html#ArgumentParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.code.cmdutils.ArgumentParser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/argparse.html#argparse.ArgumentParser" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">argparse.ArgumentParser</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.code.cmdutils.ArgumentParser.exit">
+   <tt class="descname">exit</tt><big>(</big><em>status=0</em>, <em>message=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/code/cmdutils.html#ArgumentParser.exit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.code.cmdutils.ArgumentParser.exit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.code.cmdutils.getJPackage">
+   <tt class="descclassname">JumpScale.baselib.code.cmdutils.</tt><tt class="descname">getJPackage</tt><big>(</big><em>args</em>, <em>installed=None</em>, <em>debug=None</em>, <em>update=False</em>, <em>expandInstances=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/code/cmdutils.html#getJPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.code.cmdutils.getJPackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.code.cmdutils.getProcess">
+   <tt class="descclassname">JumpScale.baselib.code.cmdutils.</tt><tt class="descname">getProcess</tt><big>(</big><em>parser=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/code/cmdutils.html#getProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.code.cmdutils.getProcess" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.code.cmdutils.processLogin">
+   <tt class="descclassname">JumpScale.baselib.code.cmdutils.</tt><tt class="descname">processLogin</tt><big>(</big><em>parser</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/code/cmdutils.html#processLogin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.code.cmdutils.processLogin" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.code.cmdutils package</a><ul>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.code.cmdutils">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.code.html"
+                           title="previous chapter">JumpScale.baselib.code package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.codeexecutor.html"
+                           title="next chapter">JumpScale.baselib.codeexecutor package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.code.cmdutils.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.codeexecutor.html" title="JumpScale.baselib.codeexecutor package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.code.html" title="JumpScale.baselib.code package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.code.html" >JumpScale.baselib.code package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>
