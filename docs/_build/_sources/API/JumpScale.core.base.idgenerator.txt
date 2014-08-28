@@ -1,22 +1,177 @@
-JumpScale.core.base.idgenerator package
-=======================================
-
-Submodules
-----------
-
-JumpScale.core.base.idgenerator.IDGenerator module
---------------------------------------------------
-
-.. automodule:: JumpScale.core.base.idgenerator.IDGenerator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.core.base.idgenerator
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.core.base.idgenerator package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.core.base package" href="JumpScale.core.base.html" />
+       <link rel="next" title="JumpScale.core.base.time package" href="JumpScale.core.base.time.html" />
+       <link rel="prev" title="JumpScale.core.base package" href="JumpScale.core.base.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.base.time.html" title="JumpScale.core.base.time package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.base.html" title="JumpScale.core.base package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li>
+             <li><a href="JumpScale.core.base.html" accesskey="U">JumpScale.core.base package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-core-base-idgenerator-package">
+   <h1>JumpScale.core.base.idgenerator package<a class="headerlink" href="#jumpscale-core-base-idgenerator-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.core.base.idgenerator.IDGenerator">
+   <span id="jumpscale-core-base-idgenerator-idgenerator-module"></span><h2>JumpScale.core.base.idgenerator.IDGenerator module<a class="headerlink" href="#module-JumpScale.core.base.idgenerator.IDGenerator" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.base.idgenerator.IDGenerator.IDGenerator">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.base.idgenerator.IDGenerator.</tt><tt class="descname">IDGenerator</tt><a class="reference internal" href="../_modules/JumpScale/core/base/idgenerator/IDGenerator.html#IDGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.base.idgenerator.IDGenerator.IDGenerator" title="Permalink to this definition">¶</a></dt>
+   <dd><p>generic provider of id&#8217;s
+   lives at j.idgenerator</p>
+   <dl class="method">
+   <dt id="JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateGUID">
+   <tt class="descname">generateGUID</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/base/idgenerator/IDGenerator.html#IDGenerator.generateGUID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateGUID" title="Permalink to this definition">¶</a></dt>
+   <dd><p>generate unique guid
+   how to use:  j.base.idgenerator.generateGUID()</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateIncrID">
+   <tt class="descname">generateIncrID</tt><big>(</big><em>incrTypeId</em>, <em>service</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/base/idgenerator/IDGenerator.html#IDGenerator.generateIncrID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateIncrID" title="Permalink to this definition">¶</a></dt>
+   <dd><p>type is like agent, job, jobstep
+   needs to be a unique type, can only work if application service is known
+   how to use:  j.base.idgenerator.generateIncrID(&#8220;agent&#8221;)
+   &#64;reset if True means restart from 1</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateRandomInt">
+   <tt class="descname">generateRandomInt</tt><big>(</big><em>fromInt</em>, <em>toInt</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/base/idgenerator/IDGenerator.html#IDGenerator.generateRandomInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.generateRandomInt" title="Permalink to this definition">¶</a></dt>
+   <dd><p>how to use:  j.base.idgenerator.generateRandomInt(0,10)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.getID">
+   <tt class="descname">getID</tt><big>(</big><em>incrTypeId</em>, <em>objectUniqueSeedInfo</em>, <em>service</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/base/idgenerator/IDGenerator.html#IDGenerator.getID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.base.idgenerator.IDGenerator.IDGenerator.getID" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get a unique id for an object uniquely identified
+   remembers previously given id&#8217;s</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.base.idgenerator">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.base.idgenerator" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.core.base.idgenerator package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.base.idgenerator.IDGenerator">JumpScale.core.base.idgenerator.IDGenerator module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.base.idgenerator">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.core.base.html"
+                           title="previous chapter">JumpScale.core.base package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.core.base.time.html"
+                           title="next chapter">JumpScale.core.base.time package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.core.base.idgenerator.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.base.time.html" title="JumpScale.core.base.time package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.base.html" title="JumpScale.core.base package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li>
+             <li><a href="JumpScale.core.base.html" >JumpScale.core.base package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

@@ -1,62 +1,410 @@
-JumpScale.portal.portalloaders package
-======================================
-
-Submodules
-----------
-
-JumpScale.portal.portalloaders.ActorsInfo module
-------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.ActorsInfo
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.portalloaders.ActorsLoader module
---------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.ActorsLoader
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.portalloaders.BucketLoader module
---------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.BucketLoader
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.portalloaders.LoaderBase module
-------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.LoaderBase
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.portalloaders.PortalLoaderFactory module
----------------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.PortalLoaderFactory
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.portalloaders.SpacesLoader module
---------------------------------------------------
-
-.. automodule:: JumpScale.portal.portalloaders.SpacesLoader
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.portal.portalloaders
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.portal.portalloaders package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.portal package" href="JumpScale.portal.html" />
+       <link rel="next" title="&lt;no title&gt;" href="../spaces/Doc_Jumpscale_Devel/Docs/index.html" />
+       <link rel="prev" title="JumpScale.portal.portal package" href="JumpScale.portal.portal.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="../spaces/Doc_Jumpscale_Devel/Docs/index.html" title="&lt;no title&gt;"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.portal.html" title="JumpScale.portal.portal package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" accesskey="U">JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-portal-portalloaders-package">
+   <h1>JumpScale.portal.portalloaders package<a class="headerlink" href="#jumpscale-portal-portalloaders-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.ActorsInfo">
+   <span id="jumpscale-portal-portalloaders-actorsinfo-module"></span><h2>JumpScale.portal.portalloaders.ActorsInfo module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.ActorsInfo" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsInfo.</tt><tt class="descname">ActorsInfo</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsInfo.html#ActorsInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorInfoPage">
+   <tt class="descname">getActorInfoPage</tt><big>(</big><em>appname</em>, <em>actorname</em>, <em>methodname</em>, <em>page=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsInfo.html#ActorsInfo.getActorInfoPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorInfoPage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>used for during error show info about 1 actor</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorMethodCall">
+   <tt class="descname">getActorMethodCall</tt><big>(</big><em>appname</em>, <em>actor</em>, <em>method</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsInfo.html#ActorsInfo.getActorMethodCall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorMethodCall" title="Permalink to this definition">¶</a></dt>
+   <dd><p>used for during error show links to methods in browser</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorsInfoPage">
+   <tt class="descname">getActorsInfoPage</tt><big>(</big><em>appname=''</em>, <em>actor=''</em>, <em>page=None</em>, <em>extraParams={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsInfo.html#ActorsInfo.getActorsInfoPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsInfo.ActorsInfo.getActorsInfoPage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.ActorsLoader">
+   <span id="jumpscale-portal-portalloaders-actorsloader-module"></span><h2>JumpScale.portal.portalloaders.ActorsLoader module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.ActorsLoader" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorExtensionsGroup">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">ActorExtensionsGroup</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorExtensionsGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorExtensionsGroup" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.extensions.html#JumpScale.core.extensions.PMExtensionsGroup.PMExtensionsGroup" title="JumpScale.core.extensions.PMExtensionsGroup.PMExtensionsGroup"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.extensions.PMExtensionsGroup.PMExtensionsGroup</span></tt></a></p>
+   <p>ActorExtensionsGroup</p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">ActorLoader</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.activate">
+   <tt class="descname">activate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader.activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.activate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.createDefaults">
+   <tt class="descname">createDefaults</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader.createDefaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.createDefaults" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.loadFromDisk">
+   <tt class="descname">loadFromDisk</tt><big>(</big><em>path</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader.loadFromDisk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.loadFromDisk" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.raiseError">
+   <tt class="descname">raiseError</tt><big>(</big><em>msg</em>, <em>path=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader.raiseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.raiseError" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.reset">
+   <tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorLoader.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorLoader.reset" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">ActorsLoader</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBase</span></tt></a></p>
+   <p>loader for all actors</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActor">
+   <tt class="descname">existsActor</tt><big>(</big><em>appname</em>, <em>actorname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.existsActor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActorLoader">
+   <tt class="descname">existsActorLoader</tt><big>(</big><em>appname</em>, <em>actorname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.existsActorLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.existsActorLoader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getActor">
+   <tt class="descname">getActor</tt><big>(</big><em>appname</em>, <em>actorname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.getActor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getActor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getAppActors">
+   <tt class="descname">getAppActors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.getAppActors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getAppActors" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getApps">
+   <tt class="descname">getApps</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.getApps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.getApps" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.loadOsisTasklets">
+   <tt class="descname">loadOsisTasklets</tt><big>(</big><em>actorobject</em>, <em>actorpath</em>, <em>modelname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.loadOsisTasklets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.loadOsisTasklets" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.reset">
+   <tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#ActorsLoader.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.ActorsLoader.reset" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.AppClass">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">AppClass</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#AppClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.AppClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.Class">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">Class</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#Class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.Class" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.ActorsLoader.GroupAppsClass">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.ActorsLoader.</tt><tt class="descname">GroupAppsClass</tt><big>(</big><em>actorsloader</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/ActorsLoader.html#GroupAppsClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.ActorsLoader.GroupAppsClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.BucketLoader">
+   <span id="jumpscale-portal-portalloaders-bucketloader-module"></span><h2>JumpScale.portal.portalloaders.BucketLoader module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.BucketLoader" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.BucketLoader.Bucket">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.BucketLoader.</tt><tt class="descname">Bucket</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/BucketLoader.html#Bucket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.BucketLoader.Bucket" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.BucketLoader.Bucket.createDefaults">
+   <tt class="descname">createDefaults</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/BucketLoader.html#Bucket.createDefaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.BucketLoader.Bucket.createDefaults" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.BucketLoader.Bucket.loadFromDisk">
+   <tt class="descname">loadFromDisk</tt><big>(</big><em>path</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/BucketLoader.html#Bucket.loadFromDisk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.BucketLoader.Bucket.loadFromDisk" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.BucketLoader.BucketLoader">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.BucketLoader.</tt><tt class="descname">BucketLoader</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/BucketLoader.html#BucketLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.BucketLoader.BucketLoader" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBase</span></tt></a></p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.LoaderBase">
+   <span id="jumpscale-portal-portalloaders-loaderbase-module"></span><h2>JumpScale.portal.portalloaders.LoaderBase module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.LoaderBase" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBase">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.LoaderBase.</tt><tt class="descname">LoaderBase</tt><big>(</big><em>type</em>, <em>objectClass</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase" title="Permalink to this definition">¶</a></dt>
+   <dd><p>is loader for all objects e.g. for all actors or spaces</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBase.getLoaderFromId">
+   <tt class="descname">getLoaderFromId</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBase.getLoaderFromId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.getLoaderFromId" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBase.removeLoader">
+   <tt class="descname">removeLoader</tt><big>(</big><em>id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBase.removeLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.removeLoader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBase.scan">
+   <tt class="descname">scan</tt><big>(</big><em>path</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBase.scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase.scan" title="Permalink to this definition">¶</a></dt>
+   <dd><p>path can be 1 path or list of paths</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.LoaderBase.</tt><tt class="descname">LoaderBaseObject</tt><big>(</big><em>type</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBaseObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>is loader for 1 object</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.deleteOnDisk">
+   <tt class="descname">deleteOnDisk</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBaseObject.deleteOnDisk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.deleteOnDisk" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.processAcl">
+   <tt class="descname">processAcl</tt><big>(</big><em>cfgdir=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBaseObject.processAcl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.processAcl" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.reset">
+   <tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#LoaderBaseObject.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject.reset" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.LoaderBase.Model">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.LoaderBase.</tt><tt class="descname">Model</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/LoaderBase.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.LoaderBase.Model" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.PortalLoaderFactory">
+   <span id="jumpscale-portal-portalloaders-portalloaderfactory-module"></span><h2>JumpScale.portal.portalloaders.PortalLoaderFactory module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.PortalLoaderFactory" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.PortalLoaderFactory.</tt><tt class="descname">PortalLoaderFactory</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/PortalLoaderFactory.html#PortalLoaderFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getActorsLoader">
+   <tt class="descname">getActorsLoader</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/PortalLoaderFactory.html#PortalLoaderFactory.getActorsLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getActorsLoader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getBucketsLoader">
+   <tt class="descname">getBucketsLoader</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/PortalLoaderFactory.html#PortalLoaderFactory.getBucketsLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getBucketsLoader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getSpacesLoader">
+   <tt class="descname">getSpacesLoader</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/PortalLoaderFactory.html#PortalLoaderFactory.getSpacesLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getSpacesLoader" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getTemplatesPath">
+   <tt class="descname">getTemplatesPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/PortalLoaderFactory.html#PortalLoaderFactory.getTemplatesPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.PortalLoaderFactory.PortalLoaderFactory.getTemplatesPath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders.SpacesLoader">
+   <span id="jumpscale-portal-portalloaders-spacesloader-module"></span><h2>JumpScale.portal.portalloaders.SpacesLoader module<a class="headerlink" href="#module-JumpScale.portal.portalloaders.SpacesLoader" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.SpacesLoader.</tt><tt class="descname">Space</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBaseObject</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space.createDefaultDir">
+   <tt class="descname">createDefaultDir</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space.createDefaultDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space.createDefaultDir" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space.createDefaults">
+   <tt class="descname">createDefaults</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space.createDefaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space.createDefaults" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space.loadDocProcessor">
+   <tt class="descname">loadDocProcessor</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space.loadDocProcessor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space.loadDocProcessor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space.loadFromDisk">
+   <tt class="descname">loadFromDisk</tt><big>(</big><em>path</em>, <em>reset=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space.loadFromDisk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space.loadFromDisk" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.Space.reset">
+   <tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#Space.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.Space.reset" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portalloaders.SpacesLoader.SpacesLoader">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portalloaders.SpacesLoader.</tt><tt class="descname">SpacesLoader</tt><a class="reference internal" href="../_modules/JumpScale/portal/portalloaders/SpacesLoader.html#SpacesLoader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portalloaders.SpacesLoader.SpacesLoader" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portalloaders.LoaderBase.LoaderBase" title="JumpScale.portal.portalloaders.LoaderBase.LoaderBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portalloaders.LoaderBase.LoaderBase</span></tt></a></p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portalloaders">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal.portalloaders" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.portal.portalloaders package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.ActorsInfo">JumpScale.portal.portalloaders.ActorsInfo module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.ActorsLoader">JumpScale.portal.portalloaders.ActorsLoader module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.BucketLoader">JumpScale.portal.portalloaders.BucketLoader module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.LoaderBase">JumpScale.portal.portalloaders.LoaderBase module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.PortalLoaderFactory">JumpScale.portal.portalloaders.PortalLoaderFactory module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders.SpacesLoader">JumpScale.portal.portalloaders.SpacesLoader module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portalloaders">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.portal.portal.html"
+                           title="previous chapter">JumpScale.portal.portal package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="../spaces/Doc_Jumpscale_Devel/Docs/index.html"
+                           title="next chapter">&lt;no title&gt;</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.portal.portalloaders.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="../spaces/Doc_Jumpscale_Devel/Docs/index.html" title="&lt;no title&gt;"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.portal.html" title="JumpScale.portal.portal package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" >JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

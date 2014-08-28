@@ -32,6 +32,7 @@ div.documentwrapper {
 }
 
 div.bodywrapper {
+    margin-left: 0px;
     margin: 0 0 0 230px;
 }
 
@@ -55,62 +56,53 @@ div.footer a {
 }
 
 div.related {
-    background-color: #133f52;
-    line-height: 30px;
-    color: #ffffff;
+    display: none;
 }
 
 div.related a {
-    color: #ffffff;
+    display: none;
 }
 
 div.sphinxsidebar {
+    display: none;
 }
 
 div.sphinxsidebar h3 {
-    font-family: 'Trebuchet MS', sans-serif;
-    color: #ffffff;
-    font-size: 1.4em;
-    font-weight: normal;
-    margin: 0;
-    padding: 0;
+    display: none;
 }
 
 div.sphinxsidebar h3 a {
-    color: #ffffff;
+    display: none;
 }
 
 div.sphinxsidebar h4 {
-    font-family: 'Trebuchet MS', sans-serif;
-    color: #ffffff;
-    font-size: 1.3em;
-    font-weight: normal;
-    margin: 5px 0 0 0;
-    padding: 0;
+    display: none;
 }
 
 div.sphinxsidebar p {
-    color: #ffffff;
+    display: none;
 }
 
 div.sphinxsidebar p.topless {
-    margin: 5px 10px 10px 10px;
+    display: none;
 }
 
 div.sphinxsidebar ul {
-    margin: 10px;
-    padding: 0;
-    color: #ffffff;
+    display: none;
 }
 
 div.sphinxsidebar a {
-    color: #98dbcc;
+    display: none;
 }
 
 div.sphinxsidebar input {
-    border: 1px solid #98dbcc;
-    font-family: sans-serif;
-    font-size: 1em;
+    display: none;
+}
+
+div.bodywrapper {
+    width: 0 px;
+    margin-left: 0%;
+    font-size: 90%;
 }
 
 

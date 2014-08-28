@@ -1,38 +1,239 @@
-JumpScale.portal.macrolib package
-=================================
-
-Subpackages
------------
-
-.. toctree::
-
-    JumpScale.portal.macrolib.imagelib
-    JumpScale.portal.macrolib.plantuml
-
-Submodules
-----------
-
-JumpScale.portal.macrolib.blog module
--------------------------------------
-
-.. automodule:: JumpScale.portal.macrolib.blog
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.portal.macrolib.div_base module
------------------------------------------
-
-.. automodule:: JumpScale.portal.macrolib.div_base
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.portal.macrolib
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.portal.macrolib package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.portal package" href="JumpScale.portal.html" />
+       <link rel="next" title="JumpScale.portal.macrolib.imagelib package" href="JumpScale.portal.macrolib.imagelib.html" />
+       <link rel="prev" title="JumpScale.portal.html package" href="JumpScale.portal.html.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.macrolib.imagelib.html" title="JumpScale.portal.macrolib.imagelib package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.html.html" title="JumpScale.portal.html package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" accesskey="U">JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-portal-macrolib-package">
+   <h1>JumpScale.portal.macrolib package<a class="headerlink" href="#jumpscale-portal-macrolib-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="subpackages">
+   <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+   <div class="toctree-wrapper compound">
+   <ul>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html">JumpScale.portal.macrolib.imagelib package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#module-JumpScale.portal.macrolib.imagelib.ImageLib">JumpScale.portal.macrolib.imagelib.ImageLib module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#module-JumpScale.portal.macrolib.imagelib">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.macrolib.plantuml.html">JumpScale.portal.macrolib.plantuml package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.plantuml.html#module-JumpScale.portal.macrolib.plantuml">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   </div>
+   </div>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.portal.macrolib.blog">
+   <span id="jumpscale-portal-macrolib-blog-module"></span><h2>JumpScale.portal.macrolib.blog module<a class="headerlink" href="#module-JumpScale.portal.macrolib.blog" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.macrolib.blog.BlogPost">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.macrolib.blog.</tt><tt class="descname">BlogPost</tt><big>(</big><em>file_name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/blog.html#BlogPost"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.blog.BlogPost" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="attribute">
+   <dt id="JumpScale.portal.macrolib.blog.BlogPost.date">
+   <tt class="descname">date</tt><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/blog.html#BlogPost.date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.blog.BlogPost.date" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="staticmethod">
+   <dt id="JumpScale.portal.macrolib.blog.BlogPost.get_posts_in">
+   <em class="property">static </em><tt class="descname">get_posts_in</tt><big>(</big><em>base_name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/blog.html#BlogPost.get_posts_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.blog.BlogPost.get_posts_in" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.portal.macrolib.blog.BlogPost.title">
+   <tt class="descname">title</tt><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/blog.html#BlogPost.title"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.blog.BlogPost.title" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.portal.macrolib.blog.BlogPost.url">
+   <tt class="descname">url</tt><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/blog.html#BlogPost.url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.blog.BlogPost.url" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.macrolib.div_base">
+   <span id="jumpscale-portal-macrolib-div-base-module"></span><h2>JumpScale.portal.macrolib.div_base module<a class="headerlink" href="#module-JumpScale.portal.macrolib.div_base" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.portal.macrolib.div_base.macro">
+   <tt class="descclassname">JumpScale.portal.macrolib.div_base.</tt><tt class="descname">macro</tt><big>(</big><em>q</em>, <em>args</em>, <em>params</em>, <em>self_closing=False</em>, <em>tag=None</em>, <em>additional_tag_params=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/div_base.html#macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.div_base.macro" title="Permalink to this definition">¶</a></dt>
+   <dd><p>A generic HTML tag macro, similar to div/span macros in Confluence.
+   In practice, this supports any macro in this format:</p>
+   <blockquote>
+   <div>{{tag_name: id=id1|class=x y x|style=background-color: green|src=123}}</div></blockquote>
+   <p>and all attributes will be converted to HTML attributes. To close the macro, use the same macro name without any
+   parameters, like:</p>
+   <blockquote>
+   <div>{{tag_name}}</div></blockquote>
+   <p>Nesting macros is through a number added to the macro name which represents the level, e.g. {{div2}}.</p>
+   <p>Example:</p>
+   <blockquote>
+   <div><dl class="docutils">
+   <dt>{{div}}</dt>
+   <dd><dl class="first docutils">
+   <dt>{{div2 id=left-panel|class=clearbox column8}}</dt>
+   <dd>{{span id=span1}}Text inside{{span}}</dd>
+   </dl>
+   <p class="last">{{div2}}</p>
+   </dd>
+   </dl>
+   <p>{{div}}</p>
+   </div></blockquote>
+   <p>The generated HTML will be:</p>
+   <blockquote>
+   <div><dl class="docutils">
+   <dt>&lt;div&gt;</dt>
+   <dd><dl class="first docutils">
+   <dt>&lt;div id=&#8221;left-panel&#8221; class=&#8221;clearbox column8&#8221;&gt;</dt>
+   <dd>&lt;span id=&#8221;span1&#8221;&gt;Text inside&lt;/span&gt;</dd>
+   </dl>
+   <p class="last">&lt;/div&gt;</p>
+   </dd>
+   </dl>
+   <p>&lt;/div&gt;</p>
+   </div></blockquote>
+   <p>It also allows specifying the tag name explicitly, or adding additional HTML attributes. This is used to implement
+   the input macros, e.g.</p>
+   <blockquote>
+   <div>{{email}}</div></blockquote>
+   <dl class="docutils">
+   <dt>will generate</dt>
+   <dd>&lt;input type=&#8221;email&#8221; /&gt;</dd>
+   </dl>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.portal.macrolib.div_base.tag_params_to_html_attrs">
+   <tt class="descclassname">JumpScale.portal.macrolib.div_base.</tt><tt class="descname">tag_params_to_html_attrs</tt><big>(</big><em>tag_params</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/macrolib/div_base.html#tag_params_to_html_attrs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.macrolib.div_base.tag_params_to_html_attrs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.macrolib">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal.macrolib" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.portal.macrolib package</a><ul>
+   <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.macrolib.blog">JumpScale.portal.macrolib.blog module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.macrolib.div_base">JumpScale.portal.macrolib.div_base module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.macrolib">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.portal.html.html"
+                           title="previous chapter">JumpScale.portal.html package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.portal.macrolib.imagelib.html"
+                           title="next chapter">JumpScale.portal.macrolib.imagelib package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.portal.macrolib.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.macrolib.imagelib.html" title="JumpScale.portal.macrolib.imagelib package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.html.html" title="JumpScale.portal.html package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" >JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

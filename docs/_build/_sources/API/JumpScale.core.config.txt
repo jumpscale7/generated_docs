@@ -1,53 +1,512 @@
-JumpScale.core.config package
-=============================
-
-Subpackages
------------
-
-.. toctree::
-
-    JumpScale.core.config.generator
-
-Submodules
-----------
-
-JumpScale.core.config.ConfigLib module
---------------------------------------
-
-.. automodule:: JumpScale.core.config.ConfigLib
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.core.config.IConfigBase module
-----------------------------------------
-
-.. automodule:: JumpScale.core.config.IConfigBase
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.core.config.JConfig module
-------------------------------------
-
-.. automodule:: JumpScale.core.config.JConfig
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.core.config.JConfigBase module
-----------------------------------------
-
-.. automodule:: JumpScale.core.config.JConfigBase
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.core.config
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.core.config package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.core package" href="JumpScale.core.html" />
+       <link rel="next" title="JumpScale.core.config.generator package" href="JumpScale.core.config.generator.html" />
+       <link rel="prev" title="JumpScale.core.baseclasses package" href="JumpScale.core.baseclasses.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.config.generator.html" title="JumpScale.core.config.generator package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.baseclasses.html" title="JumpScale.core.baseclasses package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" accesskey="U">JumpScale.core package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-core-config-package">
+   <h1>JumpScale.core.config package<a class="headerlink" href="#jumpscale-core-config-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="subpackages">
+   <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+   <div class="toctree-wrapper compound">
+   <ul>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.core.config.generator.html">JumpScale.core.config.generator package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.generator.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.agent_cfg">JumpScale.core.config.generator.agent_cfg module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.arakoon_cfg">JumpScale.core.config.generator.arakoon_cfg module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator.osis_cfg">JumpScale.core.config.generator.osis_cfg module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.core.config.generator.html#module-JumpScale.core.config.generator">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   </div>
+   </div>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.core.config.ConfigLib">
+   <span id="jumpscale-core-config-configlib-module"></span><h2>JumpScale.core.config.ConfigLib module<a class="headerlink" href="#module-JumpScale.core.config.ConfigLib" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.core.config.ConfigLib.ItemGroupClass">
+   <tt class="descclassname">JumpScale.core.config.ConfigLib.</tt><tt class="descname">ItemGroupClass</tt><big>(</big><em>itemclass</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/ConfigLib.html#ItemGroupClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.ConfigLib.ItemGroupClass" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.ConfigLib.ItemSingleClass">
+   <tt class="descclassname">JumpScale.core.config.ConfigLib.</tt><tt class="descname">ItemSingleClass</tt><big>(</big><em>itemclass</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/ConfigLib.html#ItemSingleClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.ConfigLib.ItemSingleClass" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.ConfigLib.checkItemClass">
+   <tt class="descclassname">JumpScale.core.config.ConfigLib.</tt><tt class="descname">checkItemClass</tt><big>(</big><em>itemclass</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/ConfigLib.html#checkItemClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.ConfigLib.checkItemClass" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.IConfigBase">
+   <span id="jumpscale-core-config-iconfigbase-module"></span><h2>JumpScale.core.config.IConfigBase module<a class="headerlink" href="#module-JumpScale.core.config.IConfigBase" title="Permalink to this headline">¶</a></h2>
+   <dl class="exception">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">ConfigError</tt><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">ConfigManagementItem</tt><big>(</big><em>configtype</em>, <em>itemname</em>, <em>params=None</em>, <em>load=True</em>, <em>partialadd=False</em>, <em>setDefaults=False</em>, <em>validate=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="class">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode">
+   <em class="property">class </em><tt class="descname">ConfigMode</tt><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.ConfigMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.ADD">
+   <tt class="descname">ADD</tt><em class="property"> = 1</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.ADD" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.CHECKCONFIG">
+   <tt class="descname">CHECKCONFIG</tt><em class="property"> = 2</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.CHECKCONFIG" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.IDLE">
+   <tt class="descname">IDLE</tt><em class="property"> = 0</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.IDLE" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.PARTIALADD">
+   <tt class="descname">PARTIALADD</tt><em class="property"> = 4</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.PARTIALADD" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.REVIEW">
+   <tt class="descname">REVIEW</tt><em class="property"> = 3</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.REVIEW" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.SETDEFAULTS">
+   <tt class="descname">SETDEFAULTS</tt><em class="property"> = 5</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ConfigMode.SETDEFAULTS" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod">
+   <em class="property">class </em><tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">SortMethod</tt><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.SortMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.INT_ASCENDING">
+   <tt class="descname">INT_ASCENDING</tt><em class="property"> = 1</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.INT_ASCENDING" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.INT_DESCENDING">
+   <tt class="descname">INT_DESCENDING</tt><em class="property"> = 2</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.INT_DESCENDING" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.STRING_ASCENDING">
+   <tt class="descname">STRING_ASCENDING</tt><em class="property"> = 3</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.STRING_ASCENDING" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.STRING_DESCENDING">
+   <tt class="descname">STRING_DESCENDING</tt><em class="property"> = 4</em><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.SortMethod.STRING_DESCENDING" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.add">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">add</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.add" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.ask">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">ask</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.ask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.ask" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Smart wizard which asks user for configuration information.
+   Result is a filled in self.params dictionary with simple name-value pairs
+   To be implemented in subclass.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoice">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskChoice</tt><big>(</big><em>name</em>, <em>message</em>, <em>choices</em>, <em>default=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogAskChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoice" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoiceMultiple">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskChoiceMultiple</tt><big>(</big><em>name</em>, <em>message</em>, <em>choices</em>, <em>default=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogAskChoiceMultiple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskChoiceMultiple" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskDate">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskDate</tt><big>(</big><em>name</em>, <em>message</em>, <em>minValue=None</em>, <em>maxValue=None</em>, <em>selectedValue=None</em>, <em>format='YYYY/MM/DD'</em>, <em>default=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogAskDate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskDate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskDirPath">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskDirPath</tt><big>(</big><em>name</em>, <em>message</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskDirPath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskFilePath">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskFilePath</tt><big>(</big><em>name</em>, <em>message</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskFilePath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskInteger">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskInteger</tt><big>(</big><em>name</em>, <em>message</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskInteger" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskIntegers">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskIntegers</tt><big>(</big><em>name</em>, <em>message</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskIntegers" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskMultiline">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskMultiline</tt><big>(</big><em>name</em>, <em>message</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskMultiline" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskPassword">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskPassword</tt><big>(</big><em>name</em>, <em>message</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskPassword" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskString">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskString</tt><big>(</big><em>name</em>, <em>message</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskString" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskYesNo">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogAskYesNo</tt><big>(</big><em>name</em>, <em>message</em>, <em>default=None</em><big>)</big><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogAskYesNo" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogMessage">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogMessage</tt><big>(</big><em>message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogMessage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowLogging">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogShowLogging</tt><big>(</big><em>text</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogShowLogging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowLogging" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowProgress">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">dialogShowProgress</tt><big>(</big><em>minvalue</em>, <em>maxvalue</em>, <em>currentvalue</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.dialogShowProgress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.dialogShowProgress" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.load">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">load</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.load" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.partialadd">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">partialadd</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.partialadd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.partialadd" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Behaviour for PARTIALADD mode</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.review">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">review</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.review"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.review" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.save">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.save" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.setDefaultValues">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">setDefaultValues</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.setDefaultValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.setDefaultValues" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.show">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">show</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.show" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.validate">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">validate</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.validate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check that configuration is consistent. This happens by dry-running the ask() method
+   and detecting whether config keys are missing or not matching constraints.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.IConfigBase.ConfigManagementItem.wrappedAsk">
+   <tt class="descclassname">ConfigManagementItem.</tt><tt class="descname">wrappedAsk</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#ConfigManagementItem.wrappedAsk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.ConfigManagementItem.wrappedAsk" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Wrapper around ask function. Here we can do things such as input buffer flushing and adding newlines when running in an action</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.config.IConfigBase.GroupConfigManagement">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">GroupConfigManagement</tt><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#GroupConfigManagement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.GroupConfigManagement" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>Classes inheriting from GroupConfigManagement will be put on i tree.
+   Serves for configuration of a collection of ConfigManagementItem classes.</p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.config.IConfigBase.SingleConfigManagement">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">SingleConfigManagement</tt><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#SingleConfigManagement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.SingleConfigManagement" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>Classes inheriting from ConfigManagement will be put on i tree.
+   Serves for configuration of a single ConfigManagementItem class.</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.autoCast">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">autoCast</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#autoCast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.autoCast" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.generateGroupConfigManagementMethods">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">generateGroupConfigManagementMethods</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#generateGroupConfigManagementMethods"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.generateGroupConfigManagementMethods" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Generate UI-visible config management methods for Group config objects.
+   (i.e. config objects which have multiple instances)</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.generateSingleConfigManagementMethods">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">generateSingleConfigManagementMethods</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#generateSingleConfigManagementMethods"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.generateSingleConfigManagementMethods" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Generate UI-visible config management methods for Single config objects.
+   (i.e. config objects which have only one &#8216;main&#8217; section and no other sections)</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.isValidInifileKeyName">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">isValidInifileKeyName</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#isValidInifileKeyName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.isValidInifileKeyName" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check that this key name is valid to be used in inifiles, and to be used as a python property name on a q or i object</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.isValidInifileSectionName">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">isValidInifileSectionName</tt><big>(</big><em>section</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#isValidInifileSectionName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.isValidInifileSectionName" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check that this section name is valid to be used in inifiles, and to be used as a python property name on a q or i object</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.core.config.IConfigBase.isValidInifileValue">
+   <tt class="descclassname">JumpScale.core.config.IConfigBase.</tt><tt class="descname">isValidInifileValue</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/IConfigBase.html#isValidInifileValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.IConfigBase.isValidInifileValue" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.JConfig">
+   <span id="jumpscale-core-config-jconfig-module"></span><h2>JumpScale.core.config.JConfig module<a class="headerlink" href="#module-JumpScale.core.config.JConfig" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.config.JConfig.JConfig">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.JConfig.</tt><tt class="descname">JConfig</tt><a class="reference internal" href="../_modules/JumpScale/core/config/JConfig.html#JConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfig.JConfig" title="Permalink to this definition">¶</a></dt>
+   <dd><p>jumpscale singleton class available under j.config
+   Meant for non interactive access to configuration items</p>
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfig.JConfig.getConfig">
+   <tt class="descname">getConfig</tt><big>(</big><em>configtype</em>, <em>directory='jsconfig'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfig.html#JConfig.getConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfig.JConfig.getConfig" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return dict of dicts for this configuration.
+   E.g. { &#8216;jumpscale.org&#8217;    : {url:&#8217;http://jumpscale.org&#8217;, login=&#8217;test&#8217;} ,</p>
+   <blockquote>
+   <div>&#8216;trac.qlayer.com&#8217; : {url:&#8217;http://trac.qlayer.com&#8217;, login=&#8217;mylogin&#8217;} }</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfig.JConfig.getInifile">
+   <tt class="descname">getInifile</tt><big>(</big><em>configtype</em>, <em>directory='jsconfig'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfig.html#JConfig.getInifile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfig.JConfig.getInifile" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfig.JConfig.list">
+   <tt class="descname">list</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfig.html#JConfig.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfig.JConfig.list" title="Permalink to this definition">¶</a></dt>
+   <dd><p>List all configuration types available.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfig.JConfig.remove">
+   <tt class="descname">remove</tt><big>(</big><em>configtype</em>, <em>directory='jsconfig'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfig.html#JConfig.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfig.JConfig.remove" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.JConfigBase">
+   <span id="jumpscale-core-config-jconfigbase-module"></span><h2>JumpScale.core.config.JConfigBase module<a class="headerlink" href="#module-JumpScale.core.config.JConfigBase" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItem">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.JConfigBase.</tt><tt class="descname">ConfiguredItem</tt><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.JConfigBase.</tt><tt class="descname">ConfiguredItemGroup</tt><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.has_key">
+   <tt class="descname">has_key</tt><big>(</big><em>k</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.has_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.has_key" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.items">
+   <tt class="descname">items</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.items" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.iteritems">
+   <tt class="descname">iteritems</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.iteritems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.iteritems" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.iterkeys">
+   <tt class="descname">iterkeys</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.iterkeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.iterkeys" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.itervalues">
+   <tt class="descname">itervalues</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.itervalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.itervalues" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.keys">
+   <tt class="descname">keys</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.keys" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.JConfigBase.ConfiguredItemGroup.values">
+   <tt class="descname">values</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/JConfigBase.html#ConfiguredItemGroup.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.JConfigBase.ConfiguredItemGroup.values" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.config" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.core.config package</a><ul>
+   <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.ConfigLib">JumpScale.core.config.ConfigLib module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.IConfigBase">JumpScale.core.config.IConfigBase module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.JConfig">JumpScale.core.config.JConfig module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.JConfigBase">JumpScale.core.config.JConfigBase module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.core.baseclasses.html"
+                           title="previous chapter">JumpScale.core.baseclasses package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.core.config.generator.html"
+                           title="next chapter">JumpScale.core.config.generator package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.core.config.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.config.generator.html" title="JumpScale.core.config.generator package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.baseclasses.html" title="JumpScale.core.baseclasses package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

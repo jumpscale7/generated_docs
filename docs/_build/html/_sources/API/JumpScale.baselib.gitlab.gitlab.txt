@@ -1,22 +1,1013 @@
-JumpScale.baselib.gitlab.gitlab package
-=======================================
-
-Submodules
-----------
-
-JumpScale.baselib.gitlab.gitlab.exceptions module
--------------------------------------------------
-
-.. automodule:: JumpScale.baselib.gitlab.gitlab.exceptions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.gitlab.gitlab
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.gitlab.gitlab package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib.gitlab package" href="JumpScale.baselib.gitlab.html" />
+       <link rel="next" title="JumpScale.baselib.graphite package" href="JumpScale.baselib.graphite.html" />
+       <link rel="prev" title="JumpScale.baselib.gitlab package" href="JumpScale.baselib.gitlab.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.graphite.html" title="JumpScale.baselib.graphite package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.gitlab.html" title="JumpScale.baselib.gitlab package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.gitlab.html" accesskey="U">JumpScale.baselib.gitlab package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-gitlab-gitlab-package">
+   <h1>JumpScale.baselib.gitlab.gitlab package<a class="headerlink" href="#jumpscale-baselib-gitlab-gitlab-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.gitlab.gitlab.exceptions">
+   <span id="jumpscale-baselib-gitlab-gitlab-exceptions-module"></span><h2>JumpScale.baselib.gitlab.gitlab.exceptions module<a class="headerlink" href="#module-JumpScale.baselib.gitlab.gitlab.exceptions" title="Permalink to this headline">¶</a></h2>
+   <dl class="exception">
+   <dt id="JumpScale.baselib.gitlab.gitlab.exceptions.HttpError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.baselib.gitlab.gitlab.exceptions.</tt><tt class="descname">HttpError</tt><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab/exceptions.html#HttpError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.exceptions.HttpError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+   <p>An http error occurred</p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.gitlab.gitlab">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.gitlab.gitlab" title="Permalink to this headline">¶</a></h2>
+   <p>pyapi-gitlab, a gitlab python wrapper for the gitlab API
+   by Itxaka Serrano Garcia &lt;<a class="reference external" href="mailto:itxakaserrano&#37;&#52;&#48;gmail&#46;com">itxakaserrano<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+   now changes also by jumpscale team</p>
+   <dl class="class">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.gitlab.gitlab.</tt><tt class="descname">Gitlab</tt><big>(</big><em>host</em>, <em>token=''</em>, <em>verify_ssl=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>Gitlab class</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addcommenttomergerequest">
+   <tt class="descname">addcommenttomergerequest</tt><big>(</big><em>project_id</em>, <em>mergerequest_id</em>, <em>note</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addcommenttomergerequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addcommenttomergerequest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add a comment to a merge request.
+   :param project_id: ID of the project originating the merge request
+   :param mergerequest_id: ID of the merge request to comment on
+   :param note: Text of comment</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.adddeploykey">
+   <tt class="descname">adddeploykey</tt><big>(</big><em>id_</em>, <em>title</em>, <em>key</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.adddeploykey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.adddeploykey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates a new deploy key for a project.
+   If deploy key already exists in another project - it will be joined
+   to project but only if original one was is accessible by same user
+   :param <a href="#id1"><span class="problematic" id="id2">id_</span></a>: project id
+   :param title: title of the key
+   :param key: the key itself
+   :return: true if sucess, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addgroupmember">
+   <tt class="descname">addgroupmember</tt><big>(</big><em>group_id</em>, <em>user_id</em>, <em>access_level</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addgroupmember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addgroupmember" title="Permalink to this definition">¶</a></dt>
+   <dd><p>add a user to a group
+   new in 6.2</p>
+   <p># check the access level and put into a number</p>
+   <p>adds a project member to a project
+   :param <a href="#id3"><span class="problematic" id="id4">id_</span></a>: project id
+   :param user_id: user id
+   :param access_level: access level, see gitlab help to know more
+   :param sudo: do the request with another user
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addprojecthook">
+   <tt class="descname">addprojecthook</tt><big>(</big><em>id_</em>, <em>url</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addprojecthook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addprojecthook" title="Permalink to this definition">¶</a></dt>
+   <dd><p>add a hook to a project
+   :param <a href="#id5"><span class="problematic" id="id6">id_</span></a>: project id
+   :param url: url of the hook
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addprojectmember">
+   <tt class="descname">addprojectmember</tt><big>(</big><em>id_</em>, <em>user_id</em>, <em>access_level</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addprojectmember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addprojectmember" title="Permalink to this definition">¶</a></dt>
+   <dd><p>adds a project member to a project
+   :param <a href="#id7"><span class="problematic" id="id8">id_</span></a>: project id
+   :param user_id: user id
+   :param access_level: access level, see gitlab help to know more
+   :param sudo: do the request with another user
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addsshkey">
+   <tt class="descname">addsshkey</tt><big>(</big><em>title</em>, <em>key</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addsshkey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addsshkey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add a new ssh key for the current user
+   :param title: title of the new key
+   :param key: the key itself
+   :return: true if added, false if it didn&#8217;t add it
+   (it could be because the name or key already exists)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.addsshkeyuser">
+   <tt class="descname">addsshkeyuser</tt><big>(</big><em>id_</em>, <em>title</em>, <em>key</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.addsshkeyuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.addsshkeyuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add a new ssh key for the user identified by id
+   :param <a href="#id9"><span class="problematic" id="id10">id_</span></a>: id of the user to add the key to
+   :param title: title of the new key
+   :param key: the key itself
+   :return: true if added, false if it didn&#8217;t add it
+   (it could be because the name or key already exists)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createfile">
+   <tt class="descname">createfile</tt><big>(</big><em>project_id</em>, <em>file_path</em>, <em>branch_name</em>, <em>content</em>, <em>commit_message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createfile" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates a new file in the repository
+   :param project_id: project id
+   :param file_path: Full path to new file. Ex. lib/class.rb
+   :param branch_name: The name of branch
+   :param content: File content
+   :param commit_message: Commit message
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createforkrelation">
+   <tt class="descname">createforkrelation</tt><big>(</big><em>id_</em>, <em>from_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createforkrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createforkrelation" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a fork relation. This DO NOT create a fork but only adds
+   the relation between 2 repositories
+   :param <a href="#id11"><span class="problematic" id="id12">id_</span></a>: project id
+   :param <a href="#id13"><span class="problematic" id="id14">from_</span></a>: from id
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.creategroup">
+   <tt class="descname">creategroup</tt><big>(</big><em>name</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.creategroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.creategroup" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates a new group
+   :param name: The name of the group
+   :param path: The path for the group</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createissue">
+   <tt class="descname">createissue</tt><big>(</big><em>id_</em>, <em>title</em>, <em>description=''</em>, <em>assignee_id=''</em>, <em>milestone_id=''</em>, <em>labels=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createissue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createissue" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new issue
+   :param <a href="#id15"><span class="problematic" id="id16">id_</span></a>: project id
+   :param title: title of the issue
+   :param description: description
+   :param assignee_id: assignee for the issue
+   :param milestone_id: milestone
+   :param labels: label
+   :param sudo: do the request as another user
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createissuewallnote">
+   <tt class="descname">createissuewallnote</tt><big>(</big><em>project_id</em>, <em>issue_id</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createissuewallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createissuewallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new note</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createmergerequest">
+   <tt class="descname">createmergerequest</tt><big>(</big><em>project_id</em>, <em>sourcebranch</em>, <em>targetbranch</em>, <em>title</em>, <em>assignee_id=None</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createmergerequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createmergerequest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a new merge request.
+   :param project_id: ID of the project originating the merge request
+   :param sourcebranch: name of the branch to merge from
+   :param targetbranch: name of the branch to merge to
+   :param title: Title of the merge request
+   :param assignee_id: Assignee user ID</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createmergerequestewallnote">
+   <tt class="descname">createmergerequestewallnote</tt><big>(</big><em>project_id</em>, <em>merge_request_id</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createmergerequestewallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createmergerequestewallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new note</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createmilestone">
+   <tt class="descname">createmilestone</tt><big>(</big><em>id_</em>, <em>title</em>, <em>description=''</em>, <em>due_date=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createmilestone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createmilestone" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new milestone
+   :param <a href="#id17"><span class="problematic" id="id18">id_</span></a>: project id
+   :param title: title
+   :param description: description
+   :param due_date: due date
+   :param sudo: do the request as another user
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createproject">
+   <tt class="descname">createproject</tt><big>(</big><em>name</em>, <em>description=''</em>, <em>issues_enabled=0</em>, <em>wall_enabled=0</em>, <em>merge_requests_enabled=0</em>, <em>wiki_enabled=0</em>, <em>snippets_enabled=0</em>, <em>public=0</em>, <em>group='admin'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createproject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createproject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a project
+   :param name: Obligatory
+   :return: Dict of information on the newly created project if successful,</p>
+   <blockquote>
+   <div>False otherwise</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createprojectuser">
+   <tt class="descname">createprojectuser</tt><big>(</big><em>id_</em>, <em>name</em>, <em>description=''</em>, <em>default_branch=''</em>, <em>issues_enabled=0</em>, <em>wall_enabled=0</em>, <em>merge_requests_enabled=0</em>, <em>wiki_enabled=0</em>, <em>public=0</em>, <em>snippets_enabled=0</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createprojectuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createprojectuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a project for the given user identified by id
+   :param <a href="#id19"><span class="problematic" id="id20">id_</span></a>: id of the user to crete the project for
+   :param name: Obligatory
+   :return: True if it created the project, False otherwise</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createprojectwallnote">
+   <tt class="descname">createprojectwallnote</tt><big>(</big><em>project_id</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createprojectwallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createprojectwallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new note</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createsnippet">
+   <tt class="descname">createsnippet</tt><big>(</big><em>project_id</em>, <em>title</em>, <em>file_name</em>, <em>code</em>, <em>lifetime=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createsnippet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createsnippet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates an snippet
+   &#64;param project_id: project id to create the snippet under
+   &#64;param title: title of the snippet
+   &#64;param file_name: filename for the snippet
+   &#64;param code: content of the snippet
+   &#64;param lifetime: expiration date
+   &#64;return: True if correct, false if failed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createsnippetewallnote">
+   <tt class="descname">createsnippetewallnote</tt><big>(</big><em>project_id</em>, <em>snippet_id</em>, <em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createsnippetewallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createsnippetewallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>create a new note</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.createuser">
+   <tt class="descname">createuser</tt><big>(</big><em>name</em>, <em>username</em>, <em>password</em>, <em>email</em>, <em>skype=''</em>, <em>linkedin=''</em>, <em>twitter=''</em>, <em>projects_limit=''</em>, <em>extern_uid=''</em>, <em>provider=''</em>, <em>bio=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.createuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.createuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a user
+   :param name: Obligatory
+   :param username: Obligatory
+   :param password: Obligatory
+   :param email: Obligatory
+   :return: TRue if the user was created,false if it wasn&#8217;t(already exists)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.currentuser">
+   <tt class="descname">currentuser</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.currentuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.currentuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the current user parameters. The current user is linked
+   to the secret token
+   :return: a list with the current user properties</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletedeploykey">
+   <tt class="descname">deletedeploykey</tt><big>(</big><em>id_</em>, <em>key_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletedeploykey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletedeploykey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete a deploy key from a project
+   :param <a href="#id21"><span class="problematic" id="id22">id_</span></a>: project id
+   :param key_id: key id to delete
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletefile">
+   <tt class="descname">deletefile</tt><big>(</big><em>project_id</em>, <em>file_path</em>, <em>branch_name</em>, <em>commit_message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletefile" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Deletes existing file in the repository
+   :param project_id: project id
+   :param file_path: Full path to new file. Ex. lib/class.rb
+   :param branch_name: The name of branch
+   :param commit_message: Commit message
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletegitlabciservice">
+   <tt class="descname">deletegitlabciservice</tt><big>(</big><em>project_id</em>, <em>token</em>, <em>project_url</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletegitlabciservice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletegitlabciservice" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete GitLab CI service settings
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletegroup">
+   <tt class="descname">deletegroup</tt><big>(</big><em>group_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletegroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletegroup" title="Permalink to this definition">¶</a></dt>
+   <dd><p>groups section, new in 6.2</p>
+   <p>Deletes an group by ID
+   :param <a href="#id23"><span class="problematic" id="id24">id_</span></a>: id of the group to delete
+   :return: True if it deleted, False if it couldn&#8217;t. False could happen
+   for several reasons, but there isn&#8217;t a
+   good way of differentiating them</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletegroupmember">
+   <tt class="descname">deletegroupmember</tt><big>(</big><em>group_id</em>, <em>user_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletegroupmember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletegroupmember" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete a group member
+   :param <a href="#id25"><span class="problematic" id="id26">id_</span></a>: project id
+   :param user_id: user id
+   :return: always true</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deleteproject">
+   <tt class="descname">deleteproject</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deleteproject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deleteproject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete a project
+   :param <a href="#id27"><span class="problematic" id="id28">id_</span></a>: project id
+   :return: always true</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deleteprojecthook">
+   <tt class="descname">deleteprojecthook</tt><big>(</big><em>id_</em>, <em>hook_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deleteprojecthook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deleteprojecthook" title="Permalink to this definition">¶</a></dt>
+   <dd><p>delete a project hook
+   :param <a href="#id29"><span class="problematic" id="id30">id_</span></a>: project id
+   :param hook_id: hook id
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deleteprojectmember">
+   <tt class="descname">deleteprojectmember</tt><big>(</big><em>id_</em>, <em>user_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deleteprojectmember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deleteprojectmember" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete a project member
+   :param <a href="#id31"><span class="problematic" id="id32">id_</span></a>: project id
+   :param user_id: user id
+   :return: always true</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletesnippet">
+   <tt class="descname">deletesnippet</tt><big>(</big><em>project_id</em>, <em>snippet_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletesnippet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletesnippet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deletesshkey">
+   <tt class="descname">deletesshkey</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deletesshkey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deletesshkey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Deletes an sshkey for the current user identified by id
+   :param <a href="#id33"><span class="problematic" id="id34">id_</span></a>: the id of the key
+   :return: False if it didn&#8217;t delete it, True if it was deleted</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.deleteuser">
+   <tt class="descname">deleteuser</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.deleteuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.deleteuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Deletes an user by ID
+   :param <a href="#id35"><span class="problematic" id="id36">id_</span></a>: id of the user to delete
+   :return: True if it deleted, False if it couldn&#8217;t. False could happen
+   for several reasons, but there isn&#8217;t a
+   good way of differenting them</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.editissue">
+   <tt class="descname">editissue</tt><big>(</big><em>id_</em>, <em>issue_id</em>, <em>title=''</em>, <em>description=''</em>, <em>assignee_id=''</em>, <em>milestone_id=''</em>, <em>labels=''</em>, <em>state_event=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.editissue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.editissue" title="Permalink to this definition">¶</a></dt>
+   <dd><p>edit an existing issue data
+   :param <a href="#id37"><span class="problematic" id="id38">id_</span></a>: project id
+   :param issue_id: issue id
+   :param title: title
+   :param description: description
+   :param assignee_id: asignee
+   :param milestone_id: milestone
+   :param labels: label
+   :param state_event: state
+   :param sudo: do the request as another user
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.editmilestone">
+   <tt class="descname">editmilestone</tt><big>(</big><em>id_</em>, <em>milestone_id</em>, <em>title=''</em>, <em>description=''</em>, <em>due_date=''</em>, <em>state_event=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.editmilestone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.editmilestone" title="Permalink to this definition">¶</a></dt>
+   <dd><p>edit an existing milestone
+   :param <a href="#id39"><span class="problematic" id="id40">id_</span></a>: project id
+   :param milestone_id: milestone id
+   :param title: title
+   :param description: description
+   :param due_date: due date
+   :param state_event: state
+   :param sudo: do the request as another user
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.editprojecthook">
+   <tt class="descname">editprojecthook</tt><big>(</big><em>id_</em>, <em>hook_id</em>, <em>url</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.editprojecthook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.editprojecthook" title="Permalink to this definition">¶</a></dt>
+   <dd><p>edit an existing hook from a project
+   :param <a href="#id41"><span class="problematic" id="id42">id_</span></a>: project id
+   :param hook_id: hook id
+   :param url: the new url
+   :param sudo: do the request as another user
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.editprojectmember">
+   <tt class="descname">editprojectmember</tt><big>(</big><em>id_</em>, <em>user_id</em>, <em>access_level</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.editprojectmember"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.editprojectmember" title="Permalink to this definition">¶</a></dt>
+   <dd><p>edit a project member
+   :param <a href="#id43"><span class="problematic" id="id44">id_</span></a>: project id
+   :param user_id: user id
+   :param access_level: access level
+   :param sudo: do the request as another user
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.edituser">
+   <tt class="descname">edituser</tt><big>(</big><em>id_</em>, <em>name=''</em>, <em>username=''</em>, <em>password=''</em>, <em>email=''</em>, <em>skype=''</em>, <em>linkedin=''</em>, <em>twitter=''</em>, <em>projects_limit=''</em>, <em>extern_uid=''</em>, <em>provider=''</em>, <em>bio=''</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.edituser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.edituser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Edits an user data. Unfortunately we have to check ALL the params,
+   as they can&#8217;t be empty or the user will get all their data empty,
+   so we only send the filled params
+   :param <a href="#id45"><span class="problematic" id="id46">id_</span></a>: id of the user to change
+   :param name: name
+   :param username: username
+   :param password: pass
+   :param email: email
+   :param skype: skype
+   :param linkedin: linkedin
+   :param twitter: twitter
+   :param projects_limit: the limits project, default is 10
+   :param extern_uid: no idea
+   :param provider: google login for example
+   :param bio: bio
+   :param sudo: do the task as the user provided
+   :return: alway true as gitlab answers with a 404</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.existsGroup">
+   <tt class="descname">existsGroup</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.existsGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.existsGroup" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.existsProject">
+   <tt class="descname">existsProject</tt><big>(</big><em>namespace</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.existsProject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.existsProject" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.existsUser">
+   <tt class="descname">existsUser</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.existsUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.existsUser" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getGroupId">
+   <tt class="descname">getGroupId</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getGroupId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getGroupId" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getProjectId">
+   <tt class="descname">getProjectId</tt><big>(</big><em>namespace</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getProjectId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getProjectId" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getUserId">
+   <tt class="descname">getUserId</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getUserId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getUserId" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getallprojects">
+   <tt class="descname">getallprojects</tt><big>(</big><em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getallprojects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getallprojects" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a dictionary of all the projects for admins only
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)
+   :return: list with the repo name, description, last activity,</p>
+   <blockquote>
+   <div>web url, ssh url, owner and if its public</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getfilearchive">
+   <tt class="descname">getfilearchive</tt><big>(</big><em>project_id</em>, <em>filepath=''</em>, <em>sha1=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getfilearchive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getfilearchive" title="Permalink to this definition">¶</a></dt>
+   <dd><p>repository section</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getgroups">
+   <tt class="descname">getgroups</tt><big>(</big><em>id_=None</em>, <em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getgroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getgroups" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Retrieve group information
+   :param <a href="#id47"><span class="problematic" id="id48">id_</span></a>: Specify a group. Otherwise, all groups are returned
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getissues">
+   <tt class="descname">getissues</tt><big>(</big><em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getissues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getissues" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a global list of issues for your user.
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getissuewallnote">
+   <tt class="descname">getissuewallnote</tt><big>(</big><em>project_id</em>, <em>issue_id</em>, <em>note_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getissuewallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getissuewallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get one note from the wall of the issue</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getissuewallnotes">
+   <tt class="descname">getissuewallnotes</tt><big>(</big><em>project_id</em>, <em>issue_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getissuewallnotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getissuewallnotes" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get the notes from the wall of a issue</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequest">
+   <tt class="descname">getmergerequest</tt><big>(</big><em>project_id</em>, <em>mergerequest_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmergerequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get information about a specific merge request.
+   :type project_id: int
+   :param project_id: ID of the project
+   :param mergerequest_id: ID of the merge request</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequests">
+   <tt class="descname">getmergerequests</tt><big>(</big><em>project_id</em>, <em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmergerequests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequests" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get all the merge requests for a project.
+   :param project_id: ID of the project to retrieve merge requests for
+   :param page: If pagination is set, which page to return
+   :param per_page: Number of merge requests to return per page</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequestwallnote">
+   <tt class="descname">getmergerequestwallnote</tt><big>(</big><em>project_id</em>, <em>merge_request_id</em>, <em>note_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmergerequestwallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequestwallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get one note from the wall of the merge request</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequestwallnotes">
+   <tt class="descname">getmergerequestwallnotes</tt><big>(</big><em>project_id</em>, <em>merge_request_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmergerequestwallnotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmergerequestwallnotes" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get the notes from the wall of a merge request</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmilestone">
+   <tt class="descname">getmilestone</tt><big>(</big><em>id_</em>, <em>milestone_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmilestone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmilestone" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get an specific milestone
+   :param <a href="#id49"><span class="problematic" id="id50">id_</span></a>: project id
+   :param milestone_id: milestone id
+   :return: the milestone</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getmilestones">
+   <tt class="descname">getmilestones</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getmilestones"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getmilestones" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get the milestones for a project
+   :param <a href="#id51"><span class="problematic" id="id52">id_</span></a>: project id
+   :return: the milestones</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getproject">
+   <tt class="descname">getproject</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getproject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getproject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get info for a project identified by id
+   :param <a href="#id53"><span class="problematic" id="id54">id_</span></a>: id of the project
+   :return: False if not found, a dictionary if found</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectevents">
+   <tt class="descname">getprojectevents</tt><big>(</big><em>id_</em>, <em>page=1</em>, <em>per_page=20</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojectevents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectevents" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get the project identified by id, events(commits)
+   :param <a href="#id55"><span class="problematic" id="id56">id_</span></a>: id of the project
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)
+   :return: False if no project with that id, a dictionary</p>
+   <blockquote>
+   <div>with the events if found</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojecthook">
+   <tt class="descname">getprojecthook</tt><big>(</big><em>id_</em>, <em>hook_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojecthook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojecthook" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get a particular hook from a project
+   :param <a href="#id57"><span class="problematic" id="id58">id_</span></a>: project id
+   :param hook_id: hook id
+   :return: the hook</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojecthooks">
+   <tt class="descname">getprojecthooks</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojecthooks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojecthooks" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get all the hooks from a project
+   :param <a href="#id59"><span class="problematic" id="id60">id_</span></a>: project id
+   :return: the hooks</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectissue">
+   <tt class="descname">getprojectissue</tt><big>(</big><em>id_</em>, <em>issue_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojectissue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectissue" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get an specific issue id from a project
+   :param <a href="#id61"><span class="problematic" id="id62">id_</span></a>: project id
+   :param issue_id: issue id
+   :return: the issue</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectissues">
+   <tt class="descname">getprojectissues</tt><big>(</big><em>id_</em>, <em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojectissues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectissues" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a list of issues for project <a href="#id63"><span class="problematic" id="id64">id_</span></a>.
+   :param <a href="#id65"><span class="problematic" id="id66">id_</span></a>: The id for the project.
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojects">
+   <tt class="descname">getprojects</tt><big>(</big><em>page=1</em>, <em>per_page=20</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojects" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a dictionary of all the projects
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)
+   :return: list with the repo name, description, last activity,</p>
+   <blockquote>
+   <div>web url, ssh url, owner and if its public</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectwallnote">
+   <tt class="descname">getprojectwallnote</tt><big>(</big><em>project_id</em>, <em>note_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojectwallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectwallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get one note from the wall of the project</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectwallnotes">
+   <tt class="descname">getprojectwallnotes</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getprojectwallnotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getprojectwallnotes" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get the notes from the wall of a project</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getrawblob">
+   <tt class="descname">getrawblob</tt><big>(</big><em>project_id</em>, <em>sha1</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getrawblob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getrawblob" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getreadme">
+   <tt class="descname">getreadme</tt><big>(</big><em>repo</em>, <em>mark=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getreadme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getreadme" title="Permalink to this definition">¶</a></dt>
+   <dd><p>returns the readme
+   :param mark: If false returns the raw readme,
+   else returns the readme parsed by markdown
+   :param repo: the web url to the project</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getrepositories">
+   <tt class="descname">getrepositories</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getrepositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getrepositories" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getrepositorybranch">
+   <tt class="descname">getrepositorybranch</tt><big>(</big><em>project_id</em>, <em>branch</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getrepositorybranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getrepositorybranch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippet">
+   <tt class="descname">getsnippet</tt><big>(</big><em>project_id</em>, <em>snippet_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsnippet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get one snippet from a project
+   &#64;param project_id: project id to get the snippet from
+   &#64;param snippet_id: snippet id
+   &#64;return: dictionary</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetcontent">
+   <tt class="descname">getsnippetcontent</tt><big>(</big><em>project_id</em>, <em>snippet_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsnippetcontent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetcontent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippets">
+   <tt class="descname">getsnippets</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsnippets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippets" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get all the snippets of the project identified by project_id
+   &#64;param project_id: project id to get the snippets from
+   &#64;return: list of dictionaries</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetwallnote">
+   <tt class="descname">getsnippetwallnote</tt><big>(</big><em>project_id</em>, <em>snippet_id</em>, <em>note_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsnippetwallnote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetwallnote" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get one note from the wall of the snippet</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetwallnotes">
+   <tt class="descname">getsnippetwallnotes</tt><big>(</big><em>project_id</em>, <em>snippet_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsnippetwallnotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsnippetwallnotes" title="Permalink to this definition">¶</a></dt>
+   <dd><p>get the notes from the wall of a snippet</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsshkey">
+   <tt class="descname">getsshkey</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsshkey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsshkey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get a single ssh key identified by <a href="#id67"><span class="problematic" id="id68">id_</span></a>
+   :param <a href="#id69"><span class="problematic" id="id70">id_</span></a>: the id of the key
+   :return: the key itself</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getsshkeys">
+   <tt class="descname">getsshkeys</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getsshkeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getsshkeys" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Gets all the ssh keys for the current user
+   :return: a dictionary with the lists</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getuser">
+   <tt class="descname">getuser</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getuser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getuser" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get info for a user identified by id
+   :param <a href="#id71"><span class="problematic" id="id72">id_</span></a>: id of the user
+   :return: False if not found, a dictionary if found</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.getusers">
+   <tt class="descname">getusers</tt><big>(</big><em>page=1</em>, <em>per_page=20</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.getusers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.getusers" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a user list
+   :param page: Which page to return (default is 1)
+   :param per_page: Number of items to return per page (default is 20)
+   return: returs a dictionary of the users, false if there is an error</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listbranch">
+   <tt class="descname">listbranch</tt><big>(</big><em>id_</em>, <em>branch</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listbranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listbranch" title="Permalink to this definition">¶</a></dt>
+   <dd><p>list one branch from a project
+   :param <a href="#id73"><span class="problematic" id="id74">id_</span></a>: project id
+   :param branch: branch id
+   :return: the branch</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listbranches">
+   <tt class="descname">listbranches</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listbranches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listbranches" title="Permalink to this definition">¶</a></dt>
+   <dd><p>list all the branches from a project
+   :param <a href="#id75"><span class="problematic" id="id76">id_</span></a>: project id
+   :return: the branches</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listdeploykey">
+   <tt class="descname">listdeploykey</tt><big>(</big><em>id_</em>, <em>key_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listdeploykey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listdeploykey" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get a single key.
+   :param <a href="#id77"><span class="problematic" id="id78">id_</span></a>: project id
+   :param key_id: key id
+   :return: the key in a dict if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listdeploykeys">
+   <tt class="descname">listdeploykeys</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listdeploykeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listdeploykeys" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get a list of a project&#8217;s deploy keys.
+   :param <a href="#id79"><span class="problematic" id="id80">id_</span></a>: project id
+   :return: the keys in a dictionary if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listgroupmembers">
+   <tt class="descname">listgroupmembers</tt><big>(</big><em>group_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listgroupmembers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listgroupmembers" title="Permalink to this definition">¶</a></dt>
+   <dd><p>list group members
+   new in 6.2</p>
+   <p>lists the members of a given group id
+   :param group_id: the group id
+   :return: the group&#8217;s members</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listprojectmembers">
+   <tt class="descname">listprojectmembers</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listprojectmembers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listprojectmembers" title="Permalink to this definition">¶</a></dt>
+   <dd><p>lists the members of a given project id
+   :param <a href="#id81"><span class="problematic" id="id82">id_</span></a>: the project id
+   :return: the projects memebers</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommit">
+   <tt class="descname">listrepositorycommit</tt><big>(</big><em>project_id</em>, <em>sha1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listrepositorycommit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommitdiff">
+   <tt class="descname">listrepositorycommitdiff</tt><big>(</big><em>project_id</em>, <em>sha1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listrepositorycommitdiff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommitdiff" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommits">
+   <tt class="descname">listrepositorycommits</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listrepositorycommits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorycommits" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorytags">
+   <tt class="descname">listrepositorytags</tt><big>(</big><em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listrepositorytags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorytags" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorytree">
+   <tt class="descname">listrepositorytree</tt><big>(</big><em>project_id</em>, <em>path=''</em>, <em>ref_name=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.listrepositorytree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.listrepositorytree" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.load">
+   <tt class="descname">load</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.load" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.login">
+   <tt class="descname">login</tt><big>(</big><em>user</em>, <em>password</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.login" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Logs the user in and setups the header with the private token
+   :param user: gitlab user
+   :param password: gitlab password
+   :return: True if login successfull</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.moveproject">
+   <tt class="descname">moveproject</tt><big>(</big><em>group_id</em>, <em>project_id</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.moveproject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.moveproject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Move a given project into a given group
+   :param group_id: ID of the destination group
+   :param project_id: ID of the project to be moved</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.protectbranch">
+   <tt class="descname">protectbranch</tt><big>(</big><em>id_</em>, <em>branch</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.protectbranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.protectbranch" title="Permalink to this definition">¶</a></dt>
+   <dd><p>protect a branch from changes
+   :param <a href="#id83"><span class="problematic" id="id84">id_</span></a>: project id
+   :param branch: branch id
+   :return: True if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.protectrepositorybranch">
+   <tt class="descname">protectrepositorybranch</tt><big>(</big><em>project_id</em>, <em>branch_name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.protectrepositorybranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.protectrepositorybranch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.removeforkrelation">
+   <tt class="descname">removeforkrelation</tt><big>(</big><em>id_</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.removeforkrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.removeforkrelation" title="Permalink to this definition">¶</a></dt>
+   <dd><p>remove an existing fork relation. this DO NOT remove the fork,
+   only the relation between them
+   :param <a href="#id85"><span class="problematic" id="id86">id_</span></a>: project id
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.searchproject">
+   <tt class="descname">searchproject</tt><big>(</big><em>search</em>, <em>page=1</em>, <em>per_page=20</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.searchproject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.searchproject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>projects section</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.setgitlabciservice">
+   <tt class="descname">setgitlabciservice</tt><big>(</big><em>project_id</em>, <em>token</em>, <em>project_url</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.setgitlabciservice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.setgitlabciservice" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Set GitLab CI service for project
+   :param project_id: project id
+   :param token: CI project token
+   :param project_url: CI project url
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.unprotectbranch">
+   <tt class="descname">unprotectbranch</tt><big>(</big><em>id_</em>, <em>branch</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.unprotectbranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.unprotectbranch" title="Permalink to this definition">¶</a></dt>
+   <dd><p>stop protecting a branch
+   :param <a href="#id87"><span class="problematic" id="id88">id_</span></a>: project id
+   :param branch: branch id
+   :return: true if success</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.unprotectrepositorybranch">
+   <tt class="descname">unprotectrepositorybranch</tt><big>(</big><em>project_id</em>, <em>branch_name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.unprotectrepositorybranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.unprotectrepositorybranch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.updatefile">
+   <tt class="descname">updatefile</tt><big>(</big><em>project_id</em>, <em>file_path</em>, <em>branch_name</em>, <em>content</em>, <em>commit_message</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.updatefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.updatefile" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Updates an existing file in the repository
+   :param project_id: project id
+   :param file_path: Full path to new file. Ex. lib/class.rb
+   :param branch_name: The name of branch
+   :param content: File content
+   :param commit_message: Commit message
+   :return: true if success, false if not</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.gitlab.gitlab.Gitlab.updatemergerequest">
+   <tt class="descname">updatemergerequest</tt><big>(</big><em>project_id</em>, <em>mergerequest_id</em>, <em>sourcebranch=None</em>, <em>targetbranch=None</em>, <em>title=None</em>, <em>assignee_id=None</em>, <em>closed=None</em>, <em>sudo=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/gitlab/gitlab.html#Gitlab.updatemergerequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.gitlab.gitlab.Gitlab.updatemergerequest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Update an existing merge request.
+   :param project_id: ID of the project originating the merge request
+   :param mergerequest_id: ID of the merge request to update
+   :param sourcebranch: name of the branch to merge from
+   :param targetbranch: name of the branch to merge to
+   :param title: Title of the merge request
+   :param assignee_id: Assignee user ID
+   :param closed: MR status.  True = closed</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.gitlab.gitlab package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.gitlab.gitlab.exceptions">JumpScale.baselib.gitlab.gitlab.exceptions module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.gitlab.gitlab">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.gitlab.html"
+                           title="previous chapter">JumpScale.baselib.gitlab package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.graphite.html"
+                           title="next chapter">JumpScale.baselib.graphite package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.gitlab.gitlab.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.graphite.html" title="JumpScale.baselib.graphite package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.gitlab.html" title="JumpScale.baselib.gitlab package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.gitlab.html" >JumpScale.baselib.gitlab package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>
