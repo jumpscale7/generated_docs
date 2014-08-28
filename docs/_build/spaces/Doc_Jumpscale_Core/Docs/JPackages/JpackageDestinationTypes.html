@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JPackage Destination Types &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Installation" href="../index.html" />
+    <link rel="next" title="Process Management In Jumpscale" href="../ProcessManagement/ProcessManagement.html" />
+    <link rel="prev" title="Coderecipe" href="Coderecipe.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../ProcessManagement/ProcessManagement.html" title="Process Management In Jumpscale"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Coderecipe.html" title="Coderecipe"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jpackage-destination-types">
+<h1>JPackage Destination Types<a class="headerlink" href="#jpackage-destination-types" title="Permalink to this headline">¶</a></h1>
+<p>Following is the convention for the different types</p>
+<ul class="simple">
+<li>Files with type root are copied to root of system</li>
+<li>Files with type bin are copied to /bin/</li>
+<li>Files with type etc are copied to /etc/</li>
+<li>Files with type debs are copied to tmp and then installed using debian/ubuntu apt-get</li>
+<li>Files with type base are copied to $j.dirs.baseDir</li>
+<li>Files with type app are copied to $j.dirs.appDir</li>
+<li>Files with type code are copied to $j.dirs.codeDir</li>
+<li>Files with type var are copied to $j.dirs.varDir</li>
+<li>Files with type cfg are copied to $j.dirs.cfgDir</li>
+<li>Files with type bin are copied to j.application.config.get(&#8220;bin.local&#8221;) (comes out of system hrd)</li>
+<li>Files with type jsbin are copied to $j.dirs.binDir</li>
+<li>Files with type log are copied to $j.dirs.logDir</li>
+<li>Files with type tmp are copied to $j.dirs.tmpDir</li>
+<li>Files with type lib are copied to $j.dirs.libDir</li>
+<li>Files with type libext are copied to $j.dirs.libExtDir   #external to sandbox</li>
+<li>Files with type sitepackages are copied to j.application.config.get(&#8220;python.paths.local.sitepackages&#8221;) or to j.dirs.baseDir+&#8221;libext&#8221; when sandboxed</li>
+</ul>
+<p>you can use</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">txt</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">replaceTxtDirVars</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">j</span><span class="o">.</span><span class="n">dirs</span><span class="o">.</span><span class="n">replaceFilesDirVars</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>to replace template vars in text or text files.
+the template vars are rootdir, bindir, ... (all varnames used above + &#8220;dir&#8221;)</p>
+<p>PS: above var names can also be used in all metadata from jpackages, will also get replaced.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Coderecipe.html"
+                        title="previous chapter">Coderecipe</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../ProcessManagement/ProcessManagement.html"
+                        title="next chapter">Process Management In Jumpscale</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Core/Docs/JPackages/JpackageDestinationTypes.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../ProcessManagement/ProcessManagement.html" title="Process Management In Jumpscale"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Coderecipe.html" title="Coderecipe"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

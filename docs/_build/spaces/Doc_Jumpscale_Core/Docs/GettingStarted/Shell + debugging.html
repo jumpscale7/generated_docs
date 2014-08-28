@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Shell and Debugging &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Installation" href="../index.html" />
+    <link rel="next" title="Configuration Files" href="Configuration Files.html" />
+    <link rel="prev" title="IPython Tricks" href="IPythonTricks.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Configuration Files.html" title="Configuration Files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="IPythonTricks.html" title="IPython Tricks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Installation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="shell-and-debugging">
+<h1>Shell and Debugging<a class="headerlink" href="#shell-and-debugging" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="js">
+<h2>js<a class="headerlink" href="#js" title="Permalink to this headline">¶</a></h2>
+<p>is the jumpscale shell
+just do &#8216;js&#8217;</p>
+<p>there are many more cmdline tools installed to explore do js`tab` and you will see...</p>
+<div class="highlight-python"><div class="highlight"><pre># js
+Python 2.7.5+ (default, Sep 19 2013, 13:48:49)
+Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+
+IPython 0.13.2 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython&#39;s features.
+%quickref -&gt; Quick reference.
+help      -&gt; Python&#39;s own help system.
+object?   -&gt; Details about &#39;object&#39;, use &#39;object??&#39; for extra details.
+
+In [1]:
+</pre></div>
+</div>
+</div>
+<div class="section" id="import-jumpscale-in-any-python-script">
+<h2>import jumpscale in any python script<a class="headerlink" href="#import-jumpscale-in-any-python-script" title="Permalink to this headline">¶</a></h2>
+<p>e.g. try using ipython</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+<span class="n">j</span><span class="o">.</span><span class="p">[</span><span class="n">tab</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>now underneath j there is a basic set of functionality available.
+just do j.tab</p>
+<p>there are tons of extensions available which can be installed using jspackages (more about that later)</p>
+</div>
+<div class="section" id="from-an-existing-python-script-start-jumpscale-go-to-the-debug-shell">
+<h2>from an existing python script start JumpScale &amp; go to the debug shell<a class="headerlink" href="#from-an-existing-python-script-start-jumpscale-go-to-the-debug-shell" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+<span class="c">#your python code here ... optionally using jumpscale</span>
+
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">embed</span>
+<span class="k">print</span> <span class="s">&quot;DEBUG NOW in my shell on pos X&quot;</span>
+<span class="n">embed</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>your script will now stop &amp; show you an ipython console in which you can inspect your code and work with all variables in an interactive way.</p>
+</div>
+<div class="section" id="alternative-way-of-debugging-ipdb-h3">
+<h2>Alternative way of debugging ipdb h3.<a class="headerlink" href="#alternative-way-of-debugging-ipdb-h3" title="Permalink to this headline">¶</a></h2>
+<p>Install ipdb &#8216;apt-get install python-ipdb&#8217; or &#8216;pip install ipdb&#8217;</p>
+<p>ipdb exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks, better introspection with the same interface as the pdb module.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&quot;Debug point for checking ....&quot;</span>
+<span class="kn">import</span> <span class="nn">ipdb</span><span class="p">;</span> <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+
+ <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+<span class="o">--</span><span class="n">Call</span><span class="o">--</span>
+<span class="o">&gt;</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">displayhook</span><span class="o">.</span><span class="n">py</span><span class="p">(</span><span class="mi">228</span><span class="p">)</span><span class="n">__call__</span><span class="p">()</span>
+    <span class="mi">227</span>
+<span class="o">--&gt;</span> <span class="mi">228</span>     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="mi">229</span>         <span class="s">&quot;&quot;&quot;Printing with history cache management.</span>
+
+<span class="s">ipdb&gt; help</span>
+
+<span class="s">Documented commands (type help &lt;topic&gt;):</span>
+<span class="s">========================================</span>
+<span class="s">EOF    bt         cont      enable  jump  pdef   r        tbreak   w</span>
+<span class="s">a      c          continue  exit    l     pdoc   restart  u        whatis</span>
+<span class="s">alias  cl         d         h       list  pinfo  return   unalias  where</span>
+<span class="s">args   clear      debug     help    n     pp     run      unt</span>
+<span class="s">b      commands   disable   ignore  next  q      s        until</span>
+<span class="s">break  condition  down      j       p     quit   step     up</span>
+
+<span class="s">Miscellaneous help topics:</span>
+<span class="s">==========================</span>
+<span class="s">exec  pdb</span>
+
+<span class="s">Undocumented commands:</span>
+<span class="s">======================</span>
+<span class="s">retval  rv</span>
+</pre></div>
+</div>
+<p>More info about ipdb &lt;<a class="reference external" href="https://github.com/gotcha/ipdb">https://github.com/gotcha/ipdb</a>&gt;</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Shell and Debugging</a><ul>
+<li><a class="reference internal" href="#js">js</a></li>
+<li><a class="reference internal" href="#import-jumpscale-in-any-python-script">import jumpscale in any python script</a></li>
+<li><a class="reference internal" href="#from-an-existing-python-script-start-jumpscale-go-to-the-debug-shell">from an existing python script start JumpScale &amp; go to the debug shell</a></li>
+<li><a class="reference internal" href="#alternative-way-of-debugging-ipdb-h3">Alternative way of debugging ipdb h3.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="IPythonTricks.html"
+                        title="previous chapter">IPython Tricks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Configuration Files.html"
+                        title="next chapter">Configuration Files</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Core/Docs/GettingStarted/Shell + debugging.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Configuration Files.html" title="Configuration Files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="IPythonTricks.html" title="IPython Tricks"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Installation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

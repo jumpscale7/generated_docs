@@ -1,0 +1,357 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.expect package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+       <link rel="next" title="JumpScale.baselib.git package" href="JumpScale.baselib.git.html" />
+       <link rel="prev" title="JumpScale.baselib.elasticsearch package" href="JumpScale.baselib.elasticsearch.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.git.html" title="JumpScale.baselib.git package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.elasticsearch.html" title="JumpScale.baselib.elasticsearch package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-expect-package">
+   <h1>JumpScale.baselib.expect package<a class="headerlink" href="#jumpscale-baselib-expect-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.expect.Expect">
+   <span id="jumpscale-baselib-expect-expect-module"></span><h2>JumpScale.baselib.expect.Expect module<a class="headerlink" href="#module-JumpScale.baselib.expect.Expect" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.expect.Expect.Expect">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.expect.Expect.</tt><tt class="descname">Expect</tt><big>(</big><em>cmd=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.addIgnoreLineFilter">
+   <tt class="descname">addIgnoreLineFilter</tt><big>(</big><em>filter</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.addIgnoreLineFilter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.addIgnoreLineFilter" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add a filter on output lines. Lines matching the provided filter will not be displayed on stdout or stderr.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.addWaitToken">
+   <tt class="descname">addWaitToken</tt><big>(</big><em>token</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.addWaitToken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.addWaitToken" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Adds a token that we will wait for when using C{self.wait()}</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.clearReceive">
+   <tt class="descname">clearReceive</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.clearReceive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.clearReceive" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.disableCleanString">
+   <tt class="descname">disableCleanString</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.disableCleanString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.disableCleanString" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Disable output cleaning, e.g. stripping ANSI code</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.do">
+   <tt class="descname">do</tt><big>(</big><em>data</em>, <em>timeout=30</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.do"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.do" title="Permalink to this definition">¶</a></dt>
+   <dd><p>This function is a combination of the functions C{send}, C{receive} and C{print}.</p>
+   <p>The first line is also removed (this is the echo from what has been sent).
+   Use this if you quickly want to execute something from the command line.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.enableCleanString">
+   <tt class="descname">enableCleanString</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.enableCleanString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.enableCleanString" title="Permalink to this definition">¶</a></dt>
+   <dd><p>All output will be cleaned from ANSI code and other unwanted garbage</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.error">
+   <tt class="descname">error</tt><em class="property"> = False</em><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.error" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.execShellCmd">
+   <tt class="descname">execShellCmd</tt><big>(</big><em>cmd</em>, <em>timeout=30</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.execShellCmd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.execShellCmd" title="Permalink to this definition">¶</a></dt>
+   <dd><p>execute a command and wait on the prompt</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.executeSequence">
+   <tt class="descname">executeSequence</tt><big>(</big><em>sequence</em>, <em>cmd</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.executeSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.executeSequence" title="Permalink to this definition">¶</a></dt>
+   <dd><p>sequence=[[regex1,tosend,stepname,timeout],...]
+   timeout is optional, also stepname is optional
+   at end it waits for prompt</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.expect">
+   <tt class="descname">expect</tt><big>(</big><em>outputToExpect</em>, <em>timeout=2</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.expect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.expect" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Pexpect expect method wrapper
+   usage: Excuting a command that expects user input, this method can be used to 
+   expect the question asked then send the answer
+   Example:
+   Expect = j.tools.expect.new(&#8216;passwd&#8217;)
+   if Expect.expect(&#8216;Enter new&#8217;):</p>
+   <blockquote>
+   <div><p>Expect.send(&#8216;newPasswd&#8217;)</p>
+   <dl class="docutils">
+   <dt>if Expect.expect(&#8216;Retype new&#8217;):</dt>
+   <dd><p class="first">Expect.send(&#8216;anotherPasswd&#8217;)</p>
+   <dl class="last docutils">
+   <dt>if Expect.expect(&#8216;passwords do not match&#8217;):</dt>
+   <dd>j.console.echo(Expect.receive())</dd>
+   </dl>
+   </dd>
+   </dl>
+   </div></blockquote>
+   <dl class="docutils">
+   <dt>else:</dt>
+   <dd>j.console.echo(Expect.receive())</dd>
+   </dl>
+   <p>&#64;return &#8216;E&#8217; when error</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.log">
+   <tt class="descname">log</tt><big>(</big><em>message</em>, <em>category=''</em>, <em>level=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.log" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.login">
+   <tt class="descname">login</tt><big>(</big><em>remote</em>, <em>passwd</em>, <em>seedpasswd</em>, <em>initial=False</em>, <em>timeout=10</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.login"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.login" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.logout">
+   <tt class="descname">logout</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.logout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.logout" title="Permalink to this definition">¶</a></dt>
+   <dd><p>This sends exit. If there are stopped jobs then this sends exit twice.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.pprint">
+   <tt class="descname">pprint</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.pprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.pprint" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Print the result of all send &amp; receive operations till now on local C{stdout}.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.prompt">
+   <tt class="descname">prompt</tt><big>(</big><em>timeout=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.prompt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.prompt" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Expect the prompt.</p>
+   <p>Return C{True} if the prompt was matched.
+   Returns C{False} if there was a time out.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.receive">
+   <tt class="descname">receive</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.receive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.receive" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Receive standard out, stderror if available
+   return stdout,stderror</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.receivePrint">
+   <tt class="descname">receivePrint</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.receivePrint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.receivePrint" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Receive data from stdout and stderr and displays them
+   This function also remembers this information for later usage in the 
+   classes C{_out} &amp; C{_error}.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.resetWaitTokens">
+   <tt class="descname">resetWaitTokens</tt><big>(</big><em>token</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.resetWaitTokens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.resetWaitTokens" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Remove all tokens we&#8217;d wait for in self.wait()</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.send">
+   <tt class="descname">send</tt><big>(</big><em>data=''</em>, <em>newline=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.send" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Send a command to shell.
+   After sending a command, one of the receive functions must be called to 
+   check for the result on C{stdout} or C{stderr}.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.setIgnoreStdError">
+   <tt class="descname">setIgnoreStdError</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.setIgnoreStdError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.setIgnoreStdError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Disable display of stderr error messages to the standard output</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.setPrompt">
+   <tt class="descname">setPrompt</tt><big>(</big><em>prompt='#.#.#'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.setPrompt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.setPrompt" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.unsetIgnoreStdError">
+   <tt class="descname">unsetIgnoreStdError</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.unsetIgnoreStdError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.unsetIgnoreStdError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Enable display error output (stderr)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Expect.wait">
+   <tt class="descname">wait</tt><big>(</big><em>timeoutval=30</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Expect.wait"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Expect.wait" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Wait until we detect tokens (see L{addWaitToken})</p>
+   <p>&#64;param timeoutval: time in seconds we maximum will wait</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.expect.Expect.ExpectTool">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.expect.Expect.</tt><tt class="descname">ExpectTool</tt><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#ExpectTool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.ExpectTool" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="staticmethod">
+   <dt id="JumpScale.baselib.expect.Expect.ExpectTool.new">
+   <em class="property">static </em><tt class="descname">new</tt><big>(</big><em>cmd=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#ExpectTool.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.ExpectTool.new" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a new Expect session</p>
+   <p>&#64;param cmd: Command to execute
+   &#64;type cmd: string</p>
+   <p>&#64;returns: Expect session
+   &#64;rtype jumpscale.cmdline.Expect.Expect</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.expect.Expect.Popen">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.expect.Expect.</tt><tt class="descname">Popen</tt><big>(</big><em>args</em>, <em>bufsize=0</em>, <em>executable=None</em>, <em>stdin=None</em>, <em>stdout=None</em>, <em>stderr=None</em>, <em>preexec_fn=None</em>, <em>close_fds=False</em>, <em>shell=False</em>, <em>cwd=None</em>, <em>env=None</em>, <em>universal_newlines=False</em>, <em>startupinfo=None</em>, <em>creationflags=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/subprocess.html#subprocess.Popen" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">subprocess.Popen</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Popen.get_conn_maxsize">
+   <tt class="descname">get_conn_maxsize</tt><big>(</big><em>which</em>, <em>maxsize</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen.get_conn_maxsize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen.get_conn_maxsize" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Popen.recv">
+   <tt class="descname">recv</tt><big>(</big><em>maxsize=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen.recv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen.recv" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Popen.recv_err">
+   <tt class="descname">recv_err</tt><big>(</big><em>maxsize=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen.recv_err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen.recv_err" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Popen.send">
+   <tt class="descname">send</tt><big>(</big><em>input</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen.send" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.expect.Expect.Popen.send_recv">
+   <tt class="descname">send_recv</tt><big>(</big><em>input=''</em>, <em>maxsize=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/expect/Expect.html#Popen.send_recv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.expect.Expect.Popen.send_recv" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.expect">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.expect" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.expect package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.expect.Expect">JumpScale.baselib.expect.Expect module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.expect">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.elasticsearch.html"
+                           title="previous chapter">JumpScale.baselib.elasticsearch package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.git.html"
+                           title="next chapter">JumpScale.baselib.git package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.expect.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.git.html" title="JumpScale.baselib.git package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.elasticsearch.html" title="JumpScale.baselib.elasticsearch package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

@@ -1,0 +1,161 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.lib.rogerthat package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
+       <link rel="next" title="JumpScale.lib.routeros package" href="JumpScale.lib.routeros.html" />
+       <link rel="prev" title="JumpScale.lib.qemu_img package" href="JumpScale.lib.qemu_img.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.routeros.html" title="JumpScale.lib.routeros package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.qemu_img.html" title="JumpScale.lib.qemu_img package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" accesskey="U">JumpScale.lib package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-lib-rogerthat-package">
+   <h1>JumpScale.lib.rogerthat package<a class="headerlink" href="#jumpscale-lib-rogerthat-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.lib.rogerthat.rogerthat">
+   <span id="jumpscale-lib-rogerthat-rogerthat-module"></span><h2>JumpScale.lib.rogerthat.rogerthat module<a class="headerlink" href="#module-JumpScale.lib.rogerthat.rogerthat" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.lib.rogerthat.rogerthat.Rogerthat">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.rogerthat.rogerthat.</tt><tt class="descname">Rogerthat</tt><big>(</big><em>api_key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/rogerthat/rogerthat.html#Rogerthat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.rogerthat.rogerthat.Rogerthat" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.lib.rogerthat.rogerthat.Rogerthat.send_message">
+   <tt class="descname">send_message</tt><big>(</big><em>message</em>, <em>members</em>, <em>flags=0</em>, <em>parent_message_key=None</em>, <em>answers=None</em>, <em>dismiss_button_ui_flags=0</em>, <em>alert_flags=0</em>, <em>branding=None</em>, <em>tag=None</em>, <em>context=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/rogerthat/rogerthat.html#Rogerthat.send_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.rogerthat.rogerthat.Rogerthat.send_message" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.lib.rogerthat.rogerthat.RogerthatFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.rogerthat.rogerthat.</tt><tt class="descname">RogerthatFactory</tt><a class="reference internal" href="../_modules/JumpScale/lib/rogerthat/rogerthat.html#RogerthatFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.rogerthat.rogerthat.RogerthatFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.lib.rogerthat.rogerthat.RogerthatFactory.get">
+   <tt class="descname">get</tt><big>(</big><em>api_key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/rogerthat/rogerthat.html#RogerthatFactory.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.rogerthat.rogerthat.RogerthatFactory.get" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.lib.rogerthat">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.rogerthat" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.lib.rogerthat package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.lib.rogerthat.rogerthat">JumpScale.lib.rogerthat.rogerthat module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.lib.rogerthat">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.lib.qemu_img.html"
+                           title="previous chapter">JumpScale.lib.qemu_img package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.lib.routeros.html"
+                           title="next chapter">JumpScale.lib.routeros package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.lib.rogerthat.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.routeros.html" title="JumpScale.lib.routeros package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.qemu_img.html" title="JumpScale.lib.qemu_img package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

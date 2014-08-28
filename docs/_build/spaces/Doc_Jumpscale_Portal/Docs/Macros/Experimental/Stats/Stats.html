@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>statistics related macro’s &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../../index.html" />
+    <link rel="up" title="Experimental" href="../index.html" />
+    <link rel="next" title="Toggle" href="../Toggle/Toggle.html" />
+    <link rel="prev" title="ListDocs" href="../ListDocs/ListDocs.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Toggle/Toggle.html" title="Toggle"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../ListDocs/ListDocs.html" title="ListDocs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Experimental</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="statistics-related-macro-s">
+<h1>statistics related macro&#8217;s<a class="headerlink" href="#statistics-related-macro-s" title="Permalink to this headline">¶</a></h1>
+<p>following shows info for a specific entry
+mod =100 means data is modified with 100% so not, mod=50 would mean all values/2 (ideal for simulation)</p>
+<div class="section" id="multistatsmonth">
+<h2>multistatsmonth<a class="headerlink" href="#multistatsmonth" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>\<span class="p">{</span>\<span class="p">{</span><span class="n">multistatsmonth</span> <span class="nb">id</span><span class="p">:</span><span class="n">tanks</span><span class="o">.</span><span class="n">water</span><span class="o">.</span><span class="n">level</span><span class="o">.</span><span class="n">sb</span><span class="o">.</span><span class="mi">1</span> <span class="n">mod</span><span class="p">:</span><span class="mi">50</span> <span class="n">title</span><span class="p">:</span><span class="s">&#39;Black Water Level Starboard Side&#39;</span> <span class="n">width</span><span class="p">:</span><span class="mi">800</span> <span class="n">height</span><span class="p">:</span><span class="mi">400</span>\<span class="p">}</span>\<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stats">
+<h2>stats<a class="headerlink" href="#stats" title="Permalink to this headline">¶</a></h2>
+<p>show statistics for 1 specific measurement</p>
+<ul class="simple">
+<li>start &amp; stop can be as follows: -2h 3d  or 0 (means till now), always need to be a  (not +)</li>
+<li>widht &amp; height is in pixels</li>
+<li>id is the name of the counter</li>
+<li>mod see above</li>
+<li>maxvalues: max nr of items which will be put on graph (cols), std 200</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>\{\{stats: id:$id start:-2h stop:-1h title:&#39;$t1&#39; width:$w height:$h mod:$modamount maxvalues=200\}\}
+</pre></div>
+</div>
+</div>
+<div class="section" id="liststats">
+<h2>liststats<a class="headerlink" href="#liststats" title="Permalink to this headline">¶</a></h2>
+<p>list all know stats for the system, from these you can then click to data &amp; graphs</p>
+</div>
+<div class="section" id="statsdata">
+<h2>statsdata<a class="headerlink" href="#statsdata" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>\{\{statsdata: id:$id start:-2h stop:-1h\}\}
+</pre></div>
+</div>
+<p>show table with the raw data per 5 min</p>
+</div>
+<div class="section" id="statsdatahour">
+<h2>statsdatahour<a class="headerlink" href="#statsdatahour" title="Permalink to this headline">¶</a></h2>
+<p>show stats per hour
+data shown is</p>
+<ul class="simple">
+<li>avg value per hour</li>
+<li>max value per hour</li>
+<li>min value per hour</li>
+<li>nr of measurements per hour</li>
+<li>total value per hour</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>\{\{statsdatahour: id:$id start:-2h stop:-1h\}\}
+</pre></div>
+</div>
+</div>
+<div class="section" id="statsdataday">
+<h2>statsdataday<a class="headerlink" href="#statsdataday" title="Permalink to this headline">¶</a></h2>
+<p>show stats per day</p>
+<p>data shown is</p>
+<ul class="simple">
+<li>avg value per day</li>
+<li>max value per day</li>
+<li>min value per day</li>
+<li>nr of measurements per day</li>
+<li>total value per day</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>\{\{statsdataday: id:$id start:-2h stop:-1h\}\}
+</pre></div>
+</div>
+</div>
+<div class="section" id="statsdatamonth">
+<h2>statsdatamonth<a class="headerlink" href="#statsdatamonth" title="Permalink to this headline">¶</a></h2>
+<p>show stats per month</p>
+<p>data shown is</p>
+<ul class="simple">
+<li>avg value per month</li>
+<li>max value per month</li>
+<li>min value per month</li>
+<li>nr of measurements per month</li>
+<li>total value per month</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>\{\{statsdatamonth: id:$id start:-2h stop:-1h\}\}
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">statistics related macro&#8217;s</a><ul>
+<li><a class="reference internal" href="#multistatsmonth">multistatsmonth</a></li>
+<li><a class="reference internal" href="#stats">stats</a></li>
+<li><a class="reference internal" href="#liststats">liststats</a></li>
+<li><a class="reference internal" href="#statsdata">statsdata</a></li>
+<li><a class="reference internal" href="#statsdatahour">statsdatahour</a></li>
+<li><a class="reference internal" href="#statsdataday">statsdataday</a></li>
+<li><a class="reference internal" href="#statsdatamonth">statsdatamonth</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../ListDocs/ListDocs.html"
+                        title="previous chapter">ListDocs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Toggle/Toggle.html"
+                        title="next chapter">Toggle</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Macros/Experimental/Stats/Stats.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../Toggle/Toggle.html" title="Toggle"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../ListDocs/ListDocs.html" title="ListDocs"
+             >previous</a> |</li>
+        <li><a href="../../../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="../../index.html" >Macros:</a> &raquo;</li>
+          <li><a href="../index.html" >Experimental</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

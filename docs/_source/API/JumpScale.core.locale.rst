@@ -1,0 +1,156 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.core.locale package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.core package" href="JumpScale.core.html" />
+       <link rel="next" title="JumpScale.core.logging package" href="JumpScale.core.logging.html" />
+       <link rel="prev" title="JumpScale.core.extensions package" href="JumpScale.core.extensions.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.logging.html" title="JumpScale.core.logging package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.extensions.html" title="JumpScale.core.extensions package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" accesskey="U">JumpScale.core package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-core-locale-package">
+   <h1>JumpScale.core.locale package<a class="headerlink" href="#jumpscale-core-locale-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.core.locale.locale">
+   <span id="jumpscale-core-locale-locale-module"></span><h2>JumpScale.core.locale.locale module<a class="headerlink" href="#module-JumpScale.core.locale.locale" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.locale.locale.Domain">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.locale.locale.</tt><tt class="descname">Domain</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/locale/locale.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.locale.locale.Domain" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.core.locale.locale.Localizer">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.locale.locale.</tt><tt class="descname">Localizer</tt><big>(</big><em>tdirs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/locale/locale.html#Localizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.locale.locale.Localizer" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.locale">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.locale" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.core.locale.getlocalizer">
+   <tt class="descclassname">JumpScale.core.locale.</tt><tt class="descname">getlocalizer</tt><big>(</big><em>id</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/locale.html#getlocalizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.locale.getlocalizer" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.core.locale package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.locale.locale">JumpScale.core.locale.locale module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.locale">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.core.extensions.html"
+                           title="previous chapter">JumpScale.core.extensions package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.core.logging.html"
+                           title="next chapter">JumpScale.core.logging package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.core.locale.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.logging.html" title="JumpScale.core.logging package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.extensions.html" title="JumpScale.core.extensions package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

@@ -1,0 +1,238 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.portal package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale package" href="JumpScale.html" />
+       <link rel="next" title="JumpScale.portal.codegentools package" href="JumpScale.portal.codegentools.html" />
+       <link rel="prev" title="JumpScale.lib.shorewall package" href="JumpScale.lib.shorewall.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.codegentools.html" title="JumpScale.portal.codegentools package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.shorewall.html" title="JumpScale.lib.shorewall package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" accesskey="U">JumpScale package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-portal-package">
+   <h1>JumpScale.portal package<a class="headerlink" href="#jumpscale-portal-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="subpackages">
+   <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+   <div class="toctree-wrapper compound">
+   <ul>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.codegentools.html">JumpScale.portal.codegentools package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGenerator">JumpScale.portal.codegentools.CodeGenerator module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorActorClass">JumpScale.portal.codegentools.CodeGeneratorActorClass module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorActorLocal">JumpScale.portal.codegentools.CodeGeneratorActorLocal module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorActorRemote">JumpScale.portal.codegentools.CodeGeneratorActorRemote module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorActorTasklets">JumpScale.portal.codegentools.CodeGeneratorActorTasklets module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorBase">JumpScale.portal.codegentools.CodeGeneratorBase module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorEnumeration">JumpScale.portal.codegentools.CodeGeneratorEnumeration module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorEveModel">JumpScale.portal.codegentools.CodeGeneratorEveModel module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools.CodeGeneratorModel">JumpScale.portal.codegentools.CodeGeneratorModel module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.codegentools.html#module-JumpScale.portal.codegentools">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.docgenerator.html">JumpScale.portal.docgenerator package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.Confluence2HTML">JumpScale.portal.docgenerator.Confluence2HTML module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.Confluence2RST">JumpScale.portal.docgenerator.Confluence2RST module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.Docgenerator">JumpScale.portal.docgenerator.Docgenerator module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.Page">JumpScale.portal.docgenerator.Page module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#jumpscale-portal-docgenerator-pagealkira-module">JumpScale.portal.docgenerator.PageAlkira module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.PageConfluence">JumpScale.portal.docgenerator.PageConfluence module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.PageGroup">JumpScale.portal.docgenerator.PageGroup module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.PageHTML">JumpScale.portal.docgenerator.PageHTML module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.PageRST">JumpScale.portal.docgenerator.PageRST module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.WikiClientAlkira">JumpScale.portal.docgenerator.WikiClientAlkira module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator.WikiClientConfluence">JumpScale.portal.docgenerator.WikiClientConfluence module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docgenerator.html#module-JumpScale.portal.docgenerator">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html">JumpScale.portal.docpreprocessor package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html#module-JumpScale.portal.docpreprocessor.DocParser">JumpScale.portal.docpreprocessor.DocParser module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html#module-JumpScale.portal.docpreprocessor.DocPreprocessor">JumpScale.portal.docpreprocessor.DocPreprocessor module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html#module-JumpScale.portal.docpreprocessor.DocPreprocessorFactory">JumpScale.portal.docpreprocessor.DocPreprocessorFactory module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.docpreprocessor.html#module-JumpScale.portal.docpreprocessor">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.html.html">JumpScale.portal.html package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.BootStrapForm">JumpScale.portal.html.BootStrapForm module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.GridDataTables">JumpScale.portal.html.GridDataTables module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.HTMLGalleria">JumpScale.portal.html.HTMLGalleria module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.HtmlFactory">JumpScale.portal.html.HtmlFactory module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.elFinder">JumpScale.portal.html.elFinder module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html.multipart">JumpScale.portal.html.multipart module</a><ul>
+   <li class="toctree-l3"><a class="reference internal" href="JumpScale.portal.html.html#parser-for-multipart-form-data">Parser for multipart/form-data</a><ul>
+   <li class="toctree-l4"><a class="reference internal" href="JumpScale.portal.html.html#licence-mit">Licence (MIT)</a></li>
+   </ul>
+   </li>
+   </ul>
+   </li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.html.html#module-JumpScale.portal.html">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.macrolib.html">JumpScale.portal.macrolib package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.html#subpackages">Subpackages</a><ul>
+   <li class="toctree-l3"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html">JumpScale.portal.macrolib.imagelib package</a><ul>
+   <li class="toctree-l4"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#submodules">Submodules</a></li>
+   <li class="toctree-l4"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#module-JumpScale.portal.macrolib.imagelib.ImageLib">JumpScale.portal.macrolib.imagelib.ImageLib module</a></li>
+   <li class="toctree-l4"><a class="reference internal" href="JumpScale.portal.macrolib.imagelib.html#module-JumpScale.portal.macrolib.imagelib">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l3"><a class="reference internal" href="JumpScale.portal.macrolib.plantuml.html">JumpScale.portal.macrolib.plantuml package</a><ul>
+   <li class="toctree-l4"><a class="reference internal" href="JumpScale.portal.macrolib.plantuml.html#module-JumpScale.portal.macrolib.plantuml">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   </li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.html#module-JumpScale.portal.macrolib.blog">JumpScale.portal.macrolib.blog module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.html#module-JumpScale.portal.macrolib.div_base">JumpScale.portal.macrolib.div_base module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.macrolib.html#module-JumpScale.portal.macrolib">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.portal.html">JumpScale.portal.portal package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.MacroExecutor">JumpScale.portal.portal.MacroExecutor module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.OsisBeaker">JumpScale.portal.portal.OsisBeaker module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalAuthenticatorOSIS">JumpScale.portal.portal.PortalAuthenticatorOSIS module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalClient">JumpScale.portal.portal.PortalClient module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalClientWS">JumpScale.portal.portal.PortalClientWS module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalFactory">JumpScale.portal.portal.PortalFactory module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalRest">JumpScale.portal.portal.PortalRest module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.PortalServer">JumpScale.portal.portal.PortalServer module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.RequestContext">JumpScale.portal.portal.RequestContext module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal.auth">JumpScale.portal.portal.auth module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portal.html#module-JumpScale.portal.portal">Module contents</a></li>
+   </ul>
+   </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.portal.portalloaders.html">JumpScale.portal.portalloaders package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.ActorsInfo">JumpScale.portal.portalloaders.ActorsInfo module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.ActorsLoader">JumpScale.portal.portalloaders.ActorsLoader module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.BucketLoader">JumpScale.portal.portalloaders.BucketLoader module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.LoaderBase">JumpScale.portal.portalloaders.LoaderBase module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.PortalLoaderFactory">JumpScale.portal.portalloaders.PortalLoaderFactory module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders.SpacesLoader">JumpScale.portal.portalloaders.SpacesLoader module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.portal.portalloaders.html#module-JumpScale.portal.portalloaders">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   </div>
+   </div>
+   <div class="section" id="module-JumpScale.portal">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.portal package</a><ul>
+   <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.lib.shorewall.html"
+                           title="previous chapter">JumpScale.lib.shorewall package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.portal.codegentools.html"
+                           title="next chapter">JumpScale.portal.codegentools package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.portal.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.codegentools.html" title="JumpScale.portal.codegentools package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.shorewall.html" title="JumpScale.lib.shorewall package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>j.system.netconfig &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="j-system-netconfig">
+<h1>j.system.netconfig<a class="headerlink" href="#j-system-netconfig" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /baselib/netconfig/Netconfig.py</li>
+</ul>
+<div class="section" id="addiptointerface">
+<h2>addIpToInterface<a class="headerlink" href="#addiptointerface" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,ipaddr,aliasnr,start</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:184)</li>
+</ul>
+</div>
+<div class="section" id="enableinterface">
+<h2>enableInterface<a class="headerlink" href="#enableinterface" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,start,dhcp</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:60)</li>
+</ul>
+</div>
+<div class="section" id="enableinterfacebridgedhcp">
+<h2>enableInterfaceBridgeDhcp<a class="headerlink" href="#enableinterfacebridgedhcp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,bridgedev,start</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:168)</li>
+</ul>
+</div>
+<div class="section" id="enableinterfacebridgestatic">
+<h2>enableInterfaceBridgeStatic<a class="headerlink" href="#enableinterfacebridgestatic" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,ipaddr,bridgedev,gw,start</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:126)</li>
+</ul>
+<p>ipaddr in form of 192.168.10.2/24 (can be list)
+gateway in form of 192.168.10.254</p>
+</div>
+<div class="section" id="enableinterfacestatic">
+<h2>enableInterfaceStatic<a class="headerlink" href="#enableinterfacestatic" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev,ipaddr,gw,start</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:106)</li>
+</ul>
+<p>ipaddr in form of 192.168.10.2/24 (can be list)
+gateway in form of 192.168.10.254</p>
+</div>
+<div class="section" id="remove">
+<h2>remove<a class="headerlink" href="#remove" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dev</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:84)</li>
+</ul>
+</div>
+<div class="section" id="reset">
+<h2>reset<a class="headerlink" href="#reset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: shutdown</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:49)</li>
+</ul>
+<p>empty config of /etc/network/interfaces</p>
+</div>
+<div class="section" id="setnameserver">
+<h2>setNameserver<a class="headerlink" href="#setnameserver" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: addr</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:91)</li>
+</ul>
+<p>resolvconf will be disabled</p>
+</div>
+<div class="section" id="setroot">
+<h2>setRoot<a class="headerlink" href="#setroot" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: root</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="shutdownnetwork">
+<h2>shutdownNetwork<a class="headerlink" href="#shutdownnetwork" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: excludes</li>
+<li>path:/baselib/netconfig/Netconfig.py (line:23)</li>
+</ul>
+<p>find all interfaces and shut them all down with ifdown
+this is to remove all networking things going on</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">j.system.netconfig</a><ul>
+<li><a class="reference internal" href="#addiptointerface">addIpToInterface</a></li>
+<li><a class="reference internal" href="#enableinterface">enableInterface</a></li>
+<li><a class="reference internal" href="#enableinterfacebridgedhcp">enableInterfaceBridgeDhcp</a></li>
+<li><a class="reference internal" href="#enableinterfacebridgestatic">enableInterfaceBridgeStatic</a></li>
+<li><a class="reference internal" href="#enableinterfacestatic">enableInterfaceStatic</a></li>
+<li><a class="reference internal" href="#remove">remove</a></li>
+<li><a class="reference internal" href="#reset">reset</a></li>
+<li><a class="reference internal" href="#setnameserver">setNameserver</a></li>
+<li><a class="reference internal" href="#setroot">setRoot</a></li>
+<li><a class="reference internal" href="#shutdownnetwork">shutdownNetwork</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.netconfig.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

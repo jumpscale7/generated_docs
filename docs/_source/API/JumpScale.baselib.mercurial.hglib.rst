@@ -1,0 +1,1268 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.mercurial.hglib package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib.mercurial package" href="JumpScale.baselib.mercurial.html" />
+       <link rel="next" title="JumpScale.baselib.netconfig package" href="JumpScale.baselib.netconfig.html" />
+       <link rel="prev" title="JumpScale.baselib.mercurial package" href="JumpScale.baselib.mercurial.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.netconfig.html" title="JumpScale.baselib.netconfig package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.mercurial.html" title="JumpScale.baselib.mercurial package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.mercurial.html" accesskey="U">JumpScale.baselib.mercurial package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-mercurial-hglib-package">
+   <h1>JumpScale.baselib.mercurial.hglib package<a class="headerlink" href="#jumpscale-baselib-mercurial-hglib-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.client">
+   <span id="jumpscale-baselib-mercurial-hglib-client-module"></span><h2>JumpScale.baselib.mercurial.hglib.client module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.client" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.client.</tt><tt class="descname">hgclient</tt><big>(</big><em>path</em>, <em>encoding</em>, <em>configs</em>, <em>connect=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.add">
+   <tt class="descname">add</tt><big>(</big><em>files=</em>, <span class="optional">[</span><span class="optional">]</span><em>dryrun=False</em>, <em>subrepos=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.add" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add the specified files on the next commit.
+   If no files are given, add all files to the repository.</p>
+   <p>dryrun - do no perform actions
+   subrepos - recurse into subrepositories
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   <p>Return whether all given files were added.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.addremove">
+   <tt class="descname">addremove</tt><big>(</big><em>files=</em>, <span class="optional">[</span><span class="optional">]</span><em>similarity=None</em>, <em>dryrun=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.addremove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.addremove" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add all new files and remove all missing files from the repository.</p>
+   <p>New files are ignored if they match any of the patterns in &#8221;.hgignore&#8221;. As
+   with add, these changes take effect at the next commit.</p>
+   <p>similarity - used to detect renamed files. With a parameter
+   greater than 0, this compares every removed file with every added file and
+   records those similar enough as renames. This option takes a percentage
+   between 0 (disabled) and 100 (files must be identical) as its parameter.
+   Detecting renamed files this way can be expensive. After using this
+   option, &#8220;hg status -C&#8221; can be used to check which files were identified as
+   moved or renamed.</p>
+   <p>dryrun - do no perform actions
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   <p>Return True if all files are successfully added.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.annotate">
+   <tt class="descname">annotate</tt><big>(</big><em>files</em>, <em>rev=None</em>, <em>nofollow=False</em>, <em>text=False</em>, <em>user=False</em>, <em>file=False</em>, <em>date=False</em>, <em>number=False</em>, <em>changeset=False</em>, <em>line=False</em>, <em>verbose=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.annotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.annotate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Show changeset information by line for each file in files.</p>
+   <p>rev - annotate the specified revision
+   nofollow - don&#8217;t follow copies and renames
+   text - treat all files as text
+   user - list the author (long with -v)
+   file - list the filename
+   date - list the date
+   number - list the revision number (default)
+   changeset - list the changeset
+   line - show line number at the first appearance
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   <p>Yields a (info, contents) tuple for each line in a file. Info is a space
+   separated string according to the given options.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.archive">
+   <tt class="descname">archive</tt><big>(</big><em>dest</em>, <em>rev=None</em>, <em>nodecode=False</em>, <em>prefix=None</em>, <em>type=None</em>, <em>subrepos=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.archive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.archive" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create an unversioned archive of a repository revision.</p>
+   <p>The exact name of the destination archive or directory is given using a
+   format string; see export for details.</p>
+   <p>Each member added to an archive file has a directory prefix prepended. Use
+   prefix to specify a format string for the prefix. The default is the
+   basename of the archive, with suffixes removed.</p>
+   <p>dest - destination path
+   rev - revision to distribute. The revision used is the parent of the
+   working directory if one isn&#8217;t given.</p>
+   <p>nodecode - do not pass files through decoders
+   prefix - directory prefix for files in archive
+   type - type of distribution to create. The archive type is automatically
+   detected based on file extension if one isn&#8217;t given.</p>
+   <p>Valid types are:</p>
+   <p>&#8220;files&#8221;  a directory full of files (default)
+   &#8220;tar&#8221;    tar archive, uncompressed
+   &#8220;tbz2&#8221;   tar archive, compressed using bzip2
+   &#8220;tgz&#8221;    tar archive, compressed using gzip
+   &#8220;uzip&#8221;   zip archive, uncompressed
+   &#8220;zip&#8221;    zip archive, compressed using deflate</p>
+   <p>subrepos - recurse into subrepositories
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.backout">
+   <tt class="descname">backout</tt><big>(</big><em>rev</em>, <em>merge=False</em>, <em>parent=None</em>, <em>tool=None</em>, <em>message=None</em>, <em>logfile=None</em>, <em>date=None</em>, <em>user=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.backout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.backout" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Prepare a new changeset with the effect of rev undone in the current
+   working directory.</p>
+   <p>If rev is the parent of the working directory, then this new changeset is
+   committed automatically. Otherwise, hg needs to merge the changes and the
+   merged result is left uncommitted.</p>
+   <p>rev - revision to backout
+   merge - merge with old dirstate parent after backout
+   parent - parent to choose when backing out merge
+   tool - specify merge tool
+   message - use text as commit message
+   logfile - read commit message from file
+   date - record the specified date as commit date
+   user - record the specified user as committer</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.bookmark">
+   <tt class="descname">bookmark</tt><big>(</big><em>name</em>, <em>rev=None</em>, <em>force=False</em>, <em>delete=False</em>, <em>inactive=False</em>, <em>rename=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.bookmark" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Set a bookmark on the working directory&#8217;s parent revision or rev,
+   with the given name.</p>
+   <p>name - bookmark name
+   rev - revision to bookmark
+   force - bookmark even if another bookmark with the same name exists
+   delete - delete the given bookmark
+   inactive - do not mark the new bookmark active
+   rename - rename the bookmark given by rename to name</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.bookmarks">
+   <tt class="descname">bookmarks</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.bookmarks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.bookmarks" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the bookmarks as a list of (name, rev, node) and the index of the
+   current one.</p>
+   <p>If there isn&#8217;t a current one, -1 is returned as the index.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.branch">
+   <tt class="descname">branch</tt><big>(</big><em>name=None</em>, <em>clean=False</em>, <em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.branch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.branch" title="Permalink to this definition">¶</a></dt>
+   <dd><p>When name isn&#8217;t given, return the current branch name. Otherwise set the
+   working directory branch name (the branch will not exist in the repository
+   until the next commit). Standard practice recommends that primary
+   development take place on the &#8216;default&#8217; branch.</p>
+   <p>When clean is True, reset and return the working directory branch to that
+   of the parent of the working directory, negating a previous branch change.</p>
+   <p>name - new branch name
+   clean - reset branch name to parent branch name
+   force - set branch name even if it shadows an existing branch</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.branches">
+   <tt class="descname">branches</tt><big>(</big><em>active=False</em>, <em>closed=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.branches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.branches" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the repository&#8217;s named branches as a list of (name, rev, node).</p>
+   <p>active - show only branches that have unmerged heads
+   closed - show normal and closed branches</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.bundle">
+   <tt class="descname">bundle</tt><big>(</big><em>file</em>, <em>destrepo=None</em>, <em>rev=</em>, <span class="optional">[</span><span class="optional">]</span><em>branch=</em>, <span class="optional">[</span><span class="optional">]</span><em>base=</em>, <span class="optional">[</span><span class="optional">]</span><em>all=False</em>, <em>force=False</em>, <em>type=None</em>, <em>ssh=None</em>, <em>remotecmd=None</em>, <em>insecure=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.bundle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.bundle" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Generate a compressed changegroup file collecting changesets not known to
+   be in another repository.</p>
+   <p>If destrepo isn&#8217;t given, then hg assumes the destination will have all
+   the nodes you specify with base. To create a bundle containing all
+   changesets, use all (or set base to &#8216;null&#8217;).</p>
+   <p>file - destination file name
+   destrepo - repository to look for changes
+   rev - a changeset intended to be added to the destination
+   branch - a specific branch you would like to bundle
+   base - a base changeset assumed to be available at the destination
+   all - bundle all changesets in the repository
+   type - bundle compression type to use, available compression methods are:
+   none, bzip2, and gzip (default: bzip2)</p>
+   <p>force - run even when the destrepo is unrelated
+   ssh - specify ssh command to use
+   remotecmd - specify hg command to run on the remote side
+   insecure - do not verify server certificate (ignoring web.cacerts config)</p>
+   <p>Return True if a bundle was created, False if no changes were found.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.cat">
+   <tt class="descname">cat</tt><big>(</big><em>files</em>, <em>rev=None</em>, <em>output=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.cat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.cat" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a string containing the specified files as they were at the
+   given revision. If no revision is given, the parent of the working
+   directory is used, or tip if no revision is checked out.</p>
+   <p>If output is given, writes the contents to the specified file.
+   The name of the file is given using a format string. The formatting rules
+   are the same as for the export command, with the following additions:</p>
+   <p>&#8220;%s&#8221;  basename of file being printed
+   &#8220;%d&#8221;  dirname of file being printed, or &#8216;.&#8217; if in repository root
+   &#8220;%p&#8221;  root-relative path name of file being printed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.clone">
+   <tt class="descname">clone</tt><big>(</big><em>source='.'</em>, <em>dest=None</em>, <em>branch=None</em>, <em>updaterev=None</em>, <em>revrange=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.clone" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a copy of an existing repository specified by source in a new
+   directory dest.</p>
+   <p>If dest isn&#8217;t specified, it defaults to the basename of source.</p>
+   <p>branch - clone only the specified branch
+   updaterev - revision, tag or branch to check out
+   revrange - include the specified changeset</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.close">
+   <tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.close" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Closes the command server instance and waits for it to exit, returns the
+   exit code.</p>
+   <p>Attempting to call any function afterwards that needs to communicate with
+   the server will raise a ValueError.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.commit">
+   <tt class="descname">commit</tt><big>(</big><em>message=None</em>, <em>logfile=None</em>, <em>addremove=False</em>, <em>closebranch=False</em>, <em>date=None</em>, <em>user=None</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.commit" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Commit changes reported by status into the repository.</p>
+   <p>message - the commit message
+   logfile - read commit message from file
+   addremove - mark new/missing files as added/removed before committing
+   closebranch - mark a branch as closed, hiding it from the branch list
+   date - record the specified date as commit date
+   user - record the specified user as committer
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.config">
+   <tt class="descname">config</tt><big>(</big><em>names=</em>, <span class="optional">[</span><span class="optional">]</span><em>untrusted=False</em>, <em>showsource=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.config" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a list of (section, key, value) config settings from all hgrc files</p>
+   <p>When showsource is specified, return (source, section, key, value) where
+   source is of the form filename:[line]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.copy">
+   <tt class="descname">copy</tt><big>(</big><em>source</em>, <em>dest</em>, <em>after=False</em>, <em>force=False</em>, <em>dryrun=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.copy" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Mark dest as having copies of source files. If dest is a directory, copies
+   are put in that directory. If dest is a file, then source must be a string.</p>
+   <p>Returns True on success, False if errors are encountered.</p>
+   <p>source - a file or a list of files
+   dest - a destination file or directory
+   after - record a copy that has already occurred
+   force - forcibly copy over an existing managed file
+   dryrun - do not perform actions, just print output
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.diff">
+   <tt class="descname">diff</tt><big>(</big><em>files=</em>, <span class="optional">[</span><span class="optional">]</span><em>revs=</em>, <span class="optional">[</span><span class="optional">]</span><em>change=None</em>, <em>text=False</em>, <em>git=False</em>, <em>nodates=False</em>, <em>showfunction=False</em>, <em>reverse=False</em>, <em>ignoreallspace=False</em>, <em>ignorespacechange=False</em>, <em>ignoreblanklines=False</em>, <em>unified=None</em>, <em>stat=False</em>, <em>subrepos=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.diff" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return differences between revisions for the specified files.</p>
+   <p>revs - a revision or a list of two revisions to diff
+   change - change made by revision
+   text - treat all files as text
+   git - use git extended diff format
+   nodates - omit dates from diff headers
+   showfunction - show which function each change is in
+   reverse - produce a diff that undoes the changes
+   ignoreallspace - ignore white space when comparing lines
+   ignorespacechange - ignore changes in the amount of white space
+   ignoreblanklines - ignore changes whose lines are all blank
+   unified - number of lines of context to show
+   stat - output diffstat-style summary of changes
+   subrepos - recurse into subrepositories
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.encoding">
+   <tt class="descname">encoding</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.encoding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.encoding" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the server&#8217;s encoding (as reported in the hello message).</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.export">
+   <tt class="descname">export</tt><big>(</big><em>revs</em>, <em>output=None</em>, <em>switchparent=False</em>, <em>text=False</em>, <em>git=False</em>, <em>nodates=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.export" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the header and diffs for one or more changesets. When output is
+   given, dumps to file. The name of the file is given using a format string.
+   The formatting rules are as follows:</p>
+   <p>&#8220;%%&#8221;  literal &#8220;%&#8221; character
+   &#8220;%H&#8221;  changeset hash (40 hexadecimal digits)
+   &#8220;%N&#8221;  number of patches being generated
+   &#8220;%R&#8221;  changeset revision number
+   &#8220;%b&#8221;  basename of the exporting repository
+   &#8220;%h&#8221;  short-form changeset hash (12 hexadecimal digits)
+   &#8220;%n&#8221;  zero-padded sequence number, starting at 1
+   &#8220;%r&#8221;  zero-padded changeset revision number</p>
+   <p>output - print output to file with formatted name
+   switchparent - diff against the second parent
+   rev - a revision or list of revisions to export
+   text - treat all files as text
+   git - use git extended diff format
+   nodates - omit dates from diff headers</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.forget">
+   <tt class="descname">forget</tt><big>(</big><em>files</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.forget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.forget" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Mark the specified files so they will no longer be tracked after the next
+   commit.</p>
+   <p>This only removes files from the current branch, not from the entire
+   project history, and it does not delete them from the working directory.</p>
+   <p>Returns True on success.</p>
+   <p>include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.grep">
+   <tt class="descname">grep</tt><big>(</big><em>pattern</em>, <em>files=</em>, <span class="optional">[</span><span class="optional">]</span><em>all=False</em>, <em>text=False</em>, <em>follow=False</em>, <em>ignorecase=False</em>, <em>fileswithmatches=False</em>, <em>line=False</em>, <em>user=False</em>, <em>date=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.grep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.grep" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Search for a pattern in specified files and revisions.</p>
+   <p>This behaves differently than Unix grep. It only accepts Python/Perl
+   regexps. It searches repository history, not the working directory.
+   It always prints the revision number in which a match appears.</p>
+   <p>Yields (filename, revision, [line, [match status, [user, [date, [match]]]]])
+   per match depending on the given options.</p>
+   <p>all - print all revisions that match
+   text - treat all files as text
+   follow - follow changeset history, or file history across copies and renames
+   ignorecase - ignore case when matching
+   fileswithmatches - return only filenames and revisions that match
+   line - return line numbers in the result tuple
+   user - return the author in the result tuple
+   date - return the date in the result tuple
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.heads">
+   <tt class="descname">heads</tt><big>(</big><em>rev=</em>, <span class="optional">[</span><span class="optional">]</span><em>startrev=</em>, <span class="optional">[</span><span class="optional">]</span><em>topological=False</em>, <em>closed=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.heads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.heads" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a list of current repository heads or branch heads.</p>
+   <p>rev - return only branch heads on the branches associated with the specified
+   changesets.</p>
+   <p>startrev - return only heads which are descendants of the given revs.
+   topological - named branch mechanics will be ignored and only changesets
+   without children will be shown.</p>
+   <p>closed - normal and closed branch heads.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.identify">
+   <tt class="descname">identify</tt><big>(</big><em>rev=None</em>, <em>source=None</em>, <em>num=False</em>, <em>id=False</em>, <em>branch=False</em>, <em>tags=False</em>, <em>bookmarks=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.identify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.identify" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a summary string identifying the repository state at rev using one or
+   two parent hash identifiers, followed by a &#8220;+&#8221; if the working directory has
+   uncommitted changes, the branch name (if not default), a list of tags, and
+   a list of bookmarks.</p>
+   <p>When rev is not given, return a summary string of the current state of the
+   repository.</p>
+   <p>Specifying source as a repository root or Mercurial bundle will cause
+   lookup to operate on that repository/bundle.</p>
+   <p>num - show local revision number
+   id - show global revision id
+   branch - show branch
+   tags - show tags
+   bookmarks - show bookmarks</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.import_">
+   <tt class="descname">import_</tt><big>(</big><em>patches</em>, <em>strip=None</em>, <em>force=False</em>, <em>nocommit=False</em>, <em>bypass=False</em>, <em>exact=False</em>, <em>importbranch=False</em>, <em>message=None</em>, <em>date=None</em>, <em>user=None</em>, <em>similarity=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.import_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.import_" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Import the specified patches which can be a list of file names or a
+   file-like object and commit them individually (unless nocommit is
+   specified).</p>
+   <p>strip - directory strip option for patch. This has the same meaning as the
+   corresponding patch option (default: 1)</p>
+   <p>force - skip check for outstanding uncommitted changes
+   nocommit - don&#8217;t commit, just update the working directory
+   bypass - apply patch without touching the working directory
+   exact - apply patch to the nodes from which it was generated
+   importbranch - use any branch information in patch (implied by exact)
+   message - the commit message
+   date - record the specified date as commit date
+   user - record the specified user as committer
+   similarity - guess renamed files by similarity (0&lt;=s&lt;=100)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.incoming">
+   <tt class="descname">incoming</tt><big>(</big><em>revrange=None</em>, <em>path=None</em>, <em>force=False</em>, <em>newest=False</em>, <em>bundle=None</em>, <em>bookmarks=False</em>, <em>branch=None</em>, <em>limit=None</em>, <em>nomerges=False</em>, <em>subrepos=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.incoming"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.incoming" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return new changesets found in the specified path or the default pull
+   location.</p>
+   <p>When bookmarks=True, return a list of (name, node) of incoming bookmarks.</p>
+   <p>revrange - a remote changeset or list of changesets intended to be added
+   force - run even if remote repository is unrelated
+   newest - show newest record first
+   bundle - avoid downloading the changesets twice and store the bundles into
+   the specified file.</p>
+   <p>bookmarks - compare bookmarks (this changes the return value)
+   branch - a specific branch you would like to pull
+   limit - limit number of changes returned
+   nomerges - do not show merges
+   ssh - specify ssh command to use
+   remotecmd - specify hg command to run on the remote side
+   insecure- do not verify server certificate (ignoring web.cacerts config)
+   subrepos - recurse into subrepositories</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.inputfmt">
+   <tt class="descname">inputfmt</tt><em class="property"> = '&gt;I'</em><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.inputfmt" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.log">
+   <tt class="descname">log</tt><big>(</big><em>revrange=None</em>, <em>files=</em>, <span class="optional">[</span><span class="optional">]</span><em>follow=False</em>, <em>followfirst=False</em>, <em>date=None</em>, <em>copies=False</em>, <em>keyword=None</em>, <em>removed=False</em>, <em>onlymerges=False</em>, <em>user=None</em>, <em>branch=None</em>, <em>prune=None</em>, <em>hidden=False</em>, <em>limit=None</em>, <em>nomerges=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.log" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the revision history of the specified files or the entire project.</p>
+   <p>File history is shown without following rename or copy history of files.
+   Use follow with a filename to follow history across renames and copies.
+   follow without a filename will only show ancestors or descendants of the
+   starting revision. followfirst only follows the first parent of merge
+   revisions.</p>
+   <p>If revrange isn&#8217;t specified, the default is &#8220;<a class="reference external" href="tip:0">tip:0</a>&#8221; unless follow is set,
+   in which case the working directory parent is used as the starting
+   revision.</p>
+   <dl class="docutils">
+   <dt>The returned changeset is a named tuple with the following string fields:</dt>
+   <dd><ul class="first last simple">
+   <li>rev</li>
+   <li>node</li>
+   <li>tags (space delimited)</li>
+   <li>branch</li>
+   <li>author</li>
+   <li>desc</li>
+   </ul>
+   </dd>
+   </dl>
+   <p>follow - follow changeset history, or file history across copies and renames
+   followfirst - only follow the first parent of merge changesets
+   date - show revisions matching date spec
+   copies - show copied files
+   keyword - do case-insensitive search for a given text
+   removed - include revisions where files were removed
+   onlymerges - show only merges
+   user - revisions committed by user
+   branch - show changesets within the given named branch
+   prune - do not display revision or any of its ancestors
+   hidden - show hidden changesets
+   limit - limit number of changes displayed
+   nomerges - do not show merges
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.manifest">
+   <tt class="descname">manifest</tt><big>(</big><em>rev=None</em>, <em>all=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.manifest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.manifest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Yields (nodeid, permission, executable, symlink, file path) tuples for
+   version controlled files for the given revision. If no revision is given,
+   the first parent of the working directory is used, or the null revision if
+   no revision is checked out.</p>
+   <p>When all is True, all files from all revisions are yielded (just the name).
+   This includes deleted and renamed files.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.merge">
+   <tt class="descname">merge</tt><big>(</big><em>rev=None</em>, <em>force=False</em>, <em>tool=None</em>, <em>cb=&lt;function abort at 0xbe31d70&gt;</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.merge" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Merge working directory with rev. If no revision is specified, the working
+   directory&#8217;s parent is a head revision, and the current branch contains
+   exactly one other head, the other head is merged with by default.</p>
+   <p>The current working directory is updated with all changes made in the
+   requested revision since the last common predecessor revision.</p>
+   <p>Files that changed between either parent are marked as changed for the
+   next commit and a commit must be performed before any further updates to
+   the repository are allowed. The next commit will have two parents.</p>
+   <p>force - force a merge with outstanding changes
+   tool - can be used to specify the merge tool used for file merges. It
+   overrides the HGMERGE environment variable and your configuration files.</p>
+   <p>cb - controls the behaviour when Mercurial prompts what to do with regard
+   to a specific file, e.g. when one parent modified a file and the other
+   removed it. It can be one of merge.handlers, or a function that gets a
+   single argument which are the contents of stdout. It should return one
+   of the expected choices (a single character).</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.move">
+   <tt class="descname">move</tt><big>(</big><em>source</em>, <em>dest</em>, <em>after=False</em>, <em>force=False</em>, <em>dryrun=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.move" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Mark dest as copies of source; mark source for deletion. If dest is a
+   directory, copies are put in that directory. If dest is a file, then source
+   must be a string.</p>
+   <p>Returns True on success, False if errors are encountered.</p>
+   <p>source - a file or a list of files
+   dest - a destination file or directory
+   after - record a rename that has already occurred
+   force - forcibly copy over an existing managed file
+   dryrun - do not perform actions, just print output
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.open">
+   <tt class="descname">open</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.open" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.outgoing">
+   <tt class="descname">outgoing</tt><big>(</big><em>revrange=None</em>, <em>path=None</em>, <em>force=False</em>, <em>newest=False</em>, <em>bookmarks=False</em>, <em>branch=None</em>, <em>limit=None</em>, <em>nomerges=False</em>, <em>subrepos=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.outgoing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.outgoing" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return changesets not found in the specified path or the default push
+   location.</p>
+   <p>When bookmarks=True, return a list of (name, node) of bookmarks that will
+   be pushed.</p>
+   <p>revrange - a (list of) changeset intended to be included in the destination
+   force - run even when the destination is unrelated
+   newest - show newest record first
+   branch - a specific branch you would like to push
+   limit - limit number of changes displayed
+   nomerges - do not show merges
+   ssh - specify ssh command to use
+   remotecmd - specify hg command to run on the remote side
+   insecure - do not verify server certificate (ignoring web.cacerts config)
+   subrepos - recurse into subrepositories</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.outputfmt">
+   <tt class="descname">outputfmt</tt><em class="property"> = '&gt;cI'</em><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.outputfmt" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.outputfmtsize">
+   <tt class="descname">outputfmtsize</tt><em class="property"> = 5</em><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.outputfmtsize" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.parents">
+   <tt class="descname">parents</tt><big>(</big><em>rev=None</em>, <em>file=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.parents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.parents" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the working directory&#8217;s parent revisions. If rev is given, the
+   parent of that revision will be printed. If file is given, the revision
+   in which the file was last changed (before the working directory revision
+   or the revision specified by rev) is returned.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.paths">
+   <tt class="descname">paths</tt><big>(</big><em>name=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.paths" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the definition of given symbolic path name. If no name is given,
+   return a dictionary of pathname : url of all available names.</p>
+   <p>Path names are defined in the [paths] section of your configuration file
+   and in &#8220;/etc/mercurial/hgrc&#8221;. If run inside a repository, &#8221;.hg/hgrc&#8221; is
+   used, too.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.pull">
+   <tt class="descname">pull</tt><big>(</big><em>source=None</em>, <em>rev=None</em>, <em>update=False</em>, <em>force=False</em>, <em>bookmark=None</em>, <em>branch=None</em>, <em>ssh=None</em>, <em>remotecmd=None</em>, <em>insecure=False</em>, <em>tool=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.pull"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.pull" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Pull changes from a remote repository.</p>
+   <p>This finds all changes from the repository specified by source and adds
+   them to this repository. If source is omitted, the &#8216;default&#8217; path will be
+   used. By default, this does not update the copy of the project in the
+   working directory.</p>
+   <p>Returns True on success, False if update was given and there were
+   unresolved files.</p>
+   <p>update - update to new branch head if changesets were pulled
+   force - run even when remote repository is unrelated
+   rev - a (list of) remote changeset intended to be added
+   bookmark - (list of) bookmark to pull
+   branch - a (list of) specific branch you would like to pull
+   ssh - specify ssh command to use
+   remotecmd - specify hg command to run on the remote side
+   insecure - do not verify server certificate (ignoring web.cacerts config)
+   tool - specify merge tool for rebase</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.push">
+   <tt class="descname">push</tt><big>(</big><em>dest=None</em>, <em>rev=None</em>, <em>force=False</em>, <em>bookmark=None</em>, <em>branch=None</em>, <em>newbranch=False</em>, <em>ssh=None</em>, <em>remotecmd=None</em>, <em>insecure=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.push" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Push changesets from this repository to the specified destination.</p>
+   <p>This operation is symmetrical to pull: it is identical to a pull in the
+   destination repository from the current one.</p>
+   <p>Returns True if push was successful, False if nothing to push.</p>
+   <p>rev - the (list of) specified revision and all its ancestors will be pushed
+   to the remote repository.</p>
+   <p>force - override the default behavior and push all changesets on all
+   branches.</p>
+   <p>bookmark - (list of) bookmark to push
+   branch - a (list of) specific branch you would like to push
+   newbranch - allows push to create a new named branch that is not present at
+   the destination. This allows you to only create a new branch without
+   forcing other changes.</p>
+   <p>ssh - specify ssh command to use
+   remotecmd - specify hg command to run on the remote side
+   insecure - do not verify server certificate (ignoring web.cacerts config)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.rawcommand">
+   <tt class="descname">rawcommand</tt><big>(</big><em>args</em>, <em>eh=None</em>, <em>prompt=None</em>, <em>input=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.rawcommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.rawcommand" title="Permalink to this definition">¶</a></dt>
+   <dd><p>args is the cmdline (usually built using util.cmdbuilder)</p>
+   <p>eh is an error handler that is passed the return code, stdout and stderr
+   If no eh is given, we raise a CommandError if ret != 0</p>
+   <p>prompt is used to reply to prompts by the server
+   It receives the max number of bytes to return and the contents of stdout
+   received so far</p>
+   <p>input is used to reply to bulk data requests by the server
+   It receives the max number of bytes to return</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.remove">
+   <tt class="descname">remove</tt><big>(</big><em>files</em>, <em>after=False</em>, <em>force=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.remove" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Schedule the indicated files for removal from the repository. This only
+   removes files from the current branch, not from the entire project history.</p>
+   <p>Returns True on success, False if any warnings encountered.</p>
+   <p>after - used to remove only files that have already been deleted
+   force - remove (and delete) file even if added or modified
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.resolve">
+   <tt class="descname">resolve</tt><big>(</big><em>file=</em>, <span class="optional">[</span><span class="optional">]</span><em>all=False</em>, <em>listfiles=False</em>, <em>mark=False</em>, <em>unmark=False</em>, <em>tool=None</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.resolve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.resolve" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Redo merges or set/view the merge status of given files.</p>
+   <p>Returns True on success, False if any files fail a resolve attempt.</p>
+   <p>When listfiles is True, returns a list of (code, file path) of resolved
+   and unresolved files. Code will be &#8216;R&#8217; or &#8216;U&#8217; accordingly.</p>
+   <p>all - select all unresolved files
+   mark - mark files as resolved
+   unmark - mark files as unresolved
+   tool - specify merge tool
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.retfmt">
+   <tt class="descname">retfmt</tt><em class="property"> = '&gt;i'</em><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.retfmt" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.revert">
+   <tt class="descname">revert</tt><big>(</big><em>files</em>, <em>rev=None</em>, <em>all=False</em>, <em>date=None</em>, <em>nobackup=False</em>, <em>dryrun=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.revert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.revert" title="Permalink to this definition">¶</a></dt>
+   <dd><p>With no revision specified, revert the specified files or directories to
+   the contents they had in the parent of the working directory. This
+   restores the contents of files to an unmodified state and unschedules
+   adds, removes, copies, and renames. If the working directory has two
+   parents, you must explicitly specify a revision.</p>
+   <p>Specifying rev or date will revert the given files or directories to their
+   states as of a specific revision. Because revert does not change the
+   working directory parents, this will cause these files to appear modified.
+   This can be helpful to &#8220;back out&#8221; some or all of an earlier change.</p>
+   <p>Modified files are saved with a .orig suffix before reverting. To disable
+   these backups, use nobackup.</p>
+   <p>Returns True on success.</p>
+   <p>all - revert all changes when no arguments given
+   date - tipmost revision matching date
+   rev - revert to the specified revision
+   nobackup - do not save backup copies of files
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns
+   dryrun - do not perform actions, just print output</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.root">
+   <tt class="descname">root</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.root"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.root" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the root directory of the current repository.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.runcommand">
+   <tt class="descname">runcommand</tt><big>(</big><em>args</em>, <em>inchannels</em>, <em>outchannels</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.runcommand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.runcommand" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.status">
+   <tt class="descname">status</tt><big>(</big><em>rev=None</em>, <em>change=None</em>, <em>all=False</em>, <em>modified=False</em>, <em>added=False</em>, <em>removed=False</em>, <em>deleted=False</em>, <em>clean=False</em>, <em>unknown=False</em>, <em>ignored=False</em>, <em>copies=False</em>, <em>subrepos=False</em>, <em>include=None</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.status" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return status of files in the repository as a list of (code, file path)
+   where code can be:</p>
+   <blockquote>
+   <div><p>M = modified
+   A = added
+   R = removed
+   C = clean
+   ! = missing (deleted by non-hg command, but still tracked)
+   ? = untracked
+   I = ignored</p>
+   <blockquote>
+   <div>= origin of the previous file listed as A (added)</div></blockquote>
+   </div></blockquote>
+   <p>rev - show difference from (list of) revision
+   change - list the changed files of a revision
+   all - show status of all files
+   modified - show only modified files
+   added - show only added files
+   removed - show only removed files
+   deleted - show only deleted (but tracked) files
+   clean - show only files without changes
+   unknown - show only unknown (not tracked) files
+   ignored - show only ignored files
+   copies - show source of copied files
+   subrepos - recurse into subrepositories
+   include - include names matching the given patterns
+   exclude - exclude names matching the given patterns</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.summary">
+   <tt class="descname">summary</tt><big>(</big><em>remote=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.summary" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a dictionary with a brief summary of the working directory state,
+   including parents, branch, commit status, and available updates.</p>
+   <blockquote>
+   <div><p>&#8216;parent&#8217; : a list of (rev, node, tags, message)
+   &#8216;branch&#8217; : the current branch
+   &#8216;commit&#8217; : True if the working directory is clean, False otherwise
+   &#8216;update&#8217; : number of available updates,
+   [&#8216;remote&#8217; : (in, in bookmarks, out, out bookmarks),]
+   [&#8216;mq&#8217;: (applied, unapplied) mq patches,]</p>
+   <p>unparsed entries will be of them form key : value</p>
+   </div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.tag">
+   <tt class="descname">tag</tt><big>(</big><em>names</em>, <em>rev=None</em>, <em>message=None</em>, <em>force=False</em>, <em>local=False</em>, <em>remove=False</em>, <em>date=None</em>, <em>user=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.tag" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Add one or more tags specified by names for the current or given revision.</p>
+   <p>Changing an existing tag is normally disallowed; use force to override.</p>
+   <p>Tag commits are usually made at the head of a branch. If the parent of the
+   working directory is not a branch head, a CommandError will be raised.
+   force can be specified to force the tag commit to be based on a non-head
+   changeset.</p>
+   <p>local - make the tag local
+   rev - revision to tag
+   remove - remove a tag
+   message - set commit message
+   date - record the specified date as commit date
+   user - record the specified user as committer</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.tags">
+   <tt class="descname">tags</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.tags" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a list of repository tags as: (name, rev, node, islocal)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.tip">
+   <tt class="descname">tip</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.tip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.tip" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the tip revision (usually just called the tip) which is the
+   changeset most recently added to the repository (and therefore the most
+   recently changed head).</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.update">
+   <tt class="descname">update</tt><big>(</big><em>rev=None</em>, <em>clean=False</em>, <em>check=False</em>, <em>date=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.update" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Update the repository&#8217;s working directory to changeset specified by rev.
+   If rev isn&#8217;t specified, update to the tip of the current named branch.</p>
+   <p>Return the number of files (updated, merged, removed, unresolved)</p>
+   <p>clean - discard uncommitted changes (no backup)
+   check - update across branches if no uncommitted changes
+   date - tipmost revision matching date</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.version">
+   <tt class="descname">version</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.version" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return hg version that runs the command server as a 4 fielded tuple: major,
+   minor, micro and local build info. e.g. (1, 9, 1, &#8216;+4-3095db9f5c2c&#8217;)</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.client.</tt><tt class="descname">revision</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.author">
+   <tt class="descname">author</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.author"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.author" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.branch">
+   <tt class="descname">branch</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.branch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.branch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.date">
+   <tt class="descname">date</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.date" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.desc">
+   <tt class="descname">desc</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.desc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.desc" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.node">
+   <tt class="descname">node</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.node" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.rev">
+   <tt class="descname">rev</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.rev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.rev" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.client.revision.tags">
+   <tt class="descname">tags</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#revision.tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.revision.tags" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.context">
+   <span id="jumpscale-baselib-mercurial-hglib-context-module"></span><h2>JumpScale.baselib.mercurial.hglib.context module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.context" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.context.</tt><tt class="descname">changectx</tt><big>(</big><em>repo</em>, <em>changeid=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>A changecontext object makes access to data related to a particular
+   changeset convenient.</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.added">
+   <tt class="descname">added</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.added"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.added" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.ancestor">
+   <tt class="descname">ancestor</tt><big>(</big><em>c2</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.ancestor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.ancestor" title="Permalink to this definition">¶</a></dt>
+   <dd><p>return the ancestor context of self and c2</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.ancestors">
+   <tt class="descname">ancestors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.ancestors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.ancestors" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.author">
+   <tt class="descname">author</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.author"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.author" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.bookmarks">
+   <tt class="descname">bookmarks</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.bookmarks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.bookmarks" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.branch">
+   <tt class="descname">branch</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.branch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.branch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.children">
+   <tt class="descname">children</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.children" title="Permalink to this definition">¶</a></dt>
+   <dd><p>return contexts for each child changeset</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.clean">
+   <tt class="descname">clean</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.clean" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.date">
+   <tt class="descname">date</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.date" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.descendants">
+   <tt class="descname">descendants</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.descendants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.descendants" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.description">
+   <tt class="descname">description</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.description" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.files">
+   <tt class="descname">files</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.files" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.hex">
+   <tt class="descname">hex</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.hex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.hex" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.ignored">
+   <tt class="descname">ignored</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.ignored"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.ignored" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.manifest">
+   <tt class="descname">manifest</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.manifest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.manifest" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.modified">
+   <tt class="descname">modified</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.modified"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.modified" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.node">
+   <tt class="descname">node</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.node" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.p1">
+   <tt class="descname">p1</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.p1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.p1" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.p2">
+   <tt class="descname">p2</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.p2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.p2" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.parents">
+   <tt class="descname">parents</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.parents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.parents" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.removed">
+   <tt class="descname">removed</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.removed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.removed" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.rev">
+   <tt class="descname">rev</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.rev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.rev" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.status">
+   <tt class="descname">status</tt><big>(</big><em>ignored=False</em>, <em>clean=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.status" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Explicit status query
+   Unless this method is used to query the working copy status, the
+   _status property will implicitly read the status using its default
+   arguments.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.tags">
+   <tt class="descname">tags</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.tags" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.mercurial.hglib.context.changectx.user">
+   <tt class="descname">user</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/context.html#changectx.user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.context.changectx.user" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.error">
+   <span id="jumpscale-baselib-mercurial-hglib-error-module"></span><h2>JumpScale.baselib.mercurial.hglib.error module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.error" title="Permalink to this headline">¶</a></h2>
+   <dl class="exception">
+   <dt id="JumpScale.baselib.mercurial.hglib.error.CapabilityError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.error.</tt><tt class="descname">CapabilityError</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/error.html#CapabilityError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.error.CapabilityError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.mercurial.hglib.error.ServerError" title="JumpScale.baselib.mercurial.hglib.error.ServerError"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.mercurial.hglib.error.ServerError</span></tt></a></p>
+   </dd></dl>
+   
+   <dl class="exception">
+   <dt id="JumpScale.baselib.mercurial.hglib.error.CommandError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.error.</tt><tt class="descname">CommandError</tt><big>(</big><em>args</em>, <em>ret</em>, <em>out</em>, <em>err</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/error.html#CommandError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.error.CommandError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+   </dd></dl>
+   
+   <dl class="exception">
+   <dt id="JumpScale.baselib.mercurial.hglib.error.ResponseError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.error.</tt><tt class="descname">ResponseError</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/error.html#ResponseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.error.ResponseError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.mercurial.hglib.error.ServerError" title="JumpScale.baselib.mercurial.hglib.error.ServerError"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.mercurial.hglib.error.ServerError</span></tt></a>, <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.ValueError" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.ValueError</span></tt></a></p>
+   </dd></dl>
+   
+   <dl class="exception">
+   <dt id="JumpScale.baselib.mercurial.hglib.error.ServerError">
+   <em class="property">exception </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.error.</tt><tt class="descname">ServerError</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/error.html#ServerError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.error.ServerError" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/exceptions.html#exceptions.Exception" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></a></p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.merge">
+   <span id="jumpscale-baselib-mercurial-hglib-merge-module"></span><h2>JumpScale.baselib.mercurial.hglib.merge module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.merge" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.merge.handlers">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.merge.</tt><tt class="descname">handlers</tt><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/merge.html#handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.merge.handlers" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>These can be used as the cb argument to hgclient.merge() to control the
+   behaviour when Mercurial prompts what to do with regard to a specific file,
+   e.g. when one parent modified a file and the other removed it.</p>
+   <dl class="staticmethod">
+   <dt id="JumpScale.baselib.mercurial.hglib.merge.handlers.abort">
+   <em class="property">static </em><tt class="descname">abort</tt><big>(</big><em>size</em>, <em>output</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/merge.html#handlers.abort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.merge.handlers.abort" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Abort the merge if a prompt appears.</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.mercurial.hglib.merge.handlers.noninteractive">
+   <tt class="descname">noninteractive</tt><em class="property"> = 'yes'</em><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.merge.handlers.noninteractive" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.templates">
+   <span id="jumpscale-baselib-mercurial-hglib-templates-module"></span><h2>JumpScale.baselib.mercurial.hglib.templates module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.templates" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib.util">
+   <span id="jumpscale-baselib-mercurial-hglib-util-module"></span><h2>JumpScale.baselib.mercurial.hglib.util module<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib.util" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.cmdbuilder">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">cmdbuilder</tt><big>(</big><em>name</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#cmdbuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.cmdbuilder" title="Permalink to this definition">¶</a></dt>
+   <dd><p>A helper for building the command arguments</p>
+   <p>args are the positional arguments</p>
+   <p>kwargs are the options
+   keys that are single lettered are prepended with &#8216;-&#8216;, others with &#8216;&#8211;&#8217;,
+   underscores are replaced with dashes</p>
+   <p>keys with False boolean values are ignored, lists add the key multiple times</p>
+   <p>None arguments are skipped</p>
+   <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;, &#39;-a&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="nb">long</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;, &#39;--long&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="o">=</span><span class="s">&#39;s&#39;</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;, &#39;--str&#39;, &#39;s&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="n">d_ash</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;, &#39;--d-ash&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="n">_</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;, &#39;-&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+   <span class="go">[&#39;cmd&#39;, &#39;--list&#39;, &#39;1&#39;, &#39;--list&#39;, &#39;2&#39;]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">cmdbuilder</span><span class="p">(</span><span class="s">&#39;cmd&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+   <span class="go">[&#39;cmd&#39;]</span>
+   </pre></div>
+   </div>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.eatlines">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">eatlines</tt><big>(</big><em>s</em>, <em>n</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#eatlines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.eatlines" title="Permalink to this definition">¶</a></dt>
+   <dd><div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">eatlines</span><span class="p">(</span><span class="s">&quot;1</span><span class="se">\n</span><span class="s">2&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+   <span class="go">&#39;2&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">eatlines</span><span class="p">(</span><span class="s">&quot;1</span><span class="se">\n</span><span class="s">2&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+   <span class="go">&#39;&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">eatlines</span><span class="p">(</span><span class="s">&quot;1</span><span class="se">\n</span><span class="s">2&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+   <span class="go">&#39;&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">eatlines</span><span class="p">(</span><span class="s">&quot;1</span><span class="se">\n</span><span class="s">2</span><span class="se">\n</span><span class="s">3&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+   <span class="go">&#39;2\n3&#39;</span>
+   </pre></div>
+   </div>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.grouper">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">grouper</tt><big>(</big><em>n</em>, <em>iterable</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#grouper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.grouper" title="Permalink to this definition">¶</a></dt>
+   <dd><p>list(grouper(2, range(4))) -&gt; [(0, 1), (2, 3)]</p>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.popen">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">popen</tt><big>(</big><em>args</em>, <em>env={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#popen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.popen" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.propertycache">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">propertycache</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#propertycache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.propertycache" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>Decorator that remembers the return value of a function call.</p>
+   <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">obj</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+   <span class="gp">... </span>    <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+   <span class="gp">... </span>        <span class="k">print</span> <span class="s">&#39;func&#39;</span>
+   <span class="gp">... </span>        <span class="k">return</span> <span class="p">[]</span>
+   <span class="gp">... </span>    <span class="n">func</span> <span class="o">=</span> <span class="n">propertycache</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">o</span> <span class="o">=</span> <span class="n">obj</span><span class="p">()</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">func</span>
+   <span class="go">func</span>
+   <span class="go">[]</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">func</span>
+   <span class="go">[]</span>
+   </pre></div>
+   </div>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.reterrorhandler">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">reterrorhandler</tt><big>(</big><em>args</em>, <em>allowed=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#reterrorhandler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.reterrorhandler" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>This class is meant to be used with rawcommand() error handler argument.
+   It remembers the return value the command returned if it&#8217;s one of allowed
+   values, which is only 1 if none are given. Otherwise it raises a CommandError.</p>
+   <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">reterrorhandler</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+   <span class="go">True</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+   <span class="go">&#39;a&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+   <span class="go">False</span>
+   </pre></div>
+   </div>
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.util.skiplines">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.util.</tt><tt class="descname">skiplines</tt><big>(</big><em>s</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/util.html#skiplines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.util.skiplines" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Skip lines starting with prefix in s</p>
+   <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">skiplines</span><span class="p">(</span><span class="s">&#39;a</span><span class="se">\n</span><span class="s">b</span><span class="se">\n</span><span class="s">a</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+   <span class="go">&#39;b\na\n&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">skiplines</span><span class="p">(</span><span class="s">&#39;a</span><span class="se">\n</span><span class="s">a</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+   <span class="go">&#39;&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">skiplines</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span>
+   <span class="go">&#39;&#39;</span>
+   <span class="gp">&gt;&gt;&gt; </span><span class="n">skiplines</span><span class="p">(</span><span class="s">&#39;a</span><span class="se">\n</span><span class="s">b&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)</span>
+   <span class="go">&#39;a\nb&#39;</span>
+   </pre></div>
+   </div>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.mercurial.hglib">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.mercurial.hglib" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.clone">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.</tt><tt class="descname">clone</tt><big>(</big><em>source=None</em>, <em>dest=None</em>, <em>noupdate=False</em>, <em>updaterev=None</em>, <em>rev=None</em>, <em>branch=None</em>, <em>pull=False</em>, <em>uncompressed=False</em>, <em>ssh=None</em>, <em>remotecmd=None</em>, <em>insecure=False</em>, <em>encoding=None</em>, <em>configs=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib.html#clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.clone" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.init">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.</tt><tt class="descname">init</tt><big>(</big><em>dest=None</em>, <em>ssh=None</em>, <em>remotecmd=None</em>, <em>insecure=False</em>, <em>encoding=None</em>, <em>configs=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib.html#init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.init" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.mercurial.hglib.open">
+   <tt class="descclassname">JumpScale.baselib.mercurial.hglib.</tt><tt class="descname">open</tt><big>(</big><em>path=None</em>, <em>encoding=None</em>, <em>configs=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib.html#open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.open" title="Permalink to this definition">¶</a></dt>
+   <dd><p>starts a cmdserver for the given path (or for a repository found in the
+   cwd). HGENCODING is set to the given encoding. configs is a list of key, value,
+   similar to those passed to hg &#8211;config.</p>
+   </dd></dl>
+   
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.mercurial.hglib package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.client">JumpScale.baselib.mercurial.hglib.client module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.context">JumpScale.baselib.mercurial.hglib.context module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.error">JumpScale.baselib.mercurial.hglib.error module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.merge">JumpScale.baselib.mercurial.hglib.merge module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.templates">JumpScale.baselib.mercurial.hglib.templates module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib.util">JumpScale.baselib.mercurial.hglib.util module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.mercurial.hglib">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.mercurial.html"
+                           title="previous chapter">JumpScale.baselib.mercurial package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.netconfig.html"
+                           title="next chapter">JumpScale.baselib.netconfig package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.mercurial.hglib.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.netconfig.html" title="JumpScale.baselib.netconfig package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.mercurial.html" title="JumpScale.baselib.mercurial package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.mercurial.html" >JumpScale.baselib.mercurial package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

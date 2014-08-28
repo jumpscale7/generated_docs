@@ -1,0 +1,450 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.lib.sheet package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
+       <link rel="next" title="JumpScale.lib.shorewall package" href="JumpScale.lib.shorewall.html" />
+       <link rel="prev" title="JumpScale.lib.sandboxer package" href="JumpScale.lib.sandboxer.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.shorewall.html" title="JumpScale.lib.shorewall package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.sandboxer.html" title="JumpScale.lib.sandboxer package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" accesskey="U">JumpScale.lib package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-lib-sheet-package">
+   <h1>JumpScale.lib.sheet package<a class="headerlink" href="#jumpscale-lib-sheet-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.lib.sheet.Sheet">
+   <span id="jumpscale-lib-sheet-sheet-module"></span><h2>JumpScale.lib.sheet.Sheet module<a class="headerlink" href="#module-JumpScale.lib.sheet.Sheet" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.lib.sheet.Sheet.Row">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.sheet.Sheet.</tt><tt class="descname">Row</tt><big>(</big><em>name=''</em>, <em>ttype='float'</em>, <em>nrcols=72</em>, <em>aggregate='T'</em>, <em>description=''</em>, <em>groupname=''</em>, <em>groupdescr=''</em>, <em>format=''</em>, <em>defval='default'</em>, <em>nrfloat=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.baselib.code.html#JumpScale.baselib.code.ClassBase.ClassBase" title="JumpScale.baselib.code.ClassBase.ClassBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.code.ClassBase.ClassBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.aggregate">
+   <tt class="descname">aggregate</tt><big>(</big><em>period='Y'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.aggregate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param period is Q or Y (Quarter/Year)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.applyFunction">
+   <tt class="descname">applyFunction</tt><big>(</big><em>ffunction</em>, <em>args={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.applyFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.applyFunction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>call ffunction with params (val of cell, x, args as dict)
+   row gets modified</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.areCosts">
+   <tt class="descname">areCosts</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.areCosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.areCosts" title="Permalink to this definition">¶</a></dt>
+   <dd><p>negate the values in the row</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.checkFilledIn">
+   <tt class="descname">checkFilledIn</tt><big>(</big><em>start</em>, <em>stop</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.checkFilledIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.checkFilledIn" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.complete">
+   <tt class="descname">complete</tt><big>(</big><em>start</em>, <em>vvariation=0.2</em>, <em>hvariation=0</em>, <em>minvalue=0</em>, <em>maxvalue=100</em>, <em>lastpos=70</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.complete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.complete" title="Permalink to this definition">¶</a></dt>
+   <dd><p>will copy beginning of row with certain variation to rest of row
+   will start doing that from mentioned startpoint
+   &#64;param hvariation not implemented</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.delay">
+   <tt class="descname">delay</tt><big>(</big><em>delay=0</em>, <em>defval=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.delay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.delay" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.getMax">
+   <tt class="descname">getMax</tt><big>(</big><em>start=None</em>, <em>stop=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.getMax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.getMax" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.goDown">
+   <tt class="descname">goDown</tt><big>(</big><em>start</em>, <em>stop</em>, <em>godown</em>, <em>nrSteps</em>, <em>hvariation</em>, <em>vvariation</em>, <em>isActiveFunction=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.goDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.goDown" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.goUp">
+   <tt class="descname">goUp</tt><big>(</big><em>start</em>, <em>stop</em>, <em>goup</em>, <em>nrSteps</em>, <em>hvariation</em>, <em>vvariation</em>, <em>isActiveFunction=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.goUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.goUp" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.indexation">
+   <tt class="descname">indexation</tt><big>(</big><em>yearlyIndexationInPerc</em>, <em>roundval=100</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.indexation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.indexation" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.interpolate">
+   <tt class="descname">interpolate</tt><big>(</big><em>start=None</em>, <em>stop=None</em>, <em>variation=0</em>, <em>min=None</em>, <em>max=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.interpolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.interpolate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param random if 5 means will put 5% variation on it while interpolating</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.invert">
+   <tt class="descname">invert</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.invert" title="Permalink to this definition">¶</a></dt>
+   <dd><p>invert + becomes - and reverse</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.makeGoHigher">
+   <tt class="descname">makeGoHigher</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.makeGoHigher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.makeGoHigher" title="Permalink to this definition">¶</a></dt>
+   <dd><p>make sure each cell of row is higher than previous cell</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.randomVariation">
+   <tt class="descname">randomVariation</tt><big>(</big><em>variation</em>, <em>start=None</em>, <em>stop=None</em>, <em>min=None</em>, <em>max=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.randomVariation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.randomVariation" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.recurring">
+   <tt class="descname">recurring</tt><big>(</big><em>row</em>, <em>delay</em>, <em>start</em>, <em>churn</em>, <em>nrmonths</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.recurring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.recurring" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param row is the row we will fill in with recurring calc
+   &#64;param start value to start with at month 0 (is first month)
+   &#64;param churn 2 means 2% churn
+   &#64;param delay is different beween selling &amp; being active</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.round">
+   <tt class="descname">round</tt><big>(</big><em>nrfloat=None</em>, <em>roundval=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.round"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.round" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param roundval if e.g. 100 means round will be done with values of 10, nr float will then be 0 (automatically)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.setCell">
+   <tt class="descname">setCell</tt><big>(</big><em>posx</em>, <em>value</em>, <em>minvalue=None</em>, <em>maxvalue=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.setCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.setCell" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.setDefaultValue">
+   <tt class="descname">setDefaultValue</tt><big>(</big><em>defval=None</em>, <em>stop=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.setDefaultValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.setDefaultValue" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Row.text2row">
+   <tt class="descname">text2row</tt><big>(</big><em>data</em>, <em>standstill=0</em>, <em>defval=None</em>, <em>startval=None</em>, <em>round=False</em>, <em>interpolate=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Row.text2row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Row.text2row" title="Permalink to this definition">¶</a></dt>
+   <dd><p>convert string format 2:100,5:200 to an array with required length (month 2=100, ...)
+   values can be 10%,0.1,100,1m,1k  m=million USD/EUR/CH/EGP/GBP are also understood
+   result will be put into the given row
+   data kan be 1 string or list
+   if list then list need to be of length len(row)/12 so is a value per year
+   standstill is first X nr of months which are made 0</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.sheet.Sheet.</tt><tt class="descname">Sheet</tt><big>(</big><em>name</em>, <em>nrcols=72</em>, <em>headers=</em>, <span class="optional">[</span><span class="optional">]</span><em>period='M'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.baselib.code.html#JumpScale.baselib.code.ClassBase.ClassBase" title="JumpScale.baselib.code.ClassBase.ClassBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.code.ClassBase.ClassBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.accumulate">
+   <tt class="descname">accumulate</tt><big>(</big><em>rowNameInput</em>, <em>rowNameDest</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.accumulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.accumulate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>add previous month on top of current and keep on adding (accumulating)
+   &#64;param rowNameInput is name of row we would like to aggregate
+   &#64;param rowNameDest if empty will be same as rowNameInput1</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.addCell">
+   <tt class="descname">addCell</tt><big>(</big><em>rowName</em>, <em>month</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.addCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.addCell" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.addRow">
+   <tt class="descname">addRow</tt><big>(</big><em>name</em>, <em>ttype='float'</em>, <em>aggregate='T'</em>, <em>description=''</em>, <em>groupname=''</em>, <em>groupdescr=''</em>, <em>nrcols=None</em>, <em>format=''</em>, <em>values=</em>, <span class="optional">[</span><span class="optional">]</span><em>defval=None</em>, <em>nrfloat=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.addRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.addRow" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param ttype int,perc,float,empty,str
+   &#64;param aggregate= T,A,MIN,MAX
+   &#64;param values is array of values to insert
+   &#64;param defval is default value for each col
+   &#64;param round is only valid for float e.g. 2 after comma</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.addRows">
+   <tt class="descname">addRows</tt><big>(</big><em>rows2create</em>, <em>aggregation</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.addRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.addRows" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;para rows2create {groupname:[rownames,...]}</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.aggregate">
+   <tt class="descname">aggregate</tt><big>(</big><em>rownames=</em>, <span class="optional">[</span><span class="optional">]</span><em>period='Y'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.aggregate" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rownames names of rows to aggregate
+   &#64;param period is Q or Y (Quarter/Year)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.applyFunction">
+   <tt class="descname">applyFunction</tt><big>(</big><em>rowNames</em>, <em>method</em>, <em>rowNameDest=''</em>, <em>params={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.applyFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.applyFunction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rowNames is array if names of row we would like to use as inputvalues
+   &#64;param rowNameDest if empty will be same as first rowName
+   &#64;param method is python function with params (sheet,**input) returns the result</p>
+   <blockquote>
+   <div>input is dict with as key the arguments &amp; the keys of params (so all collapsed in same input dict)</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.applyFunctionOnValuesFromRows">
+   <tt class="descname">applyFunctionOnValuesFromRows</tt><big>(</big><em>rownames</em>, <em>method</em>, <em>rowDest</em>, <em>params={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.applyFunctionOnValuesFromRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.applyFunctionOnValuesFromRows" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows is array if of rows we would like to use as inputvalues
+   &#64;param rowDest if empty will be same as first row
+   &#64;param method is python function with params (values,params) values are inputvalues from the rows</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.copyFrom">
+   <tt class="descname">copyFrom</tt><big>(</big><em>sheets</em>, <em>sheetname</em>, <em>rowname</em>, <em>newRowName</em>, <em>newGroupName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.copyFrom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.copyFrom" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param sheets if None then this sheetobject</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.getCell">
+   <tt class="descname">getCell</tt><big>(</big><em>rowName</em>, <em>month</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.getCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.getCell" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.getColumnsWidth">
+   <tt class="descname">getColumnsWidth</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.getColumnsWidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.getColumnsWidth" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.getRow">
+   <tt class="descname">getRow</tt><big>(</big><em>rowName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.getRow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.getRow" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.getSheetAggregated">
+   <tt class="descname">getSheetAggregated</tt><big>(</big><em>period='Y'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.getSheetAggregated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.getSheetAggregated" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param period is Q or Y (Quarter/Year)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.interpolate">
+   <tt class="descname">interpolate</tt><big>(</big><em>rowname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.interpolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.interpolate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.multiplyRows">
+   <tt class="descname">multiplyRows</tt><big>(</big><em>rownames</em>, <em>newRow</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.multiplyRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.multiplyRows" title="Permalink to this definition">¶</a></dt>
+   <dd><p>make procuct of rows
+   &#64;param rownames is list of rows to add specified by list or rownames
+   &#64;param newRow is the row where the result will be stored (can also be the name of the new row then row will be looked for)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.setCell">
+   <tt class="descname">setCell</tt><big>(</big><em>rowName</em>, <em>month</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.setCell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.setCell" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.setDefaultValue">
+   <tt class="descname">setDefaultValue</tt><big>(</big><em>rowNameInput</em>, <em>defval=0.0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.setDefaultValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.setDefaultValue" title="Permalink to this definition">¶</a></dt>
+   <dd><p>add previous month on top of current and keep on adding (accumulating)
+   &#64;param rowNameInput is name of row we would like to aggregate</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.Sheet.sumRows">
+   <tt class="descname">sumRows</tt><big>(</big><em>rownames</em>, <em>newRow</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#Sheet.sumRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.Sheet.sumRows" title="Permalink to this definition">¶</a></dt>
+   <dd><p>make sum of rows
+   &#64;param rownames is list of rows to add specified by list or rownames
+   &#64;param newRow is the row where the result will be stored (can also be the name of the new row then row will be looked for)</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.lib.sheet.Sheet.SheetFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.sheet.Sheet.</tt><tt class="descname">SheetFactory</tt><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#SheetFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.SheetFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.SheetFactory.getSheetsCollection">
+   <tt class="descname">getSheetsCollection</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#SheetFactory.getSheetsCollection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.SheetFactory.getSheetsCollection" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheet.SheetFactory.new">
+   <tt class="descname">new</tt><big>(</big><em>name</em>, <em>nrcols=72</em>, <em>headers=</em>, <span class="optional">[</span><span class="optional">]</span><em>period='M'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheet.html#SheetFactory.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheet.SheetFactory.new" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param period is M,Q or Y</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.lib.sheet.Sheets">
+   <span id="jumpscale-lib-sheet-sheets-module"></span><h2>JumpScale.lib.sheet.Sheets module<a class="headerlink" href="#module-JumpScale.lib.sheet.Sheets" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets">
+   <em class="property">class </em><tt class="descclassname">JumpScale.lib.sheet.Sheets.</tt><tt class="descname">Sheets</tt><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.baselib.code.html#JumpScale.baselib.code.ClassBase.ClassBase" title="JumpScale.baselib.code.ClassBase.ClassBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.code.ClassBase.ClassBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.add">
+   <tt class="descname">add</tt><big>(</big><em>sheet</em>, <em>category=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.add" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.aggregateSheets">
+   <tt class="descname">aggregateSheets</tt><big>(</big><em>sheetnames</em>, <em>rowdescr</em>, <em>category</em>, <em>aggregateSheetName='Total'</em>, <em>aggregation={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.aggregateSheets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.aggregateSheets" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param sheetnames are the sheets to aggregate
+   &#64;param rowdescr {groupname:[rownames,...]}</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.applyFunction">
+   <tt class="descname">applyFunction</tt><big>(</big><em>rows</em>, <em>method</em>, <em>rowDest=None</em>, <em>params={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.applyFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.applyFunction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param rows is array if of rows we would like to use as inputvalues
+   &#64;param rowDest if empty will be same as first row
+   &#64;param method is python function with params (values,params) values are inputvalues from the rows</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.dict2sheet">
+   <tt class="descname">dict2sheet</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.dict2sheet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.dict2sheet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.multiplyRows">
+   <tt class="descname">multiplyRows</tt><big>(</big><em>rows</em>, <em>newRow</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.multiplyRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.multiplyRows" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.new">
+   <tt class="descname">new</tt><big>(</big><em>name</em>, <em>nrcols=72</em>, <em>headers=</em>, <span class="optional">[</span><span class="optional">]</span><em>category=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.new" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.lib.sheet.Sheets.Sheets.sumRows">
+   <tt class="descname">sumRows</tt><big>(</big><em>rows</em>, <em>newRow</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/lib/sheet/Sheets.html#Sheets.sumRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.lib.sheet.Sheets.Sheets.sumRows" title="Permalink to this definition">¶</a></dt>
+   <dd><p>make sum of rows
+   &#64;param rows is list of rows to add
+   &#64;param newRow is the row where the result will be stored</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.lib.sheet">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.lib.sheet" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.lib.sheet package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.lib.sheet.Sheet">JumpScale.lib.sheet.Sheet module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.lib.sheet.Sheets">JumpScale.lib.sheet.Sheets module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.lib.sheet">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.lib.sandboxer.html"
+                           title="previous chapter">JumpScale.lib.sandboxer package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.lib.shorewall.html"
+                           title="next chapter">JumpScale.lib.shorewall package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.lib.sheet.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.shorewall.html" title="JumpScale.lib.shorewall package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.sandboxer.html" title="JumpScale.lib.sandboxer package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

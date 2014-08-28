@@ -1,0 +1,205 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.grid.jumpscripts package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.grid package" href="JumpScale.grid.html" />
+       <link rel="next" title="JumpScale.grid.master package" href="JumpScale.grid.master.html" />
+       <link rel="prev" title="JumpScale.grid.gridhealthchecker package" href="JumpScale.grid.gridhealthchecker.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.master.html" title="JumpScale.grid.master package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.gridhealthchecker.html" title="JumpScale.grid.gridhealthchecker package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.grid.html" accesskey="U">JumpScale.grid package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-grid-jumpscripts-package">
+   <h1>JumpScale.grid.jumpscripts package<a class="headerlink" href="#jumpscale-grid-jumpscripts-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.grid.jumpscripts.JumpscriptFactory">
+   <span id="jumpscale-grid-jumpscripts-jumpscriptfactory-module"></span><h2>JumpScale.grid.jumpscripts.JumpscriptFactory module<a class="headerlink" href="#module-JumpScale.grid.jumpscripts.JumpscriptFactory" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.jumpscripts.JumpscriptFactory.</tt><tt class="descname">JumpScript</tt><big>(</big><em>ddict=None</em>, <em>path=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.execute">
+   <tt class="descname">execute</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.execute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.execute" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.executeInProcess">
+   <tt class="descname">executeInProcess</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.executeInProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.executeInProcess" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.executeInWorker">
+   <tt class="descname">executeInWorker</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.executeInWorker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.executeInWorker" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.getDict">
+   <tt class="descname">getDict</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.getDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.getDict" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.getKey">
+   <tt class="descname">getKey</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.getKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.getKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.load">
+   <tt class="descname">load</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.load" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.loadAttributes">
+   <tt class="descname">loadAttributes</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.loadAttributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.loadAttributes" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.write">
+   <tt class="descname">write</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpScript.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.write" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.jumpscripts.JumpscriptFactory.</tt><tt class="descname">JumpscriptFactory</tt><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpscriptFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.getJSClass">
+   <tt class="descname">getJSClass</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpscriptFactory.getJSClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.getJSClass" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.loadFromGridMaster">
+   <tt class="descname">loadFromGridMaster</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpscriptFactory.loadFromGridMaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.loadFromGridMaster" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.pushToGridMaster">
+   <tt class="descname">pushToGridMaster</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/jumpscripts/JumpscriptFactory.html#JumpscriptFactory.pushToGridMaster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpscriptFactory.pushToGridMaster" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.grid.jumpscripts">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.grid.jumpscripts" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.grid.jumpscripts package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.jumpscripts.JumpscriptFactory">JumpScale.grid.jumpscripts.JumpscriptFactory module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.jumpscripts">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.grid.gridhealthchecker.html"
+                           title="previous chapter">JumpScale.grid.gridhealthchecker package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.grid.master.html"
+                           title="next chapter">JumpScale.grid.master package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.grid.jumpscripts.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.master.html" title="JumpScale.grid.master package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.gridhealthchecker.html" title="JumpScale.grid.gridhealthchecker package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.grid.html" >JumpScale.grid package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

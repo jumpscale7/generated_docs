@@ -1,0 +1,301 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.grid.zdaemon package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.grid package" href="JumpScale.grid.html" />
+       <link rel="next" title="JumpScale.lib package" href="JumpScale.lib.html" />
+       <link rel="prev" title="JumpScale.grid.tornado package" href="JumpScale.grid.tornado.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.html" title="JumpScale.lib package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.tornado.html" title="JumpScale.grid.tornado package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.grid.html" accesskey="U">JumpScale.grid package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-grid-zdaemon-package">
+   <h1>JumpScale.grid.zdaemon package<a class="headerlink" href="#jumpscale-grid-zdaemon-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.grid.zdaemon.ZDaemon">
+   <span id="jumpscale-grid-zdaemon-zdaemon-module"></span><h2>JumpScale.grid.zdaemon.ZDaemon module<a class="headerlink" href="#module-JumpScale.grid.zdaemon.ZDaemon" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.grid.zdaemon.ZDaemon.ZDaemon">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.zdaemon.ZDaemon.</tt><tt class="descname">ZDaemon</tt><big>(</big><em>port=None</em>, <em>name=''</em>, <em>nrCmdGreenlets=50</em>, <em>sslorg=''</em>, <em>ssluser=''</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemon.html#ZDaemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemon.ZDaemon" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.grid.gevent.html#JumpScale.grid.gevent.GeventLoop.GeventLoop" title="JumpScale.grid.gevent.GeventLoop.GeventLoop"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.grid.gevent.GeventLoop.GeventLoop</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemon.ZDaemon.addCMDsInterface">
+   <tt class="descname">addCMDsInterface</tt><big>(</big><em>cmdInterfaceClass</em>, <em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemon.html#ZDaemon.addCMDsInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemon.ZDaemon.addCMDsInterface" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemon.ZDaemon.cmdGreenlet">
+   <tt class="descname">cmdGreenlet</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemon.html#ZDaemon.cmdGreenlet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemon.ZDaemon.cmdGreenlet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemon.ZDaemon.repCmdServer">
+   <tt class="descname">repCmdServer</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemon.html#ZDaemon.repCmdServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemon.ZDaemon.repCmdServer" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemon.ZDaemon.start">
+   <tt class="descname">start</tt><big>(</big><em>mainloop=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemon.html#ZDaemon.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemon.ZDaemon.start" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="jumpscale-grid-zdaemon-zdaemonagent-module">
+   <h2>JumpScale.grid.zdaemon.ZDaemonAgent module<a class="headerlink" href="#jumpscale-grid-zdaemon-zdaemonagent-module" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.grid.zdaemon.ZDaemonFactory">
+   <span id="jumpscale-grid-zdaemon-zdaemonfactory-module"></span><h2>JumpScale.grid.zdaemon.ZDaemonFactory module<a class="headerlink" href="#module-JumpScale.grid.zdaemon.ZDaemonFactory" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.zdaemon.ZDaemonFactory.</tt><tt class="descname">ZDaemonFactory</tt><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemon">
+   <tt class="descname">getZDaemon</tt><big>(</big><em>port=4444</em>, <em>name=''</em>, <em>nrCmdGreenlets=50</em>, <em>sslorg=''</em>, <em>ssluser=''</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.getZDaemon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemon" title="Permalink to this definition">¶</a></dt>
+   <dd><p>is a generic usable zmq daemon which has a data &amp; cmd channel (data channel not completely implemented for now)</p>
+   <p>zd=j.core.zdaemon.getZDaemon(port=5651,nrCmdGreenlets=50)</p>
+   <dl class="docutils">
+   <dt>class MyCommands():</dt>
+   <dd><dl class="first last docutils">
+   <dt>def __init__(self,daemon):</dt>
+   <dd>self.daemon=daemon</dd>
+   <dt>def pingcmd(self,session=None):</dt>
+   <dd>return &#8220;pong&#8221;</dd>
+   <dt>def echo(self,msg=&#8221;&#8221;,session=None):</dt>
+   <dd>return msg</dd>
+   </dl>
+   </dd>
+   <dt>#remark always need to add <a href="#id1"><span class="problematic" id="id2">**</span></a>args in method because user &amp; returnformat are passed as params which can </dt>
+   <dd>be used in method</dd>
+   </dl>
+   <p>zd.addCMDsInterface(MyCommands)  #pass as class not as object !!!
+   zd.start()</p>
+   <p>use self.getZDaemonClientClass as client to this daemon</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonAgent">
+   <tt class="descname">getZDaemonAgent</tt><big>(</big><em>ipaddr='127.0.0.1'</em>, <em>port=5651</em>, <em>org='myorg'</em>, <em>user='root'</em>, <em>passwd='1234'</em>, <em>ssl=False</em>, <em>reset=False</em>, <em>roles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.getZDaemonAgent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonAgent" title="Permalink to this definition">¶</a></dt>
+   <dd><p>example usage, see example for server at self.getZDaemon</p>
+   <p>agent=j.core.zdaemon.getZDaemonAgent(ipaddr=&#8221;127.0.0.1&#8221;,port=5651,login=&#8221;root&#8221;,passwd=&#8221;1234&#8221;,ssl=False,roles=[&#8220;*&#8221;])
+   agent.start()</p>
+   <dl class="docutils">
+   <dt>&#64;param roles describes which roles the agent can execute e.g. node.1,hypervisor.virtualbox.1,*</dt>
+   <dd><ul class="first last simple">
+   <li>means all</li>
+   </ul>
+   </dd>
+   </dl>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonClient">
+   <tt class="descname">getZDaemonClient</tt><big>(</big><em>addr='127.0.0.1'</em>, <em>port=5651</em>, <em>org='myorg'</em>, <em>user='root'</em>, <em>passwd='1234'</em>, <em>ssl=False</em>, <em>category='core'</em>, <em>sendformat='m'</em>, <em>returnformat='m'</em>, <em>gevent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.getZDaemonClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>example usage, see example for server at self.getZDaemon</p>
+   <p>client=j.core.zdaemon.getZDaemonClient(ipaddr=&#8221;127.0.0.1&#8221;,port=5651,login=&#8221;root&#8221;,passwd=&#8221;1234&#8221;,ssl=False)</p>
+   <blockquote>
+   <div>print client.echo(&#8220;Hello World.&#8221;)</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonHAClient">
+   <tt class="descname">getZDaemonHAClient</tt><big>(</big><em>connections=None</em>, <em>org='myorg'</em>, <em>user='root'</em>, <em>passwd='1234'</em>, <em>ssl=False</em>, <em>category='core'</em>, <em>sendformat='m'</em>, <em>returnformat='m'</em>, <em>gevent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.getZDaemonHAClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonHAClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>example usage, see example for server at self.getZDaemon</p>
+   <p>client=j.core.zdaemon.getZDaemonHAClient([(&#8216;127.0.0.1&#8217;, 5544)],login=&#8221;root&#8221;,passwd=&#8221;1234&#8221;,ssl=False)</p>
+   <blockquote>
+   <div>print client.echo(&#8220;Hello World.&#8221;)</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonTransportClass">
+   <tt class="descname">getZDaemonTransportClass</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.getZDaemonTransportClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.getZDaemonTransportClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>#example usage:
+   import JumpScale.grid.zdaemon
+   class BlobStorTransport(j.core.zdaemon.getZDaemonTransportClass()):</p>
+   <blockquote>
+   <div><dl class="docutils">
+   <dt>def sendMsg(self,timeout=0, <a href="#id3"><span class="problematic" id="id4">*</span></a>args):</dt>
+   <dd>self._cmdchannel.send_multipart(args)
+   result=self._cmdchannel.recv_multipart()
+   return result</dd>
+   </dl>
+   </div></blockquote>
+   <p>transp=BlobStorTransport(addr=ipaddr,port=port,gevent=True)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.initSSL4Server">
+   <tt class="descname">initSSL4Server</tt><big>(</big><em>organization</em>, <em>serveruser</em>, <em>sslkeyvaluestor=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonFactory.html#ZDaemonFactory.initSSL4Server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonFactory.ZDaemonFactory.initSSL4Server" title="Permalink to this definition">¶</a></dt>
+   <dd><p>use this to init your ssl keys for the server (they can be used over all transports)</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.grid.zdaemon.ZDaemonTransport">
+   <span id="jumpscale-grid-zdaemon-zdaemontransport-module"></span><h2>JumpScale.grid.zdaemon.ZDaemonTransport module<a class="headerlink" href="#module-JumpScale.grid.zdaemon.ZDaemonTransport" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonHATransport">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.zdaemon.ZDaemonTransport.</tt><tt class="descname">ZDaemonHATransport</tt><big>(</big><em>connections</em>, <em>gevent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonTransport.html#ZDaemonHATransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonHATransport" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.TCPHATransport.TCPHATransport" title="JumpScale.grid.serverbase.TCPHATransport.TCPHATransport"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.grid.serverbase.TCPHATransport.TCPHATransport</span></tt></a></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport">
+   <em class="property">class </em><tt class="descclassname">JumpScale.grid.zdaemon.ZDaemonTransport.</tt><tt class="descname">ZDaemonTransport</tt><big>(</big><em>addr='localhost'</em>, <em>port=9999</em>, <em>gevent=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonTransport.html#ZDaemonTransport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.grid.serverbase.html#JumpScale.grid.serverbase.DaemonClient.Transport" title="JumpScale.grid.serverbase.DaemonClient.Transport"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.grid.serverbase.DaemonClient.Transport</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.close">
+   <tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonTransport.html#ZDaemonTransport.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.close" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.connect">
+   <tt class="descname">connect</tt><big>(</big><em>sessionid</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonTransport.html#ZDaemonTransport.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.connect" title="Permalink to this definition">¶</a></dt>
+   <dd><p>everwrite this method in implementation to init your connection to server (the transport layer)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.sendMsg">
+   <tt class="descname">sendMsg</tt><big>(</big><em>category</em>, <em>cmd</em>, <em>data</em>, <em>sendformat=''</em>, <em>returnformat=''</em>, <em>timeout=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/grid/zdaemon/ZDaemonTransport.html#ZDaemonTransport.sendMsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.grid.zdaemon.ZDaemonTransport.ZDaemonTransport.sendMsg" title="Permalink to this definition">¶</a></dt>
+   <dd><p>overwrite this class in implementation to send &amp; retrieve info from the server (implement the transport layer)</p>
+   <dl class="docutils">
+   <dt>&#64;return (resultcode,returnformat,result)</dt>
+   <dd>item 0=cmd, item 1=returnformat (str), item 2=args (dict)</dd>
+   <dt>resultcode</dt>
+   <dd>0=ok
+   1= not authenticated
+   2= method not found
+   2+ any other error</dd>
+   </dl>
+   <p>&#64;param timeout is not used</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.grid.zdaemon">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.grid.zdaemon" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.grid.zdaemon package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.zdaemon.ZDaemon">JumpScale.grid.zdaemon.ZDaemon module</a></li>
+   <li><a class="reference internal" href="#jumpscale-grid-zdaemon-zdaemonagent-module">JumpScale.grid.zdaemon.ZDaemonAgent module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.zdaemon.ZDaemonFactory">JumpScale.grid.zdaemon.ZDaemonFactory module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.zdaemon.ZDaemonTransport">JumpScale.grid.zdaemon.ZDaemonTransport module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.grid.zdaemon">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.grid.tornado.html"
+                           title="previous chapter">JumpScale.grid.tornado package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.lib.html"
+                           title="next chapter">JumpScale.lib package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.grid.zdaemon.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.html" title="JumpScale.lib package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.grid.tornado.html" title="JumpScale.grid.tornado package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.grid.html" >JumpScale.grid package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>
