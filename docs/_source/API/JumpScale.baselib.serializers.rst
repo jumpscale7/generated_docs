@@ -7,7 +7,7 @@
      <head>
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        
-       <title>JumpScale.baselib.serializers package &mdash; Jumpscale Doc 7.0 documentation</title>
+       <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
        
        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -24,10 +24,49 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   
+       <title>JumpScale.baselib.serializers package &mdash; Jumpscale Doc 7.0 documentation</title>
+   
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+   
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
        <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
        <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
        <link rel="next" title="JumpScale.baselib.servers package" href="JumpScale.baselib.servers.html" />
-       <link rel="prev" title="JumpScale.baselib.screen package" href="JumpScale.baselib.screen.html" /> 
+       <link rel="prev" title="JumpScale.baselib.screen package" href="JumpScale.baselib.screen.html" />
      </head>
      <body>
        <div class="related">
@@ -47,15 +86,15 @@
                 accesskey="P">previous</a> |</li>
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
+             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li>
          </ul>
-       </div>  
+       </div>
    
        <div class="document">
          <div class="documentwrapper">
            <div class="bodywrapper">
              <div class="body">
-               
+   
      <div class="section" id="jumpscale-baselib-serializers-package">
    <h1>JumpScale.baselib.serializers package<a class="headerlink" href="#jumpscale-baselib-serializers-package" title="Permalink to this headline">¶</a></h1>
    <div class="section" id="submodules">
@@ -317,7 +356,7 @@
    <dd><dl class="docutils">
    <dt>serializationstr FORMATS SUPPORTED FOR NOW</dt>
    <dd><blockquote class="first">
-   <div>m=MESSAGEPACK 
+   <div>m=MESSAGEPACK
    c=COMPRESSION WITH BLOSC
    b=blowfish
    s=snappy
@@ -349,7 +388,7 @@
    <tt class="descname">getSerializerType</tt><big>(</big><em>type</em>, <em>key=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/serializers/SerializersFactory.html#SerializersFactory.getSerializerType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.serializers.SerializersFactory.SerializersFactory.getSerializerType" title="Permalink to this definition">¶</a></dt>
    <dd><dl class="docutils">
    <dt>serializationstr FORMATS SUPPORTED FOR NOW</dt>
-   <dd>m=MESSAGEPACK 
+   <dd>m=MESSAGEPACK
    c=COMPRESSION WITH BLOSC
    b=blowfish
    s=snappy
@@ -444,7 +483,48 @@
                 >previous</a> |</li>
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.serializers.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
          </ul>
        </div>
        <div class="footer">
