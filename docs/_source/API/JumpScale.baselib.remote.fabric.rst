@@ -7,50 +7,11 @@
      <head>
        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        
-       <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   
        <title>JumpScale.baselib.remote.fabric package &mdash; Jumpscale Doc 7.0 documentation</title>
-   
+       
        <link rel="stylesheet" href="../_static/default.css" type="text/css" />
        <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-   
+       
        <script type="text/javascript">
          var DOCUMENTATION_OPTIONS = {
            URL_ROOT:    '../',
@@ -66,7 +27,7 @@
        <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
        <link rel="up" title="JumpScale.baselib.remote package" href="JumpScale.baselib.remote.html" />
        <link rel="next" title="JumpScale.baselib.remote.remotesystem package" href="JumpScale.baselib.remote.remotesystem.html" />
-       <link rel="prev" title="JumpScale.baselib.remote.cuisine package" href="JumpScale.baselib.remote.cuisine.html" />
+       <link rel="prev" title="JumpScale.baselib.remote.cuisine package" href="JumpScale.baselib.remote.cuisine.html" /> 
      </head>
      <body>
        <div class="related">
@@ -87,15 +48,15 @@
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
              <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.remote.html" accesskey="U">JumpScale.baselib.remote package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.remote.html" accesskey="U">JumpScale.baselib.remote package</a> &raquo;</li> 
          </ul>
-       </div>
+       </div>  
    
        <div class="document">
          <div class="documentwrapper">
            <div class="bodywrapper">
              <div class="body">
-   
+               
      <div class="section" id="jumpscale-baselib-remote-fabric-package">
    <h1>JumpScale.baselib.remote.fabric package<a class="headerlink" href="#jumpscale-baselib-remote-fabric-package" title="Permalink to this headline">¶</a></h1>
    <div class="section" id="submodules">
@@ -197,48 +158,7 @@
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
              <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.remote.html" >JumpScale.baselib.remote package</a> &raquo;</li>
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.baselib.remote.fabric.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+             <li><a href="JumpScale.baselib.remote.html" >JumpScale.baselib.remote package</a> &raquo;</li> 
          </ul>
        </div>
        <div class="footer">

@@ -6,50 +6,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
-    
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '7.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
-  </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
     <title>JumpScale.baselib.remote.remotesystem package &mdash; Jumpscale Doc 7.0 documentation</title>
-
+    
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -65,7 +26,7 @@
     <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
     <link rel="up" title="JumpScale.baselib.remote package" href="JumpScale.baselib.remote.html" />
     <link rel="next" title="JumpScale.baselib.remote.ssh package" href="JumpScale.baselib.remote.ssh.html" />
-    <link rel="prev" title="JumpScale.baselib.remote.fabric package" href="JumpScale.baselib.remote.fabric.html" />
+    <link rel="prev" title="JumpScale.baselib.remote.fabric package" href="JumpScale.baselib.remote.fabric.html" /> 
   </head>
   <body>
     <div class="related">
@@ -86,15 +47,15 @@
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
           <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
-          <li><a href="JumpScale.baselib.remote.html" accesskey="U">JumpScale.baselib.remote package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.remote.html" accesskey="U">JumpScale.baselib.remote package</a> &raquo;</li> 
       </ul>
-    </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-
+            
   <div class="section" id="jumpscale-baselib-remote-remotesystem-package">
 <h1>JumpScale.baselib.remote.remotesystem package<a class="headerlink" href="#jumpscale-baselib-remote-remotesystem-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
@@ -273,7 +234,7 @@ it will be created as well as missing parent directories</p>
 <tt class="descname">copyDirTreeLocalRemote</tt><big>(</big><em>source</em>, <em>destination=''</em>, <em>removeNonRelevantFiles=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/remotesystem/RemoteSystem.html#RemoteSystemFS.copyDirTreeLocalRemote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.copyDirTreeLocalRemote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Recursively copy an entire directory tree rooted at source.
 The destination directory may already exist; if not, it will be created</p>
-<p>Parameters:
+<p>Parameters:        
 - source: string (source of directory tree to be copied)
 - destination: string (path directory to be copied to...should not already exist)</p>
 <blockquote>
@@ -285,7 +246,7 @@ The destination directory may already exist; if not, it will be created</p>
 <tt class="descname">copyFile</tt><big>(</big><em>fileFrom</em>, <em>fileTo</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/remote/remotesystem/RemoteSystem.html#RemoteSystemFS.copyFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.remote.remotesystem.RemoteSystem.RemoteSystemFS.copyFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy file</p>
 <p>Copies the file from C{fileFrom} to the file or directory C{to}.
-If C{to} is a directory, a file with the same basename as C{fileFrom} is
+If C{to} is a directory, a file with the same basename as C{fileFrom} is 
 created (or overwritten) in the directory specified.
 Permission bits are copied.</p>
 <p>&#64;param fileFrom: Source file path name
@@ -321,7 +282,7 @@ if newdir was given as a complete path with the directory name, the new director
 <dd><p>Read a file and get contents of that file</p>
 <p>&#64;param filename: filename to open for reading
 &#64;type filename: string</p>
-<p>&#64;rtype: string
+<p>&#64;rtype: string 
 &#64;return: representing the file contents</p>
 <p>&#64;raise TypeError: filename is None</p>
 </dd></dl>
@@ -358,7 +319,7 @@ if newdir was given as a complete path with the directory name, the new director
 <dd><p>Move a file from source path to destination path</p>
 <p>&#64;param source: Source file path
 &#64;type source: string
-&#64;param destination: Destination path the file should be moved to
+&#64;param destination: Destination path the file should be moved to 
 &#64;type destination: string</p>
 <p>&#64;raise TypeError: source or destin is empty
 &#64;raise RuntimeError: Specified source / destination does not exist
@@ -540,48 +501,7 @@ if newdir was given as a complete path with the directory name, the new director
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
           <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
-          <li><a href="JumpScale.baselib.remote.html" >JumpScale.baselib.remote package</a> &raquo;</li>
-      </ul>
-    </div>
-    <div class="footer">
-    </div>
-  </body>
-</html>
-
-          </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/API/JumpScale.baselib.remote.remotesystem.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <li><a href="JumpScale.baselib.remote.html" >JumpScale.baselib.remote package</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

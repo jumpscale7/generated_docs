@@ -1,734 +1,86 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.baselib.key_value_store package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
-       <link rel="next" title="JumpScale.baselib.lrucache package" href="JumpScale.baselib.lrucache.html" />
-       <link rel="prev" title="JumpScale.baselib.jsdeveltools package" href="JumpScale.baselib.jsdeveltools.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.lrucache.html" title="JumpScale.baselib.lrucache package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.jsdeveltools.html" title="JumpScale.baselib.jsdeveltools package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-baselib-key-value-store-package">
-   <h1>JumpScale.baselib.key_value_store package<a class="headerlink" href="#jumpscale-baselib-key-value-store-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.arakoon_store">
-   <span id="jumpscale-baselib-key-value-store-arakoon-store-module"></span><h2>JumpScale.baselib.key_value_store.arakoon_store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.arakoon_store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.arakoon_store.</tt><tt class="descname">ArakoonKeyValueStore</tt><big>(</big><em>namespace=None</em>, <em>serializers=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="JumpScale.baselib.key_value_store.store.KeyValueStoreBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.key_value_store.store.KeyValueStoreBase</span></tt></a></p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.checkChangeLog">
-   <tt class="descname">checkChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.checkChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.checkChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.delete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.exists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.get" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.increment">
-   <tt class="descname">increment</tt><big>(</big><em>incrementtype</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.increment" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param incrementtype : type of increment is in style machine.disk.nrdisk  (dot notation)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.list">
-   <tt class="descname">list</tt><big>(</big><em>category</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.list" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em>, <em>JSModelSerializer=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/arakoon_store.html#ArakoonKeyValueStore.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.arakoon_store.ArakoonKeyValueStore.set" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.file_system_store">
-   <span id="jumpscale-baselib-key-value-store-file-system-store-module"></span><h2>JumpScale.baselib.key_value_store.file_system_store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.file_system_store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.file_system_store.</tt><tt class="descname">FileSystemKeyValueStore</tt><big>(</big><em>namespace=''</em>, <em>baseDir=None</em>, <em>serializers=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="JumpScale.baselib.key_value_store.store.KeyValueStoreBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.key_value_store.store.KeyValueStoreBase</span></tt></a></p>
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.EXTENSION">
-   <tt class="descname">EXTENSION</tt><em class="property"> = ''</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.EXTENSION" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.checkChangeLog">
-   <tt class="descname">checkChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.checkChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.checkChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.delete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.destroy">
-   <tt class="descname">destroy</tt><big>(</big><em>category=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.destroy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.destroy" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.exists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.fileGetContents">
-   <tt class="descname">fileGetContents</tt><big>(</big><em>filename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.fileGetContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.fileGetContents" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.get" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.list">
-   <tt class="descname">list</tt><big>(</big><em>category</em>, <em>prefix=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.list" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.set" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.writeFile">
-   <tt class="descname">writeFile</tt><big>(</big><em>filename</em>, <em>contents</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/file_system_store.html#FileSystemKeyValueStore.writeFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.file_system_store.FileSystemKeyValueStore.writeFile" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Open a file and write file contents, close file afterwards
-   &#64;param contents: string (file contents to be written)</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="jumpscale-baselib-key-value-store-leveldb-store-module">
-   <h2>JumpScale.baselib.key_value_store.leveldb_store module<a class="headerlink" href="#jumpscale-baselib-key-value-store-leveldb-store-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.memory_store">
-   <span id="jumpscale-baselib-key-value-store-memory-store-module"></span><h2>JumpScale.baselib.key_value_store.memory_store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.memory_store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.memory_store.</tt><tt class="descname">MemoryKeyValueStore</tt><big>(</big><em>namespace=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="JumpScale.baselib.key_value_store.store.KeyValueStoreBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.key_value_store.store.KeyValueStoreBase</span></tt></a></p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.checkChangeLog">
-   <tt class="descname">checkChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.checkChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.checkChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.delete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.exists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.get" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.list">
-   <tt class="descname">list</tt><big>(</big><em>category=''</em>, <em>prefix=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.list" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/memory_store.html#MemoryKeyValueStore.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.memory_store.MemoryKeyValueStore.set" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.mongodb_store">
-   <span id="jumpscale-baselib-key-value-store-mongodb-store-module"></span><h2>JumpScale.baselib.key_value_store.mongodb_store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.mongodb_store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.mongodb_store.</tt><tt class="descname">MongoDBKeyValueStore</tt><big>(</big><em>namespace=''</em>, <em>host='localhost'</em>, <em>port=7771</em>, <em>db=0</em>, <em>password=''</em>, <em>serializers=</em>, <span class="optional">[</span><span class="optional">]</span><em>masterdb=None</em>, <em>changelog=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="JumpScale.baselib.key_value_store.store.KeyValueStoreBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.key_value_store.store.KeyValueStoreBase</span></tt></a></p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.delete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.exists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.get" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.list">
-   <tt class="descname">list</tt><big>(</big><em>category</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.list" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.osis">
-   <tt class="descname">osis</tt><em class="property"> = {}</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.osis" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em>, <em>expire=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#MongoDBKeyValueStore.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.MongoDBKeyValueStore.set" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param expire is in seconds when value will expire</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.baselib.key_value_store.mongodb_store.chunks">
-   <tt class="descclassname">JumpScale.baselib.key_value_store.mongodb_store.</tt><tt class="descname">chunks</tt><big>(</big><em>l</em>, <em>n</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/mongodb_store.html#chunks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.mongodb_store.chunks" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.redis_store">
-   <span id="jumpscale-baselib-key-value-store-redis-store-module"></span><h2>JumpScale.baselib.key_value_store.redis_store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.redis_store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.redis_store.</tt><tt class="descname">RedisKeyValueStore</tt><big>(</big><em>namespace=''</em>, <em>host='localhost'</em>, <em>port=7771</em>, <em>db=0</em>, <em>password=''</em>, <em>serializers=</em>, <span class="optional">[</span><span class="optional">]</span><em>masterdb=None</em>, <em>changelog=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="JumpScale.baselib.key_value_store.store.KeyValueStoreBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.baselib.key_value_store.store.KeyValueStoreBase</span></tt></a></p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.addToChangeLog">
-   <tt class="descname">addToChangeLog</tt><big>(</big><em>category</em>, <em>key</em>, <em>action='M'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.addToChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.addToChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.checkChangeLog">
-   <tt class="descname">checkChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.checkChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.checkChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param reset, will just ignore the changelog
-   &#64;param delete, means even delete the changelog on master</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.delete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.deleteChangeLog">
-   <tt class="descname">deleteChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.deleteChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.deleteChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.exists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.get" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.increment">
-   <tt class="descname">increment</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.increment" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.list">
-   <tt class="descname">list</tt><big>(</big><em>category</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.list" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.osis">
-   <tt class="descname">osis</tt><em class="property"> = {}</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.osis" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em>, <em>expire=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#RedisKeyValueStore.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.RedisKeyValueStore.set" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param expire is in seconds when value will expire</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.baselib.key_value_store.redis_store.chunks">
-   <tt class="descclassname">JumpScale.baselib.key_value_store.redis_store.</tt><tt class="descname">chunks</tt><big>(</big><em>l</em>, <em>n</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/redis_store.html#chunks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.redis_store.chunks" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.store">
-   <span id="jumpscale-baselib-key-value-store-store-module"></span><h2>JumpScale.baselib.key_value_store.store module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.store" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.store.</tt><tt class="descname">KeyValueStoreBase</tt><big>(</big><em>serializers=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-   <p>KeyValueStoreBase defines a store interface.</p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheDelete">
-   <tt class="descname">cacheDelete</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheDelete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheDelete" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExists">
-   <tt class="descname">cacheExists</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExists" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExpire">
-   <tt class="descname">cacheExpire</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheExpire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheExpire" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheGet">
-   <tt class="descname">cacheGet</tt><big>(</big><em>key</em>, <em>deleteAfterGet=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheGet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheGet" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheList">
-   <tt class="descname">cacheList</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheList" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheSet">
-   <tt class="descname">cacheSet</tt><big>(</big><em>key</em>, <em>value</em>, <em>expirationInSecondsFromNow=60</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.cacheSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.cacheSet" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.checkChangeLog">
-   <tt class="descname">checkChangeLog</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.checkChangeLog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.checkChangeLog" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.delete">
-   <tt class="descname">delete</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.delete" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Deletes a key value pair from the store.</p>
-   <p>&#64;param: category of the key value pair
-   &#64;type: String</p>
-   <p>&#64;param: key of the key value pair
-   &#64;type: String</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.exists">
-   <tt class="descname">exists</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.exists" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Checks if a key value pair exists in the store.</p>
-   <p>&#64;param: category of the key value pair
-   &#64;type: String</p>
-   <p>&#64;param: key of the key value pair
-   &#64;type: String</p>
-   <p>&#64;return: flag that states if the key value pair exists or not
-   &#64;rtype: Boolean</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.get">
-   <tt class="descname">get</tt><big>(</big><em>category</em>, <em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.get" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets a key value pair from the store.</p>
-   <p>&#64;param: category of the key value pair
-   &#64;type: String</p>
-   <p>&#64;param: key of the key value pair
-   &#64;type: String</p>
-   <p>&#64;return: value of the key value pair
-   &#64;rtype: Objects</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getModifySet">
-   <tt class="descname">getModifySet</tt><big>(</big><em>category</em>, <em>key</em>, <em>modfunction</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.getModifySet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getModifySet" title="Permalink to this definition">¶</a></dt>
-   <dd><p>get value
-   give as parameter to modfunction
-   try to set by means of testset, if not succesfull try again, will use random function to maximize chance to set
-   &#64;param kwargs are other parameters as required (see usage in subscriber function)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getNrRecords">
-   <tt class="descname">getNrRecords</tt><big>(</big><em>incrementtype</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.getNrRecords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.getNrRecords" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.increment">
-   <tt class="descname">increment</tt><big>(</big><em>incrementtype</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.increment" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param incrementtype : type of increment is in style machine.disk.nrdisk  (dot notation)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.incrementReset">
-   <tt class="descname">incrementReset</tt><big>(</big><em>incrementtype</em>, <em>newint=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.incrementReset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.incrementReset" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param incrementtype : type of increment is in style machine.disk.nrdisk  (dot notation)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.list">
-   <tt class="descname">list</tt><big>(</big><em>category</em>, <em>prefix</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.list" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Lists the keys matching <cite>prefix</cite> in <cite>category</cite>.</p>
-   <p>&#64;param category: category the keys should be in
-   &#64;type category: String
-   &#64;param prefix: prefix the keys should start with
-   &#64;type prefix: String
-   &#64;return: keys that match <cite>prefix</cite> in <cite>category</cite>.
-   &#64;rtype: List(String)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.listCategories">
-   <tt class="descname">listCategories</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.listCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.listCategories" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Lists the categories in this db.</p>
-   <p>&#64;return: categories in this db
-   &#64;rtype: List(String)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lock">
-   <tt class="descname">lock</tt><big>(</big><em>locktype</em>, <em>info=''</em>, <em>timeout=5</em>, <em>timeoutwait=0</em>, <em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lock" title="Permalink to this definition">¶</a></dt>
-   <dd><p>if locked will wait for time specified
-   &#64;param locktype of lock is in style machine.disk.import  (dot notation)
-   &#64;param timeout is the time we want our lock to last
-   &#64;param timeoutwait wait till lock becomes free
-   &#64;param info is info which will be kept in lock, can be handy to e.g. mention why lock taken
-   &#64;param force, if force will erase lock when timeout is reached
-   &#64;return None</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lockCheck">
-   <tt class="descname">lockCheck</tt><big>(</big><em>locktype</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.lockCheck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.lockCheck" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param locktype of lock is in style machine.disk.import  (dot notation)
-   &#64;return result,id,lockEnd,info  (lockEnd is time when lock times out, info is descr of lock, id is who locked)</p>
-   <blockquote>
-   <div>result is False when free, True when lock is active</div></blockquote>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.now">
-   <tt class="descname">now</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.now" title="Permalink to this definition">¶</a></dt>
-   <dd><p>return current time (when in appserver will require less time then calling native jumpscale function)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.serialize">
-   <tt class="descname">serialize</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.serialize" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.set">
-   <tt class="descname">set</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.set" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Sets a key value pair in the store.</p>
-   <p>&#64;param: category of the key value pair
-   &#64;type: String</p>
-   <p>&#64;param: key of the key value pair
-   &#64;type: String</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.settest">
-   <tt class="descname">settest</tt><big>(</big><em>category</em>, <em>key</em>, <em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.settest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.settest" title="Permalink to this definition">¶</a></dt>
-   <dd><p>if well stored return True</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscribe">
-   <tt class="descname">subscribe</tt><big>(</big><em>subscriberid</em>, <em>category</em>, <em>startid=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.subscribe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscribe" title="Permalink to this definition">¶</a></dt>
-   <dd><p>each subscriber is identified by a key
-   in db there is a dict stored on key for category = category of this method
-   value= dict with as keys the subscribers
-   {&#8220;kristof&#8221;:[lastaccessedTime,lastId],&#8221;pol&#8221;:...}</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionAdvance">
-   <tt class="descname">subscriptionAdvance</tt><big>(</big><em>subscriberid</em>, <em>category</em>, <em>lastProcessedId</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.subscriptionAdvance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionAdvance" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionGetNextItem">
-   <tt class="descname">subscriptionGetNextItem</tt><big>(</big><em>subscriberid</em>, <em>category</em>, <em>autoConfirm=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.subscriptionGetNextItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.subscriptionGetNextItem" title="Permalink to this definition">¶</a></dt>
-   <dd><p>get next item from subscription
-   returns</p>
-   <blockquote>
-   <div>False,None when no next
-   True,the data when a next</div></blockquote>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unlock">
-   <tt class="descname">unlock</tt><big>(</big><em>locktype</em>, <em>timeoutwait=0</em>, <em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.unlock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unlock" title="Permalink to this definition">¶</a></dt>
-   <dd><p>&#64;param locktype of lock is in style machine.disk.import  (dot notation)</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unserialize">
-   <tt class="descname">unserialize</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreBase.unserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreBase.unserialize" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreType">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.store.</tt><tt class="descname">KeyValueStoreType</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store.html#KeyValueStoreType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreType" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreType.ARAKOON">
-   <tt class="descname">ARAKOON</tt><em class="property"> = arakoon</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreType.ARAKOON" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreType.FILE_SYSTEM">
-   <tt class="descname">FILE_SYSTEM</tt><em class="property"> = file_system</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreType.FILE_SYSTEM" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreType.MEMORY">
-   <tt class="descname">MEMORY</tt><em class="property"> = memory</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreType.MEMORY" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="attribute">
-   <dt id="JumpScale.baselib.key_value_store.store.KeyValueStoreType.REDIS">
-   <tt class="descname">REDIS</tt><em class="property"> = redis</em><a class="headerlink" href="#JumpScale.baselib.key_value_store.store.KeyValueStoreType.REDIS" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store.store_factory">
-   <span id="jumpscale-baselib-key-value-store-store-factory-module"></span><h2>JumpScale.baselib.key_value_store.store_factory module<a class="headerlink" href="#module-JumpScale.baselib.key_value_store.store_factory" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.key_value_store.store_factory.</tt><tt class="descname">KeyValueStoreFactory</tt><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
-   <p>The key value store factory provides logic to retrieve store instances. It
-   also caches the stores based on their type, name and namespace.</p>
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getArakoonStore">
-   <tt class="descname">getArakoonStore</tt><big>(</big><em>namespace=''</em>, <em>serializers=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory.getArakoonStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getArakoonStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets an Arakoon key value store.</p>
-   <p>&#64;param namespace: namespace of the store, defaults to None
-   &#64;type namespace: String</p>
-   <p>&#64;param defaultJSModelSerializer: default JSModel serializer
-   &#64;type defaultJSModelSerializer: Object</p>
-   <p>&#64;return: key value store
-   &#64;rtype: ArakoonKeyValueStore</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getFileSystemStore">
-   <tt class="descname">getFileSystemStore</tt><big>(</big><em>namespace=''</em>, <em>baseDir=None</em>, <em>serializers=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory.getFileSystemStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getFileSystemStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets a file system key value store.</p>
-   <p>&#64;param namespace: namespace of the store, defaults to an empty string
-   &#64;type namespace: String</p>
-   <p>&#64;param baseDir: base directory of the store, defaults to j.dirs.db
-   &#64;type namespace: String</p>
-   <p>&#64;param defaultJSModelSerializer: default JSModel serializer
-   &#64;type defaultJSModelSerializer: Object</p>
-   <p>&#64;return: key value store
-   &#64;rtype: FileSystemKeyValueStore</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getLevelDBStore">
-   <tt class="descname">getLevelDBStore</tt><big>(</big><em>namespace=''</em>, <em>basedir=None</em>, <em>serializers=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory.getLevelDBStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getLevelDBStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets a leveldb key value store.</p>
-   <p>&#64;param name: name of the store
-   &#64;type name: String</p>
-   <p>&#64;param namespace: namespace of the store, defaults to &#8216;&#8217;
-   &#64;type namespace: String</p>
-   <p>&#64;return: key value store</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getMemoryStore">
-   <tt class="descname">getMemoryStore</tt><big>(</big><em>namespace=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory.getMemoryStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getMemoryStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets a memory key value store.</p>
-   <p>&#64;return: key value store
-   &#64;rtype: MemoryKeyValueStore</p>
-   </dd></dl>
-   
-   <dl class="method">
-   <dt id="JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getRedisStore">
-   <tt class="descname">getRedisStore</tt><big>(</big><em>namespace=''</em>, <em>host='localhost'</em>, <em>port=7768</em>, <em>db=0</em>, <em>password=''</em>, <em>serializers=None</em>, <em>masterdb=None</em>, <em>changelog=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/key_value_store/store_factory.html#KeyValueStoreFactory.getRedisStore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.key_value_store.store_factory.KeyValueStoreFactory.getRedisStore" title="Permalink to this definition">¶</a></dt>
-   <dd><p>Gets a memory key value store.</p>
-   <p>&#64;param name: name of the store
-   &#64;type name: String</p>
-   <p>&#64;param namespace: namespace of the store, defaults to None
-   &#64;type namespace: String</p>
-   <p>&#64;return: key value store
-   &#64;rtype: MemoryKeyValueStore</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="jumpscale-baselib-key-value-store-test-store-module">
-   <h2>JumpScale.baselib.key_value_store.test_store module<a class="headerlink" href="#jumpscale-baselib-key-value-store-test-store-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.key_value_store">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.key_value_store" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.baselib.key_value_store package</a><ul>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.arakoon_store">JumpScale.baselib.key_value_store.arakoon_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.file_system_store">JumpScale.baselib.key_value_store.file_system_store module</a></li>
-   <li><a class="reference internal" href="#jumpscale-baselib-key-value-store-leveldb-store-module">JumpScale.baselib.key_value_store.leveldb_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.memory_store">JumpScale.baselib.key_value_store.memory_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.mongodb_store">JumpScale.baselib.key_value_store.mongodb_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.redis_store">JumpScale.baselib.key_value_store.redis_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.store">JumpScale.baselib.key_value_store.store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store.store_factory">JumpScale.baselib.key_value_store.store_factory module</a></li>
-   <li><a class="reference internal" href="#jumpscale-baselib-key-value-store-test-store-module">JumpScale.baselib.key_value_store.test_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.key_value_store">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.jsdeveltools.html"
-                           title="previous chapter">JumpScale.baselib.jsdeveltools package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.lrucache.html"
-                           title="next chapter">JumpScale.baselib.lrucache package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.baselib.key_value_store.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.lrucache.html" title="JumpScale.baselib.lrucache package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.jsdeveltools.html" title="JumpScale.baselib.jsdeveltools package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.baselib.key_value_store package
+=========================================
+
+Submodules
+----------
+
+JumpScale.baselib.key_value_store.arakoon_store module
+------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.arakoon_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.file_system_store module
+----------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.file_system_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.leveldb_store module
+------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.leveldb_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.memory_store module
+-----------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.memory_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.mongodb_store module
+------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.mongodb_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.redis_store module
+----------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.redis_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.store module
+----------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.store_factory module
+------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.store_factory
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.key_value_store.test_store module
+---------------------------------------------------
+
+.. automodule:: JumpScale.baselib.key_value_store.test_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.baselib.key_value_store
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -24,7 +24,10 @@
        <script type="text/javascript" src="../_static/jquery.js"></script>
        <script type="text/javascript" src="../_static/underscore.js"></script>
        <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
+       <link rel="next" title="JumpScale.lib.jail package" href="JumpScale.lib.jail.html" />
+       <link rel="prev" title="JumpScale.lib.docker package" href="JumpScale.lib.docker.html" /> 
      </head>
      <body>
        <div class="related">
@@ -36,7 +39,15 @@
            <li class="right" >
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+           <li class="right" >
+             <a href="JumpScale.lib.jail.html" title="JumpScale.lib.jail package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.docker.html" title="JumpScale.lib.docker package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" accesskey="U">JumpScale.lib package</a> &raquo;</li> 
          </ul>
        </div>  
    
@@ -165,7 +176,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape">
-   <tt class="descname">r_unescape</tt><em class="property"> = &lt;_sre.SRE_Pattern object at 0x542ea50&gt;</em><a class="headerlink" href="#JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">r_unescape</tt><em class="property"> = &lt;_sre.SRE_Pattern object at 0xa1ed320&gt;</em><a class="headerlink" href="#JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    <dl class="method">
@@ -333,6 +344,12 @@
    </li>
    </ul>
    
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.lib.docker.html"
+                           title="previous chapter">JumpScale.lib.docker package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.lib.jail.html"
+                           title="next chapter">JumpScale.lib.jail package</a></p>
      <h3>This Page</h3>
      <ul class="this-page-menu">
        <li><a href="../_sources/API/JumpScale.lib.html.txt"
@@ -364,7 +381,15 @@
            <li class="right" >
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+           <li class="right" >
+             <a href="JumpScale.lib.jail.html" title="JumpScale.lib.jail package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.lib.docker.html" title="JumpScale.lib.docker package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.lib.html" >JumpScale.lib package</a> &raquo;</li> 
          </ul>
        </div>
        <div class="footer">
