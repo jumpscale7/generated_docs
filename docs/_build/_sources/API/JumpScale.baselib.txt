@@ -13,6 +13,7 @@ Subpackages
     JumpScale.baselib.bitbucket
     JumpScale.baselib.blobstor
     JumpScale.baselib.blobstor2
+    JumpScale.baselib.celery
     JumpScale.baselib.changetracker
     JumpScale.baselib.cloudsystemfs
     JumpScale.baselib.cmdline

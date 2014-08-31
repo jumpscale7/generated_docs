@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JumpScale.baselib.celery.CeleryFactory &mdash; Jumpscale Doc 7.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="Module code" href="../../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for JumpScale.baselib.celery.CeleryFactory</h1><div class="highlight"><pre>
+<span class="c"># from __future__ import print_function</span>
+<span class="kn">from</span> <span class="nn">JumpScale</span> <span class="kn">import</span> <span class="n">j</span>
+
+
+<div class="viewcode-block" id="CeleryFactory"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory">[docs]</a><span class="k">class</span> <span class="nc">CeleryFactory</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actors</span><span class="o">=</span><span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">=</span><span class="bp">None</span>
+
+<div class="viewcode-block" id="CeleryFactory.flowerStart"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory.flowerStart">[docs]</a>    <span class="k">def</span> <span class="nf">flowerStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="o">=</span><span class="s">&quot;redis://localhost:7768/0&quot;</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">flower.command</span> <span class="kn">import</span> <span class="n">FlowerCommand</span>
+        <span class="kn">from</span> <span class="nn">flower.utils</span> <span class="kn">import</span> <span class="n">bugreport</span>
+
+        <span class="n">flower</span> <span class="o">=</span> <span class="n">FlowerCommand</span><span class="p">()</span>
+
+        <span class="n">argv</span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;flower.py&#39;</span><span class="p">,</span> <span class="s">&#39;--broker=</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="n">url</span><span class="p">]</span>
+        
+
+        <span class="n">flower</span><span class="o">.</span><span class="n">execute_from_commandline</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_getCode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="n">state</span><span class="o">=</span><span class="s">&quot;start&quot;</span>
+        <span class="n">C</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">fileGetContents</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">basename</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">getBaseName</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">basename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;.py&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">out</span><span class="o">=</span><span class="s">&quot;class </span><span class="si">%s</span><span class="s">():</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">name</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">C</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">):</span>
+            <span class="c"># if state==&quot;method&quot;:</span>
+            <span class="c">#     if line.strip().find(&quot;def&quot;)==0:</span>
+
+            <span class="k">if</span> <span class="n">state</span><span class="o">==</span><span class="s">&quot;class&quot;</span><span class="p">:</span>
+                <span class="c">#now processing the methods</span>
+                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;def&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="c"># state==&quot;method&quot;</span>
+                    <span class="n">pre</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;(&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">pre</span><span class="o">=</span><span class="n">pre</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;def &quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">method_name</span><span class="o">=</span><span class="n">pre</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">out</span><span class="o">+=</span><span class="s">&quot;    @app.task(name=&#39;</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;)</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">method_name</span><span class="p">)</span>
+                    
+                <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">%</span><span class="n">line</span>
+
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;class&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">state</span><span class="o">=</span><span class="s">&quot;class&quot;</span>
+        <span class="n">out</span><span class="o">+=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<div class="viewcode-block" id="CeleryFactory.getCodeServer"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory.getCodeServer">[docs]</a>    <span class="k">def</span> <span class="nf">getCodeServer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;could not find actors path:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">code</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">listFilesInDir</span><span class="p">(</span> <span class="n">path</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s">&quot;*.py&quot;</span><span class="p">,</span><span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">followSymlinks</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>            
+            <span class="n">code</span><span class="o">+=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getCode</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">code</span>
+</div>
+<div class="viewcode-block" id="CeleryFactory.getCodeClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory.getCodeClient">[docs]</a>    <span class="k">def</span> <span class="nf">getCodeClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">actorName</span><span class="p">):</span>
+        <span class="n">path2</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.py&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">actorName</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path2</span><span class="p">):</span>
+            <span class="n">j</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">inputerror_critical</span><span class="p">(</span><span class="s">&quot;could not find actor path:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path2</span><span class="p">)</span>
+        <span class="n">code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_getCode</span><span class="p">(</span><span class="n">path2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">code</span>
+
+</div>
+<div class="viewcode-block" id="CeleryFactory.celeryStart"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory.celeryStart">[docs]</a>    <span class="k">def</span> <span class="nf">celeryStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">url</span><span class="o">=</span><span class="s">&quot;redis://localhost:7768/0&quot;</span><span class="p">,</span><span class="n">concurrency</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">actorsPath</span><span class="o">=</span><span class="s">&quot;actors&quot;</span><span class="p">):</span>
+
+        <span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">CELERY_TASK_SERIALIZER</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+            <span class="n">CELERY_ACCEPT_CONTENT</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;json&#39;</span><span class="p">],</span>  <span class="c"># Ignore other content</span>
+            <span class="n">CELERY_RESULT_SERIALIZER</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+            <span class="n">CELERY_TIMEZONE</span><span class="o">=</span><span class="s">&#39;Europe/Oslo&#39;</span><span class="p">,</span>
+            <span class="n">CELERY_ENABLE_UTC</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">&#39;rpc&#39;</span><span class="p">,</span>
+            <span class="n">CELERY_RESULT_PERSISTENT</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="c"># CELERY_RESULT_BACKEND = BROKER_URL,</span>
+        <span class="p">)</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="p">[</span><span class="s">&quot;CELERY_ALWAYS_EAGER&quot;</span><span class="p">]</span><span class="o">=</span><span class="bp">False</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="p">[</span><span class="s">&quot;CELERYD_CONCURRENCY&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">concurrency</span>
+
+        <span class="n">code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getCodeServer</span><span class="p">(</span><span class="n">actorsPath</span><span class="p">)</span>
+        <span class="k">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="nb">locals</span><span class="p">(),</span><span class="nb">globals</span><span class="p">())</span>
+
+        <span class="n">app</span><span class="o">.</span><span class="n">worker_main</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CeleryFactory.celeryClient"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.celery.html#JumpScale.baselib.celery.CeleryFactory.CeleryFactory.celeryClient">[docs]</a>    <span class="k">def</span> <span class="nf">celeryClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actorName</span><span class="p">,</span><span class="n">url</span><span class="o">=</span><span class="s">&quot;redis://localhost:7768/0&quot;</span><span class="p">,</span><span class="n">actorsPath</span><span class="o">=</span><span class="s">&quot;actors&quot;</span><span class="p">,</span><span class="n">local</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">actors</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">actorName</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">actorName</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+
+            <span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+
+            <span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+
+            <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                <span class="n">CELERY_TASK_SERIALIZER</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                <span class="n">CELERY_ACCEPT_CONTENT</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;json&#39;</span><span class="p">],</span>  <span class="c"># Ignore other content</span>
+                <span class="n">CELERY_RESULT_SERIALIZER</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                <span class="n">CELERY_TIMEZONE</span><span class="o">=</span><span class="s">&#39;Europe/Oslo&#39;</span><span class="p">,</span>
+                <span class="n">CELERY_ENABLE_UTC</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">CELERY_RESULT_BACKEND</span> <span class="o">=</span> <span class="s">&#39;rpc&#39;</span><span class="p">,</span>
+                <span class="n">CELERY_RESULT_PERSISTENT</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+                <span class="c"># CELERY_RESULT_BACKEND = BROKER_URL,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">local</span><span class="p">:</span>
+                <span class="n">app</span><span class="o">.</span><span class="n">conf</span><span class="p">[</span><span class="s">&quot;CELERY_ALWAYS_EAGER&quot;</span><span class="p">]</span><span class="o">=</span><span class="bp">False</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">=</span><span class="n">app</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span>
+
+        <span class="n">code</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getCodeClient</span><span class="p">(</span><span class="n">actorsPath</span><span class="p">,</span><span class="n">actorName</span><span class="o">=</span><span class="n">actorName</span><span class="p">)</span>
+        <span class="k">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span><span class="nb">locals</span><span class="p">(),</span><span class="nb">globals</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">actorName</span><span class="p">]</span><span class="o">=</span><span class="nb">eval</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">actorName</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">actors</span><span class="p">[</span><span class="n">actorName</span><span class="p">]</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+    </div>
+  </body>
+</html>

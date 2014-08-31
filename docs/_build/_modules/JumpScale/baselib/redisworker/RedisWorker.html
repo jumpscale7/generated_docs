@@ -60,11 +60,11 @@
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 
-<span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;agentcontroller.webdiskey&quot;</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">JumpScale.grid.jumpscripts</span>
-    <span class="n">Jumpscript</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">jumpscriptsManager</span><span class="o">.</span><span class="n">getJSClass</span><span class="p">()</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">Jumpscript</span><span class="o">=</span><span class="bp">None</span>
+<span class="c"># if j.application.config.exists(&quot;agentcontroller.webdiskey&quot;):</span>
+<span class="kn">import</span> <span class="nn">JumpScale.grid.jumpscripts</span>
+<span class="n">Jumpscript</span><span class="o">=</span><span class="n">j</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">jumpscriptsManager</span><span class="o">.</span><span class="n">getJSClass</span><span class="p">()</span>
+<span class="c"># else:</span>
+    <span class="c"># Jumpscript=None</span>
 
 <div class="viewcode-block" id="Job"><a class="viewcode-back" href="../../../../API/JumpScale.baselib.redisworker.html#JumpScale.baselib.redisworker.RedisWorker.Job">[docs]</a><span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="n">OsisBaseObject</span><span class="p">):</span>
 

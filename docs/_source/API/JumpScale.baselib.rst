@@ -129,6 +129,12 @@
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.blobstor2.html#module-contents">Module contents</a></li>
    </ul>
    </li>
+   <li class="toctree-l1"><a class="reference internal" href="JumpScale.baselib.celery.html">JumpScale.baselib.celery package</a><ul>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.celery.html#submodules">Submodules</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.celery.html#module-JumpScale.baselib.celery.CeleryFactory">JumpScale.baselib.celery.CeleryFactory module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.celery.html#module-JumpScale.baselib.celery">Module contents</a></li>
+   </ul>
+   </li>
    <li class="toctree-l1"><a class="reference internal" href="JumpScale.baselib.changetracker.html">JumpScale.baselib.changetracker package</a><ul>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.changetracker.html#submodules">Submodules</a></li>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.baselib.changetracker.html#jumpscale-baselib-changetracker-changetrackerclient-module">JumpScale.baselib.changetracker.ChangeTrackerClient module</a></li>

@@ -26,7 +26,7 @@
        <script type="text/javascript" src="../_static/doctools.js"></script>
        <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
        <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
-       <link rel="next" title="JumpScale.baselib.changetracker package" href="JumpScale.baselib.changetracker.html" />
+       <link rel="next" title="JumpScale.baselib.celery package" href="JumpScale.baselib.celery.html" />
        <link rel="prev" title="JumpScale.baselib.blobstor package" href="JumpScale.baselib.blobstor.html" /> 
      </head>
      <body>
@@ -40,7 +40,7 @@
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
            <li class="right" >
-             <a href="JumpScale.baselib.changetracker.html" title="JumpScale.baselib.changetracker package"
+             <a href="JumpScale.baselib.celery.html" title="JumpScale.baselib.celery package"
                 accesskey="N">next</a> |</li>
            <li class="right" >
              <a href="JumpScale.baselib.blobstor.html" title="JumpScale.baselib.blobstor package"
@@ -113,8 +113,8 @@
      <p class="topless"><a href="JumpScale.baselib.blobstor.html"
                            title="previous chapter">JumpScale.baselib.blobstor package</a></p>
      <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.changetracker.html"
-                           title="next chapter">JumpScale.baselib.changetracker package</a></p>
+     <p class="topless"><a href="JumpScale.baselib.celery.html"
+                           title="next chapter">JumpScale.baselib.celery package</a></p>
      <h3>This Page</h3>
      <ul class="this-page-menu">
        <li><a href="../_sources/API/JumpScale.baselib.blobstor2.txt"
@@ -147,7 +147,7 @@
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
            <li class="right" >
-             <a href="JumpScale.baselib.changetracker.html" title="JumpScale.baselib.changetracker package"
+             <a href="JumpScale.baselib.celery.html" title="JumpScale.baselib.celery package"
                 >next</a> |</li>
            <li class="right" >
              <a href="JumpScale.baselib.blobstor.html" title="JumpScale.baselib.blobstor package"
