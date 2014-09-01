@@ -816,6 +816,11 @@
    <dd></dd></dl>
    
    <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath">
+   <tt class="descname">getAppPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getAppPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
    <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobHistory">
    <tt class="descname">getBlobHistory</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobHistory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobHistory" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>

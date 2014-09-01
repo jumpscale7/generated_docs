@@ -68,6 +68,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">startatboot</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="o">=</span><span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="o">=</span><span class="mi">60</span>
         <span class="k">if</span> <span class="n">ddict</span><span class="p">:</span>
             <span class="n">ddict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -94,6 +95,8 @@
         <span class="n">modulename</span> <span class="o">=</span> <span class="s">&#39;JumpScale.jumpscript_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">md5sum</span>
         <span class="n">linecache</span><span class="o">.</span><span class="n">checkcache</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="n">modulename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;DEBUG NOW&quot;</span><span class="p">)</span><span class="o">&lt;&gt;-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span>
 </div>
 <div class="viewcode-block" id="JumpScript.getDict"><a class="viewcode-back" href="../../../../API/JumpScale.grid.jumpscripts.html#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.getDict">[docs]</a>    <span class="k">def</span> <span class="nf">getDict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -135,15 +138,19 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaded</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
-        <span class="k">def</span> <span class="nf">helper</span><span class="p">(</span><span class="n">pipe</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">executeInProcess</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="n">pipe</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">helper</span><span class="p">(</span><span class="n">pipe</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">executeInProcess</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">pipe</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-        <span class="n">ppipe</span><span class="p">,</span> <span class="n">cpipe</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pipe</span><span class="p">()</span>
-        <span class="n">proc</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">helper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">cpipe</span><span class="p">,))</span>
-        <span class="n">proc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="n">proc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">ppipe</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+            <span class="n">ppipe</span><span class="p">,</span> <span class="n">cpipe</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pipe</span><span class="p">()</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">helper</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">cpipe</span><span class="p">,))</span>
+            <span class="n">proc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">proc</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">ppipe</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="JumpScript.executeInProcess"><a class="viewcode-back" href="../../../../API/JumpScale.grid.jumpscripts.html#JumpScale.grid.jumpscripts.JumpscriptFactory.JumpScript.executeInProcess">[docs]</a>    <span class="k">def</span> <span class="nf">executeInProcess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
