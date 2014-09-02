@@ -1,0 +1,30 @@
+JumpScale.lib.cloudproviders package
+====================================
+
+Submodules
+----------
+
+JumpScale.lib.cloudproviders.amazon module
+------------------------------------------
+
+.. automodule:: JumpScale.lib.cloudproviders.amazon
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.lib.cloudproviders.factory module
+-------------------------------------------
+
+.. automodule:: JumpScale.lib.cloudproviders.factory
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.lib.cloudproviders
+    :members:
+    :undoc-members:
+    :show-inheritance:

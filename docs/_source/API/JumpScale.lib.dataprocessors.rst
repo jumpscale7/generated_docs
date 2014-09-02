@@ -27,7 +27,7 @@
        <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
        <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
        <link rel="next" title="JumpScale.lib.dhcp package" href="JumpScale.lib.dhcp.html" />
-       <link rel="prev" title="JumpScale.lib.cisco_ios package" href="JumpScale.lib.cisco_ios.html" /> 
+       <link rel="prev" title="JumpScale.lib.cloudproviders package" href="JumpScale.lib.cloudproviders.html" /> 
      </head>
      <body>
        <div class="related">
@@ -43,7 +43,7 @@
              <a href="JumpScale.lib.dhcp.html" title="JumpScale.lib.dhcp package"
                 accesskey="N">next</a> |</li>
            <li class="right" >
-             <a href="JumpScale.lib.cisco_ios.html" title="JumpScale.lib.cisco_ios package"
+             <a href="JumpScale.lib.cloudproviders.html" title="JumpScale.lib.cloudproviders package"
                 accesskey="P">previous</a> |</li>
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
@@ -78,8 +78,8 @@
    </ul>
    
      <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.lib.cisco_ios.html"
-                           title="previous chapter">JumpScale.lib.cisco_ios package</a></p>
+     <p class="topless"><a href="JumpScale.lib.cloudproviders.html"
+                           title="previous chapter">JumpScale.lib.cloudproviders package</a></p>
      <h4>Next topic</h4>
      <p class="topless"><a href="JumpScale.lib.dhcp.html"
                            title="next chapter">JumpScale.lib.dhcp package</a></p>
@@ -118,7 +118,7 @@
              <a href="JumpScale.lib.dhcp.html" title="JumpScale.lib.dhcp package"
                 >next</a> |</li>
            <li class="right" >
-             <a href="JumpScale.lib.cisco_ios.html" title="JumpScale.lib.cisco_ios package"
+             <a href="JumpScale.lib.cloudproviders.html" title="JumpScale.lib.cloudproviders package"
                 >previous</a> |</li>
            <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
              <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>

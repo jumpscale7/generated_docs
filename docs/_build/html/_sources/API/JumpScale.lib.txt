@@ -8,6 +8,7 @@ Subpackages
 
     JumpScale.lib.btrfs
     JumpScale.lib.cisco_ios
+    JumpScale.lib.cloudproviders
     JumpScale.lib.dataprocessors
     JumpScale.lib.dhcp
     JumpScale.lib.diskmanager

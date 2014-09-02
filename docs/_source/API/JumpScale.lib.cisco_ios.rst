@@ -26,7 +26,7 @@
        <script type="text/javascript" src="../_static/doctools.js"></script>
        <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
        <link rel="up" title="JumpScale.lib package" href="JumpScale.lib.html" />
-       <link rel="next" title="JumpScale.lib.dataprocessors package" href="JumpScale.lib.dataprocessors.html" />
+       <link rel="next" title="JumpScale.lib.cloudproviders package" href="JumpScale.lib.cloudproviders.html" />
        <link rel="prev" title="JumpScale.lib.btrfs package" href="JumpScale.lib.btrfs.html" /> 
      </head>
      <body>
@@ -40,7 +40,7 @@
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
            <li class="right" >
-             <a href="JumpScale.lib.dataprocessors.html" title="JumpScale.lib.dataprocessors package"
+             <a href="JumpScale.lib.cloudproviders.html" title="JumpScale.lib.cloudproviders package"
                 accesskey="N">next</a> |</li>
            <li class="right" >
              <a href="JumpScale.lib.btrfs.html" title="JumpScale.lib.btrfs package"
@@ -222,8 +222,8 @@
      <p class="topless"><a href="JumpScale.lib.btrfs.html"
                            title="previous chapter">JumpScale.lib.btrfs package</a></p>
      <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.lib.dataprocessors.html"
-                           title="next chapter">JumpScale.lib.dataprocessors package</a></p>
+     <p class="topless"><a href="JumpScale.lib.cloudproviders.html"
+                           title="next chapter">JumpScale.lib.cloudproviders package</a></p>
      <h3>This Page</h3>
      <ul class="this-page-menu">
        <li><a href="../_sources/API/JumpScale.lib.cisco_ios.txt"
@@ -256,7 +256,7 @@
              <a href="../py-modindex.html" title="Python Module Index"
                 >modules</a> |</li>
            <li class="right" >
-             <a href="JumpScale.lib.dataprocessors.html" title="JumpScale.lib.dataprocessors package"
+             <a href="JumpScale.lib.cloudproviders.html" title="JumpScale.lib.cloudproviders package"
                 >next</a> |</li>
            <li class="right" >
              <a href="JumpScale.lib.btrfs.html" title="JumpScale.lib.btrfs package"
