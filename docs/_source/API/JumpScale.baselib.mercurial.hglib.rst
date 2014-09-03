@@ -512,7 +512,7 @@
    
    <dl class="method">
    <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.merge">
-   <tt class="descname">merge</tt><big>(</big><em>rev=None</em>, <em>force=False</em>, <em>tool=None</em>, <em>cb=&lt;function abort at 0xb33b8c0&gt;</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.merge" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">merge</tt><big>(</big><em>rev=None</em>, <em>force=False</em>, <em>tool=None</em>, <em>cb=&lt;function abort at 0xa34de60&gt;</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.merge" title="Permalink to this definition">¶</a></dt>
    <dd><p>Merge working directory with rev. If no revision is specified, the working
    directory&#8217;s parent is a head revision, and the current branch contains
    exactly one other head, the other head is merged with by default.</p>
