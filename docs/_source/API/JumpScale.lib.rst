@@ -77,6 +77,7 @@
    <li class="toctree-l1"><a class="reference internal" href="JumpScale.lib.cloudproviders.html">JumpScale.lib.cloudproviders package</a><ul>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.lib.cloudproviders.html#submodules">Submodules</a></li>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.lib.cloudproviders.html#jumpscale-lib-cloudproviders-amazon-module">JumpScale.lib.cloudproviders.amazon module</a></li>
+   <li class="toctree-l2"><a class="reference internal" href="JumpScale.lib.cloudproviders.html#jumpscale-lib-cloudproviders-digitalocean-module">JumpScale.lib.cloudproviders.digitalocean module</a></li>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.lib.cloudproviders.html#jumpscale-lib-cloudproviders-factory-module">JumpScale.lib.cloudproviders.factory module</a></li>
    <li class="toctree-l2"><a class="reference internal" href="JumpScale.lib.cloudproviders.html#module-contents">Module contents</a></li>
    </ul>

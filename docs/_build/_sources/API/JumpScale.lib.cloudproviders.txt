@@ -12,6 +12,14 @@ JumpScale.lib.cloudproviders.amazon module
     :undoc-members:
     :show-inheritance:
 
+JumpScale.lib.cloudproviders.digitalocean module
+------------------------------------------------
+
+.. automodule:: JumpScale.lib.cloudproviders.digitalocean
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 JumpScale.lib.cloudproviders.factory module
 -------------------------------------------
 
