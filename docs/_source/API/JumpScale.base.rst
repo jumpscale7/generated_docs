@@ -188,7 +188,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.base.FS.FS.installtools">
-   <tt class="descname">installtools</tt><em class="property"> = &lt;JumpScale.baselib.installtools.InstallTools.InstallTools instance at 0x5bc8830&gt;</em><a class="headerlink" href="#JumpScale.base.FS.FS.installtools" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">installtools</tt><em class="property"> = &lt;JumpScale.baselib.installtools.InstallTools.InstallTools instance at 0x5e99d40&gt;</em><a class="headerlink" href="#JumpScale.base.FS.FS.installtools" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    <dl class="staticmethod">
