@@ -66,7 +66,7 @@
    <p>Definition of several collection types (list, dict, set,...)</p>
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CollectionTypes.Dictionary">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">Dictionary</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.Dictionary" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">Dictionary</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#Dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.Dictionary" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic dictionary type</p>
    <dl class="attribute">
@@ -89,7 +89,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CollectionTypes.List">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">List</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#List"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.List" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">List</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#List"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.List" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic list type</p>
    <dl class="attribute">
@@ -112,7 +112,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CollectionTypes.Set">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">Set</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#Set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.Set" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CollectionTypes.</tt><tt class="descname">Set</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CollectionTypes.html#Set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CollectionTypes.Set" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic set type</p>
    <dl class="attribute">
@@ -134,7 +134,7 @@
    <p>Definition of several custom types (paths, ipaddress, guid,...)</p>
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.DirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">DirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#DirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">DirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#DirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="JumpScale.core.pmtypes.CustomTypes.Path"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.Path</span></tt></a></p>
    <p>Generic folder path type</p>
    <dl class="attribute">
@@ -153,7 +153,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.Duration">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Duration</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Duration" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Duration</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Duration" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Duration type</p>
    <p>Can be assigned a string or a number. Will always be read as a number.</p>
@@ -171,7 +171,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.FilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">FilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#FilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">FilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#FilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="JumpScale.core.pmtypes.CustomTypes.Path"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.Path</span></tt></a></p>
    <p>Generic file path type</p>
    <dl class="attribute">
@@ -190,7 +190,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.Guid">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Guid</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Guid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Guid" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Guid</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Guid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Guid" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="JumpScale.core.pmtypes.PrimitiveTypes.String"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.PrimitiveTypes.String</span></tt></a></p>
    <p>Generic GUID type</p>
    <dl class="attribute">
@@ -208,7 +208,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.IPAddress">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPAddress</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPAddress" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPAddress</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPAddress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPAddress" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="JumpScale.core.pmtypes.PrimitiveTypes.String"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.PrimitiveTypes.String</span></tt></a></p>
    <p>Generic IPv4 address type</p>
    <dl class="attribute">
@@ -230,7 +230,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.IPPort">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPPort</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPPort" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPPort</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPPort" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic IP port type</p>
    <dl class="attribute">
@@ -250,7 +250,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.IPv4AddressRange">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPv4AddressRange</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPv4AddressRange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPv4AddressRange" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">IPv4AddressRange</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#IPv4AddressRange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.IPv4AddressRange" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic IPv4 address range type</p>
    <dl class="attribute">
@@ -269,7 +269,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.Path">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Path</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">Path</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="JumpScale.core.pmtypes.PrimitiveTypes.String"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.PrimitiveTypes.String</span></tt></a></p>
    <p>Generic path type</p>
    <dl class="attribute">
@@ -288,7 +288,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.UnixDirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">UnixDirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#UnixDirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.UnixDirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">UnixDirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#UnixDirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.UnixDirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="JumpScale.core.pmtypes.CustomTypes.DirPath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.DirPath</span></tt></a></p>
    <p>Generic Unix folder path type</p>
    <dl class="attribute">
@@ -308,7 +308,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.UnixFilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">UnixFilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#UnixFilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.UnixFilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">UnixFilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#UnixFilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.UnixFilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="JumpScale.core.pmtypes.CustomTypes.FilePath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.FilePath</span></tt></a></p>
    <p>Generic Unix file path type</p>
    <dl class="attribute">
@@ -328,7 +328,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.WindowsDirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">WindowsDirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#WindowsDirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.WindowsDirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">WindowsDirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#WindowsDirPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.WindowsDirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="JumpScale.core.pmtypes.CustomTypes.DirPath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.DirPath</span></tt></a></p>
    <p>Generic Windows folder path type</p>
    <dl class="attribute">
@@ -349,7 +349,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.CustomTypes.WindowsFilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">WindowsFilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#WindowsFilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.WindowsFilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.CustomTypes.</tt><tt class="descname">WindowsFilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/CustomTypes.html#WindowsFilePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.CustomTypes.WindowsFilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="JumpScale.core.pmtypes.CustomTypes.FilePath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.FilePath</span></tt></a></p>
    <p>Generic Windows file path type</p>
    <dl class="attribute">
@@ -475,7 +475,7 @@
    <p>Definition of several primitive type properties (integer, string,...)</p>
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.PrimitiveTypes.Boolean">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Boolean</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Boolean" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Boolean</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Boolean" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic boolean type</p>
    <dl class="attribute">
@@ -508,7 +508,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.PrimitiveTypes.Float">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Float</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Float" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Float</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Float" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic float type</p>
    <dl class="attribute">
@@ -531,7 +531,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.PrimitiveTypes.Integer">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Integer</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Integer" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">Integer</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.Integer" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic integer type</p>
    <dl class="attribute">
@@ -554,7 +554,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.PrimitiveTypes.String">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">String</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.PrimitiveTypes.</tt><tt class="descname">String</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/PrimitiveTypes.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic string type</p>
    <dl class="attribute">
@@ -585,7 +585,7 @@
    <span id="jumpscale-core-pmtypes-base-module"></span><h2>JumpScale.core.pmtypes.base module<a class="headerlink" href="#module-JumpScale.core.pmtypes.base" title="Permalink to this headline">¶</a></h2>
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.base.BaseType">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.base.</tt><tt class="descname">BaseType</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/base.html#BaseType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.base.BaseType" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.base.</tt><tt class="descname">BaseType</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/pmtypes/base.html#BaseType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.pmtypes.base.BaseType" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
    <p>Base class for all defined types</p>
    <dl class="classmethod">
@@ -669,7 +669,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Boolean">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Boolean</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Boolean" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Boolean</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Boolean" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic boolean type</p>
    <dl class="attribute">
@@ -702,7 +702,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Integer">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Integer</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Integer" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Integer</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Integer" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic integer type</p>
    <dl class="attribute">
@@ -725,7 +725,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Float">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Float</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Float" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Float</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Float" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic float type</p>
    <dl class="attribute">
@@ -748,7 +748,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.String">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">String</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.String" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">String</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.String" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic string type</p>
    <dl class="attribute">
@@ -776,7 +776,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.List">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">List</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.List" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">List</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.List" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic list type</p>
    <dl class="attribute">
@@ -799,7 +799,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Set">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Set</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Set" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Set</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Set" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic set type</p>
    <dl class="attribute">
@@ -817,7 +817,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Dictionary">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Dictionary</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Dictionary" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Dictionary</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Dictionary" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.base.BaseType" title="JumpScale.core.pmtypes.base.BaseType"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.base.BaseType</span></tt></a></p>
    <p>Generic dictionary type</p>
    <dl class="attribute">
@@ -840,7 +840,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Guid">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Guid</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Guid" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Guid</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Guid" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="JumpScale.core.pmtypes.PrimitiveTypes.String"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.PrimitiveTypes.String</span></tt></a></p>
    <p>Generic GUID type</p>
    <dl class="attribute">
@@ -858,7 +858,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.Path">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Path</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Path" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">Path</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.Path" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.PrimitiveTypes.String" title="JumpScale.core.pmtypes.PrimitiveTypes.String"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.PrimitiveTypes.String</span></tt></a></p>
    <p>Generic path type</p>
    <dl class="attribute">
@@ -877,7 +877,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.DirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">DirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.DirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">DirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.DirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="JumpScale.core.pmtypes.CustomTypes.Path"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.Path</span></tt></a></p>
    <p>Generic folder path type</p>
    <dl class="attribute">
@@ -896,7 +896,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.FilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">FilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.FilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">FilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.FilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.Path" title="JumpScale.core.pmtypes.CustomTypes.Path"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.Path</span></tt></a></p>
    <p>Generic file path type</p>
    <dl class="attribute">
@@ -915,7 +915,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.UnixDirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">UnixDirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.UnixDirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">UnixDirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.UnixDirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="JumpScale.core.pmtypes.CustomTypes.DirPath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.DirPath</span></tt></a></p>
    <p>Generic Unix folder path type</p>
    <dl class="attribute">
@@ -935,7 +935,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.UnixFilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">UnixFilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.UnixFilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">UnixFilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.UnixFilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="JumpScale.core.pmtypes.CustomTypes.FilePath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.FilePath</span></tt></a></p>
    <p>Generic Unix file path type</p>
    <dl class="attribute">
@@ -955,7 +955,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.WindowsDirPath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">WindowsDirPath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.WindowsDirPath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">WindowsDirPath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.WindowsDirPath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.DirPath" title="JumpScale.core.pmtypes.CustomTypes.DirPath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.DirPath</span></tt></a></p>
    <p>Generic Windows folder path type</p>
    <dl class="attribute">
@@ -976,7 +976,7 @@
    
    <dl class="class">
    <dt id="JumpScale.core.pmtypes.WindowsFilePath">
-   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">WindowsFilePath</tt><big>(</big><em>default=&lt;object object at 0x3872fa0&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.WindowsFilePath" title="Permalink to this definition">¶</a></dt>
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.pmtypes.</tt><tt class="descname">WindowsFilePath</tt><big>(</big><em>default=&lt;object object at 0x2a1d330&gt;</em>, <em>check=None</em>, <em>doc=None</em>, <em>allow_none=False</em>, <em>flag_dirty=False</em>, <em>fset=None</em>, <em>readonly=False</em><big>)</big><a class="headerlink" href="#JumpScale.core.pmtypes.WindowsFilePath" title="Permalink to this definition">¶</a></dt>
    <dd><p>Bases: <a class="reference internal" href="#JumpScale.core.pmtypes.CustomTypes.FilePath" title="JumpScale.core.pmtypes.CustomTypes.FilePath"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.pmtypes.CustomTypes.FilePath</span></tt></a></p>
    <p>Generic Windows file path type</p>
    <dl class="attribute">
