@@ -69,8 +69,20 @@
    <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
    <dl class="method">
    <dt id="JumpScale.baselib.mailclient.emailclient.EmailClient.send">
-   <tt class="descname">send</tt><big>(</big><em>recipients</em>, <em>sender</em>, <em>subject</em>, <em>message</em>, <em>files=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mailclient/emailclient.html#EmailClient.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mailclient.emailclient.EmailClient.send" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
+   <tt class="descname">send</tt><big>(</big><em>recipients</em>, <em>sender</em>, <em>subject</em>, <em>message</em>, <em>files=None</em>, <em>mimetype=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mailclient/emailclient.html#EmailClient.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mailclient.emailclient.EmailClient.send" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param recipients: Recipients of the message
+   &#64;type recipients: mixed, string or list
+   &#64;param sender: Sender of the email
+   &#64;type sender: string
+   &#64;param subject: Subject of the email
+   &#64;type subject: string
+   &#64;param message: Body of the email
+   &#64;type message: string
+   &#64;param files: List of paths to files to attach
+   &#64;type files: list of strings
+   &#64;param mimetype: Type of the body plain, html or None for autodetection
+   &#64;type mimetype: string</p>
+   </dd></dl>
    
    </dd></dl>
    

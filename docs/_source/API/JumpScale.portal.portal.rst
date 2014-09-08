@@ -342,6 +342,11 @@
    </dd></dl>
    
    <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getClientByInstance">
+   <tt class="descname">getClientByInstance</tt><big>(</big><em>instance=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getClientByInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getClientByInstance" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
    <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getPortalConfig">
    <tt class="descname">getPortalConfig</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getPortalConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getPortalConfig" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>

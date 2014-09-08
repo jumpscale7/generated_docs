@@ -176,7 +176,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape">
-   <tt class="descname">r_unescape</tt><em class="property"> = &lt;_sre.SRE_Pattern object at 0x4be60a0&gt;</em><a class="headerlink" href="#JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">r_unescape</tt><em class="property"> = &lt;_sre.SRE_Pattern object at 0x60687e0&gt;</em><a class="headerlink" href="#JumpScale.lib.html.HTML2Text.HTML2Text.r_unescape" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    <dl class="method">
