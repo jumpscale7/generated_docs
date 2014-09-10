@@ -1,94 +1,1712 @@
-JumpScale.baselib.jpackages package
-===================================
-
-Submodules
-----------
-
-JumpScale.baselib.jpackages.ActionManager module
-------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.ActionManager
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.CodeManagementRecipe module
--------------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.CodeManagementRecipe
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.Domain module
------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.Domain
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.JPackageClient module
--------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.JPackageClient
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.JPackageObject module
--------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.JPackageObject
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.JPackageStateObject module
-------------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.JPackageStateObject
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.JPackagesGenDocs module
----------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.JPackagesGenDocs
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.PythonPackage module
-------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.PythonPackage
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.ReleaseMgmt module
-----------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.ReleaseMgmt
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.jpackages.enumerators4 module
------------------------------------------------
-
-.. automodule:: JumpScale.baselib.jpackages.enumerators4
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.jpackages
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.jpackages package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+       <link rel="next" title="JumpScale.baselib.jsdeveltools package" href="JumpScale.baselib.jsdeveltools.html" />
+       <link rel="prev" title="JumpScale.baselib.installtools package" href="JumpScale.baselib.installtools.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.jsdeveltools.html" title="JumpScale.baselib.jsdeveltools package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.installtools.html" title="JumpScale.baselib.installtools package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-jpackages-package">
+   <h1>JumpScale.baselib.jpackages package<a class="headerlink" href="#jumpscale-baselib-jpackages-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.ActionManager">
+   <span id="jumpscale-baselib-jpackages-actionmanager-module"></span><h2>JumpScale.baselib.jpackages.ActionManager module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.ActionManager" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.ActionManager.ActionManager">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.ActionManager.</tt><tt class="descname">ActionManager</tt><big>(</big><em>jp</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ActionManager.html#ActionManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ActionManager.ActionManager" title="Permalink to this definition">¶</a></dt>
+   <dd><p>the action manager is responsible for executing the actions linked to a jpackages</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.ActionManager.ActionManager.clear">
+   <tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ActionManager.html#ActionManager.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ActionManager.ActionManager.clear" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.CodeManagementRecipe">
+   <span id="jumpscale-baselib-jpackages-codemanagementrecipe-module"></span><h2>JumpScale.baselib.jpackages.CodeManagementRecipe module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.CodeManagementRecipe" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.CodeManagementRecipe.</tt><tt class="descname">CodeManagementRecipe</tt><big>(</big><em>hrdpath</em>, <em>configpath</em>, <em>jp=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Recipe providing guidelines how to cook a JPackage from source code in a repo, is populated from a config file</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.addToProtectedDirs">
+   <tt class="descname">addToProtectedDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.addToProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.addToProtectedDirs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.commit">
+   <tt class="descname">commit</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.commit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.export">
+   <tt class="descname">export</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.export" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Export all items from VCS to the system sandbox or other location specifed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.isDestinationClean">
+   <tt class="descname">isDestinationClean</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.isDestinationClean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.isDestinationClean" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check whether the final destination is clean (means do the folders exist)</p>
+   <p>Returns C{True} if none of the destination folders exist, C{False}
+   otherwise.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.link">
+   <tt class="descname">link</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.link" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.package">
+   <tt class="descname">package</tt><big>(</big><em>jpackage</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.package" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullmerge">
+   <tt class="descname">pullmerge</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.pullmerge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullmerge" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullupdate">
+   <tt class="descname">pullupdate</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.pullupdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.pullupdate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.push">
+   <tt class="descname">push</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.push" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromProtectedDirs">
+   <tt class="descname">removeFromProtectedDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.removeFromProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromProtectedDirs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromSystem">
+   <tt class="descname">removeFromSystem</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.removeFromSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.removeFromSystem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Remove all folders the recipe has written to</p>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.repoconnection">
+   <tt class="descname">repoconnection</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.repoconnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.repoconnection" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.unlink">
+   <tt class="descname">unlink</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.unlink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.unlink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.update">
+   <tt class="descname">update</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#CodeManagementRecipe.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.CodeManagementRecipe.update" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.CodeManagementRecipe.</tt><tt class="descname">RecipeItem</tt><big>(</big><em>repoinfo</em>, <em>source</em>, <em>destination</em>, <em>platform='generic'</em>, <em>type='base'</em>, <em>tags=''</em>, <em>recipe=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>Ingredient of a CodeRecipe</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.addToProtectedDirs">
+   <tt class="descname">addToProtectedDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.addToProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.addToProtectedDirs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.codeToFiles">
+   <tt class="descname">codeToFiles</tt><big>(</big><em>jpackage</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.codeToFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.codeToFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>copy code from repo&#8217;s (using the recipes) to the file location for packaging
+   this is done per platform as specified in recipe, if not specified then generic</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.exportToSystem">
+   <tt class="descname">exportToSystem</tt><big>(</big><em>force=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.exportToSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.exportToSystem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Copy files from coderepo to destination, without metadata of coderepo
+   This is only done when the recipe item is relevant for our platform</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.getSource">
+   <tt class="descname">getSource</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.getSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.getSource" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.linkToSystem">
+   <tt class="descname">linkToSystem</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.linkToSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.linkToSystem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>link parts of the coderepo to the destination and put this  entry in the protected dirs section so data cannot be overwritten by jpackages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.removeFromProtectedDirs">
+   <tt class="descname">removeFromProtectedDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.removeFromProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.removeFromProtectedDirs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.unlinkSystem">
+   <tt class="descname">unlinkSystem</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/CodeManagementRecipe.html#RecipeItem.unlinkSystem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.CodeManagementRecipe.RecipeItem.unlinkSystem" title="Permalink to this definition">¶</a></dt>
+   <dd><p>unlink the system, remove the links and copy the content instead</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.Domain">
+   <span id="jumpscale-baselib-jpackages-domain-module"></span><h2>JumpScale.baselib.jpackages.Domain module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.Domain" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.Domain.</tt><tt class="descname">Domain</tt><big>(</big><em>domainname</em>, <em>qualityLevel=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain" title="Permalink to this definition">¶</a></dt>
+   <dd><p>is representation of domain
+   source can come from tgz or from mercurial</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackageMetadataDir">
+   <tt class="descname">getJPackageMetadataDir</tt><big>(</big><em>qualitylevel</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackageMetadataDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackageMetadataDir" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get the meta data dir for the JPackage with <cite>name</cite> and <cite>version</cite> on
+   <cite>qualitylevel</cite>.</p>
+   <p>&#64;param qualitylevel: quality level
+   &#64;type qualitylevel: string
+   &#64;param name: name of the JPackage
+   &#64;type name: string
+   &#64;param version: version of the JPackage
+   &#64;type version: string
+   &#64;return: path of the meta data dir for the JPackage
+   &#64;rtype: string</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithDeletedMetadata">
+   <tt class="descname">getJPackageTuplesWithDeletedMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackageTuplesWithDeletedMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithDeletedMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithModifiedFiles">
+   <tt class="descname">getJPackageTuplesWithModifiedFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackageTuplesWithModifiedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithModifiedFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithModifiedMetadata">
+   <tt class="descname">getJPackageTuplesWithModifiedMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackageTuplesWithModifiedMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithModifiedMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithNewMetadata">
+   <tt class="descname">getJPackageTuplesWithNewMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackageTuplesWithNewMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackageTuplesWithNewMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getJPackages">
+   <tt class="descname">getJPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getJPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getJPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a list of all jpackages of the currently active domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getLatestBuildNrForJPackage">
+   <tt class="descname">getLatestBuildNrForJPackage</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getLatestBuildNrForJPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getLatestBuildNrForJPackage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the lastest buildnumber
+   Buildnr comes from default tip of mercurial repo</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getMetadataDir">
+   <tt class="descname">getMetadataDir</tt><big>(</big><em>qualitylevel=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getMetadataDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getMetadataDir" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get the meta data dir for the argument quality level, or for the current
+   quality level if no quality level is passed.</p>
+   <p>&#64;param qualitylevel: optional quality level to return the metadata dir for
+   &#64;type qualitylevel: string
+   &#64;return: metadata dir for the argument quality level or the current quality level if no quality level argument is passed
+   &#64;rtype: str</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getModifiedJPackages">
+   <tt class="descname">getModifiedJPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getModifiedJPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getModifiedJPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>reloadconfig
+   Returns a list with all the packages whose files or metadata have been changed in the currently active domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.getQualityLevels">
+   <tt class="descname">getQualityLevels</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.getQualityLevels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.getQualityLevels" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the available quality levels for this domain</p>
+   <p>&#64;return: the available quality levels for this domain
+   &#64;rtype: list(string)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.hasDomainChanged">
+   <tt class="descname">hasDomainChanged</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.hasDomainChanged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.hasDomainChanged" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.hasModifiedFiles">
+   <tt class="descname">hasModifiedFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.hasModifiedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.hasModifiedFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Checks for the entire domain if it has any modified files</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.hasModifiedMetadata">
+   <tt class="descname">hasModifiedMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.hasModifiedMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.hasModifiedMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Checks for the entire domain if it has any modified metadata</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.linkMetadata">
+   <tt class="descname">linkMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.linkMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.linkMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.mergeMetadata">
+   <tt class="descname">mergeMetadata</tt><big>(</big><em>commitMessage=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.mergeMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.mergeMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd><p><a class="reference external" href="mailto:#&#37;&#52;&#48;todo">#<span>&#64;</span>todo</a> doc</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.publish">
+   <tt class="descname">publish</tt><big>(</big><em>commitMessage</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.publish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.publish" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Publishes the currently active domain&#8217;s bundles &amp; metadata</p>
+   <dl class="docutils">
+   <dt>&#64;debug: It is recommended to NOT use publish() </dt>
+   <dd>Use a combination of updateMetadata(), publishMetadata() and upload() instead.
+   Reason publish() changes the build numbers on top of update()</dd>
+   </dl>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.publishMetaDataAsTarGz">
+   <tt class="descname">publishMetaDataAsTarGz</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.publishMetaDataAsTarGz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.publishMetaDataAsTarGz" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.publishMetadata">
+   <tt class="descname">publishMetadata</tt><big>(</big><em>commitMessage=''</em>, <em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.publishMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.publishMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Publishes all metadata of the currently active domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.removeDebugStateFromAll">
+   <tt class="descname">removeDebugStateFromAll</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.removeDebugStateFromAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.removeDebugStateFromAll" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.saveConfig">
+   <tt class="descname">saveConfig</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.saveConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.saveConfig" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Saves changes to the jpackages config file</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.showChangedItems">
+   <tt class="descname">showChangedItems</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.showChangedItems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.showChangedItems" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Shows all changes in the files or metadata</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.switchQualityLevel">
+   <tt class="descname">switchQualityLevel</tt><big>(</big><em>qlevel</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.switchQualityLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.switchQualityLevel" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Allows a clean reconfiguration for a new quality level, and be sure that the configurations are OK.
+   All packages are reinstalled, if need.
+   NO active removal of unneeded packages.
+   Includes a check that the repository has the new quality level</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.updateMetadata">
+   <tt class="descname">updateMetadata</tt><big>(</big><em>commitMessage=''</em>, <em>force=False</em>, <em>accessCode=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.updateMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.updateMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get all metadata of the currently active domain&#8217;s repo servers and store locally</p>
+   <p>Depends on the parameter metadataFromTgz.
+   Note: Changing the configuration of metadataFromTgz will usually erase 
+   the local uncommited modifications of the metadata.</p>
+   <dl class="docutils">
+   <dt>&#64;debug: It is recommended to NOT use publish() </dt>
+   <dd>Use a combination of updateMetadata(), publishMetadata() and upload() instead.
+   Reason publish() changes the build numbers on top of update()</dd>
+   </dl>
+   </dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.Domain.Domain.vcsclient">
+   <tt class="descname">vcsclient</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.vcsclient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.vcsclient" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.JPackageClient">
+   <span id="jumpscale-baselib-jpackages-jpackageclient-module"></span><h2>JumpScale.baselib.jpackages.JPackageClient module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.JPackageClient" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackageClient.</tt><tt class="descname">JPackageClient</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.checkJpackagesExistsOnRemoteBlobStor">
+   <tt class="descname">checkJpackagesExistsOnRemoteBlobStor</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.checkJpackagesExistsOnRemoteBlobStor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.checkJpackagesExistsOnRemoteBlobStor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.checkProtectedDirs">
+   <tt class="descname">checkProtectedDirs</tt><big>(</big><em>redo=True</em>, <em>checkInteractive=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.checkProtectedDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.checkProtectedDirs" title="Permalink to this definition">¶</a></dt>
+   <dd><p>recreate the config file for protected dirs (means directories linked to code repo&#8217;s)
+   by executing this command you are sure that no development data will be overwritten
+   &#64;param redo means, restart from existing links in qbase, do not use the config file
+   &#64;checkInteractive if False, will not ask just execute on it</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.create">
+   <tt class="descname">create</tt><big>(</big><em>domain=''</em>, <em>name=''</em>, <em>version='1.0'</em>, <em>description=''</em>, <em>supportedPlatforms=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.create" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates a new jpackages4, this includes all standard tasklets, a config file and a description.wiki file
+   &#64;param domain:      string - The domain the new jpackages should reside in
+   &#64;param name:        string - The name of the new jpackages
+   &#64;param version:     string - The version of the new jpackages
+   &#64;param description: string - The description of the new jpackages (is stored in the description.wiki file)
+   &#64;param supportedPlatforms  [&#8220;linux&#8221;,...] other examples win,win32,linux64 see j.system.platformtype</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.disableDebugMetaData">
+   <tt class="descname">disableDebugMetaData</tt><big>(</big><em>qualitylevel</em>, <em>domain=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.disableDebugMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.disableDebugMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.enableConsoleLogging">
+   <tt class="descname">enableConsoleLogging</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.enableConsoleLogging"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.enableConsoleLogging" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.exists">
+   <tt class="descname">exists</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.exists" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Checks whether the jpackages&#8217;s metadata path is currently present on your system</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.find">
+   <tt class="descname">find</tt><big>(</big><em>domain=None</em>, <em>name=None</em>, <em>version=''</em>, <em>platform=None</em>, <em>onlyone=False</em>, <em>installed=None</em>, <em>instance=None</em>, <em>expandInstances=True</em>, <em>interactive=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.find" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;domain, if none will ask for domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.findByName">
+   <tt class="descname">findByName</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.findByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.findByName" title="Permalink to this definition">¶</a></dt>
+   <dd><p>name is part of jpackage, if none found return None, if more than 1 found raise error, name is part of name</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.findNewest">
+   <tt class="descname">findNewest</tt><big>(</big><em>domain=''</em>, <em>name=''</em>, <em>minversion=''</em>, <em>maxversion=''</em>, <em>platform=None</em>, <em>returnNoneIfNotFound=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.findNewest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.findNewest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Find the newest jpackages which matches the criteria
+   If more than 1 jpackages matches -&gt; error
+   If no jpackages match and not returnNoneIfNotFound -&gt; error
+   &#64;param name:       string - The name of jpackages you are looking for
+   &#64;param domain:     string - The domain of the jpackages you are looking for
+   &#64;param minversion: string - The minimum version the jpackages must have
+   &#64;param maxversion: string - The maximum version the jpackages can have
+   &#64;param platform:   string - Which platform the jpackages must run on
+   &#64;param returnNoneIfNotFound: boolean - if true, will return None object if no jpackages have been found</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.get">
+   <tt class="descname">get</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em>, <em>instance=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.get" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a jpackages 
+   &#64;param domain:  string - The domain the jpackages is part from
+   &#64;param name:    string - The name of the jpackages
+   &#64;param version: string - The version of the jpackages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getActionNamesClass">
+   <tt class="descname">getActionNamesClass</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getActionNamesClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getActionNamesClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>these actions can be applied on jpackage without knowing the jpackage instance</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getActionNamesInstance">
+   <tt class="descname">getActionNamesInstance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getActionNamesInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getActionNamesInstance" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDataPath">
+   <tt class="descname">getDataPath</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getDataPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDataPath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the filesdatapath for the provided jpackages
+   &#64;param domain:  string - The domain of the jpackages
+   &#64;param name:    string - The name of the jpackages
+   &#64;param version: string - The version of the jpackages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDebugPackages">
+   <tt class="descname">getDebugPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getDebugPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDebugPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a list of all currently installed packages on your system</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDomainNames">
+   <tt class="descname">getDomainNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getDomainNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDomainNames" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a list of all domains present in the sources.cfg file</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDomainObject">
+   <tt class="descname">getDomainObject</tt><big>(</big><em>domain</em>, <em>qualityLevel=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getDomainObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getDomainObject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Get provided domain as an object</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getInstalledPackages">
+   <tt class="descname">getInstalledPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getInstalledPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getInstalledPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a list of all currently installed packages on your system</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActionsPath">
+   <tt class="descname">getJPActionsPath</tt><big>(</big><em>domain</em>, <em>name</em>, <em>instance</em>, <em>fromtmp=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getJPActionsPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActionsPath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the metadatapath for the provided jpackages
+   if fromtmp is True, then tmp directorypath will be returned</p>
+   <p>&#64;param domain:  string - The domain of the jpackages
+   &#64;param name:    string - The name of the jpackages
+   &#64;param fromtmp: boolean</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActiveHRDPath">
+   <tt class="descname">getJPActiveHRDPath</tt><big>(</big><em>domain</em>, <em>name</em>, <em>instance</em>, <em>fromtmp=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getJPActiveHRDPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActiveHRDPath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the metadatapath for the provided jpackages
+   if fromtmp is True, then tmp directorypath will be returned</p>
+   <p>&#64;param domain:  string - The domain of the jpackages
+   &#64;param name:    string - The name of the jpackages
+   &#64;param version: string - The version of the jpackages
+   &#64;param fromtmp: boolean</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActiveInstancePath">
+   <tt class="descname">getJPActiveInstancePath</tt><big>(</big><em>domain</em>, <em>name</em>, <em>instance</em>, <em>fromtmp=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getJPActiveInstancePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPActiveInstancePath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the metadatapath for the provided jpackages in active mode</p>
+   <p>&#64;param domain:  string - The domain of the jpackages
+   &#64;param name:    string - The name of the jpackages
+   &#64;param fromtmp: boolean</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPackageMetadataScanner">
+   <tt class="descname">getJPackageMetadataScanner</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getJPackageMetadataScanner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPackageMetadataScanner" title="Permalink to this definition">¶</a></dt>
+   <dd><p>returns tool which can be  used to scan the jpackages repo&#8217;s and manipulate them</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPackageObjects">
+   <tt class="descname">getJPackageObjects</tt><big>(</big><em>platform=None</em>, <em>domain=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getJPackageObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getJPackageObjects" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a list of jpackages objects for specified platform &amp; domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getMetaTarPath">
+   <tt class="descname">getMetaTarPath</tt><big>(</big><em>domainName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getMetaTarPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getMetaTarPath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the metatarsdatapath for the provided domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getMetadataPath">
+   <tt class="descname">getMetadataPath</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getMetadataPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getMetadataPath" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns the metadatapath for the provided jpackages for active state</p>
+   <p>&#64;param domain:  string - The domain of the jpackages
+   &#64;param name:    string - The name of the jpackages
+   &#64;param version: string - The version of the jpackages
+   &#64;param fromtmp: boolean</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getPackagesWithBrokenDependencies">
+   <tt class="descname">getPackagesWithBrokenDependencies</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getPackagesWithBrokenDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getPackagesWithBrokenDependencies" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getPendingReconfigurationPackages">
+   <tt class="descname">getPendingReconfigurationPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getPendingReconfigurationPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getPendingReconfigurationPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns a List of all jpackages that are pending for configuration</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getTypePath">
+   <tt class="descname">getTypePath</tt><big>(</big><em>ttype</em>, <em>relativepath</em>, <em>jp=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.getTypePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.getTypePath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.linkMetaData">
+   <tt class="descname">linkMetaData</tt><big>(</big><em>domain=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.linkMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.linkMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Does an link of the meta information repo for each domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.log">
+   <tt class="descname">log</tt><big>(</big><em>msg</em>, <em>category=''</em>, <em>level=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.log" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.makeDependencyGraph">
+   <tt class="descname">makeDependencyGraph</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.makeDependencyGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.makeDependencyGraph" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Creates a graphical visualization of all dependencies between the JPackackages of all domains.
+   This helps to quickly view and debug the dependencies and avoid errors.
+   The target audience are the developers of accross groups and domains that depend on each others packages.</p>
+   <p>The graph can be found here:   
+   /opt/qbase5/var/jpackages/metadata/dependencyGraph.png</p>
+   <p>Notes:  
+   The graph omits the constraints, such as version numbers and platform.</p>
+   <p>For completeness, a second graph is created that shows packages without andy dependencies (both ways). 
+   See: dependencyGraph_singleNodes.png</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.mergeMetaData">
+   <tt class="descname">mergeMetaData</tt><big>(</big><em>domain=''</em>, <em>commitMessage=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.mergeMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.mergeMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Does an update of the meta information repo for each domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.mergeMetaDataAll">
+   <tt class="descname">mergeMetaDataAll</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.mergeMetaDataAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.mergeMetaDataAll" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Tries to merge the metadata information of all jpackages with info on remote repo.
+   This used to be called updateJPackage list</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.metadataCreateQualityLevel">
+   <tt class="descname">metadataCreateQualityLevel</tt><big>(</big><em>domain=''</em>, <em>qualityLevelFrom=None</em>, <em>qualityLevelTo=None</em>, <em>force=False</em>, <em>link=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.metadataCreateQualityLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.metadataCreateQualityLevel" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a quality level starting from the qualitylevelFrom e.g. unstable to beta
+   &#64;param link if True will link the jpackages otherwise copy
+   &#64;param force, will delete the destination</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.metadataDeleteQualityLevel">
+   <tt class="descname">metadataDeleteQualityLevel</tt><big>(</big><em>domain=''</em>, <em>qualityLevel=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.metadataDeleteQualityLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.metadataDeleteQualityLevel" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Delete a quality level</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.pm_getJPackageConfig">
+   <tt class="descname">pm_getJPackageConfig</tt><big>(</big><em>jpackagesMDPath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.pm_getJPackageConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.pm_getJPackageConfig" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publish">
+   <tt class="descname">publish</tt><big>(</big><em>commitMessage</em>, <em>domain=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.publish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publish" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Publishes all domains&#8217; bundles &amp; metadata (if no domain specified)
+   &#64;param commitMessage: string - The commit message you want to assign to the publish</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishAll">
+   <tt class="descname">publishAll</tt><big>(</big><em>commitMessage=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.publishAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishAll" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Publish metadata &amp; bundles for all domains, for more informartion see publishDomain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishDomain">
+   <tt class="descname">publishDomain</tt><big>(</big><em>domain=''</em>, <em>commitMessage=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.publishDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishDomain" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Publish metadata &amp; bundles for a domain. 
+   To publish a domain means to make your local changes to the corresponding domain available to other users.
+   A domain can be changed in the following ways: a new package is created in it, a package in it is modified, a package in it is deleted.
+   To make the changes available to others the new metadata is uploaded to the mercurial servers and for the packages whos files 
+   have been modified,
+   new bundles are created and uploaded to the blobstor server</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishMetaDataAsTarGz">
+   <tt class="descname">publishMetaDataAsTarGz</tt><big>(</big><em>domain=''</em>, <em>qualityLevel=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.publishMetaDataAsTarGz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishMetaDataAsTarGz" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Compresses the meta data of a domain into a tar and upload that tar to the bundleUpload server.
+   After this the that uptain there metadata as a tar can download the latest metadata.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.reloadconfig">
+   <tt class="descname">reloadconfig</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.reloadconfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.reloadconfig" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Reload all jpackages config data from disk</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.reportError">
+   <tt class="descname">reportError</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.reportError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.reportError" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.runConfigurationPending">
+   <tt class="descname">runConfigurationPending</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.runConfigurationPending"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.runConfigurationPending" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.sourcesFile">
+   <tt class="descname">sourcesFile</tt><em class="property"> = None</em><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.sourcesFile" title="Permalink to this definition">¶</a></dt>
+   <dd><p>methods to deal with jpackages, seen from client level</p>
+   <p>&#64;qlocation j.packages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.switchMetaData">
+   <tt class="descname">switchMetaData</tt><big>(</big><em>toQualitylevel</em>, <em>domain=''</em>, <em>disableDebug=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.switchMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.switchMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateAll">
+   <tt class="descname">updateAll</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.updateAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateAll" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Updates all installed jpackages to the latest builds.
+   The latest meta information is retrieved from the repository and based on this information,
+   The install packages that have a buildnr that has been outdated our reinstall, thust updating them to the latest build.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaData">
+   <tt class="descname">updateMetaData</tt><big>(</big><em>domain=''</em>, <em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.updateMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Does an update of the meta information repo for each domain</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaDataAll">
+   <tt class="descname">updateMetaDataAll</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.updateMetaDataAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaDataAll" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Updates the metadata information of all jpackages
+   This used to be called updateJPackage list
+   &#64;param is force True then local changes will be lost if any</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaDataForDomain">
+   <tt class="descname">updateMetaDataForDomain</tt><big>(</big><em>domainName=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.updateMetaDataForDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.updateMetaDataForDomain" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Updates the meta information of specific domain
+   This used to be called updateJPackage list</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.uploadLocalJpackagesToBlobStor">
+   <tt class="descname">uploadLocalJpackagesToBlobStor</tt><big>(</big><em>blobservername='jpackages_remote'</em>, <em>history=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.uploadLocalJpackagesToBlobStor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.uploadLocalJpackagesToBlobStor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.JPackageObject">
+   <span id="jumpscale-baselib-jpackages-jpackageobject-module"></span><h2>JumpScale.baselib.jpackages.JPackageObject module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.JPackageObject" title="Permalink to this headline">¶</a></h2>
+   <dl class="function">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPLock">
+   <tt class="descclassname">JumpScale.baselib.jpackages.JPackageObject.</tt><tt class="descname">JPLock</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPLock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPLock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackageObject.</tt><tt class="descname">JPackageObject</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em>, <em>instance=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Data representation of a JPackage, should contain all information contained in the jpackages.cfg</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.addDependency">
+   <tt class="descname">addDependency</tt><big>(</big><em>domain</em>, <em>name</em>, <em>supportedplatforms</em>, <em>minversion</em>, <em>maxversion</em>, <em>dependencytype</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.addDependency"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.addDependency" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.backup">
+   <tt class="descname">backup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.backup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.backup" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.buildNrIncrement">
+   <tt class="descname">buildNrIncrement</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.buildNrIncrement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.buildNrIncrement" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.checkExistingBlobs">
+   <tt class="descname">checkExistingBlobs</tt><big>(</big><em>blobserver</em>, <em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.checkExistingBlobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.checkExistingBlobs" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return the non found keys</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeCommit">
+   <tt class="descname">codeCommit</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.codeCommit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeCommit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeExport">
+   <tt class="descname">codeExport</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.codeExport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeExport" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeLink">
+   <tt class="descname">codeLink</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.codeLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeLink" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeUpdate">
+   <tt class="descname">codeUpdate</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.codeUpdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.codeUpdate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.compile">
+   <tt class="descname">compile</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.compile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.compile" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.configure">
+   <tt class="descname">configure</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.configure" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.copyfiles">
+   <tt class="descname">copyfiles</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.copyfiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.copyfiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.delete">
+   <tt class="descname">delete</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.delete" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.download">
+   <tt class="descname">download</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.download" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath">
+   <tt class="descname">getAppPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getAppPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobHistory">
+   <tt class="descname">getBlobHistory</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobHistory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobHistory" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobInfo">
+   <tt class="descname">getBlobInfo</tt><big>(</big><em>platform</em>, <em>ttype</em>, <em>active=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobInfo" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return blobkey,[[md5,path],...]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobItemPaths">
+   <tt class="descname">getBlobItemPaths</tt><big>(</big><em>platform</em>, <em>ttype</em>, <em>blobitempath</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobItemPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobItemPaths" title="Permalink to this definition">¶</a></dt>
+   <dd><p>translates the item as shown in the blobinfo to the corresponding paths (jpackageFilesPath,destpathOnSystem)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobKeysActive">
+   <tt class="descname">getBlobKeysActive</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobKeysActive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobKeysActive" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobPlatformTypes">
+   <tt class="descname">getBlobPlatformTypes</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBlobPlatformTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBlobPlatformTypes" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBrokenDependencies">
+   <tt class="descname">getBrokenDependencies</tt><big>(</big><em>platform=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getBrokenDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getBrokenDependencies" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return a list of dependencies that cannot be resolved</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getCodeLocationsFromRecipe">
+   <tt class="descname">getCodeLocationsFromRecipe</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getCodeLocationsFromRecipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getCodeLocationsFromRecipe" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getCodeMgmtRecipe">
+   <tt class="descname">getCodeMgmtRecipe</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getCodeMgmtRecipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getCodeMgmtRecipe" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDebugMode">
+   <tt class="descname">getDebugMode</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDebugMode" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDebugModeInJpackage">
+   <tt class="descname">getDebugModeInJpackage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getDebugModeInJpackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDebugModeInJpackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependencies">
+   <tt class="descname">getDependencies</tt><big>(</big><em>errorIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependencies" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the dependencies for the JPackage</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependingInstalledPackages">
+   <tt class="descname">getDependingInstalledPackages</tt><big>(</big><em>recursive=False</em>, <em>errorIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getDependingInstalledPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependingInstalledPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the packages that are dependent on this packages and installed on this machine
+   This is a heavy operation and might take some time</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependingPackages">
+   <tt class="descname">getDependingPackages</tt><big>(</big><em>recursive=False</em>, <em>errorIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getDependingPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getDependingPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the packages that are dependent on this package
+   This is a heavy operation and might take some time</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getHighestInstalledBuildNr">
+   <tt class="descname">getHighestInstalledBuildNr</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getHighestInstalledBuildNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getHighestInstalledBuildNr" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return the latetst installed buildnumber</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getInstanceNames">
+   <tt class="descname">getInstanceNames</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getInstanceNames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getInstanceNames" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getIsPreparedForUpdatingFiles">
+   <tt class="descname">getIsPreparedForUpdatingFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getIsPreparedForUpdatingFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getIsPreparedForUpdatingFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return true if package has been prepared</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getKey">
+   <tt class="descname">getKey</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getMetadataPathQualityLevel">
+   <tt class="descname">getMetadataPathQualityLevel</tt><big>(</big><em>ql</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getMetadataPathQualityLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getMetadataPathQualityLevel" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFiles">
+   <tt class="descname">getPathFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute pathname of the jpackages&#8217;s filespath</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFilesPlatform">
+   <tt class="descname">getPathFilesPlatform</tt><big>(</big><em>platform=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathFilesPlatform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFilesPlatform" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute pathname of the jpackages&#8217;s filespath
+   if not given then will be: j.system.platformtype</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFilesPlatformForSubDir">
+   <tt class="descname">getPathFilesPlatformForSubDir</tt><big>(</big><em>subdir</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathFilesPlatformForSubDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathFilesPlatformForSubDir" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute pathnames of the jpackages&#8217;s filespath for platform or parent of platform if it does not exist in lowest level
+   if platform not given then will be: j.system.platformtype
+   the subdir will be used to check upon if found in one of the dirs, if never found will raise error
+   all matching results are returned</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathInstance">
+   <tt class="descname">getPathInstance</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathInstance" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute pathname of the package&#8217;s metadatapath</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathMetadata">
+   <tt class="descname">getPathMetadata</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathMetadata" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute pathname of the package&#8217;s metadatapath active instance</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathSourceCode">
+   <tt class="descname">getPathSourceCode</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getPathSourceCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getPathSourceCode" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return absolute path to where this package&#8217;s source can be extracted to</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getQualityLevels">
+   <tt class="descname">getQualityLevels</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getQualityLevels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getQualityLevels" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getVersionAsInt">
+   <tt class="descname">getVersionAsInt</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getVersionAsInt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getVersionAsInt" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Translate string version representation to a number</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.hasModifiedFiles">
+   <tt class="descname">hasModifiedFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.hasModifiedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.hasModifiedFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if files are modified in the JPackage files</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.hasModifiedMetaData">
+   <tt class="descname">hasModifiedMetaData</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.hasModifiedMetaData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.hasModifiedMetaData" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if files are modified in the JPackage metadata</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.install">
+   <tt class="descname">install</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.install"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.install" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.installDebs">
+   <tt class="descname">installDebs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.installDebs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.installDebs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isInstalled">
+   <tt class="descname">isInstalled</tt><big>(</big><em>instance=None</em>, <em>checkAndDie=False</em>, <em>hrdcheck=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.isInstalled"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isInstalled" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if the JPackage is installed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isNew">
+   <tt class="descname">isNew</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.isNew"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isNew" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isPendingReconfiguration">
+   <tt class="descname">isPendingReconfiguration</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.isPendingReconfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isPendingReconfiguration" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if the JPackage needs reconfiguration</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isrunning">
+   <tt class="descname">isrunning</tt><big>(</big><em>dependencies=False</em>, <em>ipaddr='localhost'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.isrunning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.isrunning" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if application installed is running for jpackages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.kill">
+   <tt class="descname">kill</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.kill"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.kill" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.load">
+   <tt class="descname">load</tt><big>(</big><em>instance=None</em>, <em>force=False</em>, <em>hrddata={}</em>, <em>findDefaultInstance=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.load" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.loadBlobStores">
+   <tt class="descname">loadBlobStores</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.loadBlobStores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.loadBlobStores" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.loadDependencies">
+   <tt class="descname">loadDependencies</tt><big>(</big><em>errorIfNotFound=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.loadDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.loadDependencies" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.log">
+   <tt class="descname">log</tt><big>(</big><em>msg</em>, <em>category=''</em>, <em>level=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.log" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.monitor">
+   <tt class="descname">monitor</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.monitor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.monitor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.monitor_net">
+   <tt class="descname">monitor_net</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.monitor_net"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.monitor_net" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.package">
+   <tt class="descname">package</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.package" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.prepare">
+   <tt class="descname">prepare</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.prepare" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.prepareForUpdatingFiles">
+   <tt class="descname">prepareForUpdatingFiles</tt><big>(</big><em>suppressErrors=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.prepareForUpdatingFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.prepareForUpdatingFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>After this command the operator can change the files of the jpackages.
+   Files do not aways come from code repo, they can also come from jpackages repo only</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.processDepCheck">
+   <tt class="descname">processDepCheck</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.processDepCheck"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.processDepCheck" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.reinstall">
+   <tt class="descname">reinstall</tt><big>(</big><em>dependencies=False</em>, <em>download=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.reinstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.reinstall" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Reinstall the JPackage by running its install tasklet, best not to use dependancies reinstall</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.removeDebugMode">
+   <tt class="descname">removeDebugMode</tt><big>(</big><em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.removeDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.removeDebugMode" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.removeDebugModeInJpackage">
+   <tt class="descname">removeDebugModeInJpackage</tt><big>(</big><em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.removeDebugModeInJpackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.removeDebugModeInJpackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.reportNumbers">
+   <tt class="descname">reportNumbers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.reportNumbers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.reportNumbers" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.restart">
+   <tt class="descname">restart</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.restart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.restart" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.restore">
+   <tt class="descname">restore</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.restore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.restore" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.save">
+   <tt class="descname">save</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.save" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.setDebugMode">
+   <tt class="descname">setDebugMode</tt><big>(</big><em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.setDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.setDebugMode" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.setDebugModeInJpackage">
+   <tt class="descname">setDebugModeInJpackage</tt><big>(</big><em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.setDebugModeInJpackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.setDebugModeInJpackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependencies">
+   <tt class="descname">showDependencies</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.showDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependencies" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Return all dependencies of the JPackage.
+   See also: addDependency and removeDependency</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependingInstalledPackages">
+   <tt class="descname">showDependingInstalledPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.showDependingInstalledPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependingInstalledPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Show which jpackages have this jpackages as dependency.
+   Do this only for the installed jpackages.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependingPackages">
+   <tt class="descname">showDependingPackages</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.showDependingPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.showDependingPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Show which jpackages have this jpackages as dependency.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.signalConfigurationNeeded">
+   <tt class="descname">signalConfigurationNeeded</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.signalConfigurationNeeded"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.signalConfigurationNeeded" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Set in the corresponding jpackages&#8217;s state file if reconfiguration is needed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.start">
+   <tt class="descname">start</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.start" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.stop">
+   <tt class="descname">stop</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.stop" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.supportsPlatform">
+   <tt class="descname">supportsPlatform</tt><big>(</big><em>platform=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.supportsPlatform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.supportsPlatform" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Check if a JPackage can be installed on a platform</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uninstall">
+   <tt class="descname">uninstall</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.uninstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uninstall" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.upload">
+   <tt class="descname">upload</tt><big>(</big><em>remote=True</em>, <em>local=True</em>, <em>dependencies=False</em>, <em>onlycode=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.upload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.upload" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uploadExistingBlobs">
+   <tt class="descname">uploadExistingBlobs</tt><big>(</big><em>blobserver</em>, <em>dependencies=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.uploadExistingBlobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uploadExistingBlobs" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return the non found keys</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uploadExistingBlobsFromHistory">
+   <tt class="descname">uploadExistingBlobsFromHistory</tt><big>(</big><em>blobserver='jpackages_remote'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.uploadExistingBlobsFromHistory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.uploadExistingBlobsFromHistory" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return the non found keys</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.waitDown">
+   <tt class="descname">waitDown</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.waitDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.waitDown" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.waitUp">
+   <tt class="descname">waitUp</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.waitUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.waitUp" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.JPackageStateObject">
+   <span id="jumpscale-baselib-jpackages-jpackagestateobject-module"></span><h2>JumpScale.baselib.jpackages.JPackageStateObject module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.JPackageStateObject" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackageStateObject.</tt><tt class="descname">JPackageStateObject</tt><big>(</big><em>jpackagesObject</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.checkNoCurrentAction">
+   <tt class="descname">checkNoCurrentAction</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.checkNoCurrentAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.checkNoCurrentAction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>if no current action return True</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getDebugMode">
+   <tt class="descname">getDebugMode</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.getDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getDebugMode" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getIsPendingReconfiguration">
+   <tt class="descname">getIsPendingReconfiguration</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.getIsPendingReconfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.getIsPendingReconfiguration" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Returns true is the jpackages needs reconfiguration</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.save">
+   <tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.save" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentAction">
+   <tt class="descname">setCurrentAction</tt><big>(</big><em>tag</em>, <em>action</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setCurrentAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentAction" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param tag  e.g. install
+   &#64;param action e.g. checkout when tag=codemgmt</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentActionIsDone">
+   <tt class="descname">setCurrentActionIsDone</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setCurrentActionIsDone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setCurrentActionIsDone" title="Permalink to this definition">¶</a></dt>
+   <dd><p>current action is succesfully completed</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setDebugMode">
+   <tt class="descname">setDebugMode</tt><big>(</big><em>mode=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setDebugMode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setDebugMode" title="Permalink to this definition">¶</a></dt>
+   <dd><p>enables debug mode for jpackages</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setIsPendingReconfiguration">
+   <tt class="descname">setIsPendingReconfiguration</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setIsPendingReconfiguration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setIsPendingReconfiguration" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Changes the jpackages&#8217;s config file to see whether reconfiguration is required or not depending on the value given as parameter</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastDownloadedBuildNr">
+   <tt class="descname">setLastDownloadedBuildNr</tt><big>(</big><em>buildNr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setLastDownloadedBuildNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastDownloadedBuildNr" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Sets the last downloaded build number to the one given as parameter</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastExpandedBuildNr">
+   <tt class="descname">setLastExpandedBuildNr</tt><big>(</big><em>buildNr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setLastExpandedBuildNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastExpandedBuildNr" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Sets the last expanded build number to the one given as parameter</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastInstalledBuildNr">
+   <tt class="descname">setLastInstalledBuildNr</tt><big>(</big><em>buildNr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setLastInstalledBuildNr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setLastInstalledBuildNr" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Sets the last buildnumber to the one given as parameter</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setPrepared">
+   <tt class="descname">setPrepared</tt><big>(</big><em>prepared</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageStateObject.html#JPackageStateObject.setPrepared"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageStateObject.JPackageStateObject.setPrepared" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Changes the jpackages config file to whether the package has been prepared or not depending on the parameter given</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.JPackagesGenDocs">
+   <span id="jumpscale-baselib-jpackages-jpackagesgendocs-module"></span><h2>JumpScale.baselib.jpackages.JPackagesGenDocs module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.JPackagesGenDocs" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.Domain">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackagesGenDocs.</tt><tt class="descname">Domain</tt><big>(</big><em>ql</em>, <em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#Domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.Domain" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.Domain.addJPackage">
+   <tt class="descname">addJPackage</tt><big>(</big><em>ql</em>, <em>domain</em>, <em>packagename</em>, <em>version</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#Domain.addJPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.Domain.addJPackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackagesGenDocs.</tt><tt class="descname">JPackage</tt><big>(</big><em>ql</em>, <em>domain</em>, <em>packagename</em>, <em>version</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getBlobFiles">
+   <tt class="descname">getBlobFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage.getBlobFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getBlobFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return [[md5,path]]</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getDescr">
+   <tt class="descname">getDescr</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage.getDescr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getDescr" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getJpackageObject">
+   <tt class="descname">getJpackageObject</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage.getJpackageObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getJpackageObject" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getKey">
+   <tt class="descname">getKey</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage.getKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getKeyTitle">
+   <tt class="descname">getKeyTitle</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackage.getKeyTitle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackage.getKeyTitle" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackagesGenDocs">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackagesGenDocs.</tt><tt class="descname">JPackagesGenDocs</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackagesGenDocs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackagesGenDocs" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPackagesGenDocs.getDocs">
+   <tt class="descname">getDocs</tt><big>(</big><em>refresh=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPackagesGenDocs.getDocs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPackagesGenDocs.getDocs" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.JPackagesGenDocs.</tt><tt class="descname">JPdata</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.addDomain">
+   <tt class="descname">addDomain</tt><big>(</big><em>ql</em>, <em>domain</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.addDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.addDomain" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.addJPackage">
+   <tt class="descname">addJPackage</tt><big>(</big><em>ql</em>, <em>domain</em>, <em>packagename</em>, <em>version</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.addJPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.addJPackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.checkErrors">
+   <tt class="descname">checkErrors</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.checkErrors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.checkErrors" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.existsPackage">
+   <tt class="descname">existsPackage</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.existsPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.existsPackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getDuplicateFiles">
+   <tt class="descname">getDuplicateFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.getDuplicateFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getDuplicateFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getHrdLists">
+   <tt class="descname">getHrdLists</tt><big>(</big><em>refresh=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.getHrdLists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getHrdLists" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;return hrdlistPerPackage,hrdlist</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getPackage">
+   <tt class="descname">getPackage</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.getPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getPackage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getPackageFromKey">
+   <tt class="descname">getPackageFromKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.getPackageFromKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.getPackageFromKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.walk">
+   <tt class="descname">walk</tt><big>(</big><em>method</em>, <em>params={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.walk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.walk" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.writeHrdList">
+   <tt class="descname">writeHrdList</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackagesGenDocs.html#JPdata.writeHrdList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackagesGenDocs.JPdata.writeHrdList" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.PythonPackage">
+   <span id="jumpscale-baselib-jpackages-pythonpackage-module"></span><h2>JumpScale.baselib.jpackages.PythonPackage module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.PythonPackage" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.PythonPackage.</tt><tt class="descname">PythonPackage</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.check">
+   <tt class="descname">check</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.check" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.clearcache">
+   <tt class="descname">clearcache</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.clearcache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.clearcache" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibToLocalSitePackagesDir">
+   <tt class="descname">copyLibToLocalSitePackagesDir</tt><big>(</big><em>path</em>, <em>remove=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.copyLibToLocalSitePackagesDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibToLocalSitePackagesDir" title="Permalink to this definition">¶</a></dt>
+   <dd><p>copy library to python.paths.local.sitepackages config param in main jumpscale hrd 
+   eg. for ubuntu is: /usr/local/lib/python2.7/site-packages/
+   does this for 1 lib, so the dir needs to be the library by itself</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibsToLocalSitePackagesDir">
+   <tt class="descname">copyLibsToLocalSitePackagesDir</tt><big>(</big><em>rootpath</em>, <em>remove=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.copyLibsToLocalSitePackagesDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibsToLocalSitePackagesDir" title="Permalink to this definition">¶</a></dt>
+   <dd><p>list all files and dirs in specified path and for each one call
+   self.copyLibToLocalSitePackagesDir</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.getSitePackagePathLocal">
+   <tt class="descname">getSitePackagePathLocal</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.getSitePackagePathLocal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.getSitePackagePathLocal" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.install">
+   <tt class="descname">install</tt><big>(</big><em>name</em>, <em>version=None</em>, <em>latest=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.install"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.install" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.list">
+   <tt class="descname">list</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.list" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.remove">
+   <tt class="descname">remove</tt><big>(</big><em>names</em>, <em>clearcache=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.remove" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param names can be 1 name as str or array when list
+   will look in all possible python paths &amp; remove the python lib</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.ReleaseMgmt">
+   <span id="jumpscale-baselib-jpackages-releasemgmt-module"></span><h2>JumpScale.baselib.jpackages.ReleaseMgmt module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.ReleaseMgmt" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.ReleaseMgmt.</tt><tt class="descname">ReleaseMgmt</tt><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ReleaseMgmt.html#ReleaseMgmt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;qlocation = j.packages.releasemgmt</p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.createTgzForChangedPackages">
+   <tt class="descname">createTgzForChangedPackages</tt><big>(</big><em>earlierFile</em>, <em>laterFile</em>, <em>tempDir='/opt/qbase3/var/tmp/changedpackages'</em>, <em>tarName='changedPack.tgz'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ReleaseMgmt.html#ReleaseMgmt.createTgzForChangedPackages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.createTgzForChangedPackages" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Given two files with a list of packages, this method will download to a temporary folder the packages that have been added to laterFile.
+   Each package will be downloaded in a subdirectory corresponding to its domain.
+   Packages will be downloaded for all platforms.
+   Next to the packages, the metadata will be copied as well to the temporary folder.
+   Finally the folders and files will be compressed in a tgz file
+   Note that the packages and metadata are downloaded from the location specified in bundledownload in /opt/qbase3/cfg/jpackages/sources.cfg
+   If there are no changes between the two package files, an empty tgz file will be created.</p>
+   <p>Parameters:
+   - earlierFile: string - file containing the packages for an earlier release
+   - laterFile: string - file containing the packages for a later release. Added packages will be given back by this method if comparison = &#8216;+&#8217;
+   - tempDir: string - temporary directory where files will be downloaded. This directory will be cleaned up at the beginning of the method and must be located in an existing directory!
+   - tarName: string - name of the tgz file to be created</p>
+   <blockquote>
+   <div>Returns:
+   None</div></blockquote>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.generateBillOfMaterials">
+   <tt class="descname">generateBillOfMaterials</tt><big>(</big><em>jpackagesObject</em>, <em>outputFile</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ReleaseMgmt.html#ReleaseMgmt.generateBillOfMaterials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.generateBillOfMaterials" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Create a file with all jpackages and their versions that a given jpackages depends upon (&#8216;parents&#8217;)
+   The file will contain the domain, the name, the version and the build nr from the parent jpackages.
+   The file will be sorted.</p>
+   <p>Parameters: 
+   - jpackagesObject: Object - the jpackages object where you want to list the parents for
+   - outputFile: string - the file where the parent jpackages list will be written to</p>
+   <p>Returns: None</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.listChangedPackagesAsStrings">
+   <tt class="descname">listChangedPackagesAsStrings</tt><big>(</big><em>earlierFile</em>, <em>laterFile</em>, <em>comparison='+'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ReleaseMgmt.html#ReleaseMgmt.listChangedPackagesAsStrings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ReleaseMgmt.ReleaseMgmt.listChangedPackagesAsStrings" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Given two files with a list of packages, this method will give back the packages that have been added or removed between the two.</p>
+   <p>Parameters:
+   - earlierFile: string - file containing the packages for an earlier release
+   - laterFile: string - file containing the packages for a later release. Added packages will be given back by this method if comparison = &#8216;+&#8217;
+   - comparison: char - &#8216;+&#8217; if you want the added packages back. &#8216;-&#8216; if you want the removed packages back.</p>
+   <blockquote>
+   <div>Returns:</div></blockquote>
+   <p>list of strings - each string is the name of a package</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="function">
+   <dt id="JumpScale.baselib.jpackages.ReleaseMgmt.compareDependencyFiles">
+   <tt class="descclassname">JumpScale.baselib.jpackages.ReleaseMgmt.</tt><tt class="descname">compareDependencyFiles</tt><big>(</big><em>file1</em>, <em>file2</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/ReleaseMgmt.html#compareDependencyFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.ReleaseMgmt.compareDependencyFiles" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Compare two files with lists of jpackages, to find out which ones are new, which ones have been removed, and which ones have been changed between the two.
+   The files need to be compiled with releaseMgmt.createDependencyFile()</p>
+   <p>Parameters:
+   - file1, file2: string - the pathnames of the files to be compared</p>
+   <p>Returns:
+   - a list of strings, each string is a line starting with &#8216;+&#8217; if the line is added in file2, &#8216;-&#8216; if it is removed from file2, &#8216;?&#8217; for some additional explanation w.r.t. possible changes</p>
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages.enumerators4">
+   <span id="jumpscale-baselib-jpackages-enumerators4-module"></span><h2>JumpScale.baselib.jpackages.enumerators4 module<a class="headerlink" href="#module-JumpScale.baselib.jpackages.enumerators4" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.ACLPermission4">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.enumerators4.</tt><tt class="descname">ACLPermission4</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/enumerators4.html#ACLPermission4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.ACLPermission4" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+   <p><a class="reference external" href="mailto:#&#37;&#52;&#48;todo">#<span>&#64;</span>todo</a> doc</p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.ACLPermission4.R">
+   <tt class="descname">R</tt><em class="property"> = R</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.ACLPermission4.R" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.ACLPermission4.RW">
+   <tt class="descname">RW</tt><em class="property"> = RW</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.ACLPermission4.RW" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.ACLPermission4.W">
+   <tt class="descname">W</tt><em class="property"> = W</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.ACLPermission4.W" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.DependencyType4">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.enumerators4.</tt><tt class="descname">DependencyType4</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/enumerators4.html#DependencyType4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.DependencyType4" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+   <p>One of two constants: runtime and build.
+   When a package has a runtime dependency on another package it means the first package cannot operate properly without the second package being installed.
+   When a package has a build dependency on another package it means the first package cannot be build without the second package being installed.
+   The second package typically is some build tool like gcc.
+   <a class="reference external" href="mailto:#&#37;&#52;&#48;todo">#<span>&#64;</span>todo</a> doc</p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.DependencyType4.BUILD">
+   <tt class="descname">BUILD</tt><em class="property"> = build</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.DependencyType4.BUILD" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.DependencyType4.NATIVE">
+   <tt class="descname">NATIVE</tt><em class="property"> = native</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.DependencyType4.NATIVE" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.DependencyType4.PYTHON">
+   <tt class="descname">PYTHON</tt><em class="property"> = python</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.DependencyType4.PYTHON" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.DependencyType4.RUNTIME">
+   <tt class="descname">RUNTIME</tt><em class="property"> = runtime</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.DependencyType4.RUNTIME" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.enumerators4.</tt><tt class="descname">JPackageQualityLevelType4</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/enumerators4.html#JPackageQualityLevelType4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+   <p>JPackage quality level</p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.BETA">
+   <tt class="descname">BETA</tt><em class="property"> = beta</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.BETA" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.STABLE">
+   <tt class="descname">STABLE</tt><em class="property"> = stable</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.STABLE" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.TEST">
+   <tt class="descname">TEST</tt><em class="property"> = test</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.TEST" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.TRUNK">
+   <tt class="descname">TRUNK</tt><em class="property"> = trunk</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.TRUNK" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.UNSTABLE">
+   <tt class="descname">UNSTABLE</tt><em class="property"> = unstable</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageQualityLevelType4.UNSTABLE" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageState4">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.enumerators4.</tt><tt class="descname">JPackageState4</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/enumerators4.html#JPackageState4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageState4" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+   <p>The states a JPackage can find itself in.</p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageState4.ERROR">
+   <tt class="descname">ERROR</tt><em class="property"> = ERROR</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageState4.ERROR" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.JPackageState4.OK">
+   <tt class="descname">OK</tt><em class="property"> = OK</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.JPackageState4.OK" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.VListType4">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.jpackages.enumerators4.</tt><tt class="descname">VListType4</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/enumerators4.html#VListType4"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.VListType4" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="JumpScale.core.baseclasses.html#JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration" title="JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.core.baseclasses.BaseEnumeration.BaseEnumeration</span></tt></a></p>
+   <p><a class="reference external" href="mailto:#&#37;&#52;&#48;todo">#<span>&#64;</span>todo</a> doc</p>
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.VListType4.CLIENT">
+   <tt class="descname">CLIENT</tt><em class="property"> = client</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.VListType4.CLIENT" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.jpackages.enumerators4.VListType4.SERVER">
+   <tt class="descname">SERVER</tt><em class="property"> = server</em><a class="headerlink" href="#JumpScale.baselib.jpackages.enumerators4.VListType4.SERVER" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.jpackages">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.jpackages" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.jpackages package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.ActionManager">JumpScale.baselib.jpackages.ActionManager module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.CodeManagementRecipe">JumpScale.baselib.jpackages.CodeManagementRecipe module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.Domain">JumpScale.baselib.jpackages.Domain module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.JPackageClient">JumpScale.baselib.jpackages.JPackageClient module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.JPackageObject">JumpScale.baselib.jpackages.JPackageObject module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.JPackageStateObject">JumpScale.baselib.jpackages.JPackageStateObject module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.JPackagesGenDocs">JumpScale.baselib.jpackages.JPackagesGenDocs module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.PythonPackage">JumpScale.baselib.jpackages.PythonPackage module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.ReleaseMgmt">JumpScale.baselib.jpackages.ReleaseMgmt module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages.enumerators4">JumpScale.baselib.jpackages.enumerators4 module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.jpackages">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.installtools.html"
+                           title="previous chapter">JumpScale.baselib.installtools package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.jsdeveltools.html"
+                           title="next chapter">JumpScale.baselib.jsdeveltools package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.jpackages.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.jsdeveltools.html" title="JumpScale.baselib.jsdeveltools package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.installtools.html" title="JumpScale.baselib.installtools package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

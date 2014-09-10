@@ -1,38 +1,199 @@
-JumpScale.core.config.generator package
-=======================================
-
-Submodules
-----------
-
-JumpScale.core.config.generator.agent_cfg module
-------------------------------------------------
-
-.. automodule:: JumpScale.core.config.generator.agent_cfg
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.core.config.generator.arakoon_cfg module
---------------------------------------------------
-
-.. automodule:: JumpScale.core.config.generator.arakoon_cfg
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.core.config.generator.osis_cfg module
------------------------------------------------
-
-.. automodule:: JumpScale.core.config.generator.osis_cfg
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.core.config.generator
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.core.config.generator package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.core.config package" href="JumpScale.core.config.html" />
+       <link rel="next" title="JumpScale.core.db package" href="JumpScale.core.db.html" />
+       <link rel="prev" title="JumpScale.core.config package" href="JumpScale.core.config.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.db.html" title="JumpScale.core.db package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.config.html" title="JumpScale.core.config package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li>
+             <li><a href="JumpScale.core.config.html" accesskey="U">JumpScale.core.config package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-core-config-generator-package">
+   <h1>JumpScale.core.config.generator package<a class="headerlink" href="#jumpscale-core-config-generator-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.core.config.generator.agent_cfg">
+   <span id="jumpscale-core-config-generator-agent-cfg-module"></span><h2>JumpScale.core.config.generator.agent_cfg module<a class="headerlink" href="#module-JumpScale.core.config.generator.agent_cfg" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.generator.agent_cfg.</tt><tt class="descname">AgentPyApps</tt><big>(</big><em>appName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/agent_cfg.html#AgentPyApps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="attribute">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps.agentcontrollerguid">
+   <tt class="descname">agentcontrollerguid</tt><em class="property"> = 'agentcontroller'</em><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps.agentcontrollerguid" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps.agentguid">
+   <tt class="descname">agentguid</tt><em class="property"> = 'agent1'</em><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps.agentguid" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps.generate_cfg">
+   <tt class="descname">generate_cfg</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/agent_cfg.html#AgentPyApps.generate_cfg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps.generate_cfg" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps.hostname">
+   <tt class="descname">hostname</tt><a class="reference internal" href="../_modules/JumpScale/core/config/generator/agent_cfg.html#AgentPyApps.hostname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps.hostname" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.core.config.generator.agent_cfg.AgentPyApps.password">
+   <tt class="descname">password</tt><a class="reference internal" href="../_modules/JumpScale/core/config/generator/agent_cfg.html#AgentPyApps.password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.agent_cfg.AgentPyApps.password" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.generator.arakoon_cfg">
+   <span id="jumpscale-core-config-generator-arakoon-cfg-module"></span><h2>JumpScale.core.config.generator.arakoon_cfg module<a class="headerlink" href="#module-JumpScale.core.config.generator.arakoon_cfg" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.config.generator.arakoon_cfg.ArakoonPyApps">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.generator.arakoon_cfg.</tt><tt class="descname">ArakoonPyApps</tt><big>(</big><em>appName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/arakoon_cfg.html#ArakoonPyApps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.arakoon_cfg.ArakoonPyApps" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.core.config.generator.arakoon_cfg.ArakoonPyApps.generate_cfg">
+   <tt class="descname">generate_cfg</tt><big>(</big><em>baseport</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/arakoon_cfg.html#ArakoonPyApps.generate_cfg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.arakoon_cfg.ArakoonPyApps.generate_cfg" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.generator.osis_cfg">
+   <span id="jumpscale-core-config-generator-osis-cfg-module"></span><h2>JumpScale.core.config.generator.osis_cfg module<a class="headerlink" href="#module-JumpScale.core.config.generator.osis_cfg" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.core.config.generator.osis_cfg.OsisPyApps">
+   <em class="property">class </em><tt class="descclassname">JumpScale.core.config.generator.osis_cfg.</tt><tt class="descname">OsisPyApps</tt><big>(</big><em>appName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/osis_cfg.html#OsisPyApps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.osis_cfg.OsisPyApps" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.core.config.generator.osis_cfg.OsisPyApps.generate_cfg">
+   <tt class="descname">generate_cfg</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/core/config/generator/osis_cfg.html#OsisPyApps.generate_cfg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.core.config.generator.osis_cfg.OsisPyApps.generate_cfg" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.core.config.generator">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.core.config.generator" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.core.config.generator package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.generator.agent_cfg">JumpScale.core.config.generator.agent_cfg module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.generator.arakoon_cfg">JumpScale.core.config.generator.arakoon_cfg module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.generator.osis_cfg">JumpScale.core.config.generator.osis_cfg module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.core.config.generator">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.core.config.html"
+                           title="previous chapter">JumpScale.core.config package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.core.db.html"
+                           title="next chapter">JumpScale.core.db package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.core.config.generator.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.db.html" title="JumpScale.core.db package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.core.config.html" title="JumpScale.core.config package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.core.html" >JumpScale.core package</a> &raquo;</li>
+             <li><a href="JumpScale.core.config.html" >JumpScale.core.config package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

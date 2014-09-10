@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .. raw:: html
    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -513,7 +512,7 @@
    
    <dl class="method">
    <dt id="JumpScale.baselib.mercurial.hglib.client.hgclient.merge">
-   <tt class="descname">merge</tt><big>(</big><em>rev=None</em>, <em>force=False</em>, <em>tool=None</em>, <em>cb=&lt;function abort at 0x2ac923a6fb18&gt;</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.merge" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">merge</tt><big>(</big><em>rev=None</em>, <em>force=False</em>, <em>tool=None</em>, <em>cb=&lt;function abort at 0xac3ce60&gt;</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mercurial/hglib/client.html#hgclient.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mercurial.hglib.client.hgclient.merge" title="Permalink to this definition">¶</a></dt>
    <dd><p>Merge working directory with rev. If no revision is specified, the working
    directory&#8217;s parent is a head revision, and the current branch contains
    exactly one other head, the other head is merged with by default.</p>
@@ -1267,67 +1266,3 @@
        </div>
      </body>
    </html>
-=======
-JumpScale.baselib.mercurial.hglib package
-=========================================
-
-Submodules
-----------
-
-JumpScale.baselib.mercurial.hglib.client module
------------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.client
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.mercurial.hglib.context module
-------------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.context
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.mercurial.hglib.error module
-----------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.error
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.mercurial.hglib.merge module
-----------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.merge
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.mercurial.hglib.templates module
---------------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.templates
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.mercurial.hglib.util module
----------------------------------------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib.util
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.mercurial.hglib
-    :members:
-    :undoc-members:
-    :show-inheritance:
->>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b

@@ -1,30 +1,232 @@
-JumpScale.baselib.git package
-=============================
-
-Submodules
-----------
-
-JumpScale.baselib.git.GitClient module
---------------------------------------
-
-.. automodule:: JumpScale.baselib.git.GitClient
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.git.GitFactory module
----------------------------------------
-
-.. automodule:: JumpScale.baselib.git.GitFactory
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.git
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.baselib.git package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
+       <link rel="next" title="JumpScale.baselib.github package" href="JumpScale.baselib.github.html" />
+       <link rel="prev" title="JumpScale.baselib.expect package" href="JumpScale.baselib.expect.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.github.html" title="JumpScale.baselib.github package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.expect.html" title="JumpScale.baselib.expect package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-baselib-git-package">
+   <h1>JumpScale.baselib.git package<a class="headerlink" href="#jumpscale-baselib-git-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.baselib.git.GitClient">
+   <span id="jumpscale-baselib-git-gitclient-module"></span><h2>JumpScale.baselib.git.GitClient module<a class="headerlink" href="#module-JumpScale.baselib.git.GitClient" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.git.GitClient.</tt><tt class="descname">GitClient</tt><big>(</big><em>baseDir</em>, <em>remoteUrl</em>, <em>branchName='master'</em>, <em>cleanDir=False</em>, <em>login=''</em>, <em>passwd=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.addFiles">
+   <tt class="descname">addFiles</tt><big>(</big><em>files=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.addFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.addFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.addRemoveFiles">
+   <tt class="descname">addRemoveFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.addRemoveFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.addRemoveFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.commit">
+   <tt class="descname">commit</tt><big>(</big><em>message=''</em>, <em>addremove=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.commit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.fetch">
+   <tt class="descname">fetch</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.fetch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.getModifiedFiles">
+   <tt class="descname">getModifiedFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.getModifiedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.getModifiedFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.getUntrackedFiles">
+   <tt class="descname">getUntrackedFiles</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.getUntrackedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.getUntrackedFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.init">
+   <tt class="descname">init</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.init" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.patchGitignore">
+   <tt class="descname">patchGitignore</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.patchGitignore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.patchGitignore" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.pull">
+   <tt class="descname">pull</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.pull"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.pull" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.push">
+   <tt class="descname">push</tt><big>(</big><em>force=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.push"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.push" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.removeFiles">
+   <tt class="descname">removeFiles</tt><big>(</big><em>files=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.removeFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.removeFiles" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="attribute">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.repo">
+   <tt class="descname">repo</tt><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.repo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.repo" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitClient.GitClient.switchBranch">
+   <tt class="descname">switchBranch</tt><big>(</big><em>branchName</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitClient.html#GitClient.switchBranch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitClient.GitClient.switchBranch" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.git.GitFactory">
+   <span id="jumpscale-baselib-git-gitfactory-module"></span><h2>JumpScale.baselib.git.GitFactory module<a class="headerlink" href="#module-JumpScale.baselib.git.GitFactory" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.baselib.git.GitFactory.GitFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.git.GitFactory.</tt><tt class="descname">GitFactory</tt><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitFactory.html#GitFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitFactory.GitFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.baselib.git.GitFactory.GitFactory.getClient">
+   <tt class="descname">getClient</tt><big>(</big><em>basedir</em>, <em>remoteUrl=''</em>, <em>branchname='master'</em>, <em>cleandir=False</em>, <em>login=None</em>, <em>passwd=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitFactory.html#GitFactory.getClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitFactory.GitFactory.getClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>return a mercurial tool which you can help to manipulate a hg repository
+   &#64;param base dir where local gitrepository will be stored
+   &#64;param remote url of git repository, e.g. <a class="reference external" href="https://login:passwd&#64;bitbucket.org/despiegk/ssospecs/">https://login:passwd&#64;bitbucket.org/despiegk/ssospecs/</a>  #DO NOT FORGET LOGIN PASSWD</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.baselib.git.GitFactory.GitFactory.log">
+   <tt class="descname">log</tt><big>(</big><em>msg</em>, <em>category=''</em>, <em>level=5</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/git/GitFactory.html#GitFactory.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.git.GitFactory.GitFactory.log" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.baselib.git">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.git" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.baselib.git package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.git.GitClient">JumpScale.baselib.git.GitClient module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.git.GitFactory">JumpScale.baselib.git.GitFactory module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.baselib.git">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.expect.html"
+                           title="previous chapter">JumpScale.baselib.expect package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.baselib.github.html"
+                           title="next chapter">JumpScale.baselib.github package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.baselib.git.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.github.html" title="JumpScale.baselib.github package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.baselib.expect.html" title="JumpScale.baselib.expect package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>
