@@ -2,8 +2,7 @@
 j.core.specparser
 =================
 
-
-* path: /baselib/specparser/SpecParser.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/specparser/SpecParser.py>`_
 
 
 addSpec

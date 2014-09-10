@@ -2,8 +2,8 @@
 j.core.processmanager
 =====================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/processmanager/ProcessmanagerFactory.py>`_
 
-* path: /grid/processmanager/ProcessmanagerFactory.py
 
 
 
@@ -13,7 +13,7 @@ checkStartupOlderThan
 
 
 * params: secago
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:177)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:181)
 
 
 getCmdsObject
@@ -21,7 +21,7 @@ getCmdsObject
 
 
 * params: category
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:126)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:129)
 
 
 getStartupTime
@@ -29,7 +29,7 @@ getStartupTime
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:173)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:177)
 
 
 loadCmds
@@ -37,7 +37,7 @@ loadCmds
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:132)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:135)
 
 
 loadMonitorObjectTypes
@@ -45,7 +45,7 @@ loadMonitorObjectTypes
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:160)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:164)
 
 
 restartWorkers
@@ -53,7 +53,7 @@ restartWorkers
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:115)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:118)
 
 
 start
@@ -61,6 +61,6 @@ start
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:55)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:58)
 
 

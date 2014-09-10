@@ -2,8 +2,7 @@
 j.servers.tornado
 =================
 
-
-* path: /grid/tornado/TornadoFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/tornado/TornadoFactory.py>`_
 
 
 getClient

@@ -2,8 +2,7 @@
 j.clients.graphite
 ==================
 
-
-* path: /baselib/graphite/GraphiteClient.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/graphite/GraphiteClient.py>`_
 
 
 close

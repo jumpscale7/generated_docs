@@ -2,8 +2,7 @@
 j.tools.docpreprocessorparser
 =============================
 
-
-* path: /portal/docpreprocessor/DocParser.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/docpreprocessor/DocParser.py>`_
 
 
 addUniqueId

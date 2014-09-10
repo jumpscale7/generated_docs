@@ -2,8 +2,7 @@
 j.tools.testengineKds
 =====================
 
-
-* path: /baselib/testengine/TestEngineKds.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/testengine/TestEngineKds.py>`_
 
 
 initTests

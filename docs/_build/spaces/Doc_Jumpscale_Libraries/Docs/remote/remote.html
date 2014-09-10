@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="../index.html" />
+    <link rel="next" title="j.remote.cluster" href="j.remote.cluster.html" />
+    <link rel="prev" title="j.base.fs" href="../base/j.base.fs.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,7 +35,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="j.remote.cluster.html" title="j.remote.cluster"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../base/j.base.fs.html" title="j.base.fs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">&lt;no title&gt;</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -45,11 +55,55 @@
 <h1>j.remote<a class="headerlink" href="#j-remote" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.cluster.html">j.remote.cluster</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.html#create">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.html#delete">delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.html#listavahienabledmachines">listAvahiEnabledMachines</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="j.remote.fabric.html">j.remote.fabric</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="j.remote.fabric.html#help">help</a></li>
 <li class="toctree-l2"><a class="reference internal" href="j.remote.fabric.html#setdefaultpasswd">setDefaultPasswd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="j.remote.fabric.html#sethost">setHost</a></li>
 <li class="toctree-l2"><a class="reference internal" href="j.remote.fabric.html#sethosts">setHosts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.avahi.html">j.remote.avahi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.avahi.html#getservices">getServices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.avahi.html#registerservice">registerService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.avahi.html#resolveaddress">resolveAddress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.cuisine.html">j.remote.cuisine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cuisine.html#help">help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.cluster.replication.html">j.remote.cluster.replication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.replication.html#loadrecipe">loadRecipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.replication.html#start">start</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.cluster.config.html">j.remote.cluster.config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#add">add</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#addclusternode">addClusterNode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#configure">configure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#getconfig">getConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#review">review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#saveall">saveAll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.config.html#show">show</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.cluster.replicator.html">j.remote.cluster.replicator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.replicator.html#loadrecipe">loadRecipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.cluster.replicator.html#start">start</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.remote.system.html">j.remote.system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.remote.system.html#connect">connect</a></li>
 </ul>
 </li>
 </ul>
@@ -62,6 +116,12 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../base/j.base.fs.html"
+                        title="previous chapter">j.base.fs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="j.remote.cluster.html"
+                        title="next chapter">j.remote.cluster</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/remote/remote.txt"
@@ -90,7 +150,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="j.remote.cluster.html" title="j.remote.cluster"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../base/j.base.fs.html" title="j.base.fs"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

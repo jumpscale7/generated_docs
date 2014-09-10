@@ -2,8 +2,7 @@
 j.system.platform.screen
 ========================
 
-
-* path: /baselib/screen/Tmux.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/screen/Tmux.py>`_
 
 
 attachSession

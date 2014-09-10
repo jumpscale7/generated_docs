@@ -2,8 +2,7 @@
 j.system.platform.lxc
 =====================
 
-
-* path: /lib/lxc/Lxc.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/lxc/Lxc.py>`_
 
 
 btrfsSubvolCopy

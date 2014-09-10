@@ -2,8 +2,7 @@
 j.base.regex
 ============
 
-
-* path: /base/REGEXTOOL.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/REGEXTOOL.py>`_
 
 
 match

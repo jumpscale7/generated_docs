@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="j.core" href="core.html" />
+    <link rel="next" title="j.core.processmanager.daemon" href="j.core.processmanager.daemon.html" />
+    <link rel="prev" title="j.core.processmanager.redisprocessmanager.connection_pool" href="j.core.processmanager.redisprocessmanager.connection_pool.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,9 +36,14 @@
           <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.core.processmanager.daemon.html" title="j.core.processmanager.daemon"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="j.core.processmanager.redisprocessmanager.connection_pool.html" title="j.core.processmanager.redisprocessmanager.connection_pool"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="core.html" accesskey="U">j.core</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,9 +54,7 @@
             
   <div class="section" id="j-core-osis">
 <h1>j.core.osis<a class="headerlink" href="#j-core-osis" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>path: /grid/osis/OSISFactory.py</li>
-</ul>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/osis/OSISFactory.py">Source</a></p>
 <div class="section" id="decrypt">
 <h2>decrypt<a class="headerlink" href="#decrypt" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -67,7 +73,7 @@
 <h2>generateOsisModelDefaults<a class="headerlink" href="#generateosismodeldefaults" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: namespace,specpath</li>
-<li>path:/grid/osis/OSISFactory.py (line:271)</li>
+<li>path:/grid/osis/OSISFactory.py (line:274)</li>
 </ul>
 </div>
 <div class="section" id="getclient">
@@ -80,7 +86,7 @@
 <div class="section" id="getclientbyinstance">
 <h2>getClientByInstance<a class="headerlink" href="#getclientbyinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>params: instance,ssl,gevent</li>
+<li>params: instance,ssl,gevent,die</li>
 <li>path:/grid/osis/OSISFactory.py (line:169)</li>
 </ul>
 </div>
@@ -88,7 +94,7 @@
 <h2>getClientForCategory<a class="headerlink" href="#getclientforcategory" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: client,namespace,category</li>
-<li>path:/grid/osis/OSISFactory.py (line:186)</li>
+<li>path:/grid/osis/OSISFactory.py (line:189)</li>
 </ul>
 <p>how to use</p>
 <p>client=j.core.osis.getClient(&#8220;localhost&#8221;,port=5544,user=&#8221;root&#8221;,passwd=&#8221;rooter&#8221;,ssl=False)
@@ -98,7 +104,7 @@ client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;
 <h2>getClientForNamespace<a class="headerlink" href="#getclientfornamespace" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: namespace,client</li>
-<li>path:/grid/osis/OSISFactory.py (line:181)</li>
+<li>path:/grid/osis/OSISFactory.py (line:184)</li>
 </ul>
 </div>
 <div class="section" id="getlocal">
@@ -113,28 +119,28 @@ client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;
 <h2>getModelTemplate<a class="headerlink" href="#getmodeltemplate" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/grid/osis/OSISFactory.py (line:283)</li>
+<li>path:/grid/osis/OSISFactory.py (line:286)</li>
 </ul>
 </div>
 <div class="section" id="getosisbaseobjectcomplextype">
 <h2>getOSISBaseObjectComplexType<a class="headerlink" href="#getosisbaseobjectcomplextype" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/grid/osis/OSISFactory.py (line:200)</li>
+<li>path:/grid/osis/OSISFactory.py (line:203)</li>
 </ul>
 </div>
 <div class="section" id="getosisbaseobjectclass">
 <h2>getOsisBaseObjectClass<a class="headerlink" href="#getosisbaseobjectclass" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/grid/osis/OSISFactory.py (line:197)</li>
+<li>path:/grid/osis/OSISFactory.py (line:200)</li>
 </ul>
 </div>
 <div class="section" id="getosisimplementationparentclass">
 <h2>getOsisImplementationParentClass<a class="headerlink" href="#getosisimplementationparentclass" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: namespacename</li>
-<li>path:/grid/osis/OSISFactory.py (line:203)</li>
+<li>path:/grid/osis/OSISFactory.py (line:206)</li>
 </ul>
 <p>return parent class for osis implementation (is the implementation from which each namespace &amp; category inherits)</p>
 </div>
@@ -142,7 +148,7 @@ client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;
 <h2>getOsisModelClass<a class="headerlink" href="#getosismodelclass" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: namespace,category,specpath</li>
-<li>path:/grid/osis/OSISFactory.py (line:288)</li>
+<li>path:/grid/osis/OSISFactory.py (line:291)</li>
 </ul>
 <p>returns class generated from spec file or from model.py file</p>
 </div>
@@ -183,6 +189,12 @@ client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="j.core.processmanager.redisprocessmanager.connection_pool.html"
+                        title="previous chapter">j.core.processmanager.redisprocessmanager.connection_pool</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="j.core.processmanager.daemon.html"
+                        title="next chapter">j.core.processmanager.daemon</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/core/j.core.osis.txt"
@@ -212,9 +224,14 @@ client4node=j.core.osis.getClientForCategory(client,&#8221;system&#8221;,&#8221;
           <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.core.processmanager.daemon.html" title="j.core.processmanager.daemon"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="j.core.processmanager.redisprocessmanager.connection_pool.html" title="j.core.processmanager.redisprocessmanager.connection_pool"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="core.html" >j.core</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

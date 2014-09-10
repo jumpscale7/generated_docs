@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="j.system" href="system.html" />
+    <link rel="next" title="j.system.platform.nginx" href="j.system.platform.nginx.html" />
+    <link rel="prev" title="j.system.string" href="j.system.string.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,9 +36,14 @@
           <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.system.platform.nginx.html" title="j.system.platform.nginx"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="j.system.string.html" title="j.system.string"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="system.html" accesskey="U">j.system</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,56 +54,61 @@
             
   <div class="section" id="j-system-stataggregator">
 <h1>j.system.stataggregator<a class="headerlink" href="#j-system-stataggregator" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>path: /baselib/stataggregator/StatAggregator.py</li>
-</ul>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/stataggregator/StatAggregator.py">Source</a></p>
 <div class="section" id="clean">
 <h2>clean<a class="headerlink" href="#clean" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:172)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:193)</li>
 </ul>
 </div>
 <div class="section" id="delete">
 <h2>delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: prefix</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:177)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:198)</li>
 </ul>
 </div>
 <div class="section" id="get">
 <h2>get<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: key</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:152)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:171)</li>
 </ul>
 </div>
 <div class="section" id="getavgmax">
 <h2>getAvgMax<a class="headerlink" href="#getavgmax" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: key</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:157)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:176)</li>
 </ul>
 </div>
 <div class="section" id="gettime">
 <h2>getTime<a class="headerlink" href="#gettime" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:112)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:121)</li>
 </ul>
 </div>
 <div class="section" id="list">
 <h2>list<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: prefix,memonly,avgmax</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:184)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:205)</li>
+</ul>
+</div>
+<div class="section" id="loadstat">
+<h2>loadStat<a class="headerlink" href="#loadstat" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,data</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:148)</li>
 </ul>
 </div>
 <div class="section" id="registerstats">
 <h2>registerStats<a class="headerlink" href="#registerstats" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: key,ttype,memonly,percent</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:162)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:181)</li>
 </ul>
 <p>type is N or D (D from diff)</p>
 </div>
@@ -103,21 +116,21 @@
 <h2>send2carbon<a class="headerlink" href="#send2carbon" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:204)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:222)</li>
 </ul>
 </div>
 <div class="section" id="send2log">
 <h2>send2log<a class="headerlink" href="#send2log" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name,key,val</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:115)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:124)</li>
 </ul>
 </div>
 <div class="section" id="set">
 <h2>set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: key,val,ttype,remember,memonly,percent</li>
-<li>path:/baselib/stataggregator/StatAggregator.py (line:141)</li>
+<li>path:/baselib/stataggregator/StatAggregator.py (line:158)</li>
 </ul>
 </div>
 </div>
@@ -137,6 +150,7 @@
 <li><a class="reference internal" href="#getavgmax">getAvgMax</a></li>
 <li><a class="reference internal" href="#gettime">getTime</a></li>
 <li><a class="reference internal" href="#list">list</a></li>
+<li><a class="reference internal" href="#loadstat">loadStat</a></li>
 <li><a class="reference internal" href="#registerstats">registerStats</a></li>
 <li><a class="reference internal" href="#send2carbon">send2carbon</a></li>
 <li><a class="reference internal" href="#send2log">send2log</a></li>
@@ -145,6 +159,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="j.system.string.html"
+                        title="previous chapter">j.system.string</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="j.system.platform.nginx.html"
+                        title="next chapter">j.system.platform.nginx</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.stataggregator.txt"
@@ -174,9 +194,14 @@
           <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.system.platform.nginx.html" title="j.system.platform.nginx"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="j.system.string.html" title="j.system.string"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="system.html" >j.system</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

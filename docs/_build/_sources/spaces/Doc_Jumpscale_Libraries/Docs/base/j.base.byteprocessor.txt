@@ -2,8 +2,7 @@
 j.base.byteprocessor
 ====================
 
-
-* path: /base/BYTEPROCESSOR.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/BYTEPROCESSOR.py>`_
 
 
 ByteProcessor

@@ -2,8 +2,7 @@
 j.clients.http
 ==============
 
-
-* path: /baselib/http_client/HttpClient.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/http_client/HttpClient.py>`_
 
 
 getConnection

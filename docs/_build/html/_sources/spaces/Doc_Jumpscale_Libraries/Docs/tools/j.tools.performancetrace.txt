@@ -2,8 +2,8 @@
 j.tools.performancetrace
 ========================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/performancetrace/PerformanceTrace.py>`_
 
-* path: /baselib/performancetrace/PerformanceTrace.py
 
 
 

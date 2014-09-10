@@ -38,27 +38,13 @@ JumpScale Grid
    spaces/Doc_Jumpscale_Grid/Docs/index
 
 
-.. raw:: html
+JumpScale Libraries
+###################
+.. toctree::
+   :maxdepth: 2
+   :glob:
 
-   <h2>JumpScale API<a class="headerlink" href="#jumpscale-api" title="Permalink to this headline">¶</a></h2>
-   <div class="toctree-wrapper compound">
-   <ul>
-   <li class="toctree-l1"><a class="reference internal" href="API/JumpScale.html">JumpScale package</a><ul>
-   <li class="toctree-l2"><a class="reference internal" href="API/JumpScale.html#subpackages">Subpackages</a><ul>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.base.html">JumpScale.base package</a></li>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.baselib.html">JumpScale.baselib package</a></li>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.core.html">JumpScale.core package</a></li>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.grid.html">JumpScale.grid package</a></li>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.lib.html">JumpScale.lib package</a></li>
-   <li class="toctree-l3"><a class="reference internal" href="API/JumpScale.portal.html">JumpScale.portal package</a></li>
-   </ul>
-   </li>
-   <li class="toctree-l2"><a class="reference internal" href="API/JumpScale.html#module-JumpScale">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   </div>
-   
+   spaces/Doc_Jumpscale_Libraries/Docs/index
 
 
 JumpScale Development

@@ -2,8 +2,7 @@
 j.clients.github
 ================
 
-
-* path: /baselib/github/github.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/github/github.py>`_
 
 
 getClient

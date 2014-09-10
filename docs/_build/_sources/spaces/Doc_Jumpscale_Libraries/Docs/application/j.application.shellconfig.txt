@@ -2,8 +2,7 @@
 j.application.shellconfig
 =========================
 
-
-* path: /core/shellconfig/ShellConfig.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/shellconfig/ShellConfig.py>`_
 
 
 attach configuration items to this configure object (can happen at runtime)

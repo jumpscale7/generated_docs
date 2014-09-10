@@ -2,8 +2,7 @@
 j.core.portalloader.actorsinfo
 ==============================
 
-
-* path: /portal/portalloaders/ActorsInfo.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/portalloaders/ActorsInfo.py>`_
 
 
 getActorInfoPage

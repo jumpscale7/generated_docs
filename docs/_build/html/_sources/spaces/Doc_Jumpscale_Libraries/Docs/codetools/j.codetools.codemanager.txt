@@ -2,8 +2,7 @@
 j.codetools.codemanager
 =======================
 
-
-* path: /baselib/codetools/CodeManager.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/codetools/CodeManager.py>`_
 
 
 getCodeManagerForFile

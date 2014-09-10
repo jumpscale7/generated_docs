@@ -2,8 +2,7 @@
 j.codetools.regex.templates.lines
 =================================
 
-
-* path: /baselib/codetools/RegexTools.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/codetools/RegexTools.py>`_
 
 
 regexexamples which find lines

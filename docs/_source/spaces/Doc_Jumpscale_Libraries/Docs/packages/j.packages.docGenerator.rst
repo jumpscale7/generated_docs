@@ -2,8 +2,7 @@
 j.packages.docGenerator
 =======================
 
-
-* path: /baselib/jpackages/JPackagesGenDocs.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/jpackages/JPackagesGenDocs.py>`_
 
 
 getDocs

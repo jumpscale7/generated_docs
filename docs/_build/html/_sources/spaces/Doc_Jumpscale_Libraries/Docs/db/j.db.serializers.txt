@@ -2,8 +2,7 @@
 j.db.serializers
 ================
 
-
-* path: /baselib/serializers/SerializersFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializersFactory.py>`_
 
 
 get

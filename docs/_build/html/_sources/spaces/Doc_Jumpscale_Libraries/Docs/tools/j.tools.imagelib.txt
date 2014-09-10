@@ -2,8 +2,7 @@
 j.tools.imagelib
 ================
 
-
-* path: /portal/macrolib/imagelib/ImageLib.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/macrolib/imagelib/ImageLib.py>`_
 
 
 imageObjectGet

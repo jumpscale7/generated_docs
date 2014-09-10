@@ -2,8 +2,7 @@
 j.logger
 ========
 
-
-* path: /core/logging/LogHandler.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/logging/LogHandler.py>`_
 
 
 addConsoleLogCategory

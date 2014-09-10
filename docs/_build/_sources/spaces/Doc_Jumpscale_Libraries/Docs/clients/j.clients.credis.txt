@@ -2,8 +2,8 @@
 j.clients.credis
 ================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/credis/CRedis.py>`_
 
-* path: /baselib/credis/CRedis.py
 
 
 

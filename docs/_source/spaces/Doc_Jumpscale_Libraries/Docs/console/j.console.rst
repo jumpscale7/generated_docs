@@ -2,8 +2,7 @@
 j.console
 =========
 
-
-* path: /core/console/Console.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/console/Console.py>`_
 
 
 class which groups functionality to print to a console

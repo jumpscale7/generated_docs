@@ -2,8 +2,7 @@
 j.system.platform.qemu_img
 ==========================
 
-
-* path: /lib/qemu_img/qemu_img.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/qemu_img/qemu_img.py>`_
 
 
 commit

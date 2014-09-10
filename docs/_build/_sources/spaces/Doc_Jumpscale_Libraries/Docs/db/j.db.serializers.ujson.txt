@@ -2,8 +2,7 @@
 j.db.serializers.ujson
 ======================
 
-
-* path: /baselib/serializers/SerializerUJson.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerUJson.py>`_
 
 
 dumps

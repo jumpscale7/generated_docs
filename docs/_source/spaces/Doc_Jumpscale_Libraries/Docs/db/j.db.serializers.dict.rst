@@ -2,8 +2,7 @@
 j.db.serializers.dict
 =====================
 
-
-* path: /baselib/serializers/SerializerDict.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerDict.py>`_
 
 
 dumps
@@ -19,6 +18,6 @@ loads
 
 
 * params: s
-* path:/baselib/serializers/SerializerDict.py (line:10)
+* path:/baselib/serializers/SerializerDict.py (line:12)
 
 

@@ -2,8 +2,7 @@
 j.system.string
 ===============
 
-
-* path: /core/system/string.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/string.py>`_
 
 
 decodeUnicode2Asci

@@ -2,8 +2,7 @@
 j.tools.objectinspector
 =======================
 
-
-* path: /lib/objectinspector/ObjectInspector.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/objectinspector/ObjectInspector.py>`_
 
 
 functionality to inspect objectr structure and generate apifile
@@ -14,7 +13,7 @@ generateDocs
 
 
 * params: dest,ignore
-* path:/lib/objectinspector/ObjectInspector.py (line:135)
+* path:/lib/objectinspector/ObjectInspector.py (line:136)
 
 
 importAllLibs
@@ -22,7 +21,7 @@ importAllLibs
 
 
 * params: ignore,base
-* path:/lib/objectinspector/ObjectInspector.py (line:112)
+* path:/lib/objectinspector/ObjectInspector.py (line:113)
 
 
 inspect
@@ -30,7 +29,7 @@ inspect
 
 
 * params: objectLocationPath
-* path:/lib/objectinspector/ObjectInspector.py (line:148)
+* path:/lib/objectinspector/ObjectInspector.py (line:149)
 
 
 walk over objects in memory and create code completion api in jumpscale cfgdir under codecompletionapi
@@ -41,7 +40,7 @@ processObject
 
 
 * params: obj,objectLocationPath
-* path:/lib/objectinspector/ObjectInspector.py (line:161)
+* path:/lib/objectinspector/ObjectInspector.py (line:165)
 
 
 writeDocs
@@ -49,6 +48,6 @@ writeDocs
 
 
 * params: path
-* path:/lib/objectinspector/ObjectInspector.py (line:209)
+* path:/lib/objectinspector/ObjectInspector.py (line:213)
 
 

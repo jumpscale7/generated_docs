@@ -2,8 +2,7 @@
 j.system.socketserver
 =====================
 
-
-* path: /grid/socketserver/QSocketServer.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/socketserver/QSocketServer.py>`_
 
 
 get

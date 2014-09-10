@@ -2,8 +2,7 @@
 j.core.codegenerator
 ====================
 
-
-* path: /portal/codegentools/CodeGenerator.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/codegentools/CodeGenerator.py>`_
 
 
 generate

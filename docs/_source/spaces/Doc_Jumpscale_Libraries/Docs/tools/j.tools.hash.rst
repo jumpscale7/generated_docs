@@ -2,8 +2,7 @@
 j.tools.hash
 ============
 
-
-* path: /baselib/hash/HashTool.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/hash/HashTool.py>`_
 
 
 crc32

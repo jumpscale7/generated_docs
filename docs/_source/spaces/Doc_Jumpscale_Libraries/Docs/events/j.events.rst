@@ -2,8 +2,7 @@
 j.events
 ========
 
-
-* path: /core/errorhandling/EventHandler.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/errorhandling/EventHandler.py>`_
 
 
 bug_critical

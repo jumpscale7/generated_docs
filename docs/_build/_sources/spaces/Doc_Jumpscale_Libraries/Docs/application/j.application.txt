@@ -2,8 +2,7 @@
 j.application
 =============
 
-
-* path: /core/Application.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/Application.py>`_
 
 
 connectRedis
@@ -77,7 +76,7 @@ initWhoAmI
 ----------
 
 
-* params:
+* params: reload
 * path:/core/Application.py (line:68)
 
 

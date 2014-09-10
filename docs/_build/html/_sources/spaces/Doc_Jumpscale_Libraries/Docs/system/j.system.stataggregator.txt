@@ -2,8 +2,7 @@
 j.system.stataggregator
 =======================
 
-
-* path: /baselib/stataggregator/StatAggregator.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/stataggregator/StatAggregator.py>`_
 
 
 clean
@@ -11,7 +10,7 @@ clean
 
 
 * params:
-* path:/baselib/stataggregator/StatAggregator.py (line:172)
+* path:/baselib/stataggregator/StatAggregator.py (line:193)
 
 
 delete
@@ -19,7 +18,7 @@ delete
 
 
 * params: prefix
-* path:/baselib/stataggregator/StatAggregator.py (line:177)
+* path:/baselib/stataggregator/StatAggregator.py (line:198)
 
 
 get
@@ -27,7 +26,7 @@ get
 
 
 * params: key
-* path:/baselib/stataggregator/StatAggregator.py (line:152)
+* path:/baselib/stataggregator/StatAggregator.py (line:171)
 
 
 getAvgMax
@@ -35,7 +34,7 @@ getAvgMax
 
 
 * params: key
-* path:/baselib/stataggregator/StatAggregator.py (line:157)
+* path:/baselib/stataggregator/StatAggregator.py (line:176)
 
 
 getTime
@@ -43,7 +42,7 @@ getTime
 
 
 * params:
-* path:/baselib/stataggregator/StatAggregator.py (line:112)
+* path:/baselib/stataggregator/StatAggregator.py (line:121)
 
 
 list
@@ -51,7 +50,15 @@ list
 
 
 * params: prefix,memonly,avgmax
-* path:/baselib/stataggregator/StatAggregator.py (line:184)
+* path:/baselib/stataggregator/StatAggregator.py (line:205)
+
+
+loadStat
+--------
+
+
+* params: key,data
+* path:/baselib/stataggregator/StatAggregator.py (line:148)
 
 
 registerStats
@@ -59,7 +66,7 @@ registerStats
 
 
 * params: key,ttype,memonly,percent
-* path:/baselib/stataggregator/StatAggregator.py (line:162)
+* path:/baselib/stataggregator/StatAggregator.py (line:181)
 
 
 type is N or D (D from diff)
@@ -70,7 +77,7 @@ send2carbon
 
 
 * params:
-* path:/baselib/stataggregator/StatAggregator.py (line:204)
+* path:/baselib/stataggregator/StatAggregator.py (line:222)
 
 
 send2log
@@ -78,7 +85,7 @@ send2log
 
 
 * params: name,key,val
-* path:/baselib/stataggregator/StatAggregator.py (line:115)
+* path:/baselib/stataggregator/StatAggregator.py (line:124)
 
 
 set
@@ -86,6 +93,6 @@ set
 
 
 * params: key,val,ttype,remember,memonly,percent
-* path:/baselib/stataggregator/StatAggregator.py (line:141)
+* path:/baselib/stataggregator/StatAggregator.py (line:158)
 
 

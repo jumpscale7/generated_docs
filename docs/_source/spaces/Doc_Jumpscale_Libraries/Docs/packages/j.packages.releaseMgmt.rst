@@ -2,8 +2,8 @@
 j.packages.releaseMgmt
 ======================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/jpackages/ReleaseMgmt.py>`_
 
-* path: /baselib/jpackages/ReleaseMgmt.py
 
 
 

@@ -2,8 +2,7 @@
 j.enumerators.ErrorConditionLevel
 =================================
 
-
-* path: /core/enumerators/ErrorConditionLevel.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/enumerators/ErrorConditionLevel.py>`_
 
 
 Iterrator for levels of errorconditions

@@ -2,8 +2,7 @@
 j.tools.docgenerator
 ====================
 
-
-* path: /portal/docgenerator/Docgenerator.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/docgenerator/Docgenerator.py>`_
 
 
 convertConfluenceToRST

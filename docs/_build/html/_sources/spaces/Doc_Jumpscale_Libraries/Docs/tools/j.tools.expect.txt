@@ -2,8 +2,7 @@
 j.tools.expect
 ==============
 
-
-* path: /baselib/expect/Expect.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/expect/Expect.py>`_
 
 
 new

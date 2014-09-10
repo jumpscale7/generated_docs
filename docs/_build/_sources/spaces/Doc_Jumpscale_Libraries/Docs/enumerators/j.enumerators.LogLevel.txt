@@ -2,8 +2,7 @@
 j.enumerators.LogLevel
 ======================
 
-
-* path: /core/enumerators/LogLevel.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/enumerators/LogLevel.py>`_
 
 
 Iterrator for levels of log

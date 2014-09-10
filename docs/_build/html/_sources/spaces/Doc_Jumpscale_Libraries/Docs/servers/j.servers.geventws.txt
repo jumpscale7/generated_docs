@@ -2,8 +2,7 @@
 j.servers.geventws
 ==================
 
-
-* path: /grid/geventws/GeventWSFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/geventws/GeventWSFactory.py>`_
 
 
 getClient

@@ -2,8 +2,7 @@
 j.base.time
 ===========
 
-
-* path: /core/base/time/Time.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/base/time/Time.py>`_
 
 
 generic provider of time functions

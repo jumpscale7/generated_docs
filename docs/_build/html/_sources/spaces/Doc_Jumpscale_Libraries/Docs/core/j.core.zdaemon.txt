@@ -2,8 +2,7 @@
 j.core.zdaemon
 ==============
 
-
-* path: /grid/zdaemon/ZDaemonFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/zdaemon/ZDaemonFactory.py>`_
 
 
 getZDaemon

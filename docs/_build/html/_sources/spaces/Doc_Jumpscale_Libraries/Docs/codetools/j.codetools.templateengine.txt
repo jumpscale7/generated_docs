@@ -2,8 +2,7 @@
 j.codetools.templateengine
 ==========================
 
-
-* path: /baselib/codetools/TemplateEngineWrapper.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/codetools/TemplateEngineWrapper.py>`_
 
 
 new

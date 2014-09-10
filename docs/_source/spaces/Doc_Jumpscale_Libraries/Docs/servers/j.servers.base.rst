@@ -2,8 +2,7 @@
 j.servers.base
 ==============
 
-
-* path: /grid/serverbase/ServerBaseFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/serverbase/ServerBaseFactory.py>`_
 
 
 getDaemon

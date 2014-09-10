@@ -2,8 +2,7 @@
 j.core.grid.zobjects
 ====================
 
-
-* path: /grid/grid/GridFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/grid/GridFactory.py>`_
 
 
 getModelObject

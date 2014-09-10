@@ -2,8 +2,7 @@
 j.dirs
 ======
 
-
-* path: /core/Dirs.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/Dirs.py>`_
 
 
 Utility class to configure and store all relevant directory paths
@@ -14,7 +13,7 @@ addProtectedDir
 
 
 * params: path,name
-* path:/core/Dirs.py (line:255)
+* path:/core/Dirs.py (line:260)
 
 
 checkInProtectedDir
@@ -22,7 +21,7 @@ checkInProtectedDir
 
 
 * params: path
-* path:/core/Dirs.py (line:288)
+* path:/core/Dirs.py (line:293)
 
 
 deployDefaultFilesInSandbox
@@ -30,7 +29,7 @@ deployDefaultFilesInSandbox
 
 
 * params:
-* path:/core/Dirs.py (line:295)
+* path:/core/Dirs.py (line:300)
 
 
 getPathOfRunningFunction
@@ -38,7 +37,7 @@ getPathOfRunningFunction
 
 
 * params: function
-* path:/core/Dirs.py (line:234)
+* path:/core/Dirs.py (line:239)
 
 
 init
@@ -46,7 +45,7 @@ init
 
 
 * params: reinit
-* path:/core/Dirs.py (line:191)
+* path:/core/Dirs.py (line:196)
 
 
 Initializes all the configured directories if needed
@@ -61,7 +60,7 @@ loadProtectedDirs
 
 
 * params:
-* path:/core/Dirs.py (line:237)
+* path:/core/Dirs.py (line:242)
 
 
 removeProtectedDir
@@ -69,7 +68,7 @@ removeProtectedDir
 
 
 * params: path
-* path:/core/Dirs.py (line:267)
+* path:/core/Dirs.py (line:272)
 
 
 replaceFilesDirVars

@@ -2,8 +2,7 @@
 j.clients.mercurial
 ===================
 
-
-* path: /baselib/mercurial/HgLibFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/mercurial/HgLibFactory.py>`_
 
 
 getClient

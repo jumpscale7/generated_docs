@@ -2,8 +2,7 @@
 j.clients.blobstor
 ==================
 
-
-* path: /baselib/blobstor/BlobStor.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/blobstor/BlobStor.py>`_
 
 
 get

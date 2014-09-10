@@ -2,8 +2,7 @@
 j.tools.testengine
 ==================
 
-
-* path: /baselib/testengine/TestEngine.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/testengine/TestEngine.py>`_
 
 
 initTests

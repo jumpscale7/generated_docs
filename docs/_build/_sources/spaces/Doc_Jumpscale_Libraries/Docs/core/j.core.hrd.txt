@@ -2,8 +2,7 @@
 j.core.hrd
 ==========
 
-
-* path: /baselib/hrd/HumanReadableData.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/hrd/HumanReadableData.py>`_
 
 
 getHRD

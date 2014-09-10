@@ -2,8 +2,7 @@
 j.tools.sandboxer
 =================
 
-
-* path: /lib/sandboxer/Sandboxer.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/sandboxer/Sandboxer.py>`_
 
 
 sandbox any linux app

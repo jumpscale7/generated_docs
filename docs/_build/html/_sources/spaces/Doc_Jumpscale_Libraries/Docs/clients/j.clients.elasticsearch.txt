@@ -2,8 +2,7 @@
 j.clients.elasticsearch
 =======================
 
-
-* path: /baselib/elasticsearch/Elasticsearch.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/elasticsearch/Elasticsearch.py>`_
 
 
 get

@@ -2,8 +2,8 @@
 j.core.osismodel
 ================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/osismodel/OSIS.py>`_
 
-* path: /grid/osismodel/OSIS.py
 
 
 

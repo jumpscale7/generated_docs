@@ -2,8 +2,7 @@
 j.clients.agentcontroller
 =========================
 
-
-* path: /grid/agentcontroller/AgentControllerFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/agentcontroller/AgentControllerFactory.py>`_
 
 
 get
@@ -20,15 +19,15 @@ getByInstance
 
 
 * params: instance
-* path:/grid/agentcontroller/AgentControllerFactory.py (line:42)
+* path:/grid/agentcontroller/AgentControllerFactory.py (line:46)
 
 
 getClientProxy
 --------------
 
 
-* params: category,agentControllerIP
-* path:/grid/agentcontroller/AgentControllerFactory.py (line:46)
+* params: category,addr,port,login,passwd
+* path:/grid/agentcontroller/AgentControllerFactory.py (line:50)
 
 
 getInstanceConfig
@@ -36,6 +35,6 @@ getInstanceConfig
 
 
 * params: instance
-* path:/grid/agentcontroller/AgentControllerFactory.py (line:26)
+* path:/grid/agentcontroller/AgentControllerFactory.py (line:30)
 
 

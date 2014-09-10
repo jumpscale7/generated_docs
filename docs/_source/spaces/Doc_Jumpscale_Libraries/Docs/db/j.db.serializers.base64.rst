@@ -2,8 +2,7 @@
 j.db.serializers.base64
 =======================
 
-
-* path: /baselib/serializers/SerializerBase64.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerBase64.py>`_
 
 
 dumps

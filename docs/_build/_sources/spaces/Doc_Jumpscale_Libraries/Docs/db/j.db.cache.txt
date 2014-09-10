@@ -2,8 +2,7 @@
 j.db.cache
 ==========
 
-
-* path: /baselib/lrucache/LRUCacheFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/lrucache/LRUCacheFactory.py>`_
 
 
 getRCache

@@ -2,8 +2,7 @@
 j.tools.units.sizes
 ===================
 
-
-* path: /baselib/units/units.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/units/units.py>`_
 
 
 converToBestUnit

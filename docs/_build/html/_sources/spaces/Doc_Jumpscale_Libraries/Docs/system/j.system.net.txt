@@ -2,8 +2,7 @@
 j.system.net
 ============
 
-
-* path: /core/system/net.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/net.py>`_
 
 
 checkIpAddressIsLocal

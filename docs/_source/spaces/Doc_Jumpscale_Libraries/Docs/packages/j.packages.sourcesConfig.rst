@@ -2,8 +2,7 @@
 j.packages.sourcesConfig
 ========================
 
-
-* path: /baselib/inifile/IniFile.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/inifile/IniFile.py>`_
 
 
 Use with care:

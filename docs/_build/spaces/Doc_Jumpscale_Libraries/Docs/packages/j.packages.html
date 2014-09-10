@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="j.packages" href="packages.html" />
+    <link rel="next" title="j.packages.sourcesConfig" href="j.packages.sourcesConfig.html" />
+    <link rel="prev" title="j.packages._object.jpackage" href="j.packages._object.jpackage.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,9 +36,14 @@
           <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.packages.sourcesConfig.html" title="j.packages.sourcesConfig"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="j.packages._object.jpackage.html" title="j.packages._object.jpackage"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="packages.html" accesskey="U">j.packages</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,14 +54,12 @@
             
   <div class="section" id="j-packages">
 <h1>j.packages<a class="headerlink" href="#j-packages" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>path: /baselib/jpackages/JPackageClient.py</li>
-</ul>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/jpackages/JPackageClient.py">Source</a></p>
 <div class="section" id="checkjpackagesexistsonremoteblobstor">
 <h2>checkJpackagesExistsOnRemoteBlobStor<a class="headerlink" href="#checkjpackagesexistsonremoteblobstor" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:1192)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1186)</li>
 </ul>
 </div>
 <div class="section" id="checkprotecteddirs">
@@ -77,7 +83,7 @@ by executing this command you are sure that no development data will be overwrit
 <h2>disableDebugMetaData<a class="headerlink" href="#disabledebugmetadata" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: qualitylevel,domain</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:795)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:789)</li>
 </ul>
 </div>
 <div class="section" id="enableconsolelogging">
@@ -91,7 +97,7 @@ by executing this command you are sure that no development data will be overwrit
 <h2>exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,version</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:312)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:306)</li>
 </ul>
 <p>Checks whether the jpackages&#8217;s metadata path is currently present on your system</p>
 </div>
@@ -99,14 +105,14 @@ by executing this command you are sure that no development data will be overwrit
 <h2>find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,version,platform,onlyone,installed,instance,expandInstances,interactive</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:536)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:530)</li>
 </ul>
 </div>
 <div class="section" id="findbyname">
 <h2>findByName<a class="headerlink" href="#findbyname" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:525)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:519)</li>
 </ul>
 <p>name is part of jpackage, if none found return None, if more than 1 found raise error, name is part of name</p>
 </div>
@@ -114,7 +120,7 @@ by executing this command you are sure that no development data will be overwrit
 <h2>findNewest<a class="headerlink" href="#findnewest" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,minversion,maxversion,platform,returnNoneIfNotFound</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:473)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:467)</li>
 </ul>
 <p>Find the newest jpackages which matches the criteria
 If more than 1 jpackages matches -&gt; error
@@ -124,7 +130,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>get<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,version,instance</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:292)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:286)</li>
 </ul>
 <p>Returns a jpackages</p>
 </div>
@@ -132,7 +138,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getActionNamesClass<a class="headerlink" href="#getactionnamesclass" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:279)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:273)</li>
 </ul>
 <p>these actions can be applied on jpackage without knowing the jpackage instance</p>
 </div>
@@ -140,14 +146,14 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getActionNamesInstance<a class="headerlink" href="#getactionnamesinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:286)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:280)</li>
 </ul>
 </div>
 <div class="section" id="getdatapath">
 <h2>getDataPath<a class="headerlink" href="#getdatapath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,version</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:440)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:434)</li>
 </ul>
 <p>Returns the filesdatapath for the provided jpackages</p>
 </div>
@@ -155,7 +161,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getDebugPackages<a class="headerlink" href="#getdebugpackages" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:326)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:320)</li>
 </ul>
 <p>Returns a list of all currently installed packages on your system</p>
 </div>
@@ -163,7 +169,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getDomainNames<a class="headerlink" href="#getdomainnames" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:365)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:359)</li>
 </ul>
 <p>Returns a list of all domains present in the sources.cfg file</p>
 </div>
@@ -171,7 +177,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getDomainObject<a class="headerlink" href="#getdomainobject" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,qualityLevel</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:351)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:345)</li>
 </ul>
 <p>Get provided domain as an object</p>
 </div>
@@ -179,7 +185,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getInstalledPackages<a class="headerlink" href="#getinstalledpackages" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:319)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:313)</li>
 </ul>
 <p>Returns a list of all currently installed packages on your system</p>
 </div>
@@ -187,7 +193,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
 <h2>getJPActionsPath<a class="headerlink" href="#getjpactionspath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,instance,fromtmp</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:380)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:374)</li>
 </ul>
 <p>Returns the metadatapath for the provided jpackages
 if fromtmp is True, then tmp directorypath will be returned</p>
@@ -196,7 +202,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getJPActiveHRDPath<a class="headerlink" href="#getjpactivehrdpath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,instance,fromtmp</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:413)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:407)</li>
 </ul>
 <p>Returns the metadatapath for the provided jpackages
 if fromtmp is True, then tmp directorypath will be returned</p>
@@ -205,7 +211,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getJPActiveInstancePath<a class="headerlink" href="#getjpactiveinstancepath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,instance,fromtmp</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:396)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:390)</li>
 </ul>
 <p>Returns the metadatapath for the provided jpackages in active mode</p>
 </div>
@@ -221,7 +227,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getJPackageObjects<a class="headerlink" href="#getjpackageobjects" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: platform,domain</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:692)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:686)</li>
 </ul>
 <p>Returns a list of jpackages objects for specified platform &amp; domain</p>
 </div>
@@ -229,7 +235,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getMetaTarPath<a class="headerlink" href="#getmetatarpath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domainName</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:449)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:443)</li>
 </ul>
 <p>Returns the metatarsdatapath for the provided domain</p>
 </div>
@@ -237,7 +243,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getMetadataPath<a class="headerlink" href="#getmetadatapath" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,name,version</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:429)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:423)</li>
 </ul>
 <p>Returns the metadatapath for the provided jpackages for active state</p>
 </div>
@@ -245,14 +251,14 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>getPackagesWithBrokenDependencies<a class="headerlink" href="#getpackageswithbrokendependencies" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:706)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:700)</li>
 </ul>
 </div>
 <div class="section" id="getpendingreconfigurationpackages">
 <h2>getPendingReconfigurationPackages<a class="headerlink" href="#getpendingreconfigurationpackages" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:340)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:334)</li>
 </ul>
 <p>Returns a List of all jpackages that are pending for configuration</p>
 </div>
@@ -267,7 +273,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>linkMetaData<a class="headerlink" href="#linkmetadata" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:756)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:750)</li>
 </ul>
 <p>Does an link of the meta information repo for each domain</p>
 </div>
@@ -282,7 +288,7 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <h2>makeDependencyGraph<a class="headerlink" href="#makedependencygraph" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:1090)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1084)</li>
 </ul>
 <p>Creates a graphical visualization of all dependencies between the JPackackages of all domains.
 This helps to quickly view and debug the dependencies and avoid errors.
@@ -298,7 +304,7 @@ See: dependencyGraph_singleNodes.png</p>
 <h2>mergeMetaData<a class="headerlink" href="#mergemetadata" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,commitMessage</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:827)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:821)</li>
 </ul>
 <p>Does an update of the meta information repo for each domain</p>
 </div>
@@ -306,7 +312,7 @@ See: dependencyGraph_singleNodes.png</p>
 <h2>mergeMetaDataAll<a class="headerlink" href="#mergemetadataall" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:737)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:731)</li>
 </ul>
 <p>Tries to merge the metadata information of all jpackages with info on remote repo.
 This used to be called updateJPackage list</p>
@@ -315,7 +321,7 @@ This used to be called updateJPackage list</p>
 <h2>metadataCreateQualityLevel<a class="headerlink" href="#metadatacreatequalitylevel" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,qualityLevelFrom,qualityLevelTo,force,link</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:880)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:874)</li>
 </ul>
 <p>Create a quality level starting from the qualitylevelFrom e.g. unstable to beta</p>
 </div>
@@ -323,7 +329,7 @@ This used to be called updateJPackage list</p>
 <h2>metadataDeleteQualityLevel<a class="headerlink" href="#metadatadeletequalitylevel" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,qualityLevel</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:862)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:856)</li>
 </ul>
 <p>Delete a quality level</p>
 </div>
@@ -331,14 +337,14 @@ This used to be called updateJPackage list</p>
 <h2>pm_getJPackageConfig<a class="headerlink" href="#pm-getjpackageconfig" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: jpackagesMDPath</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:1087)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1081)</li>
 </ul>
 </div>
 <div class="section" id="publish">
 <h2>publish<a class="headerlink" href="#publish" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: commitMessage,domain</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:941)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:935)</li>
 </ul>
 <p>Publishes all domains&#8217; bundles &amp; metadata (if no domain specified)</p>
 </div>
@@ -346,7 +352,7 @@ This used to be called updateJPackage list</p>
 <h2>publishAll<a class="headerlink" href="#publishall" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: commitMessage</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:954)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:948)</li>
 </ul>
 <p>Publish metadata &amp; bundles for all domains, for more informartion see publishDomain</p>
 </div>
@@ -354,7 +360,7 @@ This used to be called updateJPackage list</p>
 <h2>publishDomain<a class="headerlink" href="#publishdomain" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,commitMessage</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:964)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:958)</li>
 </ul>
 <p>Publish metadata &amp; bundles for a domain.
 To publish a domain means to make your local changes to the corresponding domain available to other users.
@@ -367,7 +373,7 @@ new bundles are created and uploaded to the blobstor server</p>
 <h2>publishMetaDataAsTarGz<a class="headerlink" href="#publishmetadataastargz" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,qualityLevel</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:919)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:913)</li>
 </ul>
 <p>Compresses the meta data of a domain into a tar and upload that tar to the bundleUpload server.
 After this the that uptain there metadata as a tar can download the latest metadata.</p>
@@ -391,21 +397,21 @@ After this the that uptain there metadata as a tar can download the latest metad
 <h2>runConfigurationPending<a class="headerlink" href="#runconfigurationpending" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:1009)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1003)</li>
 </ul>
 </div>
 <div class="section" id="switchmetadata">
 <h2>switchMetaData<a class="headerlink" href="#switchmetadata" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: toQualitylevel,domain,disableDebug</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:771)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:765)</li>
 </ul>
 </div>
 <div class="section" id="updateall">
 <h2>updateAll<a class="headerlink" href="#updateall" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:714)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:708)</li>
 </ul>
 <p>Updates all installed jpackages to the latest builds.
 The latest meta information is retrieved from the repository and based on this information,
@@ -415,7 +421,7 @@ The install packages that have a buildnr that has been outdated our reinstall, t
 <h2>updateMetaData<a class="headerlink" href="#updatemetadata" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domain,force</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:812)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:806)</li>
 </ul>
 <p>Does an update of the meta information repo for each domain</p>
 </div>
@@ -423,7 +429,7 @@ The install packages that have a buildnr that has been outdated our reinstall, t
 <h2>updateMetaDataAll<a class="headerlink" href="#updatemetadataall" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: force</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:728)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:722)</li>
 </ul>
 <p>Updates the metadata information of all jpackages
 This used to be called updateJPackage list</p>
@@ -432,7 +438,7 @@ This used to be called updateJPackage list</p>
 <h2>updateMetaDataForDomain<a class="headerlink" href="#updatemetadatafordomain" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: domainName</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:745)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:739)</li>
 </ul>
 <p>Updates the meta information of specific domain
 This used to be called updateJPackage list</p>
@@ -441,7 +447,7 @@ This used to be called updateJPackage list</p>
 <h2>uploadLocalJpackagesToBlobStor<a class="headerlink" href="#uploadlocaljpackagestoblobstor" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: blobservername,history</li>
-<li>path:/baselib/jpackages/JPackageClient.py (line:1184)</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1178)</li>
 </ul>
 </div>
 </div>
@@ -507,6 +513,12 @@ This used to be called updateJPackage list</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="j.packages._object.jpackage.html"
+                        title="previous chapter">j.packages._object.jpackage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="j.packages.sourcesConfig.html"
+                        title="next chapter">j.packages.sourcesConfig</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/packages/j.packages.txt"
@@ -536,9 +548,14 @@ This used to be called updateJPackage list</p>
           <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.packages.sourcesConfig.html" title="j.packages.sourcesConfig"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="j.packages._object.jpackage.html" title="j.packages._object.jpackage"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="packages.html" >j.packages</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -2,8 +2,7 @@
 j.tools.text
 ============
 
-
-* path: /core/system/text.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/text.py>`_
 
 
 addCmd

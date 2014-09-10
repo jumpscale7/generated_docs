@@ -2,8 +2,7 @@
 j.system.platform.python
 ========================
 
-
-* path: /baselib/jpackages/PythonPackage.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/jpackages/PythonPackage.py>`_
 
 
 check

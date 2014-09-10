@@ -2,8 +2,7 @@
 j.enumerators.AppStatusType
 ===========================
 
-
-* path: /core/enumerators/AppStatusType.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/enumerators/AppStatusType.py>`_
 
 
 Application status

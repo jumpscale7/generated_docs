@@ -2,8 +2,7 @@
 j.gui.dialog.easyDialog
 =======================
 
-
-* path: /core/gui/dialog/EasyDialogConsole.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/gui/dialog/EasyDialogConsole.py>`_
 
 
 askChoice

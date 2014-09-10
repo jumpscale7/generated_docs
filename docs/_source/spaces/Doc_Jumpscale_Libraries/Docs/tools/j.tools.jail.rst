@@ -2,8 +2,7 @@
 j.tools.jail
 ============
 
-
-* path: /lib/jail/JailFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/jail/JailFactory.py>`_
 
 
 createJSJail

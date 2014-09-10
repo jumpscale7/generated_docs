@@ -2,8 +2,7 @@
 j.system.process
 ================
 
-
-* path: /core/system/process.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/process.py>`_
 
 
 appCheckActive

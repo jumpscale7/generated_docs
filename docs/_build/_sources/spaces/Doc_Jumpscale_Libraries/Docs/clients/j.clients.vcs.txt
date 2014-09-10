@@ -2,8 +2,7 @@
 j.clients.vcs
 =============
 
-
-* path: /baselib/vcs/vcsfactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/vcs/vcsfactory.py>`_
 
 
 getClient

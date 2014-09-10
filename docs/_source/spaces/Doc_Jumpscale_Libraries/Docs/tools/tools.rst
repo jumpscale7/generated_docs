@@ -23,6 +23,7 @@ j.tools
    j.tools.units.sizes
    j.tools.ssl
    j.tools.inifile
+   j.tools.admin
    j.tools.txtrobot
    j.tools.youtrack
    j.tools.text

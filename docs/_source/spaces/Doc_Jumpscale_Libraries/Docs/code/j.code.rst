@@ -2,8 +2,7 @@
 j.code
 ======
 
-
-* path: /baselib/code/Code.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/code/Code.py>`_
 
 
 classEditGeany

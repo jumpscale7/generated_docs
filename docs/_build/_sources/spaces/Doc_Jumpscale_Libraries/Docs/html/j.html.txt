@@ -2,8 +2,7 @@
 j.html
 ======
 
-
-* path: /portal/html/HtmlFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/html/HtmlFactory.py>`_
 
 
 escape

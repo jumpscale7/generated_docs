@@ -2,8 +2,7 @@
 j.tools.jail.redis
 ==================
 
-
-* path: /baselib/redis/Redis.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/redis/Redis.py>`_
 
 
 append
@@ -401,7 +400,7 @@ getDict
 
 
 * params: key
-* path:/baselib/redis/Redis.py (line:40)
+* path:/baselib/redis/Redis.py (line:54)
 
 
 getbit
@@ -474,6 +473,17 @@ Return the value of `'key'` within the hash `'name'`
 
 hgetall
 -------
+
+
+* params: name
+* path:/baselib/redis/Redis.py (line:1385)
+
+
+Return a Python dict of the hash's name/value pairs
+
+
+hgetalldict
+-----------
 
 
 * params: name

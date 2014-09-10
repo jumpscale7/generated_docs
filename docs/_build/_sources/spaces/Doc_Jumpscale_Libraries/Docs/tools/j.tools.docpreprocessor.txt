@@ -2,8 +2,7 @@
 j.tools.docpreprocessor
 =======================
 
-
-* path: /portal/docpreprocessor/DocPreprocessorFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/docpreprocessor/DocPreprocessorFactory.py>`_
 
 
 generate

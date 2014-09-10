@@ -2,8 +2,7 @@
 j.base.idgenerator
 ==================
 
-
-* path: /core/base/idgenerator/IDGenerator.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/base/idgenerator/IDGenerator.py>`_
 
 
 generic provider of id's

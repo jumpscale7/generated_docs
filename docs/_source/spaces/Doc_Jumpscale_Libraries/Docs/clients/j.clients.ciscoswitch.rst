@@ -2,8 +2,7 @@
 j.clients.ciscoswitch
 =====================
 
-
-* path: /lib/cisco_ios/CiscoSwitchManager.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/cisco_ios/CiscoSwitchManager.py>`_
 
 
 get

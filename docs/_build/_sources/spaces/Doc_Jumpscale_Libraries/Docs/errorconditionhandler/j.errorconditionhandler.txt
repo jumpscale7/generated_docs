@@ -2,8 +2,7 @@
 j.errorconditionhandler
 =======================
 
-
-* path: /core/errorhandling/ErrorConditionHandler.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/errorhandling/ErrorConditionHandler.py>`_
 
 
 checkErrorIgnore

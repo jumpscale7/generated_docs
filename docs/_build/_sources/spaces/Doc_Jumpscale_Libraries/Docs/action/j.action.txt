@@ -2,8 +2,7 @@
 j.action
 ========
 
-
-* path: /baselib/actions/action/ActionController.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/actions/action/ActionController.py>`_
 
 
 Manager controlling actions

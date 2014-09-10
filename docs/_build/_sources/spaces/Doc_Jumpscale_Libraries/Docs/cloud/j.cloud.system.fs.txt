@@ -2,8 +2,7 @@
 j.cloud.system.fs
 =================
 
-
-* path: /baselib/cloudsystemfs/CloudSystemFS.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/cloudsystemfs/CloudSystemFS.py>`_
 
 
 copyDir

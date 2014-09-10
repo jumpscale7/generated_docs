@@ -2,8 +2,7 @@
 j.system.fswalker
 =================
 
-
-* path: /core/system/fswalker.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/fswalker.py>`_
 
 
 find

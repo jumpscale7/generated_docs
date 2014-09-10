@@ -2,8 +2,7 @@
 j.remote.fabric
 ===============
 
-
-* path: /baselib/remote/fabric/FabricTool.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/remote/fabric/FabricTool.py>`_
 
 
 help

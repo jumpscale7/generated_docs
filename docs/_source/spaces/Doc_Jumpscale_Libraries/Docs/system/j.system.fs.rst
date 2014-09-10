@@ -2,8 +2,7 @@
 j.system.fs
 ===========
 
-
-* path: /core/system/fs.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/fs.py>`_
 
 
 changeDir
@@ -11,7 +10,7 @@ changeDir
 
 
 * params: path
-* path:/core/system/fs.py (line:446)
+* path:/core/system/fs.py (line:445)
 
 
 Changes Current Directory
@@ -22,7 +21,7 @@ changeFileNames
 
 
 * params: toReplace,replaceWith,pathToSearchIn,recursive,filter,minmtime,maxmtime
-* path:/core/system/fs.py (line:957)
+* path:/core/system/fs.py (line:956)
 
 
 
@@ -31,7 +30,7 @@ checkDirOrLink
 
 
 * params: fullpath
-* path:/core/system/fs.py (line:938)
+* path:/core/system/fs.py (line:937)
 
 
 check if path is dir or link to a dir
@@ -42,7 +41,7 @@ checkDirOrLinkToDir
 
 
 * params: fullpath
-* path:/core/system/fs.py (line:945)
+* path:/core/system/fs.py (line:944)
 
 
 check if path is dir or link to a dir
@@ -53,7 +52,7 @@ checkDirParam
 
 
 * params: path
-* path:/core/system/fs.py (line:1103)
+* path:/core/system/fs.py (line:1102)
 
 
 chmod
@@ -61,7 +60,7 @@ chmod
 
 
 * params: path,permissions
-* path:/core/system/fs.py (line:693)
+* path:/core/system/fs.py (line:692)
 
 
 
@@ -70,7 +69,7 @@ chown
 
 
 * params: path,user
-* path:/core/system/fs.py (line:671)
+* path:/core/system/fs.py (line:670)
 
 
 cleanupString
@@ -89,7 +88,7 @@ constructDirPathFromArray
 
 
 * params: array
-* path:/core/system/fs.py (line:1794)
+* path:/core/system/fs.py (line:1793)
 
 
 constructFilePathFromArray
@@ -97,7 +96,7 @@ constructFilePathFromArray
 
 
 * params: array
-* path:/core/system/fs.py (line:1804)
+* path:/core/system/fs.py (line:1803)
 
 
 convertFileDirnamesSpaceToUnderscore
@@ -105,7 +104,7 @@ convertFileDirnamesSpaceToUnderscore
 
 
 * params: rootdir
-* path:/core/system/fs.py (line:1563)
+* path:/core/system/fs.py (line:1562)
 
 
 convertFileDirnamesUnicodeToAscii
@@ -113,7 +112,7 @@ convertFileDirnamesUnicodeToAscii
 
 
 * params: rootdir,spacesToUnderscore
-* path:/core/system/fs.py (line:1536)
+* path:/core/system/fs.py (line:1535)
 
 
 copyDirTree
@@ -121,7 +120,7 @@ copyDirTree
 
 
 * params: src,dst,keepsymlinks,eraseDestination,skipProtectedDirs,overwriteFiles,applyHrdOnDestPaths
-* path:/core/system/fs.py (line:354)
+* path:/core/system/fs.py (line:353)
 
 
 Recursively copy an entire directory tree rooted at src.
@@ -134,7 +133,7 @@ copyFile
 
 
 * params: fileFrom,to,createDirIfNeeded,skipProtectedDirs,overwriteFile
-* path:/core/system/fs.py (line:224)
+* path:/core/system/fs.py (line:223)
 
 
 Copy file
@@ -151,7 +150,7 @@ createDir
 
 
 * params: newdir,skipProtectedDirs
-* path:/core/system/fs.py (line:319)
+* path:/core/system/fs.py (line:318)
 
 
 Create new Directory
@@ -164,7 +163,7 @@ createEmptyFile
 
 
 * params: filename
-* path:/core/system/fs.py (line:306)
+* path:/core/system/fs.py (line:305)
 
 
 Create an empty file
@@ -175,7 +174,7 @@ dirEqual
 
 
 * params: path1,path2
-* path:/core/system/fs.py (line:581)
+* path:/core/system/fs.py (line:580)
 
 
 exists
@@ -183,7 +182,7 @@ exists
 
 
 * params: path,followlinks
-* path:/core/system/fs.py (line:1032)
+* path:/core/system/fs.py (line:1031)
 
 
 Check if the specified path exists
@@ -194,7 +193,7 @@ fileConvertLineEndingCRLF
 
 
 * params: file
-* path:/core/system/fs.py (line:1748)
+* path:/core/system/fs.py (line:1747)
 
 
 Convert CRLF line-endings in a file to LF-only endings (
@@ -209,7 +208,7 @@ fileGetContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1266)
+* path:/core/system/fs.py (line:1265)
 
 
 Read a file and get contents of that file
@@ -220,7 +219,7 @@ fileGetTextContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1299)
+* path:/core/system/fs.py (line:1298)
 
 
 Read a UTF-8 file and get contents of that file. Takes care of the BOM <BOM>(http://en.wikipedia.org/wiki/Byte_order_mark)
@@ -231,7 +230,7 @@ fileGetUncommentedContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1280)
+* path:/core/system/fs.py (line:1279)
 
 
 Read a file and get uncommented contents of that file
@@ -242,7 +241,7 @@ fileSize
 
 
 * params: filename
-* path:/core/system/fs.py (line:1350)
+* path:/core/system/fs.py (line:1349)
 
 
 Get Filesize of file in bytes
@@ -253,7 +252,7 @@ find
 
 
 * params: startDir,fileregex
-* path:/core/system/fs.py (line:1764)
+* path:/core/system/fs.py (line:1763)
 
 
 Search for files or folders matching a given pattern
@@ -267,7 +266,7 @@ getBaseName
 
 
 * params: path
-* path:/core/system/fs.py (line:534)
+* path:/core/system/fs.py (line:533)
 
 
 Return the base name of pathname path.
@@ -278,7 +277,7 @@ getDirName
 
 
 * params: path,lastOnly,levelsUp
-* path:/core/system/fs.py (line:505)
+* path:/core/system/fs.py (line:504)
 
 
 Return a directory name from pathname path.
@@ -292,7 +291,7 @@ getFileExtension
 
 
 * params: path
-* path:/core/system/fs.py (line:663)
+* path:/core/system/fs.py (line:662)
 
 
 getParent
@@ -300,7 +299,7 @@ getParent
 
 
 * params: path
-* path:/core/system/fs.py (line:648)
+* path:/core/system/fs.py (line:647)
 
 
 Returns the parent of the path:
@@ -313,7 +312,7 @@ getParentDirName
 
 
 * params: path
-* path:/core/system/fs.py (line:615)
+* path:/core/system/fs.py (line:614)
 
 
 returns parent of path (only for dirs)
@@ -325,7 +324,7 @@ getTempFileName
 
 
 * params: dir,prefix
-* path:/core/system/fs.py (line:1600)
+* path:/core/system/fs.py (line:1599)
 
 
 Generates a temp file for the directory specified
@@ -336,7 +335,7 @@ getTmpDirPath
 
 
 * params:
-* path:/core/system/fs.py (line:1573)
+* path:/core/system/fs.py (line:1572)
 
 
 create a tmp dir name and makes sure the dir exists
@@ -347,7 +346,7 @@ getTmpFilePath
 
 
 * params: cygwin
-* path:/core/system/fs.py (line:1582)
+* path:/core/system/fs.py (line:1581)
 
 
 Generate a temp file path
@@ -359,7 +358,7 @@ getcwd
 
 
 * params:
-* path:/core/system/fs.py (line:772)
+* path:/core/system/fs.py (line:771)
 
 
 get current working directory
@@ -370,7 +369,7 @@ grep
 
 
 * params: fileregex,lineregex
-* path:/core/system/fs.py (line:1776)
+* path:/core/system/fs.py (line:1775)
 
 
 Search for lines matching a given regex in all files matching a regex
@@ -382,7 +381,7 @@ gunzip
 
 
 * params: sourceFile,destFile
-* path:/core/system/fs.py (line:1888)
+* path:/core/system/fs.py (line:1887)
 
 
 gzip
@@ -390,7 +389,7 @@ gzip
 
 
 * params: sourceFile,destFile
-* path:/core/system/fs.py (line:1880)
+* path:/core/system/fs.py (line:1879)
 
 
 hardlinkFile
@@ -398,7 +397,7 @@ hardlinkFile
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:1085)
+* path:/core/system/fs.py (line:1084)
 
 
 Create a hard link pointing to source named destin. Availability: Unix.
@@ -410,7 +409,7 @@ isAsciiFile
 
 
 * params: filename,checksize
-* path:/core/system/fs.py (line:1612)
+* path:/core/system/fs.py (line:1611)
 
 
 Read the first <checksize> bytes of <filename>.
@@ -424,7 +423,7 @@ isBinaryFile
 
 
 * params: filename,checksize
-* path:/core/system/fs.py (line:1636)
+* path:/core/system/fs.py (line:1635)
 
 
 isDir
@@ -432,7 +431,7 @@ isDir
 
 
 * params: path,followSoftlink
-* path:/core/system/fs.py (line:1115)
+* path:/core/system/fs.py (line:1114)
 
 
 Check if the specified Directory path exists
@@ -443,7 +442,7 @@ isEmptyDir
 
 
 * params: path
-* path:/core/system/fs.py (line:1129)
+* path:/core/system/fs.py (line:1128)
 
 
 Check if the specified directory path is empty
@@ -454,7 +453,7 @@ isFile
 
 
 * params: path,followSoftlink
-* path:/core/system/fs.py (line:1145)
+* path:/core/system/fs.py (line:1144)
 
 
 Check if the specified file exists for the given path
@@ -465,7 +464,7 @@ isLink
 
 
 * params: path,checkJunction
-* path:/core/system/fs.py (line:1170)
+* path:/core/system/fs.py (line:1169)
 
 
 Check if the specified path is a link
@@ -476,7 +475,7 @@ isMount
 
 
 * params: path
-* path:/core/system/fs.py (line:1199)
+* path:/core/system/fs.py (line:1198)
 
 
 Return true if pathname path is a mount point:
@@ -488,7 +487,7 @@ islocked
 
 
 * params: lockname,reentry
-* path:/core/system/fs.py (line:110)
+* path:/core/system/fs.py (line:109)
 
 
 Check if a system-wide interprocess exclusive lock is set
@@ -499,7 +498,7 @@ joinPaths
 
 
 * params:
-* path:/core/system/fs.py (line:478)
+* path:/core/system/fs.py (line:477)
 
 
 Join one or more path components.
@@ -512,7 +511,7 @@ listDirsInDir
 
 
 * params: path,recursive,dirNameOnly,findDirectorySymlinks
-* path:/core/system/fs.py (line:981)
+* path:/core/system/fs.py (line:980)
 
 
 Retrieves list of directories found in the specified directory
@@ -523,7 +522,7 @@ listFilesAndDirsInDir
 
 
 * params: path,recursive,filter,minmtime,maxmtime,depth,type
-* path:/core/system/fs.py (line:851)
+* path:/core/system/fs.py (line:850)
 
 
 Retrieves list of files found in the specified directory
@@ -534,7 +533,7 @@ listFilesInDir
 
 
 * params: path,recursive,filter,minmtime,maxmtime,depth,case_sensitivity,exclude,followSymlinks
-* path:/core/system/fs.py (line:825)
+* path:/core/system/fs.py (line:824)
 
 
 Retrieves list of files found in the specified directory
@@ -545,7 +544,7 @@ listPyScriptsInDir
 
 
 * params: path,recursive,filter
-* path:/core/system/fs.py (line:1010)
+* path:/core/system/fs.py (line:1009)
 
 
 Retrieves list of python scripts (with extension .py) in the specified directory
@@ -584,7 +583,7 @@ log
 
 
 * params: msg,level,category
-* path:/core/system/fs.py (line:219)
+* path:/core/system/fs.py (line:218)
 
 
 md5sum
@@ -592,7 +591,7 @@ md5sum
 
 
 * params: filename
-* path:/core/system/fs.py (line:1398)
+* path:/core/system/fs.py (line:1397)
 
 
 Return the hex digest of a file without loading it all into memory
@@ -603,7 +602,7 @@ move
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:1023)
+* path:/core/system/fs.py (line:1022)
 
 
 Main Move function
@@ -615,7 +614,7 @@ moveDir
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:464)
+* path:/core/system/fs.py (line:463)
 
 
 Move Directory from source to destination
@@ -626,7 +625,7 @@ moveFile
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:260)
+* path:/core/system/fs.py (line:259)
 
 
 Move a  File from source path to destination path
@@ -637,7 +636,7 @@ parsePath
 
 
 * params: path,baseDir,existCheck,checkIsFile
-* path:/core/system/fs.py (line:716)
+* path:/core/system/fs.py (line:715)
 
 
 parse paths of form /root/tmp/33_adoc.doc into the path, priority which is numbers before _ at beginning of path
@@ -656,7 +655,7 @@ pathClean
 
 
 * params: path
-* path:/core/system/fs.py (line:565)
+* path:/core/system/fs.py (line:564)
 
 
 goal is to get a equal representation in / & in relation to os.sep
@@ -667,7 +666,7 @@ pathDirClean
 
 
 * params: path
-* path:/core/system/fs.py (line:577)
+* path:/core/system/fs.py (line:576)
 
 
 pathNormalize
@@ -675,7 +674,7 @@ pathNormalize
 
 
 * params: path,root
-* path:/core/system/fs.py (line:584)
+* path:/core/system/fs.py (line:583)
 
 
 paths are made absolute & made sure they are in line with os.sep
@@ -686,7 +685,7 @@ pathRemoveDirPart
 
 
 * params: path,toremove,removeTrailingSlash
-* path:/core/system/fs.py (line:597)
+* path:/core/system/fs.py (line:596)
 
 
 goal remove dirparts of a dirpath e,g, a basepath which is not needed
@@ -698,7 +697,7 @@ pathShorten
 
 
 * params: path
-* path:/core/system/fs.py (line:544)
+* path:/core/system/fs.py (line:543)
 
 
 Clean path (change /var/www/../lib to /var/lib). On Windows, if the
@@ -711,7 +710,7 @@ pathToUnicode
 
 
 * params: path
-* path:/core/system/fs.py (line:1810)
+* path:/core/system/fs.py (line:1809)
 
 
 Convert path to unicode. Use the local filesystem encoding. Will return
@@ -726,7 +725,7 @@ processPathForDoubleDots
 
 
 * params: path
-* path:/core/system/fs.py (line:626)
+* path:/core/system/fs.py (line:625)
 
 
 /root/somepath/.. would become /root
@@ -740,7 +739,7 @@ readObjectFromFile
 
 
 * params: filelocation
-* path:/core/system/fs.py (line:1381)
+* path:/core/system/fs.py (line:1380)
 
 
 Read a object from a file(file contents in pickle format)
@@ -751,7 +750,7 @@ readlink
 
 
 * params: path
-* path:/core/system/fs.py (line:782)
+* path:/core/system/fs.py (line:781)
 
 
 Works only for unix
@@ -763,7 +762,7 @@ remove
 
 
 * params: path
-* path:/core/system/fs.py (line:288)
+* path:/core/system/fs.py (line:287)
 
 
 Remove a File
@@ -774,7 +773,7 @@ removeDir
 
 
 * params: path
-* path:/core/system/fs.py (line:430)
+* path:/core/system/fs.py (line:429)
 
 
 Remove a Directory
@@ -785,7 +784,7 @@ removeDirTree
 
 
 * params: path,onlyLogWarningOnRemoveError
-* path:/core/system/fs.py (line:404)
+* path:/core/system/fs.py (line:403)
 
 
 Recursively delete a directory tree.
@@ -796,7 +795,7 @@ removeIrrelevantFiles
 
 
 * params: path,followSymlinks
-* path:/core/system/fs.py (line:282)
+* path:/core/system/fs.py (line:281)
 
 
 removeLinks
@@ -804,7 +803,7 @@ removeLinks
 
 
 * params: path
-* path:/core/system/fs.py (line:799)
+* path:/core/system/fs.py (line:798)
 
 
 find all links & remove
@@ -815,7 +814,7 @@ renameDir
 
 
 * params: dirname,newname,overwrite
-* path:/core/system/fs.py (line:1219)
+* path:/core/system/fs.py (line:1218)
 
 
 Rename Directory from dirname to newname
@@ -826,7 +825,7 @@ renameFile
 
 
 * params: filePath,new_name
-* path:/core/system/fs.py (line:275)
+* path:/core/system/fs.py (line:274)
 
 
 OBSOLETE
@@ -837,7 +836,7 @@ replaceWordsInFiles
 
 
 * params: pathToSearchIn,templateengine,recursive,filter,minmtime,maxmtime
-* path:/core/system/fs.py (line:968)
+* path:/core/system/fs.py (line:967)
 
 
 apply templateengine to list of found files
@@ -852,7 +851,7 @@ statPath
 
 
 * params: path
-* path:/core/system/fs.py (line:1208)
+* path:/core/system/fs.py (line:1207)
 
 
 Perform a stat() system call on the given path
@@ -863,7 +862,7 @@ symlink
 
 
 * params: path,target,overwriteTarget
-* path:/core/system/fs.py (line:1051)
+* path:/core/system/fs.py (line:1050)
 
 
 Create a symbolic link
@@ -874,7 +873,7 @@ targzCompress
 
 
 * params: sourcepath,destinationpath,followlinks,destInTar,pathRegexIncludes,pathRegexExcludes,contentRegexIncludes,contentRegexExcludes,depths,extrafiles
-* path:/core/system/fs.py (line:1825)
+* path:/core/system/fs.py (line:1824)
 
 
 tar.gz with this param can put something in front e.g. /qbase3/ prefix to dest in tgz
@@ -886,7 +885,7 @@ targzUncompress
 
 
 * params: sourceFile,destinationdir,removeDestinationdir
-* path:/core/system/fs.py (line:1897)
+* path:/core/system/fs.py (line:1896)
 
 
 compress dirname recursive
@@ -897,7 +896,7 @@ touch
 
 
 * params: paths,overwrite
-* path:/core/system/fs.py (line:1315)
+* path:/core/system/fs.py (line:1314)
 
 
 can be single path or multiple (then list)
@@ -908,7 +907,7 @@ unlink
 
 
 * params: filename
-* path:/core/system/fs.py (line:1251)
+* path:/core/system/fs.py (line:1250)
 
 
 Remove the given file if it's a file or a symlink
@@ -920,7 +919,7 @@ unlinkFile
 
 
 * params: filename
-* path:/core/system/fs.py (line:1236)
+* path:/core/system/fs.py (line:1235)
 
 
 Remove the file path (only for files, not for symlinks)
@@ -931,7 +930,7 @@ unlock
 
 
 * params: lockname
-* path:/core/system/fs.py (line:140)
+* path:/core/system/fs.py (line:139)
 
 
 Unlock system-wide interprocess lock
@@ -942,7 +941,7 @@ unlock_
 
 
 * params: lockname
-* path:/core/system/fs.py (line:148)
+* path:/core/system/fs.py (line:147)
 
 
 Unlock system-wide interprocess lock
@@ -959,7 +958,7 @@ validateFilename
 
 
 * params: filename,platform
-* path:/core/system/fs.py (line:1645)
+* path:/core/system/fs.py (line:1644)
 
 
 Validate a filename for a given (or current) platform
@@ -1009,7 +1008,7 @@ walk
 
 
 * params: root,recurse,pattern,return_folders,return_files,followSoftlinks,unicode
-* path:/core/system/fs.py (line:1494)
+* path:/core/system/fs.py (line:1493)
 
 
 This is to provide ScanDir similar function
@@ -1022,7 +1021,7 @@ walkExtended
 
 
 * params: root,recurse,dirPattern,filePattern,followSoftLinks,dirs,files
-* path:/core/system/fs.py (line:1421)
+* path:/core/system/fs.py (line:1420)
 
 
 Extended Walk version: seperate dir and file pattern
@@ -1046,7 +1045,7 @@ writeFile
 
 
 * params: filename,contents,append
-* path:/core/system/fs.py (line:1330)
+* path:/core/system/fs.py (line:1329)
 
 
 Open a file and write file contents, close file afterwards
@@ -1057,7 +1056,7 @@ writeObjectToFile
 
 
 * params: filelocation,obj
-* path:/core/system/fs.py (line:1364)
+* path:/core/system/fs.py (line:1363)
 
 
 Write a object to a file(pickle format)

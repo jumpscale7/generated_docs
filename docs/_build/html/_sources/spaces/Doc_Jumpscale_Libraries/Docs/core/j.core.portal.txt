@@ -2,8 +2,7 @@
 j.core.portal
 =============
 
-
-* path: /portal/portal/PortalFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/portal/PortalFactory.py>`_
 
 
 getClient

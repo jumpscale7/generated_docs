@@ -2,8 +2,7 @@
 j.clients.bitbucket.config
 ==========================
 
-
-* path: /core/config/ConfigLib.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/config/ConfigLib.py>`_
 
 
 add

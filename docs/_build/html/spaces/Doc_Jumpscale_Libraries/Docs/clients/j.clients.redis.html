@@ -23,7 +23,10 @@
     <script type="text/javascript" src="../../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" /> 
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="j.clients" href="clients.html" />
+    <link rel="next" title="j.clients.blobstor" href="j.clients.blobstor.html" />
+    <link rel="prev" title="j.clients.elasticsearch" href="j.clients.elasticsearch.html" /> 
   </head>
   <body>
     <div class="related">
@@ -33,9 +36,14 @@
           <a href="../../../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.clients.blobstor.html" title="j.clients.blobstor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="j.clients.elasticsearch.html" title="j.clients.elasticsearch"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="clients.html" accesskey="U">j.clients</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,21 +54,19 @@
             
   <div class="section" id="j-clients-redis">
 <h1>j.clients.redis<a class="headerlink" href="#j-clients-redis" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>path: /baselib/redis/Redis.py</li>
-</ul>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/redis/Redis.py">Source</a></p>
 <div class="section" id="checkallinstances">
 <h2>checkAllInstances<a class="headerlink" href="#checkallinstances" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/redis/Redis.py (line:92)</li>
+<li>path:/baselib/redis/Redis.py (line:105)</li>
 </ul>
 </div>
 <div class="section" id="configureinstance">
 <h2>configureInstance<a class="headerlink" href="#configureinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name,port,maxram,appendonly,snapshot,slave,ismaster,passwd</li>
-<li>path:/baselib/redis/Redis.py (line:170)</li>
+<li>path:/baselib/redis/Redis.py (line:183)</li>
 </ul>
 <p>slave example: (192.168.10.10,8888,asecret)   (ip,port,secret)</p>
 </div>
@@ -68,77 +74,77 @@
 <h2>deleteInstance<a class="headerlink" href="#deleteinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:158)</li>
+<li>path:/baselib/redis/Redis.py (line:171)</li>
 </ul>
 </div>
 <div class="section" id="emptyallinstances">
 <h2>emptyAllInstances<a class="headerlink" href="#emptyallinstances" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params:</li>
-<li>path:/baselib/redis/Redis.py (line:103)</li>
+<li>path:/baselib/redis/Redis.py (line:116)</li>
 </ul>
 </div>
 <div class="section" id="emptyinstance">
 <h2>emptyInstance<a class="headerlink" href="#emptyinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:163)</li>
+<li>path:/baselib/redis/Redis.py (line:176)</li>
 </ul>
 </div>
 <div class="section" id="getgeventredisclient">
 <h2>getGeventRedisClient<a class="headerlink" href="#getgeventredisclient" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: ipaddr,port,fromcache,password</li>
-<li>path:/baselib/redis/Redis.py (line:61)</li>
+<li>path:/baselib/redis/Redis.py (line:74)</li>
 </ul>
 </div>
 <div class="section" id="getgeventredisqueue">
 <h2>getGeventRedisQueue<a class="headerlink" href="#getgeventredisqueue" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: ipaddr,port,name,namespace,fromcache</li>
-<li>path:/baselib/redis/Redis.py (line:83)</li>
+<li>path:/baselib/redis/Redis.py (line:96)</li>
 </ul>
 </div>
 <div class="section" id="getport">
 <h2>getPort<a class="headerlink" href="#getport" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:121)</li>
+<li>path:/baselib/redis/Redis.py (line:134)</li>
 </ul>
 </div>
 <div class="section" id="getprocesspids">
 <h2>getProcessPids<a class="headerlink" href="#getprocesspids" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:135)</li>
+<li>path:/baselib/redis/Redis.py (line:148)</li>
 </ul>
 </div>
 <div class="section" id="getredisclient">
 <h2>getRedisClient<a class="headerlink" href="#getredisclient" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: ipaddr,port,password</li>
-<li>path:/baselib/redis/Redis.py (line:71)</li>
+<li>path:/baselib/redis/Redis.py (line:84)</li>
 </ul>
 </div>
 <div class="section" id="getredisqueue">
 <h2>getRedisQueue<a class="headerlink" href="#getredisqueue" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: ipaddr,port,name,namespace</li>
-<li>path:/baselib/redis/Redis.py (line:77)</li>
+<li>path:/baselib/redis/Redis.py (line:90)</li>
 </ul>
 </div>
 <div class="section" id="startinstance">
 <h2>startInstance<a class="headerlink" href="#startinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:155)</li>
+<li>path:/baselib/redis/Redis.py (line:168)</li>
 </ul>
 </div>
 <div class="section" id="stopinstance">
 <h2>stopInstance<a class="headerlink" href="#stopinstance" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>params: name</li>
-<li>path:/baselib/redis/Redis.py (line:148)</li>
+<li>path:/baselib/redis/Redis.py (line:161)</li>
 </ul>
 </div>
 </div>
@@ -169,6 +175,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="j.clients.elasticsearch.html"
+                        title="previous chapter">j.clients.elasticsearch</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="j.clients.blobstor.html"
+                        title="next chapter">j.clients.blobstor</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/clients/j.clients.redis.txt"
@@ -198,9 +210,14 @@
           <a href="../../../../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+          <a href="j.clients.blobstor.html" title="j.clients.blobstor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="j.clients.elasticsearch.html" title="j.clients.elasticsearch"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >&lt;no title&gt;</a> &raquo;</li>
+          <li><a href="clients.html" >j.clients</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

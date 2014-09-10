@@ -2,8 +2,7 @@
 j.enumerators.DialogType
 ========================
 
-
-* path: /core/gui/dialog/DialogType.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/gui/dialog/DialogType.py>`_
 
 
 check

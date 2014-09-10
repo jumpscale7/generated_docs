@@ -2,8 +2,7 @@
 j.clients.bitbucketi
 ====================
 
-
-* path: /baselib/bitbucket/BitbucketInterface.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/bitbucket/BitbucketInterface.py>`_
 
 
 interface on i

@@ -14,6 +14,7 @@ j.core
    j.core.portalloader.actorsinfo
    j.core.grid.zobjects
    j.core.osismodel
+   j.core.grid.healthchecker
    j.core.processmanager
    j.core.portal
    j.core.gevent

@@ -2,8 +2,7 @@
 j.clients.git
 =============
 
-
-* path: /baselib/git/GitFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/git/GitFactory.py>`_
 
 
 getClient

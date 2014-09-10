@@ -20,5 +20,6 @@ j.db
    j.db.cache
    j.db.keyvaluestore
    j.db.serializers.base64
+   j.db.serializers.msgpack
 
 

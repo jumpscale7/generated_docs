@@ -2,8 +2,7 @@
 j.enumerators.EnumerationWithValue
 ==================================
 
-
-* path: /core/baseclasses/BaseEnumeration.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/baseclasses/BaseEnumeration.py>`_
 
 
 Enumeration base type providing separation between item name and value

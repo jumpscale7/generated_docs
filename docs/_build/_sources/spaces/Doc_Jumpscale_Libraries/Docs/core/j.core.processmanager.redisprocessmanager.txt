@@ -2,8 +2,7 @@
 j.core.processmanager.redisprocessmanager
 =========================================
 
-
-* path: /baselib/redis/Redis.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/redis/Redis.py>`_
 
 
 append
@@ -401,7 +400,7 @@ getDict
 
 
 * params: key
-* path:/baselib/redis/Redis.py (line:40)
+* path:/baselib/redis/Redis.py (line:54)
 
 
 getbit
@@ -477,7 +476,7 @@ hgetall
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:45)
+* path:/baselib/redis/Redis.py (line:58)
 
 
 Return a Python dict of the hash's name/value pairs

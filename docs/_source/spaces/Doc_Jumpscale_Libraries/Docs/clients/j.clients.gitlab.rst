@@ -2,8 +2,7 @@
 j.clients.gitlab
 ================
 
-
-* path: /baselib/gitlab/GitlabFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/gitlab/GitlabFactory.py>`_
 
 
 Gitlab client enables administrators and developers leveraging Gitlab services through JumpScale
