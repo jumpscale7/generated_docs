@@ -45,16 +45,6 @@ print "\nConverting Confluence to RST..."
 j.system.process.execute("""cd /opt/code/github/jumpscale/jumpscale_prototypes/prototypes/confluence2rst; python confluence2rst.py""")
 print "Converted"
 
-
-print "\nBuilding..."
-j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; sphinx-build _source/ _build/")
-print "Built"
-
-print "\nMaking HTML"
-j.system.process.execute("cd /opt/code/github/jumpscale/generated_docs/docs/; make html")
-print "DONE"
-
-
 gencl.addRemoveFiles()
 gencl.commit('auto generated docs')
 gencl.push()
