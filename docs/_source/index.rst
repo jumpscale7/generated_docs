@@ -1,7 +1,8 @@
+:tocdepth: 2
+
 ***********************************
 Welcome to Jumpscale documentation!
 ***********************************
-:tocdepth: 2
 
 JumpScale Core
 ##############
