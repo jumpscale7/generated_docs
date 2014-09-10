@@ -106,7 +106,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.core.system.TarFile.TarFile.pm_property_metadata">
-   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x4807fd0&gt;, 'doc': 'Access method of tar file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.TarFileActionType object at 0xb219c90&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x4807fd0&gt;, 'doc': 'Path of the on-disk tar file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0xb219d10&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3888fa0&gt;, 'doc': 'Access method of tar file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.TarFileActionType object at 0xb63f790&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3888fa0&gt;, 'doc': 'Path of the on-disk tar file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0xb63fb90&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.TarFile.TarFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    </dd></dl>
@@ -155,7 +155,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.core.system.ZipFile.ZipFile.pm_property_metadata">
-   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x4807fd0&gt;, 'doc': 'Access method of zip file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.ZipFileActionType object at 0x928c950&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x4807fd0&gt;, 'doc': 'Path of the on-disk zip file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0x9298090&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'action': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3888fa0&gt;, 'doc': 'Access method of zip file', 'self': &lt;JumpScale.core.pmtypes.GenericTypes.ZipFileActionType object at 0x8317950&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'path': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3888fa0&gt;, 'doc': 'Path of the on-disk zip file', 'self': &lt;JumpScale.core.pmtypes.CustomTypes.FilePath object at 0x8323090&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.core.system.ZipFile.ZipFile.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    </dd></dl>
