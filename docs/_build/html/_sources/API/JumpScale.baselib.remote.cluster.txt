@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .. raw:: html
    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -175,7 +174,7 @@
    
    <dl class="attribute">
    <dt id="JumpScale.baselib.remote.cluster.Cluster.Cluster.pm_property_metadata">
-   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'nodes': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2ac91a5a9fc0&gt;, 'doc': None, 'self': &lt;JumpScale.core.pmtypes.CollectionTypes.List object at 0x2ac91d07dc10&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'superadminpassword': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2ac91a5a9fc0&gt;, 'doc': 'superadmin password of cluster', 'self': &lt;JumpScale.core.pmtypes.PrimitiveTypes.String object at 0x2ac91d07db90&gt;, 'readonly': False, 'allow_none': False, 'check': None}, '_superadminpasswords': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2ac91a5a9fc0&gt;, 'doc': None, 'self': &lt;JumpScale.core.pmtypes.CollectionTypes.List object at 0x2ac91d07dbd0&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'domainname': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x2ac91a5a9fc0&gt;, 'doc': 'domain name of cluster', 'self': &lt;JumpScale.core.pmtypes.PrimitiveTypes.String object at 0x2ac91d07dad0&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.baselib.remote.cluster.Cluster.Cluster.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
+   <tt class="descname">pm_property_metadata</tt><em class="property"> = {'nodes': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3e832f0&gt;, 'doc': None, 'self': &lt;JumpScale.core.pmtypes.CollectionTypes.List object at 0x612b910&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'superadminpassword': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3e832f0&gt;, 'doc': 'superadmin password of cluster', 'self': &lt;JumpScale.core.pmtypes.PrimitiveTypes.String object at 0x612b890&gt;, 'readonly': False, 'allow_none': False, 'check': None}, '_superadminpasswords': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3e832f0&gt;, 'doc': None, 'self': &lt;JumpScale.core.pmtypes.CollectionTypes.List object at 0x612b8d0&gt;, 'readonly': False, 'allow_none': False, 'check': None}, 'domainname': {'fset': None, 'flag_dirty': False, 'default': &lt;object object at 0x3e832f0&gt;, 'doc': 'domain name of cluster', 'self': &lt;JumpScale.core.pmtypes.PrimitiveTypes.String object at 0x612b7d0&gt;, 'readonly': False, 'allow_none': False, 'check': None}}</em><a class="headerlink" href="#JumpScale.baselib.remote.cluster.Cluster.Cluster.pm_property_metadata" title="Permalink to this definition">¶</a></dt>
    <dd></dd></dl>
    
    <dl class="method">
@@ -644,67 +643,3 @@
        </div>
      </body>
    </html>
-=======
-JumpScale.baselib.remote.cluster package
-========================================
-
-Submodules
-----------
-
-JumpScale.baselib.remote.cluster.Cluster module
------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.Cluster
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.remote.cluster.ClusterConfigs module
-------------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.ClusterConfigs
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.remote.cluster.ClusterFactory module
-------------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.ClusterFactory
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.remote.cluster.ClusterNode module
----------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.ClusterNode
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.remote.cluster.ClusterSSHClient module
---------------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.ClusterSSHClient
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-JumpScale.baselib.remote.cluster.Replicator module
---------------------------------------------------
-
-.. automodule:: JumpScale.baselib.remote.cluster.Replicator
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
-Module contents
----------------
-
-.. automodule:: JumpScale.baselib.remote.cluster
-    :members:
-    :undoc-members:
-    :show-inheritance:
->>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
