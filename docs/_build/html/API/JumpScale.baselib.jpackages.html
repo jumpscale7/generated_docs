@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
+    <title>JumpScale.baselib.jpackages package &mdash; Jumpscale Doc 7.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+<<<<<<< HEAD
     <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
   </head>
   <body>
@@ -65,10 +66,12 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+=======
+>>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
     <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
     <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
     <link rel="next" title="JumpScale.baselib.jsdeveltools package" href="JumpScale.baselib.jsdeveltools.html" />
-    <link rel="prev" title="JumpScale.baselib.installtools package" href="JumpScale.baselib.installtools.html" />
+    <link rel="prev" title="JumpScale.baselib.installtools package" href="JumpScale.baselib.installtools.html" /> 
   </head>
   <body>
     <div class="related">
@@ -88,15 +91,15 @@
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
       </ul>
-    </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-
+            
   <div class="section" id="jumpscale-baselib-jpackages-package">
 <h1>JumpScale.baselib.jpackages package<a class="headerlink" href="#jumpscale-baselib-jpackages-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
@@ -410,7 +413,7 @@ Includes a check that the repository has the new quality level</p>
 <tt class="descname">updateMetadata</tt><big>(</big><em>commitMessage=''</em>, <em>force=False</em>, <em>accessCode=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/Domain.html#Domain.updateMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.Domain.Domain.updateMetadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all metadata of the currently active domain&#8217;s repo servers and store locally</p>
 <p>Depends on the parameter metadataFromTgz.
-Note: Changing the configuration of metadataFromTgz will usually erase
+Note: Changing the configuration of metadataFromTgz will usually erase 
 the local uncommited modifications of the metadata.</p>
 <dl class="docutils">
 <dt>&#64;debug: It is recommended to NOT use publish() </dt>
@@ -502,7 +505,7 @@ If no jpackages match and not returnNoneIfNotFound -&gt; error
 <dl class="method">
 <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.get">
 <tt class="descname">get</tt><big>(</big><em>domain</em>, <em>name</em>, <em>version</em>, <em>instance=0</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a jpackages
+<dd><p>Returns a jpackages 
 &#64;param domain:  string - The domain the jpackages is part from
 &#64;param name:    string - The name of the jpackages
 &#64;param version: string - The version of the jpackages</p>
@@ -643,11 +646,11 @@ if fromtmp is True, then tmp directorypath will be returned</p>
 <dd><p>Creates a graphical visualization of all dependencies between the JPackackages of all domains.
 This helps to quickly view and debug the dependencies and avoid errors.
 The target audience are the developers of accross groups and domains that depend on each others packages.</p>
-<p>The graph can be found here:
+<p>The graph can be found here:   
 /opt/qbase5/var/jpackages/metadata/dependencyGraph.png</p>
-<p>Notes:
+<p>Notes:  
 The graph omits the constraints, such as version numbers and platform.</p>
-<p>For completeness, a second graph is created that shows packages without andy dependencies (both ways).
+<p>For completeness, a second graph is created that shows packages without andy dependencies (both ways). 
 See: dependencyGraph_singleNodes.png</p>
 </dd></dl>
 
@@ -699,10 +702,10 @@ This used to be called updateJPackage list</p>
 <dl class="method">
 <dt id="JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishDomain">
 <tt class="descname">publishDomain</tt><big>(</big><em>domain=''</em>, <em>commitMessage=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageClient.html#JPackageClient.publishDomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageClient.JPackageClient.publishDomain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Publish metadata &amp; bundles for a domain.
+<dd><p>Publish metadata &amp; bundles for a domain. 
 To publish a domain means to make your local changes to the corresponding domain available to other users.
 A domain can be changed in the following ways: a new package is created in it, a package in it is modified, a package in it is deleted.
-To make the changes available to others the new metadata is uploaded to the mercurial servers and for the packages whos files
+To make the changes available to others the new metadata is uploaded to the mercurial servers and for the packages whos files 
 have been modified,
 new bundles are created and uploaded to the blobstor server</p>
 </dd></dl>
@@ -854,6 +857,11 @@ This used to be called updateJPackage list</p>
 <dl class="method">
 <dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.download">
 <tt class="descname">download</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath">
+<tt class="descname">getAppPath</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/JPackageObject.html#JPackageObject.getAppPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.JPackageObject.JPackageObject.getAppPath" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1440,7 +1448,7 @@ Do this only for the installed jpackages.</p>
 <dl class="method">
 <dt id="JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibToLocalSitePackagesDir">
 <tt class="descname">copyLibToLocalSitePackagesDir</tt><big>(</big><em>path</em>, <em>remove=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/jpackages/PythonPackage.html#PythonPackage.copyLibToLocalSitePackagesDir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.jpackages.PythonPackage.PythonPackage.copyLibToLocalSitePackagesDir" title="Permalink to this definition">¶</a></dt>
-<dd><p>copy library to python.paths.local.sitepackages config param in main jumpscale hrd
+<dd><p>copy library to python.paths.local.sitepackages config param in main jumpscale hrd 
 eg. for ubuntu is: /usr/local/lib/python2.7/site-packages/
 does this for 1 lib, so the dir needs to be the library by itself</p>
 </dd></dl>
@@ -1509,7 +1517,7 @@ None</div></blockquote>
 <dd><p>Create a file with all jpackages and their versions that a given jpackages depends upon (&#8216;parents&#8217;)
 The file will contain the domain, the name, the version and the build nr from the parent jpackages.
 The file will be sorted.</p>
-<p>Parameters:
+<p>Parameters: 
 - jpackagesObject: Object - the jpackages object where you want to list the parents for
 - outputFile: string - the file where the parent jpackages list will be written to</p>
 <p>Returns: None</p>
@@ -1739,6 +1747,7 @@ The second package typically is some build tool like gcc.
              >previous</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+<<<<<<< HEAD
           <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
       </ul>
     </div>
@@ -1784,6 +1793,9 @@ The second package typically is some build tool like gcc.
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+=======
+          <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+>>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
       </ul>
     </div>
     <div class="footer">

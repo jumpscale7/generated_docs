@@ -1,156 +1,22 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.baselib.performancetrace package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
-       <link rel="next" title="JumpScale.baselib.platforms package" href="JumpScale.baselib.platforms.html" />
-       <link rel="prev" title="JumpScale.baselib.params package" href="JumpScale.baselib.params.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.platforms.html" title="JumpScale.baselib.platforms package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.params.html" title="JumpScale.baselib.params package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-baselib-performancetrace-package">
-   <h1>JumpScale.baselib.performancetrace package<a class="headerlink" href="#jumpscale-baselib-performancetrace-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.performancetrace.PerformanceTrace">
-   <span id="jumpscale-baselib-performancetrace-performancetrace-module"></span><h2>JumpScale.baselib.performancetrace.PerformanceTrace module<a class="headerlink" href="#module-JumpScale.baselib.performancetrace.PerformanceTrace" title="Permalink to this headline">¶</a></h2>
-   <dl class="class">
-   <dt id="JumpScale.baselib.performancetrace.PerformanceTrace.PerformanceTraceFactory">
-   <em class="property">class </em><tt class="descclassname">JumpScale.baselib.performancetrace.PerformanceTrace.</tt><tt class="descname">PerformanceTraceFactory</tt><a class="reference internal" href="../_modules/JumpScale/baselib/performancetrace/PerformanceTrace.html#PerformanceTraceFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.performancetrace.PerformanceTrace.PerformanceTraceFactory" title="Permalink to this definition">¶</a></dt>
-   <dd><dl class="method">
-   <dt id="JumpScale.baselib.performancetrace.PerformanceTrace.PerformanceTraceFactory.profile">
-   <tt class="descname">profile</tt><big>(</big><em>methodstatement</em>, <em>locals={}</em>, <em>globals={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/performancetrace/PerformanceTrace.html#PerformanceTraceFactory.profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.performancetrace.PerformanceTrace.PerformanceTraceFactory.profile" title="Permalink to this definition">¶</a></dt>
-   <dd><p>create a wrapper method which has no args and then pass that wrapper method to this method as first arg
-   method is passed as a string e.g. &#8216;listDirTest()&#8217;
-   it remove stats is False the path where the stats are will be returned
-   make sure that whatever arguments used in the statement are passed to the globals</p>
-   <p>example:</p>
-   <p>import JumpScale.baselib.performancetrace
-   do=j.tools.performancetrace.profile(&#8216;test0b()&#8217;, globals=globals())</p>
-   </dd></dl>
-   
-   </dd></dl>
-   
-   </div>
-   <div class="section" id="module-JumpScale.baselib.performancetrace">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.performancetrace" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.baselib.performancetrace package</a><ul>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.performancetrace.PerformanceTrace">JumpScale.baselib.performancetrace.PerformanceTrace module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.performancetrace">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.params.html"
-                           title="previous chapter">JumpScale.baselib.params package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.platforms.html"
-                           title="next chapter">JumpScale.baselib.platforms package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.baselib.performancetrace.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.platforms.html" title="JumpScale.baselib.platforms package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.params.html" title="JumpScale.baselib.params package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.baselib.performancetrace package
+==========================================
+
+Submodules
+----------
+
+JumpScale.baselib.performancetrace.PerformanceTrace module
+----------------------------------------------------------
+
+.. automodule:: JumpScale.baselib.performancetrace.PerformanceTrace
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.baselib.performancetrace
+    :members:
+    :undoc-members:
+    :show-inheritance:

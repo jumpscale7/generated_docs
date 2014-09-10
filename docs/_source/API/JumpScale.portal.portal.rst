@@ -1,0 +1,775 @@
+.. raw:: html
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+   
+   
+   <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       
+       <title>JumpScale.portal.portal package &mdash; Jumpscale Doc 7.0 documentation</title>
+       
+       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+       
+       <script type="text/javascript">
+         var DOCUMENTATION_OPTIONS = {
+           URL_ROOT:    '../',
+           VERSION:     '7.0',
+           COLLAPSE_INDEX: false,
+           FILE_SUFFIX: '.html',
+           HAS_SOURCE:  true
+         };
+       </script>
+       <script type="text/javascript" src="../_static/jquery.js"></script>
+       <script type="text/javascript" src="../_static/underscore.js"></script>
+       <script type="text/javascript" src="../_static/doctools.js"></script>
+       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
+       <link rel="up" title="JumpScale.portal package" href="JumpScale.portal.html" />
+       <link rel="next" title="JumpScale.portal.portalloaders package" href="JumpScale.portal.portalloaders.html" />
+       <link rel="prev" title="JumpScale.portal.macrolib.plantuml package" href="JumpScale.portal.macrolib.plantuml.html" /> 
+     </head>
+     <body>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                accesskey="I">index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.portalloaders.html" title="JumpScale.portal.portalloaders package"
+                accesskey="N">next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.macrolib.plantuml.html" title="JumpScale.portal.macrolib.plantuml package"
+                accesskey="P">previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" accesskey="U">JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>  
+   
+       <div class="document">
+         <div class="documentwrapper">
+           <div class="bodywrapper">
+             <div class="body">
+               
+     <div class="section" id="jumpscale-portal-portal-package">
+   <h1>JumpScale.portal.portal package<a class="headerlink" href="#jumpscale-portal-portal-package" title="Permalink to this headline">¶</a></h1>
+   <div class="section" id="submodules">
+   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.MacroExecutor">
+   <span id="jumpscale-portal-portal-macroexecutor-module"></span><h2>JumpScale.portal.portal.MacroExecutor module<a class="headerlink" href="#module-JumpScale.portal.portal.MacroExecutor" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.MacroExecutor.</tt><tt class="descname">MacroExecutorBase</tt><big>(</big><em>macrodirs=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.addMacros">
+   <tt class="descname">addMacros</tt><big>(</big><em>macrodirs</em>, <em>spacename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorBase.addMacros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.addMacros" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.findMacros">
+   <tt class="descname">findMacros</tt><big>(</big><em>doc</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorBase.findMacros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.findMacros" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;returns list of list with macrostrwithtags,withouttags</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.getMacroCandidates">
+   <tt class="descname">getMacroCandidates</tt><big>(</big><em>txt</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorBase.getMacroCandidates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.getMacroCandidates" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.parseMacroStr">
+   <tt class="descname">parseMacroStr</tt><big>(</big><em>macrostr</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorBase.parseMacroStr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase.parseMacroStr" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param macrostr full string like {{test something more}}
+   &#64;return macroname,jumpscaletags</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPage">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.MacroExecutor.</tt><tt class="descname">MacroExecutorPage</tt><big>(</big><em>macrodirs=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPage" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase" title="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portal.MacroExecutor.MacroExecutorBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.executeMacroAdd2Page">
+   <tt class="descname">executeMacroAdd2Page</tt><big>(</big><em>macrostr</em>, <em>page</em>, <em>doc=None</em>, <em>requestContext=None</em>, <em>paramsExtra=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPage.executeMacroAdd2Page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.executeMacroAdd2Page" title="Permalink to this definition">¶</a></dt>
+   <dd><p>&#64;param macrostr full string like {{test something more}}
+   &#64;param page is htmlpage, rstpage, confluencepage, ...
+   find macro&#8217;s in a page &amp; execute the macro
+   a doc is a document in final phase whichere the final result is generated</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.executeMacroReturnHTML">
+   <tt class="descname">executeMacroReturnHTML</tt><big>(</big><em>macrostr</em>, <em>doc=None</em>, <em>requestContext=None</em>, <em>paramsExtra=''</em>, <em>pagemirror4jscss=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPage.executeMacroReturnHTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.executeMacroReturnHTML" title="Permalink to this definition">¶</a></dt>
+   <dd><p>macrostr is already formatted like {{....}} and only that is returned, 
+   use executeMacrosInWikiContent instead to process macros in a full text</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.processMacrosInWikiContent">
+   <tt class="descname">processMacrosInWikiContent</tt><big>(</big><em>content</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPage.processMacrosInWikiContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPage.processMacrosInWikiContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.MacroExecutor.</tt><tt class="descname">MacroExecutorPreprocess</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPreprocess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase" title="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portal.MacroExecutor.MacroExecutorBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess.addMacros">
+   <tt class="descname">addMacros</tt><big>(</big><em>macrodirs</em>, <em>spacename</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPreprocess.addMacros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess.addMacros" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess.execMacrosOnDoc">
+   <tt class="descname">execMacrosOnDoc</tt><big>(</big><em>doc</em>, <em>paramsExtra={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorPreprocess.execMacrosOnDoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorPreprocess.execMacrosOnDoc" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.MacroExecutor.</tt><tt class="descname">MacroExecutorWiki</tt><big>(</big><em>macrodirs=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorWiki"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <a class="reference internal" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorBase" title="JumpScale.portal.portal.MacroExecutor.MacroExecutorBase"><tt class="xref py py-class docutils literal"><span class="pre">JumpScale.portal.portal.MacroExecutor.MacroExecutorBase</span></tt></a></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.execMacrosOnContent">
+   <tt class="descname">execMacrosOnContent</tt><big>(</big><em>content</em>, <em>doc</em>, <em>paramsExtra={}</em>, <em>ctx=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorWiki.execMacrosOnContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.execMacrosOnContent" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.executeMacroOnContent">
+   <tt class="descname">executeMacroOnContent</tt><big>(</big><em>content</em>, <em>macrostr</em>, <em>doc</em>, <em>paramsExtra=None</em>, <em>ctx=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorWiki.executeMacroOnContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.executeMacroOnContent" title="Permalink to this definition">¶</a></dt>
+   <dd><p>find macro&#8217;s in a doc &amp; execute the macro
+   a doc is a document in preprocessor phase</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.existsMacros">
+   <tt class="descname">existsMacros</tt><big>(</big><em>doc</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorWiki.existsMacros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.existsMacros" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.findMacros">
+   <tt class="descname">findMacros</tt><big>(</big><em>doc</em>, <em>content=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/MacroExecutor.html#MacroExecutorWiki.findMacros"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.MacroExecutor.MacroExecutorWiki.findMacros" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.OsisBeaker">
+   <span id="jumpscale-portal-portal-osisbeaker-module"></span><h2>JumpScale.portal.portal.OsisBeaker module<a class="headerlink" href="#module-JumpScale.portal.portal.OsisBeaker" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.OsisBeaker.OsisBeaker">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.OsisBeaker.</tt><tt class="descname">OsisBeaker</tt><big>(</big><em>id</em>, <em>namespace_args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/OsisBeaker.html#OsisBeaker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.OsisBeaker.OsisBeaker" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">beaker.container.NamespaceManager</span></tt></p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.OsisBeaker.OsisBeaker.acquire_read_lock">
+   <tt class="descname">acquire_read_lock</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/OsisBeaker.html#OsisBeaker.acquire_read_lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.OsisBeaker.OsisBeaker.acquire_read_lock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.OsisBeaker.OsisBeaker.acquire_write_lock">
+   <tt class="descname">acquire_write_lock</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/OsisBeaker.html#OsisBeaker.acquire_write_lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.OsisBeaker.OsisBeaker.acquire_write_lock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.OsisBeaker.OsisBeaker.release_read_lock">
+   <tt class="descname">release_read_lock</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/OsisBeaker.html#OsisBeaker.release_read_lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.OsisBeaker.OsisBeaker.release_read_lock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.OsisBeaker.OsisBeaker.release_write_lock">
+   <tt class="descname">release_write_lock</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/OsisBeaker.html#OsisBeaker.release_write_lock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.OsisBeaker.OsisBeaker.release_write_lock" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalAuthenticatorOSIS">
+   <span id="jumpscale-portal-portal-portalauthenticatorosis-module"></span><h2>JumpScale.portal.portal.PortalAuthenticatorOSIS module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalAuthenticatorOSIS" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalAuthenticatorOSIS.</tt><tt class="descname">PortalAuthenticatorOSIS</tt><big>(</big><em>osis</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.authenticate">
+   <tt class="descname">authenticate</tt><big>(</big><em>login</em>, <em>passwd</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.authenticate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.createUser">
+   <tt class="descname">createUser</tt><big>(</big><em>username</em>, <em>password</em>, <em>email</em>, <em>groups</em>, <em>domain</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.createUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.createUser" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.existsKey">
+   <tt class="descname">existsKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.existsKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.existsKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getGroupInfo">
+   <tt class="descname">getGroupInfo</tt><big>(</big><em>groupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.getGroupInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getGroupInfo" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getGroups">
+   <tt class="descname">getGroups</tt><big>(</big><em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.getGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getGroups" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getUserFromKey">
+   <tt class="descname">getUserFromKey</tt><big>(</big><em>key</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.getUserFromKey"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getUserFromKey" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getUserInfo">
+   <tt class="descname">getUserInfo</tt><big>(</big><em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.getUserInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.getUserInfo" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.listGroups">
+   <tt class="descname">listGroups</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.listGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.listGroups" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.listUsers">
+   <tt class="descname">listUsers</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.listUsers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.listUsers" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.loadFromLocalConfig">
+   <tt class="descname">loadFromLocalConfig</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.loadFromLocalConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.loadFromLocalConfig" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.userExists">
+   <tt class="descname">userExists</tt><big>(</big><em>user</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalAuthenticatorOSIS.html#PortalAuthenticatorOSIS.userExists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalAuthenticatorOSIS.PortalAuthenticatorOSIS.userExists" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalClient">
+   <span id="jumpscale-portal-portal-portalclient-module"></span><h2>JumpScale.portal.portal.PortalClient module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalClient" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClient.AppClass">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClient.</tt><tt class="descname">AppClass</tt><big>(</big><em>client</em>, <em>appname</em>, <em>actors=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#AppClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.AppClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClient.GroupAppsClass">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClient.</tt><tt class="descname">GroupAppsClass</tt><big>(</big><em>client</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#GroupAppsClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.GroupAppsClass" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClient.ModelsClass">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClient.</tt><tt class="descname">ModelsClass</tt><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#ModelsClass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.ModelsClass" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClient.PortalClient">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClient.</tt><tt class="descname">PortalClient</tt><big>(</big><em>ip</em>, <em>port</em>, <em>secret</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#PortalClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.PortalClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>client to appserver 6 running out of process</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalClient.PortalClient.getActor">
+   <tt class="descname">getActor</tt><big>(</big><em>appname</em>, <em>actorname</em>, <em>instance=0</em>, <em>redis=False</em>, <em>refresh=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#PortalClient.getActor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.PortalClient.getActor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClient.PortalProcess">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClient.</tt><tt class="descname">PortalProcess</tt><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClient.html#PortalProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClient.PortalProcess" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalClientWS">
+   <span id="jumpscale-portal-portal-portalclientws-module"></span><h2>JumpScale.portal.portal.PortalClientWS module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalClientWS" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalClientWS.PortalClientWS">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalClientWS.</tt><tt class="descname">PortalClientWS</tt><big>(</big><em>ip</em>, <em>port</em>, <em>secret=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClientWS.html#PortalClientWS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClientWS.PortalClientWS" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portal.PortalClientWS.PortalClientWS.callWebService">
+   <tt class="descname">callWebService</tt><big>(</big><em>appname</em>, <em>actorname</em>, <em>method</em>, <em>**params</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClientWS.html#PortalClientWS.callWebService"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClientWS.PortalClientWS.callWebService" title="Permalink to this definition">¶</a></dt>
+   <dd><p>ip,port &amp; secret are params of webservice to call
+   &#64;params the extra params is what will be passed to the webservice as arguments</p>
+   <blockquote>
+   <div>e.g. name=&#8221;kds&#8221;,color=&#8221;red&#8221;</div></blockquote>
+   <p>&#64;return 0, result #if ok
+   &#64;return 1, result #if error
+   &#64;return 3, result #if asyncresult</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalClientWS.PortalClientWS.html2text">
+   <tt class="descname">html2text</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClientWS.html#PortalClientWS.html2text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClientWS.PortalClientWS.html2text" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalClientWS.PortalClientWS.ping">
+   <tt class="descname">ping</tt><big>(</big><em>nrping=1</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalClientWS.html#PortalClientWS.ping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalClientWS.PortalClientWS.ping" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalFactory">
+   <span id="jumpscale-portal-portal-portalfactory-module"></span><h2>JumpScale.portal.portal.PortalFactory module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalFactory" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalFactory.Group">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalFactory.</tt><tt class="descname">Group</tt><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.Group" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalFactory.</tt><tt class="descname">PortalFactory</tt><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getClient">
+   <tt class="descname">getClient</tt><big>(</big><em>ip='localhost'</em>, <em>port=9900</em>, <em>secret=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getClient" title="Permalink to this definition">¶</a></dt>
+   <dd><p>return client to manipulate &amp; access a running application server (out of process)
+   caching is done so can call this as many times as required
+   secret is normally configured from grid
+   there is normally no need to use this method, use self.getActorClient in stead</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getClientByInstance">
+   <tt class="descname">getClientByInstance</tt><big>(</big><em>instance=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getClientByInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getClientByInstance" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getPortalConfig">
+   <tt class="descname">getPortalConfig</tt><big>(</big><em>appname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getPortalConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getPortalConfig" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.getServer">
+   <tt class="descname">getServer</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.getServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.getServer" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalFactory.PortalFactory.loadActorsInProcess">
+   <tt class="descname">loadActorsInProcess</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalFactory.html#PortalFactory.loadActorsInProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalFactory.PortalFactory.loadActorsInProcess" title="Permalink to this definition">¶</a></dt>
+   <dd><p>make sure all actors are loaded on j.apps...</p>
+   </dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalRest">
+   <span id="jumpscale-portal-portal-portalrest-module"></span><h2>JumpScale.portal.portal.PortalRest module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalRest" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalRest.</tt><tt class="descname">PortalRest</tt><big>(</big><em>webserver</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.activateActor">
+   <tt class="descname">activateActor</tt><big>(</big><em>appname</em>, <em>actor</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.activateActor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.activateActor" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.execute_rest_call">
+   <tt class="descname">execute_rest_call</tt><big>(</big><em>ctx</em>, <em>routekey</em>, <em>ext=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.execute_rest_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.execute_rest_call" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.processor_rest">
+   <tt class="descname">processor_rest</tt><big>(</big><em>env</em>, <em>start_response</em>, <em>path</em>, <em>human=True</em>, <em>ctx=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.processor_rest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.processor_rest" title="Permalink to this definition">¶</a></dt>
+   <dd><p>orignal rest processor (get statements)
+   e.g. <a class="reference external" href="http://localhost/restmachine/system/contentmanager/notifySpaceModification?name=www_openvstorage&amp;authkey=1234">http://localhost/restmachine/system/contentmanager/notifySpaceModification?name=www_openvstorage&amp;authkey=1234</a></p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.processor_restext">
+   <tt class="descname">processor_restext</tt><big>(</big><em>env</em>, <em>start_response</em>, <em>path</em>, <em>human=True</em>, <em>ctx=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.processor_restext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.processor_restext" title="Permalink to this definition">¶</a></dt>
+   <dd><p>rest processer gen 2 (not used by the original get code)</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.restPathProcessor">
+   <tt class="descname">restPathProcessor</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.restPathProcessor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.restPathProcessor" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Function which parse a path, returning True or False depending on
+   successfull parsing, a error message and a dict of parameters.
+   When successfull the params dict contains the path elements otherwise it
+   contains if provided the actorname  and appname.</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.restRouter">
+   <tt class="descname">restRouter</tt><big>(</big><em>env</em>, <em>start_response</em>, <em>path</em>, <em>paths</em>, <em>ctx</em>, <em>ext=False</em>, <em>routekey=None</em>, <em>human=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.restRouter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.restRouter" title="Permalink to this definition">¶</a></dt>
+   <dd><p>does validaton &amp; authorization
+   returns right route key</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalRest.PortalRest.validate">
+   <tt class="descname">validate</tt><big>(</big><em>auth</em>, <em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalRest.html#PortalRest.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalRest.PortalRest.validate" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.PortalServer">
+   <span id="jumpscale-portal-portal-portalserver-module"></span><h2>JumpScale.portal.portal.PortalServer module<a class="headerlink" href="#module-JumpScale.portal.portal.PortalServer" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.PortalServer.</tt><tt class="descname">PortalServer</tt><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.addGreenlet">
+   <tt class="descname">addGreenlet</tt><big>(</big><em>appName</em>, <em>greenlet</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.addGreenlet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.addGreenlet" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.addRoute">
+   <tt class="descname">addRoute</tt><big>(</big><em>function</em>, <em>appname</em>, <em>actor</em>, <em>method</em>, <em>paramvalidation={}</em>, <em>paramdescription={}</em>, <em>paramoptional={}</em>, <em>description=''</em>, <em>auth=True</em>, <em>returnformat=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.addRoute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.addRoute" title="Permalink to this definition">¶</a></dt>
+   <dd><dl class="docutils">
+   <dt>&#64;param function is the function which will be called as follows: function(webserver,path,params):</dt>
+   <dd>function can also be a string, then only the string will be returned
+   if str==&#8217;taskletengine&#8217; will directly call the taskletengine e.g. for std method calls from actors</dd>
+   </dl>
+   <p>&#64;appname e.g. system is 1e part of url which is routed <a class="reference external" href="http://localhost/appname/actor/method/">http://localhost/appname/actor/method/</a>
+   &#64;actor e.g. system is 2nd part of url which is routed <a class="reference external" href="http://localhost/appname/actor/method/">http://localhost/appname/actor/method/</a>
+   &#64;method e.g. &#8220;test&#8221; is part of url which is routed e.g. <a class="reference external" href="http://localhost/appname/actor/method/">http://localhost/appname/actor/method/</a>
+   &#64;paramvalidation e.g. {&#8220;name&#8221;:&#8221;w+&#8221;,&#8221;color&#8221;:&#8221;&#8220;}   the values are regexes
+   &#64;paramdescription is optional e.g. {&#8220;name&#8221;:&#8221;this is the description for name&#8221;}
+   &#64;auth is for authentication if false then there will be no auth key checked</p>
+   <p>example function called</p>
+   <blockquote>
+   <div><dl class="docutils">
+   <dt>def test(self,webserver,path,params):</dt>
+   <dd>return &#8216;hello world!!&#8217;</dd>
+   </dl>
+   <p>or without the self in the functioncall (when no class method)</p>
+   <p>what you return is being send to the browser</p>
+   </div></blockquote>
+   <p>example call: <a class="reference external" href="http://localhost:9999/test?key=1234&amp;color=dd&amp;name=dd">http://localhost:9999/test?key=1234&amp;color=dd&amp;name=dd</a></p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.addSchedule15MinPeriod">
+   <tt class="descname">addSchedule15MinPeriod</tt><big>(</big><em>name</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.addSchedule15MinPeriod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.addSchedule15MinPeriod" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.addSchedule1MinPeriod">
+   <tt class="descname">addSchedule1MinPeriod</tt><big>(</big><em>name</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.addSchedule1MinPeriod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.addSchedule1MinPeriod" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.addSchedule60MinPeriod">
+   <tt class="descname">addSchedule60MinPeriod</tt><big>(</big><em>name</em>, <em>method</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.addSchedule60MinPeriod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.addSchedule60MinPeriod" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.bootstrap">
+   <tt class="descname">bootstrap</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.bootstrap" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getActors">
+   <tt class="descname">getActors</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getActors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getActors" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getBucket">
+   <tt class="descname">getBucket</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getBucket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getBucket" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getBuckets">
+   <tt class="descname">getBuckets</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getBuckets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getBuckets" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getContentDirs">
+   <tt class="descname">getContentDirs</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getContentDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getContentDirs" title="Permalink to this definition">¶</a></dt>
+   <dd><p>walk over known content dirs &amp; execute loader on it</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getDoc">
+   <tt class="descname">getDoc</tt><big>(</big><em>space</em>, <em>name</em>, <em>ctx</em>, <em>params={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getDoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getDoc" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getGroupsFromCTX">
+   <tt class="descname">getGroupsFromCTX</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getGroupsFromCTX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getGroupsFromCTX" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getMimeType">
+   <tt class="descname">getMimeType</tt><big>(</big><em>contenttype</em>, <em>format_types</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getMimeType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getMimeType" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getNow">
+   <tt class="descname">getNow</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getNow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getNow" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getSpace">
+   <tt class="descname">getSpace</tt><big>(</big><em>name</em>, <em>ignore_doc_processor=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getSpace" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getSpaces">
+   <tt class="descname">getSpaces</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getSpaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getSpaces" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getUserFromCTX">
+   <tt class="descname">getUserFromCTX</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getUserFromCTX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getUserFromCTX" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getUserRight">
+   <tt class="descname">getUserRight</tt><big>(</big><em>ctx</em>, <em>space</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getUserRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getUserRight" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.getpage">
+   <tt class="descname">getpage</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.getpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.getpage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.isAdminFromCTX">
+   <tt class="descname">isAdminFromCTX</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.isAdminFromCTX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.isAdminFromCTX" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.isLoggedInFromCTX">
+   <tt class="descname">isLoggedInFromCTX</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.isLoggedInFromCTX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.isLoggedInFromCTX" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.loadConfig">
+   <tt class="descname">loadConfig</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.loadConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.loadConfig" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.loadSpace">
+   <tt class="descname">loadSpace</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.loadSpace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.loadSpace" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.loadSpaces">
+   <tt class="descname">loadSpaces</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.loadSpaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.loadSpaces" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.log">
+   <tt class="descname">log</tt><big>(</big><em>ctx</em>, <em>user</em>, <em>path</em>, <em>space=''</em>, <em>pagename=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.log" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.path2spacePagename">
+   <tt class="descname">path2spacePagename</tt><big>(</big><em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.path2spacePagename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.path2spacePagename" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.process_elfinder">
+   <tt class="descname">process_elfinder</tt><big>(</big><em>path</em>, <em>ctx</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.process_elfinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.process_elfinder" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.processor_page">
+   <tt class="descname">processor_page</tt><big>(</big><em>environ</em>, <em>start_response</em>, <em>wwwroot</em>, <em>path</em>, <em>prefix=''</em>, <em>webprefix=''</em>, <em>index=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.processor_page"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.processor_page" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.raiseError">
+   <tt class="descname">raiseError</tt><big>(</big><em>ctx</em>, <em>msg=''</em>, <em>msginfo=''</em>, <em>errorObject=None</em>, <em>httpcode='500 Internal Server Error'</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.raiseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.raiseError" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.reformatOutput">
+   <tt class="descname">reformatOutput</tt><big>(</big><em>ctx</em>, <em>result</em>, <em>restreturn=False</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.reformatOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.reformatOutput" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.reset">
+   <tt class="descname">reset</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.reset" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.restartInProcess">
+   <tt class="descname">restartInProcess</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.restartInProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.restartInProcess" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.returnDoc">
+   <tt class="descname">returnDoc</tt><big>(</big><em>ctx</em>, <em>start_response</em>, <em>space</em>, <em>docname</em>, <em>extraParams={}</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.returnDoc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.returnDoc" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.router">
+   <tt class="descname">router</tt><big>(</big><em>environ</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.router"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.router" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.sendpage">
+   <tt class="descname">sendpage</tt><big>(</big><em>page</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.sendpage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.sendpage" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.start">
+   <tt class="descname">start</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.start" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Start the web server, serving the <cite>routes</cite>. When no <cite>routes</cite> dict is passed, serve a single &#8216;test&#8217; route.</p>
+   <p>This method will block until an exception stops the server.</p>
+   <p>&#64;param routes: routes to serve, will be merged with the already added routes
+   &#64;type routes: dict(string, list(callable, dict(string, string), dict(string, string)))</p>
+   </dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.startSession">
+   <tt class="descname">startSession</tt><big>(</big><em>ctx</em>, <em>path</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.startSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.startSession" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.stop">
+   <tt class="descname">stop</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.stop" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.PortalServer.PortalServer.unloadActorFromRoutes">
+   <tt class="descname">unloadActorFromRoutes</tt><big>(</big><em>appname</em>, <em>actorname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/PortalServer.html#PortalServer.unloadActorFromRoutes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.PortalServer.PortalServer.unloadActorFromRoutes" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.RequestContext">
+   <span id="jumpscale-portal-portal-requestcontext-module"></span><h2>JumpScale.portal.portal.RequestContext module<a class="headerlink" href="#module-JumpScale.portal.portal.RequestContext" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.RequestContext.RequestContext">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.RequestContext.</tt><tt class="descname">RequestContext</tt><big>(</big><em>application</em>, <em>actor</em>, <em>method</em>, <em>env</em>, <em>start_response</em>, <em>path</em>, <em>params={}</em>, <em>fformat=''</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/RequestContext.html#RequestContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.RequestContext.RequestContext" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <p>is context of one request to WS
+   please keep this as light as possible because these objects are mostly created</p>
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.RequestContext.RequestContext.checkFormat">
+   <tt class="descname">checkFormat</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/RequestContext.html#RequestContext.checkFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.RequestContext.RequestContext.checkFormat" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.RequestContext.RequestContext.start_response">
+   <tt class="descname">start_response</tt><big>(</big><em>status</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/RequestContext.html#RequestContext.start_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.RequestContext.RequestContext.start_response" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal.auth">
+   <span id="jumpscale-portal-portal-auth-module"></span><h2>JumpScale.portal.portal.auth module<a class="headerlink" href="#module-JumpScale.portal.portal.auth" title="Permalink to this headline">¶</a></h2>
+   <dl class="class">
+   <dt id="JumpScale.portal.portal.auth.auth">
+   <em class="property">class </em><tt class="descclassname">JumpScale.portal.portal.auth.</tt><tt class="descname">auth</tt><big>(</big><em>groups=None</em>, <em>audit=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/auth.html#auth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.auth.auth" title="Permalink to this definition">¶</a></dt>
+   <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+   <dl class="attribute">
+   <dt id="JumpScale.portal.portal.auth.auth.clients">
+   <tt class="descname">clients</tt><em class="property"> = {}</em><a class="headerlink" href="#JumpScale.portal.portal.auth.auth.clients" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.auth.auth.doAudit">
+   <tt class="descname">doAudit</tt><big>(</big><em>user</em>, <em>statuscode</em>, <em>pathinfo</em>, <em>args</em>, <em>kwargs</em>, <em>result</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/auth.html#auth.doAudit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.auth.auth.doAudit" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   <dl class="method">
+   <dt id="JumpScale.portal.portal.auth.auth.getClient">
+   <tt class="descname">getClient</tt><big>(</big><em>namespace</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/portal/portal/auth.html#auth.getClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.portal.portal.auth.auth.getClient" title="Permalink to this definition">¶</a></dt>
+   <dd></dd></dl>
+   
+   </dd></dl>
+   
+   </div>
+   <div class="section" id="module-JumpScale.portal.portal">
+   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.portal.portal" title="Permalink to this headline">¶</a></h2>
+   </div>
+   </div>
+   
+   
+             </div>
+           </div>
+         </div>
+         <div class="sphinxsidebar">
+           <div class="sphinxsidebarwrapper">
+     <h3><a href="../index.html">Table Of Contents</a></h3>
+     <ul>
+   <li><a class="reference internal" href="#">JumpScale.portal.portal package</a><ul>
+   <li><a class="reference internal" href="#submodules">Submodules</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.MacroExecutor">JumpScale.portal.portal.MacroExecutor module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.OsisBeaker">JumpScale.portal.portal.OsisBeaker module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalAuthenticatorOSIS">JumpScale.portal.portal.PortalAuthenticatorOSIS module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalClient">JumpScale.portal.portal.PortalClient module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalClientWS">JumpScale.portal.portal.PortalClientWS module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalFactory">JumpScale.portal.portal.PortalFactory module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalRest">JumpScale.portal.portal.PortalRest module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.PortalServer">JumpScale.portal.portal.PortalServer module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.RequestContext">JumpScale.portal.portal.RequestContext module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal.auth">JumpScale.portal.portal.auth module</a></li>
+   <li><a class="reference internal" href="#module-JumpScale.portal.portal">Module contents</a></li>
+   </ul>
+   </li>
+   </ul>
+   
+     <h4>Previous topic</h4>
+     <p class="topless"><a href="JumpScale.portal.macrolib.plantuml.html"
+                           title="previous chapter">JumpScale.portal.macrolib.plantuml package</a></p>
+     <h4>Next topic</h4>
+     <p class="topless"><a href="JumpScale.portal.portalloaders.html"
+                           title="next chapter">JumpScale.portal.portalloaders package</a></p>
+     <h3>This Page</h3>
+     <ul class="this-page-menu">
+       <li><a href="../_sources/API/JumpScale.portal.portal.txt"
+              rel="nofollow">Show Source</a></li>
+     </ul>
+   <div id="searchbox" style="display: none">
+     <h3>Quick search</h3>
+       <form class="search" action="../search.html" method="get">
+         <input type="text" name="q" />
+         <input type="submit" value="Go" />
+         <input type="hidden" name="check_keywords" value="yes" />
+         <input type="hidden" name="area" value="default" />
+       </form>
+       <p class="searchtip" style="font-size: 90%">
+       Enter search terms or a module, class or function name.
+       </p>
+   </div>
+   <script type="text/javascript">$('#searchbox').show(0);</script>
+           </div>
+         </div>
+         <div class="clearer"></div>
+       </div>
+       <div class="related">
+         <h3>Navigation</h3>
+         <ul>
+           <li class="right" style="margin-right: 10px">
+             <a href="../genindex.html" title="General Index"
+                >index</a></li>
+           <li class="right" >
+             <a href="../py-modindex.html" title="Python Module Index"
+                >modules</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.portalloaders.html" title="JumpScale.portal.portalloaders package"
+                >next</a> |</li>
+           <li class="right" >
+             <a href="JumpScale.portal.macrolib.plantuml.html" title="JumpScale.portal.macrolib.plantuml package"
+                >previous</a> |</li>
+           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
+             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+             <li><a href="JumpScale.portal.html" >JumpScale.portal package</a> &raquo;</li> 
+         </ul>
+       </div>
+       <div class="footer">
+       </div>
+     </body>
+   </html>

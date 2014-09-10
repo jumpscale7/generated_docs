@@ -1,163 +1,30 @@
-.. raw:: html
-   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-   
-   
-   <html xmlns="http://www.w3.org/1999/xhtml">
-     <head>
-       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
-       <title>JumpScale.baselib.backuptools package &mdash; Jumpscale Doc 7.0 documentation</title>
-       
-       <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-       
-       <script type="text/javascript">
-         var DOCUMENTATION_OPTIONS = {
-           URL_ROOT:    '../',
-           VERSION:     '7.0',
-           COLLAPSE_INDEX: false,
-           FILE_SUFFIX: '.html',
-           HAS_SOURCE:  true
-         };
-       </script>
-       <script type="text/javascript" src="../_static/jquery.js"></script>
-       <script type="text/javascript" src="../_static/underscore.js"></script>
-       <script type="text/javascript" src="../_static/doctools.js"></script>
-       <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
-       <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
-       <link rel="next" title="JumpScale.baselib.bitbucket package" href="JumpScale.baselib.bitbucket.html" />
-       <link rel="prev" title="JumpScale.baselib.backup package" href="JumpScale.baselib.backup.html" /> 
-     </head>
-     <body>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                accesskey="I">index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.bitbucket.html" title="JumpScale.baselib.bitbucket package"
-                accesskey="N">next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.backup.html" title="JumpScale.baselib.backup package"
-                accesskey="P">previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>  
-   
-       <div class="document">
-         <div class="documentwrapper">
-           <div class="bodywrapper">
-             <div class="body">
-               
-     <div class="section" id="jumpscale-baselib-backuptools-package">
-   <h1>JumpScale.baselib.backuptools package<a class="headerlink" href="#jumpscale-baselib-backuptools-package" title="Permalink to this headline">¶</a></h1>
-   <div class="section" id="submodules">
-   <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.backuptools.backup">
-   <span id="jumpscale-baselib-backuptools-backup-module"></span><h2>JumpScale.baselib.backuptools.backup module<a class="headerlink" href="#module-JumpScale.baselib.backuptools.backup" title="Permalink to this headline">¶</a></h2>
-   <dl class="function">
-   <dt id="JumpScale.baselib.backuptools.backup.backup">
-   <tt class="descclassname">JumpScale.baselib.backuptools.backup.</tt><tt class="descname">backup</tt><big>(</big><em>store</em>, <em>bucketname</em>, <em>f</em>, <em>compress=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/backuptools/backup.html#backup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.backuptools.backup.backup" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.baselib.backuptools.backup.read_metadata">
-   <tt class="descclassname">JumpScale.baselib.backuptools.backup.</tt><tt class="descname">read_metadata</tt><big>(</big><em>store</em>, <em>mdbucketname</em>, <em>backupname</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/backuptools/backup.html#read_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.backuptools.backup.read_metadata" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.baselib.backuptools.backup.restore">
-   <tt class="descclassname">JumpScale.baselib.backuptools.backup.</tt><tt class="descname">restore</tt><big>(</big><em>store</em>, <em>bucketname</em>, <em>restorepath</em>, <em>parts</em>, <em>compress=True</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/backuptools/backup.html#restore"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.backuptools.backup.restore" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   <dl class="function">
-   <dt id="JumpScale.baselib.backuptools.backup.store_metadata">
-   <tt class="descclassname">JumpScale.baselib.backuptools.backup.</tt><tt class="descname">store_metadata</tt><big>(</big><em>store</em>, <em>mdbucketname</em>, <em>backupname</em>, <em>backupmetadata</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/backuptools/backup.html#store_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.backuptools.backup.store_metadata" title="Permalink to this definition">¶</a></dt>
-   <dd></dd></dl>
-   
-   </div>
-   <div class="section" id="jumpscale-baselib-backuptools-object-store-module">
-   <h2>JumpScale.baselib.backuptools.object_store module<a class="headerlink" href="#jumpscale-baselib-backuptools-object-store-module" title="Permalink to this headline">¶</a></h2>
-   </div>
-   <div class="section" id="module-JumpScale.baselib.backuptools">
-   <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-JumpScale.baselib.backuptools" title="Permalink to this headline">¶</a></h2>
-   </div>
-   </div>
-   
-   
-             </div>
-           </div>
-         </div>
-         <div class="sphinxsidebar">
-           <div class="sphinxsidebarwrapper">
-     <h3><a href="../index.html">Table Of Contents</a></h3>
-     <ul>
-   <li><a class="reference internal" href="#">JumpScale.baselib.backuptools package</a><ul>
-   <li><a class="reference internal" href="#submodules">Submodules</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.backuptools.backup">JumpScale.baselib.backuptools.backup module</a></li>
-   <li><a class="reference internal" href="#jumpscale-baselib-backuptools-object-store-module">JumpScale.baselib.backuptools.object_store module</a></li>
-   <li><a class="reference internal" href="#module-JumpScale.baselib.backuptools">Module contents</a></li>
-   </ul>
-   </li>
-   </ul>
-   
-     <h4>Previous topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.backup.html"
-                           title="previous chapter">JumpScale.baselib.backup package</a></p>
-     <h4>Next topic</h4>
-     <p class="topless"><a href="JumpScale.baselib.bitbucket.html"
-                           title="next chapter">JumpScale.baselib.bitbucket package</a></p>
-     <h3>This Page</h3>
-     <ul class="this-page-menu">
-       <li><a href="../_sources/API/JumpScale.baselib.backuptools.txt"
-              rel="nofollow">Show Source</a></li>
-     </ul>
-   <div id="searchbox" style="display: none">
-     <h3>Quick search</h3>
-       <form class="search" action="../search.html" method="get">
-         <input type="text" name="q" />
-         <input type="submit" value="Go" />
-         <input type="hidden" name="check_keywords" value="yes" />
-         <input type="hidden" name="area" value="default" />
-       </form>
-       <p class="searchtip" style="font-size: 90%">
-       Enter search terms or a module, class or function name.
-       </p>
-   </div>
-   <script type="text/javascript">$('#searchbox').show(0);</script>
-           </div>
-         </div>
-         <div class="clearer"></div>
-       </div>
-       <div class="related">
-         <h3>Navigation</h3>
-         <ul>
-           <li class="right" style="margin-right: 10px">
-             <a href="../genindex.html" title="General Index"
-                >index</a></li>
-           <li class="right" >
-             <a href="../py-modindex.html" title="Python Module Index"
-                >modules</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.bitbucket.html" title="JumpScale.baselib.bitbucket package"
-                >next</a> |</li>
-           <li class="right" >
-             <a href="JumpScale.baselib.backup.html" title="JumpScale.baselib.backup package"
-                >previous</a> |</li>
-           <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
-             <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-             <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
-         </ul>
-       </div>
-       <div class="footer">
-       </div>
-     </body>
-   </html>
+JumpScale.baselib.backuptools package
+=====================================
+
+Submodules
+----------
+
+JumpScale.baselib.backuptools.backup module
+-------------------------------------------
+
+.. automodule:: JumpScale.baselib.backuptools.backup
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+JumpScale.baselib.backuptools.object_store module
+-------------------------------------------------
+
+.. automodule:: JumpScale.baselib.backuptools.object_store
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.baselib.backuptools
+    :members:
+    :undoc-members:
+    :show-inheritance:

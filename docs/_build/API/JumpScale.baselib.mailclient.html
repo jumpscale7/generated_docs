@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
+    <title>JumpScale.baselib.mailclient package &mdash; Jumpscale Doc 7.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+<<<<<<< HEAD
     <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" /> 
   </head>
   <body>
@@ -65,10 +66,12 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+=======
+>>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
     <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../index.html" />
     <link rel="up" title="JumpScale.baselib package" href="JumpScale.baselib.html" />
     <link rel="next" title="JumpScale.baselib.manage package" href="JumpScale.baselib.manage.html" />
-    <link rel="prev" title="JumpScale.baselib.lrucache package" href="JumpScale.baselib.lrucache.html" />
+    <link rel="prev" title="JumpScale.baselib.lrucache package" href="JumpScale.baselib.lrucache.html" /> 
   </head>
   <body>
     <div class="related">
@@ -88,15 +91,15 @@
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
-          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li>
+          <li><a href="JumpScale.baselib.html" accesskey="U">JumpScale.baselib package</a> &raquo;</li> 
       </ul>
-    </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-
+            
   <div class="section" id="jumpscale-baselib-mailclient-package">
 <h1>JumpScale.baselib.mailclient package<a class="headerlink" href="#jumpscale-baselib-mailclient-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
@@ -110,8 +113,20 @@
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <dl class="method">
 <dt id="JumpScale.baselib.mailclient.emailclient.EmailClient.send">
-<tt class="descname">send</tt><big>(</big><em>recipients</em>, <em>sender</em>, <em>subject</em>, <em>message</em>, <em>files=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mailclient/emailclient.html#EmailClient.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mailclient.emailclient.EmailClient.send" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<tt class="descname">send</tt><big>(</big><em>recipients</em>, <em>sender</em>, <em>subject</em>, <em>message</em>, <em>files=None</em>, <em>mimetype=None</em><big>)</big><a class="reference internal" href="../_modules/JumpScale/baselib/mailclient/emailclient.html#EmailClient.send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#JumpScale.baselib.mailclient.emailclient.EmailClient.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>&#64;param recipients: Recipients of the message
+&#64;type recipients: mixed, string or list
+&#64;param sender: Sender of the email
+&#64;type sender: string
+&#64;param subject: Subject of the email
+&#64;type subject: string
+&#64;param message: Body of the email
+&#64;type message: string
+&#64;param files: List of paths to files to attach
+&#64;type files: list of strings
+&#64;param mimetype: Type of the body plain, html or None for autodetection
+&#64;type mimetype: string</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -182,6 +197,7 @@
              >previous</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li>
           <li><a href="JumpScale.html" >JumpScale package</a> &raquo;</li>
+<<<<<<< HEAD
           <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li>
       </ul>
     </div>
@@ -227,6 +243,9 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li><a href="../index.html">Jumpscale Doc 7.0 documentation</a> &raquo;</li> 
+=======
+          <li><a href="JumpScale.baselib.html" >JumpScale.baselib package</a> &raquo;</li> 
+>>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
       </ul>
     </div>
     <div class="footer">

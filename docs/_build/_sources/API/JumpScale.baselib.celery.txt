@@ -1,0 +1,22 @@
+JumpScale.baselib.celery package
+================================
+
+Submodules
+----------
+
+JumpScale.baselib.celery.CeleryFactory module
+---------------------------------------------
+
+.. automodule:: JumpScale.baselib.celery.CeleryFactory
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: JumpScale.baselib.celery
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -38,6 +38,7 @@ JumpScale Grid
    spaces/Doc_Jumpscale_Grid/Docs/index
 
 
+<<<<<<< HEAD
 JumpScale Libraries
 ###################
 .. toctree::
@@ -45,6 +46,16 @@ JumpScale Libraries
    :glob:
 
    spaces/Doc_Jumpscale_Libraries/Docs/index
+=======
+JumpScale API
+#############
+
+.. toctree::
+   :maxdepth: 3
+   :glob:
+
+   API/JumpScale
+>>>>>>> 0f1afde8dfe262da0b32d369154b325dfc3bf16b
 
 
 JumpScale Development
