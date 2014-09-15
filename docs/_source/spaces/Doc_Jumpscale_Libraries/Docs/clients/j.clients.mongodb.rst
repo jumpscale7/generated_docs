@@ -13,3 +13,11 @@ get
 * path:/grid/mongodbclient/MongoDBClient.py (line:7)
 
 
+getByInstance
+-------------
+
+
+* params: instancename
+* path:/grid/mongodbclient/MongoDBClient.py (line:15)
+
+

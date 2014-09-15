@@ -9,9 +9,8 @@ send
 ----
 
 
-* params: recipients,sender,subject,message,files
+* params: recipients,sender,subject,message,files,mimetype
 * path:/baselib/mailclient/emailclient.py (line:34)
-
 
 
 

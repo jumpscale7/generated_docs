@@ -17,15 +17,6 @@ import os
 sys.path.append("/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/")
 
 
-# sys.path.append(os.path.abspath('.'))
-# from .DummyBuilders import DummyBuilder   
-
-
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-# if True: #on_rtd:
-     # sphinx.builders.Builder = DummyBuilder
-#     sphinx.builders.Builder.name =  'DummyBuilder'
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -161,7 +152,7 @@ html_static_path = ['_static']
 #html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {}
+html_sidebars = {'**': ['localtoc.html', 'relations.html', 'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
