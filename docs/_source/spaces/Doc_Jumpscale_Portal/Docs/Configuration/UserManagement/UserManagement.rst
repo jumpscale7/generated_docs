@@ -105,7 +105,30 @@ Example content of .space/acl.cfg
 
 
 
+jsuser command-line tool
+========================
+To begin with, you can use the command 'jsuser list' to list all the available users on the system.
 
+.. code-block:: bash
 
+``~# jsuser list``
 
+``name                 domain                    groups``
+``================================================================================``
+``admin                                          admin``
 
+In order to add users to groups, you can use jsuser command as follows:
+
+.. code-block:: bash
+
+``~# jsuser addgroup -gu admin -gg test``
+
+With -gu option and give it the user you want to add to a certain group, and -gg option and give it the group name. You can run jsuser list command afterwards to check that the user was successfully added to the group.
+
+.. code-block:: bash
+
+``~# jsuser list``
+
+``name                 domain                    groups``
+``================================================================================``
+``admin                                          admin,test``
