@@ -1,10 +1,10 @@
 
 
 IPython Tricks
-==============
+--------------
 
 how to play with the default loaded libraries
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""
 
 
 you can walk around in the JumpScale namespace by using j. and tab
@@ -12,7 +12,7 @@ you can walk around in the JumpScale namespace by using j. and tab
 
 
 how to get info about a method for an JumpScale lib
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 e.g. j.system.fs.createDir(?
@@ -35,14 +35,14 @@ e.g. j.system.fs.createDir(?
 
 
 how to know where a library is on the filesystem
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 see above, look at help of method, the File: info shows where the file is which implements the method
 
 
 
 how to load extra modules in JumpScale
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""
 
 do
 
@@ -74,7 +74,7 @@ to drill deeper do
 
 
 how to know which modules are availabe in JumpScale
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 )-: needs to be further implemented but the ones which are probably relevant to play with now are found by

@@ -16,6 +16,8 @@ import os
 
 sys.path.append("/opt/code/github/jumpscale/jumpscale_core/lib/JumpScale/")
 
+html_theme = "sphinx_rtd_theme"
+html_theme_path = ["_themes", ]
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

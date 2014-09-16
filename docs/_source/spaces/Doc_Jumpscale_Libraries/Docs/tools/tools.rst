@@ -30,10 +30,13 @@ j.tools
    j.tools.docgenerator
    j.tools.expect
    j.tools.testengineKds
+   j.tools.whmcs.tickets
    j.tools.hash
+   j.tools.whmcs.orders
    j.tools.units.bytes
    j.tools.dnsmasq
    j.tools.html
+   j.tools.whmcs.users
    j.tools.jail
 
 

@@ -1,10 +1,10 @@
 
 
 E-Mail client
-*************
+-------------
 
 JPackage
-========
+--------
 
 
 This package is responsible for configuring the mail client
@@ -26,7 +26,7 @@ This package is responsible for configuring the mail client
 
 
 Usage
-=====
+-----
 
 
 

@@ -1,17 +1,17 @@
 
 
 Process Management In Jumpscale
-*******************************
+-------------------------------
 
 jsprocess
-=========
+---------
 
 
 is the main command to manage processes in a jumpscale environment.
 
 
 jsprocess list
-==============
+--------------
 
 
 lists all known processes
@@ -37,7 +37,7 @@ priority is priority of starting
 
 
 jsprocess disable
-=================
+-----------------
 
 
 
@@ -52,7 +52,7 @@ disables a specific process and also stops it if still running
 
 
 jsprocess cmd
-=============
+-------------
 
 
 

@@ -72,8 +72,56 @@
 
   {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 </head>
+
+<script type="text/javascript">
+    function customtoc(){
+      var ToC =
+        "<ul>";
+
+      var newLine, el, title, link;
+
+      $(".section").each(function() {
+        el = $(this);
+        header = el.children()[0];
+        title = header.textContent.replace("¶", "");
+        link = header.children[0].getAttribute('href');
+
+        newLine =
+          "<li class='toctree-l1 toctree'>" + 
+              "<a class='reference internal' href='" + link + "'>" + title + "</a>"
+
+        ToC += newLine;
+
+        el.find('.toctree-l1').each(function(){
+            sub = $(this);
+            subtitle = sub.children()[0].text;
+            sublink = sub.children()[0].getAttribute('href');
+            subnewLine =
+              "<ul>" +
+                "<li class='toctree-l2'>" +
+                  "<a class='reference internal' href='" + sublink + "'>" + subtitle + "</a>" +
+                "</li>"+
+              "</ul>";
+            ToC += subnewLine;
+        });
+
+        ToC += "</li>";
+
+      });
+
+      ToC += "</ul>";
+      $(".customtoc").append(ToC);
+
+      $('.toctree').on('click', function(){
+          $('.current').removeClass('current');
+          $(this).addClass('current');
+      });
+    };
+</script>
 
 <body class="wy-body-for-nav" role="document">
 
@@ -89,10 +137,14 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+<!--         {% set toctree = toctree(maxdepth=2, collapse=False, includehidden=True) %}
+        {% if toctree %}
+            {{ toctree }}
+        {% else %}
             <!-- Local TOC -->
             <div class="local-toc">{{ toc }}</div>
-      </div>
-      &nbsp;
+        {% endif %} -->
+            <div class="customtoc">&nbsp;</div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -114,6 +166,10 @@
           {% include "footer.html" %}
         </div>
       </div>
+
+          <script type="text/javascript">
+            customtoc();
+          </script>
 
     </section>
 

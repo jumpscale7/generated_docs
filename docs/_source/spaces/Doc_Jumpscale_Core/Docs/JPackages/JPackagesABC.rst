@@ -1,16 +1,16 @@
 
 
 JPackages Tutorial
-******************
+------------------
 
 Introduction
-============
+------------
 
 This tutorial will walk you through creating a JPackage from scratch, until having it installed. Note that you need to have JumpScale core (at least) to be installed to be able to complete this tutorial.
 
 
 Create
-======
+------
 
 We are going to create a new JPackage, named "example_package", under domain "test" (domain and blobstore configuration will come later). Run the following command from within shell:
 
@@ -75,7 +75,7 @@ Now you will have metadata for your package created under *$jumpscaledir/var/jpa
 
 
 Define recipe
-^^^^^^^^^^^^^
+"""""""""""""
 
 After creating a new package, you may now need to define a recipe. A code recipe is basically some config files which tell jpackage system which code files your package needs to download to be installed. These files are as follows:
 
@@ -214,7 +214,7 @@ Now, you should find your package files on the remote blobstore
 
 
 Publish
-^^^^^^^
+"""""""
 
 Now, your jpackage metadata needs to be published to the domain's repo (as specified in the *sources.cfg* file, *bitbucketreponame* field). In order to do this, you will need to call the publish command:
 
@@ -304,7 +304,7 @@ This command will start a wizard to publish your metadata (i.e: push metadata to
 
 
 Install
-^^^^^^^
+"""""""
 
 Now, your jpackage example_package is successfully created, published and ready to be consumed via any JumpScale system which of course has the required configuration for the package to be installed (i.e: *sources.cfg*, *blobstor.cfg*)
 In order to install your jpackage, run the install command:
@@ -325,9 +325,9 @@ There is a command *jpackage repackage* which can do the package, upload and pub
 
 
 Using JPackage instances
-========================
+------------------------
 You can install the same package in different instances.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 For example, instead of only one agent, you want to have more.
 'jpacakge install -n agent -i test'

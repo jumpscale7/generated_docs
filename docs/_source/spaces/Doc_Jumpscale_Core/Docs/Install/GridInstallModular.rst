@@ -1,13 +1,13 @@
 
 
 How to install a grid in a modular way
-**************************************
+--------------------------------------
 
 components
-==========
+----------
 
 ProcessManager
---------------
+^^^^^^^^^^^^^^
 
 
 * on each node
@@ -15,7 +15,7 @@ ProcessManager
 
 
 AgentController = GridMaster
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 * runs on 1 node
@@ -25,7 +25,7 @@ AgentController = GridMaster
 
 
 OSIS = Object Storage & Indexing Server
----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 * requires elasticsearch cluster & keyvalue stor
@@ -33,20 +33,20 @@ OSIS = Object Storage & Indexing Server
 
 
 Graphite if statistics are required
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 * OSIS populates Graphite for statistics of the grid.
 
 
 GridPortal
-----------
+^^^^^^^^^^
 
 
 * runs on any node & talks to OSIS & the AgentController
 
 
 Detailed Installation Instructions
-==================================
+----------------------------------
 
 

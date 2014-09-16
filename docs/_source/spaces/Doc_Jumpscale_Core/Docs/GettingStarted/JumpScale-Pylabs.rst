@@ -1,14 +1,14 @@
 
 
 JumpScale vs Pylabs
-===================
+-------------------
 
 
 This page is intended for people who are familiar with Pylabs. People who do not know Pylabs should not read this.
 
 
 j is the new q
-^^^^^^^^^^^^^^
+""""""""""""""
 
 
 The j name space replaces the complete q name space.
@@ -17,7 +17,7 @@ The i and p name spaces are removed (as for now).
 
 
 No more InitBase
-^^^^^^^^^^^^^^^^
+""""""""""""""""
 
 
 Loading JumpScale is as simple as import j from JumpScale:
@@ -35,7 +35,7 @@ Loading JumpScale is as simple as import j from JumpScale:
 
 
 Modules versus Extensions
-^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""
 
 
 Extensions are replaced by modules.

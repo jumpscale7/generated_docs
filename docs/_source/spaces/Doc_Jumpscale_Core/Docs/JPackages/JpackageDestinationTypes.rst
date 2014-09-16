@@ -1,7 +1,7 @@
 
 
 JPackage Destination Types
-==========================
+--------------------------
 
 
 Following is the convention for the different types

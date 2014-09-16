@@ -1,7 +1,7 @@
 
 
 This Explains how to manually install JumpScale in sandboxed mode
-=================================================================
+-----------------------------------------------------------------
 
 
 Tested on 13.10 & 14.04 64 bit.
@@ -22,7 +22,7 @@ update your apt repository & make sure some basic requirements are met
 
 
 to make sure you remove previous version od
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""
 
 
 
@@ -61,7 +61,7 @@ this will make sure all leftovers are gone
 
 
 Install the sandbox
-^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""
 
 
 
@@ -77,7 +77,7 @@ Install the sandbox
 
 
 Update the jpackage metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""
 
 
 Run the following command:
@@ -96,7 +96,7 @@ Run the following command:
 
 
 install jumpscale documentation in a development env which is also master
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 just do
 
