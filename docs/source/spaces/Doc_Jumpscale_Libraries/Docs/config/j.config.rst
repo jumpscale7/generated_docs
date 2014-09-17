@@ -2,8 +2,7 @@
 j.config
 ========
 
-
-* path: /core/config/JConfig.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/config/JConfig.py>`_
 
 
 jumpscale singleton class available under j.config

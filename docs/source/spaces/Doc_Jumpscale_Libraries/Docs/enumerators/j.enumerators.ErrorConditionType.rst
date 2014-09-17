@@ -2,8 +2,7 @@
 j.enumerators.ErrorConditionType
 ================================
 
-
-* path: /core/enumerators/ErrorConditionType.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/enumerators/ErrorConditionType.py>`_
 
 
 check

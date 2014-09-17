@@ -2,8 +2,7 @@
 j.base.errorhandler
 ===================
 
-
-* path: /base/ERRORHANDLER.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/ERRORHANDLER.py>`_
 
 
 exceptHook

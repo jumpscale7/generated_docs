@@ -2,8 +2,7 @@
 j.core.tags
 ===========
 
-
-* path: /baselib/tags/TagsFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/tags/TagsFactory.py>`_
 
 
 Factory Class of dealing with TAGS

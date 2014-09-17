@@ -2,8 +2,7 @@
 j.base.fs
 =========
 
-
-* path: /base/FS.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/FS.py>`_
 
 
 copyDependencies

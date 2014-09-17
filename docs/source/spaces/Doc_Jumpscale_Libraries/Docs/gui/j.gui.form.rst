@@ -2,8 +2,7 @@
 j.gui.form
 ==========
 
-
-* path: /core/gui/dialog/EasyDialogWizardForm.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/gui/dialog/EasyDialogWizardForm.py>`_
 
 
 createForm

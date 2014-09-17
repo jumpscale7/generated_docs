@@ -2,8 +2,8 @@
 j.db.tlog
 =========
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/tlog/TLOG.py>`_
 
-* path: /grid/tlog/TLOG.py
 
 
 

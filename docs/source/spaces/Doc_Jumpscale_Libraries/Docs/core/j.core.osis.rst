@@ -2,8 +2,8 @@
 j.core.osis
 ===========
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/osis/OSISFactory.py>`_
 
-* path: /grid/osis/OSISFactory.py
 
 
 
@@ -29,7 +29,7 @@ generateOsisModelDefaults
 
 
 * params: namespace,specpath
-* path:/grid/osis/OSISFactory.py (line:271)
+* path:/grid/osis/OSISFactory.py (line:274)
 
 
 getClient
@@ -44,7 +44,7 @@ getClientByInstance
 -------------------
 
 
-* params: instance,ssl,gevent
+* params: instance,ssl,gevent,die
 * path:/grid/osis/OSISFactory.py (line:169)
 
 
@@ -53,7 +53,7 @@ getClientForCategory
 
 
 * params: client,namespace,category
-* path:/grid/osis/OSISFactory.py (line:186)
+* path:/grid/osis/OSISFactory.py (line:189)
 
 
 how to use
@@ -67,7 +67,7 @@ getClientForNamespace
 
 
 * params: namespace,client
-* path:/grid/osis/OSISFactory.py (line:181)
+* path:/grid/osis/OSISFactory.py (line:184)
 
 
 getLocal
@@ -86,7 +86,7 @@ getModelTemplate
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:283)
+* path:/grid/osis/OSISFactory.py (line:286)
 
 
 getOSISBaseObjectComplexType
@@ -94,7 +94,7 @@ getOSISBaseObjectComplexType
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:200)
+* path:/grid/osis/OSISFactory.py (line:203)
 
 
 getOsisBaseObjectClass
@@ -102,7 +102,7 @@ getOsisBaseObjectClass
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:197)
+* path:/grid/osis/OSISFactory.py (line:200)
 
 
 getOsisImplementationParentClass
@@ -110,7 +110,7 @@ getOsisImplementationParentClass
 
 
 * params: namespacename
-* path:/grid/osis/OSISFactory.py (line:203)
+* path:/grid/osis/OSISFactory.py (line:206)
 
 
 return parent class for osis implementation (is the implementation from which each namespace & category inherits)
@@ -121,7 +121,7 @@ getOsisModelClass
 
 
 * params: namespace,category,specpath
-* path:/grid/osis/OSISFactory.py (line:288)
+* path:/grid/osis/OSISFactory.py (line:291)
 
 
 returns class generated from spec file or from model.py file

@@ -2,8 +2,7 @@
 j.core.portalloader
 ===================
 
-
-* path: /portal/portalloaders/PortalLoaderFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/portalloaders/PortalLoaderFactory.py>`_
 
 
 getActorsLoader

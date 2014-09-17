@@ -2,8 +2,8 @@
 j.clients.influxdb
 ==================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/influxdb/Influxdb.py>`_
 
-* path: /baselib/influxdb/Influxdb.py
 
 
 

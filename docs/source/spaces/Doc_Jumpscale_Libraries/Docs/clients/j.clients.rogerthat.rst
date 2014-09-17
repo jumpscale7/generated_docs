@@ -2,8 +2,7 @@
 j.clients.rogerthat
 ===================
 
-
-* path: /lib/rogerthat/rogerthat.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/rogerthat/rogerthat.py>`_
 
 
 get

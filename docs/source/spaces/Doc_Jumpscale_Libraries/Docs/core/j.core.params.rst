@@ -2,8 +2,7 @@
 j.core.params
 =============
 
-
-* path: /baselib/params/Params.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/params/Params.py>`_
 
 
 This factory can create new Params objects

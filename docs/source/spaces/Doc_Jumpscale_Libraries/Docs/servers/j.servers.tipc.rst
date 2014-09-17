@@ -2,8 +2,7 @@
 j.servers.tipc
 ==============
 
-
-* path: /grid/tipc/TipcFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/tipc/TipcFactory.py>`_
 
 
 getClient

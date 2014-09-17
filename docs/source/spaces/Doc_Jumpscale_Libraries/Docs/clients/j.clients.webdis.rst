@@ -2,8 +2,8 @@
 j.clients.webdis
 ================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/webdis/Webdis.py>`_
 
-* path: /baselib/webdis/Webdis.py
 
 
 

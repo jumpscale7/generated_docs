@@ -2,8 +2,7 @@
 j.db.serializers.int
 ====================
 
-
-* path: /baselib/serializers/SerializerInt.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerInt.py>`_
 
 
 dumps

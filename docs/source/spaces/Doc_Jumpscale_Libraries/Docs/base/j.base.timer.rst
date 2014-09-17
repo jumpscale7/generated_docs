@@ -2,8 +2,7 @@
 j.base.timer
 ============
 
-
-* path: /base/TIMER.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/TIMER.py>`_
 
 
 clean

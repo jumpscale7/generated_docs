@@ -2,8 +2,8 @@
 j.tools.jumpscriptsManager
 ==========================
 
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/jumpscripts/JumpscriptFactory.py>`_
 
-* path: /grid/jumpscripts/JumpscriptFactory.py
 
 
 
@@ -13,7 +13,7 @@ getJSClass
 
 
 * params:
-* path:/grid/jumpscripts/JumpscriptFactory.py (line:147)
+* path:/grid/jumpscripts/JumpscriptFactory.py (line:159)
 
 
 loadFromGridMaster
@@ -21,7 +21,7 @@ loadFromGridMaster
 
 
 * params:
-* path:/grid/jumpscripts/JumpscriptFactory.py (line:173)
+* path:/grid/jumpscripts/JumpscriptFactory.py (line:185)
 
 
 pushToGridMaster
@@ -29,6 +29,6 @@ pushToGridMaster
 
 
 * params:
-* path:/grid/jumpscripts/JumpscriptFactory.py (line:153)
+* path:/grid/jumpscripts/JumpscriptFactory.py (line:165)
 
 

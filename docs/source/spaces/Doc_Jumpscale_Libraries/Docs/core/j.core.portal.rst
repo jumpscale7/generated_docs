@@ -2,8 +2,7 @@
 j.core.portal
 =============
 
-
-* path: /portal/portal/PortalFactory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/portal/portal/PortalFactory.py>`_
 
 
 getClient
@@ -11,13 +10,21 @@ getClient
 
 
 * params: ip,port,secret
-* path:/portal/portal/PortalFactory.py (line:55)
+* path:/portal/portal/PortalFactory.py (line:65)
 
 
 return client to manipulate & access a running application server (out of process)
 caching is done so can call this as many times as required
 secret is normally configured from grid
 there is normally no need to use this method, use self.getActorClient in stead
+
+
+getClientByInstance
+-------------------
+
+
+* params: instance
+* path:/portal/portal/PortalFactory.py (line:55)
 
 
 getPortalConfig

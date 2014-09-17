@@ -2,8 +2,7 @@
 j.tools.jail.redis.connection_pool
 ==================================
 
-
-* path: python.zip//redis/connection.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScalepython.zip//redis/connection.py>`_
 
 
 Generic connection pool

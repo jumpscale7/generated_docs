@@ -2,8 +2,7 @@
 j.codetools
 ===========
 
-
-* path: /baselib/codetools/CodeTools.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/codetools/CodeTools.py>`_
 
 
 getTextFileEditor

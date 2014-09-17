@@ -2,8 +2,7 @@
 j.tools.ssl
 ===========
 
-
-* path: /baselib/ssl/SSL.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/ssl/SSL.py>`_
 
 
 getSSLHandler

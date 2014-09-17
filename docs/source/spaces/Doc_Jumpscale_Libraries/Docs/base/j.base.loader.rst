@@ -2,8 +2,7 @@
 j.base.loader
 =============
 
-
-* path: /base/LOADER.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/LOADER.py>`_
 
 
 makeAvailable

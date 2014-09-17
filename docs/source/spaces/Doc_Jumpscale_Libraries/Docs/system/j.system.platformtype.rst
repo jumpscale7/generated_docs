@@ -2,8 +2,7 @@
 j.system.platformtype
 =====================
 
-
-* path: /core/PlatformTypes.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/PlatformTypes.py>`_
 
 
 addPlatform

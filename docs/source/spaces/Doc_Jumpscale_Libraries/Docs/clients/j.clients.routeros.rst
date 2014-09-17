@@ -2,8 +2,7 @@
 j.clients.routeros
 ==================
 
-
-* path: /lib/routeros/RouterOS.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/routeros/RouterOS.py>`_
 
 
 get

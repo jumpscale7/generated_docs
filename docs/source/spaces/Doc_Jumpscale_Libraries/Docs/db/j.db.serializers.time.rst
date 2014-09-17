@@ -2,8 +2,7 @@
 j.db.serializers.time
 =====================
 
-
-* path: /baselib/serializers/SerializerTime.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerTime.py>`_
 
 
 dumps

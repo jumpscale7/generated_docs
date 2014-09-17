@@ -2,8 +2,7 @@
 j.db.keyvaluestore
 ==================
 
-
-* path: /baselib/key_value_store/store_factory.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/key_value_store/store_factory.py>`_
 
 
 The key value store factory provides logic to retrieve store instances. It

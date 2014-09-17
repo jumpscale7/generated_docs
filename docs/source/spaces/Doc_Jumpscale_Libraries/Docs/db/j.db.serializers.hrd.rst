@@ -2,8 +2,7 @@
 j.db.serializers.hrd
 ====================
 
-
-* path: /baselib/serializers/SerializerHRD.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/serializers/SerializerHRD.py>`_
 
 
 dumps

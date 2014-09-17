@@ -2,8 +2,7 @@
 j.system.platform.diskmanager
 =============================
 
-
-* path: /lib/diskmanager/Diskmanager.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/diskmanager/Diskmanager.py>`_
 
 
 diskGetFreeRegions

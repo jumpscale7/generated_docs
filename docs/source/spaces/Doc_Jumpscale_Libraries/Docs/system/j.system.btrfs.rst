@@ -2,8 +2,7 @@
 j.system.btrfs
 ==============
 
-
-* path: /lib/btrfs/BtrfsExtension.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/lib/btrfs/BtrfsExtension.py>`_
 
 
 deviceAdd

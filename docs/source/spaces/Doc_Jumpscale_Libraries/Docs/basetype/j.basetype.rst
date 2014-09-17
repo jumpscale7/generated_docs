@@ -2,8 +2,7 @@
 j.basetype
 ==========
 
-
-* path: /core/pmtypes/__init__.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/pmtypes/__init__.py>`_
 
 
 enumeration

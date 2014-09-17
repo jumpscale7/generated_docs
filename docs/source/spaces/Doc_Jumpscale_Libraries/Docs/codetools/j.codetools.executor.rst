@@ -2,8 +2,7 @@
 j.codetools.executor
 ====================
 
-
-* path: /baselib/codeexecutor/CodeExecutor.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/codeexecutor/CodeExecutor.py>`_
 
 
 eval

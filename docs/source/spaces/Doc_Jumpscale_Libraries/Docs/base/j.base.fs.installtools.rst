@@ -2,8 +2,7 @@
 j.base.fs.installtools
 ======================
 
-
-* path: /baselib/installtools/InstallTools.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/installtools/InstallTools.py>`_
 
 
 chdir

@@ -112,7 +112,10 @@ Install the core jpackages
 
   template:shell
   jpackage install -n base -r
-  jpackage link -n core,libs,grid,portal -r
+  jpacakge install -n core -r --debug
+  jpacakge install -n libs -r --debug
+  jpacakge install -n grid -r --debug
+  jpacakge install -n portal -r --debug
 
 
 this will checkout the core repo and link into your environment, to make development easy.

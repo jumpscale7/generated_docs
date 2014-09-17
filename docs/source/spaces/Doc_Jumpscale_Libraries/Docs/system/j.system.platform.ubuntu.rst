@@ -2,8 +2,7 @@
 j.system.platform.ubuntu
 ========================
 
-
-* path: /baselib/platforms/ubuntu/Ubuntu.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/platforms/ubuntu/Ubuntu.py>`_
 
 
 addUser2Group

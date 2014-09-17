@@ -2,8 +2,7 @@
 j.packages.redis
 ================
 
-
-* path: /baselib/credis/CRedis.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/credis/CRedis.py>`_
 
 
 example for pipeline

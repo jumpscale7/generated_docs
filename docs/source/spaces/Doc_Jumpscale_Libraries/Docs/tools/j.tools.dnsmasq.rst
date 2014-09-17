@@ -2,8 +2,7 @@
 j.tools.dnsmasq
 ===============
 
-
-* path: /baselib/dnsmasq/dnsmasq.py
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/dnsmasq/dnsmasq.py>`_
 
 
 addHost
