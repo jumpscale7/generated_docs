@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Wiki Syntax &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="&lt;no title&gt;" href="../../index.html"/>
+        <link rel="next" title="Macros:" href="../Macros/index.html"/>
+        <link rel="prev" title="User Management" href="../Configuration/UserManagement/UserManagement.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+    <li>Wiki Syntax</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="wiki-syntax">
+<h1>Wiki Syntax<a class="headerlink" href="#wiki-syntax" title="Permalink to this headline">¶</a></h1>
+<p>To write documentation with JumpScale, you have to use a specific wiki format, which is a plain-text syntax using text annotation to change the markup.
+In this section you find the general text formatting in the JumpScale wiki format.</p>
+<div class="section" id="general-text-formatting">
+<h2>General Text Formatting<a class="headerlink" href="#general-text-formatting" title="Permalink to this headline">¶</a></h2>
+<p>Any text surrounded with one of the</p>
+<p>WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.</p>
+</div>
+<div class="section" id="other-text-formatting">
+<h2>Other Text Formatting<a class="headerlink" href="#other-text-formatting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use text color:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="n">color</span><span class="p">:</span><span class="n">green</span><span class="p">}</span><span class="n">Colored</span> <span class="n">text</span><span class="p">{</span><span class="n">color</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>&lt;span style=&#8221;color:green&#8221;&gt;Colored text&lt;/span&gt;</p>
+<ul class="simple">
+<li>Use block quotes:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bq</span><span class="o">.</span> <span class="n">Text</span> <span class="n">inside</span> <span class="n">blockquote</span> <span class="n">text</span>
+</pre></div>
+</div>
+<p>&lt;blockquote&gt;Text inside blockquote text&lt;/blockquote&gt;</p>
+<p>Paragraphs are separated by new lines. Consecutive new lines are considered as one. To force a new line, write double-backslashes. <a href="#id1"><span class="problematic" id="id2">`</span></a></p>
+</div>
+<div class="section" id="heading">
+<h2>Heading<a class="headerlink" href="#heading" title="Permalink to this headline">¶</a></h2>
+<p>You define a heading as follows: &#8216;h3. &#8216;, followed by your heading text. The heading range is from 1 to 6 included.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">h4</span><span class="o">.</span> <span class="n">Sample</span> <span class="n">heading</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>becomes</p>
+</div>
+<div class="section" id="sample-heading-4">
+<h2>Sample heading 4<a class="headerlink" href="#sample-heading-4" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>You can create two types of lists:</p>
+<ul class="simple">
+<li>Ordered lists: you create an ordered list by using the the combination star and hash (<cite>#</cite>) as first characters on each line. Do not use empty lines between subsequent items because the numbering will restart.</li>
+<li>Unordered lists: you create an unordered list by using the asterisk (``) as first character on each line.</li>
+</ul>
+<p>You can nest levels, by adding two or more asterisks (<cite>&#8216;) or hashes (&#8216;##</cite>). You can also combine unordered and ordered lists.</p>
+<div class="section" id="example-unordered-list">
+<h3>Example Unordered List<a class="headerlink" href="#example-unordered-list" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*</span> <span class="n">item</span> <span class="mi">1</span>
+<span class="o">*</span> <span class="n">item</span> <span class="mi">2</span>
+<span class="o">**</span> <span class="n">item</span> <span class="mf">2.1</span>
+<span class="o">**</span> <span class="n">item</span> <span class="mf">2.2</span>
+<span class="o">*</span> <span class="n">item</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+<div class="section" id="example-ordered-list">
+<h3>Example Ordered List<a class="headerlink" href="#example-ordered-list" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*</span><span class="c"># item 1</span>
+<span class="o">*</span><span class="c"># item 2</span>
+<span class="o">*</span><span class="c">## item 2.1</span>
+<span class="o">*</span><span class="c">## item 2.2</span>
+<span class="o">*</span><span class="c"># item 3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+<div class="section" id="ordered-list-with-inline-css">
+<h3>Ordered List with Inline CSS<a class="headerlink" href="#ordered-list-with-inline-css" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">*-</span> <span class="n">style</span><span class="o">=</span><span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">green</span> <span class="o">|</span> <span class="nb">id</span><span class="o">=</span><span class="n">ul_id</span>
+<span class="o">*</span><span class="c"># item 1</span>
+<span class="o">*</span><span class="c"># item 2</span>
+<span class="o">**-</span> <span class="n">style</span><span class="o">=</span><span class="n">border</span><span class="p">:</span> <span class="mi">1</span><span class="n">px</span> <span class="n">solid</span> <span class="n">red</span>
+<span class="o">*</span><span class="c">## item 2.1</span>
+<span class="o">*</span><span class="c">## item 2.2</span>
+<span class="o">*</span><span class="c"># item 3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>item 1</li>
+<li>item 2<ul>
+<li>item 2.1</li>
+<li>item 2.2</li>
+</ul>
+</li>
+<li>item 3</li>
+</ul>
+</div>
+</div>
+<div class="section" id="images">
+<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<p>To create an image, write its path enclosed with exclamation marks &#8216;!&#8217;</p>
+<div class="highlight-python"><div class="highlight"><pre>!/$$space/.files/img/gorilla.jpg!
+</pre></div>
+</div>
+<p>!/$$space/.files/img/gorilla.jpg!</p>
+<div class="section" id="with-styles">
+<h3>With styles<a class="headerlink" href="#with-styles" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre>!/$$space/.files/img/gorilla.jpg | border= 5px solid blue!
+</pre></div>
+</div>
+<p>!/$$space/.files/img/gorilla.jpg | border= 5px solid blue!</p>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<p>Links are surrounded by square brackets</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">Macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>/docs/Macros &lt;/docs/Macros&gt;
+To add description to the link, add it like this</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Macros</span> <span class="n">page</span> <span class="n">description</span> <span class="o">|</span> <span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">Macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Macros page description  &lt; /docs/Macros&gt;</p>
+<p>You can put a link to a page in a space this way</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Macros</span> <span class="n">page</span> <span class="n">description</span> <span class="o">|</span> <span class="n">docs</span><span class="p">;</span><span class="n">macros</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Macros page description  &lt;/docs/macros&gt;</p>
+<p>You can add ID &amp; class to it</p>
+<div class="highlight-python"><div class="highlight"><pre>[Macros page description | /docs/Macros | id=link_id | class = link_class]
+</pre></div>
+</div>
+<p>Macros page description  &lt; /docs/Macros &gt;</p>
+<p>the last element is any html which will be putin in the link, in this case ask the link to open a new tab</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">Performance</span> <span class="n">Dashboard</span><span class="o">|</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8081</span><span class="o">/</span><span class="n">dashboard</span><span class="o">|||</span><span class="n">target</span><span class="o">=</span><span class="s">&#39;_blank&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You can add images in the description of links</p>
+<div class="highlight-python"><div class="highlight"><pre>[Macros page description !/$$space/.files/img/gorilla.jpg! | /docs/Macros | id=link_id | class = link_class]
+</pre></div>
+</div>
+<p>Macros page description !/$$space/.files/img/gorilla.jpg!  &lt; /docs/Macros &gt;</p>
+</div>
+<div class="section" id="tables">
+<h2>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
+<p>Header cells are enclosed with double bars &#8216;|&#8217;, while table body cells are surrounded with single bars &#8216;|&#8217;.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">||</span> <span class="n">Header</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">Header</span> <span class="mi">2</span> <span class="o">||</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">1.1</span> <span class="o">|</span> <span class="n">Cell</span> <span class="mf">1.2</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.1</span> <span class="o">|</span> <span class="n">Cell</span> <span class="mf">2.2</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Macros/index.html" class="btn btn-neutral float-right" title="Macros:">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Configuration/UserManagement/UserManagement.html" class="btn btn-neutral" title="User Management"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

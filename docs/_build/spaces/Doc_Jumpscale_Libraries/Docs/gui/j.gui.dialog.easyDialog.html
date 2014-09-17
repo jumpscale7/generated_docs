@@ -1,0 +1,402 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.gui.dialog.easyDialog &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.gui" href="gui.html"/>
+        <link rel="next" title="j.gui.form" href="j.gui.form.html"/>
+        <link rel="prev" title="j.gui" href="gui.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="gui.html">j.gui</a> &raquo;</li>
+      
+    <li>j.gui.dialog.easyDialog</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/gui/j.gui.dialog.easyDialog.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-gui-dialog-easydialog">
+<h1>j.gui.dialog.easyDialog<a class="headerlink" href="#j-gui-dialog-easydialog" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/gui/dialog/EasyDialogConsole.py">Source</a></p>
+<div class="section" id="askchoice">
+<h2>askChoice<a class="headerlink" href="#askchoice" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,choices,defaultValue,pageSize,sortChoices,sortCallBack</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:126)</li>
+</ul>
+<p>Ask the user the supplied question and list the choices to choose from, if no response given the default value is used</p>
+</div>
+<div class="section" id="askchoicemultiple">
+<h2>askChoiceMultiple<a class="headerlink" href="#askchoicemultiple" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,choices,defaultValue,pageSize,sortChoices,sortCallBack</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:169)</li>
+</ul>
+<p>Ask the user the supplied question and list the choices to choose from, if no response given the default values &lt;s&gt; is used</p>
+</div>
+<div class="section" id="askdate">
+<h2>askDate<a class="headerlink" href="#askdate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,minValue,maxValue,selectedValue,format</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:318)</li>
+</ul>
+<p>Asks user the supplied question, a valid answer is a date between minValue and maxValue</p>
+<p>Currently in the EasyDialogConsole implementation ignores the format parameter and  only dates with format YYYY/MM/DD are supported</p>
+</div>
+<div class="section" id="askdatetime">
+<h2>askDateTime<a class="headerlink" href="#askdatetime" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,minValue,maxValue,selectedValue,format</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:178)</li>
+</ul>
+<p>Asks user a question that its answer is a datetime between minValue and maxValue</p>
+<p>Note: this note my seem out of place, but is is important to note that currently in the EasyDialogConsole implementation only dates with format YYYY/MM/DD are supported</p>
+</div>
+<div class="section" id="askdirpath">
+<h2>askDirPath<a class="headerlink" href="#askdirpath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,startPath</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:38)</li>
+</ul>
+<p>Prompts for a selection of a file path starting from startPath if given and &#8216;/&#8217; if not</p>
+</div>
+<div class="section" id="askfilepath">
+<h2>askFilePath<a class="headerlink" href="#askfilepath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,startPath</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:12)</li>
+</ul>
+<p>Prompts for a selection of a file path starting from startPath if given and &#8216;/&#8217; if not</p>
+</div>
+<div class="section" id="askint">
+<h2>askInt<a class="headerlink" href="#askint" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:65)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer, if none given the default value is used, the response and the default value must be valid integer</p>
+</div>
+<div class="section" id="askinteger">
+<h2>askInteger<a class="headerlink" href="#askinteger" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:115)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer, if none given the default value is used, the response and the default value must be valid integer</p>
+</div>
+<div class="section" id="askintegers">
+<h2>askIntegers<a class="headerlink" href="#askintegers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:397)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer</p>
+</div>
+<div class="section" id="askmultiline">
+<h2>askMultiline<a class="headerlink" href="#askmultiline" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:310)</li>
+</ul>
+<p>Asks the user the supplied question, where the answer could be multi-lines</p>
+</div>
+<div class="section" id="askpassword">
+<h2>askPassword<a class="headerlink" href="#askpassword" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,confirm,regex,retry,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:88)</li>
+</ul>
+<p>Asks the supplied question and prompts for password</p>
+</div>
+<div class="section" id="askstring">
+<h2>askString<a class="headerlink" href="#askstring" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue,validator</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:55)</li>
+</ul>
+<p>Asks the user the supplied question and prompt for an answer, if none given the default value is used</p>
+</div>
+<div class="section" id="askyesno">
+<h2>askYesNo<a class="headerlink" href="#askyesno" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: question,defaultValue</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:77)</li>
+</ul>
+<p>Asks user the supplied question and prompt for an answer, if none given the default value is used, the response and the default value one of the values [y|Y|yes|Yes..n|N|No..]</p>
+<p>Currently the default value effect is ignored since it would require changing the jumpscale vapp</p>
+</div>
+<div class="section" id="choosedialogtype">
+<h2>chooseDialogType<a class="headerlink" href="#choosedialogtype" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: type</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:434)</li>
+</ul>
+<p>supported types today: console,win32,wizardserver</p>
+</div>
+<div class="section" id="clear">
+<h2>clear<a class="headerlink" href="#clear" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:441)</li>
+</ul>
+<p>Clears the screen/form.</p>
+</div>
+<div class="section" id="message">
+<h2>message<a class="headerlink" href="#message" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:107)</li>
+</ul>
+<p>prints the given message to the screen</p>
+</div>
+<div class="section" id="navigateto">
+<h2>navigateTo<a class="headerlink" href="#navigateto" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: url</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:393)</li>
+</ul>
+</div>
+<div class="section" id="showlogging">
+<h2>showLogging<a class="headerlink" href="#showlogging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: text</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:386)</li>
+</ul>
+<p>Shows logging message</p>
+</div>
+<div class="section" id="showmessagebox">
+<h2>showMessageBox<a class="headerlink" href="#showmessagebox" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,title,msgboxButtons,msgboxIcon,defaultButton</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:211)</li>
+</ul>
+<p>Shows a message box</p>
+</div>
+<div class="section" id="showprogress">
+<h2>showProgress<a class="headerlink" href="#showprogress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: minvalue,maxvalue,currentvalue</li>
+<li>path:/core/gui/dialog/EasyDialogConsole.py (line:361)</li>
+</ul>
+<p>Shows a progress bar according to the given values</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.gui.form.html" class="btn btn-neutral float-right" title="j.gui.form">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gui.html" class="btn btn-neutral" title="j.gui"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

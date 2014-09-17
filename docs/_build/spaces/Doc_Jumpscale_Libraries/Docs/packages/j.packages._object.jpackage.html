@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.packages._object.jpackage &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.packages" href="packages.html"/>
+        <link rel="next" title="j.packages" href="j.packages.html"/>
+        <link rel="prev" title="j.packages" href="packages.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="packages.html">j.packages</a> &raquo;</li>
+      
+    <li>j.packages._object.jpackage</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/packages/j.packages._object.jpackage.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-packages-object-jpackage">
+<h1>j.packages._object.jpackage<a class="headerlink" href="#j-packages-object-jpackage" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/jpackages/JPackageObject.py">Source</a></p>
+<p>Data representation of a JPackage, should contain all information contained in the jpackages.cfg</p>
+<div class="section" id="adddependency">
+<h2>addDependency<a class="headerlink" href="#adddependency" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,supportedplatforms,minversion,maxversion,dependencytype</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:542)</li>
+</ul>
+</div>
+<div class="section" id="backup">
+<h2>backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="buildnrincrement">
+<h2>buildNrIncrement<a class="headerlink" href="#buildnrincrement" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:677)</li>
+</ul>
+</div>
+<div class="section" id="checkexistingblobs">
+<h2>checkExistingBlobs<a class="headerlink" href="#checkexistingblobs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: blobserver,dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1747)</li>
+</ul>
+</div>
+<div class="section" id="codecommit">
+<h2>codeCommit<a class="headerlink" href="#codecommit" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="codeexport">
+<h2>codeExport<a class="headerlink" href="#codeexport" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="codelink">
+<h2>codeLink<a class="headerlink" href="#codelink" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="codeupdate">
+<h2>codeUpdate<a class="headerlink" href="#codeupdate" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="compile">
+<h2>compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="configure">
+<h2>configure<a class="headerlink" href="#configure" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="copyfiles">
+<h2>copyfiles<a class="headerlink" href="#copyfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="delete">
+<h2>delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="download">
+<h2>download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="getapppath">
+<h2>getAppPath<a class="headerlink" href="#getapppath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:367)</li>
+</ul>
+</div>
+<div class="section" id="getblobhistory">
+<h2>getBlobHistory<a class="headerlink" href="#getblobhistory" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1766)</li>
+</ul>
+</div>
+<div class="section" id="getblobinfo">
+<h2>getBlobInfo<a class="headerlink" href="#getblobinfo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform,ttype,active</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:754)</li>
+</ul>
+</div>
+<div class="section" id="getblobitempaths">
+<h2>getBlobItemPaths<a class="headerlink" href="#getblobitempaths" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform,ttype,blobitempath</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:775)</li>
+</ul>
+<p>translates the item as shown in the blobinfo to the corresponding paths (jpackageFilesPath,destpathOnSystem)</p>
+</div>
+<div class="section" id="getblobkeysactive">
+<h2>getBlobKeysActive<a class="headerlink" href="#getblobkeysactive" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1681)</li>
+</ul>
+</div>
+<div class="section" id="getblobplatformtypes">
+<h2>getBlobPlatformTypes<a class="headerlink" href="#getblobplatformtypes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="getbrokendependencies">
+<h2>getBrokenDependencies<a class="headerlink" href="#getbrokendependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:710)</li>
+</ul>
+<p>Return a list of dependencies that cannot be resolved</p>
+</div>
+<div class="section" id="getcodelocationsfromrecipe">
+<h2>getCodeLocationsFromRecipe<a class="headerlink" href="#getcodelocationsfromrecipe" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:810)</li>
+</ul>
+</div>
+<div class="section" id="getcodemgmtrecipe">
+<h2>getCodeMgmtRecipe<a class="headerlink" href="#getcodemgmtrecipe" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:268)</li>
+</ul>
+</div>
+<div class="section" id="getdebugmode">
+<h2>getDebugMode<a class="headerlink" href="#getdebugmode" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:376)</li>
+</ul>
+</div>
+<div class="section" id="getdebugmodeinjpackage">
+<h2>getDebugModeInJpackage<a class="headerlink" href="#getdebugmodeinjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:379)</li>
+</ul>
+</div>
+<div class="section" id="getdependencies">
+<h2>getDependencies<a class="headerlink" href="#getdependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: errorIfNotFound</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:726)</li>
+</ul>
+<p>Return the dependencies for the JPackage</p>
+</div>
+<div class="section" id="getdependinginstalledpackages">
+<h2>getDependingInstalledPackages<a class="headerlink" href="#getdependinginstalledpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: recursive,errorIfNotFound</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:572)</li>
+</ul>
+<p>Return the packages that are dependent on this packages and installed on this machine
+This is a heavy operation and might take some time</p>
+</div>
+<div class="section" id="getdependingpackages">
+<h2>getDependingPackages<a class="headerlink" href="#getdependingpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: recursive,errorIfNotFound</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:582)</li>
+</ul>
+<p>Return the packages that are dependent on this package
+This is a heavy operation and might take some time</p>
+</div>
+<div class="section" id="gethighestinstalledbuildnr">
+<h2>getHighestInstalledBuildNr<a class="headerlink" href="#gethighestinstalledbuildnr" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:670)</li>
+</ul>
+<p>Return the latetst installed buildnumber</p>
+</div>
+<div class="section" id="getinstancenames">
+<h2>getInstanceNames<a class="headerlink" href="#getinstancenames" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:733)</li>
+</ul>
+</div>
+<div class="section" id="getispreparedforupdatingfiles">
+<h2>getIsPreparedForUpdatingFiles<a class="headerlink" href="#getispreparedforupdatingfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:560)</li>
+</ul>
+<p>Return true if package has been prepared</p>
+</div>
+<div class="section" id="getkey">
+<h2>getKey<a class="headerlink" href="#getkey" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:569)</li>
+</ul>
+</div>
+<div class="section" id="getmetadatapathqualitylevel">
+<h2>getMetadataPathQualityLevel<a class="headerlink" href="#getmetadatapathqualitylevel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ql</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:692)</li>
+</ul>
+</div>
+<div class="section" id="getpathfiles">
+<h2>getPathFiles<a class="headerlink" href="#getpathfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:626)</li>
+</ul>
+<p>Return absolute pathname of the jpackages&#8217;s filespath</p>
+</div>
+<div class="section" id="getpathfilesplatform">
+<h2>getPathFilesPlatform<a class="headerlink" href="#getpathfilesplatform" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:633)</li>
+</ul>
+<p>Return absolute pathname of the jpackages&#8217;s filespath
+if not given then will be: j.system.platformtype</p>
+</div>
+<div class="section" id="getpathfilesplatformforsubdir">
+<h2>getPathFilesPlatformForSubDir<a class="headerlink" href="#getpathfilesplatformforsubdir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: subdir</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:645)</li>
+</ul>
+<p>Return absolute pathnames of the jpackages&#8217;s filespath for platform or parent of platform if it does not exist in lowest level
+if platform not given then will be: j.system.platformtype
+the subdir will be used to check upon if found in one of the dirs, if never found will raise error
+all matching results are returned</p>
+</div>
+<div class="section" id="getpathinstance">
+<h2>getPathInstance<a class="headerlink" href="#getpathinstance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:614)</li>
+</ul>
+<p>Return absolute pathname of the package&#8217;s metadatapath</p>
+</div>
+<div class="section" id="getpathmetadata">
+<h2>getPathMetadata<a class="headerlink" href="#getpathmetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:620)</li>
+</ul>
+<p>Return absolute pathname of the package&#8217;s metadatapath active instance</p>
+</div>
+<div class="section" id="getpathsourcecode">
+<h2>getPathSourceCode<a class="headerlink" href="#getpathsourcecode" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:663)</li>
+</ul>
+<p>Return absolute path to where this package&#8217;s source can be extracted to</p>
+</div>
+<div class="section" id="getqualitylevels">
+<h2>getQualityLevels<a class="headerlink" href="#getqualitylevels" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:702)</li>
+</ul>
+</div>
+<div class="section" id="getversionasint">
+<h2>getVersionAsInt<a class="headerlink" href="#getversionasint" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:605)</li>
+</ul>
+<p>Translate string version representation to a number</p>
+</div>
+<div class="section" id="hasmodifiedfiles">
+<h2>hasModifiedFiles<a class="headerlink" href="#hasmodifiedfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:878)</li>
+</ul>
+<p>Check if files are modified in the JPackage files</p>
+</div>
+<div class="section" id="hasmodifiedmetadata">
+<h2>hasModifiedMetaData<a class="headerlink" href="#hasmodifiedmetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:887)</li>
+</ul>
+<p>Check if files are modified in the JPackage metadata</p>
+</div>
+<div class="section" id="install">
+<h2>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="installdebs">
+<h2>installDebs<a class="headerlink" href="#installdebs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1101)</li>
+</ul>
+</div>
+<div class="section" id="isinstalled">
+<h2>isInstalled<a class="headerlink" href="#isinstalled" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: instance,checkAndDie,hrdcheck</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:894)</li>
+</ul>
+<p>Check if the JPackage is installed</p>
+</div>
+<div class="section" id="isnew">
+<h2>isNew<a class="headerlink" href="#isnew" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1255)</li>
+</ul>
+</div>
+<div class="section" id="ispendingreconfiguration">
+<h2>isPendingReconfiguration<a class="headerlink" href="#ispendingreconfiguration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1927)</li>
+</ul>
+<p>Check if the JPackage needs reconfiguration</p>
+</div>
+<div class="section" id="isrunning">
+<h2>isrunning<a class="headerlink" href="#isrunning" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies,ipaddr</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1062)</li>
+</ul>
+<p>Check if application installed is running for jpackages</p>
+</div>
+<div class="section" id="kill">
+<h2>kill<a class="headerlink" href="#kill" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="load">
+<h2>load<a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: instance,force,hrddata,findDefaultInstance</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:209)</li>
+</ul>
+</div>
+<div class="section" id="loadblobstores">
+<h2>loadBlobStores<a class="headerlink" href="#loadblobstores" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:355)</li>
+</ul>
+</div>
+<div class="section" id="loaddependencies">
+<h2>loadDependencies<a class="headerlink" href="#loaddependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: errorIfNotFound</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:496)</li>
+</ul>
+</div>
+<div class="section" id="log">
+<h2>log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: msg,category,level</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:130)</li>
+</ul>
+</div>
+<div class="section" id="monitor">
+<h2>monitor<a class="headerlink" href="#monitor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="monitor-net">
+<h2>monitor_net<a class="headerlink" href="#monitor-net" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="package">
+<h2>package<a class="headerlink" href="#package" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="prepare">
+<h2>prepare<a class="headerlink" href="#prepare" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="prepareforupdatingfiles">
+<h2>prepareForUpdatingFiles<a class="headerlink" href="#prepareforupdatingfiles" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: suppressErrors</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1286)</li>
+</ul>
+<p>After this command the operator can change the files of the jpackages.
+Files do not aways come from code repo, they can also come from jpackages repo only</p>
+</div>
+<div class="section" id="processdepcheck">
+<h2>processDepCheck<a class="headerlink" href="#processdepcheck" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="reinstall">
+<h2>reinstall<a class="headerlink" href="#reinstall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies,download</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1070)</li>
+</ul>
+<p>Reinstall the JPackage by running its install tasklet, best not to use dependancies reinstall</p>
+</div>
+<div class="section" id="removedebugmode">
+<h2>removeDebugMode<a class="headerlink" href="#removedebugmode" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:417)</li>
+</ul>
+</div>
+<div class="section" id="removedebugmodeinjpackage">
+<h2>removeDebugModeInJpackage<a class="headerlink" href="#removedebugmodeinjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:407)</li>
+</ul>
+</div>
+<div class="section" id="reportnumbers">
+<h2>reportNumbers<a class="headerlink" href="#reportnumbers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:2014)</li>
+</ul>
+</div>
+<div class="section" id="restart">
+<h2>restart<a class="headerlink" href="#restart" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="restore">
+<h2>restore<a class="headerlink" href="#restore" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="save">
+<h2>save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="setdebugmode">
+<h2>setDebugMode<a class="headerlink" href="#setdebugmode" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:385)</li>
+</ul>
+</div>
+<div class="section" id="setdebugmodeinjpackage">
+<h2>setDebugModeInJpackage<a class="headerlink" href="#setdebugmodeinjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:398)</li>
+</ul>
+</div>
+<div class="section" id="showdependencies">
+<h2>showDependencies<a class="headerlink" href="#showdependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1939)</li>
+</ul>
+<p>Return all dependencies of the JPackage.
+See also: addDependency and removeDependency</p>
+</div>
+<div class="section" id="showdependinginstalledpackages">
+<h2>showDependingInstalledPackages<a class="headerlink" href="#showdependinginstalledpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1946)</li>
+</ul>
+<p>Show which jpackages have this jpackages as dependency.
+Do this only for the installed jpackages.</p>
+</div>
+<div class="section" id="showdependingpackages">
+<h2>showDependingPackages<a class="headerlink" href="#showdependingpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1953)</li>
+</ul>
+<p>Show which jpackages have this jpackages as dependency.</p>
+</div>
+<div class="section" id="signalconfigurationneeded">
+<h2>signalConfigurationNeeded<a class="headerlink" href="#signalconfigurationneeded" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1920)</li>
+</ul>
+<p>Set in the corresponding jpackages&#8217;s state file if reconfiguration is needed</p>
+</div>
+<div class="section" id="start">
+<h2>start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="stop">
+<h2>stop<a class="headerlink" href="#stop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="supportsplatform">
+<h2>supportsPlatform<a class="headerlink" href="#supportsplatform" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:920)</li>
+</ul>
+<p>Check if a JPackage can be installed on a platform</p>
+</div>
+<div class="section" id="uninstall">
+<h2>uninstall<a class="headerlink" href="#uninstall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="upload">
+<h2>upload<a class="headerlink" href="#upload" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: remote,local,dependencies,onlycode</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1666)</li>
+</ul>
+</div>
+<div class="section" id="uploadexistingblobs">
+<h2>uploadExistingBlobs<a class="headerlink" href="#uploadexistingblobs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: blobserver,dependencies</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1688)</li>
+</ul>
+</div>
+<div class="section" id="uploadexistingblobsfromhistory">
+<h2>uploadExistingBlobsFromHistory<a class="headerlink" href="#uploadexistingblobsfromhistory" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: blobserver</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:1718)</li>
+</ul>
+</div>
+<div class="section" id="waitdown">
+<h2>waitDown<a class="headerlink" href="#waitdown" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+<div class="section" id="waitup">
+<h2>waitUp<a class="headerlink" href="#waitup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageObject.py (line:15)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.packages.html" class="btn btn-neutral float-right" title="j.packages">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="packages.html" class="btn btn-neutral" title="j.packages"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

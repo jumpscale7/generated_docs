@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.system.installtools &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.system" href="system.html"/>
+        <link rel="next" title="j.system.statmanager.osisclient" href="j.system.statmanager.osisclient.html"/>
+        <link rel="prev" title="j.system.redisstataggregator.redis" href="j.system.redisstataggregator.redis.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="system.html">j.system</a> &raquo;</li>
+      
+    <li>j.system.installtools</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.installtools.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-system-installtools">
+<h1>j.system.installtools<a class="headerlink" href="#j-system-installtools" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/installtools/InstallTools.py">Source</a></p>
+<div class="section" id="chdir">
+<h2>chdir<a class="headerlink" href="#chdir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: seld,ddir</li>
+<li>path:/baselib/installtools/InstallTools.py (line:51)</li>
+</ul>
+</div>
+<div class="section" id="copydeletefirst">
+<h2>copydeletefirst<a class="headerlink" href="#copydeletefirst" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: source,dest</li>
+<li>path:/baselib/installtools/InstallTools.py (line:305)</li>
+</ul>
+</div>
+<div class="section" id="copytreedeletefirst">
+<h2>copytreedeletefirst<a class="headerlink" href="#copytreedeletefirst" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: source,dest</li>
+<li>path:/baselib/installtools/InstallTools.py (line:299)</li>
+</ul>
+</div>
+<div class="section" id="createdir">
+<h2>createdir<a class="headerlink" href="#createdir" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/baselib/installtools/InstallTools.py (line:315)</li>
+</ul>
+</div>
+<div class="section" id="delete">
+<h2>delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/baselib/installtools/InstallTools.py (line:285)</li>
+</ul>
+</div>
+<div class="section" id="download">
+<h2>download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: url,to</li>
+<li>path:/baselib/installtools/InstallTools.py (line:39)</li>
+</ul>
+</div>
+<div class="section" id="downloadjumpscalecore">
+<h2>downloadJumpScaleCore<a class="headerlink" href="#downloadjumpscalecore" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dest</li>
+<li>path:/baselib/installtools/InstallTools.py (line:266)</li>
+</ul>
+</div>
+<div class="section" id="enableqshell">
+<h2>enableQshell<a class="headerlink" href="#enableqshell" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:35)</li>
+</ul>
+</div>
+<div class="section" id="execute">
+<h2>execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,dieOnNonZeroExitCode,outputToStdout,useShell,ignoreErrorOutput</li>
+<li>path:/baselib/installtools/InstallTools.py (line:96)</li>
+</ul>
+<p>Executes a command, returns the exitcode and the output
+if exitcode is not zero then the executed command returned with errors</p>
+</div>
+<div class="section" id="expand">
+<h2>expand<a class="headerlink" href="#expand" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,destdir,deleteDestFirst,deleteSourceAfter</li>
+<li>path:/baselib/installtools/InstallTools.py (line:216)</li>
+</ul>
+</div>
+<div class="section" id="expand-tar-gz">
+<h2>expand_tar_gz<a class="headerlink" href="#expand-tar-gz" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,destdir,deleteDestFirst,deleteSourceAfter</li>
+<li>path:/baselib/installtools/InstallTools.py (line:216)</li>
+</ul>
+</div>
+<div class="section" id="getlastchangesetbitbucket">
+<h2>getLastChangeSetBitbucket<a class="headerlink" href="#getlastchangesetbitbucket" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: account,reponame</li>
+<li>path:/baselib/installtools/InstallTools.py (line:254)</li>
+</ul>
+</div>
+<div class="section" id="getpythonsiteconfigpath">
+<h2>getPythonSiteConfigPath<a class="headerlink" href="#getpythonsiteconfigpath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:271)</li>
+</ul>
+</div>
+<div class="section" id="gettmppath">
+<h2>getTmpPath<a class="headerlink" href="#gettmppath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: filename</li>
+<li>path:/baselib/installtools/InstallTools.py (line:263)</li>
+</ul>
+</div>
+<div class="section" id="installbaseminimal">
+<h2>installBaseMinimal<a class="headerlink" href="#installbaseminimal" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:321)</li>
+</ul>
+</div>
+<div class="section" id="isunix">
+<h2>isUnix<a class="headerlink" href="#isunix" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:85)</li>
+</ul>
+</div>
+<div class="section" id="iswindows">
+<h2>isWindows<a class="headerlink" href="#iswindows" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:91)</li>
+</ul>
+</div>
+<div class="section" id="log">
+<h2>log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: msg,level</li>
+<li>path:/baselib/installtools/InstallTools.py (line:81)</li>
+</ul>
+</div>
+<div class="section" id="removesymlink">
+<h2>removesymlink<a class="headerlink" href="#removesymlink" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/baselib/installtools/InstallTools.py (line:347)</li>
+</ul>
+</div>
+<div class="section" id="replacesitecustomize">
+<h2>replacesitecustomize<a class="headerlink" href="#replacesitecustomize" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/installtools/InstallTools.py (line:384)</li>
+</ul>
+</div>
+<div class="section" id="symlink">
+<h2>symlink<a class="headerlink" href="#symlink" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: src,dest</li>
+<li>path:/baselib/installtools/InstallTools.py (line:356)</li>
+</ul>
+<p>dest is where the link will be created pointing to src</p>
+</div>
+<div class="section" id="writefile">
+<h2>writefile<a class="headerlink" href="#writefile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,content</li>
+<li>path:/baselib/installtools/InstallTools.py (line:280)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.system.statmanager.osisclient.html" class="btn btn-neutral float-right" title="j.system.statmanager.osisclient">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="j.system.redisstataggregator.redis.html" class="btn btn-neutral" title="j.system.redisstataggregator.redis"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

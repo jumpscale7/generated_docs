@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JSAC &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Shell Commands" href="index.html"/>
+        <link rel="next" title="JSCODE" href="JSCode.html"/>
+        <link rel="prev" title="Shell Commands" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Macros/index.html">Macros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="index.html">Shell Commands</a> &raquo;</li>
+      
+    <li>JSAC</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Grid/Docs/ShellCommands/JSAC.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="jsac">
+<h1>JSAC<a class="headerlink" href="#jsac" title="Permalink to this headline">¶</a></h1>
+<p>JumpScale Agentcontroller management script</p>
+<div class="section" id="help">
+<h2>Help<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsac</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">jsac</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">nid</span> <span class="n">NID</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">ROLE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">ORGANIZATION</span><span class="p">]</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">ARGUMENTS</span><span class="p">]</span>
+            <span class="p">{</span><span class="nb">reload</span><span class="p">,</span><span class="k">exec</span><span class="p">,</span><span class="n">listsessions</span><span class="p">}</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="nb">reload</span><span class="p">,</span><span class="k">exec</span><span class="p">,</span><span class="n">listsessions</span><span class="p">}</span>
+                        <span class="n">Command</span> <span class="n">to</span> <span class="n">perform</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
+  <span class="o">-</span><span class="n">nid</span> <span class="n">NID</span><span class="p">,</span> <span class="o">--</span><span class="n">nodeid</span> <span class="n">NID</span>
+                        <span class="n">Use</span> <span class="k">for</span> <span class="k">exec</span>
+  <span class="o">-</span><span class="n">r</span> <span class="n">ROLE</span><span class="p">,</span> <span class="o">--</span><span class="n">role</span> <span class="n">ROLE</span>  <span class="n">Use</span> <span class="k">for</span> <span class="k">exec</span>
+  <span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">,</span> <span class="o">--</span><span class="n">name</span> <span class="n">NAME</span>  <span class="n">Use</span> <span class="k">for</span> <span class="k">exec</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">ORGANIZATION</span><span class="p">,</span> <span class="o">--</span><span class="n">organization</span> <span class="n">ORGANIZATION</span>
+                        <span class="n">Use</span> <span class="k">for</span> <span class="k">exec</span>
+  <span class="o">-</span><span class="n">a</span> <span class="n">ARGUMENTS</span><span class="p">,</span> <span class="o">--</span><span class="n">arguments</span> <span class="n">ARGUMENTS</span>
+                        <span class="n">Use</span> <span class="k">for</span> <span class="k">exec</span><span class="p">,</span> <span class="n">eg</span><span class="o">.</span> <span class="n">msg</span><span class="p">:</span><span class="n">test</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="actions">
+<h2>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reload">
+<h3>Reload<a class="headerlink" href="#reload" title="Permalink to this headline">¶</a></h3>
+<p>Reloads JumpScripts on agentcontroller and instructs all processmanagers and workers in the grid to reload aswell. This action is exactly the same as &#8216;jsgrid reloadjumpscripts&#8217;</p>
+</div>
+<div class="section" id="listssions">
+<h3>Listssions<a class="headerlink" href="#listssions" title="Permalink to this headline">¶</a></h3>
+<p>This commands list all connected session to the agentcontroller handy to have a quick look which processmanagers have connected to the agentcontroller and which roles they have</p>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsac</span> <span class="n">listsessions</span>
+<span class="n">Sessions</span><span class="p">:</span>
+
+<span class="n">computenode</span><span class="o">.</span><span class="n">kvm</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;55_1&#39;</span><span class="p">]</span>
+<span class="n">master</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;55_1&#39;</span><span class="p">]</span>
+<span class="n">node</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;55_1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="exec">
+<h3>Exec<a class="headerlink" href="#exec" title="Permalink to this headline">¶</a></h3>
+<p>Execute a JumpScript on a specific node/role passing organization, name and arguments from the cli and returns the Job</p>
+<div class="section" id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsac</span> <span class="k">exec</span> <span class="o">-</span><span class="n">o</span> <span class="n">jumpscale</span> <span class="o">-</span><span class="n">n</span> <span class="n">echo</span> <span class="o">-</span><span class="n">a</span> <span class="n">msg</span><span class="p">:</span><span class="n">helloworld</span> <span class="o">-</span><span class="n">r</span> <span class="n">node</span>
+<span class="n">Job</span><span class="p">:</span>
+
+<span class="p">:</span> <span class="n">args</span><span class="p">:</span> <span class="p">{</span><span class="n">msg</span><span class="p">:</span> <span class="n">helloworld</span><span class="p">}</span>
+<span class="n">category</span><span class="p">:</span> <span class="n">jumpscale</span>
+<span class="n">cmd</span><span class="p">:</span> <span class="n">echo</span>
+<span class="n">gid</span><span class="p">:</span> <span class="mi">55</span>
+<span class="n">guid</span><span class="p">:</span> <span class="n">afced53b8ddf4d4eb6e9b0e84fd2dac9</span>
+<span class="nb">id</span><span class="p">:</span> <span class="mi">4106</span>
+<span class="n">jscriptid</span><span class="p">:</span> <span class="mi">19</span>
+<span class="n">log</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">nid</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">parent</span><span class="p">:</span> <span class="n">null</span>
+<span class="n">queue</span><span class="p">:</span> <span class="n">default</span>
+<span class="n">result</span><span class="p">:</span> <span class="n">helloworld</span>
+<span class="n">resultcode</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">roles</span><span class="p">:</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>
+<span class="n">sessionid</span><span class="p">:</span> <span class="mi">55</span><span class="n">_1_0_9949f946</span><span class="o">-</span><span class="mi">3</span><span class="n">dcf</span><span class="o">-</span><span class="mi">4682</span><span class="o">-</span><span class="mi">9631</span><span class="o">-</span><span class="mi">927</span><span class="n">adaba49e7</span>
+<span class="n">state</span><span class="p">:</span> <span class="n">OK</span>
+<span class="n">timeStart</span><span class="p">:</span> <span class="mi">1404930166</span>
+<span class="n">timeStop</span><span class="p">:</span> <span class="mi">1404930166</span>
+<span class="n">timeout</span><span class="p">:</span> <span class="mi">600</span>
+<span class="n">wait</span><span class="p">:</span> <span class="n">true</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="JSCode.html" class="btn btn-neutral float-right" title="JSCODE">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Shell Commands"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

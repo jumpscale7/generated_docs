@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FS Walker &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="How To Use JumpScale" href="index.html"/>
+        <link rel="next" title="How to configure your machine to use LXC" href="HowToInstallLXC.html"/>
+        <link rel="prev" title="How to compare directories" href="HowToCompareDirs.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">How To Use JumpScale</a> &raquo;</li>
+      
+    <li>FS Walker</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../_sources/spaces/Doc_Jumpscale_Howto/Docs/HowToFSWalker.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="fs-walker">
+<h1>FS Walker<a class="headerlink" href="#fs-walker" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">WARNING</span><span class="p">:</span>
+<span class="n">we</span> <span class="n">need</span> <span class="n">to</span> <span class="n">improve</span> <span class="n">the</span> <span class="n">documentation</span> <span class="n">on</span> <span class="n">this</span> <span class="n">page</span>
+</pre></div>
+</div>
+<div class="section" id="dependencies">
+<h2>dependencies:<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>You&#8217;ll need to &#8216;apt-get install python-regex&#8217; first</li>
+</ul>
+</div>
+<div class="section" id="example">
+<h2>example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">fswalker</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">fswalker</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">fswalker</span><span class="o">.</span>
+
+<span class="n">fswalker</span><span class="o">.</span><span class="n">find</span>                       <span class="n">fswalker</span><span class="o">.</span><span class="n">lastPath</span>
+<span class="n">fswalker</span><span class="o">.</span><span class="n">statsAdd</span>                   <span class="n">fswalker</span><span class="o">.</span><span class="n">statsSize</span>
+<span class="n">fswalker</span><span class="o">.</span><span class="n">fs</span>                         <span class="n">fswalker</span><span class="o">.</span><span class="n">log</span>
+<span class="n">fswalker</span><span class="o">.</span><span class="n">statsNr</span>                    <span class="n">fswalker</span><span class="o">.</span><span class="n">statsStart</span>
+<span class="n">fswalker</span><span class="o">.</span><span class="n">getCallBackMatchFunctions</span>  <span class="n">fswalker</span><span class="o">.</span><span class="n">stats</span>
+<span class="n">fswalker</span><span class="o">.</span><span class="n">statsPrint</span>                 <span class="n">fswalker</span><span class="o">.</span><span class="n">walk</span>
+</pre></div>
+</div>
+<div class="section" id="find">
+<h3>find:<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h3>
+<p>&#8216;fswalker.find(self, root, includeFolders=False, includeLinks=False, pathRegexIncludes={}, pathRegexExcludes={}, followlinks=False, childrenRegexExcludes=&#8217;.*/log/.*&#8217;, &#8216;/dev/.*&#8217;, &#8216;/proc/.*&#8217; &lt;&#8217;.*/log/.*&#8217;, &#8216;/dev/.*&#8217;, &#8216;/proc/.*&#8217;&gt;, mdserverclient=None)&#8217;</p>
+<ul class="simple">
+<li>root: root path to find from.</li>
+<li>includeFolders: defaults to False. In this case, only files are matched.</li>
+<li>includeLinks: defaults to False. In this case, links are not included in the search results.</li>
+<li>pathRegexIncludes/Excludes: match paths to array of regex expressions {[]} to be included/excluded.</li>
+<li>childrenRegexExcludes: Excludes children with regex matching any of the given list from the results.</li>
+<li>mdserverclient: To search on metadata from another server.</li>
+</ul>
+<p>Returns:
+&#8216;{files:[],dirs:[],links:[],...$othertypes}&#8217;</p>
+</div>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fswalker</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span><span class="s">&#39;F&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;.pyc&#39;</span><span class="p">]},</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c">#Finds all files that are not of type pyc listed under this directory</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="walk">
+<h3>Walk<a class="headerlink" href="#walk" title="Permalink to this headline">¶</a></h3>
+<p>&#8216;fswalker.walk(self, root, callbackFunctions={}, arg=None, callbackMatchFunctions={}, followlinks=False, childrenRegexExcludes=&#8217;.*/log/.*&#8217;, &#8216;/dev/.*&#8217;, &#8216;/proc/.*&#8217; &lt;&#8217;.*/log/.*&#8217;, &#8216;/dev/.*&#8217;, &#8216;/proc/.*&#8217;&gt;, pathRegexIncludes={}, pathRegexExcludes={}, mdserverclient=None)&#8217;</p>
+<p>Walk through filesystem and execute a method per file and dirname if the match function selected the item.</p>
+<ul class="simple">
+<li>root: Where to start the walk from</li>
+<li>callbackFunctions: callback functions to be executed to matched files/directories/links walked upon.</li>
+<li>arg: the first argument to be passed along to the callback function (can be used to initiate the callback function)</li>
+<li>callbackMatchFunctions: callback functions which control the criteria whether to select an item</li>
+<li>includeFolders: defaults to False. In this case, only files are walked upon.</li>
+<li>pathRegexIncludes/Excludes: includes everything by default. No paths are excluded. To do so, through a list of regexes.</li>
+<li>depths: list of depth values e.g. only return depth 0 &amp; 1 (would mean first dir depth and then 1 more deep)</li>
+<li>followlinks: defaults to False, if True would follow linked files/directories to walk within them.</li>
+</ul>
+</div>
+<div class="section" id="complex-example-with-regular-expression-find-combined-with-call-back-functions">
+<h3>Complex example with regular expression find combined with call back functions<a class="headerlink" href="#complex-example-with-regular-expression-find-combined-with-call-back-functions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pathRegexExcludes</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">pathRegexExcludes</span><span class="p">[</span><span class="s">&quot;F&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;.*\.pyc&quot;</span><span class="p">,</span><span class="s">&quot;.*\.bak&quot;</span><span class="p">,</span><span class="s">&quot;.*\.pyo&quot;</span><span class="p">,</span><span class="s">&quot;.*\.log&quot;</span><span class="p">]</span>
+<span class="n">childrenRegexExcludes</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;.*/log/.*&quot;</span><span class="p">,</span><span class="s">&quot;/dev/.*&quot;</span><span class="p">,</span><span class="s">&quot;/proc/.*&quot;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">processfile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">stat</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> - </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">processdir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">stat</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span>
+
+
+<span class="k">def</span> <span class="nf">processlink</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">stat</span><span class="p">,</span><span class="n">arg</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="n">path</span>
+
+
+<span class="n">callbackFunctions</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">callbackFunctions</span><span class="p">[</span><span class="s">&quot;F&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">processfile</span>
+<span class="n">callbackFunctions</span><span class="p">[</span><span class="s">&quot;D&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">processdir</span>
+<span class="n">callbackFunctions</span><span class="p">[</span><span class="s">&quot;L&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">processlink</span>
+<span class="c">#callbackFunctions[&quot;O&quot;]=processother</span>
+<span class="c">#type O is a generic callback which matches all not specified (will not match F,D,L)</span>
+
+<span class="n">callbackMatchFunctions</span><span class="o">=</span><span class="n">fswalker</span><span class="o">.</span><span class="n">getCallBackMatchFunctions</span><span class="p">({},</span><span class="n">pathRegexExcludes</span><span class="p">,</span><span class="bp">False</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">args</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">args</span><span class="p">[</span><span class="s">&quot;metadata&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;something&quot;</span>
+<span class="n">args</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">]</span><span class="o">=</span><span class="s">&quot;data&quot;</span>
+
+<span class="n">fswalker</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">callbackFunctions</span><span class="p">,</span><span class="n">args</span><span class="p">,</span>
+                  <span class="n">callbackMatchFunctions</span><span class="p">,</span><span class="n">childrenRegexExcludes</span><span class="p">,</span>
+                  <span class="p">[],</span><span class="n">pathRegexExcludes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lastpath">
+<h3>lastPath<a class="headerlink" href="#lastpath" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>fswalker.lastPath</li>
+</ul>
+<p>Returns a string representation of the last object. Empty string if none found.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="HowToInstallLXC.html" class="btn btn-neutral float-right" title="How to configure your machine to use LXC">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HowToCompareDirs.html" class="btn btn-neutral" title="How to compare directories"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

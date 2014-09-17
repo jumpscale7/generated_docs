@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html"/>
+        <link rel="next" title="j.codetools" href="codetools/codetools.html"/>
+        <link rel="prev" title="ZDaemon and ZClient" href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="codetools/codetools.html">j.codetools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.regex.templates.lines.html">j.codetools.regex.templates.lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.executor.html">j.codetools.executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.regex.html">j.codetools.regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.templateengine.html">j.codetools.templateengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.html">j.codetools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetools/j.codetools.codemanager.html">j.codetools.codemanager</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logger/logger.html">j.logger</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logger/j.logger.html">j.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logger/j.logger.utils.html">j.logger.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="application/application.html">j.application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="application/j.application.shellconfig.html">j.application.shellconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application/j.application.config.html">j.application.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application/j.application.redis.html">j.application.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application/j.application.state.html">j.application.state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application/j.application.html">j.application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="servers/servers.html">j.servers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.geventws.html">j.servers.geventws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.zdaemon.html">j.servers.zdaemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.base.html">j.servers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.tipc.html">j.servers.tipc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.tornado.html">j.servers.tornado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/j.servers.cloudrobot.html">j.servers.cloudrobot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config/config.html">j.config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config/j.config.html">j.config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base/base.html">j.base</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.fs.installtools.html">j.base.fs.installtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.idgenerator.html">j.base.idgenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.regex.html">j.base.regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.byteprocessor.html">j.base.byteprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.loader.html">j.base.loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.timer.html">j.base.timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.fswalker.html">j.base.fswalker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.time.html">j.base.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.errorhandler.html">j.base.errorhandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/j.base.fs.html">j.base.fs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remote/remote.html">j.remote</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.cluster.html">j.remote.cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.fabric.html">j.remote.fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.avahi.html">j.remote.avahi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.cuisine.html">j.remote.cuisine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.cluster.replication.html">j.remote.cluster.replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.cluster.config.html">j.remote.cluster.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.cluster.replicator.html">j.remote.cluster.replicator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remote/j.remote.system.html">j.remote.system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="packages/packages.html">j.packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages._object.jpackage.html">j.packages._object.jpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.html">j.packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.sourcesConfig.html">j.packages.sourcesConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.redis.html">j.packages.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.docGenerator.html">j.packages.docGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.releaseMgmt.html">j.packages.releaseMgmt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/j.packages.docGenerator.docs.html">j.packages.docGenerator.docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gui/gui.html">j.gui</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gui/j.gui.dialog.easyDialog.html">j.gui.dialog.easyDialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui/j.gui.form.html">j.gui.form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui/j.gui.dialog.html">j.gui.dialog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="db/db.html">j.db</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.dict.html">j.db.serializers.dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.int.html">j.db.serializers.int</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.hrd.html">j.db.serializers.hrd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.html">j.db.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.tlog.html">j.db.tlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.ujson.html">j.db.serializers.ujson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.blowfish.html">j.db.serializers.blowfish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.time.html">j.db.serializers.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.cache.html">j.db.cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.keyvaluestore.html">j.db.keyvaluestore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.base64.html">j.db.serializers.base64</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db/j.db.serializers.msgpack.html">j.db.serializers.msgpack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code/code.html">j.code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code/j.code.html">j.code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="errorconditionhandler/j.errorconditionhandler.html">j.errorconditionhandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud/cloud.html">j.cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud/j.cloud.system.fs.html">j.cloud.system.fs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dirs/dirs.html">j.dirs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dirs/j.dirs.html">j.dirs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core/core.html">j.core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.zdaemon.html">j.core.zdaemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.tags.html">j.core.tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.portalloader.actorsinfo.html">j.core.portalloader.actorsinfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.grid.zobjects.html">j.core.grid.zobjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.osismodel.html">j.core.osismodel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.grid.healthchecker.html">j.core.grid.healthchecker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.processmanager.html">j.core.processmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.portal.html">j.core.portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.gevent.html">j.core.gevent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.grid.html">j.core.grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.specparser.html">j.core.specparser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.params.html">j.core.params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.processmanager.redisprocessmanager.html">j.core.processmanager.redisprocessmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.taskletengine.html">j.core.taskletengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.processmanager.redisprocessmanager.connection_pool.html">j.core.processmanager.redisprocessmanager.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.osis.html">j.core.osis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.processmanager.daemon.html">j.core.processmanager.daemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.codegenerator.html">j.core.codegenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.hrd.html">j.core.hrd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/j.core.portalloader.html">j.core.portalloader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="html/html.html">j.html</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="html/j.html.html">j.html</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basetype/basetype.html">j.basetype</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basetype/j.basetype.html">j.basetype</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="events/events.html">j.events</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="events/j.events.html">j.events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system/system.html">j.system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fs.html">j.system.fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fs.html#rules">Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fs.html#information-sources">Information sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.diskmanager.html">j.system.platform.diskmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.process.html">j.system.process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.statmanager.html">j.system.statmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.statmanager.osis.client.html">j.system.statmanager.osis.client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.redisstataggregator.html">j.system.redisstataggregator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.shorewall.html">j.system.platform.shorewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.ubuntu.html">j.system.platform.ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.statmanager.osis.html">j.system.statmanager.osis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.btrfs.html">j.system.btrfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.redisstataggregator.redis.connection_pool.html">j.system.redisstataggregator.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.qemu_img.html">j.system.platform.qemu_img</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.string.html">j.system.string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.stataggregator.html">j.system.stataggregator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.nginx.html">j.system.platform.nginx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.netconfig.html">j.system.netconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fswalker.html">j.system.fswalker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fswalker.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.fswalker.html#id1">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.python.html">j.system.platform.python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.stataggregator.stats.html">j.system.stataggregator.stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.ovsnetconfig.html">j.system.ovsnetconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platformtype.html">j.system.platformtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.socketserver.html">j.system.socketserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.redisstataggregator.redis.html">j.system.redisstataggregator.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.installtools.html">j.system.installtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.statmanager.osisclient.html">j.system.statmanager.osisclient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.unix.html">j.system.unix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.lxc.html">j.system.platform.lxc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.net.html">j.system.net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system/j.system.platform.screen.html">j.system.platform.screen</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="console/console.html">j.console</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="console/j.console.html">j.console</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools/tools.html">j.tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.sandboxer.html">j.tools.sandboxer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.objectinspector.html">j.tools.objectinspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.testengine.html">j.tools.testengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.startupmanager.html">j.tools.startupmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.imagelib.html">j.tools.imagelib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.jumpscriptsManager.html">j.tools.jumpscriptsManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.performancetrace.html">j.tools.performancetrace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.jail.redis.html">j.tools.jail.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.jail.redis.connection_pool.html">j.tools.jail.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.docpreprocessorparser.html">j.tools.docpreprocessorparser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.docpreprocessor.html">j.tools.docpreprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.units.sizes.html">j.tools.units.sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.ssl.html">j.tools.ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.inifile.html">j.tools.inifile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.admin.html">j.tools.admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.txtrobot.html">j.tools.txtrobot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.youtrack.html">j.tools.youtrack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.text.html">j.tools.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.docgenerator.html">j.tools.docgenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.expect.html">j.tools.expect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.testengineKds.html">j.tools.testengineKds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.hash.html">j.tools.hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.units.bytes.html">j.tools.units.bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.dnsmasq.html">j.tools.dnsmasq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.html.html">j.tools.html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/j.tools.jail.html">j.tools.jail</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="action/action.html">j.action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action/j.action.html">j.action</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="enumerators/enumerators.html">j.enumerators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.ZipFileAction.html">j.enumerators.ZipFileAction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.LogLevel.html">j.enumerators.LogLevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.DialogType.html">j.enumerators.DialogType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.ErrorConditionLevel.html">j.enumerators.ErrorConditionLevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.MessageType.html">j.enumerators.MessageType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.EnumerationWithValue.html">j.enumerators.EnumerationWithValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.ErrorConditionType.html">j.enumerators.ErrorConditionType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.AppStatusType.html">j.enumerators.AppStatusType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enumerators/j.enumerators.BlobType.html">j.enumerators.BlobType</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clients/clients.html">j.clients</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.graphite.html">j.clients.graphite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.http.html">j.clients.http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.credis.html">j.clients.credis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.influxdb.html">j.clients.influxdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.rogerthat.html">j.clients.rogerthat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.gitlab.html">j.clients.gitlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.redisworker.html">j.clients.redisworker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.mercurial.html">j.clients.mercurial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.vcs.html">j.clients.vcs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.elasticsearch.html">j.clients.elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.redis.html">j.clients.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.blobstor.html">j.clients.blobstor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.celery.html">j.clients.celery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.mongodb.html">j.clients.mongodb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.routeros.html">j.clients.routeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.github.html">j.clients.github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.bitbucket.config.html">j.clients.bitbucket.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.email.html">j.clients.email</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.git.html">j.clients.git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.redisworker.redis.html">j.clients.redisworker.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.bitbucket.html">j.clients.bitbucket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.ciscoswitch.html">j.clients.ciscoswitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.agentcontroller.html">j.clients.agentcontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.webdis.html">j.clients.webdis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.redisworker.redis.connection_pool.html">j.clients.redisworker.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clients/j.clients.bitbucketi.html">j.clients.bitbucketi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="errors.html">errors while trying to import libraries</a></li>
+</ul>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="codetools/codetools.html" class="btn btn-neutral float-right" title="j.codetools">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html" class="btn btn-neutral" title="ZDaemon and ZClient"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

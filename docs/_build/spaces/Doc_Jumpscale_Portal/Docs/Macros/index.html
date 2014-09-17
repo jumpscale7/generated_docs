@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Macros: &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="&lt;no title&gt;" href="../../index.html"/>
+        <link rel="next" title="Data Visualization" href="DataVisualization/index.html"/>
+        <link rel="prev" title="Wiki Syntax" href="../Wiki Syntax/Wiki Syntax.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+    <li>Macros:</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Macros/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="macros">
+<h1>Macros:<a class="headerlink" href="#macros" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DataVisualization/index.html">Data Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/BarChart/BarChart.html">BarChart Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/BarChart/BarChart.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/BarChart/BarChart.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/DataTables/DataTables.html">DataTables_use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/Graphs/Graphs.html">$$page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DataVisualization/JGauge/JGauge.html">Gauge Macro</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WebSiteElements/index.html">Web Site Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WebSiteElements/contact_form/contact_form.html">contact_form</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="HtmlElements/index.html">HTML Elements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Anchor/Anchor.html">Anchor Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Anchor/Anchor.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/CSS/CSS.html">CSS Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/CSS/CSS.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Capitalize/Capitalize.html">Capitalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Cssstyle/Cssstyle.html">CSS Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Favicon/Favicon.html">favicon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Footer/Footer.html">Footer Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Footer/Footer.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Html/Html.html">Html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/HtmlDivSpan/HtmlDivSpan.html">Span</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/HtmlHead/HtmlHead.html">HtmlHead</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Logo/Logo.html">Logo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Padding/Padding.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Pagestructure/Pagestructure.html">Creating a layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HtmlElements/Title/Title.html">Title</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Images/index.html">Images</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Images/Carousel/Carousel.html">Carousel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Images/Gallery/Gallery.html">Demo Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Images/Thumbnail/Thumbnail.html">Thumbnail</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation/index.html">Navigation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Children/Children.html">Children Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Childrentree/Childrentree.html">Childrentree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Code/Code.html">Code Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Code/Code.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Explorer/Explorer.html">Explorer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Find/Find.html">Find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Login/Login.html">Login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Menu/Menu.html">Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Menudropdown/Menudropdown.html">Menudropdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Navigation/Navigation.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/NumberedHeadings/NumberedHeadings.html">NumberedHeadings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Pages/Pages.html">Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Projectname/Projectname.html">Projectname</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/Spaces/Spaces.html">Spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation/TOC/TOC.html">Table of Contents (TOC)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Portal/index.html">Portal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Portal/ActorsDocs/ActorsDocs.html">Actors documentation macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Portal/ActorsDocs/ActorsDocs.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Portal/ActorsMacro/ActorsMacro.html">Actors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Portal/Include/Include.html">Include</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Portal/IncludeDocs/IncludeDocs.html">IncludeDocs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Utils/index.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Body/Body.html">Body</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Bootstrap/Bootstrap.html">Bootstrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Container/Container.html">Container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Debug/Debug.html">Debug</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Jscript/Jscript.html">Jscript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Pagecontent/Pagecontent.html">Pagecontent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Refresh/Refresh.html">Refresh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/ReloadApplication/ReloadApplication.html">ReloadApplication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/ReloadSpace/ReloadSpace.html">ReloadSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/ReloadSpaces/ReloadSpaces.html">ReloadSpaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Restresult/Restresult.html">Restresult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/SpaceAccessLog/SpaceAccessLog.html">SpaceAccessLog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Systemlogs/Systemlogs.html">Systemlogs Macro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Systemlogs/Systemlogs.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/Urlcalled/Urlcalled.html">Urlcalled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Utils/google_analytics/google_analytics.html">google_analytics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Experimental/index.html">Experimental</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Experimental/Hostbasedcontent/Hostbasedcontent.html">Host based content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Experimental/ListDocs/ListDocs.html">ListDocs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Experimental/Stats/Stats.html">statistics related macro&#8217;s</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Experimental/Toggle/Toggle.html">Toggle</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DataVisualization/index.html" class="btn btn-neutral float-right" title="Data Visualization">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Wiki Syntax/Wiki Syntax.html" class="btn btn-neutral" title="Wiki Syntax"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

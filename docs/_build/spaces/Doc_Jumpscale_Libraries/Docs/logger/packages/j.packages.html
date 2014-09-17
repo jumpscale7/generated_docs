@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.packages &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>j.packages</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/logger/packages/j.packages.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-packages">
+<h1>j.packages<a class="headerlink" href="#j-packages" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /baselib/jpackages/JPackageClient.py</li>
+</ul>
+<div class="section" id="checkjpackagesexistsonremoteblobstor">
+<h2>checkJpackagesExistsOnRemoteBlobStor<a class="headerlink" href="#checkjpackagesexistsonremoteblobstor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1192)</li>
+</ul>
+</div>
+<div class="section" id="checkprotecteddirs">
+<h2>checkProtectedDirs<a class="headerlink" href="#checkprotecteddirs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: redo,checkInteractive</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:107)</li>
+</ul>
+<p>recreate the config file for protected dirs (means directories linked to code repo&#8217;s)
+by executing this command you are sure that no development data will be overwritten</p>
+</div>
+<div class="section" id="create">
+<h2>create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version,description,supportedPlatforms</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:163)</li>
+</ul>
+<p>Creates a new jpackages4, this includes all standard tasklets, a config file and a description.wiki file</p>
+</div>
+<div class="section" id="disabledebugmetadata">
+<h2>disableDebugMetaData<a class="headerlink" href="#disabledebugmetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: qualitylevel,domain</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:795)</li>
+</ul>
+</div>
+<div class="section" id="enableconsolelogging">
+<h2>enableConsoleLogging<a class="headerlink" href="#enableconsolelogging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:90)</li>
+</ul>
+</div>
+<div class="section" id="exists">
+<h2>exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:312)</li>
+</ul>
+<p>Checks whether the jpackages&#8217;s metadata path is currently present on your system</p>
+</div>
+<div class="section" id="find">
+<h2>find<a class="headerlink" href="#find" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version,platform,onlyone,installed,instance,expandInstances,interactive</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:536)</li>
+</ul>
+</div>
+<div class="section" id="findbyname">
+<h2>findByName<a class="headerlink" href="#findbyname" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:525)</li>
+</ul>
+<p>name is part of jpackage, if none found return None, if more than 1 found raise error, name is part of name</p>
+</div>
+<div class="section" id="findnewest">
+<h2>findNewest<a class="headerlink" href="#findnewest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,minversion,maxversion,platform,returnNoneIfNotFound</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:473)</li>
+</ul>
+<p>Find the newest jpackages which matches the criteria
+If more than 1 jpackages matches -&gt; error
+If no jpackages match and not returnNoneIfNotFound -&gt; error</p>
+</div>
+<div class="section" id="get">
+<h2>get<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version,instance</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:292)</li>
+</ul>
+<p>Returns a jpackages</p>
+</div>
+<div class="section" id="getactionnamesclass">
+<h2>getActionNamesClass<a class="headerlink" href="#getactionnamesclass" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:279)</li>
+</ul>
+<p>these actions can be applied on jpackage without knowing the jpackage instance</p>
+</div>
+<div class="section" id="getactionnamesinstance">
+<h2>getActionNamesInstance<a class="headerlink" href="#getactionnamesinstance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:286)</li>
+</ul>
+</div>
+<div class="section" id="getdatapath">
+<h2>getDataPath<a class="headerlink" href="#getdatapath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:440)</li>
+</ul>
+<p>Returns the filesdatapath for the provided jpackages</p>
+</div>
+<div class="section" id="getdebugpackages">
+<h2>getDebugPackages<a class="headerlink" href="#getdebugpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:326)</li>
+</ul>
+<p>Returns a list of all currently installed packages on your system</p>
+</div>
+<div class="section" id="getdomainnames">
+<h2>getDomainNames<a class="headerlink" href="#getdomainnames" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:365)</li>
+</ul>
+<p>Returns a list of all domains present in the sources.cfg file</p>
+</div>
+<div class="section" id="getdomainobject">
+<h2>getDomainObject<a class="headerlink" href="#getdomainobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,qualityLevel</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:351)</li>
+</ul>
+<p>Get provided domain as an object</p>
+</div>
+<div class="section" id="getinstalledpackages">
+<h2>getInstalledPackages<a class="headerlink" href="#getinstalledpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:319)</li>
+</ul>
+<p>Returns a list of all currently installed packages on your system</p>
+</div>
+<div class="section" id="getjpactionspath">
+<h2>getJPActionsPath<a class="headerlink" href="#getjpactionspath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,instance,fromtmp</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:380)</li>
+</ul>
+<p>Returns the metadatapath for the provided jpackages
+if fromtmp is True, then tmp directorypath will be returned</p>
+</div>
+<div class="section" id="getjpactivehrdpath">
+<h2>getJPActiveHRDPath<a class="headerlink" href="#getjpactivehrdpath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,instance,fromtmp</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:413)</li>
+</ul>
+<p>Returns the metadatapath for the provided jpackages
+if fromtmp is True, then tmp directorypath will be returned</p>
+</div>
+<div class="section" id="getjpactiveinstancepath">
+<h2>getJPActiveInstancePath<a class="headerlink" href="#getjpactiveinstancepath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,instance,fromtmp</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:396)</li>
+</ul>
+<p>Returns the metadatapath for the provided jpackages in active mode</p>
+</div>
+<div class="section" id="getjpackagemetadatascanner">
+<h2>getJPackageMetadataScanner<a class="headerlink" href="#getjpackagemetadatascanner" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:95)</li>
+</ul>
+<p>returns tool which can be  used to scan the jpackages repo&#8217;s and manipulate them</p>
+</div>
+<div class="section" id="getjpackageobjects">
+<h2>getJPackageObjects<a class="headerlink" href="#getjpackageobjects" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: platform,domain</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:692)</li>
+</ul>
+<p>Returns a list of jpackages objects for specified platform &amp; domain</p>
+</div>
+<div class="section" id="getmetatarpath">
+<h2>getMetaTarPath<a class="headerlink" href="#getmetatarpath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domainName</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:449)</li>
+</ul>
+<p>Returns the metatarsdatapath for the provided domain</p>
+</div>
+<div class="section" id="getmetadatapath">
+<h2>getMetadataPath<a class="headerlink" href="#getmetadatapath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,version</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:429)</li>
+</ul>
+<p>Returns the metadatapath for the provided jpackages for active state</p>
+</div>
+<div class="section" id="getpackageswithbrokendependencies">
+<h2>getPackagesWithBrokenDependencies<a class="headerlink" href="#getpackageswithbrokendependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:706)</li>
+</ul>
+</div>
+<div class="section" id="getpendingreconfigurationpackages">
+<h2>getPendingReconfigurationPackages<a class="headerlink" href="#getpendingreconfigurationpackages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:340)</li>
+</ul>
+<p>Returns a List of all jpackages that are pending for configuration</p>
+</div>
+<div class="section" id="gettypepath">
+<h2>getTypePath<a class="headerlink" href="#gettypepath" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ttype,relativepath,jp</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:214)</li>
+</ul>
+</div>
+<div class="section" id="linkmetadata">
+<h2>linkMetaData<a class="headerlink" href="#linkmetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:756)</li>
+</ul>
+<p>Does an link of the meta information repo for each domain</p>
+</div>
+<div class="section" id="log">
+<h2>log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: msg,category,level</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:81)</li>
+</ul>
+</div>
+<div class="section" id="makedependencygraph">
+<h2>makeDependencyGraph<a class="headerlink" href="#makedependencygraph" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1090)</li>
+</ul>
+<p>Creates a graphical visualization of all dependencies between the JPackackages of all domains.
+This helps to quickly view and debug the dependencies and avoid errors.
+The target audience are the developers of accross groups and domains that depend on each others packages.</p>
+<p>The graph can be found here:
+/opt/qbase5/var/jpackages/metadata/dependencyGraph.png</p>
+<p>Notes:
+The graph omits the constraints, such as version numbers and platform.</p>
+<p>For completeness, a second graph is created that shows packages without andy dependencies (both ways).
+See: dependencyGraph_singleNodes.png</p>
+</div>
+<div class="section" id="mergemetadata">
+<h2>mergeMetaData<a class="headerlink" href="#mergemetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,commitMessage</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:827)</li>
+</ul>
+<p>Does an update of the meta information repo for each domain</p>
+</div>
+<div class="section" id="mergemetadataall">
+<h2>mergeMetaDataAll<a class="headerlink" href="#mergemetadataall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:737)</li>
+</ul>
+<p>Tries to merge the metadata information of all jpackages with info on remote repo.
+This used to be called updateJPackage list</p>
+</div>
+<div class="section" id="metadatacreatequalitylevel">
+<h2>metadataCreateQualityLevel<a class="headerlink" href="#metadatacreatequalitylevel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,qualityLevelFrom,qualityLevelTo,force,link</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:880)</li>
+</ul>
+<p>Create a quality level starting from the qualitylevelFrom e.g. unstable to beta</p>
+</div>
+<div class="section" id="metadatadeletequalitylevel">
+<h2>metadataDeleteQualityLevel<a class="headerlink" href="#metadatadeletequalitylevel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,qualityLevel</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:862)</li>
+</ul>
+<p>Delete a quality level</p>
+</div>
+<div class="section" id="pm-getjpackageconfig">
+<h2>pm_getJPackageConfig<a class="headerlink" href="#pm-getjpackageconfig" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackagesMDPath</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1087)</li>
+</ul>
+</div>
+<div class="section" id="publish">
+<h2>publish<a class="headerlink" href="#publish" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: commitMessage,domain</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:941)</li>
+</ul>
+<p>Publishes all domains&#8217; bundles &amp; metadata (if no domain specified)</p>
+</div>
+<div class="section" id="publishall">
+<h2>publishAll<a class="headerlink" href="#publishall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: commitMessage</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:954)</li>
+</ul>
+<p>Publish metadata &amp; bundles for all domains, for more informartion see publishDomain</p>
+</div>
+<div class="section" id="publishdomain">
+<h2>publishDomain<a class="headerlink" href="#publishdomain" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,commitMessage</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:964)</li>
+</ul>
+<p>Publish metadata &amp; bundles for a domain.
+To publish a domain means to make your local changes to the corresponding domain available to other users.
+A domain can be changed in the following ways: a new package is created in it, a package in it is modified, a package in it is deleted.
+To make the changes available to others the new metadata is uploaded to the mercurial servers and for the packages whos files
+have been modified,
+new bundles are created and uploaded to the blobstor server</p>
+</div>
+<div class="section" id="publishmetadataastargz">
+<h2>publishMetaDataAsTarGz<a class="headerlink" href="#publishmetadataastargz" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,qualityLevel</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:919)</li>
+</ul>
+<p>Compresses the meta data of a domain into a tar and upload that tar to the bundleUpload server.
+After this the that uptain there metadata as a tar can download the latest metadata.</p>
+</div>
+<div class="section" id="reloadconfig">
+<h2>reloadconfig<a class="headerlink" href="#reloadconfig" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:139)</li>
+</ul>
+<p>Reload all jpackages config data from disk</p>
+</div>
+<div class="section" id="reporterror">
+<h2>reportError<a class="headerlink" href="#reporterror" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: msg</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:78)</li>
+</ul>
+</div>
+<div class="section" id="runconfigurationpending">
+<h2>runConfigurationPending<a class="headerlink" href="#runconfigurationpending" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1009)</li>
+</ul>
+</div>
+<div class="section" id="switchmetadata">
+<h2>switchMetaData<a class="headerlink" href="#switchmetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: toQualitylevel,domain,disableDebug</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:771)</li>
+</ul>
+</div>
+<div class="section" id="updateall">
+<h2>updateAll<a class="headerlink" href="#updateall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:714)</li>
+</ul>
+<p>Updates all installed jpackages to the latest builds.
+The latest meta information is retrieved from the repository and based on this information,
+The install packages that have a buildnr that has been outdated our reinstall, thust updating them to the latest build.</p>
+</div>
+<div class="section" id="updatemetadata">
+<h2>updateMetaData<a class="headerlink" href="#updatemetadata" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,force</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:812)</li>
+</ul>
+<p>Does an update of the meta information repo for each domain</p>
+</div>
+<div class="section" id="updatemetadataall">
+<h2>updateMetaDataAll<a class="headerlink" href="#updatemetadataall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: force</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:728)</li>
+</ul>
+<p>Updates the metadata information of all jpackages
+This used to be called updateJPackage list</p>
+</div>
+<div class="section" id="updatemetadatafordomain">
+<h2>updateMetaDataForDomain<a class="headerlink" href="#updatemetadatafordomain" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domainName</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:745)</li>
+</ul>
+<p>Updates the meta information of specific domain
+This used to be called updateJPackage list</p>
+</div>
+<div class="section" id="uploadlocaljpackagestoblobstor">
+<h2>uploadLocalJpackagesToBlobStor<a class="headerlink" href="#uploadlocaljpackagestoblobstor" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: blobservername,history</li>
+<li>path:/baselib/jpackages/JPackageClient.py (line:1184)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

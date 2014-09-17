@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to use LXC &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="How To Use JumpScale" href="index.html"/>
+        <link rel="next" title="LXC image manipulation" href="HowToChangeLXCImage.html"/>
+        <link rel="prev" title="How to configure your machine to use LXC" href="HowToInstallLXC.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">How To Use JumpScale</a> &raquo;</li>
+      
+    <li>How to use LXC</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../_sources/spaces/Doc_Jumpscale_Howto/Docs/HowToUseLXC.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="how-to-use-lxc">
+<h1>How to use LXC<a class="headerlink" href="#how-to-use-lxc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="jsmachine">
+<h2>jsmachine<a class="headerlink" href="#jsmachine" title="Permalink to this headline">¶</a></h2>
+<p>is the main tool to interact with lxc</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># jsmachine --help</span>
+<span class="n">usage</span><span class="p">:</span> <span class="n">jsmachine</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">BNAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">BASE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">PREFIX</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">k</span> <span class="n">KEY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CMD</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">PUBIP</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">GW</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">start</span><span class="p">]</span>
+
+                 <span class="p">{</span><span class="n">ps</span><span class="p">,</span><span class="n">new</span><span class="p">,</span><span class="nb">list</span><span class="p">,</span><span class="n">destroyall</span><span class="p">,</span><span class="n">destroy</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">rdp</span><span class="p">,</span><span class="n">ssh</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">restart</span><span class="p">,</span><span class="n">getip</span><span class="p">,</span><span class="n">exportTGZ</span><span class="p">,</span><span class="n">importTGZ</span><span class="p">,</span><span class="n">exportR</span><span class="p">,</span><span class="n">importR</span><span class="p">}</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="p">{</span><span class="n">ps</span><span class="p">,</span><span class="n">new</span><span class="p">,</span><span class="nb">list</span><span class="p">,</span><span class="n">destroyall</span><span class="p">,</span><span class="n">destroy</span><span class="p">,</span><span class="n">cmd</span><span class="p">,</span><span class="n">rdp</span><span class="p">,</span><span class="n">ssh</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">restart</span><span class="p">,</span><span class="n">getip</span><span class="p">,</span><span class="n">exportTGZ</span><span class="p">,</span><span class="n">importTGZ</span><span class="p">,</span><span class="n">exportR</span><span class="p">,</span><span class="n">importR</span><span class="p">}</span>
+                        <span class="n">Command</span> <span class="n">to</span> <span class="n">perform</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="nb">exit</span>
+  <span class="o">-</span><span class="n">n</span> <span class="n">NAME</span><span class="p">,</span> <span class="o">--</span><span class="n">name</span> <span class="n">NAME</span>  <span class="n">machine</span> <span class="n">name</span>
+  <span class="o">-</span><span class="n">m</span> <span class="n">BNAME</span><span class="p">,</span> <span class="o">--</span><span class="n">bname</span> <span class="n">BNAME</span>
+                        <span class="n">name</span> <span class="n">of</span> <span class="n">backup</span> <span class="p">(</span><span class="n">used</span> <span class="k">for</span> <span class="n">import</span><span class="o">/</span><span class="n">export</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">b</span> <span class="n">BASE</span><span class="p">,</span> <span class="o">--</span><span class="n">base</span> <span class="n">BASE</span>  <span class="n">base</span> <span class="n">to</span> <span class="n">clone</span> <span class="kn">from</span>
+  <span class="o">-</span><span class="n">p</span> <span class="n">PASSWD</span><span class="p">,</span> <span class="o">--</span><span class="n">passwd</span> <span class="n">PASSWD</span>
+                        <span class="n">password</span> <span class="k">for</span> <span class="n">machine</span>
+  <span class="o">-</span><span class="n">r</span> <span class="n">PREFIX</span><span class="p">,</span> <span class="o">--</span><span class="n">prefix</span> <span class="n">PREFIX</span>
+                        <span class="n">prefix</span>
+  <span class="o">-</span><span class="n">k</span> <span class="n">KEY</span><span class="p">,</span> <span class="o">--</span><span class="n">key</span> <span class="n">KEY</span>     <span class="n">key</span> <span class="k">for</span> <span class="n">syncing</span>
+  <span class="o">-</span><span class="n">c</span> <span class="n">CMD</span><span class="p">,</span> <span class="o">--</span><span class="n">cmd</span> <span class="n">CMD</span>     <span class="n">cmd</span> <span class="n">to</span> <span class="n">execute</span>
+  <span class="o">-</span><span class="n">a</span> <span class="n">PUBIP</span><span class="p">,</span> <span class="o">--</span><span class="n">pubip</span> <span class="n">PUBIP</span>
+                        <span class="nb">set</span> <span class="n">pub</span> <span class="n">ip</span> <span class="n">addr</span> <span class="n">of</span> <span class="n">machine</span> <span class="p">(</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.207</span><span class="o">/</span><span class="mi">24</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">g</span> <span class="n">GW</span><span class="p">,</span> <span class="o">--</span><span class="n">gw</span> <span class="n">GW</span>        <span class="nb">set</span> <span class="n">ip</span> <span class="n">gateway</span> <span class="n">of</span> <span class="n">machine</span> <span class="p">(</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">start</span>               <span class="n">start</span> <span class="n">after</span> <span class="n">creation</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-your-first-machine">
+<h2>create your first machine<a class="headerlink" href="#create-your-first-machine" title="Permalink to this headline">¶</a></h2>
+<p>create a machine to start working with</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsmachine</span> <span class="n">new</span> <span class="o">-</span><span class="n">n</span> <span class="n">test</span> <span class="o">-</span><span class="n">b</span> <span class="n">base</span> <span class="o">-</span><span class="n">a</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.31</span><span class="o">/</span><span class="mi">24</span> <span class="o">-</span><span class="n">g</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span> <span class="o">--</span><span class="n">start</span>
+</pre></div>
+</div>
+<p>-a 192.168.1.31 is from existing range on my network
+-g is the gateway
+make sure the netmask is properly done</p>
+<p>the &#8211;start will try to ssh the just created lxc</p>
+</div>
+<div class="section" id="list-machines">
+<h2>list machines<a class="headerlink" href="#list-machines" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># jsmachine list</span>
+<span class="c">## running:</span>
+  <span class="n">machine</span><span class="p">:</span> <span class="n">test</span>                      <span class="mf">10.10</span><span class="o">.</span><span class="mf">253.4</span>
+<span class="c">## stopped:</span>
+  <span class="n">machine</span><span class="p">:</span> <span class="n">base</span>                      <span class="mf">10.10</span><span class="o">.</span><span class="mf">253.7</span>
+  <span class="n">machine</span><span class="p">:</span> <span class="n">sentry</span>                    <span class="mf">10.10</span><span class="o">.</span><span class="mf">253.3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remote-execute-something-on-machine-s">
+<h2>remote execute something on machine(s)<a class="headerlink" href="#remote-execute-something-on-machine-s" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsexec</span> <span class="o">-</span><span class="n">r</span> <span class="n">test</span> <span class="o">-</span><span class="n">x</span> <span class="s">&quot;ls /&quot;</span> <span class="o">-</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>-s will do it synchronously</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">jsexec</span> <span class="o">-</span><span class="n">r</span> <span class="n">test</span><span class="p">,</span><span class="n">test3</span> <span class="o">-</span><span class="n">x</span> <span class="s">&quot;ls /&quot;</span>
+</pre></div>
+</div>
+<p>will execute both in parallel &amp; show result</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="HowToChangeLXCImage.html" class="btn btn-neutral float-right" title="LXC image manipulation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="HowToInstallLXC.html" class="btn btn-neutral" title="How to configure your machine to use LXC"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JPackages Tutorial &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Installation" href="../index.html"/>
+        <link rel="next" title="jpackage command" href="JPackageCMD.html"/>
+        <link rel="prev" title="JPackages Details" href="JpackageIntro.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Installation</a> &raquo;</li>
+      
+    <li>JPackages Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Core/Docs/JPackages/JPackagesABC.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="jpackages-tutorial">
+<h1>JPackages Tutorial<a class="headerlink" href="#jpackages-tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial will walk you through creating a JPackage from scratch, until having it installed. Note that you need to have JumpScale core (at least) to be installed to be able to complete this tutorial.</p>
+</div>
+<div class="section" id="create">
+<h2>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h2>
+<p>We are going to create a new JPackage, named &#8220;example_package&#8221;, under domain &#8220;test&#8221; (domain and blobstore configuration will come later). Run the following command from within shell:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">create</span>
+</pre></div>
+</div>
+<p>In this tutorial, we will be using <em>jpackage</em> commands (Note that all commands functionality are also available through JumpScale jpackages APIs, available under <em>j.packages</em>)
+The last command, <em>jpackage create</em> will trigger a wizard to collect some information about the package you wanna create as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre>template:shell
+
+ Please select a domain
+   1: cloudscalers
+   2: jumpscale
+   3: test
+
+   Select Nr (1-3): 3
+Please provide a name: example_package
+Please provide a version [1.0]:
+Please provide a description:
+Please enumerate the supported platforms
+   1: cygwin
+   2: generic
+   3: linux
+   4: linux32
+   5: linux64
+   6: mint
+   7: mint32
+   8: mint64
+   9: ubuntu
+   10: ubuntu32
+   11: ubuntu64
+   12: unix
+   13: unknown
+   14: vista
+   15: win
+   16: win2008_64
+   17: win2012_64
+   18: win32
+   19: win64
+   20: win7
+   21: win8
+
+   Select Nr, use comma separation if more e.g. &quot;1,4&quot;, * is all, 0 is None: 2
+jpackage_save             :: JPackage test example_package 1.0:saving jpackages data to $jumpscaledir/var/jpackages/metadata/test/example_package/1.0
+</pre></div>
+</div>
+<p>You need to provide the following information: package domain, name, instance, description and supported platforms.
+Now you will have metadata for your package created under <em>$jumpscaledir/var/jpackages/metadata/&lt;domain&gt;/&lt;package_name&gt;/&lt;instance&gt;</em>. You can now edit metadata scripts, like <em>install.prepare.py</em>, <em>install.configure.py</em>, etc for the logic you would like to have it implemented in your package.</p>
+<div class="section" id="define-recipe">
+<h3>Define recipe<a class="headerlink" href="#define-recipe" title="Permalink to this headline">¶</a></h3>
+<p>After creating a new package, you may now need to define a recipe. A code recipe is basically some config files which tell jpackage system which code files your package needs to download to be installed. These files are as follows:</p>
+<ol class="arabic simple">
+<li><em>code.hrd</em>: under <em>&lt;package_name&gt;/&lt;instance&gt;/hrd/</em> where you can define your recipe source repo information</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">properties</span>
+
+<span class="n">jp</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">account</span><span class="o">=</span><span class="n">jumpscale</span>
+<span class="n">jp</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">repo</span><span class="o">=</span><span class="n">jumpscale_lib</span>
+<span class="n">jp</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="n">bitbucket</span>
+<span class="n">jp</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">branch</span><span class="o">=</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><em>coderecipe.cfg</em>: under <em>&lt;package_name&gt;/&lt;instance&gt;/</em> where you can define the destination for your recipe source files. File format is as follows:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">properties</span>
+
+<span class="c">#$fileOrDir | $destination | $platform | $type | tagsOrLabels</span>
+<span class="c">#types sitepackages, root, base, etc, tmp, bin</span>
+<span class="c">#tagslabels: e.g. config</span>
+<span class="c">#platform empty means generic</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">JumpScale</span><span class="o">/</span><span class="n">lib</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="n">tmp</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>This will copy <em>JumpScale/lib</em> directory under <em>/tmp</em>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">apps</span><span class="o">/</span><span class="n">osis</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span> <span class="o">|</span> <span class="o">|</span> <span class="o">|</span> <span class="n">base</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>This will copy <em>apps/osis/tests/</em> from <em>jumpscale_grid</em> repo to <em>apps/osis/tests/</em> under <em>$jumpscaledir</em> directory on the destination system (this is what <em>base</em> means).</p>
+<p><em>root</em> means to copy files under root of the file system, <em>sitepackages</em> means under <em>/usr/local/lib/python2.7/site-packages</em> and so on. Platform also can be specified.</p>
+<p>After editing metadata scripts, you are ready now to package your jpackage via the following command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">package</span> <span class="o">-</span><span class="n">n</span> <span class="s">&#39;example_package&#39;</span>
+</pre></div>
+</div>
+<p>This command will do the following:</p>
+<ol class="arabic simple">
+<li>Execute the package recipe (i.e: check out the recipe files) and copy them under <em>$jumpscaledir/var/jpackages/files/&lt;domain&gt;/&lt;package_name&gt;/&lt;instance&gt;/&lt;platform&gt;</em></li>
+<li>Create <em>&lt;platform&gt;___cr_&lt;type&gt;.info</em> file under <em>&lt;package_name&gt;/&lt;instance&gt;/files</em> which contains all the the package&#8217;s files paths and their MD5 checksum (for each file)</li>
+<li>Update the build number</li>
+</ol>
+<p>After packaging your jpackage, you are ready now to upload your package files to the blobstore. If your package requires any additional files for its installation, you should put them now under <em>$jumpscaledir/var/jpackages/files/&lt;domain&gt;/&lt;package_name&gt;/</em> so that they can get uploaded to the blobstore. You also need to have a valid <em>$jumpscaledir/cfg/jsconfig/blobstor.cfg</em> file, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">properties</span>
+
+<span class="p">[</span><span class="n">jpackages_local</span><span class="p">]</span>
+<span class="n">ftp</span> <span class="o">=</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="n">local</span>
+<span class="n">http</span> <span class="o">=</span>
+<span class="n">localpath</span> <span class="o">=</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">jpackagesftp</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="n">jpackages</span>
+
+<span class="p">[</span><span class="n">jpackages_remote</span><span class="p">]</span>
+<span class="n">ftp</span> <span class="o">=</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="nd">@publicrepo.incubaid.com</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="n">httpftp</span>
+<span class="n">http</span> <span class="o">=</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">publicrepo</span><span class="o">.</span><span class="n">incubaid</span><span class="o">.</span><span class="n">com</span>
+<span class="n">localpath</span> <span class="o">=</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="n">jpackages</span>
+</pre></div>
+</div>
+<p>and also a valid <em>$jumpscaledir/cfg/jpackages/sources.cfg</em> file which has a reference to the correct blobstore, for example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">properties</span>
+<span class="p">[</span><span class="n">test</span><span class="p">]</span>
+<span class="n">metadatafromtgz</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">qualitylevel</span> <span class="o">=</span> <span class="n">unstable</span>
+<span class="n">metadatadownload</span> <span class="o">=</span>
+<span class="n">metadataupload</span> <span class="o">=</span>
+<span class="n">bitbucketaccount</span> <span class="o">=</span> <span class="n">jumpscale</span>
+<span class="n">bitbucketreponame</span> <span class="o">=</span> <span class="n">jp_test</span>
+<span class="n">blobstorremote</span> <span class="o">=</span> <span class="n">jpackages_remote</span>
+<span class="n">blobstorlocal</span> <span class="o">=</span> <span class="n">jpackages_local</span>
+</pre></div>
+</div>
+<p>Note <em>blobstorremote = jpackages_remote</em> the same name as in the <em>blobstor.cfg</em> for proper files uploading.
+Now, if you have these configuration values set correctly, you are ready to call the upload command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">upload</span> <span class="o">-</span><span class="n">n</span> <span class="s">&#39;example_package&#39;</span>
+</pre></div>
+</div>
+<p>Now, you should find your package files on the remote blobstore</p>
+</div>
+<div class="section" id="publish">
+<h3>Publish<a class="headerlink" href="#publish" title="Permalink to this headline">¶</a></h3>
+<p>Now, your jpackage metadata needs to be published to the domain&#8217;s repo (as specified in the <em>sources.cfg</em> file, <em>bitbucketreponame</em> field). In order to do this, you will need to call the publish command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">publish</span> <span class="o">-</span><span class="n">n</span> <span class="s">&#39;example_package&#39;</span>
+</pre></div>
+</div>
+<p>This command will start a wizard to publish your metadata (i.e: push metadata to their corresponding repo)</p>
+<div class="highlight-python"><div class="highlight"><pre>bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+continue? (y/n):y
+please enter a commit message: test
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+jpackage_save             :: JPackage test example_package 1.0:saving jpackages data to $jumpscaledir/var/jpackages/metadata/test/example_package/1.0
+ * updatejpackages metadata for domain testbitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+* pull jp_test
+Found files not added yet to repo or deleted from filesystem
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.commit.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.export.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.link.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.package.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.push.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/code.update.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/data.export.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/data.import.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/data.logrotate.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/install.configure.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/install.copy.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/install.download.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/install.post.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/install.prepare.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/monitor.getstats.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/monitor.up.local.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/monitor.up.net.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.configure.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.depcheck.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.kill.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.start.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.stop.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/process.unconfigure.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/uninstall.py
+Nottracked/Ignored: unstable/example_package/1.0/actions/upload.py
+Nottracked/Ignored: unstable/example_package/1.0/coderecipe.cfg
+Nottracked/Ignored: unstable/example_package/1.0/description.wiki
+Nottracked/Ignored: unstable/example_package/1.0/documentation/main.wiki
+Nottracked/Ignored: unstable/example_package/1.0/files/generic___cr_tmp.info
+Nottracked/Ignored: unstable/example_package/1.0/hrd/code.hrd
+Nottracked/Ignored: unstable/example_package/1.0/hrd/main.hrd
+Nottracked/Ignored: unstable/example_package/1.0/hrdactive/_example.hrd
+Nottracked/Ignored: unstable/example_package/1.0/hrdactive/readme.txt
+Nottracked/Ignored: unstable/example_package/1.0/releasenotes.wiki
+Nottracked/Ignored: unstable/example_package/1.0/uploadhistory/generic___cr_tmp.info
+\Above files are not added yet to repo but on filesystem
+What do you want to do with these files
+   1: Abort
+   2: AddRemove
+   3: RemoveTheseFiles
+
+   Select Nr (1-3): 2
+                  DONE
+bitbucket_getclient       :: try to init mercurial client:jp_test on path:/opt/code/jumpscale/jp_test
+bitbucket_getclient       :: mercurial client inited for repo:jp_test
+* commit push jp_test
+</pre></div>
+</div>
+</div>
+<div class="section" id="install">
+<h3>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
+<p>Now, your jpackage example_package is successfully created, published and ready to be consumed via any JumpScale system which of course has the required configuration for the package to be installed (i.e: <em>sources.cfg</em>, <em>blobstor.cfg</em>)
+In order to install your jpackage, run the install command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">template</span><span class="p">:</span><span class="n">shell</span>
+<span class="n">jpackage</span> <span class="n">install</span> <span class="o">-</span><span class="n">n</span> <span class="s">&#39;example_package&#39;</span>
+</pre></div>
+</div>
+<p>Note:
+There is a command <em>jpackage repackage</em> which can do the package, upload and publish for you. Check the JPackages Commands &lt;JPackagesCommands&gt; page for other available jpackages commands</p>
+</div>
+</div>
+<div class="section" id="using-jpackage-instances">
+<h2>Using JPackage instances<a class="headerlink" href="#using-jpackage-instances" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="you-can-install-the-same-package-in-different-instances">
+<h3>You can install the same package in different instances.<a class="headerlink" href="#you-can-install-the-same-package-in-different-instances" title="Permalink to this headline">¶</a></h3>
+<p>For example, instead of only one agent, you want to have more.
+&#8216;jpacakge install -n agent -i test&#8217;
+This will install a new agent instance called &#8220;test&#8221;</p>
+<p>You could also have different configurations for different instances, by configuring an hrd under &#8220;hrdinstance&#8221; of the jpackage
+Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">agent</span><span class="o">.</span><span class="n">agentcontroller</span><span class="o">.</span><span class="n">ip</span><span class="o">=</span><span class="nd">@ASK</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">agentcontroller</span><span class="o">.</span><span class="n">secret</span><span class="o">=</span><span class="nd">@ASK</span>
+</pre></div>
+</div>
+<p>this will enable different configs for different instances of the same jpackage</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="JPackageCMD.html" class="btn btn-neutral float-right" title="jpackage command">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="JpackageIntro.html" class="btn btn-neutral" title="JPackages Details"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

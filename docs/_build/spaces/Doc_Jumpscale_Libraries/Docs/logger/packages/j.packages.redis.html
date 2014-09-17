@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.packages.redis &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>j.packages.redis</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/logger/packages/j.packages.redis.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-packages-redis">
+<h1>j.packages.redis<a class="headerlink" href="#j-packages-redis" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>path: /baselib/credis/CRedis.py</li>
+</ul>
+<p>example for pipeline
+self.execute_pipeline((&#8216;SET&#8217;,&#8221;test&#8221;,&#8221;This Should Return&#8221;),(&#8216;GET&#8217;,&#8221;test&#8221;))</p>
+<div class="section" id="blpop">
+<h2>blpop<a class="headerlink" href="#blpop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,timeout</li>
+<li>path:/baselib/credis/CRedis.py (line:88)</li>
+</ul>
+</div>
+<div class="section" id="brpoplpush">
+<h2>brpoplpush<a class="headerlink" href="#brpoplpush" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: src,dst,timeout</li>
+<li>path:/baselib/credis/CRedis.py (line:142)</li>
+</ul>
+</div>
+<div class="section" id="connect">
+<h2>connect<a class="headerlink" href="#connect" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/credis/CRedis.py (line:51)</li>
+</ul>
+</div>
+<div class="section" id="delete">
+<h2>delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:133)</li>
+</ul>
+</div>
+<div class="section" id="eval">
+<h2>eval<a class="headerlink" href="#eval" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: script,nrkeys</li>
+<li>path:/baselib/credis/CRedis.py (line:153)</li>
+</ul>
+</div>
+<div class="section" id="evalsha">
+<h2>evalsha<a class="headerlink" href="#evalsha" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: sha,nrkeys</li>
+<li>path:/baselib/credis/CRedis.py (line:150)</li>
+</ul>
+</div>
+<div class="section" id="execute">
+<h2>execute<a class="headerlink" href="#execute" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/credis/CRedis.py (line:64)</li>
+</ul>
+</div>
+<div class="section" id="exists">
+<h2>exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:100)</li>
+</ul>
+</div>
+<div class="section" id="expire">
+<h2>expire<a class="headerlink" href="#expire" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,timeout</li>
+<li>path:/baselib/credis/CRedis.py (line:136)</li>
+</ul>
+</div>
+<div class="section" id="get">
+<h2>get<a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:103)</li>
+</ul>
+</div>
+<div class="section" id="getfallbackredis">
+<h2>getFallBackRedis<a class="headerlink" href="#getfallbackredis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/credis/CRedis.py (line:47)</li>
+</ul>
+</div>
+<div class="section" id="hdel">
+<h2>hdel<a class="headerlink" href="#hdel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name</li>
+<li>path:/baselib/credis/CRedis.py (line:121)</li>
+</ul>
+</div>
+<div class="section" id="hdelete">
+<h2>hdelete<a class="headerlink" href="#hdelete" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hkey,key</li>
+<li>path:/baselib/credis/CRedis.py (line:118)</li>
+</ul>
+</div>
+<div class="section" id="hexists">
+<h2>hexists<a class="headerlink" href="#hexists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hkey,key</li>
+<li>path:/baselib/credis/CRedis.py (line:124)</li>
+</ul>
+</div>
+<div class="section" id="hget">
+<h2>hget<a class="headerlink" href="#hget" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hkey,key</li>
+<li>path:/baselib/credis/CRedis.py (line:112)</li>
+</ul>
+</div>
+<div class="section" id="hgetall">
+<h2>hgetall<a class="headerlink" href="#hgetall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hkey</li>
+<li>path:/baselib/credis/CRedis.py (line:115)</li>
+</ul>
+</div>
+<div class="section" id="hincrby">
+<h2>hincrby<a class="headerlink" href="#hincrby" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name,key,amount</li>
+<li>path:/baselib/credis/CRedis.py (line:139)</li>
+</ul>
+</div>
+<div class="section" id="hkeys">
+<h2>hkeys<a class="headerlink" href="#hkeys" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:97)</li>
+</ul>
+</div>
+<div class="section" id="hset">
+<h2>hset<a class="headerlink" href="#hset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hkey,key,value</li>
+<li>path:/baselib/credis/CRedis.py (line:109)</li>
+</ul>
+</div>
+<div class="section" id="incr">
+<h2>incr<a class="headerlink" href="#incr" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:127)</li>
+</ul>
+</div>
+<div class="section" id="incrby">
+<h2>incrby<a class="headerlink" href="#incrby" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,nr</li>
+<li>path:/baselib/credis/CRedis.py (line:130)</li>
+</ul>
+</div>
+<div class="section" id="keys">
+<h2>keys<a class="headerlink" href="#keys" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:94)</li>
+</ul>
+</div>
+<div class="section" id="llen">
+<h2>llen<a class="headerlink" href="#llen" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:82)</li>
+</ul>
+</div>
+<div class="section" id="lpop">
+<h2>lpop<a class="headerlink" href="#lpop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key</li>
+<li>path:/baselib/credis/CRedis.py (line:91)</li>
+</ul>
+</div>
+<div class="section" id="lrange">
+<h2>lrange<a class="headerlink" href="#lrange" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name,start,end</li>
+<li>path:/baselib/credis/CRedis.py (line:156)</li>
+</ul>
+</div>
+<div class="section" id="rpush">
+<h2>rpush<a class="headerlink" href="#rpush" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,item</li>
+<li>path:/baselib/credis/CRedis.py (line:85)</li>
+</ul>
+</div>
+<div class="section" id="scriptload">
+<h2>scriptload<a class="headerlink" href="#scriptload" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: script</li>
+<li>path:/baselib/credis/CRedis.py (line:145)</li>
+</ul>
+</div>
+<div class="section" id="set">
+<h2>set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: key,value</li>
+<li>path:/baselib/credis/CRedis.py (line:106)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

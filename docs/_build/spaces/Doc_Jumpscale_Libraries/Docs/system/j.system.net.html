@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.system.net &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.system" href="system.html"/>
+        <link rel="next" title="j.system.platform.screen" href="j.system.platform.screen.html"/>
+        <link rel="prev" title="j.system.platform.lxc" href="j.system.platform.lxc.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="system.html">j.system</a> &raquo;</li>
+      
+    <li>j.system.net</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.net.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-system-net">
+<h1>j.system.net<a class="headerlink" href="#j-system-net" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/net.py">Source</a></p>
+<div class="section" id="checkipaddressislocal">
+<h2>checkIpAddressIsLocal<a class="headerlink" href="#checkipaddressislocal" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddr</li>
+<li>path:/core/system/net.py (line:234)</li>
+</ul>
+</div>
+<div class="section" id="checklistenport">
+<h2>checkListenPort<a class="headerlink" href="#checklistenport" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: port</li>
+<li>path:/core/system/net.py (line:105)</li>
+</ul>
+<p>Check if a certain port is listening on the system.</p>
+</div>
+<div class="section" id="checkurlreachable">
+<h2>checkUrlReachable<a class="headerlink" href="#checkurlreachable" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: url</li>
+<li>path:/core/system/net.py (line:88)</li>
+</ul>
+<p>raise operational critical if unreachable
+return True if reachable</p>
+</div>
+<div class="section" id="download">
+<h2>download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: url,localpath,username,passwd</li>
+<li>path:/core/system/net.py (line:805)</li>
+</ul>
+<p>Download a url to a file or a directory, supported protocols: http, https, ftp, file</p>
+</div>
+<div class="section" id="enableproxy">
+<h2>enableProxy<a class="headerlink" href="#enableproxy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:240)</li>
+</ul>
+</div>
+<div class="section" id="getdefaultrouter">
+<h2>getDefaultRouter<a class="headerlink" href="#getdefaultrouter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:652)</li>
+</ul>
+<p>Get default router</p>
+</div>
+<div class="section" id="getdomainname">
+<h2>getDomainName<a class="headerlink" href="#getdomainname" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:853)</li>
+</ul>
+<p>Retrieve the dns domain name</p>
+</div>
+<div class="section" id="gethostbyname">
+<h2>getHostByName<a class="headerlink" href="#gethostbyname" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: dnsHostname</li>
+<li>path:/core/system/net.py (line:649)</li>
+</ul>
+</div>
+<div class="section" id="gethostnamesforip">
+<h2>getHostNamesForIP<a class="headerlink" href="#gethostnamesforip" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hostsfile,ip</li>
+<li>path:/core/system/net.py (line:766)</li>
+</ul>
+<p>Get hostnames for ip address</p>
+</div>
+<div class="section" id="gethostname">
+<h2>getHostname<a class="headerlink" href="#gethostname" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:612)</li>
+</ul>
+<p>Get hostname of the machine</p>
+</div>
+<div class="section" id="getipaddress">
+<h2>getIpAddress<a class="headerlink" href="#getipaddress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface</li>
+<li>path:/core/system/net.py (line:452)</li>
+</ul>
+<p>Return a list of ip addresses and netmasks assigned to this interface</p>
+</div>
+<div class="section" id="getipaddresses">
+<h2>getIpAddresses<a class="headerlink" href="#getipaddresses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: up</li>
+<li>path:/core/system/net.py (line:219)</li>
+</ul>
+</div>
+<div class="section" id="getmacaddress">
+<h2>getMacAddress<a class="headerlink" href="#getmacaddress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface</li>
+<li>path:/core/system/net.py (line:503)</li>
+</ul>
+<p>Return the MAC address of this interface</p>
+</div>
+<div class="section" id="getmacaddressforip">
+<h2>getMacAddressForIp<a class="headerlink" href="#getmacaddressforip" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddress</li>
+<li>path:/core/system/net.py (line:555)</li>
+</ul>
+<p>Search the MAC address of the given IP address in the ARP table</p>
+</div>
+<div class="section" id="getnameserver">
+<h2>getNameServer<a class="headerlink" href="#getnameserver" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:189)</li>
+</ul>
+<p>Returns the first nameserver IP found in /etc/resolv.conf</p>
+<p>Only implemented for Unix based hosts.</p>
+</div>
+<div class="section" id="getnetworkinfo">
+<h2>getNetworkInfo<a class="headerlink" href="#getnetworkinfo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/net.py (line:434)</li>
+</ul>
+<p>returns {macaddr_name:ipaddr,ipaddr &lt;ipaddr,ipaddr&gt;,...}</p>
+</div>
+<div class="section" id="getnictype">
+<h2>getNicType<a class="headerlink" href="#getnictype" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface</li>
+<li>path:/core/system/net.py (line:299)</li>
+</ul>
+<p>Get Nic Type on a certain interface</p>
+</div>
+<div class="section" id="getnics">
+<h2>getNics<a class="headerlink" href="#getnics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: up</li>
+<li>path:/core/system/net.py (line:261)</li>
+</ul>
+<p>Get Nics on this machine
+Works only for Linux/Solaris systems</p>
+</div>
+<div class="section" id="getreachableipaddress">
+<h2>getReachableIpAddress<a class="headerlink" href="#getreachableipaddress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ip,port</li>
+<li>path:/core/system/net.py (line:424)</li>
+</ul>
+<p>Returns the first local ip address that can connect to the specified ip on the specified port</p>
+</div>
+<div class="section" id="getvlantag">
+<h2>getVlanTag<a class="headerlink" href="#getvlantag" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface,nicType</li>
+<li>path:/core/system/net.py (line:370)</li>
+</ul>
+<p>Get VLan tag on the specified interface and vlan type</p>
+</div>
+<div class="section" id="getvlantagfrominterface">
+<h2>getVlanTagFromInterface<a class="headerlink" href="#getvlantagfrominterface" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface</li>
+<li>path:/core/system/net.py (line:393)</li>
+</ul>
+<p>Get vlan tag from interface</p>
+</div>
+<div class="section" id="isipinhostsfile">
+<h2>isIpInHostsFile<a class="headerlink" href="#isipinhostsfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hostsfile,ip</li>
+<li>path:/core/system/net.py (line:738)</li>
+</ul>
+<p>Check if ip is in the hostsfile</p>
+</div>
+<div class="section" id="isiplocal">
+<h2>isIpLocal<a class="headerlink" href="#isiplocal" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddress</li>
+<li>path:/core/system/net.py (line:550)</li>
+</ul>
+</div>
+<div class="section" id="isnicconnected">
+<h2>isNicConnected<a class="headerlink" href="#isnicconnected" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: interface</li>
+<li>path:/core/system/net.py (line:617)</li>
+</ul>
+</div>
+<div class="section" id="pingmachine">
+<h2>pingMachine<a class="headerlink" href="#pingmachine" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ip,pingtimeout,recheck,allowhostname</li>
+<li>path:/core/system/net.py (line:696)</li>
+</ul>
+<p>Ping a machine to check if it&#8217;s up/running and accessible</p>
+</div>
+<div class="section" id="pm-formatmacaddress">
+<h2>pm_formatMacAddress<a class="headerlink" href="#pm-formatmacaddress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: macaddress</li>
+<li>path:/core/system/net.py (line:540)</li>
+</ul>
+</div>
+<div class="section" id="removefromhostsfile">
+<h2>removeFromHostsFile<a class="headerlink" href="#removefromhostsfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hostsfile,ip</li>
+<li>path:/core/system/net.py (line:751)</li>
+</ul>
+<p>Update a hostfile, delete ip from hostsfile</p>
+</div>
+<div class="section" id="tcpportconnectiontest">
+<h2>tcpPortConnectionTest<a class="headerlink" href="#tcpportconnectiontest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddr,port,timeout</li>
+<li>path:/core/system/net.py (line:37)</li>
+</ul>
+</div>
+<div class="section" id="updatehostsfile">
+<h2>updateHostsFile<a class="headerlink" href="#updatehostsfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: hostsfile,ip,hostname</li>
+<li>path:/core/system/net.py (line:783)</li>
+</ul>
+<p>Update a hostfile to contain the basic information install</p>
+</div>
+<div class="section" id="validateipaddress">
+<h2>validateIpAddress<a class="headerlink" href="#validateipaddress" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddress</li>
+<li>path:/core/system/net.py (line:667)</li>
+</ul>
+<p>Validate wether this ip address is a valid ip address of 4 octets ranging from 0 to 255 or not</p>
+</div>
+<div class="section" id="waitconnectiontest">
+<h2>waitConnectionTest<a class="headerlink" href="#waitconnectiontest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddr,port,timeout</li>
+<li>path:/core/system/net.py (line:52)</li>
+</ul>
+<p>will return false if not successfull (timeout)</p>
+</div>
+<div class="section" id="waitconnectionteststopped">
+<h2>waitConnectionTestStopped<a class="headerlink" href="#waitconnectionteststopped" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ipaddr,port,timeout</li>
+<li>path:/core/system/net.py (line:71)</li>
+</ul>
+<p>will test that port is not active
+will return false if not successfull (timeout)</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.system.platform.screen.html" class="btn btn-neutral float-right" title="j.system.platform.screen">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="j.system.platform.lxc.html" class="btn btn-neutral" title="j.system.platform.lxc"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

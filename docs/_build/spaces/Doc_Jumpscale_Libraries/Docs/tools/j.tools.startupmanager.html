@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.tools.startupmanager &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.tools" href="tools.html"/>
+        <link rel="next" title="j.tools.imagelib" href="j.tools.imagelib.html"/>
+        <link rel="prev" title="j.tools.testengine" href="j.tools.testengine.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="tools.html">j.tools</a> &raquo;</li>
+      
+    <li>j.tools.startupmanager</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/tools/j.tools.startupmanager.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-tools-startupmanager">
+<h1>j.tools.startupmanager<a class="headerlink" href="#j-tools-startupmanager" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/startupmanager/StartupManager.py">Source</a></p>
+<div class="section" id="addprocess">
+<h2>addProcess<a class="headerlink" href="#addprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: name,cmd,args,env,numprocesses,priority,shell,workingdir,jpackage,domain,ports,autostart,reload_signal,user,stopcmd,pid,active,check,timeoutcheck,isJSapp,upstart,processfilterstr,stats,log</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:570)</li>
+</ul>
+</div>
+<div class="section" id="disableprocess">
+<h2>disableProcess<a class="headerlink" href="#disableprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:830)</li>
+</ul>
+</div>
+<div class="section" id="enableprocess">
+<h2>enableProcess<a class="headerlink" href="#enableprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:834)</li>
+</ul>
+</div>
+<div class="section" id="exists">
+<h2>exists<a class="headerlink" href="#exists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:730)</li>
+</ul>
+</div>
+<div class="section" id="existsjpackage">
+<h2>existsJPackage<a class="headerlink" href="#existsjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:751)</li>
+</ul>
+</div>
+<div class="section" id="getdomains">
+<h2>getDomains<a class="headerlink" href="#getdomains" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:735)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdef">
+<h2>getProcessDef<a class="headerlink" href="#getprocessdef" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,fromkey</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:693)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdefs">
+<h2>getProcessDefs<a class="headerlink" href="#getprocessdefs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name,system</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:704)</li>
+</ul>
+</div>
+<div class="section" id="getprocessdefs4jpackage">
+<h2>getProcessDefs4JPackage<a class="headerlink" href="#getprocessdefs4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:754)</li>
+</ul>
+</div>
+<div class="section" id="getstatus">
+<h2>getStatus<a class="headerlink" href="#getstatus" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:804)</li>
+</ul>
+<p>get status of process, True if status ok</p>
+</div>
+<div class="section" id="getstatus4jpackage">
+<h2>getStatus4JPackage<a class="headerlink" href="#getstatus4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:798)</li>
+</ul>
+</div>
+<div class="section" id="listprocesses">
+<h2>listProcesses<a class="headerlink" href="#listprocesses" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:813)</li>
+</ul>
+</div>
+<div class="section" id="load">
+<h2>load<a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:686)</li>
+</ul>
+</div>
+<div class="section" id="monitorprocess">
+<h2>monitorProcess<a class="headerlink" href="#monitorprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:838)</li>
+</ul>
+</div>
+<div class="section" id="reloadprocess">
+<h2>reloadProcess<a class="headerlink" href="#reloadprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:846)</li>
+</ul>
+</div>
+<div class="section" id="remove4jpackage">
+<h2>remove4JPackage<a class="headerlink" href="#remove4jpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:794)</li>
+</ul>
+</div>
+<div class="section" id="removeprocess">
+<h2>removeProcess<a class="headerlink" href="#removeprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:786)</li>
+</ul>
+</div>
+<div class="section" id="reset">
+<h2>reset<a class="headerlink" href="#reset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:548)</li>
+</ul>
+</div>
+<div class="section" id="restartall">
+<h2>restartAll<a class="headerlink" href="#restartall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:780)</li>
+</ul>
+</div>
+<div class="section" id="restartprocess">
+<h2>restartProcess<a class="headerlink" href="#restartprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:842)</li>
+</ul>
+</div>
+<div class="section" id="startall">
+<h2>startAll<a class="headerlink" href="#startall" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:761)</li>
+</ul>
+</div>
+<div class="section" id="startjpackage">
+<h2>startJPackage<a class="headerlink" href="#startjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:742)</li>
+</ul>
+</div>
+<div class="section" id="startprocess">
+<h2>startProcess<a class="headerlink" href="#startprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:822)</li>
+</ul>
+</div>
+<div class="section" id="stopjpackage">
+<h2>stopJPackage<a class="headerlink" href="#stopjpackage" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: jpackage</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:746)</li>
+</ul>
+</div>
+<div class="section" id="stopprocess">
+<h2>stopProcess<a class="headerlink" href="#stopprocess" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: domain,name</li>
+<li>path:/baselib/startupmanager/StartupManager.py (line:826)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.tools.imagelib.html" class="btn btn-neutral float-right" title="j.tools.imagelib">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="j.tools.testengine.html" class="btn btn-neutral" title="j.tools.testengine"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

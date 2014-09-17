@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>query as json &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>query as json</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/WebServices/RestWebservices/RestWebservices.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="query-as-json">
+<h1>query as json<a class="headerlink" href="#query-as-json" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>http://localhost:9999/rest/myapp/testactor/get?key=1234&amp;format=json
+</pre></div>
+</div>
+<p>if no error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="s">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;test&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>if error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;category&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="s">&quot;applicationName&quot;</span><span class="p">:</span> <span class="s">&quot;appserver6_test&quot;</span><span class="p">,</span>
+    <span class="s">&quot;guid&quot;</span><span class="p">:</span> <span class="s">&quot;290ac4b1-1212-44f2-95e1-d2ea77d2b043&quot;</span><span class="p">,</span>
+    <span class="s">&quot;errormessagePub&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="s">&quot;level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s">&quot;backtrace&quot;</span><span class="p">:</span> <span class="s">&quot;Traceback (most recent call last):</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">c:</span><span class="se">\\</span><span class="s">qb6</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">CloudDesktopAgent</span><span class="se">\\</span><span class="s">pylabsextensions</span><span class="se">\\</span><span class="s">core</span><span class="se">\\</span><span class="s">geventWebserver</span><span class="se">\\</span><span class="s">PortalServer.py</span><span class="se">\&quot;</span><span class="s">, line 583, in processor_rest</span><span class="se">\n</span><span class="s">    result=self.routes[path][0](ctx,self)</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">test</span><span class="se">\\</span><span class="s">QBASEVAR</span><span class="se">\\</span><span class="s">code</span><span class="se">\\</span><span class="s">actormethodgreenlet_myapp_actor_testactor_testactor.py</span><span class="se">\&quot;</span><span class="s">, line 69, in wscall</span><span class="se">\n</span><span class="s">    params=q.core.codegenerator.taskletengines[</span><span class="se">\&quot;</span><span class="s">myapp_testactor_get</span><span class="se">\&quot;</span><span class="s">].execute(params,tags=None)</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">c:</span><span class="se">\\</span><span class="s">qb6</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">CloudDesktopAgent</span><span class="se">\\</span><span class="s">pylabsextensions</span><span class="se">\\</span><span class="s">core</span><span class="se">\\</span><span class="s">taskletengine</span><span class="se">\\</span><span class="s">TaskletEngine.py</span><span class="se">\&quot;</span><span class="s">, line 197, in execute</span><span class="se">\n</span><span class="s">    params = tasklet.checkExecute(q, i , params, service, tags)</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">c:</span><span class="se">\\</span><span class="s">qb6</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">CloudDesktopAgent</span><span class="se">\\</span><span class="s">pylabsextensions</span><span class="se">\\</span><span class="s">core</span><span class="se">\\</span><span class="s">taskletengine</span><span class="se">\\</span><span class="s">TaskletEngine.py</span><span class="se">\&quot;</span><span class="s">, line 54, in checkExecute</span><span class="se">\n</span><span class="s">    params = self.main(q, i, params, service, tags)</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">c:</span><span class="se">\\</span><span class="s">qb6</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">CloudDesktopAgent</span><span class="se">\\</span><span class="s">pylabsextensions</span><span class="se">\\</span><span class="s">core</span><span class="se">\\</span><span class="s">taskletengine</span><span class="se">\\</span><span class="s">TaskletEngine.py</span><span class="se">\&quot;</span><span class="s">, line 43, in main</span><span class="se">\n</span><span class="s">    params=self.module.main(q,i,params,service,tags,self)</span><span class="se">\n</span><span class="s">~   File </span><span class="se">\&quot;</span><span class="s">code</span><span class="se">\\</span><span class="s">myapp</span><span class="se">\\</span><span class="s">testactor</span><span class="se">\\</span><span class="s">method_get</span><span class="se">\\</span><span class="s">5_main.py</span><span class="se">\&quot;</span><span class="s">, line 4, in main</span><span class="se">\n</span><span class="s">    sparams.test=</span><span class="se">\&quot;</span><span class="s">d</span><span class="se">\&quot;\n</span><span class="s">~ NameError: global name &#39;sparams&#39; is not defined</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">&quot;errormessage&quot;</span><span class="p">:</span> <span class="s">&quot;Execute method myapp_testactor_get failed.</span><span class="se">\n</span><span class="s">querystr was:key=1234&amp;format=json&quot;</span><span class="p">,</span>
+    <span class="s">&quot;pid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">&quot;funclinenr&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">&quot;funcname&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="s">&quot;code&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="s">&quot;params&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s">&quot;caller&quot;</span><span class="p">:</span> <span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="s">&quot;time&quot;</span><span class="p">:</span> <span class="mi">1344162981</span><span class="p">,</span>
+    <span class="s">&quot;nid&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s">&quot;gid&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">&quot;jobid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">&quot;funcfilename&quot;</span><span class="p">:</span> <span class="s">&quot;c:</span><span class="se">\\</span><span class="s">qb6</span><span class="se">\\</span><span class="s">apps</span><span class="se">\\</span><span class="s">CloudDesktopAgent</span><span class="se">\\</span><span class="s">pylabsextensions</span><span class="se">\\</span><span class="s">core</span><span class="se">\\</span><span class="s">geventWebserver</span><span class="se">\\</span><span class="s">PortalServer.py&quot;</span><span class="p">,</span>
+    <span class="s">&quot;tags&quot;</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>how to know if appropriate result
+result is always a dict
+check on key &#8220;result&#8221; if not there is an errorcondition object with props as shown above</p>
+<div class="section" id="if-no-format-str-text-readable">
+<h2>if no format str -&gt; text readable<a class="headerlink" href="#if-no-format-str-text-readable" title="Permalink to this headline">¶</a></h2>
+<p>very difficult to parse but ideal to play around with on webserver</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

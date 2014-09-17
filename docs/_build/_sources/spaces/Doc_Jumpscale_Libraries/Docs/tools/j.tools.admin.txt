@@ -1,0 +1,15 @@
+
+j.tools.admin
+=============
+
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/admin/Admin.py>`_
+
+
+get
+---
+
+
+* params: args,failWhenNotExist
+* path:/baselib/admin/Admin.py (line:303)
+
+

@@ -1,0 +1,882 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.system &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="&lt;no title&gt;" href="../index.html"/>
+        <link rel="next" title="j.system.fs" href="j.system.fs.html"/>
+        <link rel="prev" title="j.events" href="../events/j.events.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+    <li>j.system</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/system.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-system">
+<h1>j.system<a class="headerlink" href="#j-system" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fs.html">j.system.fs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#changedir">changeDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#changefilenames">changeFileNames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#checkdirorlink">checkDirOrLink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#checkdirorlinktodir">checkDirOrLinkToDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#checkdirparam">checkDirParam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#chmod">chmod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#chown">chown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#cleanupstring">cleanupString</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#constructdirpathfromarray">constructDirPathFromArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#constructfilepathfromarray">constructFilePathFromArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#convertfiledirnamesspacetounderscore">convertFileDirnamesSpaceToUnderscore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#convertfiledirnamesunicodetoascii">convertFileDirnamesUnicodeToAscii</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#copydirtree">copyDirTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#copyfile">copyFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#createdir">createDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#createemptyfile">createEmptyFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#direqual">dirEqual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#exists">exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#fileconvertlineendingcrlf">fileConvertLineEndingCRLF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#filegetcontents">fileGetContents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#filegettextcontents">fileGetTextContents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#filegetuncommentedcontents">fileGetUncommentedContents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#filesize">fileSize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#find">find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getbasename">getBaseName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getdirname">getDirName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getfileextension">getFileExtension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getparent">getParent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getparentdirname">getParentDirName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#gettempfilename">getTempFileName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#gettmpdirpath">getTmpDirPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#gettmpfilepath">getTmpFilePath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#getcwd">getcwd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#grep">grep</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#gunzip">gunzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#gzip">gzip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#hardlinkfile">hardlinkFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#isasciifile">isAsciiFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#isbinaryfile">isBinaryFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#isdir">isDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#isemptydir">isEmptyDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#isfile">isFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#islink">isLink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#ismount">isMount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#islocked">islocked</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#joinpaths">joinPaths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#listdirsindir">listDirsInDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#listfilesanddirsindir">listFilesAndDirsInDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#listfilesindir">listFilesInDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#listpyscriptsindir">listPyScriptsInDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#lock">lock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#id3">lock_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#log">log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#md5sum">md5sum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#move">move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#movedir">moveDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#movefile">moveFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#parsepath">parsePath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathclean">pathClean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathdirclean">pathDirClean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathnormalize">pathNormalize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathremovedirpart">pathRemoveDirPart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathshorten">pathShorten</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#pathtounicode">pathToUnicode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#processpathfordoubledots">processPathForDoubleDots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#readobjectfromfile">readObjectFromFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#readlink">readlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#removedir">removeDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#removedirtree">removeDirTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#removeirrelevantfiles">removeIrrelevantFiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#removelinks">removeLinks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#renamedir">renameDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#renamefile">renameFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#replacewordsinfiles">replaceWordsInFiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#statpath">statPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#symlink">symlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#targzcompress">targzCompress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#targzuncompress">targzUncompress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#touch">touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#unlink">unlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#unlinkfile">unlinkFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#unlock">unlock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#id6">unlock_</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#validatefilename">validateFilename</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fs.html#rules">Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#generic">Generic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#unix">Unix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#windows">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fs.html#information-sources">Information sources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#walk">walk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#walkextended">walkExtended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#writefile">writeFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fs.html#writeobjecttofile">writeObjectToFile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.diskmanager.html">j.system.platform.diskmanager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#diskgetfreeregions">diskGetFreeRegions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#mirrorsfind">mirrorsFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionadd">partitionAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionsfind">partitionsFind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionsfind-ext4data">partitionsFind_Ext4Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionsgetmounted-ext4data">partitionsGetMounted_Ext4Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionsmount-ext4data">partitionsMount_Ext4Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.diskmanager.html#partitionsunmount-ext4data">partitionsUnmount_Ext4Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.process.html">j.system.process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appcheckactive">appCheckActive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appgetpids">appGetPids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appgetpidsactive">appGetPidsActive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appnrinstances">appNrInstances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appnrinstancesactive">appNrInstancesActive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appsget">appsGet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#appsgetnames">appsGetNames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#checkprocess">checkProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#checkprocessforpid">checkProcessForPid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#checkstart">checkstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#checkstop">checkstop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#execute">execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executeasync">executeAsync</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executecode">executeCode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executeinsandbox">executeInSandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executeindependant">executeIndependant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executescript">executeScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#executewithoutpipe">executeWithoutPipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getdefunctprocesses">getDefunctProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getenviron">getEnviron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getmyprocessobject">getMyProcessObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getpidsbyfilter">getPidsByFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getpidsbyport">getPidsByPort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getprocessbyport">getProcessByPort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getprocessobject">getProcessObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getprocesspid">getProcessPid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getprocesspidsfromuser">getProcessPidsFromUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#getsimularprocesses">getSimularProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#ispidalive">isPidAlive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#kill">kill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#killprocessbyname">killProcessByName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#killprocessbyport">killProcessByPort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#killuserprocesses">killUserProcesses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#run">run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#rundaemon">runDaemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#runscript">runScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.process.html#setenvironmentvariable">setEnvironmentVariable</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.statmanager.html">j.system.statmanager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#addinfo">addInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#addinfoline2historyobj">addInfoLine2HistoryObj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#cleancache">cleanCache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getepoch">getEpoch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getfiveminuteid">getFiveMinuteId</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getheaders">getHeaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#gethistoryobject">getHistoryObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#gethourid">getHourId</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getinfo1h">getInfo1h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getinfo1hfromto">getInfo1hFromTo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getinfo5min">getInfo5Min</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getinfo5minfromto">getInfo5MinFromTo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getinfowithheaders">getInfoWithHeaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#getnritemsrow">getNrItemsRow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#gettimestamp">getTimeStamp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#listhistoryobjects">listHistoryObjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#resamplelist">resampleList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#reset">reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#save">save</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.html#schedulesaveclean">scheduleSaveClean</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.statmanager.osis.client.html">j.system.statmanager.osis.client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.redisstataggregator.html">j.system.redisstataggregator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.html#popstats">popStats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.html#pushstats">pushStats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.shorewall.html">j.system.platform.shorewall</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.shorewall.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.ubuntu.html">j.system.platform.ubuntu</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#adduser2group">addUser2Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#changesourceuri">changeSourceUri</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#check">check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#checkinstall">checkInstall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#creategroup">createGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#createuser">createUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#find1packageinstalled">find1packageInstalled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#findpackagesinstalled">findPackagesInstalled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#findpackagesrepo">findPackagesRepo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#getpackage">getPackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#getpackagenamesinstalled">getPackageNamesInstalled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#getpackagenamesrepo">getPackageNamesRepo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#getversion">getVersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#initapt">initApt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#installdebfile">installDebFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#installversion">installVersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#listsources">listSources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#restartservice">restartService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#servicedisablestartatboot">serviceDisableStartAtBoot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#serviceenablestartatboot">serviceEnableStartAtBoot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#serviceinstall">serviceInstall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#serviceuninstall">serviceUninstall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#startservice">startService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#statusservice">statusService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#stopservice">stopService</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#updatepackagemetadata">updatePackageMetadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.ubuntu.html#upgradepackages">upgradePackages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.statmanager.osis.html">j.system.statmanager.osis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#authenticate">authenticate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#delete">delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#deletesearch">deleteSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#demodata">demodata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#destroy">destroy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#exists">exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#existsindex">existsIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#new">new</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#rebuildindex">rebuildindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#search">search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#set">set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#simplesearch">simpleSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.statmanager.osis.html#updatesearch">updateSearch</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.btrfs.html">j.system.btrfs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#deviceadd">deviceAdd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#devicedelete">deviceDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#getspaceusage">getSpaceUsage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#snapshotreadonlycreate">snapshotReadOnlyCreate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#subvolumecreate">subvolumeCreate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#subvolumedelete">subvolumeDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.btrfs.html#subvolumelist">subvolumeList</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.redisstataggregator.redis.connection_pool.html">j.system.redisstataggregator.redis.connection_pool</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.connection_pool.html#disconnect">disconnect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.connection_pool.html#get-connection">get_connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.connection_pool.html#make-connection">make_connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.connection_pool.html#release">release</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.qemu_img.html">j.system.platform.qemu_img</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.qemu_img.html#commit">commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.qemu_img.html#convert">convert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.qemu_img.html#create">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.qemu_img.html#info">info</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.string.html">j.system.string</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.string.html#decodeunicode2asci">decodeUnicode2Asci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.string.html#toolstripnonascifromtext">toolStripNonAsciFromText</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.stataggregator.html">j.system.stataggregator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#clean">clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#delete">delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#getavgmax">getAvgMax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#gettime">getTime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#loadstat">loadStat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#registerstats">registerStats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#send2carbon">send2carbon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#send2log">send2log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.html#set">set</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.nginx.html">j.system.platform.nginx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.nginx.html#get">get</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.netconfig.html">j.system.netconfig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#addiptointerface">addIpToInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#enableinterface">enableInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#enableinterfacebridgedhcp">enableInterfaceBridgeDhcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#enableinterfacebridgestatic">enableInterfaceBridgeStatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#enableinterfacestatic">enableInterfaceStatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#remove">remove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#reset">reset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#setnameserver">setNameserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#setroot">setRoot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.netconfig.html#shutdownnetwork">shutdownNetwork</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fswalker.html">j.system.fswalker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fswalker.html#find">find</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fswalker.html#walk">walk</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fswalker.html#examples">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.fswalker.html#walkfunctional">walkFunctional</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.fswalker.html#id1">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.python.html">j.system.platform.python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#check">check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#clearcache">clearcache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#copylibtolocalsitepackagesdir">copyLibToLocalSitePackagesDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#copylibstolocalsitepackagesdir">copyLibsToLocalSitePackagesDir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#getsitepackagepathlocal">getSitePackagePathLocal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#install">install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.python.html#remove">remove</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.stataggregator.stats.html">j.system.stataggregator.stats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.stats.html#copy">copy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.stats.html#iteritems">iteritems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.stats.html#keys">keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.stataggregator.stats.html#pop">pop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.ovsnetconfig.html">j.system.ovsnetconfig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#applyconfig">applyconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#configurestaticaddress">configureStaticAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#createvxlanbridge">createVXLanBridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#ensurevxnet">ensureVXNet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#getconfigfromsystem">getConfigFromSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#gettype">getType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#initnetworkinterfaces">initNetworkInterfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#loadnetworkinterfaces">loadNetworkInterfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#newbondedbackplane">newBondedBackplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#newbridge">newBridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#newvlanbridge">newVlanBridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#printconfigfromsystem">printConfigFromSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#removeoldconfig">removeOldConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#setbackplane">setBackplane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#setbackplanedhcp">setBackplaneDhcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#setbackplanenoaddress">setBackplaneNoAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#setbackplanenoaddresswithbond">setBackplaneNoAddressWithBond</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.ovsnetconfig.html#setbackplanewithbond">setBackplaneWithBond</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platformtype.html">j.system.platformtype</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#addplatform">addPlatform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#dieifnotplatform">dieIfNotPlatform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#getchildren">getChildren</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#getmyrelevantplatforms">getMyRelevantPlatforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#getparents">getParents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#getplatforms">getPlatforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#has-parent">has_parent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#isgeneric">isGeneric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#ishyperv">isHyperV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#islinux">isLinux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#isunix">isUnix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#isvirtualbox">isVirtualBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#iswindows">isWindows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platformtype.html#isxen">isXen</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.socketserver.html">j.system.socketserver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.socketserver.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.socketserver.html#getclient">getClient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.redisstataggregator.redis.html">j.system.redisstataggregator.redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#append">append</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#bgrewriteaof">bgrewriteaof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#bgsave">bgsave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#bitcount">bitcount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#bitop">bitop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#blpop">blpop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#brpop">brpop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#brpoplpush">brpoplpush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#client-getname">client_getname</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#client-kill">client_kill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#client-list">client_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#client-setname">client_setname</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#config-get">config_get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#config-resetstat">config_resetstat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#config-set">config_set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#dbsize">dbsize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#debug-object">debug_object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#decr">decr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#delete">delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#dump">dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#echo">echo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#eval">eval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#evalsha">evalsha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#execute-command">execute_command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#exists">exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#expire">expire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#expireat">expireat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#flushall">flushall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#flushdb">flushdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#from-url">from_url</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#get">get</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#getdict">getDict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#getbit">getbit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#getrange">getrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#getset">getset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hdel">hdel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hexists">hexists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hget">hget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hgetall">hgetall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hgetalldict">hgetalldict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hincrby">hincrby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hincrbyfloat">hincrbyfloat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hkeys">hkeys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hlen">hlen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hmget">hmget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hmset">hmset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hset">hset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hsetnx">hsetnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#hvals">hvals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#incr">incr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#incrby">incrby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#incrbyfloat">incrbyfloat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#info">info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#keys">keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lastsave">lastsave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lindex">lindex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#linsert">linsert</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#llen">llen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lock">lock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lpop">lpop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lpush">lpush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lpushx">lpushx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lrange">lrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lrem">lrem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#lset">lset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#ltrim">ltrim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#mget">mget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#move">move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#mset">mset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#msetnx">msetnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#object">object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#parse-response">parse_response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#persist">persist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#pexpire">pexpire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#pexpireat">pexpireat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#ping">ping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#pipeline">pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#psetex">psetex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#pttl">pttl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#publish">publish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#pubsub">pubsub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#randomkey">randomkey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#register-script">register_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#rename">rename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#renamenx">renamenx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#restore">restore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#rpop">rpop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#rpoplpush">rpoplpush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#rpush">rpush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#rpushx">rpushx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sadd">sadd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#save">save</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#scard">scard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#script-exists">script_exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#script-flush">script_flush</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#script-kill">script_kill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#script-load">script_load</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sdiff">sdiff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sdiffstore">sdiffstore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sentinel">sentinel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#set">set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#set-response-callback">set_response_callback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#setbit">setbit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#setex">setex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#setnx">setnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#setrange">setrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#shutdown">shutdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sinter">sinter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sinterstore">sinterstore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sismember">sismember</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#slaveof">slaveof</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#smembers">smembers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#smove">smove</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sort">sort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#spop">spop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#srandmember">srandmember</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#srem">srem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#strlen">strlen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#substr">substr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sunion">sunion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#sunionstore">sunionstore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#time">time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#transaction">transaction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#ttl">ttl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#type">type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#unwatch">unwatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#watch">watch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zadd">zadd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zcard">zcard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zcount">zcount</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zincrby">zincrby</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zinterstore">zinterstore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrange">zrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrangebyscore">zrangebyscore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrank">zrank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrem">zrem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zremrangebyrank">zremrangebyrank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zremrangebyscore">zremrangebyscore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrevrange">zrevrange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrevrangebyscore">zrevrangebyscore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zrevrank">zrevrank</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zscore">zscore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.redisstataggregator.redis.html#zunionstore">zunionstore</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.installtools.html">j.system.installtools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#chdir">chdir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#copydeletefirst">copydeletefirst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#copytreedeletefirst">copytreedeletefirst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#createdir">createdir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#delete">delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#download">download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#downloadjumpscalecore">downloadJumpScaleCore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#enableqshell">enableQshell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#execute">execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#expand">expand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#expand-tar-gz">expand_tar_gz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#getlastchangesetbitbucket">getLastChangeSetBitbucket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#getpythonsiteconfigpath">getPythonSiteConfigPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#gettmppath">getTmpPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#installbaseminimal">installBaseMinimal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#isunix">isUnix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#iswindows">isWindows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#log">log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#removesymlink">removesymlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#replacesitecustomize">replacesitecustomize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#symlink">symlink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.installtools.html#writefile">writefile</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.statmanager.osisclient.html">j.system.statmanager.osisclient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.unix.html">j.system.unix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#addcronjob">addCronJob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#addsystemgroup">addSystemGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#addsystemuser">addSystemUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#checkapplicationinstalled">checkApplicationInstalled</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#chmod">chmod</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#chown">chown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#chroot">chroot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#daemonize">daemonize</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#disableunixuser">disableUnixUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#enableunixuser">enableUnixUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#executeasuser">executeAsUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#executedaemonasuser">executeDaemonAsUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#getbashenvfromfile">getBashEnvFromFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#getmachineinfo">getMachineInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#killgroup">killGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#removeunixuser">removeUnixUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#setunixuserpassword">setUnixUserPassword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#unixgroupexists">unixGroupExists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#unixuserexists">unixUserExists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.unix.html#unixuserisingroup">unixUserIsInGroup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.lxc.html">j.system.platform.lxc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#btrfssubvolcopy">btrfsSubvolCopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#btrfssubvoldelete">btrfsSubvolDelete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#btrfssubvolexists">btrfsSubvolExists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#btrfssubvollist">btrfsSubvolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#btrfssubvolnew">btrfsSubvolNew</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#create">create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#destroy">destroy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#destroyall">destroyAll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#execute">execute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#exportrsync">exportRsync</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#exporttgz">exportTgz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#getconfig">getConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#getip">getIp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#getpid">getPid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#getprocesslist">getProcessList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#importrsync">importRsync</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#importtgz">importTgz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#list">list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#networkset">networkSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#networksetprivatevxlan">networkSetPrivateVXLan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#pushsshkey">pushSSHKey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#removeredundantfiles">removeRedundantFiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#sethostname">setHostName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#start">start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.lxc.html#stop">stop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.net.html">j.system.net</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#checkipaddressislocal">checkIpAddressIsLocal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#checklistenport">checkListenPort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#checkurlreachable">checkUrlReachable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#download">download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#enableproxy">enableProxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getdefaultrouter">getDefaultRouter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getdomainname">getDomainName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#gethostbyname">getHostByName</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#gethostnamesforip">getHostNamesForIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#gethostname">getHostname</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getipaddress">getIpAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getipaddresses">getIpAddresses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getmacaddress">getMacAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getmacaddressforip">getMacAddressForIp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getnameserver">getNameServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getnetworkinfo">getNetworkInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getnictype">getNicType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getnics">getNics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getreachableipaddress">getReachableIpAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getvlantag">getVlanTag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#getvlantagfrominterface">getVlanTagFromInterface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#isipinhostsfile">isIpInHostsFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#isiplocal">isIpLocal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#isnicconnected">isNicConnected</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#pingmachine">pingMachine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#pm-formatmacaddress">pm_formatMacAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#removefromhostsfile">removeFromHostsFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#tcpportconnectiontest">tcpPortConnectionTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#updatehostsfile">updateHostsFile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#validateipaddress">validateIpAddress</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#waitconnectiontest">waitConnectionTest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.net.html#waitconnectionteststopped">waitConnectionTestStopped</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="j.system.platform.screen.html">j.system.platform.screen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#attachsession">attachSession</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#createsession">createSession</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#createwindow">createWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#executeinscreen">executeInScreen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#getpid">getPid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#getsessionnames">getSessionNames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#getsessions">getSessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#killsession">killSession</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#killsessions">killSessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#killwindow">killWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#listsessions">listSessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#listwindows">listWindows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#logwindow">logWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="j.system.platform.screen.html#windowexists">windowExists</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.system.fs.html" class="btn btn-neutral float-right" title="j.system.fs">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../events/j.events.html" class="btn btn-neutral" title="j.events"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

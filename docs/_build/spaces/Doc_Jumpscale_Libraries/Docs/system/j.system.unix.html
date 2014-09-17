@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.system.unix &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.system" href="system.html"/>
+        <link rel="next" title="j.system.platform.lxc" href="j.system.platform.lxc.html"/>
+        <link rel="prev" title="j.system.statmanager.osisclient" href="j.system.statmanager.osisclient.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="system.html">j.system</a> &raquo;</li>
+      
+    <li>j.system.unix</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/system/j.system.unix.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-system-unix">
+<h1>j.system.unix<a class="headerlink" href="#j-system-unix" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/system/unix.py">Source</a></p>
+<div class="section" id="addcronjob">
+<h2>addCronJob<a class="headerlink" href="#addcronjob" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: commandToExecute,interval,logFilePath,replaceLineIfCommandAlreadyInCrontab,unit</li>
+<li>path:/core/system/unix.py (line:94)</li>
+</ul>
+<p>Add a cronjob to the system</p>
+</div>
+<div class="section" id="addsystemgroup">
+<h2>addSystemGroup<a class="headerlink" href="#addsystemgroup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: groupname</li>
+<li>path:/core/system/unix.py (line:376)</li>
+</ul>
+<p>Add a group to the system</p>
+<p>Note: you should be root to run this python command.</p>
+</div>
+<div class="section" id="addsystemuser">
+<h2>addSystemUser<a class="headerlink" href="#addsystemuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username,groupname,shell,homedir</li>
+<li>path:/core/system/unix.py (line:335)</li>
+</ul>
+<p>Add a user to the system</p>
+<p>Note: you should be root to run this python command.</p>
+</div>
+<div class="section" id="checkapplicationinstalled">
+<h2>checkApplicationInstalled<a class="headerlink" href="#checkapplicationinstalled" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: appname</li>
+<li>path:/core/system/unix.py (line:616)</li>
+</ul>
+<p>check if app is installed,  if yes return True</p>
+</div>
+<div class="section" id="chmod">
+<h2>chmod<a class="headerlink" href="#chmod" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: root,mode,recurse,dirPattern,filePattern,dirs,files</li>
+<li>path:/core/system/unix.py (line:231)</li>
+</ul>
+<p>Chmod based on system.fs.walk</p>
+</div>
+<div class="section" id="chown">
+<h2>chown<a class="headerlink" href="#chown" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path,user,group,recursive</li>
+<li>path:/core/system/unix.py (line:204)</li>
+</ul>
+<p>Chown a file</p>
+</div>
+<div class="section" id="chroot">
+<h2>chroot<a class="headerlink" href="#chroot" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: path</li>
+<li>path:/core/system/unix.py (line:323)</li>
+</ul>
+<p>Change root directory path</p>
+</div>
+<div class="section" id="daemonize">
+<h2>daemonize<a class="headerlink" href="#daemonize" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: chdir,umask</li>
+<li>path:/core/system/unix.py (line:521)</li>
+</ul>
+<p>Daemonize a process using a double fork</p>
+<p>This method will fork the current process to create a daemon process.
+It will perform a double fork(2), chdir(2) to the given folder (or not
+chdir at all if the C{chdir} argument is C{None}), and set the new
+process umask(2) to the value of the C{umask} argument, or not reset
+it if this argument is -1.</p>
+<p>While forking, a setsid(2) call will be done to become session leader
+and detach from the controlling TTY.</p>
+<p>In the child process, all existing file descriptors will be closed,
+including stdin, stdout and stderr, which will be re-opened to
+/dev/null.</p>
+<p>The method returns a tuple&lt;bool, number&gt;. If the first item is True,
+the current process is the daemonized process. If it is False,
+the current process is the process which called the C{daemonize}
+method, which can most likely be closed now. The second item is the
+PID of the current process.</p>
+</div>
+<div class="section" id="disableunixuser">
+<h2>disableUnixUser<a class="headerlink" href="#disableunixuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username</li>
+<li>path:/core/system/unix.py (line:424)</li>
+</ul>
+<p>Disables a given unix user</p>
+</div>
+<div class="section" id="enableunixuser">
+<h2>enableUnixUser<a class="headerlink" href="#enableunixuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username</li>
+<li>path:/core/system/unix.py (line:442)</li>
+</ul>
+<p>Enables a given unix user</p>
+</div>
+<div class="section" id="executeasuser">
+<h2>executeAsUser<a class="headerlink" href="#executeasuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,username</li>
+<li>path:/core/system/unix.py (line:240)</li>
+</ul>
+<p>Execute a given command as a specific user</p>
+<p>When calling this method, the command will be wrapped inside &#8216;su&#8217; to
+be executed as some specific user. This requires the application which
+spawns the command to be running as root.</p>
+<p>Next to this, it behaves exactly as C{j.system.process.execute},
+including the same named arguments.</p>
+</div>
+<div class="section" id="executedaemonasuser">
+<h2>executeDaemonAsUser<a class="headerlink" href="#executedaemonasuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: command,username</li>
+<li>path:/core/system/unix.py (line:273)</li>
+</ul>
+<p>Execute a given command as a background process as a specific user</p>
+<p>When calling this method, the command will be wrapped inside &#8216;su&#8217; to
+be executed as some specific user. This requires the application which
+spawns the command to be running as root.</p>
+<p>Next to this, it behaves exactly as C{j.system.process.runDaemon},
+including the same named arguments.</p>
+</div>
+<div class="section" id="getbashenvfromfile">
+<h2>getBashEnvFromFile<a class="headerlink" href="#getbashenvfromfile" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: file,var</li>
+<li>path:/core/system/unix.py (line:43)</li>
+</ul>
+<p>Get the value of an environment variable in a Bash file</p>
+</div>
+<div class="section" id="getmachineinfo">
+<h2>getMachineInfo<a class="headerlink" href="#getmachineinfo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/system/unix.py (line:57)</li>
+</ul>
+<p>Get memory and CPU info about this machine</p>
+</div>
+<div class="section" id="killgroup">
+<h2>killGroup<a class="headerlink" href="#killgroup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pid</li>
+<li>path:/core/system/unix.py (line:191)</li>
+</ul>
+<p>Kill a process group</p>
+<p>killGroup will get the parent pid from the pid given and kill the group with signal SIGKILL (default)</p>
+</div>
+<div class="section" id="removeunixuser">
+<h2>removeUnixUser<a class="headerlink" href="#removeunixuser" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username,removehome,die</li>
+<li>path:/core/system/unix.py (line:460)</li>
+</ul>
+<p>Remove a given unix user</p>
+</div>
+<div class="section" id="setunixuserpassword">
+<h2>setUnixUserPassword<a class="headerlink" href="#setunixuserpassword" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username,password</li>
+<li>path:/core/system/unix.py (line:482)</li>
+</ul>
+<p>Set a password on unix user</p>
+</div>
+<div class="section" id="unixgroupexists">
+<h2>unixGroupExists<a class="headerlink" href="#unixgroupexists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: groupname</li>
+<li>path:/core/system/unix.py (line:409)</li>
+</ul>
+<p>Checks if a given group already exists in the system</p>
+</div>
+<div class="section" id="unixuserexists">
+<h2>unixUserExists<a class="headerlink" href="#unixuserexists" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username</li>
+<li>path:/core/system/unix.py (line:394)</li>
+</ul>
+<p>Checks if a given user already exists in the system</p>
+</div>
+<div class="section" id="unixuserisingroup">
+<h2>unixUserIsInGroup<a class="headerlink" href="#unixuserisingroup" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: username,groupname</li>
+<li>path:/core/system/unix.py (line:503)</li>
+</ul>
+<p>Checks if a given user is a member of the given group</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="j.system.platform.lxc.html" class="btn btn-neutral float-right" title="j.system.platform.lxc">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="j.system.statmanager.osisclient.html" class="btn btn-neutral" title="j.system.statmanager.osisclient"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

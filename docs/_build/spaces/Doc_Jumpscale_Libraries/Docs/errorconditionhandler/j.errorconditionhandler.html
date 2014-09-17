@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>j.errorconditionhandler &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="j.errorconditionhandler" href="errorconditionhandler.html"/>
+        <link rel="next" title="j.cloud" href="../cloud/cloud.html"/>
+        <link rel="prev" title="j.errorconditionhandler" href="errorconditionhandler.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Howto/index.html">How To</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Configuration/index.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Macros/index.html">Macros:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/Modules/index.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Docs/WebServices/index.html">Web Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Portal/Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../codetools/codetools.html">j.codetools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logger/logger.html">j.logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../application/application.html">j.application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/servers.html">j.servers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/config.html">j.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base/base.html">j.base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/remote.html">j.remote</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">j.packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/gui.html">j.gui</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../db/db.html">j.db</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/code.html">j.code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="errorconditionhandler.html">j.errorconditionhandler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cloud/cloud.html">j.cloud</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dirs/dirs.html">j.dirs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">j.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../html/html.html">j.html</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basetype/basetype.html">j.basetype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../events/events.html">j.events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../system/system.html">j.system</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../console/console.html">j.console</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/tools.html">j.tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../action/action.html">j.action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../enumerators/enumerators.html">j.enumerators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clients/clients.html">j.clients</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="errorconditionhandler.html">j.errorconditionhandler</a> &raquo;</li>
+      
+    <li>j.errorconditionhandler</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../_sources/spaces/Doc_Jumpscale_Libraries/Docs/errorconditionhandler/j.errorconditionhandler.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="j-errorconditionhandler">
+<h1>j.errorconditionhandler<a class="headerlink" href="#j-errorconditionhandler" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/core/errorhandling/ErrorConditionHandler.py">Source</a></p>
+<div class="section" id="checkerrorignore">
+<h2>checkErrorIgnore<a class="headerlink" href="#checkerrorignore" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: eco</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:339)</li>
+</ul>
+</div>
+<div class="section" id="escalatebugtodeveloper">
+<h2>escalateBugToDeveloper<a class="headerlink" href="#escalatebugtodeveloper" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: errorConditionObject,tb</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:646)</li>
+</ul>
+</div>
+<div class="section" id="excepthook">
+<h2>excepthook<a class="headerlink" href="#excepthook" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ttype,pythonExceptionObject,tb</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:308)</li>
+</ul>
+<p>every fatal error in jumpscale or by python itself will result in an exception
+in this function the exception is caught.
+This routine will create an errorobject &amp; escalate to the infoserver</p>
+</div>
+<div class="section" id="geterrorconditionobject">
+<h2>getErrorConditionObject<a class="headerlink" href="#geterrorconditionobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: ddict,msg,msgpub,category,level,type,tb</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:179)</li>
+</ul>
+<p>returns only ErrorConditionObject which should be used in jumpscale to define an errorcondition (or potential error condition)</p>
+</div>
+<div class="section" id="geterrortracekis">
+<h2>getErrorTraceKIS<a class="headerlink" href="#geterrortracekis" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: tb</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:394)</li>
+</ul>
+</div>
+<div class="section" id="getframes">
+<h2>getFrames<a class="headerlink" href="#getframes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: tb</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:351)</li>
+</ul>
+</div>
+<div class="section" id="halt">
+<h2>halt<a class="headerlink" href="#halt" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: msg</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:730)</li>
+</ul>
+</div>
+<div class="section" id="lastactionclear">
+<h2>lastActionClear<a class="headerlink" href="#lastactionclear" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:640)</li>
+</ul>
+<p>clear last action so is not printed when error</p>
+</div>
+<div class="section" id="lastactionset">
+<h2>lastActionSet<a class="headerlink" href="#lastactionset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: lastActionDescription</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:634)</li>
+</ul>
+<p>will remember action you are doing, this will be added to error message if filled in</p>
+</div>
+<div class="section" id="parsepythonerrorobject">
+<h2>parsePythonErrorObject<a class="headerlink" href="#parsepythonerrorobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pythonExceptionObject,ttype,tb,level,message</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:210)</li>
+</ul>
+<p>how to use</p>
+<p>try:
+except Exception,e:
+eco=j.errorconditionhandler.parsePythonErrorObject(e)</p>
+<p>eco is jumpscale internal format for an error
+next step could be to process the error objecect (eco) e.g. by j.errorconditionhandler.processErrorConditionObject(eco)</p>
+</div>
+<div class="section" id="parsepythonexceptionobject">
+<h2>parsepythonExceptionObject<a class="headerlink" href="#parsepythonexceptionobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:305)</li>
+</ul>
+</div>
+<div class="section" id="processerrorconditionobject">
+<h2>processErrorConditionObject<a class="headerlink" href="#processerrorconditionobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: errorConditionObject,tostdout,sentry,modulename,centralsentry</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:420)</li>
+</ul>
+<p>a errorObject gets processed which means stored locally or forwarded to a logserver or both</p>
+<p>you can overrule this behaviour by changing at rutime this function with a new one e.g. following code could work</p>
+<p>def myProcessErrorConditionObject(eco):
+print eco</p>
+<p>j.errorconditionhandler.processErrorConditionObject=myProcessErrorConditionObject</p>
+<p>now there would be no further processing appart from priting the errorcondition object (eco)</p>
+</div>
+<div class="section" id="processpythonexceptionobject">
+<h2>processPythonExceptionObject<a class="headerlink" href="#processpythonexceptionobject" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: pythonExceptionObject,ttype,tb,level,message,sentry</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:188)</li>
+</ul>
+<p>how to use</p>
+<p>try:
+except Exception,e:
+j.errorconditionhandler.processpythonExceptionObject(e)</p>
+<p>the errorcondition is then also processed e.g. send to local logserver and/or stored locally in errordb
+see j.errorconditionhandler.processErrorConditionObject how to use this and overrule the behaviour</p>
+</div>
+<div class="section" id="raisebug">
+<h2>raiseBug<a class="headerlink" href="#raisebug" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,pythonExceptionObject,pythonTraceBack,msgpub,die,tags,level</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:52)</li>
+</ul>
+<p>use this to raise a bug in the code, this is the only time that a stacktrace will be asked for
+level will be Critical</p>
+<p>try:
+except Exception,e:
+j.errorconditionhandler.raiseBug(&#8220;an error&#8221;,category=&#8221;exceptions.init&#8221;,e)</p>
+</div>
+<div class="section" id="raisecritical">
+<h2>raiseCritical<a class="headerlink" href="#raisecritical" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,pythonExceptionObject,pythonTraceBack,msgpub,die,tags,level</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:52)</li>
+</ul>
+<p>use this to raise a bug in the code, this is the only time that a stacktrace will be asked for
+level will be Critical</p>
+<p>try:
+except Exception,e:
+j.errorconditionhandler.raiseBug(&#8220;an error&#8221;,category=&#8221;exceptions.init&#8221;,e)</p>
+</div>
+<div class="section" id="raiseinputerror">
+<h2>raiseInputError<a class="headerlink" href="#raiseinputerror" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,msgpub,die,backtrace,tags</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:145)</li>
+</ul>
+</div>
+<div class="section" id="raisemonitoringerror">
+<h2>raiseMonitoringError<a class="headerlink" href="#raisemonitoringerror" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,msgpub,die,tags</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:164)</li>
+</ul>
+</div>
+<div class="section" id="raiseoperationalcritical">
+<h2>raiseOperationalCritical<a class="headerlink" href="#raiseoperationalcritical" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,msgpub,die,tags,eco,extra</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:91)</li>
+</ul>
+<p>use this to raise an operational issue about the system</p>
+</div>
+<div class="section" id="raiseoperationalwarning">
+<h2>raiseOperationalWarning<a class="headerlink" href="#raiseoperationalwarning" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,msgpub,tags,eco</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:134)</li>
+</ul>
+</div>
+<div class="section" id="raiseperformanceerror">
+<h2>raisePerformanceError<a class="headerlink" href="#raiseperformanceerror" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,msgpub,tags</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:172)</li>
+</ul>
+</div>
+<div class="section" id="raiseruntimeerrorwitheco">
+<h2>raiseRuntimeErrorWithEco<a class="headerlink" href="#raiseruntimeerrorwitheco" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: eco,tostdout</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:122)</li>
+</ul>
+</div>
+<div class="section" id="raisewarning">
+<h2>raiseWarning<a class="headerlink" href="#raisewarning" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: message,category,pythonExceptionObject,pythonTraceBack,msgpub,tags</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:74)</li>
+</ul>
+<p>use this to raise a bug in the code, this is the only time that a stacktrace will be asked for</p>
+<p>try:
+except Exception,e:
+j.errorconditionhandler.raiseBug(&#8220;an error&#8221;,category=&#8221;exceptions.init&#8221;,e)</p>
+</div>
+<div class="section" id="reraiseeco">
+<h2>reRaiseECO<a class="headerlink" href="#reraiseeco" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: eco</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:293)</li>
+</ul>
+</div>
+<div class="section" id="sendecotosentry">
+<h2>sendEcoToSentry<a class="headerlink" href="#sendecotosentry" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: eco,modulename,hrdprefix</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:474)</li>
+</ul>
+</div>
+<div class="section" id="sendmessagetosentry">
+<h2>sendMessageToSentry<a class="headerlink" href="#sendmessagetosentry" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: modulename,message,ttype,tags,extra,level,tb,frames,backtrace,hrdprefix</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:504)</li>
+</ul>
+<p>fatal
+error
+warning
+info
+debug</p>
+</div>
+<div class="section" id="setexcepthook">
+<h2>setExceptHook<a class="headerlink" href="#setexcepthook" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params:</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:34)</li>
+</ul>
+</div>
+<div class="section" id="toolstripnonascifromtext">
+<h2>toolStripNonAsciFromText<a class="headerlink" href="#toolstripnonascifromtext" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>params: text</li>
+<li>path:/core/errorhandling/ErrorConditionHandler.py (line:31)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../cloud/cloud.html" class="btn btn-neutral float-right" title="j.cloud">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="errorconditionhandler.html" class="btn btn-neutral" title="j.errorconditionhandler"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

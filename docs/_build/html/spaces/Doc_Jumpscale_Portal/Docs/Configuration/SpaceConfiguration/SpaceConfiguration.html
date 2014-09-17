@@ -1,0 +1,889 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring a Space &mdash; Jumpscale Doc 7.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Jumpscale Doc 7.0 documentation" href="../../../../../index.html"/>
+        <link rel="up" title="Configuration" href="../index.html"/>
+        <link rel="next" title="How templates works" href="../Templates/Templates.html"/>
+        <link rel="prev" title="Configuration" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+</head>
+
+<script type="text/javascript">
+    function customtoc(){
+      var ToC =
+        "<ul>";
+
+      var newLine, el, title, link;
+
+      $(".section").each(function() {
+        el = $(this);
+        header = el.children()[0];
+        title = header.textContent.replace("¶", "");
+        link = header.children[0].getAttribute('href');
+
+        newLine =
+          "<li class='toctree-l1 toctree'>" + 
+              "<a class='reference internal' href='" + link + "'>" + title + "</a>"
+
+        ToC += newLine;
+
+        el.find('.toctree-l1').each(function(){
+            sub = $(this);
+            subtitle = sub.children()[0].text;
+            sublink = sub.children()[0].getAttribute('href');
+            subnewLine =
+              "<ul>" +
+                "<li class='toctree-l2'>" +
+                  "<a class='reference internal' href='" + sublink + "'>" + subtitle + "</a>" +
+                "</li>"+
+              "</ul>";
+            ToC += subnewLine;
+        });
+
+        ToC += "</li>";
+
+      });
+
+      ToC += "</ul>";
+      $(".customtoc").append(ToC);
+
+      $('.toctree').on('click', function(){
+          $('.current').removeClass('current');
+          $(this).addClass('current');
+      });
+    };
+</script>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../../index.html" class="fa fa-home"> Jumpscale Doc</a>
+        
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+<!--         
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/Install/LinuxProduction.html">This Explains how to manually install JumpScale in sandboxed mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/Install/UbuntuDevelopment.html">This Explains how to manually install JumpScale on ubuntu &amp; mint in development mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/Install/GridInstallSingleNode.html">Install grid master on single node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/Install/GridInstallModular.html">How to install a grid in a modular way</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#getting-started">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/IPythonTricks.html">IPython Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/Shell + debugging.html">Shell and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/Configuration Files.html">Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/How To Use APIs.html">How to Use the APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/Human Readable Data.html">Human Readable Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/JumpScale License.html">JumpScale License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/GettingStarted/JumpScale-Pylabs.html">JumpScale vs Pylabs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#jpackages">JPackages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/JPackages/JpackageIntro.html">JPackages Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/JPackages/JPackagesABC.html">JPackages Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/JPackages/JPackageCMD.html">jpackage command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/JPackages/Coderecipe.html">Coderecipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/JPackages/JpackageDestinationTypes.html">JPackage Destination Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#process-management">Process Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/ProcessManagement/ProcessManagement.html">Process Management In Jumpscale</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/index.html#some-extensions">Some Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/SomeExtensions/ByteProcessor.html">ByteProcessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/SomeExtensions/MailClient.html">E-Mail client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Core/Docs/SomeExtensions/ModuleCodeTools.html">manipulate code</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/index.html">How To Use JumpScale</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToUseHG.html">Using mercurial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToUseJava.html">How To Us Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToJpackageUpdateDetectNewVersion.html">how to detect during jpackage install that its a new version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToRebuildBunchJpackages.html">Rebuilding JPackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToWorkWithProcessmanager.html">how to work with process manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToBlobStorTricks.html">How to play tricks with blobstor 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToRunLocalBlobServer.html">Using Local BlobStor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToRunYourOwnBlobStorServer.html">how to run your own blobstor server (v1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToCompareDirs.html">How to compare directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToFSWalker.html">FS Walker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToInstallLXC.html">How to configure your machine to use LXC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToUseLXC.html">How to use LXC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToChangeLXCImage.html">LXC image manipulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToNginx.html">How to work with nginx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToSentry.html">how to install sentry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/HowToThrowErrorTxtLonly.html">how can you throw an error by using txt only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Howto/Docs/index.html#examples">Examples:</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../Install.html">Installing the Portal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Howto/index.html">How To</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Howto/How to get started.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Howto/How to create your first actor.html">Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Howto/How to use the wiki.html">How to use the wiki</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Howto/How to load actors of local appserver and work with actors.html">Loading and working with actors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Howto/How to connect to a remote appserver &amp; work with actors.html">Loading and working with actors remotely</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Configuration</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">Configuring a Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-the-space-to-mercurial">Saving the space to Mercurial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-the-space-on-its-url">Publishing the space on its URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Templates/Templates.html">How templates works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../UserManagement/UserManagement.html">User Management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html">Wiki Syntax</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#general-text-formatting">General Text Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#other-text-formatting">Other Text Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#heading">Heading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#sample-heading-4">Sample heading 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#lists">Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#images">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#links">Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Wiki Syntax/Wiki Syntax.html#tables">Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Macros/index.html">Macros:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/DataVisualization/index.html">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/WebSiteElements/index.html">Web Site Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/HtmlElements/index.html">HTML Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/Images/index.html">Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/Navigation/index.html">Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/Portal/index.html">Portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/Utils/index.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Macros/Experimental/index.html">Experimental</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Modules/index.html">Modules</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../WebServices/index.html">Web Services</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Using the FTP client associated with the appserver.html">Using the appserver FTP Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../Using the FTP client associated with the appserver.html#introduction">Introduction</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/index.html">Admin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/AdminBestpractices.html">Admin Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/AdminMainUseCases.html">Admin Main Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/AdminPrinciples.html">Admin Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/AdminConfiguration.html">Admin Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/AdminDNS.html">Admin DNS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/JSAdmin.html">jsadmin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Admin/JSExec.html">jsexec</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/index.html">AgentController</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/AgentController.html">Distributed Work Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/AgentControllerServer.html">Agentcontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/JumpScript.html">JumpScripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/ProcessManager.html">Processmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/Workers.html">Workers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/ScheduleWork.html">Schedule work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/AgentController/ACRedis/ACRedis.html">Agent controller usage of redis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/index.html">OSIS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/OsisModelSpec.html">Osis Model Specs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/OSISInitialization.html">Using OSIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/OSISRemote.html">Remote OSIS server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/Types.html">Types in OSIS Model Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/OSIS/DbFormat.html">How To Stor in Key Value Stor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/index.html">Macros</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroDisk.html">Macro Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroEco.html">Macro Error Condition Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroEcos.html">Macro Ecos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroJob.html">macro job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroJobs.html">Macro Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroJumpscript.html">macro jumpscript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroLog.html">Macro Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroLogs.html">Macro Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroNode.html">Macro Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroNodes.html">Macro nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroProcess.html">Macro Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/MacroProcesses.html">Macro Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Macros/Macros.html">macros specific to grid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/index.html">Shell Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSAC.html">JSAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSCode.html">JSCODE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSDISK.html">jsdisk command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSGRID.html">JSGrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSGroup.html">JSGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSGroup.html#actions">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSNode.html">jsnode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSProcess.html">JSProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSUser.html">JSUser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ShellCommands/JSUser.html#actions">Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/index.html">WatchDog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/WatchDog.html">watchdog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/WatchDogImplementationDetails.html">Implementation Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/WatchDog/WatchDogTypes.html">Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html">Redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html#redis-usage-in-jumpscale">Redis Usage in JumpScale.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html#redisac-runs-on-port-7769-only-on-agentcontroller-master-node">Redisac runs on port 7769 only on agentcontroller/master node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/Redis.html#redisc-redis-cache-on-port-7768-runs-on-all-grid-nodes">Redisc redis cache on port 7768 runs on all grid nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html">ZDaemon</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html#zdaemon-client">ZDaemon Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html#raw-client">Raw client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemon.html#cmd-introspection-client">CMD (introspection) client</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html">ZDaemon and ZClient</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html#identification-and-session">Identification and session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Grid/Docs/ZDaemonProtocol.html#calling-cmds">Calling cmds</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/codetools.html">j.codetools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.regex.templates.lines.html">j.codetools.regex.templates.lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.executor.html">j.codetools.executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.regex.html">j.codetools.regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.templateengine.html">j.codetools.templateengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.html">j.codetools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/codetools/j.codetools.codemanager.html">j.codetools.codemanager</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/logger/logger.html">j.logger</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/logger/j.logger.html">j.logger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/logger/j.logger.utils.html">j.logger.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/application.html">j.application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/j.application.shellconfig.html">j.application.shellconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/j.application.config.html">j.application.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/j.application.redis.html">j.application.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/j.application.state.html">j.application.state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/application/j.application.html">j.application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/servers.html">j.servers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.geventws.html">j.servers.geventws</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.zdaemon.html">j.servers.zdaemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.base.html">j.servers.base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.tipc.html">j.servers.tipc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.tornado.html">j.servers.tornado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/servers/j.servers.cloudrobot.html">j.servers.cloudrobot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/config/config.html">j.config</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/config/j.config.html">j.config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/base.html">j.base</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.fs.installtools.html">j.base.fs.installtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.idgenerator.html">j.base.idgenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.regex.html">j.base.regex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.byteprocessor.html">j.base.byteprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.loader.html">j.base.loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.timer.html">j.base.timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.fswalker.html">j.base.fswalker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.time.html">j.base.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.errorhandler.html">j.base.errorhandler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/base/j.base.fs.html">j.base.fs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/remote.html">j.remote</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.cluster.html">j.remote.cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.fabric.html">j.remote.fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.avahi.html">j.remote.avahi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.cuisine.html">j.remote.cuisine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.cluster.replication.html">j.remote.cluster.replication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.cluster.config.html">j.remote.cluster.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.cluster.replicator.html">j.remote.cluster.replicator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/remote/j.remote.system.html">j.remote.system</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/packages.html">j.packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages._object.jpackage.html">j.packages._object.jpackage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.html">j.packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.sourcesConfig.html">j.packages.sourcesConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.redis.html">j.packages.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.docGenerator.html">j.packages.docGenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.releaseMgmt.html">j.packages.releaseMgmt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/packages/j.packages.docGenerator.docs.html">j.packages.docGenerator.docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/gui/gui.html">j.gui</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/gui/j.gui.dialog.easyDialog.html">j.gui.dialog.easyDialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/gui/j.gui.form.html">j.gui.form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/gui/j.gui.dialog.html">j.gui.dialog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/db.html">j.db</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.dict.html">j.db.serializers.dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.int.html">j.db.serializers.int</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.hrd.html">j.db.serializers.hrd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.html">j.db.serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.tlog.html">j.db.tlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.ujson.html">j.db.serializers.ujson</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.blowfish.html">j.db.serializers.blowfish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.time.html">j.db.serializers.time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.cache.html">j.db.cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.keyvaluestore.html">j.db.keyvaluestore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.base64.html">j.db.serializers.base64</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/db/j.db.serializers.msgpack.html">j.db.serializers.msgpack</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/code/code.html">j.code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/code/j.code.html">j.code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/errorconditionhandler.html">j.errorconditionhandler</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/errorconditionhandler/j.errorconditionhandler.html">j.errorconditionhandler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/cloud/cloud.html">j.cloud</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/cloud/j.cloud.system.fs.html">j.cloud.system.fs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/dirs/dirs.html">j.dirs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/dirs/j.dirs.html">j.dirs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/core.html">j.core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.zdaemon.html">j.core.zdaemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.tags.html">j.core.tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.portalloader.actorsinfo.html">j.core.portalloader.actorsinfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.grid.zobjects.html">j.core.grid.zobjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.osismodel.html">j.core.osismodel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.grid.healthchecker.html">j.core.grid.healthchecker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.processmanager.html">j.core.processmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.portal.html">j.core.portal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.gevent.html">j.core.gevent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.grid.html">j.core.grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.specparser.html">j.core.specparser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.params.html">j.core.params</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.processmanager.redisprocessmanager.html">j.core.processmanager.redisprocessmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.taskletengine.html">j.core.taskletengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.processmanager.redisprocessmanager.connection_pool.html">j.core.processmanager.redisprocessmanager.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.osis.html">j.core.osis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.processmanager.daemon.html">j.core.processmanager.daemon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.codegenerator.html">j.core.codegenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.hrd.html">j.core.hrd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/core/j.core.portalloader.html">j.core.portalloader</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/html/html.html">j.html</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/html/j.html.html">j.html</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/basetype/basetype.html">j.basetype</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/basetype/j.basetype.html">j.basetype</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/events/events.html">j.events</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/events/j.events.html">j.events</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/system.html">j.system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fs.html">j.system.fs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fs.html#rules">Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fs.html#information-sources">Information sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.diskmanager.html">j.system.platform.diskmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.process.html">j.system.process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.statmanager.html">j.system.statmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.statmanager.osis.client.html">j.system.statmanager.osis.client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.redisstataggregator.html">j.system.redisstataggregator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.shorewall.html">j.system.platform.shorewall</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.ubuntu.html">j.system.platform.ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.statmanager.osis.html">j.system.statmanager.osis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.btrfs.html">j.system.btrfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.redisstataggregator.redis.connection_pool.html">j.system.redisstataggregator.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.qemu_img.html">j.system.platform.qemu_img</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.string.html">j.system.string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.stataggregator.html">j.system.stataggregator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.nginx.html">j.system.platform.nginx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.netconfig.html">j.system.netconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fswalker.html">j.system.fswalker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fswalker.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.fswalker.html#id1">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.python.html">j.system.platform.python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.stataggregator.stats.html">j.system.stataggregator.stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.ovsnetconfig.html">j.system.ovsnetconfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platformtype.html">j.system.platformtype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.socketserver.html">j.system.socketserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.redisstataggregator.redis.html">j.system.redisstataggregator.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.installtools.html">j.system.installtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.statmanager.osisclient.html">j.system.statmanager.osisclient</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.unix.html">j.system.unix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.lxc.html">j.system.platform.lxc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.net.html">j.system.net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/system/j.system.platform.screen.html">j.system.platform.screen</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/console/console.html">j.console</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/console/j.console.html">j.console</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/tools.html">j.tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.sandboxer.html">j.tools.sandboxer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.objectinspector.html">j.tools.objectinspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.testengine.html">j.tools.testengine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.startupmanager.html">j.tools.startupmanager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.imagelib.html">j.tools.imagelib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.jumpscriptsManager.html">j.tools.jumpscriptsManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.performancetrace.html">j.tools.performancetrace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.jail.redis.html">j.tools.jail.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.jail.redis.connection_pool.html">j.tools.jail.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.docpreprocessorparser.html">j.tools.docpreprocessorparser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.docpreprocessor.html">j.tools.docpreprocessor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.units.sizes.html">j.tools.units.sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.ssl.html">j.tools.ssl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.inifile.html">j.tools.inifile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.admin.html">j.tools.admin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.txtrobot.html">j.tools.txtrobot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.youtrack.html">j.tools.youtrack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.text.html">j.tools.text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.docgenerator.html">j.tools.docgenerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.expect.html">j.tools.expect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.testengineKds.html">j.tools.testengineKds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.whmcs.tickets.html">j.tools.whmcs.tickets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.hash.html">j.tools.hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.whmcs.orders.html">j.tools.whmcs.orders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.units.bytes.html">j.tools.units.bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.dnsmasq.html">j.tools.dnsmasq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.html.html">j.tools.html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.whmcs.users.html">j.tools.whmcs.users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/tools/j.tools.jail.html">j.tools.jail</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/action/action.html">j.action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/action/j.action.html">j.action</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/enumerators.html">j.enumerators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.ZipFileAction.html">j.enumerators.ZipFileAction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.LogLevel.html">j.enumerators.LogLevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.DialogType.html">j.enumerators.DialogType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.ErrorConditionLevel.html">j.enumerators.ErrorConditionLevel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.MessageType.html">j.enumerators.MessageType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.EnumerationWithValue.html">j.enumerators.EnumerationWithValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.ErrorConditionType.html">j.enumerators.ErrorConditionType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.AppStatusType.html">j.enumerators.AppStatusType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/enumerators/j.enumerators.BlobType.html">j.enumerators.BlobType</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/clients.html">j.clients</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.graphite.html">j.clients.graphite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.http.html">j.clients.http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.credis.html">j.clients.credis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.influxdb.html">j.clients.influxdb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.rogerthat.html">j.clients.rogerthat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.gitlab.html">j.clients.gitlab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.redisworker.html">j.clients.redisworker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.mercurial.html">j.clients.mercurial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.vcs.html">j.clients.vcs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.elasticsearch.html">j.clients.elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.redis.html">j.clients.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.blobstor.html">j.clients.blobstor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.celery.html">j.clients.celery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.mongodb.html">j.clients.mongodb</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.routeros.html">j.clients.routeros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.github.html">j.clients.github</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.bitbucket.config.html">j.clients.bitbucket.config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.email.html">j.clients.email</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.git.html">j.clients.git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.redisworker.redis.html">j.clients.redisworker.redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.bitbucket.html">j.clients.bitbucket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.ciscoswitch.html">j.clients.ciscoswitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.agentcontroller.html">j.clients.agentcontroller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.webdis.html">j.clients.webdis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.redisworker.redis.connection_pool.html">j.clients.redisworker.redis.connection_pool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/clients/j.clients.bitbucketi.html">j.clients.bitbucketi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Libraries/Docs/errors.html">errors while trying to import libraries</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html">Starting application and configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html#application-start">Application start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/DevelopYourFirstApp/Application Configuration.html#j-dirs">j.dirs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorTaskletEngines.html">Actors Tasklets Engines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html">Generic Spec Format:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html#basic-types">basic types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html#reference-to-enumerations-objects">reference to enumerations &amp; objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html#default-val-posibilities">default val posibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/GenericSpecFormat.html#generic">Generic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html">Actor Specs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ActorSpec.html#tags-which-can-be-used-in-actorspec">Tags Which Can Be Used In Actorspec</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/DirStructure.html">Actor Dirstructure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html">Model Spec</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html#nocrud">nocrud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Actors/ModelSpec.html#index">index</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/HowToWriteMacros/DocManipulatingWikiMacro.html">How to Manipulate the Doc Content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html">Portal Webserver Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html#startup">startup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Portal/PortalWebserverFlow.html#when-incoming-request">when incoming request</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html">Format of HRD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-dump-from-any-data-to-hrd">To dump from any data to HRD:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/Advanced/HRDSerializerDeserializer.html#to-load-hrd-into-an-object">To load HRD into an object:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html">jscode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html#jscode-status">jscode status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html#code-update">code update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html#jscode-commit">jscode commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Doc_Jumpscale_Devel/Docs/CodeManagement/jscode.html#jscode-push">jscode push</a></li>
+</ul>
+</li>
+</ul>
+
+         -->
+            <div class="customtoc">&nbsp;</div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../index.html">Jumpscale Doc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">&lt;no title&gt;</a> &raquo;</li>
+      
+          <li><a href="../index.html">Configuration</a> &raquo;</li>
+      
+    <li>Configuring a Space</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../../../../_sources/spaces/Doc_Jumpscale_Portal/Docs/Configuration/SpaceConfiguration/SpaceConfiguration.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="configuring-a-space">
+<h1>Configuring a Space<a class="headerlink" href="#configuring-a-space" title="Permalink to this headline">¶</a></h1>
+<p>A space is a collection of pages. Every page in a space must have a unique name. Every space can be configured independently, with its own style and user management.
+All configuration files of a space are stored in the .space directory, located in the root of the space.</p>
+<p>In this section you find the list of configuration files that can be used in a space.</p>
+<div class="section" id="acl-cfg">
+<h2>acl.cfg<a class="headerlink" href="#acl-cfg" title="Permalink to this headline">¶</a></h2>
+<p>In the acl.cfg configuration file, you can define the different rights to the defined groups. The following rights can be assigned:</p>
+<ul class="simple">
+<li>R: read-only</li>
+<li>W: read/write</li>
+<li>S: synchronize the documentation to a local file system</li>
+<li>A: administrator right</li>
+<li>: all rights</li>
+</ul>
+<p>The definition of user and group rights has the following structure:</p>
+<p>&lt;group name&gt;: &lt;rights&gt;
+&lt;user name&gt;: &lt;rights&gt;</p>
+</div>
+<div class="section" id="default-wiki">
+<h2>default.wiki<a class="headerlink" href="#default-wiki" title="Permalink to this headline">¶</a></h2>
+<p>The default.wiki file is the landing page of the space. This page defines the default parameters of the space. In this page you define the different sections that each page of the space will contain.</p>
+<p>The following parameters are accepted:</p>
+<ul class="simple">
+<li>&#8216;title&#8217;: defines the name that appears on your Internet browser&#8217;s tab and title bar.<ul>
+<li>Usage: &#8216;title: &lt;your title&gt;&#8217;</li>
+</ul>
+</li>
+<li>&#8216;projectname&#8217;: the name of your complete project, not limited to the documentation.<ul>
+<li>Usage: &#8216;projectname: &lt;your project name&gt;&#8217;</li>
+</ul>
+</li>
+<li>&#8216;find&#8217;: adds a search box to find information in the space.<ul>
+<li>Usage: &#8216;find&#8217;</li>
+</ul>
+</li>
+<li>&#8216;menu&#8217;: adds a menu item to the horizontal menu bar.<ul>
+<li>Usage: <a href="#id1"><span class="problematic" id="id2">`</span></a>menu:</li>
+</ul>
+</li>
+</ul>
+<p>&lt;menu label&gt;: &lt;root page name&gt;`</p>
+<ul class="simple">
+<li>&#8216;menuadmin&#8217;: adds the administrator menu to the horizontal menu bar.<ul>
+<li>Usage: &#8216;menuadmin&#8217;</li>
+</ul>
+</li>
+<li>&#8216;navigation&#8217;: adds a navigation menu.<ul>
+<li>Usage: &#8216;navigation&#8217;</li>
+</ul>
+</li>
+<li>&#8216;content&#8217;: adds the content of the wiki pages that you create.<ul>
+<li>Usage: &#8216;content&#8217;</li>
+<li>Single curly braces instead of double curly braces!</li>
+</ul>
+</li>
+</ul>
+<p>To define the sections of each page, you have the following parameters:</p>
+<ul class="simple">
+<li>&#8216;block&#8217;: displays a table in which you can define rows and columns. For example, when you want to add a fixed footer, you can add a block for the content and another one for the footer.</li>
+<li>&#8216;row&#8217;: creates a row in a block.</li>
+<li>&#8216;col&#8217;: creates a column in a block. You can add the width of the column as extra parameter, for example col 3.</li>
+<li>&#8216;divend&#8217;: indicates the end of an HTML div section.</li>
+</ul>
+</div>
+<div class="section" id="nav-wiki">
+<h2>nav.wiki<a class="headerlink" href="#nav-wiki" title="Permalink to this headline">¶</a></h2>
+<p>This page is the default navigation page of the space. The page is used by the navigation macro.</p>
+</div>
+<div class="section" id="notfound-wiki">
+<h2>notfound.wiki<a class="headerlink" href="#notfound-wiki" title="Permalink to this headline">¶</a></h2>
+<p>This page is shown when a requested page can not be found. This page will replace the default HTTP Not Found page. You can put any information on this page, using the default wiki style.</p>
+</div>
+<div class="section" id="template-wiki">
+<h2>template.wiki<a class="headerlink" href="#template-wiki" title="Permalink to this headline">¶</a></h2>
+<p>The template.wiki file is the default wiki file which is used as template when a new page is created in the space.</p>
+</div>
+</div>
+<div class="section" id="saving-the-space-to-mercurial">
+<h1>Saving the space to Mercurial<a class="headerlink" href="#saving-the-space-to-mercurial" title="Permalink to this headline">¶</a></h1>
+<p>Adding the space to bitbucket helps you save your work &amp; share your work with other team members.</p>
+<div class="section" id="create-mercurial-repository-for-the-space">
+<h2>Create Mercurial repository for the space<a class="headerlink" href="#create-mercurial-repository-for-the-space" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Open ssh to the server</li>
+<li>&#8216;cd&#8217; to the directory containing the code</li>
+<li>Create a repo &#8216;hg init&#8217;</li>
+<li>Add all files to the repo &#8216;hg add .&#8217;</li>
+<li>Commit the files (save the files) &#8216;hg commit -u my_username -m &#8220;Commit message describing what I did&#8221;&#8217;</li>
+</ul>
+</div>
+<div class="section" id="committing-after-changing-files">
+<h2>Committing after changing files<a class="headerlink" href="#committing-after-changing-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Tell Mercurial to consider missing files deleted, and add any new files to the repo &#8216;hg addremove&#8217;</li>
+<li>Commit the files (save the files) &#8216;hg commit -u my_username -m &#8220;Commit message describing what I did&#8221;&#8217;</li>
+</ul>
+</div>
+<div class="section" id="push-your-changes-to-bitbucket">
+<h2>Push your changes to bitbucket<a class="headerlink" href="#push-your-changes-to-bitbucket" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Make sure everything is comitted</li>
+<li>Inside this directory, add this content</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">paths</span><span class="p">]</span>
+<span class="n">default</span> <span class="o">=</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">incubaid</span><span class="o">/</span><span class="n">repo_name</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To push &#8216;hg push&#8217;</li>
+<li>Enter your bitbucket credentials</li>
+</ul>
+</div>
+<div class="section" id="how-to-pull-the-latest-changes-from-bitbucket">
+<h2>How to pull the latest changes from bitbucket<a class="headerlink" href="#how-to-pull-the-latest-changes-from-bitbucket" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To pull all the changes from bitbucket &amp; update to the latest version &#8216;hg pull -u&#8217;</li>
+</ul>
+</div>
+<div class="section" id="how-to-pull-update-from-the-admin-menu">
+<h2>How to pull &amp; update from the admin menu<a class="headerlink" href="#how-to-pull-update-from-the-admin-menu" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re logged in to the portal as admin, you will see the admin menu on the top. This allows you to pull &amp; update without being logged in to the server with ssh. To work, it requires the credentials to be configured on the server.</p>
+<p>To configure the credentials, add them to your &#8216;~/.hgrc&#8217; as the following example</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">auth</span><span class="p">]</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">incubaid</span>    <span class="c"># Apply these credentials when the bitbucket repo URL starts with this prefix</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">schemes</span> <span class="o">=</span> <span class="n">http</span> <span class="n">https</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">qp55pq</span>                  <span class="c"># bitbucket username</span>
+<span class="n">bb_incubaid</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">qp55pq</span>                  <span class="c"># bitbucket password</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="publishing-the-space-on-its-url">
+<h1>Publishing the space on its URL<a class="headerlink" href="#publishing-the-space-on-its-url" title="Permalink to this headline">¶</a></h1>
+<p>nginx is a web server just like Apache &amp; IIS. If you want to make a space has its own URL, you need to configure nginx.</p>
+<ul class="simple">
+<li>Login to nginx machine 172.19.49.230 (ask Tomas for access)</li>
+<li>&#8216;cd /etc/nginx/sites-available/&#8217;</li>
+<li>Create a new configuration file with the URL, e.g. &#8216;www.my_space.com.conf&#8217;. It works for subdomains also, e.g. &#8216;docs.my_space.com.conf&#8217;</li>
+<li>Add this content to the file (we will use &#8216;www.my_space.com&#8217; as an example)</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre>server {
+        access_log  /var/log/nginx/www.my_space.com.log ;
+        listen 80;
+
+        server_name www.my_space.com;
+
+        location / {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/my_space/; # Put the space here
+        }
+
+        location /my_space {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/my_space;
+        }
+
+        location /images {
+                proxy_set_header  X-Real-IP $remote_addr;
+                proxy_pass http://172.19.49.185/images;
+        }
+
+
+        location /lib {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/lib/;
+        }
+
+        location /restmachine {
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_pass http://172.19.49.185/restmachine/;
+        }
+
+}
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Templates/Templates.html" class="btn btn-neutral float-right" title="How templates works">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Configuration"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+          <script type="text/javascript">
+            customtoc();
+          </script>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../../',
+            VERSION:'7.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
