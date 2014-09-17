@@ -9,11 +9,11 @@ j.codetools
    :maxdepth: 2
    :glob:  
 
-   j.codetools.regex.templates.lines
    j.codetools.executor
-   j.codetools.regex
-   j.codetools.templateengine
-   j.codetools
    j.codetools.codemanager
+   j.codetools
+   j.codetools.regex.templates.lines
+   j.codetools.templateengine
+   j.codetools.regex
 
 

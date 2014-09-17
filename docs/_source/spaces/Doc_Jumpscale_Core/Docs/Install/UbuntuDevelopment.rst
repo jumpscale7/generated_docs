@@ -16,7 +16,6 @@ update your apt repository & make sure some basic requirements are met
 
 .. code-block:: python
 
-  template:shell
   apt-get update
   apt-get upgrade
   apt-get install python-git git ssh python2.7 python-requests python-apt openssl ca-certificates python-pip ipython -y
@@ -77,7 +76,6 @@ Install the latest trunk version from github
 
 .. code-block:: python
 
-  template:shell
   pip install https://github.com/Jumpscale/jumpscale_core/archive/master.zip
 
 
@@ -95,7 +93,6 @@ Run the following command:
 
 .. code-block:: python
 
-  template:shell
   jpackage mdupdate
 
 
@@ -110,7 +107,6 @@ Install the core jpackages
 
 .. code-block:: python
 
-  template:shell
   jpackage install -n base -r
   jpacakge install -n core -r --debug
   jpacakge install -n libs -r --debug

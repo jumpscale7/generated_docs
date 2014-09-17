@@ -10,7 +10,6 @@ Using Python
 
 .. code-block:: python
 
-  template:python
   import requests
   import json
   
@@ -32,7 +31,6 @@ Using cURL
 
 .. code-block:: python
 
-  template:bash
   curl -d username={username} -d password={password} https://mothership1.com/restmachine/cloudapi/users/authenticate
 
 
@@ -46,7 +44,6 @@ Using JavaScript
 
 .. code-block:: python
 
-  template:javascript
   
   var url = "https://mothership1.com/restmachine/cloudapi/users/authenticate";
   var params = {

@@ -13,7 +13,6 @@ update your apt repository & make sure some basic requirements are met
 
 .. code-block:: python
 
-  template:shell
   apt-get update
   #apt-get upgrade
   apt-get install mercurial ssh mc curl -y
@@ -68,7 +67,6 @@ Install the sandbox
 
 .. code-block:: python
 
-  template:shell
   curl http://install.jumpscale.org:85/cmds/jsbox_stable.sh > /tmp/init.sh;sh /tmp/init.sh
   source /opt/jsbox/activate
   js
@@ -87,7 +85,6 @@ Run the following command:
 
 .. code-block:: python
 
-  template:shell
   jssync download -c jpackages -k test
   #or for stable
   jssync download -c jpackages -k unstable

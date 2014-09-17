@@ -9,10 +9,10 @@ j.application
    :maxdepth: 2
    :glob:  
 
-   j.application.shellconfig
    j.application.config
-   j.application.redis
-   j.application.state
    j.application
+   j.application.state
+   j.application.redis
+   j.application.shellconfig
 
 

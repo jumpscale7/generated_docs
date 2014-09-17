@@ -74,7 +74,6 @@ In source.cfg located at '$jumpscaledir/cfg/jpackages/sources.cfg' the JPackage 
 
 .. code-block:: python
 
-  template:properties
   [jumpscale]
   metadatafromtgz = 0
   qualitylevel = unstable
@@ -151,7 +150,6 @@ This folder contains two files main.hrd and code.hrg
 
 .. code-block:: python
 
-  template:properties
   jp.domain=jumpscale
   jp.name=core
   jp.version=1.0
@@ -193,7 +191,6 @@ In this folder we store HRD files with configuration settings specific to JPacka
 
 .. code-block:: python
 
-  template:properties
   grid.node.roles = @ASK name:roles descr:roles__comma_separated type:str default:node,computenode.kvm
   gridmaster.grid.id=@ASK descr:specify__id__for__this__grid__needs__to__be__unique__globally type:int default:1 minValue:1 maxValue:32767 retry:5
   grid.master.superadminpasswd = rooter
@@ -216,7 +213,6 @@ In this folder we store HRD files with configuration settings specific to a JPac
 
 .. code-block:: python
 
-  template:properties
   agent.agentcontroller.ip=@ASK name:ip type:str default:['127.0.0.1']
 
 

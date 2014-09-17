@@ -11,7 +11,6 @@ is the tool to manipulate jpackages on your system
 
 .. code-block:: python
 
-  template:shell
   # jpackage --help
   usage: jpackage [-h] [-q] [-n NAME] [-d DOMAIN] [-i INSTANCE] [-v VERSION]
                   [--deps] [-f] [--data DATA] [-r] [-s] [--debug] [--nodownload]
@@ -105,7 +104,6 @@ update metadata
 
 .. code-block:: python
 
-  template:shell
   #updates the metadata
   jpackage mdupdate
   
@@ -122,7 +120,6 @@ install or update jpackage
 
 .. code-block:: python
 
-  template:shell
   #updates selected jpackages
   jpackage install
   
@@ -165,7 +162,6 @@ debug
 
 .. code-block:: python
 
-  template:shell
   #list all jpackages in debug
   jpackage debug --list
   

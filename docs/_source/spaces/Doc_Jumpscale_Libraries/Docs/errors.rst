@@ -55,17 +55,9 @@ No module named _mysql
 
 No module named Lxc
 
-**import JumpScale.lib.cloudproviders**
-
-No module named cloudproviders
-
 **import JumpScale.lib.puppet**
 
 JumpScale instance has no attribute 'develtools'
-
-**import JumpScale.lib.whmcs**
-
-No module named whmcs
 
 **import JumpScale.lib.dhcp**
 

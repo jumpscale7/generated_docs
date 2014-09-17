@@ -12,7 +12,6 @@ is a tool to manipulate your code on your system
 
 .. code-block:: python
 
-  template:shell
   usage: jscode [-h] [-m MESSAGE] [-b BRANCH] [-a ACCOUNTS] [-r REPOS] [-u] [-f]
                 {commit,push,update,status}
   
@@ -49,7 +48,6 @@ will see if the repo is in sync with the local version or not.
 
 .. code-block:: python
 
-  template:shell
   root@despiegk-desktop:/opt/code/openvstorage# jscode status
   select bitbucketaccounts
      1: incubaid
@@ -123,7 +121,6 @@ example to commit code on specific branch
 
 .. code-block:: python
 
-  template:shell
   # jscode commit -m 'new branch for lots of changes to core' -a jumpscale -b unstable
   select repos
      1: jumpscale_examples
