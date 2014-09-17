@@ -1,17 +1,17 @@
 
 
 JPackages Details
------------------
+*****************
 
 
 Introduction
-------------
+============
 
 JumpScale has a built-in packaging system, called JPackages. The JPackage system is an easy package system to create, build, and install an uninstall packages in the Jumpscale framework. Multiple JPackages which logically belong together are grouped in a Domain.
 
 
 The JPackage components
------------------------
+=======================
 
 JPackages use a particular directory structure to store their information. This directory structure is located in
 '$jumpscaledir/var/jpackages/'. Under this directory there are 3 subdirectories
@@ -31,7 +31,7 @@ The archive file contains the files of the JPackage.
 
 
 The Blob in depth
------------------
+=================
 
 All files necessary for the JPackage are stored under '$jumpscaledir/var/jpackages/files/<domain>/<JPackage name>/<instance>'. It is the intermediate folder for both upload and download of the JPackages.
 
@@ -61,10 +61,10 @@ The different domains to dowload packages from can can be configured in '$jumpsc
 
 
 The metadata in depth
----------------------
+=====================
 
 Sources.cfg
-^^^^^^^^^^^
+-----------
 
 
 In source.cfg located at '$jumpscaledir/cfg/jpackages/sources.cfg' the JPackage domains are configured.
@@ -102,7 +102,7 @@ These keys point to sections in the blobstor.cfg file under '$jumpscaledir/cfg/j
 
 
 The coderecipe
-^^^^^^^^^^^^^^
+--------------
 
 The coderecipe (codereciipe.cfg) maps where the files of the JPackage will end up on the system once installed.
 
@@ -131,7 +131,7 @@ In the above example the files in the JPackage Blob will be copied from apps/por
 
 
 HRD files
-^^^^^^^^^
+---------
 
 
 
@@ -140,7 +140,7 @@ The other one to provider configuration specific to the JPackage eg. port number
 
 
 hrd/
-""""
+^^^^
 
 
 This folder contains two files main.hrd and code.hrg
@@ -182,7 +182,7 @@ It also points to the required dependencies.
 
 
 hrdactive/
-""""""""""
+^^^^^^^^^^
 
 
 In this folder we store HRD files with configuration settings specific to JPackage for. eg: service port for the JPackage.
@@ -205,7 +205,7 @@ These keys will be merged with the content of '$jumpscaledir/cfg/hrd/*' if a key
 
 
 hrdinstance/
-""""""""""""
+^^^^^^^^^^^^
 
 
 In this folder we store HRD files with configuration settings specific to a JPackage instance. eg: name of the JPackage instance.
@@ -226,7 +226,7 @@ These keys will be merged with the content of '$jumpscaledir/cfg/hrd/*' if a key
 
 
 Actions
-^^^^^^^
+-------
 
 The Actions directory contains all the actions which can be performed or by the JPackage. This ranges from install actions to monitoring actions and even process management of the installed processes by the JPackage.
 
@@ -236,7 +236,7 @@ The Actions directory contains all the actions which can be performed or by the 
 
 
 Files in JPackage
------------------
+=================
 
 
 

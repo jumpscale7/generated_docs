@@ -1,7 +1,7 @@
 
 
 jpackage command
-----------------
+****************
 
 
 is the tool to manipulate jpackages on your system
@@ -98,7 +98,7 @@ is the tool to manipulate jpackages on your system
 
 
 update metadata
----------------
+===============
 
 
 
@@ -115,7 +115,7 @@ update metadata
 
 
 install or update jpackage
---------------------------
+==========================
 
 
 
@@ -154,7 +154,7 @@ updating or installing is in fact same operation
 
 
 debug
------
+=====
 
 
 * some examples how to manipulate debug flag of jpackages

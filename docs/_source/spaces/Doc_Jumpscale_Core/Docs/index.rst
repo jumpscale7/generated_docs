@@ -1,7 +1,7 @@
 
 
 Installation
-^^^^^^^^^^^^
+============
 .. toctree::
    :maxdepth: 2
 
@@ -11,7 +11,7 @@ Installation
    Install/GridInstallModular
 
 Getting Started
-^^^^^^^^^^^^^^^
+===============
 .. toctree::
    :maxdepth: 3
 
@@ -25,7 +25,7 @@ Getting Started
 
 
 JPackages
-^^^^^^^^^
+=========
 .. toctree::
    :maxdepth: 3
    
@@ -37,7 +37,7 @@ JPackages
 
 
 Process Management
-^^^^^^^^^^^^^^^^^^
+==================
 .. toctree::
    :maxdepth: 3
 
@@ -45,7 +45,7 @@ Process Management
 
 
 Some Extensions
-^^^^^^^^^^^^^^^
+===============
 .. toctree::
    :maxdepth: 3
 

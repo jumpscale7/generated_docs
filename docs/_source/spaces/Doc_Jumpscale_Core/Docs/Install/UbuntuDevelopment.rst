@@ -1,7 +1,7 @@
 
 
 This Explains how to manually install JumpScale on ubuntu & mint in development mode
-------------------------------------------------------------------------------------
+====================================================================================
 
 
 This is the non sandboxed install method.
@@ -25,7 +25,7 @@ update your apt repository & make sure some basic requirements are met
 
 
 to make sure you remove previous version
-""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
@@ -70,7 +70,7 @@ this will make sure all leftovers are gone
 
 
 Install the latest trunk version from github
-""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
@@ -85,7 +85,7 @@ if you get a weird error please make sure that all js... files or links in /usr/
 
 
 Get the jpackage metadata
-"""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 Run the following command:
@@ -103,7 +103,7 @@ This command may ask you for a valid github account credentials.
 
 
 Install the core jpackages
-""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
@@ -112,7 +112,10 @@ Install the core jpackages
 
   template:shell
   jpackage install -n base -r
-  jpackage link -n core,libs,grid,portal -r
+  jpacakge install -n core -r --debug
+  jpacakge install -n libs -r --debug
+  jpacakge install -n grid -r --debug
+  jpacakge install -n portal -r --debug
 
 
 this will checkout the core repo and link into your environment, to make development easy.
