@@ -10,6 +10,6 @@ get
 
 
 * params: host,login,password
-* path:/lib/routeros/RouterOS.py (line:6)
+* path:/lib/routeros/RouterOS.py (line:8)
 
 
