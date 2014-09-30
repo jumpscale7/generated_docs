@@ -23,6 +23,7 @@ j.core
    j.core.processmanager.redisprocessmanager
    j.core.portalloader.actorsinfo
    j.core.taskletengine
+   j.core.processmanager.daemon.osis
    j.core.grid.healthchecker
    j.core.processmanager.redisprocessmanager.connection_pool
    j.core.hrd

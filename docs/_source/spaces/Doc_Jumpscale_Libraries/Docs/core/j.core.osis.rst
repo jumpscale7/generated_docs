@@ -29,7 +29,7 @@ generateOsisModelDefaults
 
 
 * params: namespace,specpath
-* path:/grid/osis/OSISFactory.py (line:274)
+* path:/grid/osis/OSISFactory.py (line:277)
 
 
 getClient
@@ -53,7 +53,7 @@ getClientForCategory
 
 
 * params: client,namespace,category
-* path:/grid/osis/OSISFactory.py (line:189)
+* path:/grid/osis/OSISFactory.py (line:192)
 
 
 how to use
@@ -67,7 +67,7 @@ getClientForNamespace
 
 
 * params: namespace,client
-* path:/grid/osis/OSISFactory.py (line:184)
+* path:/grid/osis/OSISFactory.py (line:187)
 
 
 getLocal
@@ -86,7 +86,7 @@ getModelTemplate
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:286)
+* path:/grid/osis/OSISFactory.py (line:289)
 
 
 getOSISBaseObjectComplexType
@@ -94,7 +94,7 @@ getOSISBaseObjectComplexType
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:203)
+* path:/grid/osis/OSISFactory.py (line:206)
 
 
 getOsisBaseObjectClass
@@ -102,7 +102,7 @@ getOsisBaseObjectClass
 
 
 * params:
-* path:/grid/osis/OSISFactory.py (line:200)
+* path:/grid/osis/OSISFactory.py (line:203)
 
 
 getOsisImplementationParentClass
@@ -110,7 +110,7 @@ getOsisImplementationParentClass
 
 
 * params: namespacename
-* path:/grid/osis/OSISFactory.py (line:206)
+* path:/grid/osis/OSISFactory.py (line:209)
 
 
 return parent class for osis implementation (is the implementation from which each namespace & category inherits)
@@ -121,7 +121,7 @@ getOsisModelClass
 
 
 * params: namespace,category,specpath
-* path:/grid/osis/OSISFactory.py (line:291)
+* path:/grid/osis/OSISFactory.py (line:294)
 
 
 returns class generated from spec file or from model.py file
