@@ -14,6 +14,7 @@ path
 
 
 Example
+^^^^^^^
 
 
 
@@ -32,6 +33,7 @@ height
 
 
 Example
+^^^^^^^
 
 
 
@@ -51,6 +53,7 @@ readonly
 
 
 Example
+^^^^^^^
 
 
 
@@ -71,6 +74,7 @@ bucket
 
 
 Example
+^^^^^^^
 
 
 
@@ -89,7 +93,7 @@ Example
 
 .. code-block:: python
 
-  \{\{explorer: ppath:system/system__contentmanager/macros/ readonly height:400\}\}
+  \{\{explorer: ppath:system/system__contentmanager/ readonly height:400\}\}
 
 
 

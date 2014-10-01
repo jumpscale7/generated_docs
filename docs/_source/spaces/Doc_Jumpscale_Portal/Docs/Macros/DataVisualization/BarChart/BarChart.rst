@@ -28,9 +28,23 @@ Example
 
 .. code-block:: python
 
-  \{\{barchart:"Test"| [[55, 20, 13, 32, 5, 1, 2, 10],[60, 3, 2, 9, 10, 20, 20, 10]]| ["HEADER 1", "HEADER 2", "HEADER 3", "HEADER 4", "HEADER 5", "HEADER 6", "HEADER 7", "HEADER 8"]| 900| 400| [55, 20, 13, 32, 5, 1, 2, 10, 60, 3, 2, 9, 10, 20, 20, 10]| {20: 'a', 13: 'b'}| ''
+  \{\{barchart:
+  title=Test
+  height=900
+  size=400
+  headers=HEADER 1,HEADER 2,HEADER 3,HEADER 4,HEADER 5,HEADER 6,HEADER 7,HEADER 8
+  data.1.legend=nr of accidents
+  data.1.data= 55, 20, 13, 32, 5, 1, 2, 10
+  data.2.legend=nr of death
+  data.2.data= 60, 3, 2, 9, 10, 20, 20, 10
+  data.3.legend=nr of felool
+  data.3.data= 60, 3, 2, 9, 100, 2000, 2000, 10000
   \}\}
 
 
+
 Output
+======
+
+
 

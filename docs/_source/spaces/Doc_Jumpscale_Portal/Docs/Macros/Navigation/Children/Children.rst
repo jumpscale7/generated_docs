@@ -34,7 +34,7 @@ Example
 
 .. code-block:: python
 
-  \{\{children: page:help bullets\}\}
+  \{\{children: page:navigation bullets\}\}
 
 
 

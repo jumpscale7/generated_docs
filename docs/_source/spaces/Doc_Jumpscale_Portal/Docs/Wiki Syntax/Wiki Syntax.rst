@@ -13,7 +13,9 @@ General Text Formatting
 
 Any text surrounded with one of the
 
-WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.
+unsupported image:/images/unknownspace/wiki_textformatting.png
+!wiki_textformatting.png!
+
 
 
 
@@ -168,16 +170,18 @@ Images
 
 
 To create an image, write its path enclosed with exclamation marks '!'
+Make sure the file is found in any location in the space (not under .files, if you want to use that location see last example)
 
 
 
 
 .. code-block:: python
 
-  !/$$space/.files/img/gorilla.jpg!
+  !gorilla.jpg!
 
 
-!/$$space/.files/img/gorilla.jpg!
+unsupported image:/images/unknownspace/gorilla.jpg
+!gorilla.jpg!
 
 
 With styles
@@ -188,10 +192,29 @@ With styles
 
 .. code-block:: python
 
-  !/$$space/.files/img/gorilla.jpg | border= 5px solid blue!
+  !gorilla.jpg | border= 5px solid blue!
 
 
-!/$$space/.files/img/gorilla.jpg | border= 5px solid blue!
+unsupported image:/images/unknownspace/gorilla.jpg
+!gorilla.jpg | border= 5px solid blue!
+
+
+With sizes
+^^^^^^^^^^
+
+
+unsupported image:/images/unknownspace/gorilla.jpg
+!gorilla.jpg | width:600 height:600 | border= 5px solid blue!
+
+can do only height or width
+
+
+specific file in the .files section
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+!/$$space/.files/img/gorilla.jpg!
+$$space will be translated to the spacename
 
 
 Links
