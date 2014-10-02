@@ -5,12 +5,20 @@ j.core.grid.healthchecker
 `Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/grid/gridhealthchecker/gridhealthchecker.py>`_
 
 
+checkDBs
+--------
+
+
+* params: clean
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:234)
+
+
 checkDisks
 ----------
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:415)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:453)
 
 
 checkDisksAllNodes
@@ -18,7 +26,7 @@ checkDisksAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:363)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:401)
 
 
 checkElasticSearch
@@ -26,7 +34,7 @@ checkElasticSearch
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:181)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:195)
 
 
 checkHeartbeatsAllNodes
@@ -34,7 +42,7 @@ checkHeartbeatsAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:319)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:357)
 
 
 checkProcessManager
@@ -42,7 +50,7 @@ checkProcessManager
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:345)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:383)
 
 
 Check heartbeat on specified node, see if result came in osis
@@ -53,7 +61,7 @@ checkProcessManagerAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:304)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:342)
 
 
 checkRedis
@@ -61,7 +69,7 @@ checkRedis
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:237)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:275)
 
 
 checkRedisAllNodes
@@ -69,7 +77,7 @@ checkRedisAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:220)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:258)
 
 
 checkWorkers
@@ -77,7 +85,7 @@ checkWorkers
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:274)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:312)
 
 
 checkWorkersAllNodes
@@ -85,7 +93,15 @@ checkWorkersAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:264)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:302)
+
+
+getGID
+------
+
+
+* params: id
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:45)
 
 
 getName
@@ -93,7 +109,7 @@ getName
 
 
 * params: id
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:36)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:37)
 
 
 getNodes
@@ -101,7 +117,7 @@ getNodes
 
 
 * params: activecheck
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:110)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:120)
 
 
 cache in mem
@@ -117,7 +133,7 @@ getWikiStatus
 
 
 * params: status
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:232)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:270)
 
 
 ping
@@ -125,7 +141,7 @@ ping
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:391)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:429)
 
 
 pingAllNodesAsync
@@ -133,7 +149,7 @@ pingAllNodesAsync
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:382)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:420)
 
 
 pingAllNodesSync
@@ -141,7 +157,7 @@ pingAllNodesSync
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:373)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:411)
 
 
 pingasync
@@ -149,7 +165,7 @@ pingasync
 
 
 * params: nid,clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:403)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:441)
 
 
 runAll
@@ -157,7 +173,7 @@ runAll
 
 
 * params:
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:132)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:143)
 
 
 runAllOnNode
@@ -165,7 +181,7 @@ runAllOnNode
 
 
 * params: nid
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:149)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:161)
 
 
 toStdout
@@ -173,6 +189,6 @@ toStdout
 
 
 * params:
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:107)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:117)
 
 
