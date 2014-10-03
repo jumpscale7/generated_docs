@@ -3,6 +3,10 @@ errors while trying to import libraries
 =======================================
 
 
+**import JumpScale.baselib.vfs**
+
+libleveldb.so.1: cannot open shared object file: No such file or directory
+
 **import JumpScale.baselib.changetracker**
 
 No module named BackupFactory
