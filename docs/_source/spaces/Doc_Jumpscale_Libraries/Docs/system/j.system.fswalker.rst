@@ -63,7 +63,7 @@ walkFunctional
 
 
 * params: root,callbackFunctionFile,callbackFunctionDir,arg,callbackForMatchDir,callbackForMatchFile
-* path:/core/system/fswalker.py (line:149)
+* path:/core/system/fswalker.py (line:151)
 
 
 Walk through filesystem and execute a method per file and dirname
