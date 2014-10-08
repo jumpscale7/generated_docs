@@ -21,7 +21,7 @@ changeFileNames
 
 
 * params: toReplace,replaceWith,pathToSearchIn,recursive,filter,minmtime,maxmtime
-* path:/core/system/fs.py (line:956)
+* path:/core/system/fs.py (line:963)
 
 
 
@@ -30,7 +30,7 @@ checkDirOrLink
 
 
 * params: fullpath
-* path:/core/system/fs.py (line:937)
+* path:/core/system/fs.py (line:944)
 
 
 check if path is dir or link to a dir
@@ -41,7 +41,7 @@ checkDirOrLinkToDir
 
 
 * params: fullpath
-* path:/core/system/fs.py (line:944)
+* path:/core/system/fs.py (line:951)
 
 
 check if path is dir or link to a dir
@@ -52,7 +52,7 @@ checkDirParam
 
 
 * params: path
-* path:/core/system/fs.py (line:1102)
+* path:/core/system/fs.py (line:1109)
 
 
 chmod
@@ -88,7 +88,7 @@ constructDirPathFromArray
 
 
 * params: array
-* path:/core/system/fs.py (line:1793)
+* path:/core/system/fs.py (line:1800)
 
 
 constructFilePathFromArray
@@ -96,7 +96,7 @@ constructFilePathFromArray
 
 
 * params: array
-* path:/core/system/fs.py (line:1803)
+* path:/core/system/fs.py (line:1810)
 
 
 convertFileDirnamesSpaceToUnderscore
@@ -104,7 +104,7 @@ convertFileDirnamesSpaceToUnderscore
 
 
 * params: rootdir
-* path:/core/system/fs.py (line:1562)
+* path:/core/system/fs.py (line:1569)
 
 
 convertFileDirnamesUnicodeToAscii
@@ -112,7 +112,7 @@ convertFileDirnamesUnicodeToAscii
 
 
 * params: rootdir,spacesToUnderscore
-* path:/core/system/fs.py (line:1535)
+* path:/core/system/fs.py (line:1542)
 
 
 copyDirTree
@@ -182,7 +182,7 @@ exists
 
 
 * params: path,followlinks
-* path:/core/system/fs.py (line:1031)
+* path:/core/system/fs.py (line:1038)
 
 
 Check if the specified path exists
@@ -193,7 +193,7 @@ fileConvertLineEndingCRLF
 
 
 * params: file
-* path:/core/system/fs.py (line:1747)
+* path:/core/system/fs.py (line:1754)
 
 
 Convert CRLF line-endings in a file to LF-only endings (
@@ -208,7 +208,7 @@ fileGetContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1265)
+* path:/core/system/fs.py (line:1272)
 
 
 Read a file and get contents of that file
@@ -219,7 +219,7 @@ fileGetTextContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1298)
+* path:/core/system/fs.py (line:1305)
 
 
 Read a UTF-8 file and get contents of that file. Takes care of the BOM <BOM>(http://en.wikipedia.org/wiki/Byte_order_mark)
@@ -230,7 +230,7 @@ fileGetUncommentedContents
 
 
 * params: filename
-* path:/core/system/fs.py (line:1279)
+* path:/core/system/fs.py (line:1286)
 
 
 Read a file and get uncommented contents of that file
@@ -241,7 +241,7 @@ fileSize
 
 
 * params: filename
-* path:/core/system/fs.py (line:1349)
+* path:/core/system/fs.py (line:1356)
 
 
 Get Filesize of file in bytes
@@ -252,7 +252,7 @@ find
 
 
 * params: startDir,fileregex
-* path:/core/system/fs.py (line:1763)
+* path:/core/system/fs.py (line:1770)
 
 
 Search for files or folders matching a given pattern
@@ -324,7 +324,7 @@ getTempFileName
 
 
 * params: dir,prefix
-* path:/core/system/fs.py (line:1599)
+* path:/core/system/fs.py (line:1606)
 
 
 Generates a temp file for the directory specified
@@ -335,7 +335,7 @@ getTmpDirPath
 
 
 * params:
-* path:/core/system/fs.py (line:1572)
+* path:/core/system/fs.py (line:1579)
 
 
 create a tmp dir name and makes sure the dir exists
@@ -346,7 +346,7 @@ getTmpFilePath
 
 
 * params: cygwin
-* path:/core/system/fs.py (line:1581)
+* path:/core/system/fs.py (line:1588)
 
 
 Generate a temp file path
@@ -369,7 +369,7 @@ grep
 
 
 * params: fileregex,lineregex
-* path:/core/system/fs.py (line:1775)
+* path:/core/system/fs.py (line:1782)
 
 
 Search for lines matching a given regex in all files matching a regex
@@ -381,7 +381,7 @@ gunzip
 
 
 * params: sourceFile,destFile
-* path:/core/system/fs.py (line:1887)
+* path:/core/system/fs.py (line:1897)
 
 
 gzip
@@ -389,7 +389,7 @@ gzip
 
 
 * params: sourceFile,destFile
-* path:/core/system/fs.py (line:1879)
+* path:/core/system/fs.py (line:1889)
 
 
 hardlinkFile
@@ -397,7 +397,7 @@ hardlinkFile
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:1084)
+* path:/core/system/fs.py (line:1091)
 
 
 Create a hard link pointing to source named destin. Availability: Unix.
@@ -409,7 +409,7 @@ isAsciiFile
 
 
 * params: filename,checksize
-* path:/core/system/fs.py (line:1611)
+* path:/core/system/fs.py (line:1618)
 
 
 Read the first <checksize> bytes of <filename>.
@@ -423,7 +423,7 @@ isBinaryFile
 
 
 * params: filename,checksize
-* path:/core/system/fs.py (line:1635)
+* path:/core/system/fs.py (line:1642)
 
 
 isDir
@@ -431,7 +431,7 @@ isDir
 
 
 * params: path,followSoftlink
-* path:/core/system/fs.py (line:1114)
+* path:/core/system/fs.py (line:1121)
 
 
 Check if the specified Directory path exists
@@ -442,7 +442,7 @@ isEmptyDir
 
 
 * params: path
-* path:/core/system/fs.py (line:1128)
+* path:/core/system/fs.py (line:1135)
 
 
 Check if the specified directory path is empty
@@ -453,7 +453,7 @@ isFile
 
 
 * params: path,followSoftlink
-* path:/core/system/fs.py (line:1144)
+* path:/core/system/fs.py (line:1151)
 
 
 Check if the specified file exists for the given path
@@ -464,7 +464,7 @@ isLink
 
 
 * params: path,checkJunction
-* path:/core/system/fs.py (line:1169)
+* path:/core/system/fs.py (line:1176)
 
 
 Check if the specified path is a link
@@ -475,7 +475,7 @@ isMount
 
 
 * params: path
-* path:/core/system/fs.py (line:1198)
+* path:/core/system/fs.py (line:1205)
 
 
 Return true if pathname path is a mount point:
@@ -511,7 +511,7 @@ listDirsInDir
 
 
 * params: path,recursive,dirNameOnly,findDirectorySymlinks
-* path:/core/system/fs.py (line:980)
+* path:/core/system/fs.py (line:987)
 
 
 Retrieves list of directories found in the specified directory
@@ -521,7 +521,7 @@ listFilesAndDirsInDir
 ---------------------
 
 
-* params: path,recursive,filter,minmtime,maxmtime,depth,type
+* params: path,recursive,filter,minmtime,maxmtime,depth,type,followSymlinks,listSymlinks
 * path:/core/system/fs.py (line:850)
 
 
@@ -532,7 +532,7 @@ listFilesInDir
 --------------
 
 
-* params: path,recursive,filter,minmtime,maxmtime,depth,case_sensitivity,exclude,followSymlinks
+* params: path,recursive,filter,minmtime,maxmtime,depth,case_sensitivity,exclude,followSymlinks,listSymlinks
 * path:/core/system/fs.py (line:824)
 
 
@@ -544,7 +544,7 @@ listPyScriptsInDir
 
 
 * params: path,recursive,filter
-* path:/core/system/fs.py (line:1009)
+* path:/core/system/fs.py (line:1016)
 
 
 Retrieves list of python scripts (with extension .py) in the specified directory
@@ -591,7 +591,7 @@ md5sum
 
 
 * params: filename
-* path:/core/system/fs.py (line:1397)
+* path:/core/system/fs.py (line:1404)
 
 
 Return the hex digest of a file without loading it all into memory
@@ -602,7 +602,7 @@ move
 
 
 * params: source,destin
-* path:/core/system/fs.py (line:1022)
+* path:/core/system/fs.py (line:1029)
 
 
 Main Move function
@@ -710,7 +710,7 @@ pathToUnicode
 
 
 * params: path
-* path:/core/system/fs.py (line:1809)
+* path:/core/system/fs.py (line:1816)
 
 
 Convert path to unicode. Use the local filesystem encoding. Will return
@@ -739,7 +739,7 @@ readObjectFromFile
 
 
 * params: filelocation
-* path:/core/system/fs.py (line:1380)
+* path:/core/system/fs.py (line:1387)
 
 
 Read a object from a file(file contents in pickle format)
@@ -814,7 +814,7 @@ renameDir
 
 
 * params: dirname,newname,overwrite
-* path:/core/system/fs.py (line:1218)
+* path:/core/system/fs.py (line:1225)
 
 
 Rename Directory from dirname to newname
@@ -836,7 +836,7 @@ replaceWordsInFiles
 
 
 * params: pathToSearchIn,templateengine,recursive,filter,minmtime,maxmtime
-* path:/core/system/fs.py (line:967)
+* path:/core/system/fs.py (line:974)
 
 
 apply templateengine to list of found files
@@ -851,7 +851,7 @@ statPath
 
 
 * params: path
-* path:/core/system/fs.py (line:1207)
+* path:/core/system/fs.py (line:1214)
 
 
 Perform a stat() system call on the given path
@@ -862,7 +862,7 @@ symlink
 
 
 * params: path,target,overwriteTarget
-* path:/core/system/fs.py (line:1050)
+* path:/core/system/fs.py (line:1057)
 
 
 Create a symbolic link
@@ -873,7 +873,7 @@ targzCompress
 
 
 * params: sourcepath,destinationpath,followlinks,destInTar,pathRegexIncludes,pathRegexExcludes,contentRegexIncludes,contentRegexExcludes,depths,extrafiles
-* path:/core/system/fs.py (line:1824)
+* path:/core/system/fs.py (line:1831)
 
 
 tar.gz with this param can put something in front e.g. /qbase3/ prefix to dest in tgz
@@ -885,7 +885,7 @@ targzUncompress
 
 
 * params: sourceFile,destinationdir,removeDestinationdir
-* path:/core/system/fs.py (line:1896)
+* path:/core/system/fs.py (line:1906)
 
 
 compress dirname recursive
@@ -896,7 +896,7 @@ touch
 
 
 * params: paths,overwrite
-* path:/core/system/fs.py (line:1314)
+* path:/core/system/fs.py (line:1321)
 
 
 can be single path or multiple (then list)
@@ -907,7 +907,7 @@ unlink
 
 
 * params: filename
-* path:/core/system/fs.py (line:1250)
+* path:/core/system/fs.py (line:1257)
 
 
 Remove the given file if it's a file or a symlink
@@ -919,7 +919,7 @@ unlinkFile
 
 
 * params: filename
-* path:/core/system/fs.py (line:1235)
+* path:/core/system/fs.py (line:1242)
 
 
 Remove the file path (only for files, not for symlinks)
@@ -958,7 +958,7 @@ validateFilename
 
 
 * params: filename,platform
-* path:/core/system/fs.py (line:1644)
+* path:/core/system/fs.py (line:1651)
 
 
 Validate a filename for a given (or current) platform
@@ -1008,7 +1008,7 @@ walk
 
 
 * params: root,recurse,pattern,return_folders,return_files,followSoftlinks,unicode
-* path:/core/system/fs.py (line:1493)
+* path:/core/system/fs.py (line:1500)
 
 
 This is to provide ScanDir similar function
@@ -1021,7 +1021,7 @@ walkExtended
 
 
 * params: root,recurse,dirPattern,filePattern,followSoftLinks,dirs,files
-* path:/core/system/fs.py (line:1420)
+* path:/core/system/fs.py (line:1427)
 
 
 Extended Walk version: seperate dir and file pattern
@@ -1045,7 +1045,7 @@ writeFile
 
 
 * params: filename,contents,append
-* path:/core/system/fs.py (line:1329)
+* path:/core/system/fs.py (line:1336)
 
 
 Open a file and write file contents, close file afterwards
@@ -1056,7 +1056,7 @@ writeObjectToFile
 
 
 * params: filelocation,obj
-* path:/core/system/fs.py (line:1363)
+* path:/core/system/fs.py (line:1370)
 
 
 Write a object to a file(pickle format)

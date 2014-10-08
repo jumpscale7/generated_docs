@@ -19,7 +19,6 @@ We are going to create a new JPackage, named "example_package", under domain "te
 
 .. code-block:: python
 
-  template:shell
   jpackage create
 
 
@@ -31,7 +30,6 @@ The last command, *jpackage create* will trigger a wizard to collect some inform
 
 .. code-block:: python
 
-  template:shell
   
    Please select a domain
      1: cloudscalers
@@ -86,7 +84,6 @@ After creating a new package, you may now need to define a recipe. A code recipe
 
 .. code-block:: python
 
-  template:properties
   
   jp.code.account=jumpscale
   jp.code.repo=jumpscale_lib
@@ -103,7 +100,6 @@ After creating a new package, you may now need to define a recipe. A code recipe
 
 .. code-block:: python
 
-  template:properties
   
   #$fileOrDir | $destination | $platform | $type | tagsOrLabels
   #types sitepackages, root, base, etc, tmp, bin
@@ -143,7 +139,6 @@ After editing metadata scripts, you are ready now to package your jpackage via t
 
 .. code-block:: python
 
-  template:shell
   jpackage package -n 'example_package'
 
 
@@ -162,7 +157,6 @@ After packaging your jpackage, you are ready now to upload your package files to
 
 .. code-block:: python
 
-  template:properties
   
   [jpackages_local]
   ftp =
@@ -186,7 +180,6 @@ and also a valid *$jumpscaledir/cfg/jpackages/sources.cfg* file which has a refe
 
 .. code-block:: python
 
-  template:properties
   [test]
   metadatafromtgz = 0
   qualitylevel = unstable
@@ -206,7 +199,6 @@ Now, if you have these configuration values set correctly, you are ready to call
 
 .. code-block:: python
 
-  template:shell
   jpackage upload -n 'example_package'
 
 
@@ -223,7 +215,6 @@ Now, your jpackage metadata needs to be published to the domain's repo (as speci
 
 .. code-block:: python
 
-  template:shell
   jpackage publish -n 'example_package'
 
 
@@ -314,7 +305,6 @@ In order to install your jpackage, run the install command:
 
 .. code-block:: python
 
-  template:shell
   jpackage install -n 'example_package'
 
 

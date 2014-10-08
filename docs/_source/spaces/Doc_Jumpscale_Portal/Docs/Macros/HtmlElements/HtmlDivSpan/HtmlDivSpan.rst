@@ -24,7 +24,6 @@ The generated HTML will be:
 
 .. code-block:: python
 
-  template:xml
       <div>
           <div id="left-panel" class="clearbox column8">
               <span id="span1">Text inside</span>

@@ -16,10 +16,75 @@ update your apt repository & make sure some basic requirements are met
 
 .. code-block:: python
 
-  template:shell
   apt-get update
   apt-get upgrade
   apt-get install python-git git ssh python2.7 python-requests python-apt openssl ca-certificates python-pip ipython -y
+
+
+if reinstall make sure you remove old version first (see below)
+
+
+<<<<<<< HEAD
+to make sure you remove previous version
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+Install the latest trunk version from github
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
+
+
+
+
+.. code-block:: python
+
+  pip install https://github.com/Jumpscale/jumpscale_core/archive/master.zip
+
+
+if you get a weird error please make sure that all js... files or links in /usr/local/bin/ are gone
+
+
+Get the jpackage metadata
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Run the following command:
+
+
+
+<<<<<<< HEAD
+Install the latest trunk version from github
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+>>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
+
+.. code-block:: python
+
+  jpackage mdupdate
+
+
+This command may ask you for a valid github account credentials.
+
+
+Install the core jpackages
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+<<<<<<< HEAD
+Get the jpackage metadata
+^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+>>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
+
+.. code-block:: python
+
+  jpackage install -n base -r
+  jpackage install -n core -r --debug
+  jpackage install -n libs -r --debug
+
+
+this will checkout the core repo and link into your environment, to make development easy.
+
 
 
 
@@ -28,6 +93,11 @@ to make sure you remove previous version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+<<<<<<< HEAD
+Install the core jpackages
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+>>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 
 .. code-block:: python
@@ -37,6 +107,15 @@ to make sure you remove previous version
 
 if you are not sure please do
 
+<<<<<<< HEAD
+  template:shell
+  jpackage install -n base -r
+  jpacakge install -n core -r --debug
+  jpacakge install -n libs -r --debug
+  jpacakge install -n grid -r --debug
+  jpacakge install -n portal -r --debug
+=======
+>>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 
 .. code-block:: python
@@ -67,59 +146,6 @@ if you are not sure please do
   apt-get upgrade -y
 
 this will make sure all leftovers are gone
-
-
-Install the latest trunk version from github
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-
-.. code-block:: python
-
-  template:shell
-  pip install https://github.com/Jumpscale/jumpscale_core/archive/master.zip
-
-
-if you get a weird error please make sure that all js... files or links in /usr/local/bin/ are gone
-
-
-Get the jpackage metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-Run the following command:
-
-
-
-
-.. code-block:: python
-
-  template:shell
-  jpackage mdupdate
-
-
-This command may ask you for a valid github account credentials.
-
-
-Install the core jpackages
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-
-.. code-block:: python
-
-  template:shell
-  jpackage install -n base -r
-  jpacakge install -n core -r --debug
-  jpacakge install -n libs -r --debug
-  jpacakge install -n grid -r --debug
-  jpacakge install -n portal -r --debug
-
-
-this will checkout the core repo and link into your environment, to make development easy.
-
 
 
 

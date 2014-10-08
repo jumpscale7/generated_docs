@@ -440,7 +440,7 @@ isPendingReconfiguration
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1927)
+* path:/baselib/jpackages/JPackageObject.py (line:1926)
 
 
 Check if the JPackage needs reconfiguration
@@ -581,7 +581,7 @@ reportNumbers
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:2014)
+* path:/baselib/jpackages/JPackageObject.py (line:2013)
 
 
 restart
@@ -629,7 +629,7 @@ showDependencies
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1939)
+* path:/baselib/jpackages/JPackageObject.py (line:1938)
 
 
 Return all dependencies of the JPackage.
@@ -641,7 +641,7 @@ showDependingInstalledPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1946)
+* path:/baselib/jpackages/JPackageObject.py (line:1945)
 
 
 Show which jpackages have this jpackages as dependency.
@@ -653,7 +653,7 @@ showDependingPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1953)
+* path:/baselib/jpackages/JPackageObject.py (line:1952)
 
 
 Show which jpackages have this jpackages as dependency.
@@ -664,7 +664,7 @@ signalConfigurationNeeded
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1920)
+* path:/baselib/jpackages/JPackageObject.py (line:1919)
 
 
 Set in the corresponding jpackages's state file if reconfiguration is needed
