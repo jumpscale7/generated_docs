@@ -47,6 +47,10 @@ No module named _mysql
 
 No module named docker
 
+**import JumpScale.lib.jail**
+
+Please install jsbox (sandbox install for jumpscale)
+
 **import JumpScale.lib.ceph**
 
 No module named ceph

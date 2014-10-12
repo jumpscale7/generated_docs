@@ -9,15 +9,15 @@ attachSession
 -------------
 
 
-* params: sessionname,windowname
-* path:/baselib/screen/Tmux.py (line:154)
+* params: sessionname,windowname,user
+* path:/baselib/screen/Tmux.py (line:177)
 
 
 createSession
 -------------
 
 
-* params: sessionname,screens
+* params: sessionname,screens,user
 * path:/baselib/screen/Tmux.py (line:9)
 
 
@@ -26,16 +26,16 @@ createWindow
 ------------
 
 
-* params: session,name
-* path:/baselib/screen/Tmux.py (line:114)
+* params: session,name,user
+* path:/baselib/screen/Tmux.py (line:126)
 
 
 executeInScreen
 ---------------
 
 
-* params: sessionname,screenname,cmd,wait,cwd,env,user
-* path:/baselib/screen/Tmux.py (line:27)
+* params: sessionname,screenname,cmd,wait,cwd,env,user,tmuxuser
+* path:/baselib/screen/Tmux.py (line:33)
 
 
 
@@ -43,79 +43,63 @@ getPid
 ------
 
 
-* params: session,name
-* path:/baselib/screen/Tmux.py (line:86)
-
-
-getSessionNames
----------------
-
-
-* params:
-* path:/baselib/screen/Tmux.py (line:83)
+* params: session,name,user
+* path:/baselib/screen/Tmux.py (line:98)
 
 
 getSessions
 -----------
 
 
-* params:
-* path:/baselib/screen/Tmux.py (line:76)
+* params: user
+* path:/baselib/screen/Tmux.py (line:89)
+
+
+getWindows
+----------
+
+
+* params: session,attemps,user
+* path:/baselib/screen/Tmux.py (line:112)
 
 
 killSession
 -----------
 
 
-* params: sessionname
-* path:/baselib/screen/Tmux.py (line:150)
+* params: sessionname,user
+* path:/baselib/screen/Tmux.py (line:171)
 
 
 killSessions
 ------------
 
 
-* params:
-* path:/baselib/screen/Tmux.py (line:146)
+* params: user
+* path:/baselib/screen/Tmux.py (line:165)
 
 
 killWindow
 ----------
 
 
-* params: session,name
-* path:/baselib/screen/Tmux.py (line:138)
-
-
-listSessions
-------------
-
-
-* params:
-* path:/baselib/screen/Tmux.py (line:98)
-
-
-listWindows
------------
-
-
-* params: session,attemps
-* path:/baselib/screen/Tmux.py (line:103)
+* params: session,name,user
+* path:/baselib/screen/Tmux.py (line:155)
 
 
 logWindow
 ---------
 
 
-* params: session,name,filename
-* path:/baselib/screen/Tmux.py (line:121)
+* params: session,name,filename,user
+* path:/baselib/screen/Tmux.py (line:136)
 
 
 windowExists
 ------------
 
 
-* params: session,name
-* path:/baselib/screen/Tmux.py (line:126)
+* params: session,name,user
+* path:/baselib/screen/Tmux.py (line:143)
 
 

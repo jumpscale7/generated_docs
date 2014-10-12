@@ -24,13 +24,8 @@ update your apt repository & make sure some basic requirements are met
 if reinstall make sure you remove old version first (see below)
 
 
-<<<<<<< HEAD
-to make sure you remove previous version
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-=======
 Install the latest trunk version from github
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 
 
@@ -51,11 +46,6 @@ Run the following command:
 
 
 
-<<<<<<< HEAD
-Install the latest trunk version from github
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-=======
->>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 .. code-block:: python
 
@@ -70,11 +60,6 @@ Install the core jpackages
 
 
 
-<<<<<<< HEAD
-Get the jpackage metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^
-=======
->>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 .. code-block:: python
 
@@ -93,11 +78,6 @@ to make sure you remove previous version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-<<<<<<< HEAD
-Install the core jpackages
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-=======
->>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 
 .. code-block:: python
@@ -107,15 +87,6 @@ Install the core jpackages
 
 if you are not sure please do
 
-<<<<<<< HEAD
-  template:shell
-  jpackage install -n base -r
-  jpacakge install -n core -r --debug
-  jpacakge install -n libs -r --debug
-  jpacakge install -n grid -r --debug
-  jpacakge install -n portal -r --debug
-=======
->>>>>>> 4bd963abac470e406b5d663d4862d5f37b0cdf1d
 
 
 .. code-block:: python
