@@ -10,7 +10,7 @@ getClient
 
 
 * params: ip,port,secret
-* path:/portal/portal/PortalFactory.py (line:65)
+* path:/portal/portal/PortalFactory.py (line:82)
 
 
 return client to manipulate & access a running application server (out of process)
@@ -24,7 +24,7 @@ getClientByInstance
 
 
 * params: instance
-* path:/portal/portal/PortalFactory.py (line:55)
+* path:/portal/portal/PortalFactory.py (line:72)
 
 
 getPortalConfig
@@ -32,7 +32,7 @@ getPortalConfig
 
 
 * params: appname
-* path:/portal/portal/PortalFactory.py (line:26)
+* path:/portal/portal/PortalFactory.py (line:27)
 
 
 getServer
@@ -40,15 +40,15 @@ getServer
 
 
 * params:
-* path:/portal/portal/PortalFactory.py (line:23)
+* path:/portal/portal/PortalFactory.py (line:24)
 
 
 loadActorsInProcess
 -------------------
 
 
-* params:
-* path:/portal/portal/PortalFactory.py (line:30)
+* params: name
+* path:/portal/portal/PortalFactory.py (line:31)
 
 
 make sure all actors are loaded on j.apps...
