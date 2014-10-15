@@ -17,7 +17,7 @@ libleveldb.so.1: cannot open shared object file: No such file or directory
 
 **import JumpScale.baselib.backup**
 
-libleveldb.so.1: cannot open shared object file: No such file or directory
+No module named weed.master
 
 **import JumpScale.baselib.portapps**
 
