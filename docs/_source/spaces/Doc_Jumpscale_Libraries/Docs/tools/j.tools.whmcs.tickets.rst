@@ -10,7 +10,7 @@ add_note
 
 
 * params: ticketid,message
-* path:/lib/whmcs/whmcstickets.py (line:98)
+* path:/lib/whmcs/whmcstickets.py (line:97)
 
 
 close_ticket
