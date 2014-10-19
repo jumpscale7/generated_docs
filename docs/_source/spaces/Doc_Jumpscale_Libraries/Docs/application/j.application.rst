@@ -26,7 +26,7 @@ getCPUUsage
 
 
 * params:
-* path:/core/Application.py (line:228)
+* path:/core/Application.py (line:229)
 
 
 try to get cpu usage, if it doesn't work will return 0
@@ -38,7 +38,7 @@ getMemoryUsage
 
 
 * params:
-* path:/core/Application.py (line:252)
+* path:/core/Application.py (line:253)
 
 
 try to get memory usage, if it doesn't work will return 0i
@@ -50,7 +50,7 @@ getUniqueMachineId
 
 
 * params:
-* path:/core/Application.py (line:277)
+* path:/core/Application.py (line:278)
 
 
 will look for network interface and return a hash calculated from lowest mac address from all physical nics

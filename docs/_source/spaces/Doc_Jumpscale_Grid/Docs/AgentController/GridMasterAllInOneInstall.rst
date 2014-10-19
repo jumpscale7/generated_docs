@@ -1,0 +1,15 @@
+
+
+
+.. code-block:: python
+
+  jpackage install -n grid_master_singlenode
+
+
+this will install all required on 1 node
+- gridportal
+- osis
+- influxdb & mongodb (databases behind osis)
+- the agent controller
+- the jsagent (connecting to the agentcontroller)
+

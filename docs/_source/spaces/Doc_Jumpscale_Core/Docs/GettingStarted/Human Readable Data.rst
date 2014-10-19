@@ -119,7 +119,7 @@ you can apply all the params on files in a dir:
 it will look for template params $(hrdkey)
 
 e.g.
-$(grid.id) would be replaced with grid.id from application.config hrd tree
+0 would be replaced with grid.id from application.config hrd tree
 
 
 you can replace additional arguments
