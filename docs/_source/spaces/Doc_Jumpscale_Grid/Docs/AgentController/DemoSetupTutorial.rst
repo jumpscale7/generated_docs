@@ -118,22 +118,67 @@ you can ofcourse put this agent in init.d or so
 (PS on the roadmap (Q4 2014) the agent will register itself optionally in init.d and work as daemon)
 
 
-visit gridportal and see the different nodes (agents)
+Visit Gridportal and see the different nodes (agents)
 =====================================================
 
 
-//localhost:82/grid/Nodes <http://localhost:82/grid/Nodes>
+The grid portal gives you an overview what is going on your environment singore or multigrid.
+
+* Nodes <http://localhost:82/grid/Nodes>
+* Jobs <http://localhost:82/grid/Jobs>
+* Errors <http://localhost:82/grid/ECOs>
+
+
+It also provides a status overview see <http://localhost:82/grid/checkstatus>.
 
 
 
-jumpscripts basics
+JumpScripts Basics
 ==================
+
+
+Executing JumpScripts.
+======================
+
+
+One can use JSac <./../ShellCommands/JSAC.html> to interact with the AgentController and execute remote scripts.
+
+
+
+
+.. code-block:: python
+
+  jsac exec -o jumpscale -n exec -a cmd:hostname -nid 1
+  Job:
+  
+  achost: 127.0.0.1
+  args: {cmd: hostname}
+  category: jumpscale
+  cmd: exec
+  errorreport: false
+  gid: 77
+  guid: f2b57166e0a9_77_2
+  id: 2
+  jscriptid: 48
+  log: false
+  nid: 1
+  parent: null
+  queue: ''
+  result: [0, 'jsagent
+  
+      ']
+  resultcode: 0
+  roles: []
+  sessionid: 77_1_0_91c0b8f2-725d-4599-824a-c42a4f1c9021
+  state: OK
+  timeStart: 1413724079
+  timeStop: 1413724079
+  timeout: 600
+  wait: true
 
 
 goals of this section
 
-* explain how to create a jumpscript to call jumpscripts remotely
-* explain the role of the roles of agents
 * create a new jumpscript & reload the jumpscript on the jsagents
 * see that this jumpscript can be called
 * show output of jumpscript
@@ -145,7 +190,7 @@ so basically is a demonstration of the full end2end functionality of the agentco
 
 
 
-recurring jumpscripts
+Recurring JumpScripts
 =====================
 
 
