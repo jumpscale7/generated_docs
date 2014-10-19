@@ -10,7 +10,7 @@ add2tree
 
 
 * params: path,recursive,position,startpath
-* path:/baselib/hrd/HumanReadableData.py (line:691)
+* path:/baselib/hrd/HumanReadableData.py (line:706)
 
 
 add2treeFromContent
@@ -18,7 +18,7 @@ add2treeFromContent
 
 
 * params: content,treeposition
-* path:/baselib/hrd/HumanReadableData.py (line:682)
+* path:/baselib/hrd/HumanReadableData.py (line:697)
 
 
 applyOnContent
@@ -26,7 +26,7 @@ applyOnContent
 
 
 * params: content,position,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:874)
+* path:/baselib/hrd/HumanReadableData.py (line:889)
 
 
 applyOnDir
@@ -34,7 +34,7 @@ applyOnDir
 
 
 * params: path,position,filter,minmtime,maxmtime,depth,changeFileName,changeContent,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:855)
+* path:/baselib/hrd/HumanReadableData.py (line:870)
 
 
 applyOnFile
@@ -42,7 +42,7 @@ applyOnFile
 
 
 * params: path,position,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:868)
+* path:/baselib/hrd/HumanReadableData.py (line:883)
 
 
 exists
@@ -50,7 +50,7 @@ exists
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:740)
+* path:/baselib/hrd/HumanReadableData.py (line:755)
 
 
 get
@@ -58,7 +58,7 @@ get
 
 
 * params: key,position,checkExists,default
-* path:/baselib/hrd/HumanReadableData.py (line:783)
+* path:/baselib/hrd/HumanReadableData.py (line:798)
 
 
 getBool
@@ -66,7 +66,7 @@ getBool
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:803)
+* path:/baselib/hrd/HumanReadableData.py (line:818)
 
 
 getDict
@@ -74,7 +74,7 @@ getDict
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:811)
+* path:/baselib/hrd/HumanReadableData.py (line:826)
 
 
 getFloat
@@ -82,7 +82,7 @@ getFloat
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:799)
+* path:/baselib/hrd/HumanReadableData.py (line:814)
 
 
 getHrd
@@ -90,7 +90,7 @@ getHrd
 
 
 * params: position,checkExists
-* path:/baselib/hrd/HumanReadableData.py (line:819)
+* path:/baselib/hrd/HumanReadableData.py (line:834)
 
 
 getInt
@@ -98,7 +98,7 @@ getInt
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:795)
+* path:/baselib/hrd/HumanReadableData.py (line:810)
 
 
 getItemsFromPrefix
@@ -106,7 +106,7 @@ getItemsFromPrefix
 
 
 * params: prefix,position
-* path:/baselib/hrd/HumanReadableData.py (line:755)
+* path:/baselib/hrd/HumanReadableData.py (line:770)
 
 
 returns values from prefix return as list
@@ -117,7 +117,7 @@ getKeysFromPrefix
 
 
 * params: prefix,position
-* path:/baselib/hrd/HumanReadableData.py (line:769)
+* path:/baselib/hrd/HumanReadableData.py (line:784)
 
 
 returns keys from prefix return as list
@@ -128,7 +128,7 @@ getList
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:807)
+* path:/baselib/hrd/HumanReadableData.py (line:822)
 
 
 getParentHRDs
@@ -136,7 +136,7 @@ getParentHRDs
 
 
 * params: treeposition
-* path:/baselib/hrd/HumanReadableData.py (line:726)
+* path:/baselib/hrd/HumanReadableData.py (line:741)
 
 
 getPosition
@@ -144,7 +144,7 @@ getPosition
 
 
 * params: startpath,curpath,position
-* path:/baselib/hrd/HumanReadableData.py (line:669)
+* path:/baselib/hrd/HumanReadableData.py (line:684)
 
 
 prefix
@@ -152,7 +152,7 @@ prefix
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:746)
+* path:/baselib/hrd/HumanReadableData.py (line:761)
 
 
 set
@@ -160,7 +160,7 @@ set
 
 
 * params: key,val,position
-* path:/baselib/hrd/HumanReadableData.py (line:851)
+* path:/baselib/hrd/HumanReadableData.py (line:866)
 
 
 setDict
@@ -168,6 +168,6 @@ setDict
 
 
 * params: key,ddict,position
-* path:/baselib/hrd/HumanReadableData.py (line:815)
+* path:/baselib/hrd/HumanReadableData.py (line:830)
 
 

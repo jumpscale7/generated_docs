@@ -21,7 +21,7 @@ when using the process manager (process.configure) make sure you export the java
 
 .. code-block:: python
 
-  cmd="export JAVA_HOME=$base/apps/openjdk7/;%s/elasticsearch"%workingdir
+  cmd="export JAVA_HOME=/opt/jumpscale/apps/openjdk7/;%s/elasticsearch"%workingdir
 
 
 

@@ -107,7 +107,7 @@ use as templating system
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-on j.application.config there is the default hrd's (from under $cfgdir/hrd)
+on j.application.config there is the default hrd's (from under /opt/jumpscale/cfg/hrd)
 you can apply all the params on files in a dir:
 
 

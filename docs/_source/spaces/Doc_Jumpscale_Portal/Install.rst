@@ -7,27 +7,81 @@ The JumpScale portal requires the JumpScale framework to be installed. So if you
 
 
 
-.. code-block:: python
-
-  apt-get update
-  apt-get install mercurial ssh python2.7 python-apt openssl ca-certificates python-pip ipython -y
-  pip install https://bitbucket.org/jumpscale/jumpscale_core/get/unstable.zip
-  jpackage mdupdate
-  jpackage install -n core
-
-
-In the above code we installed the unstable version. Replace unstable.zip by default.zip to install the latest stable version.
-
-After installing the JumpScale framework, you can install the portal.
-
 
 
 .. code-block:: python
 
-  jpackage install -n portal
+  jpackage install -n base -r
+  
+  #install mail client
+  jpackage install -n mailclient -r --data="\
+  mail.relay.addr=smtp.mandrillapp.com #\
+  mail.relay.port=587 #\
+  mail.relay.ssl=1 #\
+  mail.relay.username=support@mothersip1.com #\
+  mail.relay.passwd=RVPrWxhyFF7I1s0GGtxt9Q"
+  
+  #install mongodb (if local install)
+  jpackage install -n mongodb -i main -r --data="\
+  mongodb.host=127.0.0.1 #\
+  mongodb.port=27017 #\
+  mongodb.replicaset= #\
+  mongodb.name=main"
+  
+  #install mongodb client
+  jpackage install -n mongodb_client -i main -r --data="\
+  mongodb.client.addr=localhost #\
+  mongodb.client.port=27017 #\
+  mongodb.client.login= #\
+  mongodb.client.passwd="
+  
+  #install osis (if local install)
+  jpackage install -n osis -i main -r --data="\
+  osis.key= #\
+  osis.connection=mongodb:main #\
+  osis.superadmin.passwd=rooter"
+  
+  #install osis (if local install and no influxdb)
+  jpackage install -n osis -i main -r --data="\
+  osis.key= #\
+  osis.connection=mongodb:main#\
+  osis.superadmin.passwd=rooter"
+  
+  
+  #install osis client (if remote install, then no mongodb client nor server required)
+  jpackage install -n osis_client -i main -r --data="\
+  osis.client.addr=localhost #\
+  osis.client.port=5544 #\
+  osis.client.login=root #\
+  osis.client.passwd=rooter"
+  
+  #create admin user for e.g. portal
+  jsuser set --hrd="\
+  user.name=admin #\
+  user.domain=incubaid.com #\
+  user.passwd=admin #\
+  user.roles=admin #\
+  user.active=1 #\
+  user.description= #\
+  user.emails=kristof@incubaid.com #\
+  user.xmpp= #\
+  user.mobile=+??? #\
+  user.authkeys=2354345345,436346346 #\
+  user.groups=admin"
+  
+  #install portal (depends on osis)
+  jpackage install -n portal -i main -r --data="\
+  portal.port=82 #\
+  portal.ipaddr=localhost #\
+  portal.admin.passwd=js007 #\
+  portal.name=cloudrobot #\
+  osis.connection=main"
+  
+  
+  #install portal for jumpscale docs
+  jpackage install -n docs_jumpscale -i main -r --data="\
+  osis.connection=main"
 
-
-During the install you will need to enter a a name for the Elasticsearch application and an encryption key for the OSIS database.
 
 Start the portal by starting the necessary processes:
 
@@ -36,45 +90,5 @@ Start the portal by starting the necessary processes:
 .. code-block:: python
 
   jsprocess start
-
-
-This completes the steps to install the JumpScale portal. Now you can create a new portal <How to get started> or import an existing project from BitBucket. In the below example we will make the JumpScale Documentation portal in our newly installed poral.
-
-Edit $jumpscaledir/cfg/jpackages/sources.cfg and add the Incubaid domain.
-
-
-
-.. code-block:: python
-
-  [incubaid]
-  metadatafromtgz = 0
-  qualitylevel = unstable
-  metadatadownload = 
-  metadataupload = 
-  bitbucketaccount = incubaid
-  bitbucketreponame = jp_incubaid
-  blobstorremote = jpackages_remote
-  blobstorlocal = jpackages_local
-
-
-Update the metadata and install and start the Incubaid portals.
-
-
-
-.. code-block:: python
-
-  jpackage mdupdate
-  jpackage install -n  portals_base
-  jpackage start -n portals_base
-
-When asked provide a free port on your host to serve the webpages. You can now see browse to the portal on http://<your IP address>:<port>
-
-Next download the documentation package
-
-
-
-.. code-block:: python
-
-  jpackage install -n doc_jumpscale
 
 

@@ -11,7 +11,7 @@ Location
 ========
 
 
-JumpScripts are located under the AgentController at '$basedir/apps/agentcontroller/jumpscripts'
+JumpScripts are located under the AgentController at '/opt/jumpscaledir/apps/agentcontroller/jumpscripts'
 
 
 Syntax.
