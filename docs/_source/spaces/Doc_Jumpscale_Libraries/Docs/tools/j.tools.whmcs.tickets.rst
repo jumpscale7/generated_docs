@@ -10,7 +10,7 @@ add_note
 
 
 * params: ticketid,message
-* path:/lib/whmcs/whmcstickets.py (line:97)
+* path:/lib/whmcs/whmcstickets.py (line:107)
 
 
 close_ticket
@@ -18,7 +18,7 @@ close_ticket
 
 
 * params: ticketid
-* path:/lib/whmcs/whmcstickets.py (line:64)
+* path:/lib/whmcs/whmcstickets.py (line:74)
 
 
 create_ticket
@@ -26,7 +26,7 @@ create_ticket
 
 
 * params: subject,message,priority,clientid,deptid
-* path:/lib/whmcs/whmcstickets.py (line:24)
+* path:/lib/whmcs/whmcstickets.py (line:25)
 
 
 get_ticket
@@ -34,7 +34,7 @@ get_ticket
 
 
 * params: ticketid
-* path:/lib/whmcs/whmcstickets.py (line:81)
+* path:/lib/whmcs/whmcstickets.py (line:94)
 
 
 list_deps
@@ -42,7 +42,7 @@ list_deps
 
 
 * params:
-* path:/lib/whmcs/whmcstickets.py (line:18)
+* path:/lib/whmcs/whmcstickets.py (line:19)
 
 
 update_ticket
@@ -50,6 +50,6 @@ update_ticket
 
 
 * params: ticketid,subject,priority,status,email,cc,flag,userid,deptid
-* path:/lib/whmcs/whmcstickets.py (line:44)
+* path:/lib/whmcs/whmcstickets.py (line:48)
 
 

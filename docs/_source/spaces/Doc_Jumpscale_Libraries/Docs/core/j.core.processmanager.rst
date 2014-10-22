@@ -13,7 +13,7 @@ checkStartupOlderThan
 
 
 * params: secago
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:186)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:179)
 
 
 getCmdsObject
@@ -21,7 +21,7 @@ getCmdsObject
 
 
 * params: category
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:134)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:127)
 
 
 getStartupTime
@@ -29,7 +29,7 @@ getStartupTime
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:182)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:175)
 
 
 loadCmds
@@ -37,7 +37,7 @@ loadCmds
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:140)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:133)
 
 
 loadMonitorObjectTypes
@@ -45,7 +45,15 @@ loadMonitorObjectTypes
 
 
 * params:
-* path:/grid/processmanager/ProcessmanagerFactory.py (line:169)
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:162)
+
+
+restartWorkers
+--------------
+
+
+* params:
+* path:/grid/processmanager/ProcessmanagerFactory.py (line:123)
 
 
 start

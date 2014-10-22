@@ -10,10 +10,10 @@ j.servers
    :glob:  
 
    j.servers.geventws
-   j.servers.tornado
-   j.servers.tipc
-   j.servers.cloudrobot
    j.servers.zdaemon
    j.servers.base
+   j.servers.tipc
+   j.servers.tornado
+   j.servers.cloudrobot
 
 

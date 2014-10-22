@@ -13,7 +13,7 @@ checkAllInstances
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:105)
+* path:/baselib/redis/Redis.py (line:109)
 
 
 configureInstance
@@ -21,7 +21,7 @@ configureInstance
 
 
 * params: name,port,maxram,appendonly,snapshot,slave,ismaster,passwd
-* path:/baselib/redis/Redis.py (line:183)
+* path:/baselib/redis/Redis.py (line:187)
 
 
 slave example: (192.168.10.10,8888,asecret)   (ip,port,secret)
@@ -32,7 +32,7 @@ deleteInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:171)
+* path:/baselib/redis/Redis.py (line:175)
 
 
 emptyAllInstances
@@ -40,7 +40,7 @@ emptyAllInstances
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:116)
+* path:/baselib/redis/Redis.py (line:120)
 
 
 emptyInstance
@@ -48,7 +48,7 @@ emptyInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:176)
+* path:/baselib/redis/Redis.py (line:180)
 
 
 getGeventRedisClient
@@ -64,7 +64,7 @@ getGeventRedisQueue
 
 
 * params: ipaddr,port,name,namespace,fromcache
-* path:/baselib/redis/Redis.py (line:96)
+* path:/baselib/redis/Redis.py (line:100)
 
 
 getPort
@@ -72,7 +72,7 @@ getPort
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:134)
+* path:/baselib/redis/Redis.py (line:138)
 
 
 getProcessPids
@@ -80,14 +80,14 @@ getProcessPids
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:148)
+* path:/baselib/redis/Redis.py (line:152)
 
 
 getRedisClient
 --------------
 
 
-* params: ipaddr,port,password
+* params: ipaddr,port,password,fromcache
 * path:/baselib/redis/Redis.py (line:84)
 
 
@@ -95,8 +95,8 @@ getRedisQueue
 -------------
 
 
-* params: ipaddr,port,name,namespace
-* path:/baselib/redis/Redis.py (line:90)
+* params: ipaddr,port,name,namespace,fromcache
+* path:/baselib/redis/Redis.py (line:92)
 
 
 startInstance
@@ -104,7 +104,7 @@ startInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:168)
+* path:/baselib/redis/Redis.py (line:172)
 
 
 stopInstance
@@ -112,6 +112,6 @@ stopInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:161)
+* path:/baselib/redis/Redis.py (line:165)
 
 

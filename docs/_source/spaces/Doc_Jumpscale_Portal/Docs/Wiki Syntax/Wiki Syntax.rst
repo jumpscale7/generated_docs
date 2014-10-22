@@ -3,6 +3,7 @@ Wiki Syntax
 ===========
 
 
+
 To write documentation with JumpScale, you have to use a specific wiki format, which is a plain-text syntax using text annotation to change the markup.
 In this section you find the general text formatting in the JumpScale wiki format.
 
@@ -209,12 +210,12 @@ unsupported image:/images/unknownspace/gorilla.jpg
 can do only height or width
 
 
-specific file in the .files section
+Specific file in the .files section
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 !/$$space/.files/img/gorilla.jpg!
-$$space will be translated to the spacename
+'space' will be translated to the spacename
 
 
 Links
@@ -293,7 +294,7 @@ Tables
 ------
 
 
-Header cells are enclosed with double bars '|', while table body cells are surrounded with single bars '|'.
+Header cells are enclosed with double bars `', while table body cells are surrounded with single bars '`.
 
 
 
