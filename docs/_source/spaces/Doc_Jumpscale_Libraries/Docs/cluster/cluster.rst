@@ -10,8 +10,8 @@ j.cluster
    :glob:  
 
    j.cluster.replicator
-   j.cluster
    j.cluster.replication
+   j.cluster
    j.cluster.config
 
 

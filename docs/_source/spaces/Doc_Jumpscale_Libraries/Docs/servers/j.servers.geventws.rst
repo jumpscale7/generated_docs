@@ -17,7 +17,7 @@ getHAClient
 -----------
 
 
-* params: connections,category,org,user,passwd,ssl,roles,id,timeout
+* params: connections,category,org,user,passwd,ssl,roles,id,timeout,reconnect
 * path:/grid/geventws/GeventWSFactory.py (line:53)
 
 
@@ -30,7 +30,7 @@ getServer
 
 
 HOW TO USE:
-daemon=j.servers.tornado.getServer(port=4444)
+daemon=j.servers.geventws.getServer(port=4444)
 
 class MyCommands():
 def __init__(self,daemon):

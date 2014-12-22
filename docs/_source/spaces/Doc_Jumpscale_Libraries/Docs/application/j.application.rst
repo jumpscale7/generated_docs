@@ -10,7 +10,7 @@ connectRedis
 
 
 * params:
-* path:/core/Application.py (line:60)
+* path:/core/Application.py (line:50)
 
 
 getAgentId
@@ -18,7 +18,7 @@ getAgentId
 
 
 * params:
-* path:/core/Application.py (line:112)
+* path:/core/Application.py (line:102)
 
 
 getCPUUsage
@@ -26,7 +26,7 @@ getCPUUsage
 
 
 * params:
-* path:/core/Application.py (line:229)
+* path:/core/Application.py (line:220)
 
 
 try to get cpu usage, if it doesn't work will return 0
@@ -38,7 +38,7 @@ getMemoryUsage
 
 
 * params:
-* path:/core/Application.py (line:253)
+* path:/core/Application.py (line:244)
 
 
 try to get memory usage, if it doesn't work will return 0i
@@ -50,7 +50,7 @@ getUniqueMachineId
 
 
 * params:
-* path:/core/Application.py (line:278)
+* path:/core/Application.py (line:269)
 
 
 will look for network interface and return a hash calculated from lowest mac address from all physical nics
@@ -61,7 +61,7 @@ getWhoAmiStr
 
 
 * params:
-* path:/core/Application.py (line:109)
+* path:/core/Application.py (line:99)
 
 
 initGrid
@@ -69,7 +69,7 @@ initGrid
 
 
 * params:
-* path:/core/Application.py (line:103)
+* path:/core/Application.py (line:93)
 
 
 initWhoAmI
@@ -77,7 +77,7 @@ initWhoAmI
 
 
 * params: reload
-* path:/core/Application.py (line:68)
+* path:/core/Application.py (line:58)
 
 
 when in grid:
@@ -89,7 +89,7 @@ loadConfig
 
 
 * params:
-* path:/core/Application.py (line:115)
+* path:/core/Application.py (line:105)
 
 
 start
@@ -97,7 +97,7 @@ start
 
 
 * params: name,appdir
-* path:/core/Application.py (line:121)
+* path:/core/Application.py (line:111)
 
 
 Start the application
@@ -111,8 +111,8 @@ stop
 ----
 
 
-* params: exitcode
-* path:/core/Application.py (line:161)
+* params: exitcode,stop
+* path:/core/Application.py (line:153)
 
 
 Stop the application cleanly using a given exitcode

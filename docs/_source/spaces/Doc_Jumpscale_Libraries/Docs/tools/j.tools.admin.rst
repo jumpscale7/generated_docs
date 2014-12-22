@@ -2,14 +2,14 @@
 j.tools.admin
 =============
 
-`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/admin/Admin.py>`_
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/admin2/Admin.py>`_
 
 
 get
 ---
 
 
-* params: args,failWhenNotExist
-* path:/baselib/admin/Admin.py (line:300)
+* params: path,args,failWhenNotExist
+* path:/baselib/admin2/Admin.py (line:23)
 
 

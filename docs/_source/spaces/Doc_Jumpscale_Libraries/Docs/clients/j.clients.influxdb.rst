@@ -16,3 +16,11 @@ get
 * path:/baselib/influxdb/Influxdb.py (line:13)
 
 
+getByInstance
+-------------
+
+
+* params: name
+* path:/baselib/influxdb/Influxdb.py (line:18)
+
+

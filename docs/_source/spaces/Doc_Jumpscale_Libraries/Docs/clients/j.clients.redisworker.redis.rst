@@ -10,7 +10,7 @@ append
 
 
 * params: key,value
-* path:/baselib/redis/Redis.py (line:541)
+* path:/baselib/redis/Redis.py (line:766)
 
 
 Appends the string `'value'` to the value at `'key'`. If `'key'`
@@ -23,7 +23,7 @@ bgrewriteaof
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:410)
+* path:/baselib/redis/Redis.py (line:583)
 
 
 Tell the Redis server to rewrite the AOF file from data in memory.
@@ -34,7 +34,7 @@ bgsave
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:414)
+* path:/baselib/redis/Redis.py (line:587)
 
 
 Tell the Redis server to save its data to disk.  Unlike save(),
@@ -46,7 +46,7 @@ bitcount
 
 
 * params: key,start,end
-* path:/baselib/redis/Redis.py (line:549)
+* path:/baselib/redis/Redis.py (line:774)
 
 
 Returns the count of set bits in the value of `'key'`.  Optional
@@ -58,11 +58,25 @@ bitop
 
 
 * params: operation,dest
-* path:/baselib/redis/Redis.py (line:563)
+* path:/baselib/redis/Redis.py (line:788)
 
 
 Perform a bitwise operation using `'operation'` between `'keys'` and
 store the result in `'dest'`.
+
+
+bitpos
+------
+
+
+* params: key,bit,start,end
+* path:/baselib/redis/Redis.py (line:795)
+
+
+Return the position of the first bit set to 1 or 0 in a string.
+`'start'` and `'end'` difines search range. The range is interpreted
+as a range of bytes and not a range of bits, so start=0 and end=2
+means to look at the first three bytes.
 
 
 blpop
@@ -70,7 +84,7 @@ blpop
 
 
 * params: keys,timeout
-* path:/baselib/redis/Redis.py (line:879)
+* path:/baselib/redis/Redis.py (line:1128)
 
 
 LPOP a value off of the first non-empty list
@@ -88,7 +102,7 @@ brpop
 
 
 * params: keys,timeout
-* path:/baselib/redis/Redis.py (line:899)
+* path:/baselib/redis/Redis.py (line:1148)
 
 
 RPOP a value off of the first non-empty list
@@ -106,7 +120,7 @@ brpoplpush
 
 
 * params: src,dst,timeout
-* path:/baselib/redis/Redis.py (line:919)
+* path:/baselib/redis/Redis.py (line:1168)
 
 
 Pop a value off the tail of `'src'`, push it on the head of `'dst'`
@@ -122,7 +136,7 @@ client_getname
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:429)
+* path:/baselib/redis/Redis.py (line:602)
 
 
 Returns the current connection name
@@ -133,7 +147,7 @@ client_kill
 
 
 * params: address
-* path:/baselib/redis/Redis.py (line:421)
+* path:/baselib/redis/Redis.py (line:594)
 
 
 Disconnects the client at `'address'` (ip:port)
@@ -144,7 +158,7 @@ client_list
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:425)
+* path:/baselib/redis/Redis.py (line:598)
 
 
 Returns a list of currently connected clients
@@ -155,7 +169,7 @@ client_setname
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:433)
+* path:/baselib/redis/Redis.py (line:606)
 
 
 Sets the current connection name
@@ -166,7 +180,7 @@ config_get
 
 
 * params: pattern
-* path:/baselib/redis/Redis.py (line:437)
+* path:/baselib/redis/Redis.py (line:610)
 
 
 Return a dictionary of configuration based on the `'pattern'`
@@ -177,10 +191,21 @@ config_resetstat
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:445)
+* path:/baselib/redis/Redis.py (line:618)
 
 
 Reset runtime statistics
+
+
+config_rewrite
+--------------
+
+
+* params:
+* path:/baselib/redis/Redis.py (line:622)
+
+
+Rewrite config file with the minimal change to reflect running config
 
 
 config_set
@@ -188,7 +213,7 @@ config_set
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:441)
+* path:/baselib/redis/Redis.py (line:614)
 
 
 Set config item `'name'` with `'value'`
@@ -199,7 +224,7 @@ dbsize
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:449)
+* path:/baselib/redis/Redis.py (line:626)
 
 
 Returns the number of keys in the current database
@@ -210,10 +235,10 @@ debug_object
 
 
 * params: key
-* path:/baselib/redis/Redis.py (line:453)
+* path:/baselib/redis/Redis.py (line:630)
 
 
-Returns version specific metainformation about a give key
+Returns version specific meta information about a given key
 
 
 decr
@@ -221,7 +246,7 @@ decr
 
 
 * params: name,amount
-* path:/baselib/redis/Redis.py (line:570)
+* path:/baselib/redis/Redis.py (line:815)
 
 
 Decrements the value of `'key'` by `'amount'`.  If no key exists,
@@ -233,7 +258,7 @@ delete
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:577)
+* path:/baselib/redis/Redis.py (line:822)
 
 
 Delete one or more keys specified by `'names'`
@@ -244,7 +269,7 @@ dump
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:582)
+* path:/baselib/redis/Redis.py (line:829)
 
 
 Return a serialized version of the value stored at the specified key.
@@ -256,7 +281,7 @@ echo
 
 
 * params: value
-* path:/baselib/redis/Redis.py (line:457)
+* path:/baselib/redis/Redis.py (line:634)
 
 
 Echo the string back from the server
@@ -267,10 +292,10 @@ eval
 
 
 * params: script,numkeys
-* path:/baselib/redis/Redis.py (line:1449)
+* path:/baselib/redis/Redis.py (line:1890)
 
 
-Execute the LUA `'script'`, specifying the `'numkeys'` the script
+Execute the Lua `'script'`, specifying the `'numkeys'` the script
 will touch and the key names and argument values in `'keys_and_args'`.
 Returns the result of the script.
 
@@ -283,10 +308,10 @@ evalsha
 
 
 * params: sha,numkeys
-* path:/baselib/redis/Redis.py (line:1460)
+* path:/baselib/redis/Redis.py (line:1901)
 
 
-Use the `'sha'` to execute a LUA script already registered via EVAL
+Use the `'sha'` to execute a Lua script already registered via EVAL
 or SCRIPT LOAD. Specify the `'numkeys'` the script will touch and the
 key names and argument values in `'keys_and_args'`. Returns the result
 of the script.
@@ -300,7 +325,7 @@ execute_command
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:387)
+* path:/baselib/redis/Redis.py (line:558)
 
 
 Execute a command and return a parsed response
@@ -311,7 +336,7 @@ exists
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:589)
+* path:/baselib/redis/Redis.py (line:836)
 
 
 Returns a boolean indicating whether key `'name'` exists
@@ -322,7 +347,7 @@ expire
 
 
 * params: name,time
-* path:/baselib/redis/Redis.py (line:594)
+* path:/baselib/redis/Redis.py (line:841)
 
 
 Set an expire flag on key `'name'` for `'time'` seconds. `'time'`
@@ -334,7 +359,7 @@ expireat
 
 
 * params: name,when
-* path:/baselib/redis/Redis.py (line:603)
+* path:/baselib/redis/Redis.py (line:850)
 
 
 Set an expire flag on key `'name'`. `'when'` can be represented
@@ -346,7 +371,7 @@ flushall
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:461)
+* path:/baselib/redis/Redis.py (line:638)
 
 
 Delete all keys in all databases on the current host
@@ -357,7 +382,7 @@ flushdb
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:465)
+* path:/baselib/redis/Redis.py (line:642)
 
 
 Delete all keys in the current database
@@ -368,20 +393,28 @@ from_url
 
 
 * params: cls,url,db
-* path:/baselib/redis/Redis.py (line:267)
+* path:/baselib/redis/Redis.py (line:365)
 
 
 Return a Redis client object configured from the given URL.
 
 For example::
 
-redis://username:password@localhost:6379/0
+redis://password <:password>@localhost:6379/0
+unix://password <:password>@/path/to/socket.sock?db=0
 
-If `'db'` is None, this method will attempt to extract the database ID
-from the URL path component.
+There are several ways to specify a database number. The parse function
+will return the first specified option:
+1. A `'db'` querystring option, e.g. redis://localhost?db=0
+2. If using the redis:// scheme, the path argument of the url, e.g.
+redis://localhost/0
+3. The `'db'` argument to this function.
 
-Any additional keyword arguments will be passed along to the Redis
-class's initializer.
+If none of these options are specified, db=0 is used.
+
+Any additional querystring arguments and keyword arguments will be
+passed along to the ConnectionPool class's initializer. In the case
+of conflicting arguments, querystring arguments always win.
 
 
 get
@@ -389,7 +422,7 @@ get
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:612)
+* path:/baselib/redis/Redis.py (line:859)
 
 
 Return the value at key `'name'`, or None if the key doesn't exist
@@ -403,12 +436,20 @@ getDict
 * path:/baselib/redis/Redis.py (line:54)
 
 
+getQueue
+--------
+
+
+* params: name,namespace
+* path:/baselib/redis/Redis.py (line:57)
+
+
 getbit
 ------
 
 
 * params: name,offset
-* path:/baselib/redis/Redis.py (line:628)
+* path:/baselib/redis/Redis.py (line:875)
 
 
 Returns a boolean indicating the value of `'offset'` in `'name'`
@@ -419,7 +460,7 @@ getrange
 
 
 * params: key,start,end
-* path:/baselib/redis/Redis.py (line:632)
+* path:/baselib/redis/Redis.py (line:879)
 
 
 Returns the substring of the string value stored at `'key'`,
@@ -431,11 +472,11 @@ getset
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:639)
+* path:/baselib/redis/Redis.py (line:886)
 
 
-Set the value at key `'name'` to `'value'` if key doesn't exist
-Return the value at key `'name'` atomically
+Sets the value at key `'name'` to `'value'`
+and returns the old value at key `'name'` atomically.
 
 
 hdel
@@ -443,7 +484,7 @@ hdel
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1373)
+* path:/baselib/redis/Redis.py (line:1814)
 
 
 Delete `'keys'` from hash `'name'`
@@ -454,7 +495,7 @@ hexists
 
 
 * params: name,key
-* path:/baselib/redis/Redis.py (line:1377)
+* path:/baselib/redis/Redis.py (line:1818)
 
 
 Returns a boolean indicating if `'key'` exists within hash `'name'`
@@ -465,7 +506,7 @@ hget
 
 
 * params: name,key
-* path:/baselib/redis/Redis.py (line:1381)
+* path:/baselib/redis/Redis.py (line:1822)
 
 
 Return the value of `'key'` within the hash `'name'`
@@ -476,7 +517,7 @@ hgetall
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:58)
+* path:/baselib/redis/Redis.py (line:61)
 
 
 Return a Python dict of the hash's name/value pairs
@@ -487,7 +528,7 @@ hgetalldict
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1385)
+* path:/baselib/redis/Redis.py (line:1826)
 
 
 Return a Python dict of the hash's name/value pairs
@@ -498,7 +539,7 @@ hincrby
 
 
 * params: name,key,amount
-* path:/baselib/redis/Redis.py (line:1389)
+* path:/baselib/redis/Redis.py (line:1830)
 
 
 Increment the value of `'key'` in hash `'name'` by `'amount'`
@@ -509,7 +550,7 @@ hincrbyfloat
 
 
 * params: name,key,amount
-* path:/baselib/redis/Redis.py (line:1393)
+* path:/baselib/redis/Redis.py (line:1834)
 
 
 Increment the value of `'key'` in hash `'name'` by floating `'amount'`
@@ -520,7 +561,7 @@ hkeys
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1399)
+* path:/baselib/redis/Redis.py (line:1840)
 
 
 Return the list of keys within hash `'name'`
@@ -531,7 +572,7 @@ hlen
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1403)
+* path:/baselib/redis/Redis.py (line:1844)
 
 
 Return the number of elements in hash `'name'`
@@ -542,7 +583,7 @@ hmget
 
 
 * params: name,keys
-* path:/baselib/redis/Redis.py (line:1433)
+* path:/baselib/redis/Redis.py (line:1874)
 
 
 Returns a list of values ordered identically to `'keys'`
@@ -553,11 +594,43 @@ hmset
 
 
 * params: name,mapping
-* path:/baselib/redis/Redis.py (line:1421)
+* path:/baselib/redis/Redis.py (line:1862)
 
 
-Sets each key in the `'mapping'` dict to its corresponding value
-in the hash `'name'`
+Set key to value within hash `'name'` for each corresponding
+key and value from the `'mapping'` dict.
+
+
+hscan
+-----
+
+
+* params: name,cursor,match,count
+* path:/baselib/redis/Redis.py (line:1402)
+
+
+Incrementally return key/value slices in a hash. Also return a cursor
+indicating the scan position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
+
+
+hscan_iter
+----------
+
+
+* params: name,match,count
+* path:/baselib/redis/Redis.py (line:1418)
+
+
+Make an iterator using the HSCAN command so that the client doesn't
+need to remember the cursor position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
 
 
 hset
@@ -565,7 +638,7 @@ hset
 
 
 * params: name,key,value
-* path:/baselib/redis/Redis.py (line:1407)
+* path:/baselib/redis/Redis.py (line:1848)
 
 
 Set `'key'` to `'value'` within hash `'name'`
@@ -577,7 +650,7 @@ hsetnx
 
 
 * params: name,key,value
-* path:/baselib/redis/Redis.py (line:1414)
+* path:/baselib/redis/Redis.py (line:1855)
 
 
 Set `'key'` to `'value'` within hash `'name'` if `'key'` does not
@@ -589,7 +662,7 @@ hvals
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1438)
+* path:/baselib/redis/Redis.py (line:1879)
 
 
 Return the list of values within hash `'name'`
@@ -600,7 +673,7 @@ incr
 
 
 * params: name,amount
-* path:/baselib/redis/Redis.py (line:646)
+* path:/baselib/redis/Redis.py (line:893)
 
 
 Increments the value of `'key'` by `'amount'`.  If no key exists,
@@ -612,7 +685,7 @@ incrby
 
 
 * params: name,amount
-* path:/baselib/redis/Redis.py (line:653)
+* path:/baselib/redis/Redis.py (line:900)
 
 
 Increments the value of `'key'` by `'amount'`.  If no key exists,
@@ -624,7 +697,7 @@ incrbyfloat
 
 
 * params: name,amount
-* path:/baselib/redis/Redis.py (line:663)
+* path:/baselib/redis/Redis.py (line:910)
 
 
 Increments the value at key `'name'` by floating `'amount'`.
@@ -636,7 +709,7 @@ info
 
 
 * params: section
-* path:/baselib/redis/Redis.py (line:469)
+* path:/baselib/redis/Redis.py (line:646)
 
 
 Returns a dictionary containing information about the Redis server
@@ -653,7 +726,7 @@ keys
 
 
 * params: pattern
-* path:/baselib/redis/Redis.py (line:670)
+* path:/baselib/redis/Redis.py (line:917)
 
 
 Returns a list of keys matching `'pattern'`
@@ -664,7 +737,7 @@ lastsave
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:484)
+* path:/baselib/redis/Redis.py (line:661)
 
 
 Return a Python datetime object representing the last time the
@@ -676,7 +749,7 @@ lindex
 
 
 * params: name,index
-* path:/baselib/redis/Redis.py (line:932)
+* path:/baselib/redis/Redis.py (line:1181)
 
 
 Return the item from list `'name'` at position `'index'`
@@ -690,7 +763,7 @@ linsert
 
 
 * params: name,where,refvalue,value
-* path:/baselib/redis/Redis.py (line:941)
+* path:/baselib/redis/Redis.py (line:1190)
 
 
 Insert `'value'` in list `'name'` either immediately before or after
@@ -705,7 +778,7 @@ llen
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:951)
+* path:/baselib/redis/Redis.py (line:1200)
 
 
 Return the length of the list `'name'`
@@ -715,8 +788,8 @@ lock
 ----
 
 
-* params: name,timeout,sleep
-* path:/baselib/redis/Redis.py (line:364)
+* params: name,timeout,sleep,blocking_timeout,lock_class,thread_local
+* path:/baselib/redis/Redis.py (line:490)
 
 
 Return a new Lock object using key `'name'` that mimics
@@ -729,13 +802,46 @@ By default, it will remain locked until release() is called.
 when the lock is in blocking mode and another client is currently
 holding the lock.
 
+`'blocking_timeout'` indicates the maximum amount of time in seconds to
+spend trying to acquire the lock. A value of `'None'` indicates
+continue trying forever. `'blocking_timeout'` can be specified as a
+float or integer, both representing the number of seconds to wait.
+
+`'lock_class'` forces the specified lock implementation.
+
+`'thread_local'` indicates whether the lock token is placed in
+thread-local storage. By default, the token is placed in thread local
+storage so that a thread only sees its token, not a token set by
+another thread. Consider the following timeline:
+
+time: 0, thread-1 acquires 'my-lock', with a timeout of 5 seconds.
+thread-1 sets the token to "abc"
+time: 1, thread-2 blocks trying to acquire 'my-lock' using the
+Lock instance.
+time: 5, thread-1 has not yet completed. redis expires the lock
+key.
+time: 5, thread-2 acquired 'my-lock' now that it's available.
+thread-2 sets the token to "xyz"
+time: 6, thread-1 finishes its work and calls release(). if the
+token is *not* stored in thread local storage, then
+thread-1 would see the token value as "xyz" and would be
+able to successfully release the thread-2's lock.
+
+In some use cases it's necessary to disable thread local storage. For
+example, if you have code where one thread acquires a lock and passes
+that lock instance to a worker thread to release later. If thread
+local storage isn't disabled in this case, the worker thread won't see
+the token set by the thread that acquired the lock. Our assumption
+is that these cases aren't common and as such default to using
+thread local storage.
+
 
 lpop
 ----
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:955)
+* path:/baselib/redis/Redis.py (line:1204)
 
 
 Remove and return the first item of the list `'name'`
@@ -746,7 +852,7 @@ lpush
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:959)
+* path:/baselib/redis/Redis.py (line:1208)
 
 
 Push `'values'` onto the head of the list `'name'`
@@ -757,7 +863,7 @@ lpushx
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:963)
+* path:/baselib/redis/Redis.py (line:1212)
 
 
 Push `'value'` onto the head of the list `'name'` if `'name'` exists
@@ -768,7 +874,7 @@ lrange
 
 
 * params: name,start,end
-* path:/baselib/redis/Redis.py (line:967)
+* path:/baselib/redis/Redis.py (line:1216)
 
 
 Return a slice of the list `'name'` between
@@ -783,7 +889,7 @@ lrem
 
 
 * params: name,value,num
-* path:/baselib/redis/Redis.py (line:1546)
+* path:/baselib/redis/Redis.py (line:1983)
 
 
 Remove the first `'num'` occurrences of elements equal to `'value'`
@@ -800,7 +906,7 @@ lset
 
 
 * params: name,index,value
-* path:/baselib/redis/Redis.py (line:989)
+* path:/baselib/redis/Redis.py (line:1238)
 
 
 Set `'position'` of list `'name'` to `'value'`
@@ -811,7 +917,7 @@ ltrim
 
 
 * params: name,start,end
-* path:/baselib/redis/Redis.py (line:993)
+* path:/baselib/redis/Redis.py (line:1242)
 
 
 Trim the list `'name'`, removing all values not within the slice
@@ -826,7 +932,7 @@ mget
 
 
 * params: keys
-* path:/baselib/redis/Redis.py (line:674)
+* path:/baselib/redis/Redis.py (line:921)
 
 
 Returns a list of values ordered identically to `'keys'`
@@ -837,7 +943,7 @@ move
 
 
 * params: name,db
-* path:/baselib/redis/Redis.py (line:711)
+* path:/baselib/redis/Redis.py (line:958)
 
 
 Moves the key `'name'` to a different Redis database `'db'`
@@ -848,7 +954,7 @@ mset
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:681)
+* path:/baselib/redis/Redis.py (line:928)
 
 
 Sets key/values based on a mapping. Mapping can be supplied as a single
@@ -860,7 +966,7 @@ msetnx
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:695)
+* path:/baselib/redis/Redis.py (line:942)
 
 
 Sets key/values based on a mapping if none of the keys are already set.
@@ -873,7 +979,7 @@ object
 
 
 * params: infotype,key
-* path:/baselib/redis/Redis.py (line:491)
+* path:/baselib/redis/Redis.py (line:668)
 
 
 Return the encoding, idletime, or refcount about the key
@@ -884,7 +990,7 @@ parse_response
 
 
 * params: connection,command_name
-* path:/baselib/redis/Redis.py (line:402)
+* path:/baselib/redis/Redis.py (line:575)
 
 
 Parses a response from the Redis server
@@ -895,7 +1001,7 @@ persist
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:715)
+* path:/baselib/redis/Redis.py (line:962)
 
 
 Removes an expiration on `'name'`
@@ -906,7 +1012,7 @@ pexpire
 
 
 * params: name,time
-* path:/baselib/redis/Redis.py (line:719)
+* path:/baselib/redis/Redis.py (line:966)
 
 
 Set an expire flag on key `'name'` for `'time'` milliseconds.
@@ -919,7 +1025,7 @@ pexpireat
 
 
 * params: name,when
-* path:/baselib/redis/Redis.py (line:730)
+* path:/baselib/redis/Redis.py (line:977)
 
 
 Set an expire flag on key `'name'`. `'when'` can be represented
@@ -927,12 +1033,46 @@ as an integer representing unix time in milliseconds (unix time * 1000)
 or a Python datetime object.
 
 
+pfadd
+-----
+
+
+* params: name
+* path:/baselib/redis/Redis.py (line:1798)
+
+
+Adds the specified elements to the specified HyperLogLog.
+
+
+pfcount
+-------
+
+
+* params: name
+* path:/baselib/redis/Redis.py (line:1802)
+
+
+Return the approximated cardinality of
+the set observed by the HyperLogLog at key.
+
+
+pfmerge
+-------
+
+
+* params: dest
+* path:/baselib/redis/Redis.py (line:1809)
+
+
+Merge N different HyperLogLogs into a single one.
+
+
 ping
 ----
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:495)
+* path:/baselib/redis/Redis.py (line:672)
 
 
 Ping the Redis server
@@ -943,7 +1083,7 @@ pipeline
 
 
 * params: transaction,shard_hint
-* path:/baselib/redis/Redis.py (line:1522)
+* path:/baselib/redis/Redis.py (line:1959)
 
 
 Return a new pipeline object that can queue multiple commands for
@@ -958,7 +1098,7 @@ psetex
 
 
 * params: name,time_ms,value
-* path:/baselib/redis/Redis.py (line:741)
+* path:/baselib/redis/Redis.py (line:988)
 
 
 Set the value of key `'name'` to `'value'` that expires in `'time_ms'`
@@ -971,7 +1111,7 @@ pttl
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:752)
+* path:/baselib/redis/Redis.py (line:999)
 
 
 Returns the number of milliseconds until the key `'name'` will expire
@@ -982,7 +1122,7 @@ publish
 
 
 * params: channel,message
-* path:/baselib/redis/Redis.py (line:1442)
+* path:/baselib/redis/Redis.py (line:1883)
 
 
 Publish `'message'` on `'channel'`.
@@ -993,8 +1133,8 @@ pubsub
 ------
 
 
-* params: shard_hint
-* path:/baselib/redis/Redis.py (line:378)
+* params:
+* path:/baselib/redis/Redis.py (line:549)
 
 
 Return a Publish/Subscribe object. With this object, you can
@@ -1007,7 +1147,7 @@ randomkey
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:756)
+* path:/baselib/redis/Redis.py (line:1003)
 
 
 Returns the name of a random key
@@ -1018,13 +1158,13 @@ register_script
 
 
 * params: script
-* path:/baselib/redis/Redis.py (line:1496)
+* path:/baselib/redis/Redis.py (line:1933)
 
 
-Register a LUA `'script'` specifying the `'keys'` it will touch.
+Register a Lua `'script'` specifying the `'keys'` it will touch.
 Returns a Script object that is callable and hides the complexity of
 deal with scripts, keys, and shas. This is the preferred way to work
-with LUA scripts.
+with Lua scripts.
 
 
 rename
@@ -1032,7 +1172,7 @@ rename
 
 
 * params: src,dst
-* path:/baselib/redis/Redis.py (line:760)
+* path:/baselib/redis/Redis.py (line:1007)
 
 
 Rename key `'src'` to `'dst'`
@@ -1043,7 +1183,7 @@ renamenx
 
 
 * params: src,dst
-* path:/baselib/redis/Redis.py (line:766)
+* path:/baselib/redis/Redis.py (line:1013)
 
 
 Rename key `'src'` to `'dst'` if `'dst'` doesn't already exist
@@ -1054,7 +1194,7 @@ restore
 
 
 * params: name,ttl,value
-* path:/baselib/redis/Redis.py (line:770)
+* path:/baselib/redis/Redis.py (line:1017)
 
 
 Create a key using the provided serialized value, previously obtained
@@ -1066,7 +1206,7 @@ rpop
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1003)
+* path:/baselib/redis/Redis.py (line:1252)
 
 
 Remove and return the last item of the list `'name'`
@@ -1077,7 +1217,7 @@ rpoplpush
 
 
 * params: src,dst
-* path:/baselib/redis/Redis.py (line:1007)
+* path:/baselib/redis/Redis.py (line:1256)
 
 
 RPOP a value off of the `'src'` list and atomically LPUSH it
@@ -1089,7 +1229,7 @@ rpush
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1014)
+* path:/baselib/redis/Redis.py (line:1263)
 
 
 Push `'values'` onto the tail of the list `'name'`
@@ -1100,7 +1240,7 @@ rpushx
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:1018)
+* path:/baselib/redis/Redis.py (line:1267)
 
 
 Push `'value'` onto the tail of the list `'name'` if `'name'` exists
@@ -1111,7 +1251,7 @@ sadd
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1090)
+* path:/baselib/redis/Redis.py (line:1475)
 
 
 Add `'value(s)'` to set `'name'`
@@ -1122,11 +1262,43 @@ save
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:499)
+* path:/baselib/redis/Redis.py (line:676)
 
 
 Tell the Redis server to save its data to disk,
 blocking until the save is complete
+
+
+scan
+----
+
+
+* params: cursor,match,count
+* path:/baselib/redis/Redis.py (line:1339)
+
+
+Incrementally return lists of key names. Also return a cursor
+indicating the scan position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
+
+
+scan_iter
+---------
+
+
+* params: match,count
+* path:/baselib/redis/Redis.py (line:1355)
+
+
+Make an iterator using the SCAN command so that the client doesn't
+need to remember the cursor position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
 
 
 scard
@@ -1134,7 +1306,7 @@ scard
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1094)
+* path:/baselib/redis/Redis.py (line:1479)
 
 
 Return the number of elements in set `'name'`
@@ -1145,7 +1317,7 @@ script_exists
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:1472)
+* path:/baselib/redis/Redis.py (line:1913)
 
 
 Check if a script exists in the script cache by specifying the SHAs of
@@ -1158,7 +1330,7 @@ script_flush
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:1481)
+* path:/baselib/redis/Redis.py (line:1921)
 
 
 Flush all scripts from the script cache
@@ -1169,10 +1341,10 @@ script_kill
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:1486)
+* path:/baselib/redis/Redis.py (line:1925)
 
 
-Kill the currently executing LUA script
+Kill the currently executing Lua script
 
 
 script_load
@@ -1180,10 +1352,10 @@ script_load
 
 
 * params: script
-* path:/baselib/redis/Redis.py (line:1491)
+* path:/baselib/redis/Redis.py (line:1929)
 
 
-Load a LUA `'script'` into the script cache. Returns the SHA.
+Load a Lua `'script'` into the script cache. Returns the SHA.
 
 
 sdiff
@@ -1191,7 +1363,7 @@ sdiff
 
 
 * params: keys
-* path:/baselib/redis/Redis.py (line:1098)
+* path:/baselib/redis/Redis.py (line:1483)
 
 
 Return the difference of sets specified by `'keys'`
@@ -1202,7 +1374,7 @@ sdiffstore
 
 
 * params: dest,keys
-* path:/baselib/redis/Redis.py (line:1103)
+* path:/baselib/redis/Redis.py (line:1488)
 
 
 Store the difference of sets specified by `'keys'` into a new
@@ -1214,10 +1386,98 @@ sentinel
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:506)
+* path:/baselib/redis/Redis.py (line:683)
 
 
-Redis Sentinel's SENTINEL command
+Redis Sentinel's SENTINEL command.
+
+
+sentinel_get_master_addr_by_name
+--------------------------------
+
+
+* params: service_name
+* path:/baselib/redis/Redis.py (line:688)
+
+
+Returns a (host, port) pair for the given `'service_name'`
+
+
+sentinel_master
+---------------
+
+
+* params: service_name
+* path:/baselib/redis/Redis.py (line:693)
+
+
+Returns a dictionary containing the specified masters state.
+
+
+sentinel_masters
+----------------
+
+
+* params:
+* path:/baselib/redis/Redis.py (line:697)
+
+
+Returns a list of dictionaries containing each master's state.
+
+
+sentinel_monitor
+----------------
+
+
+* params: name,ip,port,quorum
+* path:/baselib/redis/Redis.py (line:701)
+
+
+Add a new master to Sentinel to be monitored
+
+
+sentinel_remove
+---------------
+
+
+* params: name
+* path:/baselib/redis/Redis.py (line:705)
+
+
+Remove a master from Sentinel's monitoring
+
+
+sentinel_sentinels
+------------------
+
+
+* params: service_name
+* path:/baselib/redis/Redis.py (line:709)
+
+
+Returns a list of sentinels for `'service_name'`
+
+
+sentinel_set
+------------
+
+
+* params: name,option,value
+* path:/baselib/redis/Redis.py (line:713)
+
+
+Set Sentinel monitoring parameters for a given master
+
+
+sentinel_slaves
+---------------
+
+
+* params: service_name
+* path:/baselib/redis/Redis.py (line:717)
+
+
+Returns a list of slaves for `'service_name'`
 
 
 set
@@ -1225,7 +1485,7 @@ set
 
 
 * params: name,value,ex,px,nx,xx
-* path:/baselib/redis/Redis.py (line:777)
+* path:/baselib/redis/Redis.py (line:1024)
 
 
 Set the value at key `'name'` to `'value'`
@@ -1246,7 +1506,7 @@ set_response_callback
 
 
 * params: command,callback
-* path:/baselib/redis/Redis.py (line:327)
+* path:/baselib/redis/Redis.py (line:453)
 
 
 Set a custom Response Callback
@@ -1257,7 +1517,7 @@ setbit
 
 
 * params: name,offset,value
-* path:/baselib/redis/Redis.py (line:811)
+* path:/baselib/redis/Redis.py (line:1060)
 
 
 Flag the `'offset'` in `'name'` as `'value'`. Returns a boolean
@@ -1269,7 +1529,7 @@ setex
 
 
 * params: name,value,time
-* path:/baselib/redis/Redis.py (line:1536)
+* path:/baselib/redis/Redis.py (line:1973)
 
 
 Set the value of key `'name'` to `'value'` that expires in `'time'`
@@ -1282,7 +1542,7 @@ setnx
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:829)
+* path:/baselib/redis/Redis.py (line:1078)
 
 
 Set the value of key `'name'` to `'value'` if key doesn't exist
@@ -1293,7 +1553,7 @@ setrange
 
 
 * params: name,offset,value
-* path:/baselib/redis/Redis.py (line:833)
+* path:/baselib/redis/Redis.py (line:1082)
 
 
 Overwrite bytes in the value of `'name'` starting at `'offset'` with
@@ -1311,7 +1571,7 @@ shutdown
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:514)
+* path:/baselib/redis/Redis.py (line:721)
 
 
 Shutdown the server
@@ -1322,7 +1582,7 @@ sinter
 
 
 * params: keys
-* path:/baselib/redis/Redis.py (line:1111)
+* path:/baselib/redis/Redis.py (line:1496)
 
 
 Return the intersection of sets specified by `'keys'`
@@ -1333,7 +1593,7 @@ sinterstore
 
 
 * params: dest,keys
-* path:/baselib/redis/Redis.py (line:1116)
+* path:/baselib/redis/Redis.py (line:1501)
 
 
 Store the intersection of sets specified by `'keys'` into a new
@@ -1345,7 +1605,7 @@ sismember
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:1124)
+* path:/baselib/redis/Redis.py (line:1509)
 
 
 Return a boolean indicating if `'value'` is a member of set `'name'`
@@ -1356,12 +1616,46 @@ slaveof
 
 
 * params: host,port
-* path:/baselib/redis/Redis.py (line:523)
+* path:/baselib/redis/Redis.py (line:730)
 
 
 Set the server to be a replicated slave of the instance identified
-by the `'host'` and `'port'`. If called without arguements, the
+by the `'host'` and `'port'`. If called without arguments, the
 instance is promoted to a master instead.
+
+
+slowlog_get
+-----------
+
+
+* params: num
+* path:/baselib/redis/Redis.py (line:740)
+
+
+Get the entries from the slowlog. If `'num'` is specified, get the
+most recent `'num'` items.
+
+
+slowlog_len
+-----------
+
+
+* params:
+* path:/baselib/redis/Redis.py (line:750)
+
+
+Get the number of items in the slowlog
+
+
+slowlog_reset
+-------------
+
+
+* params:
+* path:/baselib/redis/Redis.py (line:754)
+
+
+Remove all items in the slowlog
 
 
 smembers
@@ -1369,7 +1663,7 @@ smembers
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1128)
+* path:/baselib/redis/Redis.py (line:1513)
 
 
 Return all members of the set `'name'`
@@ -1380,7 +1674,7 @@ smove
 
 
 * params: src,dst,value
-* path:/baselib/redis/Redis.py (line:1132)
+* path:/baselib/redis/Redis.py (line:1517)
 
 
 Move `'value'` from set `'src'` to set `'dst'` atomically
@@ -1391,7 +1685,7 @@ sort
 
 
 * params: name,start,num,by,get,desc,alpha,store,groups
-* path:/baselib/redis/Redis.py (line:1022)
+* path:/baselib/redis/Redis.py (line:1271)
 
 
 Sort and return the list, set or sorted set at `'name'`.
@@ -1422,7 +1716,7 @@ spop
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1136)
+* path:/baselib/redis/Redis.py (line:1521)
 
 
 Remove and return a random member of set `'name'`
@@ -1433,7 +1727,7 @@ srandmember
 
 
 * params: name,number
-* path:/baselib/redis/Redis.py (line:1140)
+* path:/baselib/redis/Redis.py (line:1525)
 
 
 If `'number'` is None, returns a random member of set `'name'`.
@@ -1448,10 +1742,42 @@ srem
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1151)
+* path:/baselib/redis/Redis.py (line:1536)
 
 
 Remove `'values'` from set `'name'`
+
+
+sscan
+-----
+
+
+* params: name,cursor,match,count
+* path:/baselib/redis/Redis.py (line:1370)
+
+
+Incrementally return lists of elements in a set. Also return a cursor
+indicating the scan position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
+
+
+sscan_iter
+----------
+
+
+* params: name,match,count
+* path:/baselib/redis/Redis.py (line:1386)
+
+
+Make an iterator using the SSCAN command so that the client doesn't
+need to remember the cursor position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
 
 
 strlen
@@ -1459,7 +1785,7 @@ strlen
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:846)
+* path:/baselib/redis/Redis.py (line:1095)
 
 
 Return the number of bytes stored in the value of `'name'`
@@ -1470,7 +1796,7 @@ substr
 
 
 * params: name,start,end
-* path:/baselib/redis/Redis.py (line:850)
+* path:/baselib/redis/Redis.py (line:1099)
 
 
 Return a substring of the string at key `'name'`. `'start'` and `'end'`
@@ -1482,10 +1808,10 @@ sunion
 
 
 * params: keys
-* path:/baselib/redis/Redis.py (line:1155)
+* path:/baselib/redis/Redis.py (line:1540)
 
 
-Return the union of sets specifiued by `'keys'`
+Return the union of sets specified by `'keys'`
 
 
 sunionstore
@@ -1493,7 +1819,7 @@ sunionstore
 
 
 * params: dest,keys
-* path:/baselib/redis/Redis.py (line:1160)
+* path:/baselib/redis/Redis.py (line:1545)
 
 
 Store the union of sets specified by `'keys'` into a new
@@ -1505,7 +1831,7 @@ time
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:533)
+* path:/baselib/redis/Redis.py (line:758)
 
 
 Returns the server time as a 2-item tuple of ints:
@@ -1517,12 +1843,12 @@ transaction
 
 
 * params: func
-* path:/baselib/redis/Redis.py (line:345)
+* path:/baselib/redis/Redis.py (line:471)
 
 
 Convenience method for executing the callable 'func' as a transaction
 while watching all keys specified in 'watches'. The 'func' callable
-should expect a single arguement which is a Pipeline object.
+should expect a single argument which is a Pipeline object.
 
 
 ttl
@@ -1530,7 +1856,7 @@ ttl
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:857)
+* path:/baselib/redis/Redis.py (line:1106)
 
 
 Returns the number of seconds until the key `'name'` will expire
@@ -1541,7 +1867,7 @@ type
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:861)
+* path:/baselib/redis/Redis.py (line:1110)
 
 
 Returns the type of key `'name'`
@@ -1552,7 +1878,7 @@ unwatch
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:871)
+* path:/baselib/redis/Redis.py (line:1120)
 
 
 Unwatches the value at key `'name'`, or None of the key doesn't exist
@@ -1563,7 +1889,7 @@ watch
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:865)
+* path:/baselib/redis/Redis.py (line:1114)
 
 
 Watches the values at keys `'names'`, or None if the key doesn't exist
@@ -1574,7 +1900,7 @@ zadd
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1558)
+* path:/baselib/redis/Redis.py (line:1995)
 
 
 NOTE: The order of arguments differs from that of the official ZADD
@@ -1601,7 +1927,7 @@ zcard
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1191)
+* path:/baselib/redis/Redis.py (line:1576)
 
 
 Return the number of elements in the sorted set `'name'`
@@ -1612,7 +1938,7 @@ zcount
 
 
 * params: name,min,max
-* path:/baselib/redis/Redis.py (line:1195)
+* path:/baselib/redis/Redis.py (line:1580)
 
 
 Returns the number of elements in the sorted set at key `'name'` with
@@ -1624,7 +1950,7 @@ zincrby
 
 
 * params: name,value,amount
-* path:/baselib/redis/Redis.py (line:1202)
+* path:/baselib/redis/Redis.py (line:1587)
 
 
 Increment the score of `'value'` in sorted set `'name'` by `'amount'`
@@ -1635,7 +1961,7 @@ zinterstore
 
 
 * params: dest,keys,aggregate
-* path:/baselib/redis/Redis.py (line:1206)
+* path:/baselib/redis/Redis.py (line:1591)
 
 
 Intersect multiple sorted sets specified by `'keys'` into
@@ -1643,12 +1969,24 @@ a new sorted set, `'dest'`. Scores in the destination will be
 aggregated based on the `'aggregate'`, or SUM if none is provided.
 
 
+zlexcount
+---------
+
+
+* params: name,min,max
+* path:/baselib/redis/Redis.py (line:1599)
+
+
+Return the number of items in the sorted set `'name'` between the
+lexicographical range `'min'` and `'max'`.
+
+
 zrange
 ------
 
 
 * params: name,start,end,desc,withscores,score_cast_func
-* path:/baselib/redis/Redis.py (line:1214)
+* path:/baselib/redis/Redis.py (line:1606)
 
 
 Return a range of values from sorted set `'name'` between
@@ -1664,12 +2002,27 @@ The return type is a list of (value, score) pairs
 `'score_cast_func'` a callable used to cast the score return value
 
 
+zrangebylex
+-----------
+
+
+* params: name,min,max,start,num
+* path:/baselib/redis/Redis.py (line:1633)
+
+
+Return the lexicographical range of values from sorted set `'name'`
+between `'min'` and `'max'`.
+
+If `'start'` and `'num'` are specified, then return a slice of the
+range.
+
+
 zrangebyscore
 -------------
 
 
 * params: name,min,max,start,num,withscores,score_cast_func
-* path:/baselib/redis/Redis.py (line:1239)
+* path:/baselib/redis/Redis.py (line:1649)
 
 
 Return a range of values from the sorted set `'name'` with scores
@@ -1689,7 +2042,7 @@ zrank
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:1265)
+* path:/baselib/redis/Redis.py (line:1677)
 
 
 Returns a 0-based value indicating the rank of `'value'` in sorted set
@@ -1701,10 +2054,24 @@ zrem
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:1272)
+* path:/baselib/redis/Redis.py (line:1684)
 
 
 Remove member `'values'` from sorted set `'name'`
+
+
+zremrangebylex
+--------------
+
+
+* params: name,min,max
+* path:/baselib/redis/Redis.py (line:1688)
+
+
+Remove all elements in the sorted set `'name'` between the
+lexicographical range specified by `'min'` and `'max'`.
+
+Returns the number of elements removed.
 
 
 zremrangebyrank
@@ -1712,7 +2079,7 @@ zremrangebyrank
 
 
 * params: name,min,max
-* path:/baselib/redis/Redis.py (line:1276)
+* path:/baselib/redis/Redis.py (line:1697)
 
 
 Remove all elements in the sorted set `'name'` with ranks between
@@ -1726,7 +2093,7 @@ zremrangebyscore
 
 
 * params: name,min,max
-* path:/baselib/redis/Redis.py (line:1285)
+* path:/baselib/redis/Redis.py (line:1706)
 
 
 Remove all elements in the sorted set `'name'` with scores
@@ -1737,14 +2104,14 @@ zrevrange
 ---------
 
 
-* params: name,start,num,withscores,score_cast_func
-* path:/baselib/redis/Redis.py (line:1292)
+* params: name,start,end,withscores,score_cast_func
+* path:/baselib/redis/Redis.py (line:1713)
 
 
 Return a range of values from sorted set `'name'` between
-`'start'` and `'num'` sorted in descending order.
+`'start'` and `'end'` sorted in descending order.
 
-`'start'` and `'num'` can be negative, indicating the end of the range.
+`'start'` and `'end'` can be negative, indicating the end of the range.
 
 `'withscores'` indicates to return the scores along with the values
 The return type is a list of (value, score) pairs
@@ -1757,7 +2124,7 @@ zrevrangebyscore
 
 
 * params: name,max,min,start,num,withscores,score_cast_func
-* path:/baselib/redis/Redis.py (line:1312)
+* path:/baselib/redis/Redis.py (line:1735)
 
 
 Return a range of values from the sorted set `'name'` with scores
@@ -1777,11 +2144,47 @@ zrevrank
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:1338)
+* path:/baselib/redis/Redis.py (line:1763)
 
 
 Returns a 0-based value indicating the descending rank of
 `'value'` in sorted set `'name'`
+
+
+zscan
+-----
+
+
+* params: name,cursor,match,count,score_cast_func
+* path:/baselib/redis/Redis.py (line:1434)
+
+
+Incrementally return lists of elements in a sorted set. Also return a
+cursor indicating the scan position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
+
+`'score_cast_func'` a callable used to cast the score return value
+
+
+zscan_iter
+----------
+
+
+* params: name,match,count,score_cast_func
+* path:/baselib/redis/Redis.py (line:1454)
+
+
+Make an iterator using the ZSCAN command so that the client doesn't
+need to remember the cursor position.
+
+`'match'` allows for filtering the keys by pattern
+
+`'count'` allows for hint the minimum number of returns
+
+`'score_cast_func'` a callable used to cast the score return value
 
 
 zscore
@@ -1789,7 +2192,7 @@ zscore
 
 
 * params: name,value
-* path:/baselib/redis/Redis.py (line:1345)
+* path:/baselib/redis/Redis.py (line:1770)
 
 
 Return the score of element `'value'` in sorted set `'name'`
@@ -1800,7 +2203,7 @@ zunionstore
 
 
 * params: dest,keys,aggregate
-* path:/baselib/redis/Redis.py (line:1349)
+* path:/baselib/redis/Redis.py (line:1774)
 
 
 Union multiple sorted sets specified by `'keys'` into

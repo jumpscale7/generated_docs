@@ -12,18 +12,18 @@ Redis Usage in JumpScale.
 
 
 Redis is used to cache our in process jobs and used as a queing mechanism to pass information from one component to the other.
+Runs on port 9999
 
 
-
-Redisac runs on port 7769 only on agentcontroller/master node
-=============================================================
+agentcontroller/master node
+===========================
 
 
 WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.
 
 
-Redisc redis cache on port 7768 runs on all grid nodes
-======================================================
+on each node for workers
+========================
 
 
 WARNING: UNSUPPORTED DOC, TABLES NOT SUPPORT YET.

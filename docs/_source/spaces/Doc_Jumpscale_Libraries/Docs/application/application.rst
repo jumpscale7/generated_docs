@@ -10,9 +10,9 @@ j.application
    :glob:  
 
    j.application.shellconfig
+   j.application
+   j.application.state
    j.application.config
    j.application.redis
-   j.application.state
-   j.application
 
 

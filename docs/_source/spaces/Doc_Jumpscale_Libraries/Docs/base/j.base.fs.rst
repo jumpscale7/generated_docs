@@ -10,7 +10,7 @@ copyDependencies
 
 
 * params: path,dest
-* path:/base/FS.py (line:105)
+* path:/base/FS.py (line:106)
 
 
 exists
@@ -18,7 +18,7 @@ exists
 
 
 * params: path
-* path:/base/FS.py (line:84)
+* path:/base/FS.py (line:85)
 
 
 fileGetContents
@@ -37,7 +37,7 @@ findDependencies
 
 
 * params: path,deps
-* path:/base/FS.py (line:88)
+* path:/base/FS.py (line:89)
 
 
 isDir
@@ -51,23 +51,23 @@ isDir
 Check if the specified Directory path exists
 
 
+isExecutable
+------------
+
+
+* params: path
+* path:/base/FS.py (line:40)
+
+
 isFile
 ------
 
 
 * params: path,followSoftlink
-* path:/base/FS.py (line:53)
+* path:/base/FS.py (line:54)
 
 
 Check if the specified file exists for the given path
-
-
-isLink
-------
-
-
-* params: path
-* path:/base/FS.py (line:40)
 
 
 list
@@ -75,7 +75,7 @@ list
 
 
 * params: path
-* path:/base/FS.py (line:69)
+* path:/base/FS.py (line:70)
 
 
 log
@@ -91,7 +91,7 @@ readLink
 
 
 * params: path
-* path:/base/FS.py (line:44)
+* path:/base/FS.py (line:45)
 
 
 Works only for unix

@@ -10,6 +10,6 @@ getConnection
 
 
 * params:
-* path:/baselib/http_client/HttpClient.py (line:119)
+* path:/baselib/http_client/HttpClient.py (line:122)
 
 

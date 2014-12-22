@@ -1,6 +1,6 @@
 
-j.system.redisstataggregator.redis
-==================================
+j.logger.redislogging.registered_client
+=======================================
 
 `Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/baselib/redis/Redis.py>`_
 

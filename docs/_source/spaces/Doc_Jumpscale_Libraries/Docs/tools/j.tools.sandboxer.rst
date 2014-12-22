@@ -12,8 +12,8 @@ copyLibsTo
 ----------
 
 
-* params: path,dest
-* path:/lib/sandboxer/Sandboxer.py (line:69)
+* params: path,dest,recursive
+* path:/lib/sandboxer/Sandboxer.py (line:75)
 
 
 findLibs
@@ -21,6 +21,6 @@ findLibs
 
 
 * params: path
-* path:/lib/sandboxer/Sandboxer.py (line:65)
+* path:/lib/sandboxer/Sandboxer.py (line:71)
 
 

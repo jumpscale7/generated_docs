@@ -32,7 +32,7 @@ install modular
   #redis for agentcontroller
   jpackage install -n redis -i ac --data="\
   redis.name=ac #\
-  redis.port=7769 #\
+  redis.port=9999 #\
   redis.mem=200 #\
   redis.disk=1"
   

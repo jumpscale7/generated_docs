@@ -42,7 +42,7 @@ checkHeartbeatsAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:358)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:356)
 
 
 checkProcessManager
@@ -61,7 +61,7 @@ checkProcessManagerAllNodes
 
 
 * params: clean
-* path:/grid/gridhealthchecker/gridhealthchecker.py (line:343)
+* path:/grid/gridhealthchecker/gridhealthchecker.py (line:341)
 
 
 checkRedis

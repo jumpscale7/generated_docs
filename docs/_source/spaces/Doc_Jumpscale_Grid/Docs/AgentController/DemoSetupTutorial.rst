@@ -132,7 +132,7 @@ It also provides a status overview </grid/checkstatus>.
 
 
 
-Executing JumpScripts
+Executing Jumpscripts
 =====================
 
 
@@ -174,7 +174,7 @@ One can use JSAC <JSAC> to interact with the AgentController and execute remote 
 
 
 
-Tutorial How To add a JumpScripts
+Tutorial How To add a Jumpscripts
 *********************************
 
 
@@ -226,7 +226,7 @@ Reload Agentcontroller / JSAgent
 
 
 
-Execute Newly created JumpScript and see it in the portal
+Execute Newly created Jumpscript and see it in the portal
 =========================================================
 
 
@@ -270,7 +270,7 @@ What happens when error accurs.
 ===============================
 
 
-Lets say for instance we pass a character instead of a number to our sum JumpScript
+Lets say for instance we pass a character instead of a number to our sum Jumpscript
 
 
 
@@ -325,18 +325,34 @@ If we now go look at the Jobs </grid/jobs> we will se our job is in status error
 
 
 
-Recurring JumpScripts
+Recurring Jumpscripts
 =====================
 
 
+One can schedule Jumpscript on specific nodes by combining roles and period.
 
 
-Goals this section
-
-* Expain how to create recurring jumpscripts and how they get scheduled
-* Show how the jumpscripts can be seen on portal
-* Show that from the jumpscript page you can see when & where the jumpscripts where executed
-* Show that if error where result is seen and how to debug (use a error generating jumpscript)
 
 
+.. code-block:: python
+
+  from JumpScale import j
+  descr = "This is a tutorial jumpscripts"
+  name = "backupdbtutorial" # this is the name to use to call the jumpscripts if left blank the filename is used
+  category = "tutorial"
+  author = "tutorial@jumpscale.org"
+  organization = "jumpscale"
+  license = "BSD"
+  version = "1.0"
+  async = False
+  log = True
+  roles = ['db']
+  period = 3600
+  queue = ''
+  
+  def action():
+      j.system.fs.copyDirTree('/opt/jumpscale/var/db', '/mnt/data')
+
+
+This script will run every hour (3600 seconds) on all nodes that have the 'role' `db`.
 

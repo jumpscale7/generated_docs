@@ -138,8 +138,8 @@ GridPortal
 
 
 
-ProcessManager/Workers (extra node)
-===================================
+Jsagent
+=======
 
 
 * on each node
@@ -170,15 +170,8 @@ ProcessManager/Workers (extra node)
   agentcontroller.client.login=node #\
   agentcontroller.client.port=4444"
   
-  #processmanager
-  jpackage install -n processmanager -i main --data="\
-  agentcontroller.connection=main #\
-  osis.connection=main #\
-  webdis.connection=main"
-  
-  #workers
-  jpackage install -main -n workers --data="\
-  osis.connection=main"
+  #Jsagent
+  jpackage install -n jsagent -i main
 
 
 

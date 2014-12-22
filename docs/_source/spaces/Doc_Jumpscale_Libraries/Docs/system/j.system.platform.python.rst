@@ -10,7 +10,7 @@ check
 
 
 * params:
-* path:/baselib/jpackages/PythonPackage.py (line:40)
+* path:/baselib/jpackages/PythonPackage.py (line:41)
 
 
 clearcache
@@ -26,7 +26,7 @@ copyLibToLocalSitePackagesDir
 
 
 * params: path,remove
-* path:/baselib/jpackages/PythonPackage.py (line:121)
+* path:/baselib/jpackages/PythonPackage.py (line:122)
 
 
 copy library to python.paths.local.sitepackages config param in main jumpscale hrd
@@ -39,7 +39,7 @@ copyLibsToLocalSitePackagesDir
 
 
 * params: rootpath,remove
-* path:/baselib/jpackages/PythonPackage.py (line:112)
+* path:/baselib/jpackages/PythonPackage.py (line:113)
 
 
 list all files and dirs in specified path and for each one call
@@ -51,7 +51,7 @@ getSitePackagePathLocal
 
 
 * params:
-* path:/baselib/jpackages/PythonPackage.py (line:103)
+* path:/baselib/jpackages/PythonPackage.py (line:104)
 
 
 install
@@ -59,7 +59,7 @@ install
 
 
 * params: name,version,latest
-* path:/baselib/jpackages/PythonPackage.py (line:43)
+* path:/baselib/jpackages/PythonPackage.py (line:44)
 
 
 list
@@ -67,7 +67,7 @@ list
 
 
 * params:
-* path:/baselib/jpackages/PythonPackage.py (line:93)
+* path:/baselib/jpackages/PythonPackage.py (line:94)
 
 
 remove
@@ -75,7 +75,7 @@ remove
 
 
 * params: names,clearcache
-* path:/baselib/jpackages/PythonPackage.py (line:52)
+* path:/baselib/jpackages/PythonPackage.py (line:53)
 
 
 will look in all possible python paths & remove the python lib

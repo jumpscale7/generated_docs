@@ -10,10 +10,18 @@ authenticate
 
 
 * params: name,passwd
-* path:/grid/osis/OSISClientForCat.py (line:50)
+* path:/grid/osis/OSISClientForCat.py (line:53)
 
 
 authenticates a user and returns the groups in which the user is
+
+
+count
+-----
+
+
+* params: query
+* path:/grid/osis/OSISClientForCat.py (line:67)
 
 
 delete
@@ -21,7 +29,7 @@ delete
 
 
 * params: key
-* path:/grid/osis/OSISClientForCat.py (line:111)
+* path:/grid/osis/OSISClientForCat.py (line:118)
 
 
 deleteSearch
@@ -29,7 +37,7 @@ deleteSearch
 
 
 * params: query
-* path:/grid/osis/OSISClientForCat.py (line:114)
+* path:/grid/osis/OSISClientForCat.py (line:121)
 
 
 demodata
@@ -37,7 +45,7 @@ demodata
 
 
 * params:
-* path:/grid/osis/OSISClientForCat.py (line:63)
+* path:/grid/osis/OSISClientForCat.py (line:70)
 
 
 populate db with demodata
@@ -48,7 +56,7 @@ destroy
 
 
 * params:
-* path:/grid/osis/OSISClientForCat.py (line:125)
+* path:/grid/osis/OSISClientForCat.py (line:132)
 
 
 exists
@@ -56,7 +64,7 @@ exists
 
 
 * params: key
-* path:/grid/osis/OSISClientForCat.py (line:105)
+* path:/grid/osis/OSISClientForCat.py (line:112)
 
 
 existsIndex
@@ -64,7 +72,7 @@ existsIndex
 
 
 * params: key,timeout
-* path:/grid/osis/OSISClientForCat.py (line:108)
+* path:/grid/osis/OSISClientForCat.py (line:115)
 
 
 get
@@ -72,7 +80,7 @@ get
 
 
 * params: key
-* path:/grid/osis/OSISClientForCat.py (line:87)
+* path:/grid/osis/OSISClientForCat.py (line:94)
 
 
 list
@@ -80,7 +88,15 @@ list
 
 
 * params: prefix
-* path:/grid/osis/OSISClientForCat.py (line:129)
+* path:/grid/osis/OSISClientForCat.py (line:136)
+
+
+native
+------
+
+
+* params: methodname,kwargs
+* path:/grid/osis/OSISClientForCat.py (line:64)
 
 
 new
@@ -88,7 +104,7 @@ new
 
 
 * params:
-* path:/grid/osis/OSISClientForCat.py (line:56)
+* path:/grid/osis/OSISClientForCat.py (line:59)
 
 
 rebuildindex
@@ -96,7 +112,7 @@ rebuildindex
 
 
 * params:
-* path:/grid/osis/OSISClientForCat.py (line:69)
+* path:/grid/osis/OSISClientForCat.py (line:76)
 
 
 rebuildindex
@@ -107,7 +123,7 @@ search
 
 
 * params: query,start,size
-* path:/grid/osis/OSISClientForCat.py (line:133)
+* path:/grid/osis/OSISClientForCat.py (line:140)
 
 
 set
@@ -115,7 +131,7 @@ set
 
 
 * params: obj,key,waitIndex
-* path:/grid/osis/OSISClientForCat.py (line:75)
+* path:/grid/osis/OSISClientForCat.py (line:82)
 
 
 if key none then key will be given by server
@@ -126,7 +142,7 @@ simpleSearch
 
 
 * params: params,start,size,withguid,withtotal,sort,partials,nativequery
-* path:/grid/osis/OSISClientForCat.py (line:138)
+* path:/grid/osis/OSISClientForCat.py (line:145)
 
 
 e.g. {"name":name,"country":"belgium"}
@@ -137,7 +153,7 @@ updateSearch
 
 
 * params: query,update
-* path:/grid/osis/OSISClientForCat.py (line:117)
+* path:/grid/osis/OSISClientForCat.py (line:124)
 
 
 update is dict or text

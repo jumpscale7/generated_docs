@@ -16,7 +16,7 @@ FS Walker
 dependencies:
 -------------
 
-* You'll need to 'apt-get install python-regex' first
+* You'll need to 'apt-get install python-regex' first (maybe no longer required)
 
 
 example

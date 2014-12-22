@@ -72,7 +72,7 @@ getContent
 
 
 * params:
-* path:/baselib/inifile/IniFile.py (line:285)
+* path:/baselib/inifile/IniFile.py (line:288)
 
 
 Get the Inifile content to a string
@@ -84,7 +84,7 @@ getFileAsDict
 
 
 * params:
-* path:/baselib/inifile/IniFile.py (line:310)
+* path:/baselib/inifile/IniFile.py (line:313)
 
 
 getFloatValue
@@ -125,7 +125,7 @@ getSectionAsDict
 
 
 * params: section
-* path:/baselib/inifile/IniFile.py (line:304)
+* path:/baselib/inifile/IniFile.py (line:307)
 
 
 getSections

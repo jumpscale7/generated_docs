@@ -14,7 +14,7 @@ HRDatetoEpoch
 
 
 * params: datestr,local
-* path:/core/base/time/Time.py (line:152)
+* path:/core/base/time/Time.py (line:169)
 
 
 convert string date to epoch
@@ -26,7 +26,7 @@ epoch2HRDate
 
 
 * params: epoch,local
-* path:/core/base/time/Time.py (line:61)
+* path:/core/base/time/Time.py (line:78)
 
 
 epoch2HRDateTime
@@ -34,7 +34,7 @@ epoch2HRDateTime
 
 
 * params: epoch,local
-* path:/core/base/time/Time.py (line:64)
+* path:/core/base/time/Time.py (line:81)
 
 
 epoch2HRTime
@@ -42,7 +42,7 @@ epoch2HRTime
 
 
 * params: epoch,local
-* path:/core/base/time/Time.py (line:67)
+* path:/core/base/time/Time.py (line:84)
 
 
 fiveMinuteIdToEpoch
@@ -50,7 +50,7 @@ fiveMinuteIdToEpoch
 
 
 * params: fiveMinuteId
-* path:/core/base/time/Time.py (line:88)
+* path:/core/base/time/Time.py (line:105)
 
 
 formatTime
@@ -58,7 +58,7 @@ formatTime
 
 
 * params: epoch,formatstr,local
-* path:/core/base/time/Time.py (line:40)
+* path:/core/base/time/Time.py (line:57)
 
 
 Returns a formatted time string representing the current time
@@ -74,7 +74,7 @@ get5MinuteId
 
 
 * params: epoch
-* path:/core/base/time/Time.py (line:91)
+* path:/core/base/time/Time.py (line:108)
 
 
 is # 5 min from jan 1 2010
@@ -85,7 +85,7 @@ getDayId
 
 
 * params: epoch
-* path:/core/base/time/Time.py (line:97)
+* path:/core/base/time/Time.py (line:114)
 
 
 is # day from jan 1 2010
@@ -96,7 +96,7 @@ getEpochAgo
 
 
 * params: txt
-* path:/core/base/time/Time.py (line:103)
+* path:/core/base/time/Time.py (line:120)
 
 
 only supported now is -3m, -3d and -3h  (ofcourse 3 can be any int)
@@ -110,7 +110,7 @@ getEpochFuture
 
 
 * params: txt
-* path:/core/base/time/Time.py (line:129)
+* path:/core/base/time/Time.py (line:146)
 
 
 only supported now is +3d and +3h  (ofcourse 3 can be any int)
@@ -124,7 +124,7 @@ getHourId
 
 
 * params: epoch
-* path:/core/base/time/Time.py (line:82)
+* path:/core/base/time/Time.py (line:99)
 
 
 is # hour from jan 1 2010
@@ -135,7 +135,7 @@ getLocalTimeHR
 
 
 * params:
-* path:/core/base/time/Time.py (line:30)
+* path:/core/base/time/Time.py (line:47)
 
 
 Get the current local date and time in a human-readable form
@@ -146,7 +146,7 @@ getLocalTimeHRForFilesystem
 
 
 * params:
-* path:/core/base/time/Time.py (line:36)
+* path:/core/base/time/Time.py (line:53)
 
 
 getMinuteId
@@ -154,10 +154,18 @@ getMinuteId
 
 
 * params: epoch
-* path:/core/base/time/Time.py (line:71)
+* path:/core/base/time/Time.py (line:88)
 
 
 is # min from jan 1 2010
+
+
+getSecondsInHR
+--------------
+
+
+* params: seconds
+* path:/core/base/time/Time.py (line:23)
 
 
 getTimeEpoch
@@ -176,7 +184,7 @@ getTimeEpochBin
 
 
 * params:
-* path:/core/base/time/Time.py (line:23)
+* path:/core/base/time/Time.py (line:40)
 
 
 Get epoch timestamp (number of seconds passed since January 1, 1970)

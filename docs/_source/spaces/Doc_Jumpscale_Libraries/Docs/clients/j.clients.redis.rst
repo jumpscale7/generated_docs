@@ -13,7 +13,7 @@ checkAllInstances
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:109)
+* path:/baselib/redis/Redis.py (line:125)
 
 
 configureInstance
@@ -21,7 +21,7 @@ configureInstance
 
 
 * params: name,port,maxram,appendonly,snapshot,slave,ismaster,passwd
-* path:/baselib/redis/Redis.py (line:187)
+* path:/baselib/redis/Redis.py (line:203)
 
 
 slave example: (192.168.10.10,8888,asecret)   (ip,port,secret)
@@ -32,7 +32,7 @@ deleteInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:175)
+* path:/baselib/redis/Redis.py (line:191)
 
 
 emptyAllInstances
@@ -40,7 +40,7 @@ emptyAllInstances
 
 
 * params:
-* path:/baselib/redis/Redis.py (line:120)
+* path:/baselib/redis/Redis.py (line:136)
 
 
 emptyInstance
@@ -48,7 +48,15 @@ emptyInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:180)
+* path:/baselib/redis/Redis.py (line:196)
+
+
+getByInstanceName
+-----------------
+
+
+* params: instance,gevent
+* path:/baselib/redis/Redis.py (line:95)
 
 
 getGeventRedisClient
@@ -56,7 +64,7 @@ getGeventRedisClient
 
 
 * params: ipaddr,port,fromcache,password
-* path:/baselib/redis/Redis.py (line:74)
+* path:/baselib/redis/Redis.py (line:77)
 
 
 getGeventRedisQueue
@@ -64,7 +72,7 @@ getGeventRedisQueue
 
 
 * params: ipaddr,port,name,namespace,fromcache
-* path:/baselib/redis/Redis.py (line:100)
+* path:/baselib/redis/Redis.py (line:116)
 
 
 getPort
@@ -72,7 +80,7 @@ getPort
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:138)
+* path:/baselib/redis/Redis.py (line:154)
 
 
 getProcessPids
@@ -80,7 +88,7 @@ getProcessPids
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:152)
+* path:/baselib/redis/Redis.py (line:168)
 
 
 getRedisClient
@@ -88,7 +96,7 @@ getRedisClient
 
 
 * params: ipaddr,port,password,fromcache
-* path:/baselib/redis/Redis.py (line:84)
+* path:/baselib/redis/Redis.py (line:87)
 
 
 getRedisQueue
@@ -96,7 +104,7 @@ getRedisQueue
 
 
 * params: ipaddr,port,name,namespace,fromcache
-* path:/baselib/redis/Redis.py (line:92)
+* path:/baselib/redis/Redis.py (line:108)
 
 
 startInstance
@@ -104,7 +112,7 @@ startInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:172)
+* path:/baselib/redis/Redis.py (line:188)
 
 
 stopInstance
@@ -112,6 +120,6 @@ stopInstance
 
 
 * params: name
-* path:/baselib/redis/Redis.py (line:165)
+* path:/baselib/redis/Redis.py (line:181)
 
 

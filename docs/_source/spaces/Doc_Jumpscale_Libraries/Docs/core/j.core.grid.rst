@@ -10,7 +10,7 @@ getLocalIPAccessibleByGridMaster
 
 
 * params:
-* path:/grid/grid/GridFactory.py (line:70)
+* path:/grid/grid/GridFactory.py (line:60)
 
 
 init
@@ -28,6 +28,6 @@ isGridMasterLocal
 
 
 * params:
-* path:/grid/grid/GridFactory.py (line:73)
+* path:/grid/grid/GridFactory.py (line:63)
 
 

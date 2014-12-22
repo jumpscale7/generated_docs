@@ -13,7 +13,7 @@ getRedisClient
 
 
 * params: ipaddr,port,timeout
-* path:/baselib/credis/CRedis.py (line:22)
+* path:/baselib/credis/CRedis.py (line:23)
 
 
 getRedisQueue
@@ -21,6 +21,6 @@ getRedisQueue
 
 
 * params: ipaddr,port,name,namespace
-* path:/baselib/credis/CRedis.py (line:28)
+* path:/baselib/credis/CRedis.py (line:29)
 
 

@@ -9,7 +9,7 @@ get
 ---
 
 
-* params: addr,port,login,passwd
+* params: addr,port,login,passwd,new
 * path:/grid/agentcontroller/AgentControllerFactory.py (line:11)
 
 
@@ -18,7 +18,7 @@ getByInstance
 -------------
 
 
-* params: instance
+* params: instance,new
 * path:/grid/agentcontroller/AgentControllerFactory.py (line:46)
 
 

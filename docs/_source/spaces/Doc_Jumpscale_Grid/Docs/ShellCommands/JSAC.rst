@@ -44,7 +44,7 @@ Reload
 ======
 
 
-Reloads JumpScripts on agentcontroller and instructs all processmanagers and workers in the grid to reload aswell. This action is exactly the same as 'jsgrid reloadjumpscripts'
+Reloads Jumpscripts on agentcontroller and instructs all processmanagers and workers in the grid to reload aswell. This action is exactly the same as 'jsgrid reloadjumpscripts'
 
 
 Listssions
@@ -75,7 +75,7 @@ Exec
 ====
 
 
-Execute a JumpScript on a specific node/role passing organization, name and arguments from the cli and returns the Job
+Execute a Jumpscript on a specific node/role passing organization, name and arguments from the cli and returns the Job
 
 
 Example
@@ -86,7 +86,7 @@ Example
 
 .. code-block:: python
 
-  jsac exec -o jumpscale -n echo -a msg:helloworld -r node
+  jsac exec -o jumpscale -n echo -a msg:helloworld -r node -gid 55
   Job:
   
   : args: {msg: helloworld}

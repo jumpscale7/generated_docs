@@ -49,7 +49,7 @@ partitionsFind_Ext4Data
 
 
 * params:
-* path:/lib/diskmanager/Diskmanager.py (line:279)
+* path:/lib/diskmanager/Diskmanager.py (line:278)
 
 
 looks for disks which are know to be data disks & are formatted ext4
@@ -61,7 +61,7 @@ partitionsGetMounted_Ext4Data
 
 
 * params:
-* path:/lib/diskmanager/Diskmanager.py (line:301)
+* path:/lib/diskmanager/Diskmanager.py (line:300)
 
 
 find disks which are mounted
@@ -72,7 +72,7 @@ partitionsMount_Ext4Data
 
 
 * params:
-* path:/lib/diskmanager/Diskmanager.py (line:287)
+* path:/lib/diskmanager/Diskmanager.py (line:286)
 
 
 partitionsUnmount_Ext4Data
@@ -80,6 +80,6 @@ partitionsUnmount_Ext4Data
 
 
 * params:
-* path:/lib/diskmanager/Diskmanager.py (line:294)
+* path:/lib/diskmanager/Diskmanager.py (line:293)
 
 

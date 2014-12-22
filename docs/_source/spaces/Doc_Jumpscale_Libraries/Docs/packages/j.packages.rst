@@ -10,7 +10,7 @@ checkJpackagesExistsOnRemoteBlobStor
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:1186)
+* path:/baselib/jpackages/JPackageClient.py (line:1187)
 
 
 checkProtectedDirs
@@ -18,7 +18,7 @@ checkProtectedDirs
 
 
 * params: redo,checkInteractive
-* path:/baselib/jpackages/JPackageClient.py (line:107)
+* path:/baselib/jpackages/JPackageClient.py (line:105)
 
 
 recreate the config file for protected dirs (means directories linked to code repo's)
@@ -30,7 +30,7 @@ create
 
 
 * params: domain,name,version,description,supportedPlatforms
-* path:/baselib/jpackages/JPackageClient.py (line:163)
+* path:/baselib/jpackages/JPackageClient.py (line:161)
 
 
 Creates a new jpackages4, this includes all standard tasklets, a config file and a description.wiki file
@@ -49,7 +49,7 @@ enableConsoleLogging
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:90)
+* path:/baselib/jpackages/JPackageClient.py (line:88)
 
 
 exists
@@ -57,7 +57,7 @@ exists
 
 
 * params: domain,name,version
-* path:/baselib/jpackages/JPackageClient.py (line:306)
+* path:/baselib/jpackages/JPackageClient.py (line:304)
 
 
 Checks whether the jpackages's metadata path is currently present on your system
@@ -88,7 +88,7 @@ findNewest
 
 
 * params: domain,name,minversion,maxversion,platform,returnNoneIfNotFound
-* path:/baselib/jpackages/JPackageClient.py (line:467)
+* path:/baselib/jpackages/JPackageClient.py (line:465)
 
 
 Find the newest jpackages which matches the criteria
@@ -101,7 +101,7 @@ get
 
 
 * params: domain,name,version,instance
-* path:/baselib/jpackages/JPackageClient.py (line:286)
+* path:/baselib/jpackages/JPackageClient.py (line:284)
 
 
 Returns a jpackages
@@ -112,7 +112,7 @@ getActionNamesClass
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:273)
+* path:/baselib/jpackages/JPackageClient.py (line:271)
 
 
 these actions can be applied on jpackage without knowing the jpackage instance
@@ -123,7 +123,7 @@ getActionNamesInstance
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:280)
+* path:/baselib/jpackages/JPackageClient.py (line:278)
 
 
 getDataPath
@@ -131,7 +131,7 @@ getDataPath
 
 
 * params: domain,name,version
-* path:/baselib/jpackages/JPackageClient.py (line:434)
+* path:/baselib/jpackages/JPackageClient.py (line:432)
 
 
 Returns the filesdatapath for the provided jpackages
@@ -142,7 +142,7 @@ getDebugPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:320)
+* path:/baselib/jpackages/JPackageClient.py (line:318)
 
 
 Returns a list of all currently installed packages on your system
@@ -153,7 +153,7 @@ getDomainNames
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:359)
+* path:/baselib/jpackages/JPackageClient.py (line:357)
 
 
 Returns a list of all domains present in the sources.cfg file
@@ -164,7 +164,7 @@ getDomainObject
 
 
 * params: domain,qualityLevel
-* path:/baselib/jpackages/JPackageClient.py (line:345)
+* path:/baselib/jpackages/JPackageClient.py (line:343)
 
 
 Get provided domain as an object
@@ -175,7 +175,7 @@ getInstalledPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:313)
+* path:/baselib/jpackages/JPackageClient.py (line:311)
 
 
 Returns a list of all currently installed packages on your system
@@ -186,7 +186,7 @@ getJPActionsPath
 
 
 * params: domain,name,instance,fromtmp
-* path:/baselib/jpackages/JPackageClient.py (line:374)
+* path:/baselib/jpackages/JPackageClient.py (line:372)
 
 
 Returns the metadatapath for the provided jpackages
@@ -199,7 +199,7 @@ getJPActiveHRDPath
 
 
 * params: domain,name,instance,fromtmp
-* path:/baselib/jpackages/JPackageClient.py (line:407)
+* path:/baselib/jpackages/JPackageClient.py (line:405)
 
 
 Returns the metadatapath for the provided jpackages
@@ -212,7 +212,7 @@ getJPActiveInstancePath
 
 
 * params: domain,name,instance,fromtmp
-* path:/baselib/jpackages/JPackageClient.py (line:390)
+* path:/baselib/jpackages/JPackageClient.py (line:388)
 
 
 Returns the metadatapath for the provided jpackages in active mode
@@ -224,7 +224,7 @@ getJPackageMetadataScanner
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:95)
+* path:/baselib/jpackages/JPackageClient.py (line:93)
 
 
 returns tool which can be  used to scan the jpackages repo's and manipulate them
@@ -246,7 +246,7 @@ getMetaTarPath
 
 
 * params: domainName
-* path:/baselib/jpackages/JPackageClient.py (line:443)
+* path:/baselib/jpackages/JPackageClient.py (line:441)
 
 
 Returns the metatarsdatapath for the provided domain
@@ -257,7 +257,7 @@ getMetadataPath
 
 
 * params: domain,name,version
-* path:/baselib/jpackages/JPackageClient.py (line:423)
+* path:/baselib/jpackages/JPackageClient.py (line:421)
 
 
 Returns the metadatapath for the provided jpackages for active state
@@ -277,7 +277,7 @@ getPendingReconfigurationPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:334)
+* path:/baselib/jpackages/JPackageClient.py (line:332)
 
 
 Returns a List of all jpackages that are pending for configuration
@@ -288,7 +288,7 @@ getTypePath
 
 
 * params: ttype,relativepath,jp
-* path:/baselib/jpackages/JPackageClient.py (line:214)
+* path:/baselib/jpackages/JPackageClient.py (line:212)
 
 
 linkMetaData
@@ -307,7 +307,7 @@ log
 
 
 * params: msg,category,level
-* path:/baselib/jpackages/JPackageClient.py (line:81)
+* path:/baselib/jpackages/JPackageClient.py (line:79)
 
 
 makeDependencyGraph
@@ -315,7 +315,7 @@ makeDependencyGraph
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:1084)
+* path:/baselib/jpackages/JPackageClient.py (line:1085)
 
 
 Creates a graphical visualization of all dependencies between the JPackackages of all domains.
@@ -382,7 +382,7 @@ pm_getJPackageConfig
 
 
 * params: jpackagesMDPath
-* path:/baselib/jpackages/JPackageClient.py (line:1081)
+* path:/baselib/jpackages/JPackageClient.py (line:1082)
 
 
 publish
@@ -440,7 +440,7 @@ reloadconfig
 
 
 * params:
-* path:/baselib/jpackages/JPackageClient.py (line:139)
+* path:/baselib/jpackages/JPackageClient.py (line:137)
 
 
 Reload all jpackages config data from disk
@@ -451,7 +451,7 @@ reportError
 
 
 * params: msg
-* path:/baselib/jpackages/JPackageClient.py (line:78)
+* path:/baselib/jpackages/JPackageClient.py (line:76)
 
 
 runConfigurationPending
@@ -523,6 +523,6 @@ uploadLocalJpackagesToBlobStor
 
 
 * params: blobservername,history
-* path:/baselib/jpackages/JPackageClient.py (line:1178)
+* path:/baselib/jpackages/JPackageClient.py (line:1179)
 
 

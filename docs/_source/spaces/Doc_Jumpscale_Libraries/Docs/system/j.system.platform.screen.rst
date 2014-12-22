@@ -10,7 +10,7 @@ attachSession
 
 
 * params: sessionname,windowname,user
-* path:/baselib/screen/Tmux.py (line:177)
+* path:/baselib/screen/Tmux.py (line:176)
 
 
 createSession
@@ -27,7 +27,7 @@ createWindow
 
 
 * params: session,name,user
-* path:/baselib/screen/Tmux.py (line:126)
+* path:/baselib/screen/Tmux.py (line:125)
 
 
 executeInScreen
@@ -44,7 +44,7 @@ getPid
 
 
 * params: session,name,user
-* path:/baselib/screen/Tmux.py (line:98)
+* path:/baselib/screen/Tmux.py (line:97)
 
 
 getSessions
@@ -52,7 +52,7 @@ getSessions
 
 
 * params: user
-* path:/baselib/screen/Tmux.py (line:89)
+* path:/baselib/screen/Tmux.py (line:88)
 
 
 getWindows
@@ -60,7 +60,7 @@ getWindows
 
 
 * params: session,attemps,user
-* path:/baselib/screen/Tmux.py (line:112)
+* path:/baselib/screen/Tmux.py (line:111)
 
 
 killSession
@@ -68,7 +68,7 @@ killSession
 
 
 * params: sessionname,user
-* path:/baselib/screen/Tmux.py (line:171)
+* path:/baselib/screen/Tmux.py (line:170)
 
 
 killSessions
@@ -76,7 +76,7 @@ killSessions
 
 
 * params: user
-* path:/baselib/screen/Tmux.py (line:165)
+* path:/baselib/screen/Tmux.py (line:164)
 
 
 killWindow
@@ -84,7 +84,7 @@ killWindow
 
 
 * params: session,name,user
-* path:/baselib/screen/Tmux.py (line:155)
+* path:/baselib/screen/Tmux.py (line:154)
 
 
 logWindow
@@ -92,7 +92,7 @@ logWindow
 
 
 * params: session,name,filename,user
-* path:/baselib/screen/Tmux.py (line:136)
+* path:/baselib/screen/Tmux.py (line:135)
 
 
 windowExists
@@ -100,6 +100,6 @@ windowExists
 
 
 * params: session,name,user
-* path:/baselib/screen/Tmux.py (line:143)
+* path:/baselib/screen/Tmux.py (line:142)
 
 

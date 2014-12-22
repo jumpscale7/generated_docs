@@ -10,7 +10,7 @@ add2tree
 
 
 * params: path,recursive,position,startpath
-* path:/baselib/hrd/HumanReadableData.py (line:706)
+* path:/baselib/hrd/HumanReadableData.py (line:695)
 
 
 add2treeFromContent
@@ -18,7 +18,7 @@ add2treeFromContent
 
 
 * params: content,treeposition
-* path:/baselib/hrd/HumanReadableData.py (line:697)
+* path:/baselib/hrd/HumanReadableData.py (line:686)
 
 
 applyOnContent
@@ -26,7 +26,7 @@ applyOnContent
 
 
 * params: content,position,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:889)
+* path:/baselib/hrd/HumanReadableData.py (line:884)
 
 
 applyOnDir
@@ -34,7 +34,7 @@ applyOnDir
 
 
 * params: path,position,filter,minmtime,maxmtime,depth,changeFileName,changeContent,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:870)
+* path:/baselib/hrd/HumanReadableData.py (line:865)
 
 
 applyOnFile
@@ -42,7 +42,7 @@ applyOnFile
 
 
 * params: path,position,additionalArgs
-* path:/baselib/hrd/HumanReadableData.py (line:883)
+* path:/baselib/hrd/HumanReadableData.py (line:878)
 
 
 exists
@@ -50,7 +50,7 @@ exists
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:755)
+* path:/baselib/hrd/HumanReadableData.py (line:744)
 
 
 get
@@ -58,31 +58,31 @@ get
 
 
 * params: key,position,checkExists,default
-* path:/baselib/hrd/HumanReadableData.py (line:798)
+* path:/baselib/hrd/HumanReadableData.py (line:789)
 
 
 getBool
 -------
 
 
-* params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:818)
+* params: key,default,position
+* path:/baselib/hrd/HumanReadableData.py (line:811)
 
 
 getDict
 -------
 
 
-* params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:826)
+* params: key,position,default
+* path:/baselib/hrd/HumanReadableData.py (line:821)
 
 
 getFloat
 --------
 
 
-* params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:814)
+* params: key,default,position
+* path:/baselib/hrd/HumanReadableData.py (line:807)
 
 
 getHrd
@@ -90,15 +90,15 @@ getHrd
 
 
 * params: position,checkExists
-* path:/baselib/hrd/HumanReadableData.py (line:834)
+* path:/baselib/hrd/HumanReadableData.py (line:829)
 
 
 getInt
 ------
 
 
-* params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:810)
+* params: key,position,default
+* path:/baselib/hrd/HumanReadableData.py (line:803)
 
 
 getItemsFromPrefix
@@ -106,7 +106,7 @@ getItemsFromPrefix
 
 
 * params: prefix,position
-* path:/baselib/hrd/HumanReadableData.py (line:770)
+* path:/baselib/hrd/HumanReadableData.py (line:759)
 
 
 returns values from prefix return as list
@@ -117,7 +117,7 @@ getKeysFromPrefix
 
 
 * params: prefix,position
-* path:/baselib/hrd/HumanReadableData.py (line:784)
+* path:/baselib/hrd/HumanReadableData.py (line:773)
 
 
 returns keys from prefix return as list
@@ -127,8 +127,19 @@ getList
 -------
 
 
-* params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:822)
+* params: key,position,default
+* path:/baselib/hrd/HumanReadableData.py (line:817)
+
+
+getListFromPrefix
+-----------------
+
+
+* params: prefix,position
+* path:/baselib/hrd/HumanReadableData.py (line:759)
+
+
+returns values from prefix return as list
 
 
 getParentHRDs
@@ -136,7 +147,7 @@ getParentHRDs
 
 
 * params: treeposition
-* path:/baselib/hrd/HumanReadableData.py (line:741)
+* path:/baselib/hrd/HumanReadableData.py (line:730)
 
 
 getPosition
@@ -144,7 +155,15 @@ getPosition
 
 
 * params: startpath,curpath,position
-* path:/baselib/hrd/HumanReadableData.py (line:684)
+* path:/baselib/hrd/HumanReadableData.py (line:673)
+
+
+getStr
+------
+
+
+* params: key,position,checkExists,default
+* path:/baselib/hrd/HumanReadableData.py (line:789)
 
 
 prefix
@@ -152,7 +171,7 @@ prefix
 
 
 * params: key,position
-* path:/baselib/hrd/HumanReadableData.py (line:761)
+* path:/baselib/hrd/HumanReadableData.py (line:750)
 
 
 set
@@ -160,7 +179,7 @@ set
 
 
 * params: key,val,position
-* path:/baselib/hrd/HumanReadableData.py (line:866)
+* path:/baselib/hrd/HumanReadableData.py (line:861)
 
 
 setDict
@@ -168,6 +187,6 @@ setDict
 
 
 * params: key,ddict,position
-* path:/baselib/hrd/HumanReadableData.py (line:830)
+* path:/baselib/hrd/HumanReadableData.py (line:825)
 
 

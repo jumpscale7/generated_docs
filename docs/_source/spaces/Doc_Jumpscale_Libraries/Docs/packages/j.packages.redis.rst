@@ -14,7 +14,7 @@ blpop
 
 
 * params: key,timeout
-* path:/baselib/credis/CRedis.py (line:88)
+* path:/baselib/credis/CRedis.py (line:89)
 
 
 brpoplpush
@@ -22,7 +22,7 @@ brpoplpush
 
 
 * params: src,dst,timeout
-* path:/baselib/credis/CRedis.py (line:142)
+* path:/baselib/credis/CRedis.py (line:143)
 
 
 connect
@@ -30,7 +30,7 @@ connect
 
 
 * params:
-* path:/baselib/credis/CRedis.py (line:51)
+* path:/baselib/credis/CRedis.py (line:52)
 
 
 delete
@@ -38,7 +38,7 @@ delete
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:133)
+* path:/baselib/credis/CRedis.py (line:134)
 
 
 eval
@@ -46,7 +46,7 @@ eval
 
 
 * params: script,nrkeys
-* path:/baselib/credis/CRedis.py (line:153)
+* path:/baselib/credis/CRedis.py (line:154)
 
 
 evalsha
@@ -54,7 +54,7 @@ evalsha
 
 
 * params: sha,nrkeys
-* path:/baselib/credis/CRedis.py (line:150)
+* path:/baselib/credis/CRedis.py (line:151)
 
 
 execute
@@ -62,7 +62,7 @@ execute
 
 
 * params:
-* path:/baselib/credis/CRedis.py (line:64)
+* path:/baselib/credis/CRedis.py (line:65)
 
 
 exists
@@ -70,7 +70,7 @@ exists
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:100)
+* path:/baselib/credis/CRedis.py (line:101)
 
 
 expire
@@ -78,7 +78,7 @@ expire
 
 
 * params: key,timeout
-* path:/baselib/credis/CRedis.py (line:136)
+* path:/baselib/credis/CRedis.py (line:137)
 
 
 get
@@ -86,7 +86,7 @@ get
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:103)
+* path:/baselib/credis/CRedis.py (line:104)
 
 
 getFallBackRedis
@@ -94,7 +94,7 @@ getFallBackRedis
 
 
 * params:
-* path:/baselib/credis/CRedis.py (line:47)
+* path:/baselib/credis/CRedis.py (line:48)
 
 
 hdel
@@ -102,7 +102,7 @@ hdel
 
 
 * params: name
-* path:/baselib/credis/CRedis.py (line:121)
+* path:/baselib/credis/CRedis.py (line:122)
 
 
 hdelete
@@ -110,7 +110,7 @@ hdelete
 
 
 * params: hkey,key
-* path:/baselib/credis/CRedis.py (line:118)
+* path:/baselib/credis/CRedis.py (line:119)
 
 
 hexists
@@ -118,7 +118,7 @@ hexists
 
 
 * params: hkey,key
-* path:/baselib/credis/CRedis.py (line:124)
+* path:/baselib/credis/CRedis.py (line:125)
 
 
 hget
@@ -126,7 +126,7 @@ hget
 
 
 * params: hkey,key
-* path:/baselib/credis/CRedis.py (line:112)
+* path:/baselib/credis/CRedis.py (line:113)
 
 
 hgetall
@@ -134,7 +134,7 @@ hgetall
 
 
 * params: hkey
-* path:/baselib/credis/CRedis.py (line:115)
+* path:/baselib/credis/CRedis.py (line:116)
 
 
 hincrby
@@ -142,7 +142,7 @@ hincrby
 
 
 * params: name,key,amount
-* path:/baselib/credis/CRedis.py (line:139)
+* path:/baselib/credis/CRedis.py (line:140)
 
 
 hkeys
@@ -150,7 +150,7 @@ hkeys
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:97)
+* path:/baselib/credis/CRedis.py (line:98)
 
 
 hset
@@ -158,7 +158,7 @@ hset
 
 
 * params: hkey,key,value
-* path:/baselib/credis/CRedis.py (line:109)
+* path:/baselib/credis/CRedis.py (line:110)
 
 
 incr
@@ -166,7 +166,7 @@ incr
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:127)
+* path:/baselib/credis/CRedis.py (line:128)
 
 
 incrby
@@ -174,7 +174,7 @@ incrby
 
 
 * params: key,nr
-* path:/baselib/credis/CRedis.py (line:130)
+* path:/baselib/credis/CRedis.py (line:131)
 
 
 keys
@@ -182,7 +182,7 @@ keys
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:94)
+* path:/baselib/credis/CRedis.py (line:95)
 
 
 llen
@@ -190,7 +190,7 @@ llen
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:82)
+* path:/baselib/credis/CRedis.py (line:83)
 
 
 lpop
@@ -198,7 +198,7 @@ lpop
 
 
 * params: key
-* path:/baselib/credis/CRedis.py (line:91)
+* path:/baselib/credis/CRedis.py (line:92)
 
 
 lrange
@@ -206,7 +206,7 @@ lrange
 
 
 * params: name,start,end
-* path:/baselib/credis/CRedis.py (line:156)
+* path:/baselib/credis/CRedis.py (line:157)
 
 
 rpush
@@ -214,7 +214,7 @@ rpush
 
 
 * params: key,item
-* path:/baselib/credis/CRedis.py (line:85)
+* path:/baselib/credis/CRedis.py (line:86)
 
 
 scriptload
@@ -222,7 +222,7 @@ scriptload
 
 
 * params: script
-* path:/baselib/credis/CRedis.py (line:145)
+* path:/baselib/credis/CRedis.py (line:146)
 
 
 set
@@ -230,6 +230,6 @@ set
 
 
 * params: key,value
-* path:/baselib/credis/CRedis.py (line:106)
+* path:/baselib/credis/CRedis.py (line:107)
 
 

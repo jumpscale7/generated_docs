@@ -37,7 +37,7 @@ checkExistingBlobs
 
 
 * params: blobserver,dependencies
-* path:/baselib/jpackages/JPackageObject.py (line:1739)
+* path:/baselib/jpackages/JPackageObject.py (line:1743)
 
 
 
@@ -126,7 +126,7 @@ getBlobHistory
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1758)
+* path:/baselib/jpackages/JPackageObject.py (line:1762)
 
 
 getBlobInfo
@@ -154,7 +154,7 @@ getBlobKeysActive
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1673)
+* path:/baselib/jpackages/JPackageObject.py (line:1677)
 
 
 getBlobPlatformTypes
@@ -413,7 +413,7 @@ installDebs
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1093)
+* path:/baselib/jpackages/JPackageObject.py (line:1097)
 
 
 isInstalled
@@ -432,7 +432,7 @@ isNew
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1247)
+* path:/baselib/jpackages/JPackageObject.py (line:1251)
 
 
 isPendingReconfiguration
@@ -440,7 +440,7 @@ isPendingReconfiguration
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1918)
+* path:/baselib/jpackages/JPackageObject.py (line:1922)
 
 
 Check if the JPackage needs reconfiguration
@@ -451,7 +451,7 @@ isrunning
 
 
 * params: dependencies,ipaddr
-* path:/baselib/jpackages/JPackageObject.py (line:1054)
+* path:/baselib/jpackages/JPackageObject.py (line:1058)
 
 
 Check if application installed is running for jpackages
@@ -534,7 +534,7 @@ prepareForUpdatingFiles
 
 
 * params: suppressErrors
-* path:/baselib/jpackages/JPackageObject.py (line:1278)
+* path:/baselib/jpackages/JPackageObject.py (line:1282)
 
 
 After this command the operator can change the files of the jpackages.
@@ -554,7 +554,7 @@ reinstall
 
 
 * params: dependencies,download
-* path:/baselib/jpackages/JPackageObject.py (line:1062)
+* path:/baselib/jpackages/JPackageObject.py (line:1066)
 
 
 Reinstall the JPackage by running its install tasklet, best not to use dependancies reinstall
@@ -581,7 +581,7 @@ reportNumbers
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:2005)
+* path:/baselib/jpackages/JPackageObject.py (line:2009)
 
 
 restart
@@ -629,7 +629,7 @@ showDependencies
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1930)
+* path:/baselib/jpackages/JPackageObject.py (line:1934)
 
 
 Return all dependencies of the JPackage.
@@ -641,7 +641,7 @@ showDependingInstalledPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1937)
+* path:/baselib/jpackages/JPackageObject.py (line:1941)
 
 
 Show which jpackages have this jpackages as dependency.
@@ -653,7 +653,7 @@ showDependingPackages
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1944)
+* path:/baselib/jpackages/JPackageObject.py (line:1948)
 
 
 Show which jpackages have this jpackages as dependency.
@@ -664,7 +664,7 @@ signalConfigurationNeeded
 
 
 * params:
-* path:/baselib/jpackages/JPackageObject.py (line:1911)
+* path:/baselib/jpackages/JPackageObject.py (line:1915)
 
 
 Set in the corresponding jpackages's state file if reconfiguration is needed
@@ -710,7 +710,7 @@ upload
 
 
 * params: remote,local,dependencies,onlycode
-* path:/baselib/jpackages/JPackageObject.py (line:1658)
+* path:/baselib/jpackages/JPackageObject.py (line:1662)
 
 
 uploadExistingBlobs
@@ -718,7 +718,7 @@ uploadExistingBlobs
 
 
 * params: blobserver,dependencies
-* path:/baselib/jpackages/JPackageObject.py (line:1680)
+* path:/baselib/jpackages/JPackageObject.py (line:1684)
 
 
 
@@ -727,7 +727,7 @@ uploadExistingBlobsFromHistory
 
 
 * params: blobserver
-* path:/baselib/jpackages/JPackageObject.py (line:1710)
+* path:/baselib/jpackages/JPackageObject.py (line:1714)
 
 
 

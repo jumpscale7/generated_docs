@@ -13,7 +13,7 @@ addIpToInterface
 
 
 * params: dev,ipaddr,aliasnr,start
-* path:/baselib/netconfig/Netconfig.py (line:184)
+* path:/baselib/netconfig/Netconfig.py (line:188)
 
 
 enableInterface
@@ -24,14 +24,22 @@ enableInterface
 * path:/baselib/netconfig/Netconfig.py (line:60)
 
 
+enableInterfaceBridge
+---------------------
+
+
+* params: dev,bridgedev,start,dhcp
+* path:/baselib/netconfig/Netconfig.py (line:171)
+
+
+
+
 enableInterfaceBridgeDhcp
 -------------------------
 
 
 * params: dev,bridgedev,start
 * path:/baselib/netconfig/Netconfig.py (line:168)
-
-
 
 
 enableInterfaceBridgeStatic

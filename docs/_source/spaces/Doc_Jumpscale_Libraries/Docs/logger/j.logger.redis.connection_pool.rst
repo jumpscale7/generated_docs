@@ -1,6 +1,6 @@
 
-j.clients.redisworker.redis.connection_pool
-===========================================
+j.logger.redis.connection_pool
+==============================
 
 `Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScalepython.zip//redis/connection.py>`_
 
