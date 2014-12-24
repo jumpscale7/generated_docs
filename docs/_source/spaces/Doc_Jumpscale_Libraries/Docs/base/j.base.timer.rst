@@ -1,0 +1,39 @@
+
+j.base.timer
+============
+
+`Source <https://github.com/Jumpscale/jumpscale_core/tree/master/lib/JumpScale/base/TIMER.py>`_
+
+
+clean
+-----
+
+
+* params:
+* path:/base/TIMER.py (line:21)
+
+
+result
+------
+
+
+* params:
+* path:/base/TIMER.py (line:29)
+
+
+start
+-----
+
+
+* params:
+* path:/base/TIMER.py (line:5)
+
+
+stop
+----
+
+
+* params: nritems,log
+* path:/base/TIMER.py (line:10)
+
+
