@@ -1,6 +1,7 @@
 
 
-Please help us to contribute to this documentation
+This section is for Jumpscale development
+=========================================
 
 
 * To Contribute
@@ -17,7 +18,6 @@ Please help us to contribute to this documentation
   * Prototypes code for jumpscale: `https://github.com/jumpscale/jumpscale_prototypes <https://github.com/jumpscale/jumpscale_prototypes>`_
 
 
-
 * JPackage Repo's
 
 
@@ -26,4 +26,16 @@ Please help us to contribute to this documentation
   * `https://github.com/jumpscale/jp_solutions <https://github.com/jumpscale/jp_solutions>`_
 
 
+Read more
+=========
+
+* `Actors <Actors>`_
+* `Advanced <Advanced>`_
+* `CodeManagement <CodeManagement>`_
+* `DevelopYourFirstApp <DevelopYourFirstApp>`_
+* `Extensions <Extensions>`_
+* `HowToWriteMacros <HowToWriteMacros>`_
+* `Portal <Portal>`_
+* `Docs <Docs>`_
+* `HowToDocument <HowToDocument>`_
 
