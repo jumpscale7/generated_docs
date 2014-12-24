@@ -1,5 +1,7 @@
 JumpScale Core Home
 ===================
 
-* `Doc <Doc_Jumpscale_Grid_Home>`_
-* `Doc <Doc_Jumpscale_Devel_Home>`_
+* `JumpscaleGridHome <Doc_Jumpscale_Grid_Home>`_
+* `JumpscaleHowtoHome <Doc_Jumpscale_Howto_Home>`_
+* `JumpscaleCoreHome <Doc_Jumpscale_Core_Home>`_
+* `JumpscaleDevelHome <Doc_Jumpscale_Devel_Home>`_

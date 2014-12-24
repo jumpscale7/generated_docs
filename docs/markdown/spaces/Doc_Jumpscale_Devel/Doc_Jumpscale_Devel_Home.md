@@ -1,4 +1,5 @@
-Please help us to contribute to this documentation
+This section is for Jumpscale development
+=========================================
 
 -   To Contribute
     -   the documentation is on
@@ -17,4 +18,17 @@ Please help us to contribute to this documentation
         = the main one
     -   [<https://github.com/jumpscale/jp_serverapps>](https://github.com/jumpscale/jp_serverapps)
     -   [<https://github.com/jumpscale/jp_solutions>](https://github.com/jumpscale/jp_solutions)
+
+Read more
+=========
+
+-   [Actors](Actors)
+-   [Advanced](Advanced)
+-   [CodeManagement](CodeManagement)
+-   [DevelopYourFirstApp](DevelopYourFirstApp)
+-   [Extensions](Extensions)
+-   [HowToWriteMacros](HowToWriteMacros)
+-   [Portal](Portal)
+-   [Docs](Docs)
+-   [HowToDocument](HowToDocument)
 
