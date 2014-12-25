@@ -43,7 +43,11 @@ example
 find:
 ^^^^^
 
-'fswalker.find(self, root, includeFolders=False, includeLinks=False, pathRegexIncludes={}, pathRegexExcludes={}, followlinks=False, childrenRegexExcludes=`'.*/log/.*', '/dev/.*', '/proc/.*' <'.*/log/.*', '/dev/.*', '/proc/.*'>`_, mdserverclient=None)'
+
+
+.. code-block:: python
+
+  `fswalker.find(self, root, includeFolders=False, includeLinks=False, pathRegexIncludes={}, pathRegexExcludes={}, followlinks=False, childrenRegexExcludes=['.*/log/.*', '/dev/.*', '/proc/.*'], mdserverclient=None)`
 
 
 * root: root path to find from.
@@ -76,10 +80,15 @@ Example
 Walk
 ^^^^
 
-
-'fswalker.walk(self, root, callbackFunctions={}, arg=None, callbackMatchFunctions={}, followlinks=False, childrenRegexExcludes=`'.*/log/.*', '/dev/.*', '/proc/.*' <'.*/log/.*', '/dev/.*', '/proc/.*'>`_, pathRegexIncludes={}, pathRegexExcludes={}, mdserverclient=None)'
-
 Walk through filesystem and execute a method per file and dirname if the match function selected the item.
+
+
+
+
+.. code-block:: python
+
+  `fswalker.walk(self, root, callbackFunctions={}, arg=None, callbackMatchFunctions={}, followlinks=False, childrenRegexExcludes=['.*/log/.*', '/dev/.*', '/proc/.*'], pathRegexIncludes={}, pathRegexExcludes={}, mdserverclient=None)`
+
 
 
 * root: Where to start the walk from

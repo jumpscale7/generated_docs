@@ -29,11 +29,9 @@ fswalker.statsPrint                 fswalker.walk
 
 ### find:
 
-'fswalker.find(self, root, includeFolders=False, includeLinks=False,
-pathRegexIncludes={}, pathRegexExcludes={}, followlinks=False,
-childrenRegexExcludes=['.*/log/.*', '/dev/.*',
-'/proc/.*']('.*/log/.*',%20'/dev/.*',%20'/proc/.*'),
-mdserverclient=None)'
+~~~~ {.sourceCode .python}
+`fswalker.find(self, root, includeFolders=False, includeLinks=False, pathRegexIncludes={}, pathRegexExcludes={}, followlinks=False, childrenRegexExcludes=['.*/log/.*', '/dev/.*', '/proc/.*'], mdserverclient=None)`
+~~~~
 
 -   root: root path to find from.
 -   includeFolders: defaults to False. In this case, only files are
@@ -57,14 +55,12 @@ fswalker.find('.', False, False, {}, {'F': ['.pyc']}, True)
 
 ### Walk
 
-'fswalker.walk(self, root, callbackFunctions={}, arg=None,
-callbackMatchFunctions={}, followlinks=False,
-childrenRegexExcludes=['.*/log/.*', '/dev/.*',
-'/proc/.*']('.*/log/.*',%20'/dev/.*',%20'/proc/.*'),
-pathRegexIncludes={}, pathRegexExcludes={}, mdserverclient=None)'
-
 Walk through filesystem and execute a method per file and dirname if the
 match function selected the item.
+
+~~~~ {.sourceCode .python}
+`fswalker.walk(self, root, callbackFunctions={}, arg=None, callbackMatchFunctions={}, followlinks=False, childrenRegexExcludes=['.*/log/.*', '/dev/.*', '/proc/.*'], pathRegexIncludes={}, pathRegexExcludes={}, mdserverclient=None)`
+~~~~
 
 -   root: Where to start the walk from
 -   callbackFunctions: callback functions to be executed to matched

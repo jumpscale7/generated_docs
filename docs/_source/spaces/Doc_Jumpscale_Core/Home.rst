@@ -24,18 +24,9 @@ Concepts
 * `Human Readable Data <Human Readable Data>`_
 
 
-Modules
-^^^^^^^
-
-
-* `Grid <Doc_Jumpscale_Grid>`_
-* `Portal <Doc_Jumpscale_Portal>`_
-
-
 More Info
 ^^^^^^^^^
 
-* `Tips how to work more easily <EasyStart>`_
 * `Migrating from Pylabs <JumpScale-Pylabs>`_
 * `JumpScale License <JumpScale License>`_
 
@@ -46,5 +37,3 @@ Extensions
 
 * `Process Management <ProcessManagement>`_
 * `Code Management <CodeManagement>`_
-* `Disk Management <DiskManagement>`_
-

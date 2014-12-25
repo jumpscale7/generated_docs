@@ -12,7 +12,7 @@ please submit your own howtos
 * `HowToUseHG <HowToUseHG>`_
 * `HowToUseLXC <HowToUseLXC>`_
 * `HowToCompareDirs <HowToCompareDirs>`_
-* `DownloadLXCBase <_DownloadLXCBase>`_
+* `DownloadLXCBase <DownloadLXCBase>`_
 * `Docs <Docs>`_
 * `HowToRunYourOwnBlobStorServer <HowToRunYourOwnBlobStorServer>`_
 * `HowToJpackageUpdateDetectNewVersion <HowToJpackageUpdateDetectNewVersion>`_
