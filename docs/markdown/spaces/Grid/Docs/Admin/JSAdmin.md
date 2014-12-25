@@ -111,7 +111,7 @@ jsadmin config2gridmaster
     gridmaster
 -   on the gridmaster this info can be looked at
 -   you can see on portal on following locations
-    -   [<http://localhost:81/grid/adminnodes>](http://localhost:81/grid/adminnodes)
-    -   [<http://localhost:81/grid/adminnode?gridname=york1&name=gm1>](http://localhost:81/grid/adminnode?gridname=york1&name=gm1)
-    -   [<http://localhost:81/grid/adminjumpscripts>](http://localhost:81/grid/adminjumpscripts)
+    -   [<http://localhost:82/grid/adminnodes>](http://localhost:82/grid/adminnodes)
+    -   [<http://localhost:82/grid/adminnode?gridname=york1&name=gm1>](http://localhost:82/grid/adminnode?gridname=york1&name=gm1)
+    -   [<http://localhost:82/grid/adminjumpscripts>](http://localhost:82/grid/adminjumpscripts)
 
