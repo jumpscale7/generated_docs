@@ -1,6 +1,4 @@
-JumpScale Core Home
-===================
-
+JumpScale Modules
 * `Grid <Grid_Home>`_
 * `Howto <Howto_Home>`_
 * `Home <Home>`_
