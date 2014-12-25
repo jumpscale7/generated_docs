@@ -1,7 +1,7 @@
-JumpScale Modules
+Modules
 ===================
 
-* `Grid <Grid_Home>`_
-* `Howto <Howto_Home>`_
-* `Home <Home>`_
-* `Devel <Devel_Home>`_
+[Grid](Grid_Home)
+[Howto](Howto_Home)
+[Home](Home)
+[Devel](Devel_Home)
