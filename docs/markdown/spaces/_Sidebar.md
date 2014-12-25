@@ -1,7 +1,7 @@
 JumpScale Core Home
 ===================
 
-* `GridHome <GridHome>`_
-* `HowtoHome <HowtoHome>`_
+* `Grid <Grid_Home>`_
+* `Howto <Howto_Home>`_
 * `Home <Home>`_
-* `DevelHome <DevelHome>`_
+* `Devel <Devel_Home>`_
